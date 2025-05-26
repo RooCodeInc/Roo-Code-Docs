@@ -2,9 +2,19 @@
 
 This release introduces experimental codebase indexing with semantic search, enhanced AI reasoning capabilities, and several performance optimizations.
 
-## Experimental Features
+## Codebase Indexing (Experimental)
+We've introduced a powerful new **experimental** [Codebase Indexing](/features/experimental/codebase-indexing) feature that enables semantic search across your entire project using AI embeddings. Remember, this is **disabled by default** and requires additional setup (enable in Settings (⚙️) > "Experimental").
 
-*   **[Codebase Indexing](/features/experimental/codebase-indexing)**: Added experimental semantic search capabilities that enable AI to understand and search your entire codebase using natural language queries. The new [`codebase_search`](/advanced-usage/available-tools/codebase-search) tool finds relevant code by meaning rather than exact keyword matches, powered by AI embeddings and vector search (thanks daniel-lxs!)
+Key capabilities:
+*   **Semantic Code Search**: Find relevant code using natural language queries instead of exact keyword matches
+*   **AI-Powered Understanding**: The new [`codebase_search`](/advanced-usage/available-tools/codebase-search) tool understands code meaning and relationships
+*   **Cross-Project Discovery**: Search your entire indexed codebase, not just open files
+*   **Flexible Setup**: Choose between OpenAI embeddings or local Ollama processing
+*   **Vector-Powered Search**: Advanced embedding technology with Qdrant vector database storage
+
+Transform how you navigate large codebases - ask "find authentication logic" and get meaningful results instead of hunting through files. (thanks daniel-lxs!)
+
+For setup instructions and detailed usage, see the main [Codebase Indexing documentation](/features/experimental/codebase-indexing).
 
 ## Provider Updates
 
