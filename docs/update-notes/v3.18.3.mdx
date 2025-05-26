@@ -1,0 +1,30 @@
+# Roo Code 3.18.3 Release Notes (2025-05-24)
+
+This release introduces experimental codebase indexing with semantic search, enhanced AI reasoning capabilities, and several performance optimizations.
+
+## Experimental Features
+
+*   **[Codebase Indexing](/features/experimental/codebase-indexing)**: Added experimental semantic search capabilities that enable AI to understand and search your entire codebase using natural language queries. The new [`codebase_search`](/advanced-usage/available-tools/codebase-search) tool finds relevant code by meaning rather than exact keyword matches, powered by AI embeddings and vector search (thanks daniel-lxs!)
+
+## Provider Updates
+
+*   **Enhanced Reasoning**: Added reasoning support for Claude 4 and Gemini 2.5 Flash on [`OpenRouter`](/providers/openrouter), plus fixed o1-pro compatibility
+*   **Improved Defaults**: Changed default model from Sonnet 3.7 to Sonnet 4 for better performance
+*   **Prompt Caching**: Enabled prompt caching for Gemini 2.5 Flash Preview to reduce costs and improve response times (thanks shariqriazz!)
+*   **OpenRouter Settings**: Model settings now persist when selecting specific [`OpenRouter`](/providers/openrouter) providers
+*   **LiteLLM Refresh**: Added ability to refresh [`LiteLLM`](/providers/litellm) models list for up-to-date model availability
+
+## QOL Improvements
+
+*   **Better Tool Selection**: Improved tool descriptions to guide AI in making better file editing decisions
+*   **MCP Server Loading**: Fixed MCP Server error when running with npx and bunx (thanks devxpain!)
+
+## Bug Fixes
+
+*   **Context Tracking**: Fixed mark-as-read logic in the context tracker (thanks samhvw8!)
+*   **Model Cleanup**: Removed deprecated claude-3.7-sonnet models from vscode-lm (thanks shariqriazz!)
+
+## Misc Improvements
+
+*   **Build Process**: Improved pnpm bootstrapping and added compile script (thanks KJ7LNW!)
+*   **Code Quality**: Simplified object assignment and modernized code patterns (thanks noritaka1166!)

@@ -41,6 +41,7 @@ Once your LiteLLM server is running:
 5.  **Select Model:**
     *   Roo Code will attempt to fetch the list of available models from your LiteLLM server by querying the `${baseUrl}/v1/model/info` endpoint.
     *   The models displayed in the dropdown are sourced from this endpoint.
+    *   Use the refresh button to update the model list if you've added new models to your LiteLLM server.
     *   If no model is selected, Roo Code defaults to `anthropic/claude-3-7-sonnet-20250219` (this is `litellmDefaultModelId`). Ensure this model (or your desired default) is configured and available on your LiteLLM server.
 
 <img src="/img/litellm/litellm.png" alt="Roo Code LiteLLM Provider Settings" width="600" />

@@ -189,6 +189,7 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: '3.18',
           items: [
+            { type: 'doc', id: 'update-notes/v3.18.3', label: '3.18.3' },
             { type: 'doc', id: 'update-notes/v3.18.2', label: '3.18.2' },
             { type: 'doc', id: 'update-notes/v3.18.1', label: '3.18.1' },
             { type: 'doc', id: 'update-notes/v3.18', label: '3.18 Combined' },

@@ -2,6 +2,10 @@
 
 This release introduces advanced AI models with enhanced reasoning capabilities, comprehensive context condensing improvements, YAML support for custom modes, streamlined development infrastructure, and numerous quality-of-life improvements and bug fixes.
 
+## Experimental Features
+
+*   **[Codebase Indexing](/features/experimental/codebase-indexing)**: Added experimental semantic search capabilities that enable AI to understand and search your entire codebase using natural language queries. The new [`codebase_search`](/advanced-usage/available-tools/codebase-search) tool finds relevant code by meaning rather than exact keyword matches, powered by AI embeddings and vector search (thanks daniel-lxs!)
+
 ## Context Condensing Upgrades (Experimental)
 Our **experimental** Intelligent Context Condensing feature sees significant enhancements for better control and clarity. Remember, these are **disabled by default** (enable in Settings (⚙️) > "Experimental").
 
@@ -55,11 +59,15 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 
 ## QOL Improvements
 
+*   **Better Tool Selection**: Improved tool descriptions to guide AI in making better file editing decisions
+*   **MCP Server Loading**: Fixed MCP Server error when running with npx and bunx (thanks devxpain!)
 *   **Resizable Prompt Textareas**: Restored vertical resizing for prompt input textareas (role definition, custom instructions, support prompts) for easier viewing and editing of longer prompts.
 *   **Settings Import**: Error messages are now provided in multiple languages if an import fails. (thanks ChuKhaLi!)
 
 ## Bug Fixes
 
+*   **Context Tracking**: Fixed mark-as-read logic in the context tracker (thanks samhvw8!)
+*   **Model Cleanup**: Removed deprecated claude-3.7-sonnet models from vscode-lm (thanks shariqriazz!)
 *   **Global Settings Export**: Fixed global settings export functionality to ensure configurations transfer properly between setups
 *   **File Picker Icons**: Fixed vscode-material-icons display issues in the file picker for better visual consistency
 *   **Terminal Integration**: Fixed terminal integration to properly respect user-configured timeout settings (thanks KJ7LNW!)
@@ -76,6 +84,11 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 ## Provider Updates
 
 *   **Claude 4.0 Models**: Added support for [`Claude Sonnet 4`](/providers/anthropic) and [`Claude Opus 4`](/providers/anthropic) models with thinking variants for [`Anthropic`](/providers/anthropic), [`Bedrock`](/providers/bedrock), and [`Vertex`](/providers/vertex) providers (thanks shariqriazz!)
+*   **Enhanced Reasoning**: Added reasoning support for Claude 4 and Gemini 2.5 Flash on [`OpenRouter`](/providers/openrouter), plus fixed o1-pro compatibility
+*   **Improved Defaults**: Changed default model from Sonnet 3.7 to Sonnet 4 for better performance
+*   **Prompt Caching**: Enabled prompt caching for Gemini 2.5 Flash Preview to reduce costs and improve response times (thanks shariqriazz!)
+*   **OpenRouter Settings**: Model settings now persist when selecting specific [`OpenRouter`](/providers/openrouter) providers
+*   **LiteLLM Refresh**: Added ability to refresh [`LiteLLM`](/providers/litellm) models list for up-to-date model availability
 *   **LM Studio and Ollama Token Tracking**: Token usage is now tracked for [LM Studio](/providers/lmstudio) and [Ollama](/providers/ollama) providers. (thanks xyOz-dev!)
 *   **LM Studio Reasoning Support**: Added support for parsing "think" tags in [LM Studio](/providers/lmstudio) responses for enhanced transparency into the AI's process. (thanks avtc!)
 *   **Qwen3 Model Series for Chutes**: Added new Qwen3 models to the [Chutes provider](/providers/chutes) (e.g., `Qwen/Qwen3-235B-A22B`). (thanks zeozeozeo!)
@@ -83,6 +96,8 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 
 ## Misc Improvements
 
+*   **Build Process**: Improved pnpm bootstrapping and added compile script (thanks KJ7LNW!)
+*   **Code Quality**: Simplified object assignment and modernized code patterns (thanks noritaka1166!)
 *   **Monorepo Migration**: Switched codebase to a monorepo structure for improved development workflow
 *   **Automated Nightly Builds**: Created automated [nightly release system](/advanced-usage/roo-code-nightly) to deliver the latest features and fixes more quickly
 *   **Enhanced Toolchain**: Improved build processes and dependency management for better reliability
