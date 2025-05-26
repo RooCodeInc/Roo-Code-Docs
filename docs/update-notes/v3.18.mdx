@@ -1,6 +1,6 @@
-# Roo Code 3.18.0 Release Notes (2025-05-21)
+# Roo Code 3.18 Release Notes (2025-05-21)
 
-This release introduces comprehensive context condensing improvements, YAML support for custom modes, new AI model integrations, and numerous quality-of-life improvements and bug fixes.
+This release introduces advanced AI models with enhanced reasoning capabilities, comprehensive context condensing improvements, YAML support for custom modes, streamlined development infrastructure, and numerous quality-of-life improvements and bug fixes.
 
 ## Context Condensing Upgrades (Experimental)
 Our **experimental** Intelligent Context Condensing feature sees significant enhancements for better control and clarity. Remember, these are **disabled by default** (enable in Settings (⚙️) > "Experimental").
@@ -43,6 +43,11 @@ To enhance API cost management, you can now set a **Max Requests** limit for aut
 
 Learn more about configuring this safeguard in our [Rate Limits and Costs documentation](/advanced-usage/rate-limits-costs#limiting-auto-approved-requests). (Inspired by Cline, thanks hassoncs!)
 
+## Documentation Updates
+
+*   **README Display**: Fixed README GIF display across all localized versions, ensuring consistent visual guides for users in all 17 supported languages
+*   **Referrer URL**: Fixed technical referrer URL issues in documentation links
+
 ## New Model Version: Gemini 2.5 Flash Preview (May 2025)
 Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking variant. This cutting-edge addition is available via both the generic [Gemini provider](/providers/gemini) and the [Vertex provider](/providers/vertex), further expanding your AI model options. (thanks shariqriazz, daniel-lxs!)
 
@@ -65,12 +70,23 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 
 ## Provider Updates
 
+*   **Claude 4.0 Models**: Added support for [`Claude Sonnet 4`](/providers/anthropic) and [`Claude Opus 4`](/providers/anthropic) models with thinking variants for [`Anthropic`](/providers/anthropic), [`Bedrock`](/providers/bedrock), and [`Vertex`](/providers/vertex) providers (thanks shariqriazz!)
 *   **LM Studio and Ollama Token Tracking**: Token usage is now tracked for [LM Studio](/providers/lmstudio) and [Ollama](/providers/ollama) providers. (thanks xyOz-dev!)
 *   **LM Studio Reasoning Support**: Added support for parsing "think" tags in [LM Studio](/providers/lmstudio) responses for enhanced transparency into the AI's process. (thanks avtc!)
 *   **Qwen3 Model Series for Chutes**: Added new Qwen3 models to the [Chutes provider](/providers/chutes) (e.g., `Qwen/Qwen3-235B-A22B`). (thanks zeozeozeo!)
 *   **Unbound Provider Model Refresh**: Added a refresh button for [Unbound](/providers/unbound) models to easily update the list of available models and get immediate feedback on API key validity. (thanks pugazhendhi-m!)
 
-## Misc
+## Misc Improvements
 
+*   **Monorepo Migration**: Switched codebase to a monorepo structure for improved development workflow
+*   **Automated Nightly Builds**: Created automated [nightly release system](/advanced-usage/roo-code-nightly) to deliver the latest features and fixes more quickly
+*   **Enhanced Toolchain**: Improved build processes and dependency management for better reliability
+*   **Modern Linting**: ESLint 9 upgrade with shared configurations catches issues before they reach users
+*   **E2E Test Suite**: Reorganized end-to-end testing infrastructure for better quality assurance
+*   **Build Optimizations**: Enhanced build process optimizations reduce bundle size and improve startup times
+*   **Quality Assurance**: Advanced testing infrastructure catches more issues during development
+*   **Release Automation**: Improved release process automation reduces manual errors and speeds up delivery
 *   **Auto-reload in Dev Mode**: Core file changes now automatically trigger a window reload in development mode for a faster workflow. (thanks hassoncs!)
 *   **Simplified Loop Syntax**: Refactored loop structures in multiple components to use `for...of` loops for improved readability. (thanks noritaka1166!)
+
+These improvements work behind the scenes to provide a more reliable and stable extension experience with faster updates and higher quality releases.
