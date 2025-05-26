@@ -20,7 +20,9 @@ Watch a quick overview:
 </div>
 Key updates:
 *   **Adjustable Condensing Threshold & Manual Control**: Fine-tune automatic condensing or trigger it manually. [Learn more](/features/experimental/intelligent-context-condensing#controlling-context-condensing).
+*   **Advanced Controls & UI Enhancements**: New experimental settings for fine-tuning conversation compression behavior with improved interface components for managing condensing settings. (thanks SannidhyaSah!)
 *   **Clear UI Indicators**: Better visual feedback during condensing. [Details](/features/experimental/intelligent-context-condensing#understanding-context-condensing-activity).
+*   **Improved Compression**: Better conversation summarization while preserving important context during compression. (thanks SannidhyaSah!)
 *   **Accurate Token Counting**: Improved accuracy for context and cost calculations. [More info](/features/experimental/intelligent-context-condensing#accurate-token-information).
 
 For full details, see the main [Intelligent Context Condensing documentation](/features/experimental/intelligent-context-condensing).
@@ -58,6 +60,9 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 
 ## Bug Fixes
 
+*   **Global Settings Export**: Fixed global settings export functionality to ensure configurations transfer properly between setups
+*   **File Picker Icons**: Fixed vscode-material-icons display issues in the file picker for better visual consistency
+*   **Terminal Integration**: Fixed terminal integration to properly respect user-configured timeout settings (thanks KJ7LNW!)
 *   **VSCode Command Execution**: Command execution is now type-safe, reducing potential errors.
 *   **Settings Import**: The system now gracefully handles missing `globalSettings` in import files. (thanks ChuKhaLi!)
 *   **Diff View Scrolling**: The diff view no longer scrolls unnecessarily during content updates. (thanks qdaxb!)
