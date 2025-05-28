@@ -25,7 +25,7 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
 *   **API Provider:** Select "OpenAI Compatible".
 *   **Base URL:** Enter the base URL provided by your chosen provider.  **This is crucial.**
 *   **API Key:** Enter your API key.
-*   **Model:** Chooose a model.
+*   **Model:** Choose a model.
 *   **Model Configuration:** This lets you customize advanced configuration for the model
     - Max Output Tokens
     - Context Window
