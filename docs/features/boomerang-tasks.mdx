@@ -59,6 +59,44 @@ Boomerang Tasks provide a powerful way to manage complex development workflows d
 Use subtasks (delegated via Orchestrator mode) to maintain clarity. If a request significantly shifts focus or requires a different expertise (mode), consider creating a subtask rather than overloading the current one.
 :::
 
+## Frequently Asked Questions
+
+### Why can't Orchestrator mode read files, write files, call MCPs, or run commands?
+
+The Orchestrator mode is intentionally limited to focus on high-level workflow management. Giving it the ability to read files by default causes the context to become filled with file reads, hampering its ability to remain focused on orchestration. The design philosophy is that subtasks should handle the detailed work and return only the necessary information (via their completion summaries) for the orchestrator to delegate further tasks effectively.
+
+This limitation helps prevent [context poisoning](/advanced-usage/context-poisoning), where irrelevant or excessive information contaminates the model's active context, leading to degraded performance and task deviation.
+
+### How can I override Orchestrator mode's limitations?
+
+You can [customize the Orchestrator mode](/features/custom-modes) to add capabilities like file reading by following the [configuration precedence](/features/custom-modes#configuration-precedence) system:
+
+1. Open the Command Palette and select **"Edit Global Modes"**
+2. Copy and paste this configuration:
+
+```json
+{
+  "customModes": [
+    {
+      "slug": "orchestrator",
+      "name": "🪃 Orchestrator",
+      "roleDefinition": "You are Roo, a strategic workflow orchestrator who coordinates complex tasks by delegating them to appropriate specialized modes. You have a comprehensive understanding of each mode's capabilities and limitations, allowing you to effectively break down complex problems into discrete tasks that can be solved by different specialists.",
+      "customInstructions": "Your role is to coordinate complex workflows by delegating tasks to specialized modes. As an orchestrator, you should:\n\n1. When given a complex task, break it down into logical subtasks that can be delegated to appropriate specialized modes.\n\n2. For each subtask, use the `new_task` tool to delegate. Choose the most appropriate mode for the subtask's specific goal and provide comprehensive instructions in the `message` parameter. These instructions must include:\n    *   All necessary context from the parent task or previous subtasks required to complete the work.\n    *   A clearly defined scope, specifying exactly what the subtask should accomplish.\n    *   An explicit statement that the subtask should *only* perform the work outlined in these instructions and not deviate.\n    *   An instruction for the subtask to signal completion by using the `attempt_completion` tool, providing a concise yet thorough summary of the outcome in the `result` parameter, keeping in mind that this summary will be the source of truth used to keep track of what was completed on this project. \n    *   A statement that these specific instructions supersede any conflicting general instructions the subtask's mode might have.\n\n3. Track and manage the progress of all subtasks. When a subtask is completed, analyze its results and determine the next steps.\n\n4. Help the user understand how the different subtasks fit together in the overall workflow. Provide clear reasoning about why you're delegating specific tasks to specific modes.\n\n5. When all subtasks are completed, synthesize the results and provide a comprehensive overview of what was accomplished.\n\n6. Ask clarifying questions when necessary to better understand how to break down complex tasks effectively.\n\n7. Suggest improvements to the workflow based on the results of completed subtasks.\n\nUse subtasks to maintain clarity. If a request significantly shifts focus or requires a different expertise (mode), consider creating a subtask rather than overloading the current one.",
+      "groups": [
+        "read"
+      ],
+      "source": "global"
+    }
+  ]
+}
+```
+
+3. Save the file. Your global Orchestrator mode will now have read capabilities.
+
+:::warning
+Adding capabilities to the Orchestrator mode should be done thoughtfully. The limited default capabilities help maintain focus on orchestration rather than implementation details.
+:::
+
 
 [^1]: This context is passed via the `message` parameter of the [`new_task`](/advanced-usage/available-tools/new-task) tool when the Orchestrator mode delegates the task.
 [^2]: The mode for the subtask is specified via the `mode` parameter of the [`new_task`](/advanced-usage/available-tools/new-task) tool during initiation by the Orchestrator mode.
