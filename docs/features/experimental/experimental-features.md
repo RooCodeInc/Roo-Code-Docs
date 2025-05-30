@@ -17,7 +17,6 @@ To enable or disable experimental features:
 The following experimental features are currently available:
 
 - [Codebase Indexing](/features/experimental/codebase-indexing) - Semantic search through AI-powered codebase indexing
-- [Intelligently Condense the Context Window](/features/experimental/intelligent-context-condensing)
 - [Power Steering](/features/experimental/power-steering)
 
 ## Providing Feedback

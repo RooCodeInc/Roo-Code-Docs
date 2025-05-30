@@ -44,6 +44,35 @@ Choose one of these options for generating embeddings:
 - Supports any Ollama-compatible embedding model
 - Requires Ollama base URL configuration
 
+### Setting Up Ollama for Embeddings
+
+1. **Install Ollama**
+   - **macOS**: `brew install ollama` or download from [ollama.com](https://ollama.com)
+   - **Linux**: `curl -fsSL https://ollama.com/install.sh | sh`
+   - **Windows**: Download installer from [ollama.com](https://ollama.com)
+
+2. **Start Ollama Service**
+   ```bash
+   ollama serve
+   ```
+   This starts Ollama on `http://localhost:11434` (default port)
+
+3. **Install Embedding Model**
+   ```bash
+   ollama pull nomic-embed-text
+   ```
+   This downloads the recommended embedding model (~274MB)
+
+4. **Verify Installation**
+   ```bash
+   ollama list
+   ```
+   You should see `nomic-embed-text` in the list
+
+5. **Configure in Roo Code**
+   - Set Ollama Base URL: `http://localhost:11434`
+   - Select Model: `nomic-embed-text`
+
 ### Vector Database
 
 **Qdrant** is required for storing and searching embeddings:

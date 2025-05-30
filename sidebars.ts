@@ -33,6 +33,7 @@ const sidebars: SidebarsConfig = {
         'features/enhance-prompt',
         'features/fast-edits',
         'features/footgun-prompting',
+        'features/intelligent-context-condensing',
         'features/keyboard-shortcuts',
         'features/model-temperature',
         'features/rooignore',
@@ -61,7 +62,6 @@ const sidebars: SidebarsConfig = {
           items: [
             'features/experimental/experimental-features',
             'features/experimental/codebase-indexing',
-            'features/experimental/intelligent-context-condensing',
             'features/experimental/power-steering',
           ],
         },
@@ -186,6 +186,14 @@ const sidebars: SidebarsConfig = {
         'update-notes/index',
         {
           type: 'category',
+          label: '3.19',
+          items: [
+            { type: 'doc', id: 'update-notes/v3.19', label: '3.19 Combined' },
+            { type: 'doc', id: 'update-notes/v3.19.0', label: '3.19.0' },
+          ],
+        },
+        {
+          type: 'category',
           label: '3.18',
           items: [
             { type: 'doc', id: 'update-notes/v3.18', label: '3.18 Combined' },
@@ -194,6 +202,7 @@ const sidebars: SidebarsConfig = {
             { type: 'doc', id: 'update-notes/v3.18.2', label: '3.18.2' },
             { type: 'doc', id: 'update-notes/v3.18.3', label: '3.18.3' },
             { type: 'doc', id: 'update-notes/v3.18.4', label: '3.18.4' },
+            { type: 'doc', id: 'update-notes/v3.18.5', label: '3.18.5' },
           ],
         },
         {

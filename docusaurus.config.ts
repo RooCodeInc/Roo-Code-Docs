@@ -131,8 +131,8 @@ const config: Config = {
             from: ['/advanced-usage/api-configuration-profiles'],
           },
           {
-            to: '/features/experimental/intelligent-context-condensing',
-            from: ['/features/experimental/intelligent-context-condensation'],
+            to: '/features/intelligent-context-condensing',
+            from: ['/features/experimental/intelligent-context-condensing', '/features/experimental/intelligent-context-condensation'],
           },
           
           // MCP related redirects
