@@ -37,12 +37,9 @@ These tools directly check `.rooignore` before any file operation. If a file is 
 *   [`read_file`](/advanced-usage/available-tools/read-file): Will not read ignored files.
 *   [`write_to_file`](/advanced-usage/available-tools/write-to-file): Will not write to or create new ignored files.
 *   [`apply_diff`](/advanced-usage/available-tools/apply-diff): Will not apply diffs to ignored files.
+*   [`insert_content`](/advanced-usage/available-tools/insert-content): Will not write to ignored files.
+*   [`search_and_replace`](/advanced-usage/available-tools/search-and-replace): Will not search and replace within ignored files.
 *   [`list_code_definition_names`](/advanced-usage/available-tools/list-code-definition-names): Will not parse ignored files for code symbols.
-
-### File Editing Tools (Potential Write Bypass)
-
-The [`insert_content`](/advanced-usage/available-tools/insert-content) and [`search_and_replace`](/advanced-usage/available-tools/search-and-replace) tools use an internal component for managing changes.
-**Important**: Currently, the final write operation performed by these tools might bypass `.rooignore` rules. While initial read attempts might be blocked, the save action itself does not have an explicit check.
 
 ### File Discovery and Listing
 
@@ -57,7 +54,6 @@ The [`insert_content`](/advanced-usage/available-tools/insert-content) and [`sea
 
 *   **Workspace-Centric**: `.rooignore` rules apply **only to files and directories within the current VS Code workspace root**. Files outside this scope are not affected.
 *   **[`execute_command`](/advanced-usage/available-tools/execute-command) Specificity**: Protection for `execute_command` is limited to a predefined list of file-reading commands. Custom scripts or uncommon utilities might not be caught.
-*   **Write Operations via [`insert_content`](/advanced-usage/available-tools/insert-content) & [`search_and_replace`](/advanced-usage/available-tools/search-and-replace)**: As noted, these tools might be able to write to ignored files due to current limitations in their save mechanism.
 *   **Not a Full Sandbox**: `.rooignore` is a powerful tool for controlling Roo's file access via its tools, but it does not create a system-level sandbox.
 
 ## User Experience and Notifications
