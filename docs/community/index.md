@@ -12,7 +12,7 @@ Welcome to the Roo Code community section! Here you'll find community projects t
 | [Dynamic Rules](/community/dynamic-rules) | Define new rules and delete them on the fly with simple syntax in your messages |
 | [Roo Commander](/community/roo-commander) | Sophisticated collection of custom modes designed to manage software development projects |
 | [Maestro Project](/community/maestro) | Orchestrates a team of specialized modes for comprehensive software development lifecycle management |
-| [Roocabularo](/community/roocabulary) | a collection of words, phrases, and jargon created to define and enhance the Roo Code experience |
+| [Roocabulary](/community/roocabulary) | a collection of words, phrases, and jargon created to define and enhance the Roo Code experience |
 
 ## Custom Modes Gallery {#custom-modes-gallery}
 
