@@ -15,7 +15,7 @@ This documentation is organized into several sections:
 
 * [**What is MCP?**](/features/mcp/what-is-mcp) - Clear explanation of the Model Context Protocol, its client-server architecture, and how it enables AI systems to interact with external tools.
 
-* [**STDIO & SSE Transports**](/features/mcp/server-transports) - Detailed comparison of local (STDIO) and remote (SSE) transport mechanisms with deployment considerations for each approach.
+* [**STDIO, Streamable HTTP & SSE Transports**](/features/mcp/server-transports) - Detailed comparison of local (STDIO) and remote (Streamable HTTP & legacy SSE) transport mechanisms with deployment considerations for each approach.
 
 * [**MCP vs API**](/features/mcp/mcp-vs-api) - Analysis of the fundamental distinction between MCP and REST APIs, explaining how they operate at different layers of abstraction for AI systems.
 

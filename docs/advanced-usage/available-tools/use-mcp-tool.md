@@ -25,7 +25,7 @@ This tool allows Roo to access specialized functionality provided by external MC
 ## Key Features
 
 - Uses the standardized MCP protocol via the `@modelcontextprotocol/sdk` library
-- Supports multiple transport mechanisms (StdioClientTransport and SSEClientTransport)
+- Supports multiple transport mechanisms (StdioClientTransport, StreamableHTTPClientTransport and SSEClientTransport)
 - Validates arguments using Zod schema validation on both client and server sides
 - Processes multiple response content types: text, image, and resource references
 - Manages server lifecycle with automatic restarts when server code changes
@@ -69,6 +69,7 @@ When the `use_mcp_tool` tool is invoked, it follows this process:
    - The system selects the appropriate transport mechanism:
      - `StdioClientTransport`: For communicating with local processes via standard I/O
      - `SSEClientTransport`: For communicating with HTTP servers via Server-Sent Events
+     - `StreamableHTTPClientTransport`: For communicating with HTTP servers via Streamable HTTP Events
    - A request is sent with validated server name, tool name, and arguments
    - Communication uses the `@modelcontextprotocol/sdk` library for standardized interactions
    - Request execution is tracked with timeout handling to prevent hanging operations
