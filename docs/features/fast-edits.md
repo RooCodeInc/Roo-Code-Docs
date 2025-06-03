@@ -8,13 +8,11 @@ Roo Code offers an advanced setting to change how it edits files, using diffs (d
 
 ## Enable Editing Through Diffs
 
-Open Settings by clicking the gear icon <Codicon name="gear" /> → Advanced
-
-
+Open the Roo Code pane settings by clicking the gear icon <Codicon name="gear" />. The `Providers` section will be visible.
 
 When **Enable editing through diffs** is checked:
 
-    <img src="/img/fast-edits/fast-edits-5.png" alt="Roo Code settings showing Enable editing through diffs" width="500" />
+    <img src="/img/fast-edits/fast-edits-2.png" alt="Roo Code settings showing Enable editing through diffs" width="500" />
 1.  **Faster File Editing**: Roo modifies files more quickly by applying only the necessary changes.
 2.  **Prevents Truncated Writes**: The system automatically detects and rejects attempts by the AI to write incomplete file content, which can happen with large files or complex instructions. This helps prevent corrupted files.
 
