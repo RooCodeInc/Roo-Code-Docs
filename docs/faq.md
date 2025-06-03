@@ -162,6 +162,27 @@ The error message should provide some information about the problem. If you're u
 
 Roo Code uses VS Code's built-in file editing capabilities.  You can use the standard "Undo" command (Ctrl/Cmd + Z) to revert changes. Also, if experimental checkpoints are enabled, Roo can revert changes made to a file.
 
+### Roo Code can't write to markdown files. What's wrong?
+
+If Roo Code fails to write to `.md` files with errors like "Failed to open diff editor" or "write_to_file tool failed", this is typically caused by VS Code extensions or settings that interfere with file editing:
+
+**Common causes:**
+- Extensions with "format on save" functionality
+- VS Code settings that open markdown files in preview mode by default
+- The Markdown Preview extension or similar markdown processing extensions
+
+**Solutions:**
+- Disable any extensions that automatically format files on save
+- Remove these settings from your VS Code `settings.json`:
+  ```json
+  "markdown.preview.openMarkdownLinks": "inPreview",
+  "workbench.editorAssociations": {
+    "*.md": "vscode.markdown.preview.editor"
+  }
+  ```
+- Temporarily disable markdown-related extensions to test if they're causing the issue
+- Restart VS Code after making these changes
+
 ### How do I report a bug or suggest a feature?
 
 Please report bugs or suggest features on the Roo Code [Issues page](https://github.com/RooCodeInc/Roo-Code/issues) and [Feature Requests page](https://github.com/RooCodeInc/Roo-Code/discussions/categories/feature-requests?discussions_q=is%3Aopen+category%3A%22Feature+Requests%22+sort%3Atop).
