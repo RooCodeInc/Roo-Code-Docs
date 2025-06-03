@@ -1,4 +1,4 @@
-# Fast Edits
+# Diff/Fast Edits
 
 :::info Default Setting
 Fast Edits (using the "Enable editing through diffs" setting) is enabled by default in Roo Code. You typically don't need to change these settings unless you encounter specific issues or want to experiment with different diff strategies.
@@ -6,9 +6,13 @@ Fast Edits (using the "Enable editing through diffs" setting) is enabled by defa
 
 Roo Code offers an advanced setting to change how it edits files, using diffs (differences) instead of rewriting entire files. Enabling this feature provides significant benefits.
 
+:::note Per-Provider Setting
+Diff editing configuration is set per [API Configuration Profile](/features/api-configuration-profiles), allowing you to customize editing behavior for different providers and models.
+:::
+
 ## Enable Editing Through Diffs
 
-Open the Roo Code pane settings by clicking the gear icon <Codicon name="gear" />. The `Providers` section will be visible.
+Open the Roo Code pane settings by clicking the gear icon <Codicon name="gear" />. The `Providers` section will be visible. Select the specific [API Configuration Profile](/features/api-configuration-profiles) you want to configure.
 
 When **Enable editing through diffs** is checked:
 
