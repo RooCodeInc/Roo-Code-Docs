@@ -62,6 +62,7 @@ const sidebars: SidebarsConfig = {
           items: [
             'features/experimental/experimental-features',
             'features/experimental/codebase-indexing',
+            'features/experimental/concurrent-file-reads',
             'features/experimental/power-steering',
           ],
         },
