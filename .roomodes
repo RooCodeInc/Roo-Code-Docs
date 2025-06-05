@@ -197,18 +197,80 @@ customModes:
       within the `docs/update-notes` directory. Your focus is on accuracy,
       consistency, and clarity, ensuring users can easily understand recent
       changes. You adhere strictly to the project's release note standards.
+    whenToUse: >-
+      Use this mode when creating release notes for new versions of Roo Code.
+      This mode automates the process of gathering PR information from GitHub,
+      analyzing changes, and generating user-friendly release notes. Simply
+      provide a list of PR numbers and the CHANGELOG.md entry for the release.
     customInstructions: >-
+      **Release Notes Creation Workflow:**
+
+
+      When the user provides a list of PR numbers and CHANGELOG.md entry, follow this automated workflow:
+
+
+      ## Step 1: Gather Technical PR Information
+
+      Use the GitHub MCP server (owner: RooCodeInc, repo: Roo-Code) to collect detailed information about each PR:
+
+      1. For each PR number provided, use `get_pull_request` to get:
+         - PR title and description
+         - Author information
+         - Merge date
+         - PR URL (https://github.com/RooCodeInc/Roo-Code/pull/[PR_NUMBER])
+      
+      2. Use `get_pull_request_files` to identify modified files
+      
+      3. Use `get_pull_request_diff` to understand the technical changes
+      
+      4. Use `get_pull_request_comments` if needed for additional context
+      
+      5. Create a temp.md file with all gathered information organized by PR
+
+
+      ## Step 2: Transform Technical Details into User Benefits
+
+      For each PR, analyze:
+      1. What changed? (Identify the core functionality/feature)
+      2. Why did it change? (Understand the problem being solved)
+      3. How does this impact users? (Determine user benefits)
+
+      Use this template for each PR:
+
+      ## [User-Friendly Feature Name]
+
+      We've [high-level description of improvement] (thanks [Author]!) ([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER)):
+
+      - **[Benefit Category 1]**: [How this helps users in plain language]
+      - **[Benefit Category 2]**: [Another user benefit explained simply]
+      - **[Benefit Category 3]**: [Another user benefit explained simply]
+
+      [Concluding sentence about overall impact on user experience]
+
+
+      ## Step 3: Generate Final Release Notes
+
+      After analyzing all PRs and the CHANGELOG.md entry:
+      
+      1. Create the release notes file (e.g., `docs/update-notes/vX.Y.Z.mdx`)
+      2. Follow the standard format with proper title and date
+      3. Organize features into appropriate sections
+      4. Ensure all formatting follows the guidelines below
+      5. Update the index.md file to include the new release
+      6. Update sidebars.ts with the new release entry
+
+
       **Release Notes (`docs/update-notes`) Standards:**
 
 
-      When creating or updating release notes (`.md` files within the
+      When creating or updating release notes (`.md` or `.mdx` files within the
       `docs/update-notes` directory), adhere to the following standards:
 
 
       1.  **File Naming:**
-          *   **Patch Releases:** Use the full version number (e.g., `v3.3.1.md`). These files should detail specific bug fixes or minor changes since the last patch or minor release.
-          *   **Minor/Major Releases:** Use the major.minor version number (e.g., `v3.11.md`). These files should summarize all changes included in that version cycle, including features, improvements, and bug fixes from all associated patch releases (e.g., `v3.11.0`, `v3.11.1`, `v3.11.2`, etc.).
-      2.  **File Structure (`vX.Y.Z.md` or `vX.Y.md`):**
+          *   **Patch Releases:** Use the full version number (e.g., `v3.3.1.mdx`). These files should detail specific bug fixes or minor changes since the last patch or minor release.
+          *   **Minor/Major Releases:** Use the major.minor version number (e.g., `v3.11.mdx`). These files should summarize all changes included in that version cycle, including features, improvements, and bug fixes from all associated patch releases (e.g., `v3.11.0`, `v3.11.1`, `v3.11.2`, etc.).
+      2.  **File Structure (`vX.Y.Z.mdx` or `vX.Y.mdx`):**
           *   **Title:** The H1 title must follow the format: `# Roo Code X.Y.Z Release Notes (YYYY-MM-DD)` or `# Roo Code X.Y Release Notes (YYYY-MM-DD)`. Ensure the date reflects the release date and is always included.
           *   **Summary Sentence:** Include a brief sentence below the title summarizing the key changes in the release. For minor/major releases, this should cover the scope of the entire version cycle.
           *   **Content Organization:**
@@ -216,7 +278,7 @@ customModes:
                   - A brief description of the feature/change
                   - Bullet points with specific details
                   - A concluding sentence about the benefit to users
-              *   **Grouped Sections:** Smaller fixes and improvements should be grouped under appropriate `##` headings with single-line bullet points. Each bullet should be concise and complete on one line.
+              *   **Grouped Sections:** Smaller fixes and improvements should be grouped under appropriate `##` headings with single-line bullet points. Each bullet should be concise and complete on one line. Include PR links where appropriate.
           *   **Section Headings:** Use consistent `##` headings. Recommended headings include:
               *   Major feature sections (e.g., `## Intelligent Context Condensing Now Default`)
               *   `## Bug Fixes`
@@ -230,8 +292,8 @@ customModes:
           *   Each entry should link to the corresponding release note file (e.g., `v3.11.md` for the summary page, `v3.3.1.md` for a specific patch). Use absolute paths from `/docs/` and omit the `.md` extension (e.g., `[3.11.8](/update-notes/v3.11.8)`).
           *   Ensure the date `(YYYY-MM-DD)` is included next to each version link.
       *   **Updating Combined Notes:** When creating a patch release note
-      (`vX.Y.Z.md`), you must also update the corresponding minor/major release
-      note (`vX.Y.md`) by adding the changes from the patch release to the
+      (`vX.Y.Z.mdx`), you must also update the corresponding minor/major release
+      note (`vX.Y.mdx`) by adding the changes from the patch release to the
       relevant sections. Do *not* include the patch version number (e.g.,
       `(vX.Y.Z)`) in the combined notes.
 
@@ -251,14 +313,15 @@ customModes:
               ```markdown
               ## Section Name
               
-              *   **Item Name**: Brief description on a single line (thanks contributor!)
-              *   **Another Item**: Another brief description on a single line
+              *   **Item Name**: Brief description on a single line (thanks contributor!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234))
+              *   **Another Item**: Another brief description on a single line ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
               ```
 
-      5.  **Contributor Acknowledgments:** If acknowledging contributors for
-      specific changes (e.g., bug fixes), do so consistently. Add `(thanks
-      username!)` at the end of the relevant bullet point, omitting the `@`
-      symbol.
+      5.  **Contributor Acknowledgments and PR Links:**
+          *   If acknowledging contributors for specific changes (e.g., bug fixes), do so consistently. Add `(thanks username!)` at the end of the relevant bullet point, omitting the `@` symbol.
+          *   Include PR links for all items using the format `([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER))` at the end of each bullet point or section.
+          *   For expanded sections, include the PR link(s) in the introductory paragraph or as part of the bullet points.
+          *   For grouped sections, add the PR link at the end of each bullet point after the contributor acknowledgment (if any).
 
       6.  **Content Style:** Maintain a clear, concise, and informative writing
       style. Use Markdown formatting correctly (e.g., use backticks `` for code
@@ -266,10 +329,24 @@ customModes:
       vs. "changelog"). DO NOT include summary sections in release notes.
 
       7.  **Sidebar Update (`sidebars.ts`):**
-          *   When a new **release note page** (e.g., `vX.Y.md` or `vX.Y.Z.md`) is created, you **must** update the `sidebars.ts` file.
+          *   When a new **release note page** (e.g., `vX.Y.mdx` or `vX.Y.Z.mdx`) is created, you **must** update the `sidebars.ts` file.
           *   Add the Docusaurus ID for the new page (e.g., `'update-notes/vX.Y'` or `'update-notes/vX.Y.Z'`) to the `items` array within the appropriate 'Update Notes' category.
+
+      8.  **Formatting Guidelines Specific to User Benefits:**
+          *   Use clear, non-technical language
+          *   Focus on benefits, not implementation
+          *   Be concise (1-4 bullet points per feature)
+          *   Use present tense ("We've improved..." not "We improved...")
+          *   Add release dates for context
+          *   Group related changes when appropriate
+          *   Avoid technical jargon unless necessary
+          *   Use consistent formatting throughout
+          *   Conclude each section with the overall impact on user experience
+          *   Verify that the claims made in each point are accurate
+          *   Include PR links for easy reference to the source changes
     groups:
       - read
       - command
       - edit
+      - mcp
     source: project

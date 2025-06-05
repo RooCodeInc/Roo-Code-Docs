@@ -93,7 +93,7 @@ Both files use a JSON format with a `mcpServers` object containing named server 
   STDIO configuration parameters:
 
   *   `command` (required): The executable to run (e.g., `node`, `python`, `npx`, or an absolute path).
-  *   `args` (optional): An array of string arguments to pass to the command.
+  *   `args` (optional): An array of string arguments to pass to the command. You can reference system environment variables using `${env:VARIABLE_NAME}` syntax.
   *   `cwd` (optional): The working directory from which to launch the server process. If omitted, defaults to the first workspace folder path or the main process's working directory. Useful if the server script relies on relative paths.
   *   `env` (optional): An object containing environment variables to set for the server process.
   *   `alwaysAllow` (optional): An array of tool names from this server to automatically approve.
@@ -116,6 +116,38 @@ Both files use a JSON format with a `mcpServers` object containing named server 
     }
   }
   ```
+
+  #### Using System Environment Variables in Arguments
+
+  You can reference system-level environment variables within the `args` array using the `${env:VARIABLE_NAME}` syntax. This allows you to pass sensitive information like API keys or tokens from your system environment without hardcoding them in your configuration:
+
+  ```json
+  {
+    "mcpServers": {
+      "github": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "-e",
+          "GITHUB_PERSONAL_ACCESS_TOKEN=${env:GITHUB_PERSONAL_ACCESS_TOKEN}",
+          "ghcr.io/github/github-mcp-server"
+        ],
+        "alwaysAllow": [
+          "get_pull_request"
+        ]
+      }
+    }
+  }
+  ```
+
+  In this example, `${env:GITHUB_PERSONAL_ACCESS_TOKEN}` will be replaced with the value of the `GITHUB_PERSONAL_ACCESS_TOKEN` environment variable from your system. This is particularly useful when:
+  - Working with Docker containers that need environment variables passed through
+  - Keeping sensitive credentials out of your configuration files
+  - Using the same configuration across different environments with different credentials
+
+  **Note:** The environment variable must exist in your system environment for this to work. You can set system environment variables through your operating system's settings or shell configuration files (e.g., `.bashrc`, `.zshrc`, or Windows Environment Variables).
 #### Streamable HTTP Transport
 
 This is the **modern standard** for remote servers accessed over HTTP/HTTPS, offering more flexibility and replacing the legacy SSE transport for new implementations.

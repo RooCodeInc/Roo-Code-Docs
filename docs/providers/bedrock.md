@@ -84,10 +84,15 @@ Refer to the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/
         *   Enter your "AWS Profile" name (e.g., "default").
 4.  **Select Region:** Choose the AWS region where your Bedrock service is available (e.g., "us-east-1").
 5.  **(Optional) Cross-Region Inference:** Check "Use cross-region inference" if you want to access models in a region different from your configured AWS region.
-6.  **Select Model:** Choose your desired model from the "Model" dropdown.
+6.  **(Optional) VPC Endpoint:** For enterprise environments:
+    *   Check "Use VPC Endpoint" to route all Bedrock API calls through your VPC endpoint
+    *   Enter your VPC endpoint URL in the text field that appears
+    *   This ensures all LLM transactions remain within your corporate network
+7.  **Select Model:** Choose your desired model from the "Model" dropdown.
 
 ## Tips and Notes
 
 *   **Permissions:**  Ensure your IAM user or role has the necessary permissions to invoke Bedrock models.  The `bedrock:InvokeModel` permission is required.
 *   **Pricing:**  Refer to the [Amazon Bedrock pricing](https://aws.amazon.com/bedrock/pricing/) page for details on model costs.
 *   **Cross-Region Inference:**  Using cross-region inference may result in higher latency.
+*   **VPC Endpoints:**  When using VPC endpoints, ensure your endpoint is properly configured to handle Bedrock API calls. This feature is particularly useful for organizations with strict security requirements that mandate keeping all API traffic within their private network.
