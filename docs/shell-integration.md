@@ -108,6 +108,44 @@ If you'd still like to use PowerShell, make sure you're using an updated version
   - Check your current PowerShell version by running: `$PSVersionTable.PSVersion`
   - If your version is below 7, [update PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/whats-new/migrating-from-windows-powershell-51-to-powershell-7?view=powershell-7.4#installing-powershell-7).
 
+### Cygwin (bash, zsh)
+
+Cygwin provides a Unix-like environment on Windows systems. To configure Cygwin as your terminal in VS Code:
+
+1. Install Cygwin from [https://www.cygwin.com/](https://www.cygwin.com/)
+
+2. Open VS Code settings:
+   - Select File > Preferences > Settings
+   - Click the "Open Settings (JSON)" icon in the top right corner
+   
+3. Add the following configuration to your `settings.json` (inside the top-level curly braces `{}`):
+   ```json
+   {
+     "terminal.integrated.profiles.windows": {
+       "Cygwin": {
+         "path": "C:\\cygwin64\\bin\\bash.exe",
+         "args": ["--login"],
+         "env": {"CHERE_INVOKING": "1"}
+       }
+     },
+     "terminal.integrated.defaultProfile.windows": "Cygwin"
+   }
+   ```
+
+   > Note: If you have 32-bit Cygwin installed, use `"C:\\cygwin\\bin\\bash.exe"` for the path.
+
+4. Understanding the configuration:
+   - `path`: Points to the Bash executable in your Cygwin installation
+   - `args`: The `--login` flag ensures the shell reads profile files
+   - `env`: The `CHERE_INVOKING` environment variable tells Cygwin to use the current directory as the working directory
+   - `terminal.integrated.defaultProfile.windows`: Sets Cygwin as the default terminal profile
+
+5. To open a new Cygwin terminal:
+   - Press Ctrl+Shift+(backtick) to open a new terminal, or
+   - Press `F1`, type "Terminal: Create New Terminal (with Profile)", and select "Cygwin"
+
+While our testing shows that this works out of the box, if you encounter shell integration issues with Cygwin, ensure you have added the appropriate shell integration hooks to your Cygwin bash profile as described in the "Manual Shell Integration Installation" section.
+
 #### Understanding PowerShell Execution Policies
 
 PowerShell uses execution policies to determine which scripts can run on your system. Here are the most common policies:
