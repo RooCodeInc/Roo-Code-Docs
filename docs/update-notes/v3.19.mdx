@@ -6,13 +6,17 @@ This release series focuses on streamlining the user interface with intelligent 
 
 *   **Gemini Latency**: Replaced explicit caching with implicit caching for Gemini models to significantly reduce latency ([#4488](https://github.com/RooCodeInc/Roo-Code/pull/4488))
 
+*   **Bedrock**: Improved model information detection for custom Bedrock ARNs, ensuring better compatibility (thanks adamhill!)
+
 ## QOL Improvements
 
+*   **Fix reading PDF, DOCX, and IPYNB files in [`read_file`](/advanced-usage/available-tools/read-file) tool**: Ensures reliable reading of these file types (thanks samhvw8!)
 *   **MCP Server Management**: Users can now manually refresh the list of MCP servers. The UI has also been improved to correctly reflect state changes when managing servers (thanks taylorwilsdon!) ([#4267](https://github.com/RooCodeInc/Roo-Code/pull/4267))
 *   **History Preview**: Buttons in the history preview now fade when there is no interaction, providing a cleaner UI (thanks samhvw8!) ([#4458](https://github.com/RooCodeInc/Roo-Code/pull/4458))
 
 ## Bug Fixes
 
+*   **Mermaid Diagrams**: Fixed Content Security Policy (CSP) errors for Mermaid diagrams by implementing an enhanced bundling strategy (thanks KJ7LNW!)
 *   **LiteLLM Provider**: Fixed a bug that caused an error when the LiteLLM provider URL contained a trailing slash (thanks kcwhite!) ([#4275](https://github.com/RooCodeInc/Roo-Code/pull/4275))
 *   **Copy Button**: Fixed an issue with the copy button logic (thanks samhvw8!) ([#4458](https://github.com/RooCodeInc/Roo-Code/pull/4458))
 
@@ -22,6 +26,8 @@ This release series focuses on streamlining the user interface with intelligent 
 
 ## Misc Improvements
 
+*   **OpenAI Compatible Embedder**: Added a new embedder for codebase indexing that is compatible with the OpenAI API, expanding options for local and custom embedding models (thanks SannidhyaSah!)
+*   **Enforce [`codebase_search`](/advanced-usage/available-tools/codebase-search) as primary tool**: Roo Code now always uses codebase_search as the first step for code understanding tasks, improving accuracy and consistency (thanks hannesrudolph!)
 *   **Build Scripts**: Removed unnecessary `npx` usage from some npm scripts (thanks user202729!) ([#4003](https://github.com/RooCodeInc/Roo-Code/pull/4003))
 
 Thank you to all our contributors for making Roo Code better with each release!

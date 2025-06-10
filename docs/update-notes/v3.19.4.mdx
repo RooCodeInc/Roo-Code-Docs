@@ -14,12 +14,21 @@ We've resolved multiple memory leaks across the extension, resulting in improved
 - **Clipboard**: useCopyToClipboard now clears setTimeout to avoid memory leaks (thanks kiwina!)
 - **ClineProvider**: Instance cleanup improved to prevent lingering resources (thanks xyOz-dev!)
 
+## Bug Fixes
+
+*   **Mermaid Diagrams**: Fixed Content Security Policy (CSP) errors for Mermaid diagrams by implementing an enhanced bundling strategy (thanks KJ7LNW!)
+
+## Provider Updates
+
+*   **Bedrock**: Improved model information detection for custom Bedrock ARNs, ensuring better compatibility (thanks adamhill!)
+
 ## QOL Improvements
 
 *   **Fix reading PDF, DOCX, and IPYNB files in [`read_file`](/advanced-usage/available-tools/read-file) tool**: Ensures reliable reading of these file types (thanks samhvw8!)
 
 ## Misc Improvements
 
+*   **OpenAI Compatible Embedder**: Added a new embedder for codebase indexing that is compatible with the OpenAI API, expanding options for local and custom embedding models (thanks SannidhyaSah!)
 *   **Enforce [`codebase_search`](/advanced-usage/available-tools/codebase-search) as primary tool**: Roo Code now always uses codebase_search as the first step for code understanding tasks, improving accuracy and consistency (thanks hannesrudolph!)
 *   **Improved Docker setup for evals**: Dockerfile and docker-compose updated for better isolation, real-time monitoring, and streamlined configuration
 *   **Move evals into pnpm workspace, switch from SQLite to Postgres**: Evals are now managed in a pnpm workspace and use PostgreSQL for improved scalability
