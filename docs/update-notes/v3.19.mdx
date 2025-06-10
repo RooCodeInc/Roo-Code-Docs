@@ -80,6 +80,7 @@ Enterprise customers can now use Roo Code with AWS Bedrock while maintaining com
 *   **Release Memory in `apply_diff`**: Optimized memory usage in the `apply_diff` tool by explicitly releasing the original content buffer after use, helping to prevent potential memory leaks ([#4193](https://github.com/RooCodeInc/Roo-Code/pull/4193)) (thanks xyOz-dev!).
 *   **Fix Directory Link Handling in Markdown**: Enhanced how directory links in markdown (e.g., `[some/directory/](some/directory/)`) are handled, ensuring they correctly open in the Explorer view ([#3690](https://github.com/RooCodeInc/Roo-Code/pull/3690)) (thanks KJ7LNW!).
 *   **Typo Fixes**: Corrected various typos in comments and tool use prompts ([#4220](https://github.com/RooCodeInc/Roo-Code/pull/4220), [#4095](https://github.com/RooCodeInc/Roo-Code/pull/4095)) (thanks mrubens, noritaka1166!).
+*   **Gemini 2.5 Pro Preview**: Fixed a bug where the thinking budget was not being correctly applied, causing errors. Roo Code will now correctly default to the specified token values when they are not defined in the settings. (thanks cte!) ([#4401](https://github.com/RooCodeInc/Roo-Code/pull/4401))
 
 ## Provider Updates
 
@@ -104,5 +105,7 @@ Enterprise customers can now use Roo Code with AWS Bedrock while maintaining com
 *   **Model-Specific Caching**: Optimized cache strategies for Gemini and Anthropic models for better performance
 *   **Unified History Item UI**: Refactored history item UI components for code consistency (thanks daniel-lxs!) ([#4151](https://github.com/RooCodeInc/Roo-Code/pull/4151))
 *   **Node.js Upgrade**: Upgraded Node.js to `v20.19.2` to incorporate the latest security enhancements and ensure a more secure environment (thanks PeterDaveHello!) ([#4212](https://github.com/RooCodeInc/Roo-Code/pull/4212))
+*   **Evals**: Improved the "run status" section of the internal evaluation system to provide more detailed information about the status of the task stream, controller, and runners. (thanks cte!) ([#4400](https://github.com/RooCodeInc/Roo-Code/pull/4400))
+*   **Evals**: Rust evaluations are now run using bash to improve reliability. Logging has also been improved to provide more consistent output. (thanks cte!) ([#4392](https://github.com/RooCodeInc/Roo-Code/pull/4392))
 
 Thank you to all our contributors for making Roo Code better with each release!
