@@ -134,6 +134,10 @@ const config: Config = {
             to: '/features/intelligent-context-condensing',
             from: ['/features/experimental/intelligent-context-condensing', '/features/experimental/intelligent-context-condensation'],
           },
+          {
+            to: '/advanced-usage/footgun-prompting',
+            from: ['/features/footgun-prompting'],
+          },
           
           // MCP related redirects
           {
