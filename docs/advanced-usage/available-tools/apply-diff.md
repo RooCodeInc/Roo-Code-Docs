@@ -103,3 +103,72 @@ Example format for the `<diff>` block:
 =======
     const defaultTimeout = 10000; // Increased timeout
 >>>>>>> REPLACE
+```
+
+---
+
+## Experimental: Multi-File Edits (`MULTI_FILE_APPLY_DIFF`)
+
+An experimental version of `apply_diff` allows for applying changes to multiple files within a single tool call. This feature is activated by the `MULTI_FILE_APPLY_DIFF` experiment flag.
+
+### Key Features of Experimental Mode
+
+- **Multi-File Operations**: Edit multiple files in one request, streamlining complex refactoring tasks.
+- **Batch Approval UI**: When multiple files are targeted, a single UI appears for the user to approve or deny all changes at once, or manage permissions for each file individually.
+- **New XML Format**: Introduces a new, more structured XML format using `<args>` and `<file>` tags to handle multiple operations.
+- **Backward Compatibility**: The experimental tool remains compatible with the legacy single-file `path` and `diff` parameter format.
+
+### How It Works (Experimental)
+
+1.  **Experiment Check**: The tool first checks if the `MULTI_FILE_APPLY_DIFF` experiment is enabled. If not, it falls back to the legacy `apply_diff` implementation.
+2.  **Parameter Parsing**: It parses the new `<args>` XML format to identify all target files and their corresponding diff operations. It can also handle the legacy `path`/`diff` parameters.
+3.  **Validation and Approval**:
+    *   It validates that all target files exist and are accessible (not blocked by `.rooignore`).
+    *   If multiple files are being modified, it presents a **batch approval** dialog to the user.
+4.  **Diff Application**: For each approved file, it applies the specified diffs using the `MultiFileSearchReplaceDiffStrategy`. This strategy can apply multiple, non-overlapping changes to a single file.
+5.  **Results**: It returns a consolidated result message summarizing the outcome for all attempted operations.
+
+### New Diff Format (Experimental)
+
+The experimental mode uses a new XML structure within the `<apply_diff>` tool call.
+
+- **`<args>`**: A container for all file operations.
+- **`<file>`**: A block for each file to be modified. Contains `<path>` and one or more `<diff>` tags.
+- **`<path>`**: The relative path to the file.
+- **`<diff>`**: A block containing the change.
+    - **`<content>`**: The `SEARCH/REPLACE` block.
+    - **`<start_line>`**: (Optional) A line number hint.
+
+**Example: Modifying two files in one call**
+
+```xml
+<apply_diff>
+  <args>
+    <file>
+      <path>src/services/auth.service.ts</path>
+      <diff>
+        <content>
+<<<<<<< SEARCH
+:start_line:50
+-------
+    const token_expiration = '15m';
+>>>>>>> REPLACE
+        </content>
+      </diff>
+    </file>
+    <file>
+      <path>src/config/auth.config.ts</path>
+      <diff>
+        <content>
+<<<<<<< SEARCH
+:start_line:12
+-------
+    rateLimit: 5,
+=======
+    rateLimit: 10,
+>>>>>>> REPLACE
+        </content>
+      </diff>
+    </file>
+  </args>
+</apply_diff>
