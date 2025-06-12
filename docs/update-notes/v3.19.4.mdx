@@ -2,8 +2,12 @@
 
 This patch release delivers critical memory leak fixes, new Gemini 2.5 Pro Preview 06-05 model support, improved infrastructure for evals, and several quality-of-life and workflow enhancements.
 
+---
+
 ## Gemini 2.5 Pro Preview 06-05 Model Support
 We've added support for the newly released Gemini 2.5 Pro Preview 06-05 model, giving you access to the latest advancements from Google (thanks daniel-lxs and shariqriazz!). This model is available in the [Gemini](/providers/gemini), [Vertex](/providers/vertex), and [OpenRouter](/providers/openrouter) providers.
+
+---
 
 ## Major Memory Leak Fixes
 We've resolved multiple memory leaks across the extension, resulting in improved stability and performance:
@@ -14,17 +18,25 @@ We've resolved multiple memory leaks across the extension, resulting in improved
 - **Clipboard**: useCopyToClipboard now clears setTimeout to avoid memory leaks (thanks kiwina!)
 - **ClineProvider**: Instance cleanup improved to prevent lingering resources (thanks xyOz-dev!)
 
+---
+
 ## Bug Fixes
 
 *   **Mermaid Diagrams**: Fixed Content Security Policy (CSP) errors for Mermaid diagrams by implementing an enhanced bundling strategy (thanks KJ7LNW!)
+
+---
 
 ## Provider Updates
 
 *   **Bedrock**: Improved model information detection for custom Bedrock ARNs, ensuring better compatibility (thanks adamhill!)
 
+---
+
 ## QOL Improvements
 
 *   **Fix reading PDF, DOCX, and IPYNB files in [`read_file`](/advanced-usage/available-tools/read-file) tool**: Ensures reliable reading of these file types (thanks samhvw8!)
+
+---
 
 ## Misc Improvements
 

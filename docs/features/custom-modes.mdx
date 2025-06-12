@@ -25,6 +25,8 @@ Roo Code allows you to create **custom modes** to tailor Roo's behavior to speci
 Each mode—including custom ones—features **Sticky Models**. This means Roo Code automatically remembers and selects the last model you used with a particular mode. This lets you assign different preferred models to different tasks without constant reconfiguration, as Roo switches between models when you change modes.
 :::
 
+---
+
 ## Why Use Custom Modes?
 
 *   **Specialization:** Create modes optimized for specific tasks, like "Documentation Writer," "Test Engineer," or "Refactoring Expert."
@@ -35,6 +37,8 @@ Each mode—including custom ones—features **Sticky Models**. This means Roo C
 <img src="/img/custom-modes/custom-modes-3.png" alt="Overview of custom modes interface" width="500" />
 
     *Roo Code's interface for creating and managing custom modes.*
+
+---
 
 ## What's Included in a Custom Mode?
 
@@ -48,6 +52,8 @@ Custom modes are defined by several key properties. Understanding these concepts
 | Available Tools (`groups`)               | Defines the **allowed toolsets and file access permissions** for the mode.<br />- In the UI, this corresponds to selecting which general categories of tools (like reading files, editing files, browsing, or executing commands) the mode can use.<br />- File type restrictions for the "edit" group are typically managed via manual YAML/JSON configuration or by asking Roo to set them up, as detailed in the [Property Details for `groups`](#groups). |
 | When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Roo to understand the mode's purpose**, especially for automated decisions.<br />- This text is used by Roo, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Roo decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- If populated, this description is used by Roo to understand the mode's function; otherwise, the first sentence of the `roleDefinition` is used by default. |
 | Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Roo's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
+
+---
 
 ## Methods for Creating and Configuring Custom Modes
 
@@ -276,6 +282,8 @@ When editing YAML manually, keep these points in mind:
 :::tip
 For manual conversions of `.roomodes` files, you can use online JSON to YAML converters or ask Roo to help reformat a specific mode configuration from JSON to YAML. Always validate your YAML before saving.
 :::
+---
+
 ## Mode-Specific Instructions via Files/Directories
 
 :::info Mode-Specific Instruction File Locations
@@ -329,6 +337,8 @@ There are two ways Roo Code loads these instructions, with a clear preference fo
 *   Instructions loaded from either the directory or the fallback file are combined with the `customInstructions` property defined in the mode's configuration.
 *   Typically, the content from the files/directories is appended after the content from the `customInstructions` property.
 
+---
+
 ## Configuration Precedence
 
 Mode configurations are applied in this order:
@@ -340,6 +350,8 @@ Mode configurations are applied in this order:
 This means that project-specific configurations will override global configurations, which in turn override default configurations. You can override any default mode by including a mode with the same slug in your global or project-specific configuration.
 
 *   **Note on Instruction Files:** Within the loading of mode-specific instructions from the filesystem, the directory `.roo/rules-{mode-slug}/` takes precedence over the single file `.roorules-{mode-slug}` found in the workspace root.
+
+---
 
 ## Overriding Default Modes
 
@@ -441,6 +453,8 @@ Project-specific overrides take precedence over global overrides.
 When overriding default modes, test carefully. Consider backing up configurations before major changes.
 :::
 
+---
+
 ## Understanding Regex in Custom Modes
 
 Regular expressions (`fileRegex`) offer fine-grained control over file editing permissions.
@@ -487,6 +501,8 @@ When you specify `fileRegex`, you're creating a pattern that file paths must mat
 1.  Test on sample file paths. Online regex testers are helpful.
 2.  Remember the escaping rules for JSON vs. YAML.
 3.  Start simple and build complexity.
+
+---
 
 ## Community Gallery
 Ready to explore more? Check out the [Custom Modes Gallery](/community/#custom-modes-gallery) section on the main community page to discover and share custom modes created by the community!

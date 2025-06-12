@@ -6,12 +6,16 @@ Modes in Roo Code are specialized personas that tailor the assistant's behavior 
 Each mode remembers your last-used model. When switching modes, Roo automatically selects that model—no manual selection needed. Assign different models to different modes (e.g., Gemini 2.5 Preview for `🏗️ Architect` mode, Claude Sonnet 3.7 for `💻 Code` mode) and Roo will switch models automatically when you change modes.
 :::
 
+---
+
 ## Why Use Different Modes?
 
 - **Task specialization:** Get precisely the type of assistance you need for your current task
 - **Safety controls:** Prevent unintended file modifications when focusing on planning or learning
 - **Focused interactions:** Receive responses optimized for your current activity
 - **Workflow optimization:** Seamlessly transition between planning, implementing, debugging, and learning
+
+---
 
 ## Switching Between Modes
 
@@ -36,6 +40,8 @@ Four ways to switch modes:
 4. **Accept suggestions:** Click on mode switch suggestions that Roo offers when appropriate
    
     <img src="/img/using-modes/using-modes-2.png" alt="Accepting a mode switch suggestion from Roo" width="400" />
+
+---
 
 ## Built-in Modes
 
@@ -88,6 +94,8 @@ Four ways to switch modes:
 | **Tool Access** | Access to `read`, `browser`, `command`, `mcp`, and restricted `edit` (mode configuration files only: `.roomodes`, `custom_modes.json`) |
 | **Ideal For** | Managing multi-step projects, coordinating work across different modes, and automating complex workflows |
 | **Special Features** | Uses the [`new_task`](/advanced-usage/available-tools/new-task) tool to delegate subtasks to other modes. |
+
+---
 
 ## Customizing Modes
 

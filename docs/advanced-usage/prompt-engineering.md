@@ -2,6 +2,8 @@
 
 Prompt engineering is the art of crafting effective instructions for AI models like Roo Code.  Well-written prompts lead to better results, fewer errors, and a more efficient workflow.
 
+---
+
 ## General Principles
 
 *   **Be Clear and Specific:** Clearly state what you want Roo Code to do. Avoid ambiguity.
@@ -19,6 +21,8 @@ Prompt engineering is the art of crafting effective instructions for AI models l
 
 *   **Iterate:** Don't be afraid to refine your prompt if the initial results aren't what you expect.
 
+---
+
 ## Thinking vs. Doing
 
 It's often helpful to guide Roo Code through a "think-then-do" process:
@@ -27,6 +31,8 @@ It's often helpful to guide Roo Code through a "think-then-do" process:
 2.  **Plan:**  Have Roo Code outline the steps it will take to complete the task.
 3.  **Execute:**  Instruct Roo Code to implement the plan, one step at a time.
 4.  **Review:**  Carefully review the results of each step before proceeding.
+
+---
 
 ## Using Custom Instructions
 
@@ -44,6 +50,8 @@ Custom instructions are added to the system prompt, providing persistent guidanc
 
 See the [Custom Instructions](/features/custom-instructions) section for more details.
 
+---
+
 ## Handling Ambiguity
 
 If your request is ambiguous or lacks sufficient detail, Roo Code might:
@@ -53,6 +61,8 @@ If your request is ambiguous or lacks sufficient detail, Roo Code might:
 
 It's generally better to provide clear and specific instructions from the start to avoid unnecessary back-and-forth.
 
+---
+
 ## Providing Feedback
 
 If Roo Code doesn't produce the desired results, you can provide feedback by:
@@ -61,6 +71,8 @@ If Roo Code doesn't produce the desired results, you can provide feedback by:
 *   **Providing Explanations:** When rejecting, explain *why* you're rejecting the action.  This helps Roo Code learn from its mistakes.
 *   **Rewording Your Request:** Try rephrasing your initial task or providing more specific instructions.
 *   **Manually Correcting:** If there are a few small issues, you can also directly modify the code before accepting the changes.
+
+---
 
 ## Examples
 

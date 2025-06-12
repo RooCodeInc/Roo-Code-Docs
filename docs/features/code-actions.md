@@ -2,6 +2,8 @@
 
 Code Actions are a powerful feature of VS Code that provide quick fixes, refactorings, and other code-related suggestions directly within the editor. Roo Code integrates with this system to offer AI-powered assistance for common coding tasks.
 
+---
+
 ## What are Code Actions?
 
 Code Actions appear as a lightbulb icon (💡) in the editor gutter (the area to the left of the line numbers). They can also be accessed via the right-click context menu, or via keyboard shortcut. They are triggered when:
@@ -11,6 +13,8 @@ Code Actions appear as a lightbulb icon (💡) in the editor gutter (the area to
 *   You invoke them via command.
 
 Clicking the lightbulb, right-clicking and selecting "Roo Code", or using the keyboard shortcut (`Ctrl+.` or `Cmd+.` on macOS, by default), displays a menu of available actions.
+
+---
 
 ## Roo Code's Code Actions
 
@@ -34,6 +38,8 @@ Can you explain this function?
 ```
 
 *(Where `@myFile.js:15:25` represents the code added via "Add to Context")*
+
+---
 
 ## Using Code Actions
 
@@ -61,6 +67,8 @@ There are three main ways to use Roo Code's Code Actions:
 2.  **Open the Command Palette:** Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
 3.  **Type a Command:** Type "Roo Code" to filter the commands, then choose the relevant code action (e.g., "Roo Code: Explain Code"). The action will apply in the most logical context (usually the current active chat task, if one exists).
 4.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
+
+---
 
 ## Customizing Code Action Prompts
 

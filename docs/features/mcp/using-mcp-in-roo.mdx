@@ -31,6 +31,8 @@ Model Context Protocol (MCP) extends Roo Code's capabilities by connecting to ex
 </div>
 <br />
 
+---
+
 ## Configuring MCP Servers
 
 MCP server configurations can be managed at two levels:
@@ -232,6 +234,8 @@ Disabling your MCP Servers here will remove all MCP related logic and definition
 
   <img src="/img/using-mcp-in-roo/using-mcp-in-roo-2.png" alt="Enable MCP Servers toggle" width="400" />
 
+---
+
 ## Enabling or Disabling MCP Server Creation
 
 Disabling your MCP Server Creation here will just remove the instructions from your system prompt that Roo Code uses to write MCP servers while not removing the context related to operating them. This reduces token usage. This is on by default.
@@ -240,6 +244,8 @@ Disabling your MCP Server Creation here will just remove the instructions from y
 2. Check/Uncheck `Enable MCP Server Creation`
 
   <img src="/img/using-mcp-in-roo/using-mcp-in-roo-3.png" alt="Enable MCP Server Creation toggle" width="400" />
+
+---
 
 ## How to Use Roo to Create an MCP Server
 
@@ -265,6 +271,8 @@ If you need a specific tool or capability that isn't available through existing 
 3.  **Outcome:** If successful, Roo will confirm the creation, and the new server and its tools will appear in your MCP server list, ready for use.
 
 This feature allows you to tailor Roo's capabilities by having it build the specific integrations you need directly from your requests. For a deeper look into the internal mechanics, see the [Tool Calling Mechanism](/advanced-usage/available-tools/tool-use-overview#tool-calling-mechanism).
+
+---
 
 ## Managing Individual MCP Servers
 
@@ -311,6 +319,8 @@ MCP tool auto-approval works on a per-tool basis and is disabled by default. To 
 
 When enabled, Roo Code will automatically approve this specific tool without prompting. Note that the global "Use MCP servers" setting takes precedence - if it's disabled, no MCP tools will be auto-approved.
 
+---
+
 ## Finding and Installing MCP Servers
 
 Roo Code does not come with any pre-installed MCP servers. You'll need to find and install them separately.
@@ -320,6 +330,8 @@ Roo Code does not come with any pre-installed MCP servers. You'll need to find a
 * **Build Your Own:** Create custom MCP servers using the SDK to extend Roo Code with your own tools
 
 For full SDK documentation, visit the [MCP GitHub repository](https://github.com/modelcontextprotocol/).
+
+---
 
 ## Using MCP Tools in Your Workflow
 
@@ -362,6 +374,8 @@ If Roo, guided by the tool descriptions, identifies a suitable tool, it will pro
 ### Maximizing Synergy with MCP Servers
 By investing effort in crafting detailed descriptions and potentially augmenting them with custom instructions, you significantly improve the synergy between Roo Code and your MCP servers. This unlocks their full potential for more reliable and efficient task completion.
 
+---
+
 ## Troubleshooting MCP Servers
 
 Common issues and solutions:
@@ -370,6 +384,8 @@ Common issues and solutions:
 * **Permission Errors:** Ensure proper API keys and credentials are configured in your `mcp_settings.json` (for global settings) or `.roo/mcp.json` (for project settings).
 * **Tool Not Available:** Confirm the server is properly implementing the tool and it's not disabled in settings
 * **Slow Performance:** Try adjusting the network timeout value for the specific MCP server
+
+---
 
 ## Platform-Specific MCP Configuration Examples
 
@@ -424,6 +440,8 @@ This configuration:
 - Runs the `@modelcontextprotocol/server-puppeteer` package which provides browser automation capabilities
 
 The same approach can be used for other MCP servers on Windows, adjusting the package name as needed for different server types.
+
+---
 
 ## Runtime Version Manager Configuration
 

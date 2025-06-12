@@ -10,6 +10,8 @@ Roo Code requires an API key from an AI model provider to function. We recommend
 - **OpenRouter (Recommended):** Provides access to multiple AI models through a single API key. Ideal for getting started quickly with minimal setup. [View pricing](https://openrouter.ai/models?order=pricing-low-to-high).
 - **Anthropic:** Direct access to Claude models. Requires API access approval and may have [rate limits depending on your tier](https://docs.anthropic.com/en/api/rate-limits#requirements-to-advance-tier). See [Anthropic's pricing page](https://www.anthropic.com/pricing#anthropic-api) for details.
 
+---
+
 ## Getting Your API Key
 
 ### Option 1: LLM Routers
@@ -63,6 +65,8 @@ For direct access to specific models from their original providers, with full ac
 <img src="/img/connecting-api-provider/connecting-api-provider-6.png" alt="OpenAI API keys page" width="600" />
 
 *OpenAI platform with "Create new secret key" button. Name your key and copy it immediately after creation.*
+
+---
 
 ## Configuring Roo Code in VS Code
 

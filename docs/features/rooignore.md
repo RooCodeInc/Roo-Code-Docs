@@ -6,6 +6,8 @@ sidebar_label: .rooignore
 
 The `.rooignore` file is a key feature for managing Roo Code's interaction with your project files. It allows you to specify files and directories that Roo should not access or modify, similar to how `.gitignore` works for Git.
 
+---
+
 ## What is `.rooignore`?
 
 *   **Purpose**: To protect sensitive information, prevent accidental changes to build artifacts or large assets, and generally define Roo's operational scope within your workspace.
@@ -13,6 +15,8 @@ The `.rooignore` file is a key feature for managing Roo Code's interaction with 
 *   **Scope**: `.rooignore` affects both Roo's tools and context mentions (like `@directory` attachments).
 
 Roo actively monitors the `.rooignore` file. Any changes you make are reloaded automatically, ensuring Roo always uses the most current rules. The `.rooignore` file itself is always implicitly ignored, so Roo cannot change its own access rules.
+
+---
 
 ## Pattern Syntax
 
@@ -26,6 +30,8 @@ The syntax for `.rooignore` is identical to `.gitignore`. Here are common exampl
 *   `docs/**/*.md`: Ignores all Markdown files in the `docs` directory and its subdirectories.
 
 For a comprehensive guide on syntax, refer to the [official Git documentation on .gitignore](https://git-scm.com/docs/gitignore).
+
+---
 
 ## How Roo Tools Interact with `.rooignore`
 
@@ -56,11 +62,15 @@ These tools directly check `.rooignore` before any file operation. If a file is 
 
 *   **[`execute_command`](/advanced-usage/available-tools/execute-command) Tool**: This tool checks if a command (from a predefined list like `cat` or `grep`) targets an ignored file. If so, execution is blocked.
 
+---
+
 ## Key Limitations and Scope
 
 *   **Workspace-Centric**: `.rooignore` rules apply **only to files and directories within the current VS Code workspace root**. Files outside this scope are not affected.
 *   **[`execute_command`](/advanced-usage/available-tools/execute-command) Specificity**: Protection for `execute_command` is limited to a predefined list of file-reading commands. Custom scripts or uncommon utilities might not be caught.
 *   **Not a Full Sandbox**: `.rooignore` is a powerful tool for controlling Roo's file access via its tools, but it does not create a system-level sandbox.
+
+---
 
 ## User Experience and Notifications
 

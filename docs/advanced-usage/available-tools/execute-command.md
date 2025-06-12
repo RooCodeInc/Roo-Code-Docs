@@ -2,6 +2,8 @@
 
 The `execute_command` tool runs CLI commands on the user's system. It allows Roo to perform system operations, install dependencies, build projects, start servers, and execute other terminal-based tasks needed to accomplish user objectives.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -9,9 +11,13 @@ The tool accepts these parameters:
 - `command` (required): The CLI command to execute. Must be valid for the user's operating system.
 - `cwd` (optional): The working directory to execute the command in. If not provided, the current working directory is used.
 
+---
+
 ## What It Does
 
 This tool executes terminal commands directly on the user's system, enabling a wide range of operations from file manipulations to running development servers. Commands run in managed terminal instances with real-time output capture, integrated with VS Code's terminal system for optimal performance and security.
+
+---
 
 ## When is it used?
 
@@ -22,6 +28,8 @@ This tool executes terminal commands directly on the user's system, enabling a w
 - When performing file operations beyond what other tools provide
 - When running tests or linting operations
 - When needing to execute specialized commands for specific technologies
+
+---
 
 ## Key Features
 
@@ -40,6 +48,8 @@ This tool executes terminal commands directly on the user's system, enabling a w
 - Integrates with RooIgnore system for file access control
 - Handles terminal escape sequences for clean output
 
+---
+
 ## Limitations
 
 - Command access may be restricted by RooIgnore rules and security validations
@@ -48,6 +58,8 @@ This tool executes terminal commands directly on the user's system, enabling a w
 - Very long-running commands may require specific handling
 - File paths should be properly escaped according to the OS shell rules
 - Not all terminal features may work with remote development scenarios
+
+---
 
 ## How It Works
 
@@ -78,6 +90,8 @@ When the `execute_command` tool is invoked, it follows this process:
    - Updates working directory tracking if changed by command
    - Provides command status with appropriate context
 
+---
+
 ## Terminal Implementation Details
 
 The tool uses a sophisticated terminal management system:
@@ -105,6 +119,8 @@ The tool uses a sophisticated terminal management system:
    - Working directory changes are tracked and handled automatically
    - Clean recovery from terminal disconnection scenarios
 
+---
+
 ## Examples When Used
 
 - When setting up a new project, Roo runs initialization commands like `npm init -y` followed by installing dependencies.
@@ -113,6 +129,8 @@ The tool uses a sophisticated terminal management system:
 - When troubleshooting, Roo executes diagnostic commands to gather system information.
 - When starting a development server, Roo launches the appropriate server command (e.g., `npm start`).
 - When running tests, Roo executes the test runner command for the project's testing framework.
+
+---
 
 ## Usage Examples
 

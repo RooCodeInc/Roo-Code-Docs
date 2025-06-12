@@ -8,6 +8,8 @@ Codebase Indexing enables semantic code search across your entire project using 
 
 <img src="/img/codebase-indexing/codebase-indexing.png" alt="Codebase Indexing Settings" width="800" />
 
+---
+
 ## What It Does
 
 When enabled, the indexing system:
@@ -19,12 +21,16 @@ When enabled, the indexing system:
 
 This enables natural language queries like "user authentication logic" or "database connection handling" to find relevant code across your entire project.
 
+---
+
 ## Key Benefits
 
 - **Semantic Search**: Find code by meaning, not just keywords
 - **Enhanced AI Understanding**: Roo can better comprehend and work with your codebase
 - **Cross-Project Discovery**: Search across all files, not just what's open
 - **Pattern Recognition**: Locate similar implementations and code patterns
+
+---
 
 ## Setup Requirements
 
@@ -80,6 +86,8 @@ Choose one of these options for generating embeddings:
 - **Cloud**: Qdrant Cloud or self-hosted instance
 - **Authentication**: Optional API key for secured deployments
 
+---
+
 ## Setting Up Qdrant
 
 ### Quick Local Setup
@@ -110,6 +118,8 @@ For team or production use:
 - Self-hosted on AWS, GCP, or Azure
 - Local server with network access for team sharing
 
+---
+
 ## Configuration
 
 1. Open Roo Code settings (<Codicon name="gear" /> icon)
@@ -121,6 +131,8 @@ For team or production use:
 5. Set Qdrant URL and optional API key
 6. Click **Save** to start initial indexing
 
+---
+
 ## Understanding Index Status
 
 The interface shows real-time status with color indicators:
@@ -129,6 +141,8 @@ The interface shows real-time status with color indicators:
 - **Indexing** (Yellow): Currently processing files
 - **Indexed** (Green): Up-to-date and ready for searches
 - **Error** (Red): Failed state requiring attention
+
+---
 
 ## How Files Are Processed
 
@@ -155,6 +169,8 @@ The indexer automatically excludes:
 - **Hash-based Caching**: Avoids reprocessing unchanged content
 - **Branch Switching**: Automatically handles Git branch changes
 
+---
+
 ## Best Practices
 
 ### Model Selection
@@ -175,6 +191,8 @@ The indexer automatically excludes:
 - **Local Processing**: All parsing happens locally
 - **Qdrant Security**: Use authentication for production deployments
 
+---
+
 ## Current Limitations
 
 - **File Size**: 1MB maximum per file
@@ -182,6 +200,8 @@ The indexer automatically excludes:
 - **Single Workspace**: One workspace at a time
 - **Dependencies**: Requires external services (embedding provider + Qdrant)
 - **Language Coverage**: Limited to Tree-sitter supported languages
+
+---
 
 ## Using the Search Feature
 
@@ -199,6 +219,8 @@ The tool provides Roo with:
 - Similarity scores
 - Contextual information
 
+---
+
 ## Privacy & Security
 
 - **Code stays local**: Only small code snippets sent for embedding
@@ -206,6 +228,8 @@ The tool provides Roo with:
 - **Secure storage**: API keys encrypted in VS Code storage
 - **Local option**: Use Ollama for completely local processing
 - **Access control**: Respects existing file permissions
+
+---
 
 ## Future Enhancements
 

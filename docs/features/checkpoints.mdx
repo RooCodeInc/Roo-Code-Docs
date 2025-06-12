@@ -34,6 +34,8 @@ Checkpoints let you:
 - The shadow Git repository operates independently from your project's existing Git configuration
 :::
 
+---
+
 ## Configuration Options
 
 Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
@@ -42,6 +44,8 @@ Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
 2. Check or uncheck the "Enable automatic checkpoints" checkbox
 
    <img src="/img/checkpoints/checkpoints.png" alt="Checkpoint settings in Roo Code configuration" width="500" />
+
+---
 
 ## How Checkpoints Work
 
@@ -54,6 +58,8 @@ Checkpoints are stored as Git commits in the shadow repository, capturing:
 - Deleted files
 - Renamed files
 - Binary file changes
+
+---
 
 ## Working with Checkpoints
 
@@ -110,6 +116,8 @@ To restore a project to a previous checkpoint state:
 - **External changes**: Modifications made outside of tasks (manual edits, other tools) aren't included
 - **Large files**: Very large binary files may impact performance
 - **Unsaved work**: Restoration will overwrite any unsaved changes in your workspace
+
+---
 
 ## Technical Implementation
 
@@ -188,6 +196,8 @@ The checkpoint system includes special handling for nested Git repositories:
 ### Concurrency Control
 
 Operations are queued to prevent concurrent Git operations that might corrupt repository state. This ensures that rapid checkpoint operations complete safely even when requested in quick succession.
+
+---
 
 ## Git Installation
 

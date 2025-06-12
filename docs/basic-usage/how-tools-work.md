@@ -2,6 +2,8 @@
 
 Roo Code uses tools to interact with your code and environment. These specialized helpers perform specific actions like reading files, making edits, running commands, or searching your codebase. Tools provide automation for common development tasks without requiring manual execution.
 
+---
+
 ## Tool Workflow
 
 Describe what you want to accomplish in natural language, and Roo Code will:
@@ -10,6 +12,8 @@ Describe what you want to accomplish in natural language, and Roo Code will:
 2. Present the tool with its parameters for your review
 3. Execute the approved tool and show you the results
 4. Continue this process until your task is complete
+
+---
 
 ## Tool Categories
 
@@ -20,6 +24,8 @@ Describe what you want to accomplish in natural language, and Roo Code will:
 | Execute | Run commands and perform system operations | `execute_command` |
 | Browser | Interact with web content | `browser_action` |
 | Workflow | Manage task flow and context | `ask_followup_question`, `attempt_completion`, `switch_mode`, `new_task` |
+
+---
 
 ## Example: Using Tools
 
@@ -50,6 +56,8 @@ greet('World');
 
 **Roo Code:** (Confirms file creation)
 
+---
+
 ## Tool Safety and Approval
 
 
@@ -60,6 +68,8 @@ Every tool use requires your explicit approval. When Roo proposes a tool, you'll
 * An optional "Auto-approve" setting for trusted operations
 
 This safety mechanism ensures you maintain control over which files are modified, what commands are executed, and how your codebase is changed. Always review tool proposals carefully before saving them.
+
+---
 
 ## Core Tools Reference
 
@@ -77,6 +87,8 @@ This safety mechanism ensures you maintain control over which files are modified
 | `attempt_completion` | Indicates the task is complete | Workflow |
 | `switch_mode` | Changes to a different operational mode | Workflow |
 | `new_task` | Creates a new subtask with a specific starting mode | Workflow |
+
+---
 
 ## Learn More About Tools
 

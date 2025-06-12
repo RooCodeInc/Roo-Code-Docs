@@ -12,6 +12,8 @@ Roo Code supports a wide range of AI model providers that offer APIs compatible 
 
 This document focuses on setting up providers *other than* the official OpenAI API (which has its own [dedicated configuration page](/providers/openai)).
 
+---
+
 ## General Configuration
 
 The key to using an OpenAI-compatible provider is to configure two main settings:
@@ -34,6 +36,8 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
     - Input Price
     - Output Price
 
+---
+
 ## Supported Models (for OpenAI Native Endpoint)
 
 While this provider type allows connecting to various endpoints, if you are connecting directly to the official OpenAI API (or an endpoint mirroring it exactly), Roo Code recognizes the following model IDs based on the `openAiNativeModels` definition in its source code:
@@ -49,6 +53,8 @@ While this provider type allows connecting to various endpoints, if you are conn
 *   `gpt-4o-mini`
 
 **Note:** If you are using a different OpenAI-compatible provider (like Together AI, Anyscale, etc.), the available model IDs will vary. Always refer to your specific provider's documentation for their supported model names.
+
+---
 
 ## Troubleshooting
 

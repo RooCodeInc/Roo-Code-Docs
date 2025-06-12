@@ -6,6 +6,8 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 
 *Context mentions overview showing the @ symbol dropdown menu in the chat interface.*
 
+---
+
 ## Types of Mentions
 
 <img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
@@ -97,6 +99,8 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Output** | Converts content to Markdown for readability |
 | **Limitation** | Complex pages may not convert perfectly |
 
+---
+
 ## How to Use Mentions
 
 1. Type `@` in the chat input to trigger the suggestions dropdown
@@ -112,6 +116,8 @@ The dropdown automatically suggests:
 - **All currently open files** (regardless of ignore settings or directory filters)
 
 The dropdown automatically filters out common directories like `node_modules`, `.git`, `dist`, and `out` to reduce noise, even though their content could be included if manually typed.
+
+---
 
 ## Important Behaviors
 

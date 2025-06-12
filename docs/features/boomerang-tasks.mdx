@@ -30,12 +30,16 @@ The `🪃 Orchestrator` mode (previously achieved via a custom "Boomerang Mode")
 Learn more about [Built-in Modes](/basic-usage/using-modes#built-in-modes).
 :::
 
+---
+
 ## Why Use Boomerang Tasks?
 
 -   **Tackle Complexity:** Break large, multi-step projects (e.g., building a full feature) into focused subtasks (e.g., design, implementation, documentation).
 -   **Use Specialized Modes:** Automatically delegate subtasks to the mode best suited for that specific piece of work, leveraging specialized capabilities for optimal results.
 -   **Maintain Focus & Efficiency:** Each subtask operates in its own isolated context with a separate conversation history. This prevents the parent (orchestrator) task from becoming cluttered with the detailed execution steps (like code diffs or file analysis results), allowing it to focus efficiently on the high-level workflow and manage the overall process based on concise summaries from completed subtasks.
 -   **Streamline Workflows:** Results from one subtask can be automatically passed to the next, creating a smooth flow (e.g., architectural decisions feeding into the coding task).
+
+---
 
 ## How It Works
 
@@ -44,6 +48,8 @@ Learn more about [Built-in Modes](/basic-usage/using-modes#built-in-modes).
 2.  The parent task (in Orchestrator mode) pauses, and the new subtask begins in a different, specialized mode[^2].
 3.  When the subtask's goal is achieved, Roo signals completion.
 4.  The parent task resumes with only the summary[^3] of the subtask. The parent uses this summary to continue the main workflow.
+
+---
 
 ## Key Considerations
 
@@ -58,6 +64,8 @@ Boomerang Tasks provide a powerful way to manage complex development workflows d
 :::tip Keep Tasks Focused
 Use subtasks (delegated via Orchestrator mode) to maintain clarity. If a request significantly shifts focus or requires a different expertise (mode), consider creating a subtask rather than overloading the current one.
 :::
+
+---
 
 ## Frequently Asked Questions
 

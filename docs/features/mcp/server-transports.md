@@ -7,6 +7,8 @@ sidebar_label: STDIO, Streamable HTTP & SSE Transports
 
 Model Context Protocol (MCP) supports three primary transport mechanisms for communication between Roo Code and MCP servers: Standard Input/Output (STDIO), Streamable HTTP (the modern standard), and Server-Sent Events (SSE) (for legacy use). Each has distinct characteristics, advantages, and use cases.
 
+---
+
 ## STDIO Transport
 
 STDIO transport runs locally on your machine and communicates via standard input/output streams.
@@ -58,6 +60,8 @@ const server = new Server({name: 'local-server', version: '1.0.0'});
 const transport = new StdioServerTransport(server);
 transport.listen();
 ```
+---
+
 ## Streamable HTTP Transport
 
 Streamable HTTP transport is the modern standard for remote MCP server communication, replacing the older HTTP+SSE transport. It operates over HTTP/HTTPS and allows for more flexible server implementations.
@@ -120,6 +124,8 @@ Clients and servers can maintain backwards compatibility with the deprecated HTT
 Servers wanting to support older clients should:
 * Continue to host both the SSE (`/events`) and POST (`/message`) endpoints of the old transport, alongside the new “MCP endpoint” defined for the Streamable HTTP transport.
 
+---
+
 ## SSE Transport (Legacy)
 
 Server-Sent Events (SSE) transport is a legacy method for remote server communication over HTTP/HTTPS. For new implementations, **Streamable HTTP transport is recommended.** SSE remains available for compatibility with older MCP servers.
@@ -180,6 +186,8 @@ app.listen(3000, () => {
   console.log('MCP server listening on port 3000');
 });
 ```
+---
+
 ## Local vs. Hosted: Deployment Aspects
 
 The choice between STDIO and SSE transports directly impacts how you'll deploy and manage your MCP servers.
@@ -236,6 +244,8 @@ Some scenarios benefit from a hybrid approach:
 2. **SSE with Local Commands**: A remote SSE server that can trigger operations on the client machine through callbacks
 3. **Gateway Pattern**: STDIO servers for local operations that connect to SSE servers for specialized functions
 
+---
+
 ## Choosing Between Transports
 
 | Consideration | STDIO | Streamable HTTP | SSE (Legacy) |
@@ -252,6 +262,8 @@ Some scenarios benefit from a hybrid approach:
 | **Resource Usage** | Uses client resources | Uses server resources | Uses server resources |
 | **Dependencies** | Client-side dependencies | Server-side dependencies | Server-side dependencies |
 | **Recommendation** | Ideal for local, secure, single-client tools | **Modern standard for all new remote servers** | Legacy, for existing older servers |
+
+---
 
 ## Configuring Transports in Roo Code
 

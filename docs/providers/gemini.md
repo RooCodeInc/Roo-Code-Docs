@@ -8,12 +8,16 @@ Roo Code supports Google's Gemini family of models through the Google AI Gemini 
 
 **Website:** [https://ai.google.dev/](https://ai.google.dev/)
 
+---
+
 ## Getting an API Key
 
 1.  **Go to Google AI Studio:** Navigate to [https://ai.google.dev/](https://ai.google.dev/).
 2.  **Sign In:** Sign in with your Google account.
 3.  **Create API Key:** Click on "Create API key" in the left-hand menu.
 4.  **Copy API Key:** Copy the generated API key.
+
+---
 
 ## Supported Models
 
@@ -36,12 +40,16 @@ Roo Code supports the following Gemini models:
 
 Refer to the [Gemini documentation](https://ai.google.dev/models/gemini) for more details on each model.
 
+---
+
 ## Configuration in Roo Code
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2.  **Select Provider:** Choose "Google Gemini" from the "API Provider" dropdown.
 3.  **Enter API Key:** Paste your Gemini API key into the "Gemini API Key" field.
 4.  **Select Model:** Choose your desired Gemini model from the "Model" dropdown.
+
+---
 
 ## Tips and Notes
 

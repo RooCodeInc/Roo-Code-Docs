@@ -2,6 +2,8 @@
 
 The "Enhance Prompt" feature in Roo Code helps you improve the quality and effectiveness of your prompts before sending them to the AI model.  By clicking the <Codicon name="sparkle" /> icon in the chat input, you can automatically refine your initial request, making it clearer, more specific, and more likely to produce the desired results.
 
+---
+
 ## Why Use Enhance Prompt?
 
 *   **Improved Clarity:**  Roo Code can rephrase your prompt to make it more understandable for the AI model.
@@ -10,12 +12,16 @@ The "Enhance Prompt" feature in Roo Code helps you improve the quality and effec
 *   **Reduced Ambiguity:**  Enhance Prompt helps to eliminate ambiguity and ensure that Roo Code understands your intent.
 *   **Consistency**: Roo will consistently format prompts the same way to the AI.
 
+---
+
 ## How to Use Enhance Prompt
 
 1.  **Type your initial prompt:**  Enter your request in the Roo Code chat input box as you normally would.  This can be a simple question, a complex task description, or anything in between.
 2.  **Click the <Codicon name="sparkle" /> Icon:**  Instead of pressing Enter, click the <Codicon name="sparkle" /> icon located in the bottom right of the chat input box.
 3.  **Review the Enhanced Prompt:**  Roo Code will replace your original prompt with an enhanced version.  Review the enhanced prompt to make sure it accurately reflects your intent. You can further refine the enhanced prompt before sending.
 4.  **Send the Enhanced Prompt:**  Press Enter or click the Send icon (<Codicon name="send" />) to send the enhanced prompt to Roo Code.
+
+---
 
 ## Customizing the Enhancement Process
 
@@ -27,6 +33,8 @@ The "Enhance Prompt" feature uses a customizable prompt template.  You can modif
 
 The default prompt template includes the placeholder `${userInput}`, which will be replaced with your original prompt. You can modify this to fit the model's prompt format, and instruct it how to enhance your request.
 
+---
+
 ## API Configuration
 
 The API configuration used for Enhance Prompt is, by default, the same one that is selected for Roo Code tasks,
@@ -35,6 +43,8 @@ but it can be changed:
 1.  **Open the Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
 2.  **Select "ENHANCE" Tab:** You should see an "API Configuration" dropdown
 3.  **Select an API Configuration:** Choose an existing configuration, and future Enhance Prompt requests will be sent to that configured provider/model.
+
+---
 
 ## Limitations and Best Practices
 

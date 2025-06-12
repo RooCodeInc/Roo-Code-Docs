@@ -10,6 +10,8 @@ Roo Code offers an advanced setting to change how it edits files, using diffs (d
 Diff editing configuration is set per [API Configuration Profile](/features/api-configuration-profiles), allowing you to customize editing behavior for different providers and models.
 :::
 
+---
+
 ## Enable Editing Through Diffs
 
 Open the Roo Code pane settings by clicking the gear icon <Codicon name="gear" />. The `Providers` section will be visible. Select the specific [API Configuration Profile](/features/api-configuration-profiles) you want to configure.
@@ -23,6 +25,8 @@ When **Enable editing through diffs** is checked:
 :::note Disabling Fast Edits
 If you uncheck **Enable editing through diffs**, Roo will revert to writing the entire file content for every edit using the [`write_to_file`](/advanced-usage/available-tools/write-to-file) tool, instead of applying targeted changes with [`apply_diff`](/advanced-usage/available-tools/apply-diff). This full-write approach is generally slower for modifying existing files and leads to higher token usage.
 :::
+
+---
 
 ## Match Precision
 

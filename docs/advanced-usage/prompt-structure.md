@@ -2,6 +2,8 @@
 
 This page explains the technical structure of prompts in Roo Code - how messages are constructed and sent to the Large Language Model (LLM).
 
+---
+
 ## Core Message Types
 
 Roo Code uses three primary message types when communicating with LLMs:
@@ -15,6 +17,8 @@ At the API level, there's also a fourth message role:
 - **Tool Messages**: Results returned from tool executions, sent back to the LLM as input
 
 Understanding these message types helps you work more effectively with Roo and can be valuable for troubleshooting or advanced customization.
+
+---
 
 ## System Prompt
 
@@ -35,6 +39,8 @@ The system prompt is generated dynamically each time you interact with Roo, adap
 
 Advanced users can create custom system prompts for specific modes by placing a `.roo/system-prompt-<mode_slug>` file in their workspace. When present, Roo uses this file instead of generating the standard system prompt sections, allowing for complete customization of Roo's behavior in that mode.
 
+---
+
 ## User Messages
 
 User messages contain your direct inputs to Roo, plus additional contextual information:
@@ -53,6 +59,8 @@ User messages contain your direct inputs to Roo, plus additional contextual info
 
 This automatic context enrichment helps Roo understand your workspace without requiring you to explicitly describe it.
 
+---
+
 ## Assistant Messages
 
 Assistant messages are the LLM's responses, which may include:
@@ -62,6 +70,8 @@ Assistant messages are the LLM's responses, which may include:
 - **Tool Calls**: Requests to use specific tools like reading files or executing commands
 
 Note that while assistant messages contain tool calls, the results of those tools are sent back to the LLM in separate tool messages, not as part of the assistant message itself.
+
+---
 
 ## Message Flow
 
@@ -74,6 +84,8 @@ Here's how these components work together:
 5. **Tool Execution**: If the LLM requests a tool, Roo executes it and provides the result
 6. **Conversation History**: All messages are maintained in a structured history for context
 
+---
+
 ## Technical Implementation
 
 Internally, Roo's prompt construction is handled by several components:
@@ -82,6 +94,8 @@ Internally, Roo's prompt construction is handled by several components:
 - **Section Generators**: Specialized functions create each section of the system prompt
 - **Message Transformation**: Provider-specific transformers convert Roo's internal message format to the format required by each LLM API
 - **Custom Prompt Loading**: The `loadSystemPromptFile` function checks for and processes custom system prompt files
+
+---
 
 ## Support Prompts
 
@@ -93,6 +107,8 @@ Alongside the main chat flow, Roo uses specialized templates for specific code a
 - **Task-Specific Format**: Optimized for the specific code task being performed
 
 These support prompts work outside the normal conversation flow to provide focused assistance for specific coding tasks.
+
+---
 
 ## Optimizing Your Interactions
 

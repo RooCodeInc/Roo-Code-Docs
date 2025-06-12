@@ -6,6 +6,8 @@ sidebar_label: Welcome
 
 Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
 
+---
+
 ## What Can Roo Code Do?
 
 - 🚀 **Generate Code** from natural language descriptions
@@ -15,11 +17,15 @@ Roo Code (formerly Roo Cline) is an AI-powered autonomous coding agent that live
 - 🔄 **Automate** repetitive tasks
 - 🏗️ **Create** new files and projects
 
+---
+
 ## Quick Start
 
 1. [Install Roo Code](/getting-started/installing)
 2. [Connect Your AI Provider](/getting-started/connecting-api-provider)
 3. [Try Your First Task](/getting-started/your-first-task)
+
+---
 
 ## Key Features
 
@@ -47,6 +53,8 @@ Make Roo Code work your way with:
 - [Custom Modes](/features/custom-modes) for specialized tasks
 - [Local Models](/advanced-usage/local-models) for offline use
 - [Auto-Approval Settings](/features/auto-approving-actions) for faster workflows
+
+---
 
 ## Resources
 

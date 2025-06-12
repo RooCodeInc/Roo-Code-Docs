@@ -24,6 +24,8 @@ The Intelligent Context Condensing feature helps manage long conversations by su
 </div>
 
 <br />
+---
+
 ## How It Works
 
 As your conversation with Roo Code grows, it might approach the context window limit of the underlying AI model. When this happens, older messages would typically be removed to make space. Intelligent Context Condensing aims to prevent this abrupt loss by:
@@ -35,6 +37,8 @@ As your conversation with Roo Code grows, it might approach the context window l
 **Important Considerations:**
 *   **Summarization Impact:** While original messages are preserved if you use [Checkpoints](/features/checkpoints) to rewind, the summarized version is what's used in ongoing LLM calls to keep the context manageable.
 *   **Cost:** The AI call to perform the summarization incurs a cost. This cost is included in the context condensing metrics displayed in the UI.
+
+---
 
 ## Configuration
 
@@ -50,6 +54,8 @@ Intelligent Context Condensing is **enabled by default** and offers several conf
 
 <img src="/img/intelligent-context-condensing/intelligent-context-condensing.png" alt="Settings for Intelligent Context Condensing" width="600" />
 *Intelligent Context Condensing configuration options: automatic triggering toggle, threshold slider, API configuration selection, and custom prompt customization.*
+---
+
 ## Controlling and Understanding Context Condensing
 
 Roo Code provides several ways to control and understand the Intelligent Context Condensing feature:
@@ -81,6 +87,8 @@ Roo Code provides several ways to control and understand the Intelligent Context
     *   The task header also displays the current context condensing status.
     *   The `ContextWindowProgress` bar offers a visual representation of token distribution, including current usage, space reserved for the AI's output, available space, and raw token numbers.
 *   **Interface Clarity:** The "Condense Context" button includes a tooltip explaining its function, available in all supported languages.
+
+---
 
 ## Technical Implementation
 

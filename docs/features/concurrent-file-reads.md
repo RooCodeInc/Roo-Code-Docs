@@ -11,6 +11,8 @@ The Concurrent File Reads feature allows Roo to read multiple files from your wo
 - Enabled by default for a faster, more streamlined workflow.
 - Configurable to allow disabling the feature or changing the concurrency limit.
 
+---
+
 ## Benefits
 
 -   **Increased Speed**: Reduces the time it takes for Roo to understand your code by minimizing the number of back-and-forth steps.
@@ -27,6 +29,8 @@ The Concurrent File Reads feature allows Roo to read multiple files from your wo
 - "And can I read `src/config.json`?" → You approve
 
 **With concurrent file reads**: Roo asks once to read all related files together, getting the full picture immediately and providing better assistance faster.
+
+---
 
 ## How it Works
 

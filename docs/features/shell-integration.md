@@ -2,6 +2,8 @@
 
 Terminal Shell Integration is a key feature that enables Roo Code to execute commands in your terminal and intelligently process their output. This bidirectional communication between the AI and your development environment unlocks powerful automation capabilities.
 
+---
+
 ## What is Shell Integration?
 
 Shell integration is automatically enabled in Roo Code and connects directly to your terminal's command execution lifecycle without requiring any setup from you. This built-in feature allows Roo to:
@@ -18,6 +20,8 @@ Shell integration is automatically enabled in Roo Code and connects directly to 
 
 When you ask Roo to perform tasks like installing dependencies, starting a development server, or analyzing build errors, shell integration works behind the scenes to make these interactions smooth and effective.
 
+---
+
 ## Troubleshooting Shell Integration
 
 Shell integration is built into Roo Code and works automatically in most cases. If you see "Shell Integration Unavailable" messages or experience issues with command execution, try these solutions:
@@ -26,6 +30,8 @@ Shell integration is built into Roo Code and works automatically in most cases. 
 2. **Ensure a compatible shell is selected**: Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) → "Terminal: Select Default Profile" → Choose bash, zsh, PowerShell, or fish
 3. **Windows PowerShell users**: Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` then restart VSCode
 4. **WSL users**: Add `. "$(code --locate-shell-integration-path bash)"` to your `~/.bashrc`
+
+---
 
 ## Command Execution Fallback
 
@@ -40,6 +46,8 @@ Roo Code has a fallback mechanism for executing commands. This is most relevant 
 <img src="/img/shell-integration/shell-integration-12.png" alt="Roo Code's recommended inline terminal in action" width="600" />
 *Example of Roo Code's recommended inline terminal.*
 
+
+---
 
 ## Terminal Integration Settings
 
@@ -119,6 +127,8 @@ For users of the Powerlevel10k theme for Zsh. Enable this if your Powerlevel10k 
 <img src="/img/shell-integration/shell-integration-7.png" alt="Enable ZDOTDIR handling checkbox" width="600" />
 An advanced option for Zsh users with customized Zsh startup file locations. Enable this if you use `ZDOTDIR` to specify a custom directory for your Zsh configuration files (like `.zshrc`). This setting helps Roo Code work correctly with such setups by creating an isolated, temporary `ZDOTDIR` for its own integration scripts, preventing conflicts with your personal Zsh environment.
 
+---
+
 ## How Shell Integration Works
 
 Shell integration connects Roo to your terminal's command execution process in real-time:
@@ -135,6 +145,8 @@ Shell integration connects Roo to your terminal's command execution process in r
 3. **Different Shells, Same Result**: Each shell type (Bash, Zsh, PowerShell, Fish) implements this slightly differently behind the scenes, but they all provide the same functionality to Roo.
 
 4. **Information Gathering**: Roo can see what commands are running, where they're running, how long they take, whether they succeed, and their complete output - all without you having to copy and paste anything.
+
+---
 
 ## Troubleshooting Shell Integration
 
@@ -223,6 +235,8 @@ Visual indicators of active shell integration:
 3. Working directory updates in terminal title
 4. Command duration and exit code reporting
 
+---
+
 ## WSL Terminal Integration Methods
 
 When using Windows Subsystem for Linux (WSL), there are two distinct ways to use VSCode with WSL, each with different implications for shell integration:
@@ -251,6 +265,8 @@ For optimal shell integration with WSL, we recommend:
 2. Navigate to your project directory
 3. Launch VSCode using `code .`
 4. Use the integrated terminal within VSCode
+
+---
 
 ## Known Issues and Workarounds
 
@@ -353,6 +369,8 @@ This setup works reliably on Windows systems using Cygwin, Fish, and the Starshi
    - Try enabling some or all ZSH-related workarounds in Roo settings
    - These settings can help regardless of your operating system
 
+---
+
 ## Known Issues and Workarounds
 
 ### Ctrl+C Behavior
@@ -379,6 +397,8 @@ This setup works reliably on Windows systems using Cygwin, Fish, and the Starshi
 **Issue**: Sometimes VS Code doesn't show or capture all the output from a command.
 
 **Workaround**: If you notice missing output, try closing and reopening the terminal tab, then run the command again. This refreshes the terminal connection.
+
+---
 
 ## Troubleshooting Resources
 
@@ -420,6 +440,8 @@ The [VSCode Terminal Integration Test Extension](https://github.com/KJ7LNW/vsce-
 - [VSCode Terminal Output Issue #237208](https://github.com/microsoft/vscode/issues/237208)
 - [VSCode Terminal Integration Test Repository](https://github.com/KJ7LNW/vsce-test-terminal-integration)
 - [Roo Code Shell Integration Architecture PR](https://github.com/RooCodeInc/Roo-Code/pull/1365)
+
+---
 
 ## Support
 

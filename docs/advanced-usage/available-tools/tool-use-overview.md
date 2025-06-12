@@ -2,6 +2,8 @@
 
 Roo Code implements a sophisticated tool system that allows AI models to interact with your development environment in a controlled and secure manner. This document explains how tools work, when they're called, and how they're managed.
 
+---
+
 ## Core Concepts
 
 ### Tool Groups
@@ -26,6 +28,8 @@ Certain tools are accessible regardless of the current mode:
 - [attempt_completion](/advanced-usage/available-tools/attempt-completion): Signal task completion
 - [switch_mode](/advanced-usage/available-tools/switch-mode): Change operational modes
 - [new_task](/advanced-usage/available-tools/new-task): Create subtasks
+
+---
 
 ## Available Tools
 
@@ -73,6 +77,8 @@ These tools help manage the conversation and task flow:
 - [attempt_completion](/advanced-usage/available-tools/attempt-completion) - Presents final results
 - [switch_mode](/advanced-usage/available-tools/switch-mode) - Changes to a different mode for specialized tasks
 - [new_task](/advanced-usage/available-tools/new-task) - Creates a new subtask
+
+---
 
 ## Tool Calling Mechanism
 
@@ -135,6 +141,8 @@ The system uses a multi-step process to determine tool availability:
    - Parameter type checking
    - Value validation
 
+---
+
 ## Technical Implementation
 
 ### Tool Call Processing
@@ -171,6 +179,8 @@ The system uses a multi-step process to determine tool availability:
    - Mode-based restrictions
    - System-level checks
 
+---
+
 ## Mode Integration
 
 ### Mode-Based Tool Access
@@ -193,6 +203,8 @@ Tools are made available based on the current mode:
    - Tool set changes
    - Permission adjustments
    - Context preservation
+
+---
 
 ## Best Practices
 
@@ -229,6 +241,8 @@ Tools are made available based on the current mode:
    ```
    [new_task](/advanced-usage/available-tools/new-task) → [switch_mode](/advanced-usage/available-tools/switch-mode) → [execute_command](/advanced-usage/available-tools/execute-command)
    ```
+
+---
 
 ## Error Handling and Recovery
 

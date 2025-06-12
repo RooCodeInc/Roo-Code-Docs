@@ -18,6 +18,8 @@ Footgun Prompting (System Prompt Override) lets you replace the default system p
 
 :::
 
+---
+
 ## How It Works
 
 1.  **Override File:** Create a file named `.roo/system-prompt-{mode-slug}` in your workspace root (e.g., `.roo/system-prompt-code` for the Code mode).
@@ -34,6 +36,8 @@ Footgun Prompting (System Prompt Override) lets you replace the default system p
     ${customInstructions}
     ```
 
+---
+
 ## Accessing the Feature
 
 Find the option and instructions in the Roo Code UI:
@@ -43,6 +47,8 @@ Find the option and instructions in the Roo Code UI:
 3.  Clicking the file path link within the explanation will open or create the correct override file for the currently selected mode in VS Code.
 
 <img src="/img/footgun-prompting/footgun-prompting.png" alt="UI showing the Advanced: Override System Prompt section" width="500" />
+
+---
 
 ## Using Context Variables
 
@@ -68,6 +74,8 @@ Please respond in {{language}}.
 ```
 
 Roo Code substitutes these placeholders before sending the prompt to the model.
+
+---
 
 ## Key Considerations & Warnings
 

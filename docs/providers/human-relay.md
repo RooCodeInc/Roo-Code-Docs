@@ -2,6 +2,8 @@
 
 The Human Relay provider allows you to use Roo Code with web-based AI models like ChatGPT or Claude without needing an API key. Instead, it relies on you to manually relay messages between Roo Code and the AI's web interface.
 
+---
+
 ## How it Works
 
 1.  **Select Human Relay**: Choose "Human Relay" as your API provider in Roo Code's settings. No API key is required.
@@ -12,6 +14,8 @@ The Human Relay provider allows you to use Roo Code with web-based AI models lik
 6.  **Paste Back to Roo Code**: Return to the dialog box in VS Code, paste the AI's response into the designated field, and click "Confirm".
 7.  **Continue**: Roo Code will process the response as if it came directly from an API.
 
+---
+
 ## Use Cases
 
 This provider is useful if:
@@ -19,6 +23,8 @@ This provider is useful if:
 *   You want to use models that don't offer direct API access.
 *   You prefer not to manage API keys.
 *   You need to leverage the specific capabilities or context available only in the web UI of certain AI models.
+
+---
 
 ## Limitations
 

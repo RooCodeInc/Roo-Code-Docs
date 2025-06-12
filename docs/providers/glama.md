@@ -8,11 +8,15 @@ Glama provides access to a variety of language models through a unified API, inc
 
 **Website:** [https://glama.ai/](https://glama.ai/)
 
+---
+
 ## Getting an API Key
 
 1.  **Sign Up/Sign In:** Go to the [Glama sign-up page](https://glama.ai/sign-up). Sign up using your Google account or name/email/password.
 2.  **Get API Key:** After signing up, navigate to the [API Keys](https://glama.ai/settings/gateway/api-keys) page to get an API key.
 3.  **Copy the Key:** Copy the displayed API key.
+
+---
 
 ## Supported Models
 
@@ -24,12 +28,16 @@ Roo Code will automatically try to fetch a list of available models from the Gla
     
 Refer to the [Glama documentation](https://glama.ai/models) for the most up-to-date list of supported models.
 
+---
+
 ## Configuration in Roo Code
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2.  **Select Provider:** Choose "Glama" from the "API Provider" dropdown.
 3.  **Enter API Key:** Paste your Glama API key into the "Glama API Key" field.
 4.  **Select Model:** Choose your desired model from the "Model" dropdown.
+
+---
 
 ## Tips and Notes
 

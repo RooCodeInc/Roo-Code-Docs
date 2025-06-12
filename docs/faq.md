@@ -4,6 +4,8 @@ import KangarooIcon from '@site/src/components/KangarooIcon';
 
 This page answers some common questions about Roo Code.
 
+---
+
 ## General
 
 ### What is Roo Code?
@@ -46,6 +48,8 @@ Roo Code is a powerful tool, and it's important to use it responsibly.  Here are
 *   **Roo Code can execute commands.**  Be very cautious about allowing Roo Code to run commands, especially if you're using auto-approval.
 *   **Roo Code can access the internet.** If you're using a provider that supports web browsing, be aware that Roo Code could potentially access sensitive information.
 
+---
+
 ## Setup & Installation
 
 ### How do I install Roo Code?
@@ -75,6 +79,8 @@ Each API provider has its own process for obtaining an API key.  See the [Settin
 
 ### Can I use Roo Code with local models?
 Yes, Roo Code supports running models locally using [Ollama](/providers/ollama) and [LM Studio](/providers/lmstudio).  See [Using Local Models](/advanced-usage/local-models) for instructions.
+
+---
 
 ## Usage
 
@@ -124,6 +130,8 @@ Yes, you can customize Roo Code in several ways:
 ### Does Roo Code have any auto approval settings?
 Yes, Roo Code has a few settings that when enabled will automatically approve actions. Find out more [here](/features/auto-approving-actions).
 
+---
+
 ## Advanced Features
 
 ### Can I use Roo offline?
@@ -143,6 +151,8 @@ Yes, you can create your own MCP servers to add custom functionality to Roo Code
 ### How much does Codebase Indexing cost?
 
 Codebase Indexing requires an OpenAI API key for generating embeddings and a Qdrant vector database for storage. Costs depend on your project size and the embedding model used. Initial indexing is the most expensive part; subsequent updates are incremental and much cheaper.
+
+---
 
 ## Troubleshooting
 

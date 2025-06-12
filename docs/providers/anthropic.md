@@ -8,12 +8,16 @@ Anthropic is an AI safety and research company that builds reliable, interpretab
 
 **Website:** [https://www.anthropic.com/](https://www.anthropic.com/)
 
+---
+
 ## Getting an API Key
 
 1.  **Sign Up/Sign In:** Go to the [Anthropic Console](https://console.anthropic.com/). Create an account or sign in.
 2.  **Navigate to API Keys:**  Go to the [API keys](https://console.anthropic.com/settings/keys) section.
 3.  **Create a Key:** Click "Create Key". Give your key a descriptive name (e.g., "Roo Code").
 4.  **Copy the Key:**  **Important:** Copy the API key *immediately*.  You will not be able to see it again.  Store it securely.
+
+---
 
 ## Supported Models
 
@@ -32,6 +36,8 @@ Roo Code supports the following Anthropic Claude models:
 
 See [Anthropic's Model Documentation](https://docs.anthropic.com/en/docs/about-claude/models) for more details on each model's capabilities.
 
+---
+
 ## Configuration in Roo Code
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
@@ -39,6 +45,8 @@ See [Anthropic's Model Documentation](https://docs.anthropic.com/en/docs/about-c
 3.  **Enter API Key:** Paste your Anthropic API key into the "Anthropic API Key" field.
 4.  **Select Model:** Choose your desired Claude model from the "Model" dropdown.
 5.  **(Optional) Custom Base URL:** If you need to use a custom base URL for the Anthropic API, check "Use custom base URL" and enter the URL. Most people won't need to adjust this.
+
+---
 
 ## Tips and Notes
 

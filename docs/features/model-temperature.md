@@ -6,6 +6,8 @@ Temperature controls the randomness of AI model outputs. Adjusting this setting 
 
 <img src="/img/model-temperature/model-temperature.gif" alt="Animation showing temperature slider adjustment" width="100%" />
 
+---
+
 ## What is Temperature?
 
 Temperature is a setting (usually between 0.0 and 2.0) that controls how random or predictable the AI's output is. Finding the right balance is key: lower values make the output more focused and consistent, while higher values encourage more creativity and variation. For many coding tasks, a moderate temperature (around 0.3 to 0.7) often works well, but the best setting depends on what you're trying to achieve.
@@ -19,6 +21,8 @@ Temperature controls output randomness, not code quality or accuracy directly. K
 *   **Temperature 0.0:** Useful for consistency, but limits exploration needed for complex problems.
 :::
 
+---
+
 ## Default Values in Roo Code
 
 Roo Code uses a default temperature of 0.0 for most models, optimizing for maximum determinism and precision in code generation. This applies to OpenAI models, Anthropic models (non-thinking variants), LM Studio models, and most other providers.
@@ -28,6 +32,8 @@ Some models use higher default temperatures - DeepSeek R1 models and certain rea
 Models with thinking capabilities (where the AI shows its reasoning process) require a fixed temperature of 1.0 which cannot be changed, as this setting ensures optimal performance of the thinking mechanism. This applies to any model with the ":thinking" flag enabled.
 
 Some specialized models don't support temperature adjustments at all, in which case Roo Code respects these limitations automatically.
+
+---
 
 ## When to Adjust Temperature
 
@@ -40,6 +46,8 @@ Here are some examples of temperature settings that might work well for differen
 
 These are starting points – it's important to [experiment with different settings](#experimentation) to find what works best for your specific needs and preferences.
 
+---
+
 ## How to Adjust Temperature
 
 1.  **Open the Roo Code Panel:** Click the Roo Code icon (<KangarooIcon />) in the VS Code Activity Bar
@@ -50,6 +58,8 @@ These are starting points – it's important to [experiment with different setti
 
     <img src="/img/model-temperature/model-temperature.png" alt="Temperature setting in Roo Code settings panel" width="550" />
     *Temperature slider in Roo Code settings panel*
+
+---
 
 ## Using API Configuration Profiles for Temperature
 
@@ -64,6 +74,8 @@ Create multiple [API configuration profiles](/features/api-configuration-profile
 
 This approach optimizes model behavior for specific tasks without manual adjustments.
 
+---
+
 ## Technical Implementation
 
 Roo Code implements temperature handling with these considerations:
@@ -73,6 +85,8 @@ Roo Code implements temperature handling with these considerations:
 *   Model-specific limitations are enforced:
     *   Thinking-enabled models require a fixed temperature of 1.0
     *   Some models don't support temperature adjustments
+
+---
 
 ## Experimentation
 
@@ -87,6 +101,8 @@ Experimenting with different temperature settings is the most effective way to d
 5. **Create profiles** - Save effective settings as [API configuration profiles](/features/api-configuration-profiles) for quick access
 
 Remember that different models may respond differently to the same temperature values, and thinking-enabled models always use a fixed temperature of 1.0 regardless of your settings.
+
+---
 
 ## Related Features
 

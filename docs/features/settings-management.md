@@ -13,6 +13,8 @@ You can find these options at the bottom of the Roo Code settings page, accessib
 <img src="/img/settings-management/settings-management.png" alt="Export, Import, and Reset buttons in Roo Code settings" width="400" />
 *Image: Export, Import, and Reset buttons.*
 
+---
+
 ## Export Settings
 
 Clicking the **Export** button saves your current Roo Code settings to a JSON file.
@@ -26,6 +28,8 @@ Clicking the **Export** button saves your current Roo Code settings to a JSON fi
 
 This creates a backup of your configuration or a file you can share.
 
+---
+
 ## Import Settings
 
 Clicking the **Import** button allows you to load settings from a previously exported JSON file.
@@ -36,6 +40,8 @@ Clicking the **Import** button allows you to load settings from a previously exp
     3.  Roo Code reads the file, validates its contents against the expected schema, and applies the settings.
 *   **Merging:** Importing settings **merges** the configurations. It adds new API profiles and updates existing ones and global settings based on the file content. It does **not** delete configurations present in your current setup but missing from the imported file.
 *   **Validation:** Only valid settings matching the internal schema can be imported, preventing configuration errors. A success notification appears upon completion.
+
+---
 
 ## Reset Settings
 

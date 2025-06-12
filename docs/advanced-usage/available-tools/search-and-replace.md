@@ -2,6 +2,8 @@
 
 The `search_and_replace` tool finds and replaces text within a file, supporting both literal strings and regular expression patterns. It allows for targeted replacements across multiple locations, optionally within specific line ranges.
 
+---
+
 ## Parameters
 
 ### Required Parameters
@@ -17,9 +19,13 @@ The `search_and_replace` tool finds and replaces text within a file, supporting 
 - `use_regex`: Set to `"true"` to treat the `search` parameter as a regular expression pattern (default is `false`).
 - `ignore_case`: Set to `"true"` to perform a case-insensitive search (default is `false`).
 
+---
+
 ## What It Does
 
 This tool reads the specified file and performs a search-and-replace operation based on the provided parameters. It can operate on the entire file or be restricted to a specific range of lines. Changes are presented in a diff view for user review and approval before being saved.
+
+---
 
 ## When is it used?
 
@@ -28,6 +34,8 @@ This tool reads the specified file and performs a search-and-replace operation b
 - When applying patterned changes using regular expressions.
 - When refactoring code requires replacing specific patterns.
 - When making targeted changes within a defined section of a file.
+
+---
 
 ## Key Features
 
@@ -40,11 +48,15 @@ This tool reads the specified file and performs a search-and-replace operation b
 - **Context Tracking**: Records the file edit operation.
 - **Error Handling**: Checks for missing parameters, file access issues, and invalid line numbers.
 
+---
+
 ## Limitations
 
 - **Single File Operation**: Operates on only one file at a time. Use `search_files` to find patterns across multiple files first.
 - **Review Overhead**: The mandatory diff view approval adds an interactive step.
 - **Regex Complexity**: Complex regex patterns might require careful construction and testing.
+
+---
 
 ## How It Works
 
@@ -65,6 +77,8 @@ When the `search_and_replace` tool is invoked, it follows this process:
 7.  **Saving Changes**: If approved, saves the changes (including any user edits made in the diff view).
 8.  **File Context Tracking**: Tracks the edit using `cline.getFileContextTracker().trackFileContext`.
 9.  **Result Reporting**: Reports success (including user edits) or failure back to the AI model.
+
+---
 
 ## Usage Examples
 

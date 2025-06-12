@@ -41,9 +41,13 @@ You can provide custom instructions using dedicated files or directories within 
 The directory methods take precedence if they exist and contain files. See [Workspace-Level Instructions](#workspace-level-instructions) and [Mode-Specific Instructions](#mode-specific-instructions) for details.
 :::
 
+---
+
 ## What Are Custom Instructions?
 
 Custom Instructions define specific behaviors, preferences, and constraints beyond Roo's basic role definition. Examples include coding style, documentation standards, testing requirements, and workflow guidelines.
+
+---
 
 ## Setting Custom Instructions
 
@@ -102,6 +106,8 @@ Mode-specific instructions can be set in two independent ways that can be used s
 
 Instructions from the Prompts tab, the mode-specific directory/file, and the workspace-wide directory/file are all combined. See the section below for the exact order.
 
+---
+
 ## How Instructions are Combined
 
 Instructions are placed in the system prompt in this exact format:
@@ -131,12 +137,16 @@ Workspace-Wide Instructions (from Files/Directories):
 
 *Note: The exact order ensures that more specific instructions (mode-level) appear before more general ones (workspace-wide), and directory-based rules take precedence over file-based fallbacks within each level.*
 
+---
+
 ## Rules about .rules files
 
 * **File Location:** The preferred method uses directories within `.roo/` (`.roo/rules/` and `.roo/rules-{modeSlug}/`). The fallback method uses single files (`.roorules` and `.roorules-{modeSlug}`) located directly in the workspace root.
 * **Empty Files:** Empty or missing rule files are silently skipped
 * **Source Headers:** Each rule file's contents are included with a header indicating its source
 * **Rule Interaction:** Mode-specific rules complement global rules rather than replacing them
+
+---
 
 ## Examples of Custom Instructions
 
@@ -151,6 +161,8 @@ Workspace-Wide Instructions (from Files/Directories):
 :::tip Pro Tip: File-Based Team Standards
 When working in team environments, using the `.roo/rules/` directory structure (and potentially `.roo/rules-{modeSlug}/` directories for specific modes) under version control is the recommended way to standardize Roo's behavior across your team. This allows for better organization of multiple instruction files and ensures consistent code style, documentation practices, and development workflows. The older `.roorules` file method can still be used but offers less flexibility.
 :::
+
+---
 
 ## Combining with Custom Modes
 

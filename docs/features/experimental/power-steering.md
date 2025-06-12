@@ -7,6 +7,8 @@ import Codicon from '@site/src/components/Codicon';
 
 The "Power Steering" experimental feature (`POWER_STEERING`) is designed to enhance the consistency of Roo Code's responses by more frequently reminding the underlying Large Language Model (LLM) about its current mode definition and any custom instructions.
 
+---
+
 ## How It Works
 
 When Power Steering is enabled, Roo Code constantly reinforces the LLM's understanding of its assigned role (e.g., "You are a helpful coding assistant") and any specific guidelines provided by the user (e.g., "Always provide code examples in Python").
@@ -26,6 +28,8 @@ It's a balance between stricter adherence to instructions and resource consumpti
 
 **Default Status:** Disabled.
 
+---
+
 ## Technical Details
 
 *   **Experiment ID:** `powerSteering`
@@ -34,6 +38,8 @@ It's a balance between stricter adherence to instructions and resource consumpti
     *   If enabled, the current mode's `roleDefinition` and `customInstructions` are added to the details sent to the LLM.
     *   These details are wrapped in `<environment_details>` tags and become part of the context for each LLM interaction.
 *   **Impact:** By frequently including the role definition and custom instructions, the LLM is steered to generate responses more aligned with these parameters.
+
+---
 
 ## Enabling This Feature
 
@@ -47,6 +53,8 @@ Power Steering is managed within the "Experimental Features" section of Roo Code
 <img src="/img/power-steering/power-steering.png" alt="Settings for Intelligent Context Condensation and Power Steering" width="600" />
 
 For general information on experimental features, see [Experimental Features Overview](/features/experimental/experimental-features).
+
+---
 
 ## Feedback
 

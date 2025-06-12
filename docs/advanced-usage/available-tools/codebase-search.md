@@ -6,6 +6,8 @@ The `codebase_search` tool is part of the experimental [Codebase Indexing](/feat
 
 The `codebase_search` tool performs semantic searches across your entire codebase using AI embeddings. Unlike traditional text-based search, it understands the meaning of your queries and finds relevant code even when exact keywords don't match.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -13,9 +15,13 @@ The tool accepts these parameters:
 - `query` (required): Natural language search query describing what you're looking for
 - `path` (optional): Directory path to limit search scope to a specific part of your codebase
 
+---
+
 ## What It Does
 
 This tool searches through your indexed codebase using semantic similarity rather than exact text matching. It finds code blocks that are conceptually related to your query, even if they don't contain the exact words you searched for. Results include relevant code snippets with file paths, line numbers, and similarity scores.
+
+---
 
 ## When is it used?
 
@@ -24,6 +30,8 @@ This tool searches through your indexed codebase using semantic similarity rathe
 - When searching for error handling, authentication, or other conceptual code patterns
 - When exploring unfamiliar codebases to understand how features are implemented
 - When finding related code that might be affected by changes or refactoring
+
+---
 
 ## Key Features
 
@@ -36,6 +44,8 @@ This tool searches through your indexed codebase using semantic similarity rathe
 - **UI Integration**: Results displayed with syntax highlighting and navigation links
 - **Performance Optimized**: Fast vector-based search with configurable result limits
 
+---
+
 ## Requirements
 
 This tool is only available when the experimental Codebase Indexing feature is properly configured:
@@ -44,6 +54,8 @@ This tool is only available when the experimental Codebase Indexing feature is p
 - **Embedding Provider**: OpenAI API key or Ollama configuration required
 - **Vector Database**: Qdrant instance running and accessible
 - **Index Status**: Codebase must be indexed (status: "Indexed" or "Indexing")
+
+---
 
 ## Limitations
 
@@ -54,6 +66,8 @@ This tool is only available when the experimental Codebase Indexing feature is p
 - **Similarity Threshold**: Only returns results above 0.4 similarity score
 - **File Size Limits**: Limited to files under 1MB that were successfully indexed
 - **Language Support**: Effectiveness depends on Tree-sitter language support
+
+---
 
 ## How It Works
 
@@ -89,6 +103,8 @@ When the `codebase_search` tool is invoked, it follows this process:
 6. **Dual Output Format**:
    - **AI Output**: Structured text format with query, file paths, scores, and code chunks
    - **UI Output**: JSON format with syntax highlighting and navigation capabilities
+
+---
 
 ## Search Query Best Practices
 
@@ -129,6 +145,8 @@ When the `codebase_search` tool is invoked, it follows this process:
 - **Domain Concepts**: "user profile management", "payment processing workflow"
 - **Architecture Components**: "middleware configuration", "database migration scripts"
 
+---
+
 ## Directory Scoping
 
 Use the optional `path` parameter to focus searches on specific parts of your codebase:
@@ -157,6 +175,8 @@ Use the optional `path` parameter to focus searches on specific parts of your co
 </codebase_search>
 ```
 
+---
+
 ## Result Interpretation
 
 ### Similarity Scores
@@ -174,12 +194,16 @@ Each search result includes:
 - **Line Range**: Start and end line numbers for the code block
 - **Code Chunk**: The actual code content that matched your query
 
+---
+
 ## Examples When Used
 
 - When implementing a new feature, Roo searches for "authentication middleware" to understand existing patterns before writing new code.
 - When debugging an issue, Roo searches for "error handling in API calls" to find related error patterns across the codebase.
 - When refactoring code, Roo searches for "database transaction patterns" to ensure consistency across all database operations.
 - When onboarding to a new codebase, Roo searches for "configuration loading" to understand how the application bootstraps.
+
+---
 
 ## Usage Examples
 

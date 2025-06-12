@@ -8,12 +8,16 @@ LiteLLM is a versatile tool that provides a unified interface to over 100 Large 
 
 **Website:** [https://litellm.ai/](https://litellm.ai/) (Main project) & [https://docs.litellm.ai/](https://docs.litellm.ai/) (Documentation)
 
+---
+
 ## Key Benefits
 
 *   **Unified API:** Access a wide range of LLMs (from OpenAI, Anthropic, Cohere, HuggingFace, etc.) through a single, OpenAI-compatible API.
 *   **Local Deployment:** Run your own LiteLLM server locally, giving you more control over model access and potentially reducing latency.
 *   **Simplified Configuration:** Manage credentials and model configurations in one place (your LiteLLM server) and let Roo Code connect to it.
 *   **Cost Management:** LiteLLM offers features for tracking costs across different models and providers.
+
+---
 
 ## Setting Up Your LiteLLM Server
 
@@ -25,6 +29,8 @@ To use LiteLLM with Roo Code, you first need to set up and run a LiteLLM server.
     *   You can also configure an API key for your LiteLLM server itself for added security.
 
 Refer to the [LiteLLM documentation](https://docs.litellm.ai/docs/) for detailed instructions on server setup, model configuration, and advanced features.
+
+---
 
 ## Configuration in Roo Code
 
@@ -45,6 +51,8 @@ Once your LiteLLM server is running:
     *   If no model is selected, Roo Code defaults to `anthropic/claude-3-7-sonnet-20250219` (this is `litellmDefaultModelId`). Ensure this model (or your desired default) is configured and available on your LiteLLM server.
 
 <img src="/img/litellm/litellm.png" alt="Roo Code LiteLLM Provider Settings" width="600" />
+
+---
 
 ## How Roo Code Fetches and Interprets Model Information
 
@@ -68,6 +76,8 @@ Roo Code uses default values for some of these properties if they are not explic
 *   `supportsPromptCache`: `true`
 *   `inputPrice`: 3.0 (µUSD per 1k tokens)
 *   `outputPrice`: 15.0 (µUSD per 1k tokens)
+
+---
 
 ## Tips and Notes
 

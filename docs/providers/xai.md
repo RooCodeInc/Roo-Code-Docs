@@ -8,12 +8,16 @@ xAI is the company behind Grok, a large language model known for its conversatio
 
 **Website:** [https://x.ai/](https://x.ai/)
 
+---
+
 ## Getting an API Key
 
 1.  **Sign Up/Sign In:** Go to the [xAI Console](https://console.x.ai/). Create an account or sign in.
 2.  **Navigate to API Keys:** Go to the API keys section in your dashboard.
 3.  **Create a Key:** Click to create a new API key. Give your key a descriptive name (e.g., "Roo Code").
 4.  **Copy the Key:** **Important:** Copy the API key *immediately*. You will not be able to see it again. Store it securely.
+
+---
 
 ## Supported Models
 
@@ -39,12 +43,16 @@ Roo Code supports the following xAI Grok models:
 ### Legacy Models
 * `grok-beta` - xAI's Grok Beta model (legacy) with 131K context window
 
+---
+
 ## Configuration in Roo Code
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2.  **Select Provider:** Choose "xAI" from the "API Provider" dropdown.
 3.  **Enter API Key:** Paste your xAI API key into the "xAI API Key" field.
 4.  **Select Model:** Choose your desired Grok model from the "Model" dropdown.
+
+---
 
 ## Reasoning Capabilities
 
@@ -72,6 +80,8 @@ Choose `low` for simple queries that should complete quickly, and `high` for har
 * **Step-by-Step Problem Solving**: The model thinks through problems methodically before delivering an answer
 * **Math & Quantitative Strength**: Excels at numerical challenges and logic puzzles
 * **Reasoning Trace Access**: The model's thinking process is available via the `reasoning_content` field in the response completion object
+
+---
 
 ## Tips and Notes
 

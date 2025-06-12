@@ -8,12 +8,16 @@ Roo Code supports accessing models through the Mistral AI API, including both st
 
 **Website:** [https://mistral.ai/](https://mistral.ai/)
 
+---
+
 ## Getting an API Key
 
 1.  **Sign Up/Sign In:** Go to the [Mistral Platform](https://console.mistral.ai/). Create an account or sign in.  You may need to go through a verification process.
 2.  **Create an API Key:**  
     - [La Plateforme API Key](https://console.mistral.ai/api-keys/) and/or 
     - [Codestral API Key](https://console.mistral.ai/codestral)
+
+---
 
 ## Supported Models
 
@@ -32,12 +36,16 @@ The default model temperature in Roo Code is 0.0, so you should consider experim
 **Note:**  Model availability and specifications may change.
 Refer to the [Mistral AI documentation](https://docs.mistral.ai/api/) and [Mistral Model Overview](https://docs.mistral.ai/getting-started/models/models_overview/) for the latest information.
 
+---
+
 ## Configuration in Roo Code
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2.  **Select Provider:** Choose "Mistral" from the "API Provider" dropdown.
 3.  **Enter API Key:** Paste your Mistral API key into the "Mistral API Key" field if you're using a `mistral` model.  If you intend to use `codestral-latest`, see the "Codestral" section below.
 4.  **Select Model:** Choose your desired model from the "Model" dropdown. 
+
+---
 
 ## Using Codestral
 

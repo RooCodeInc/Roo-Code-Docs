@@ -2,6 +2,8 @@
 
 This patch release delivers critical fixes and experimental features to enhance your development experience, including multi-file reading capabilities, improved MCP server integration, and enterprise security enhancements.
 
+---
+
 ## Multi-File Reading (Experimental)
 We've introduced an experimental feature for handling large codebases more efficiently:
 
@@ -11,6 +13,8 @@ We've introduced an experimental feature for handling large codebases more effic
 - **Efficiency Boost**: Dramatically reduces the time needed to analyze multiple related files
 
 This experimental feature transforms how Roo Code understands and works with your entire codebase at once (thanks samhvw8!).
+
+---
 
 ## Enterprise-Ready VPC Endpoint Support
 We've added crucial enterprise security features for [AWS Bedrock](/providers/bedrock) users:
@@ -22,6 +26,8 @@ We've added crucial enterprise security features for [AWS Bedrock](/providers/be
 
 Enterprise customers can now use Roo Code with AWS Bedrock while maintaining complete network security (thanks kcwhite!). See the [AWS Bedrock configuration guide](/providers/bedrock#configuration-in-roo-code) for setup instructions.
 
+---
+
 ## Bug Fixes
 
 *   **MCP Server Authentication**: Fixed SSE header passing to correctly authenticate with remote MCP servers
@@ -29,6 +35,8 @@ Enterprise customers can now use Roo Code with AWS Bedrock while maintaining com
 *   **Terminal UTF-8 Encoding**: Fixed encoding errors when running Ruby/CocoaPods commands (thanks mr-ryan-james!)
 *   **Sidebar Context Menus**: Resolved empty menu items by properly setting sidebar name (thanks chrarnoldus!)
 *   **Documentation Links**: Fixed broken CONTRIBUTING.md link in feature request template (thanks cannuri!)
+
+---
 
 ## Misc Improvements
 

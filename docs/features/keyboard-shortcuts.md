@@ -6,6 +6,8 @@ sidebar_label: Keyboard Shortcuts
 
 The Roo Code interface supports keyboard shortcuts to streamline your workflow and reduce dependence on mouse interactions.
 
+---
+
 ## Available Keyboard Commands
 
 Roo Code offers keyboard commands to enhance your workflow. This page focuses on the `roo.acceptInput` command, but here's a quick reference to all keyboard commands:
@@ -21,6 +23,8 @@ Roo Code offers keyboard commands to enhance your workflow. This page focuses on
 * **Improved Accessibility**: Essential for users with mobility limitations or those who experience discomfort with mouse usage
 * **Vim/Neovim Compatibility**: Supports seamless transitions for developers coming from keyboard-centric environments
 * **Workflow Efficiency**: Reduces context switching between keyboard and mouse during development tasks
+
+---
 
 ## roo.acceptInput Command
 
