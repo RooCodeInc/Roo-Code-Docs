@@ -1,10 +1,10 @@
 ---
-sidebar_label: Keyboard Shortcuts
+sidebar_label: Keyboard Navigation
 ---
 
-# Keyboard Shortcuts
+# Keyboard Navigation
 
-The Roo Code interface supports keyboard shortcuts to streamline your workflow and reduce dependence on mouse interactions.
+The Roo Code interface supports keyboard navigation and shortcuts to streamline your workflow and reduce dependence on mouse interactions.
 
 ---
 
@@ -16,6 +16,7 @@ Roo Code offers keyboard commands to enhance your workflow. This page focuses on
 |---------|-------------|-----------------|
 | `roo.acceptInput` | Submit text or accept the primary suggestion | None (configurable) |
 | `roo.focus` | Focus the Roo input box | None (configurable) |
+| Arrow Up/Down | Navigate through prompt history | Built-in |
 
 ### Key Benefits of Keyboard Commands
 
@@ -161,3 +162,59 @@ The `roo.acceptInput` command is implemented as follows:
 - Works only when the Roo interface is active
 - Has no effect if no inputs or suggestions are currently available
 - Prioritizes the primary (first) button when multiple options are shown
+
+---
+
+## Command Line Style Prompt History Navigation
+
+Navigate your prompt history with a terminal-like experience using the arrow keys. This feature makes it easy to reuse and refine previous prompts, whether from your current conversation or past tasks.
+
+### Key Features
+- **Up/Down Arrows**: Cycle through previous prompts.
+- **Context-Aware**: Switches between conversation and task history.
+- **Preserves Input**: Remembers what you were typing.
+
+### Why This Matters
+
+**Before**: Reusing a prompt meant scrolling up, copying, and pasting.
+- Tedious and slow
+- Easy to lose your place
+- Interrupted your workflow
+
+**With Prompt History Navigation**: Quickly access past prompts without leaving the keyboard.
+
+### How it Works
+
+The navigation is designed to be intuitive and adapt to your current context.
+
+#### In an Active Conversation
+- **Arrow Up**: Shows the last prompt you sent. Keep pressing to go further back in the conversation.
+- **Arrow Down**: Moves forward through the conversation history, eventually returning to the text you were typing.
+
+#### Starting a New Chat
+- **Arrow Up**: Shows the most recent prompt from your task history in the current workspace.
+- **Arrow Down**: Moves forward through your task history.
+
+#### Edge Cases
+- If you start typing while navigating, the history is dismissed, and your new text is preserved.
+- Navigation only works when your cursor is on the first or last line of the input box to avoid interfering with multi-line editing.
+
+### Configuration
+
+This feature is enabled by default. There are no settings to configure.
+
+### Benefits
+
+- **Faster Workflow**: Reuse prompts without using the mouse.
+- **Better Context**: Easily access and build upon previous interactions.
+- **Less Interruption**: Stay focused on the task at hand.
+
+### Common Questions
+
+**"Why doesn't anything happen when I press the up arrow?"**
+- You might be in the middle of a multi-line prompt. The cursor must be on the first line.
+- There might be no history available for the current context.
+
+**"What's the difference between conversation and task history?"**
+- **Conversation history** includes prompts from your current, active chat session.
+- **Task history** includes the initial prompts from all previous tasks in your current workspace.
