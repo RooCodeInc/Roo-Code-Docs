@@ -17,8 +17,8 @@ To enable or disable experimental features:
 The following experimental features are currently available:
 
 - [Codebase Indexing](/features/experimental/codebase-indexing) - Semantic search through AI-powered codebase indexing
-- [Concurrent File Reads](/features/experimental/concurrent-file-reads) - Read multiple files simultaneously for improved efficiency
 - [Power Steering](/features/experimental/power-steering)
+- [Marketplace](/features/marketplace) - Discover and install modes and MCP servers to extend Roo Code
 
 ## Providing Feedback
 

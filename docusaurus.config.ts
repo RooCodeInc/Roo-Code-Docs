@@ -119,6 +119,10 @@ const config: Config = {
             from: ['/advanced-usage/experimental-features'],
           },
           {
+            to: '/features/concurrent-file-reads',
+            from: ['/features/experimental/concurrent-file-reads'],
+          },
+          {
             to: '/features/model-temperature',
             from: ['/advanced-usage/model-temperature'],
           },

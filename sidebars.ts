@@ -35,6 +35,7 @@ const sidebars: SidebarsConfig = {
         'features/intelligent-context-condensing',
         'features/keyboard-shortcuts',
         'features/model-temperature',
+        'features/concurrent-file-reads',
         'features/rooignore',
         'features/settings-management',
         'features/shell-integration',
@@ -61,8 +62,8 @@ const sidebars: SidebarsConfig = {
           items: [
             'features/experimental/experimental-features',
             'features/experimental/codebase-indexing',
-            'features/experimental/concurrent-file-reads',
             'features/experimental/power-steering',
+            'features/marketplace',
           ],
         },
         'features/more-features',
