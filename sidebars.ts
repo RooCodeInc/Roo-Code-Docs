@@ -119,6 +119,7 @@ const sidebars: SidebarsConfig = {
         'providers/gemini',
         'providers/glama',
         'providers/groq',
+'update-notes/v3.20.0',
         'providers/human-relay',
         'providers/lmstudio',
         'providers/litellm',

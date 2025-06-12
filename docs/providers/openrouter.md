@@ -49,3 +49,4 @@ OpenRouter provides an [optional "middle-out" message transform](https://openrou
     *   For most models, caching should activate automatically if supported by the model itself (similar to how Requesty works).
     *   **Exception for Gemini Models via OpenRouter:** Due to potential response delays sometimes observed with Google's caching mechanism when accessed via OpenRouter, a manual activation step is required *specifically for Gemini models*.
     *   If using a **Gemini model** via OpenRouter, you **must manually check** the "Enable Prompt Caching" box in the provider settings to activate caching for that model. This checkbox serves as a temporary workaround. For non-Gemini models on OpenRouter, this checkbox is not necessary for caching.
+*   **Bring Your Own Key (BYOK):** If you use your own key for the underlying service, OpenRouter charges 5% of what it normally would. Roo Code automatically adjusts the cost calculation to reflect this.

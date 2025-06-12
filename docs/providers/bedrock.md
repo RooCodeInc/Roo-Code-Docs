@@ -99,6 +99,19 @@ Refer to the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/
 7.  **Select Model:** Choose your desired model from the "Model" dropdown.
 
 ---
+---
+
+## Reasoning Budget for Claude Models
+
+Roo Code supports using the reasoning budget (extended thinking) for Anthropic's Claude models on Bedrock. This allows the model to "think" more before responding, which can be useful for complex tasks.
+
+To enable the reasoning budget:
+
+1.  **Select a supported Claude model** (e.g., `anthropic.claude-3-sonnet-20240229-v1:0`).
+2.  **Enable Reasoning Mode** in the model settings.
+3.  **Adjust the thinking budget** to control how much the model should "think".
+
+This feature is only available for supported Claude models.
 
 ## Tips and Notes
 

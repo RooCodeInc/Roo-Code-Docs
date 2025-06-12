@@ -1,6 +1,7 @@
 # Update Notes
 
 This section contains notes about recent updates to Roo Code, listed by version number.
+*   [3.20.0](/update-notes/v3.20.0) (2025-06-12)
 
 ---
 

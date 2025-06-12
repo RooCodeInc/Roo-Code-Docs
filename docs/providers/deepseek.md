@@ -24,7 +24,8 @@ Roo Code supports accessing models through the DeepSeek API, including `deepseek
 Roo Code supports the following DeepSeek models:
 
 *   `deepseek-chat` (Recommended for coding tasks)
-*	  `deepseek-reasoner` (Recommended for reasoning tasks)
+*	`deepseek-reasoner` (Recommended for reasoning tasks)
+*   `deepseek-r1`
 
 ---
 
