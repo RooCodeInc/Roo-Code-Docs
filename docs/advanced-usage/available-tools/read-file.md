@@ -4,7 +4,7 @@
 The `read_file` tool examines the contents of files in a project. It allows Roo to understand code, configuration files, and documentation to provide better assistance.
 
 :::info Multi-File Support
-When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
+When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
 :::
 
 ---
@@ -25,7 +25,7 @@ While the single-file parameters (`path`, `start_line`, `end_line`) are still su
 
 ### Enhanced Format (Multi-File - Experimental)
 
-When [Concurrent File Reads](/features/experimental/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
+When [Concurrent File Reads](/features/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
 
 - `args` (required): Container for multiple file specifications
   - `file` (required): Individual file specification
@@ -65,7 +65,7 @@ This tool reads the content of a specified file and returns it with line numbers
 
 ## Multi-File Capabilities (Experimental)
 
-When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
+When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
 
 ### Batch Processing
 - Read up to 100 files in a single request (configurable, default 15)
@@ -272,7 +272,7 @@ Error: Access denied by .rooignore rules
 
 ## Multi-File Examples (Experimental)
 
-When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
+When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
 
 ### Reading Multiple Complete Files
 
