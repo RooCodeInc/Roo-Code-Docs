@@ -198,6 +198,7 @@ const sidebars: SidebarsConfig = {
             { type: 'doc', id: 'update-notes/v3.19.4', label: '3.19.4' },
             { type: 'doc', id: 'update-notes/v3.19.5', label: '3.19.5' },
             { type: 'doc', id: 'update-notes/v3.19.6', label: '3.19.6' },
+            { type: 'doc', id: 'update-notes/v3.19.7', label: '3.19.7' },
           ],
         },
         {

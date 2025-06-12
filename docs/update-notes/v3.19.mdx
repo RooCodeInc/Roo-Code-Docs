@@ -25,6 +25,8 @@ This release series focuses on streamlining the user interface with intelligent 
 *   **LiteLLM Provider**: Fixed a bug that caused an error when the LiteLLM provider URL contained a trailing slash (thanks kcwhite!) ([#4275](https://github.com/RooCodeInc/Roo-Code/pull/4275))
 *   **Copy Button**: Fixed an issue with the copy button logic (thanks samhvw8!) ([#4458](https://github.com/RooCodeInc/Roo-Code/pull/4458))
 *   **MCP Server Management**: Fixed a bug where the MCP server list would not update correctly after changes (like adding or deleting servers) without a full extension reload. The manual refresh button and automatic refresh on configuration changes now work reliably. (thanks taylorwilsdon!) ([#4267](https://github.com/RooCodeInc/Roo-Code/pull/4267))
+*   **McpHub Sidebar Focus**: We've fixed an issue where the McpHub sidebar would unexpectedly grab focus, providing a smoother navigation experience. ([#4548](https://github.com/RooCodeInc/Roo-Code/pull/4548))
+*   **Checkpoints**: We've disabled the checkpoint functionality when nested git repositories are detected to prevent conflicts. ([#4509](https://github.com/RooCodeInc/Roo-Code/pull/4509))
 
 ---
 
@@ -39,5 +41,10 @@ This release series focuses on streamlining the user interface with intelligent 
 *   **OpenAI Compatible Embedder**: Added a new embedder for codebase indexing that is compatible with the OpenAI API, expanding options for local and custom embedding models (thanks SannidhyaSah!)
 *   **Enforce [`codebase_search`](/advanced-usage/available-tools/codebase-search) as primary tool**: Roo Code now always uses codebase_search as the first step for code understanding tasks, improving accuracy and consistency (thanks hannesrudolph!)
 *   **Build Scripts**: Removed unnecessary `npx` usage from some npm scripts (thanks user202729!) ([#4003](https://github.com/RooCodeInc/Roo-Code/pull/4003))
+*   **Storybook**: We've removed unused Storybook components and dependencies to reduce the bundle size. ([#4517](https://github.com/RooCodeInc/Roo-Code/pull/4517))
+*   **ESLint**: We've added a `data-testid` ESLint rule to improve our testing standards (thanks elianiva!). ([#4505](https://github.com/RooCodeInc/Roo-Code/pull/4505))
+*   **Dependencies**: We've updated our development dependencies, including eslint, knip, @types/node, i18next, fast-xml-parser, and @google/genai.
+*   **CI**: We've improved our CI infrastructure with GitHub Actions and Blacksmith runner migrations. ([#4472](https://github.com/RooCodeInc/Roo-Code/pull/4472), [#4507](https://github.com/RooCodeInc/Roo-Code/pull/4507))
+*   **Gemini**: We've added the ability to control the thinking budget for Gemini models via Requesty (thanks dtrugman!). ([#4486](https://github.com/RooCodeInc/Roo-Code/pull/4486))
 
 Thank you to all our contributors for making Roo Code better with each release!
