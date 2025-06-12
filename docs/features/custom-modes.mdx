@@ -25,6 +25,8 @@ Roo Code allows you to create **custom modes** to tailor Roo's behavior to speci
 Each mode—including custom ones—features **Sticky Models**. This means Roo Code automatically remembers and selects the last model you used with a particular mode. This lets you assign different preferred models to different tasks without constant reconfiguration, as Roo switches between models when you change modes.
 :::
 
+---
+
 ## Why Use Custom Modes?
 
 *   **Specialization:** Create modes optimized for specific tasks, like "Documentation Writer," "Test Engineer," or "Refactoring Expert."
@@ -35,6 +37,8 @@ Each mode—including custom ones—features **Sticky Models**. This means Roo C
 <img src="/img/custom-modes/custom-modes-3.png" alt="Overview of custom modes interface" width="500" />
 
     *Roo Code's interface for creating and managing custom modes.*
+
+---
 
 ## What's Included in a Custom Mode?
 
@@ -49,11 +53,15 @@ Custom modes are defined by several key properties. Understanding these concepts
 | When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Roo to understand the mode's purpose**, especially for automated decisions.<br />- This text is used by Roo, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Roo decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- If populated, this description is used by Roo to understand the mode's function; otherwise, the first sentence of the `roleDefinition` is used by default. |
 | Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Roo's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
 
+---
+
 ## Methods for Creating and Configuring Custom Modes
 
 You can create and configure custom modes in several ways:
 
-### 1. Ask Roo! (Recommended)
+#---
+
+## 1. Ask Roo! (Recommended)
 
 You can quickly create a basic custom mode by asking Roo Code to do it for you. For example:
 ```
@@ -61,7 +69,9 @@ Create a new mode called "Documentation Writer". It should only be able to read 
 ```
 Roo Code will guide you through the process, prompting for necessary information for the properties described in the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table. Roo will create the mode using the preferred YAML format. For fine-tuning or making specific adjustments later, you can use the Prompts tab or manual configuration.
 
-### 2. Using the Prompts Tab
+#---
+
+## 2. Using the Prompts Tab
 
 1.  **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
 2.  **Create New Mode:** Click the <Codicon name="add" /> button to the right of the Modes heading.
@@ -75,7 +85,9 @@ Roo Code will guide you through the process, prompting for necessary information
 
 *Refer to the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table for conceptual explanations of each property. File type restrictions for the "edit" tool group can be added by asking Roo or through manual YAML/JSON configuration.*
 
-### 3. Manual Configuration (YAML & JSON)
+#---
+
+## 3. Manual Configuration (YAML & JSON)
 
 You can directly edit the configuration files to create or modify custom modes. This method offers the most control over all properties. Roo Code now supports both YAML (preferred) and JSON formats.
 
@@ -127,9 +139,13 @@ customModes:
 }
 ```
 
-### YAML/JSON Property Details
+#---
 
-##### `slug`
+## YAML/JSON Property Details
+
+###---
+
+## `slug`
 *   **Purpose:** A unique identifier for the mode.
 *   **Format:** Use lowercase letters, numbers, and hyphens.
 *   **Usage:** Used internally and in file/directory names for mode-specific rules (e.g., `.roo/rules-{slug}/`).
@@ -137,13 +153,17 @@ customModes:
 *   *YAML Example:* `slug: docs-writer`
 *   *JSON Example:* `"slug": "docs-writer"`
 
-##### `name`
+###---
+
+## `name`
 *   **Purpose:** The display name shown in the Roo Code UI.
 *   **Format:** Can include spaces and proper capitalization.
 *   *YAML Example:* `name: 📝 Documentation Writer`
 *   *JSON Example:* `"name": "Documentation Writer"`
 
-##### `roleDefinition`
+###---
+
+## `roleDefinition`
 *   **Purpose:** Detailed description of the mode's role, expertise, and personality.
 *   **Placement:** This text is placed at the beginning of the system prompt when the mode is active.
 *   **Important First Sentence:** The first sentence (up to the first period `.`) serves as a default concise summary for Roo to understand the mode's general purpose. **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode selection.
@@ -156,7 +176,9 @@ customModes:
     ```
 *   *JSON Example:* `"roleDefinition": "You are a technical writer specializing in clear documentation."`
 
-##### `groups`
+###---
+
+## `groups`
 *   **Purpose:** Array/list defining which tool groups the mode can access and any file restrictions.
 *   **Available Tool Groups (Strings):** `"read"`, `"edit"`, `"browser"`, `"command"`, `"mcp"`.
 *   **File Restrictions for "edit" group:**
@@ -184,14 +206,18 @@ customModes:
     ]
     ```
 
-##### `whenToUse`
+###---
+
+## `whenToUse`
 *   **Purpose:** (Optional) Provides guidance for Roo to understand what this mode does. Used by the Orchestrator mode and for mode switching.
 *   **Format:** A string describing ideal scenarios or task types for this mode.
 *   **Usage:** If populated, Roo uses this description. Otherwise, the first sentence of `roleDefinition` is used.
 *   *YAML Example:* `whenToUse: This mode is best for refactoring Python code.`
 *   *JSON Example:* `"whenToUse": "This mode is best for refactoring Python code."`
 
-##### `customInstructions`
+###---
+
+## `customInstructions`
 *   **Purpose:** A string containing additional behavioral guidelines for the mode.
 *   **Placement:** This text is added near the end of the system prompt.
 *   **Supplementing:** Can be supplemented by [Mode-Specific Instructions via Files/Directories](#mode-specific-instructions-via-filesdirectories).
@@ -204,7 +230,9 @@ customModes:
     ```
 *   *JSON Example:* `"customInstructions": "Focus on explaining concepts and providing examples."`
 
-### Benefits of YAML Format
+#---
+
+## Benefits of YAML Format
 
 YAML is now the preferred format for defining custom modes due to several advantages over JSON:
 
@@ -246,7 +274,9 @@ YAML is now the preferred format for defining custom modes due to several advant
 
 While JSON is still fully supported, new modes created via the UI or by asking Roo will default to YAML.
 
-#### Tips for Working with YAML
+##---
+
+## Tips for Working with YAML
 
 When editing YAML manually, keep these points in mind:
 
@@ -255,7 +285,9 @@ When editing YAML manually, keep these points in mind:
 *   **Hyphens for List Items:** List items start with a hyphen and a space (e.g., `- read`).
 *   **Validate Your YAML:** If you encounter issues, use an online YAML validator or your editor's built-in validation to check for syntax errors.
 
-### Migration to YAML Format
+#---
+
+## Migration to YAML Format
 
 *   **Global Modes:** The migration from `custom_modes.json` to `custom_modes.yaml` happens automatically when Roo Code starts up, under these conditions:
     1.  Roo Code starts up.
@@ -276,6 +308,8 @@ When editing YAML manually, keep these points in mind:
 :::tip
 For manual conversions of `.roomodes` files, you can use online JSON to YAML converters or ask Roo to help reformat a specific mode configuration from JSON to YAML. Always validate your YAML before saving.
 :::
+---
+
 ## Mode-Specific Instructions via Files/Directories
 
 :::info Mode-Specific Instruction File Locations
@@ -329,6 +363,8 @@ There are two ways Roo Code loads these instructions, with a clear preference fo
 *   Instructions loaded from either the directory or the fallback file are combined with the `customInstructions` property defined in the mode's configuration.
 *   Typically, the content from the files/directories is appended after the content from the `customInstructions` property.
 
+---
+
 ## Configuration Precedence
 
 Mode configurations are applied in this order:
@@ -341,11 +377,15 @@ This means that project-specific configurations will override global configurati
 
 *   **Note on Instruction Files:** Within the loading of mode-specific instructions from the filesystem, the directory `.roo/rules-{mode-slug}/` takes precedence over the single file `.roorules-{mode-slug}` found in the workspace root.
 
+---
+
 ## Overriding Default Modes
 
 You can override Roo Code's built-in modes (like `💻 Code`, `🪲 Debug`, `❓ Ask`, `🏗️ Architect`, `🪃 Orchestrator`) with customized versions. This is done by creating a custom mode with the same slug as a default mode (e.g., `code`, `debug`).
 
-### Overriding Modes Globally
+#---
+
+## Overriding Modes Globally
 
 To customize a default mode across all your projects:
 
@@ -387,7 +427,9 @@ customModes:
 ```
 This example replaces the default `💻 Code` mode with a version restricted to JavaScript and TypeScript files.
 
-### Project-Specific Mode Override
+#---
+
+## Project-Specific Mode Override
 
 To override a default mode for just one project:
 
@@ -431,7 +473,9 @@ customModes:
 ```
 Project-specific overrides take precedence over global overrides.
 
-### Common Use Cases for Overriding Default Modes
+#---
+
+## Common Use Cases for Overriding Default Modes
 * **Restricting file access:** Limit a mode to specific file types.
 * **Specializing behavior:** Customize expertise for your tech stack.
 * **Adding custom instructions:** Integrate project standards.
@@ -440,6 +484,8 @@ Project-specific overrides take precedence over global overrides.
 :::tip
 When overriding default modes, test carefully. Consider backing up configurations before major changes.
 :::
+
+---
 
 ## Understanding Regex in Custom Modes
 
@@ -487,6 +533,8 @@ When you specify `fileRegex`, you're creating a pattern that file paths must mat
 1.  Test on sample file paths. Online regex testers are helpful.
 2.  Remember the escaping rules for JSON vs. YAML.
 3.  Start simple and build complexity.
+
+---
 
 ## Community Gallery
 Ready to explore more? Check out the [Custom Modes Gallery](/community/#custom-modes-gallery) section on the main community page to discover and share custom modes created by the community!

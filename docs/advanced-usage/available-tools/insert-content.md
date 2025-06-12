@@ -2,6 +2,8 @@
 
 The `insert_content` tool adds new lines of content into an existing file without modifying the original content. It's ideal for inserting code blocks, configuration entries, or log lines at specific locations.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -10,9 +12,13 @@ The tool accepts these parameters:
 - `line` (required): The 1-based line number *before* which the content should be inserted. Use `0` to append the content to the end of the file.
 - `content` (required): The text content to insert.
 
+---
+
 ## What It Does
 
 This tool reads the target file, identifies the specified insertion point based on the `line` parameter, and inserts the provided `content` at that location. If `line` is `0`, the content is added to the end. Changes are presented in a diff view for user approval before being saved.
+
+---
 
 ## When is it used?
 
@@ -21,6 +27,8 @@ This tool reads the target file, identifies the specified insertion point based 
 - When adding configuration blocks to settings files.
 - When appending log entries or data records.
 - When adding any multi-line text block without altering existing lines.
+
+---
 
 ## Key Features
 
@@ -32,11 +40,15 @@ This tool reads the target file, identifies the specified insertion point based 
 - **Context Tracking**: Records the file edit operation for context management.
 - **Error Handling**: Checks for missing parameters, invalid line numbers, and file access issues.
 
+---
+
 ## Limitations
 
 - **Insert Only**: Cannot replace or delete existing content. Use `apply_diff` or `search_and_replace` for modifications.
 - **Requires Existing File**: The target file specified by `path` must exist.
 - **Review Overhead**: The mandatory diff view approval adds an interactive step.
+
+---
 
 ## How It Works
 
@@ -54,6 +66,8 @@ When the `insert_content` tool is invoked, it follows this process:
 8.  **File Context Tracking**: Tracks the edit using `cline.getFileContextTracker().trackFileContext`.
 9.  **Handling User Edits**: If the user edited the content in the diff view, reports the final merged content back.
 10. **Result Reporting**: Reports success (including user edits) or failure back to the AI model.
+
+---
 
 ## Usage Examples
 

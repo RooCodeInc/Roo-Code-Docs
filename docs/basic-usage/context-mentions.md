@@ -6,6 +6,8 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 
 *Context mentions overview showing the @ symbol dropdown menu in the chat interface.*
 
+---
+
 ## Types of Mentions
 
 <img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
@@ -22,7 +24,9 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Git Changes** | `@git-changes` | Shows uncommitted changes | "Suggest a message for @git-changes" |
 | **URL** | `@https://example.com` | Imports website content | "Summarize @https://docusaurus.io/" |
 
-### File Mentions
+#---
+
+## File Mentions
 
 <img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
 
@@ -35,7 +39,9 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Works in** | Initial requests, feedback responses, and follow-up messages |
 | **Limitations** | Very large files may be truncated; binary files not supported |
 
-### Folder Mentions
+#---
+
+## Folder Mentions
 
 <img src="/img/context-mentions/context-mentions-2.png" alt="Folder mention example showing directory contents being referenced in the chat" width="600" />
 
@@ -48,7 +54,9 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Best for** | Providing context from multiple files in a directory |
 | **Tip** | Be mindful of context window limits when mentioning large directories |
 
-### Problems Mention
+#---
+
+## Problems Mention
 
 <img src="/img/context-mentions/context-mentions-3.png" alt="Problems mention example showing VS Code problems panel being referenced with @problems" width="600" />
 
@@ -61,7 +69,9 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Groups** | Problems organized by file for better clarity |
 | **Best for** | Fixing errors without manual copying |
 
-### Terminal Mention
+#---
+
+## Terminal Mention
 <img src="/img/context-mentions/context-mentions-4.png" alt="Terminal mention example showing terminal output being included in Roo's context" width="600" />
 
 *Terminal mentions capture recent command output for debugging and analysis.*
@@ -74,7 +84,9 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Limitation** | Limited to visible terminal buffer content |
 | **Best for** | Debugging build errors or analyzing command output |
 
-### Git Mentions
+#---
+
+## Git Mentions
 
 <img src="/img/context-mentions/context-mentions-5.png" alt="Git commit mention example showing commit details being analyzed by Roo" width="600" />
 
@@ -84,7 +96,9 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Commit** | `@a1b2c3d` | Commit message, author, date, and complete diff | Only works in Git repositories |
 | **Working Changes** | `@git-changes` | `git status` output and diff of uncommitted changes | Only works in Git repositories |
 
-### URL Mentions
+#---
+
+## URL Mentions
 <img src="/img/context-mentions/context-mentions-6.png" alt="URL mention example showing website content being converted to Markdown in the chat" width="600" />
 
 *URL mentions import external web content and convert it to readable Markdown format.*
@@ -96,6 +110,8 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Cleaning** | Removes scripts, styles, and navigation elements |
 | **Output** | Converts content to Markdown for readability |
 | **Limitation** | Complex pages may not convert perfectly |
+
+---
 
 ## How to Use Mentions
 
@@ -113,9 +129,13 @@ The dropdown automatically suggests:
 
 The dropdown automatically filters out common directories like `node_modules`, `.git`, `dist`, and `out` to reduce noise, even though their content could be included if manually typed.
 
+---
+
 ## Important Behaviors
 
-### Ignore File Interactions
+#---
+
+## Ignore File Interactions
 
 | Behavior | Description |
 |----------|-------------|

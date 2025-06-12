@@ -2,6 +2,8 @@
 
 This release introduces advanced AI models with enhanced reasoning capabilities, comprehensive context condensing improvements, YAML support for custom modes, streamlined development infrastructure, and numerous quality-of-life improvements and bug fixes.
 
+---
+
 ## Codebase Indexing (Experimental)
 Our new **experimental** [Codebase Indexing](/features/experimental/codebase-indexing) feature enables semantic search across your entire project using AI embeddings. Remember, this is **disabled by default** and requires additional setup (enable in Settings (⚙️) > "Experimental").
 
@@ -18,6 +20,8 @@ Key capabilities:
 Transform how you navigate large codebases - ask "find authentication logic" and get meaningful results instead of hunting through files.
 
 For setup instructions and detailed usage, see the main [Codebase Indexing documentation](/features/experimental/codebase-indexing).
+
+---
 
 ## Context Condensing Upgrades
 Our Intelligent Context Condensing feature sees significant enhancements for better control and clarity. **Note**: As of version 3.19.0, this feature is enabled by default.
@@ -45,11 +49,15 @@ Key updates:
 For full details, see the main [Intelligent Context Condensing documentation](/features/intelligent-context-condensing).
 
 
+---
+
 ## Custom Modes: YAML Support
 
 Custom mode configuration is now significantly improved with **YAML support** for both global and project-level (`.roomodes`) definitions. YAML is the new default, offering superior readability with cleaner syntax, support for comments (`#`), and easier multi-line string management. While JSON remains supported for backward compatibility, YAML streamlines mode creation, sharing, and version control.
 
 For comprehensive details on YAML benefits, syntax, and migrating existing JSON configurations, please see our updated [Custom Modes documentation](/features/custom-modes#migration-to-yaml-format). (thanks R-omk! Additional thanks to GreatScottyMac for the YAML inspiration!)
+
+---
 
 ## API Cost Control: Request Limits
 To enhance API cost management, you can now set a **Max Requests** limit for auto-approved actions. This prevents Roo Code from making an excessive number of consecutive API calls without your re-approval.
@@ -62,13 +70,19 @@ To enhance API cost management, you can now set a **Max Requests** limit for aut
 
 Learn more about configuring this safeguard in our [Rate Limits and Costs documentation](/advanced-usage/rate-limits-costs#limiting-auto-approved-requests). (Inspired by Cline, thanks hassoncs!)
 
+---
+
 ## Documentation Updates
 
 *   **README Display**: Fixed README GIF display across all localized versions, ensuring consistent visual guides for users in all 17 supported languages
 *   **Referrer URL**: Fixed technical referrer URL issues in documentation links
 
+---
+
 ## New Model Version: Gemini 2.5 Flash Preview (May 2025)
 Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking variant. This cutting-edge addition is available via both the generic [Gemini provider](/providers/gemini) and the [Vertex provider](/providers/vertex), further expanding your AI model options. (thanks shariqriazz, daniel-lxs!)
+
+---
 
 ## QOL Improvements
 
@@ -78,6 +92,8 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 *   **Resizable Prompt Textareas**: Restored vertical resizing for prompt input textareas (role definition, custom instructions, support prompts) for easier viewing and editing of longer prompts.
 *   **Settings Import**: Error messages are now provided in multiple languages if an import fails. (thanks ChuKhaLi!)
 *   **Traditional Chinese Locale**: Improve zh-TW Traditional Chinese locale (thanks PeterDaveHello and chrarnoldus!)
+
+---
 
 ## Bug Fixes
 
@@ -98,6 +114,8 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 *   **Packaging `tiktoken.wasm`**: Fixed packaging to include the correct `tiktoken/lite/tiktoken_bg.wasm` file for accurate token counting. (thanks vagadiya!)
 *   **Audio Playback**: Moved audio playback to the webview to ensure cross-platform compatibility and reliability for notifications and sounds. (thanks SmartManoj, samhvw8!)
 
+---
+
 ## Provider Updates
 
 *   **Claude 4.0 Models**: Added support for [`Claude Sonnet 4`](/providers/anthropic) and [`Claude Opus 4`](/providers/anthropic) models with thinking variants for [`Anthropic`](/providers/anthropic), [`Bedrock`](/providers/bedrock), and [`Vertex`](/providers/vertex) providers (thanks shariqriazz!)
@@ -113,6 +131,8 @@ Access the latest `gemini-2.5-flash-preview-05-20` model, including its thinking
 *   **Unbound Provider Model Refresh**: Added a refresh button for [Unbound](/providers/unbound) models to easily update the list of available models and get immediate feedback on API key validity. (thanks pugazhendhi-m!)
 *   **Requesty Thinking Controls**: Add thinking controls for [Requesty provider](/providers/requesty) (thanks dtrugman!)
 *   **LiteLLM Metadata**: Improve model metadata for [LiteLLM provider](/providers/litellm)
+
+---
 
 ## Misc Improvements
 

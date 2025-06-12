@@ -9,6 +9,8 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
 
 **Website:** [https://ollama.com/](https://ollama.com/)
 
+---
+
 ## Setting up Ollama
 
 1.  **Download and Install Ollama:**  Download the Ollama installer for your operating system from the [Ollama website](https://ollama.com/). Follow the installation instructions. Make sure Ollama is running
@@ -66,6 +68,8 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     *   Enter the Model name from the previous step (e.g., `your_model_name`).
     *   (Optional) You can configure the base URL if you're running Ollama on a different machine. The default is `http://localhost:11434`.
     *   (Optional) Configure Model context size in Advanced settings, so Roo Code knows how to manage its sliding window.
+
+---
 
 ## Tips and Notes
 

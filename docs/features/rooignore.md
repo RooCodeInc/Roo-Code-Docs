@@ -6,6 +6,8 @@ sidebar_label: .rooignore
 
 The `.rooignore` file is a key feature for managing Roo Code's interaction with your project files. It allows you to specify files and directories that Roo should not access or modify, similar to how `.gitignore` works for Git.
 
+---
+
 ## What is `.rooignore`?
 
 *   **Purpose**: To protect sensitive information, prevent accidental changes to build artifacts or large assets, and generally define Roo's operational scope within your workspace.
@@ -13,6 +15,8 @@ The `.rooignore` file is a key feature for managing Roo Code's interaction with 
 *   **Scope**: `.rooignore` affects both Roo's tools and context mentions (like `@directory` attachments).
 
 Roo actively monitors the `.rooignore` file. Any changes you make are reloaded automatically, ensuring Roo always uses the most current rules. The `.rooignore` file itself is always implicitly ignored, so Roo cannot change its own access rules.
+
+---
 
 ## Pattern Syntax
 
@@ -27,11 +31,15 @@ The syntax for `.rooignore` is identical to `.gitignore`. Here are common exampl
 
 For a comprehensive guide on syntax, refer to the [official Git documentation on .gitignore](https://git-scm.com/docs/gitignore).
 
+---
+
 ## How Roo Tools Interact with `.rooignore`
 
 `.rooignore` rules are enforced across various Roo tools:
 
-### Strict Enforcement (Reads & Writes)
+#---
+
+## Strict Enforcement (Reads & Writes)
 
 These tools directly check `.rooignore` before any file operation. If a file is ignored, the operation is blocked:
 
@@ -42,25 +50,35 @@ These tools directly check `.rooignore` before any file operation. If a file is 
 *   [`search_and_replace`](/advanced-usage/available-tools/search-and-replace): Will not search and replace within ignored files.
 *   [`list_code_definition_names`](/advanced-usage/available-tools/list-code-definition-names): Will not parse ignored files for code symbols.
 
-### File Discovery and Listing
+#---
+
+## File Discovery and Listing
 
 *   **[`list_files`](/advanced-usage/available-tools/list-files) Tool & `@directory` Attachments**: When Roo lists files or when you use `@directory` attachments, ignored files are omitted or marked with a 🔒 symbol (see "User Experience" below). Both use identical filtering logic.
 *   **Environment Details**: Information about your workspace (like open tabs and project structure) provided to Roo is filtered to exclude or mark ignored items.
 
-### Context Mentions
+#---
+
+## Context Mentions
 
 *   **`@directory` Attachments**: Directory contents respect `.rooignore` patterns. Ignored files are filtered out or marked with `[🔒]` prefix depending on the `showRooIgnoredFiles` setting.
 *   **Single File Mentions**: Ignored files return "(File is ignored by .rooignore)" instead of content.
 
-### Command Execution
+#---
+
+## Command Execution
 
 *   **[`execute_command`](/advanced-usage/available-tools/execute-command) Tool**: This tool checks if a command (from a predefined list like `cat` or `grep`) targets an ignored file. If so, execution is blocked.
+
+---
 
 ## Key Limitations and Scope
 
 *   **Workspace-Centric**: `.rooignore` rules apply **only to files and directories within the current VS Code workspace root**. Files outside this scope are not affected.
 *   **[`execute_command`](/advanced-usage/available-tools/execute-command) Specificity**: Protection for `execute_command` is limited to a predefined list of file-reading commands. Custom scripts or uncommon utilities might not be caught.
 *   **Not a Full Sandbox**: `.rooignore` is a powerful tool for controlling Roo's file access via its tools, but it does not create a system-level sandbox.
+
+---
 
 ## User Experience and Notifications
 

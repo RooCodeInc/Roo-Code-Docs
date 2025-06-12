@@ -8,15 +8,21 @@ Roo Code supports accessing models through [Unbound](https://getunbound.ai/), a 
 
 **Website:** [https://getunbound.ai/](https://getunbound.ai/)
 
+---
+
 ## Creating an Account
 
 1.  **Sign Up/Sign In:** Go to the [Unbound gateway](https://gateway.getunbound.ai).  Create an account or sign in.
 2.  **Create an Application:** Go to the [Applications](https://gateway.getunbound.ai/ai-gateway-applications) page and hit the "Create Application" button.
 3.  **Copy the API Key:** Copy the API key to your clipboard.
 
+---
+
 ## Supported Models
 
 Unbound allows you configure a list of supported models in your application, and Roo Code will automatically fetch the list of available models from the Unbound API.
+
+---
 
 ## Configuration in Roo Code
 
@@ -24,6 +30,8 @@ Unbound allows you configure a list of supported models in your application, and
 2.  **Select Provider:** Choose "Unbound" from the "API Provider" dropdown.
 3.  **Enter API Key:** Paste your Unbound API key into the "Unbound API Key" field.
 4.  **Select Model:** Choose your desired model from the "Model" dropdown.
+
+---
 
 ## Tips and Notes
 

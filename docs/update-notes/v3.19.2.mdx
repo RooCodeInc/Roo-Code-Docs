@@ -2,15 +2,21 @@
 
 This release includes improvements to MCP server connectivity, provider enhancements, UI optimizations, and several bug fixes and security updates.
 
+---
+
 ## QOL Improvements
 
 *   **Streamable HTTP Transport for MCP Servers**: Added support for MCP servers using streamable HTTP-based transport (thanks taylorwilsdon!) ([#3260](https://github.com/RooCodeInc/Roo-Code/pull/3260))
 *   **MCP Server Instructions Support**: Added support for server instructions in MCP configuration (thanks qingyuan1109!) ([#4210](https://github.com/RooCodeInc/Roo-Code/pull/4210))
 *   **Optimized Chat Layout and Styles**: Fine-tuned the layout and styling of chat messages for improved readability (thanks zhangtony239!) ([#4205](https://github.com/RooCodeInc/Roo-Code/pull/4205))
 
+---
+
 ## Provider Updates
 
 *   **Enhanced LiteLLM Provider**: Added cached read and write tokens to stats and cost calculation (thanks mollux!) ([#4206](https://github.com/RooCodeInc/Roo-Code/pull/4206))
+
+---
 
 ## Bug Fixes
 
@@ -21,6 +27,8 @@ This release includes improvements to MCP server connectivity, provider enhancem
 *   **Release Memory in `apply_diff`**: Optimized memory usage in the `apply_diff` tool by explicitly releasing the original content buffer after use, helping to prevent potential memory leaks ([#4193](https://github.com/RooCodeInc/Roo-Code/pull/4193)) (thanks xyOz-dev!).
 *   **Fix Directory Link Handling in Markdown**: Enhanced how directory links in markdown (e.g., `[some/directory/](some/directory/)`) are handled, ensuring they correctly open in the Explorer view ([#3690](https://github.com/RooCodeInc/Roo-Code/pull/3690)) (thanks KJ7LNW!).
 *   **Typo Fixes**: Corrected various typos in comments and tool use prompts ([#4220](https://github.com/RooCodeInc/Roo-Code/pull/4220), [#4095](https://github.com/RooCodeInc/Roo-Code/pull/4095)) (thanks mrubens, noritaka1166!).
+
+---
 
 ## Misc Improvements
 

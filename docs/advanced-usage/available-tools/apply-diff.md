@@ -2,6 +2,8 @@
 
 The `apply_diff` tool makes precise, surgical changes to files by specifying exactly what content to replace. It uses a sophisticated strategy for finding and applying changes while maintaining proper code formatting and structure.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -11,9 +13,13 @@ The tool accepts these parameters:
 - `start_line` (optional): A hint for where the search content begins. _Note: This top-level parameter appears unused by the current main strategy, which relies on `:start_line:` within the diff content._
 - `end_line` (optional): A hint for where the search content ends. _Note: This top-level parameter appears unused by the current main strategy._
 
+---
+
 ## What It Does
 
 This tool applies targeted changes to existing files using fuzzy matching guided by line number hints to locate and replace content precisely. Unlike simple search and replace, it identifies the exact block for replacement based on the provided content and location hints.
+
+---
 
 ## When is it used?
 
@@ -21,6 +27,8 @@ This tool applies targeted changes to existing files using fuzzy matching guided
 - When refactoring specific sections of code while maintaining surrounding context.
 - When fixing bugs in existing code with surgical precision.
 - When implementing feature enhancements that modify only certain parts of a file.
+
+---
 
 ## Key Features
 
@@ -33,6 +41,8 @@ This tool applies targeted changes to existing files using fuzzy matching guided
 - Validates file access against `.rooignore` rules.
 - Handles multi-line edits effectively.
 
+---
+
 ## Limitations
 
 - Works best with unique, distinctive code sections for reliable identification.
@@ -40,6 +50,8 @@ This tool applies targeted changes to existing files using fuzzy matching guided
 - Fuzzy matching might occasionally select incorrect locations if content is ambiguous.
 - Each diff strategy has specific format requirements.
 - Complex edits might require careful strategy selection or manual review.
+
+---
 
 ## How It Works
 
@@ -57,6 +69,8 @@ When the `apply_diff` tool is invoked, it follows this process:
 7.  **Change Application**: If approved, applies the changes (potentially including user edits) to the file.
 8.  **Error Handling**: If errors occur (e.g., match failure, partial application), increments the `consecutiveMistakeCountForApplyDiff` for the file and reports the failure type.
 9. **Feedback**: Returns the result, including any user feedback or error details.
+
+---
 
 ## Diff Format Requirements
 

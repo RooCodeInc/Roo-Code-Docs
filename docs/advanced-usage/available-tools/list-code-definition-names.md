@@ -2,15 +2,21 @@
 
 The `list_code_definition_names` tool provides a structural overview of your codebase by listing code definitions from source files at the top level of a specified directory. It helps Roo understand code architecture by displaying line numbers and definition snippets.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
 
 - `path` (required): The path of the directory to list top level source code definitions for, relative to the current working directory
 
+---
+
 ## What It Does
 
 This tool scans source code files at the top level of a specified directory and extracts code definitions like classes, functions, and interfaces. It displays the line numbers and actual code for each definition, providing a quick way to map the important components of your codebase.
+
+---
 
 ## When is it used?
 
@@ -19,6 +25,8 @@ This tool scans source code files at the top level of a specified directory and 
 - When planning refactoring or extensions to existing code
 - Before diving into implementation details with other tools
 - When identifying relationships between different parts of your codebase
+
+---
 
 ## Key Features
 
@@ -32,6 +40,8 @@ This tool scans source code files at the top level of a specified directory and 
 - Creates a mental map of your codebase's architecture
 - Works in conjunction with other tools like `read_file` for deeper analysis
 
+---
+
 ## Limitations
 
 - Only identifies top-level definitions, not nested ones
@@ -44,6 +54,8 @@ This tool scans source code files at the top level of a specified directory and 
 - Does not provide information about how definitions are used
 - May have reduced accuracy with highly dynamic or metaprogrammed code
 - Limited to specific languages supported by the implemented Tree-sitter parsers
+
+---
 
 ## How It Works
 
@@ -59,6 +71,8 @@ When the `list_code_definition_names` tool is invoked, it follows this process:
    - Creating a query using a language-specific query string
    - Sorting the captures by their position in the file
 7. **Result Formatting**: Outputs definitions with line numbers and actual source code
+
+---
 
 ## Output Format
 
@@ -83,6 +97,8 @@ Each line displays:
 
 This output format helps you quickly see both where definitions are located in the file and their implementation details.
 
+---
+
 ## Examples When Used
 
 - When starting a new task, Roo first lists key code definitions to understand the overall structure of your project.
@@ -91,6 +107,8 @@ This output format helps you quickly see both where definitions are located in t
 - When adding new features, Roo identifies existing patterns and relevant code definitions to maintain consistency.
 - When troubleshooting bugs, Roo maps the codebase structure to locate potential sources of the issue.
 - When planning architecture changes, Roo identifies all affected components across files.
+
+---
 
 ## Usage Examples
 

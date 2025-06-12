@@ -26,6 +26,8 @@ Roo Code provides sophisticated browser automation capabilities that let you int
 Browser Use within Roo Code requires the use of Claude Sonnet 3.5 or 3.7
 :::
 
+---
+
 ## How Browser Use Works
 
 By default, Roo Code uses a built-in browser that:
@@ -35,6 +37,8 @@ By default, Roo Code uses a built-in browser that:
 - Runs invisibly in the background
 
 All of this happens directly within VS Code, with no setup required.
+
+---
 
 ## Using Browser Use
 
@@ -63,6 +67,8 @@ Browse http://localhost:3000, scroll down to the bottom of the page and check if
 
 <img src="/img/browser-use/browser-use-1.png" alt="Browser use example" width="300" />
 
+---
+
 ## How Browser Actions Work
 
 The browser_action tool controls a browser instance that returns screenshots and console logs after each action, allowing you to see the results of interactions.
@@ -73,7 +79,9 @@ Key characteristics:
 - While the browser is active, no other tools can be used
 - You must wait for the response (screenshot and logs) before performing the next action
 
-### Available Browser Actions
+#---
+
+## Available Browser Actions
 
 | Action | Description | When to Use |
 |--------|-------------|------------|
@@ -84,6 +92,8 @@ Key characteristics:
 | `scroll_up` | Scrolls up by one page | Returning to previous content |
 | `close` | Closes the browser | Ending a browser session |
 
+---
+
 ## Browser Use Configuration/Settings
 
 :::info Default Browser Settings
@@ -93,7 +103,9 @@ Key characteristics:
 - **Use remote browser connection**: Disabled
 :::
 
-### Accessing Settings
+#---
+
+## Accessing Settings
 
 To change Browser / Computer Use settings in Roo:
 
@@ -101,7 +113,9 @@ To change Browser / Computer Use settings in Roo:
 
    <img src="/img/browser-use/browser-use.png" alt="Browser settings menu" width="600" />
 
-### Enable/Disable Browser Use
+#---
+
+## Enable/Disable Browser Use
 
 **Purpose**: Master toggle that enables Roo to interact with websites using a Puppeteer-controlled browser.
 
@@ -110,7 +124,9 @@ To change this setting:
 
    <img src="/img/browser-use/browser-use-2.png" alt="Enable browser tool setting" width="300" />
 
-### Viewport Size
+#---
+
+## Viewport Size
 
 **Purpose**: Determines the resolution of the browser session Roo Code uses.
 
@@ -127,7 +143,9 @@ To change this setting:
 
    <img src="/img/browser-use/browser-use-3.png" alt="Viewport size setting" width="600" />
 
-### Screenshot Quality
+#---
+
+## Screenshot Quality
 
 **Purpose**: Controls the WebP compression quality of browser screenshots.
 
@@ -143,7 +161,9 @@ To change this setting:
 
    <img src="/img/browser-use/browser-use-4.png" alt="Screenshot quality setting" width="600" />
 
-### Remote Browser Connection
+#---
+
+## Remote Browser Connection
 
 **Purpose**: Connect Roo to an existing Chrome browser instead of using the built-in browser.
 
@@ -161,13 +181,17 @@ To enable this feature:
 
    <img src="/img/browser-use/browser-use-5.png" alt="Remote browser connection setting" width="600" />
 
-#### Common Use Cases
+##---
+
+## Common Use Cases
 
 - **DevContainers**: Connect from containerized VS Code to host Chrome browser
 - **Remote Development**: Use local Chrome with remote VS Code server
 - **Custom Chrome Profiles**: Use profiles with specific extensions and settings
 
-#### Connecting to a Visible Chrome Window
+##---
+
+## Connecting to a Visible Chrome Window
 
 Connect to a visible Chrome window to observe Roo's interactions in real-time:
 

@@ -4,6 +4,8 @@
 
 The Maestro Project provides a comprehensive system of highly specialized Roo modes designed to work together as an integrated development team. Orchestrated by the central **Maestro** mode, this system manages the entire software development lifecycle by delegating tasks to modes with deep expertise in specific domains such as planning, design, frontend/backend development, database management, DevOps, testing, and documentation.
 
+---
+
 ## Key Concepts
 
 - **Central Orchestration**: The Maestro mode analyzes user requests, decomposes tasks, and delegates them to the most appropriate specialized mode.

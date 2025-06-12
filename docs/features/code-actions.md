@@ -2,6 +2,8 @@
 
 Code Actions are a powerful feature of VS Code that provide quick fixes, refactorings, and other code-related suggestions directly within the editor. Roo Code integrates with this system to offer AI-powered assistance for common coding tasks.
 
+---
+
 ## What are Code Actions?
 
 Code Actions appear as a lightbulb icon (💡) in the editor gutter (the area to the left of the line numbers). They can also be accessed via the right-click context menu, or via keyboard shortcut. They are triggered when:
@@ -12,6 +14,8 @@ Code Actions appear as a lightbulb icon (💡) in the editor gutter (the area to
 
 Clicking the lightbulb, right-clicking and selecting "Roo Code", or using the keyboard shortcut (`Ctrl+.` or `Cmd+.` on macOS, by default), displays a menu of available actions.
 
+---
+
 ## Roo Code's Code Actions
 
 Roo Code provides the following Code Actions:
@@ -20,7 +24,9 @@ Roo Code provides the following Code Actions:
 *   **Explain Code:** Asks Roo Code to explain the selected code.
 *   **Improve Code:** Asks Roo Code to suggest improvements to the selected code.
 
-### Add to Context Deep Dive
+#---
+
+## Add to Context Deep Dive
 
 The **Add to Context** action is listed first in the Code Actions menu so you can quickly add code snippets to your conversation. When you use it, Roo Code includes the filename and line numbers along with the code.
 
@@ -35,11 +41,15 @@ Can you explain this function?
 
 *(Where `@myFile.js:15:25` represents the code added via "Add to Context")*
 
+---
+
 ## Using Code Actions
 
 There are three main ways to use Roo Code's Code Actions:
 
-### 1. From the Lightbulb (💡)
+#---
+
+## 1. From the Lightbulb (💡)
 
 1.  **Select Code:** Select the code you want to work with. You can select a single line, multiple lines, or an entire block of code.
 2.  **Look for the Lightbulb:** A lightbulb icon will appear in the gutter next to the selected code (or the line with the error/warning).
@@ -47,7 +57,9 @@ There are three main ways to use Roo Code's Code Actions:
 4.  **Choose an Action:** Select the desired Roo Code action from the menu.
 5.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
 
-### 2. From the Right-Click Context Menu
+#---
+
+## 2. From the Right-Click Context Menu
 
 1.  **Select Code:** Select the code you want to work with.
 2.  **Right-Click:** Right-click on the selected code to open the context menu.
@@ -55,12 +67,16 @@ There are three main ways to use Roo Code's Code Actions:
 4.  **Choose an Action:** Select the desired action from the submenu.
 5.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
 
-### 3. From the Command Palette
+#---
+
+## 3. From the Command Palette
 
 1.  **Select Code:** Select the code you want to work with.
 2.  **Open the Command Palette:** Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS).
 3.  **Type a Command:** Type "Roo Code" to filter the commands, then choose the relevant code action (e.g., "Roo Code: Explain Code"). The action will apply in the most logical context (usually the current active chat task, if one exists).
 4.  **Review and Approve:** Roo Code will propose a solution in the chat panel. Review the proposed changes and approve or reject them.
+
+---
 
 ## Customizing Code Action Prompts
 

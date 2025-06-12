@@ -34,6 +34,8 @@ Checkpoints let you:
 - The shadow Git repository operates independently from your project's existing Git configuration
 :::
 
+---
+
 ## Configuration Options
 
 Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
@@ -42,6 +44,8 @@ Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
 2. Check or uncheck the "Enable automatic checkpoints" checkbox
 
    <img src="/img/checkpoints/checkpoints.png" alt="Checkpoint settings in Roo Code configuration" width="500" />
+
+---
 
 ## How Checkpoints Work
 
@@ -54,6 +58,8 @@ Checkpoints are stored as Git commits in the shadow repository, capturing:
 - Deleted files
 - Renamed files
 - Binary file changes
+
+---
 
 ## Working with Checkpoints
 
@@ -69,7 +75,9 @@ Checkpoints appear directly in your chat history in two forms:
 
 Each checkpoint provides two primary functions:
 
-### Viewing Differences
+#---
+
+## Viewing Differences
 
 To compare your current workspace with a previous checkpoint:
 
@@ -87,7 +95,9 @@ To compare your current workspace with a previous checkpoint:
 
 <img src="/img/checkpoints/checkpoints-3.png" alt="View differences option for checkpoints" width="800" />
 
-### Restoring Checkpoints
+#---
+
+## Restoring Checkpoints
 
 To restore a project to a previous checkpoint state:
 
@@ -104,16 +114,22 @@ To restore a project to a previous checkpoint state:
 
       <img src="/img/checkpoints/checkpoints-9.png" alt="Confirmation dialog for restoring checkpoint with files & task" width="300" />
 
-### Limitations and Considerations
+#---
+
+## Limitations and Considerations
 
 - **Scope**: Checkpoints only capture changes made during active Roo Code tasks
 - **External changes**: Modifications made outside of tasks (manual edits, other tools) aren't included
 - **Large files**: Very large binary files may impact performance
 - **Unsaved work**: Restoration will overwrite any unsaved changes in your workspace
 
+---
+
 ## Technical Implementation
 
-### Checkpoint Architecture
+#---
+
+## Checkpoint Architecture
 
 The checkpoint system consists of:
 
@@ -127,18 +143,24 @@ The checkpoint system consists of:
 
 3. **UI Components**: Interface elements displayed in the chat that enable interaction with checkpoints.
 
-### Restoration Process
+#---
+
+## Restoration Process
 
 When restoration executes, Roo Code:
 - Performs a hard reset to the specified checkpoint commit
 - Copies all files from the shadow repository to your workspace
 - Updates internal checkpoint tracking state
 
-### Storage Type
+#---
+
+## Storage Type
 
 Checkpoints are task-scoped, meaning they are specific to a single task.
 
-### Diff Computation
+#---
+
+## Diff Computation
 
 Checkpoint comparison uses Git's underlying diff capabilities to produce structured file differences:
 - Modified files show line-by-line changes
@@ -146,11 +168,15 @@ Checkpoint comparison uses Git's underlying diff capabilities to produce structu
 - Renamed and moved files are tracked correctly
 - File creation and deletion are clearly identified
 
-### File Exclusion and Ignore Patterns
+#---
+
+## File Exclusion and Ignore Patterns
 
 The checkpoint system uses intelligent file exclusion to track only relevant files:
 
-#### Built-in Exclusions
+##---
+
+## Built-in Exclusions
 
 The system has comprehensive built-in exclusion patterns that automatically ignore:
 - Build artifacts and dependency directories (`node_modules/`, `dist/`, `build/`)
@@ -162,14 +188,18 @@ The system has comprehensive built-in exclusion patterns that automatically igno
 
 These patterns are written to the shadow repository's `.git/info/exclude` file during initialization.
 
-#### .gitignore Support
+##---
+
+## .gitignore Support
 
 The checkpoint system respects `.gitignore` patterns in your workspace:
 - Files excluded by `.gitignore` won't trigger checkpoint creation
 - Excluded files won't appear in checkpoint diffs
 - Standard Git ignore rules apply when staging file changes
 
-#### .rooignore Behavior
+##---
+
+## .rooignore Behavior
 
 The `.rooignore` file (which controls AI access to files) is separate from checkpoint tracking:
 - Files excluded by `.rooignore` but not by `.gitignore` will still be checkpointed
@@ -177,7 +207,9 @@ The `.rooignore` file (which controls AI access to files) is separate from check
 
 This separation is intentional, as `.rooignore` limits which files the AI can access, not which files should be tracked for version history.
 
-#### Nested Git Repositories
+##---
+
+## Nested Git Repositories
 
 The checkpoint system includes special handling for nested Git repositories:
 - Temporarily renames nested `.git` directories to `.git_disabled` during operations
@@ -185,15 +217,21 @@ The checkpoint system includes special handling for nested Git repositories:
 - Allows proper tracking of files in nested repositories
 - Ensures nested repositories remain functional and unaffected
 
-### Concurrency Control
+#---
+
+## Concurrency Control
 
 Operations are queued to prevent concurrent Git operations that might corrupt repository state. This ensures that rapid checkpoint operations complete safely even when requested in quick succession.
+
+---
 
 ## Git Installation
 
 Checkpoints require Git to be installed on your system. The implementation uses the `simple-git` library, which relies on Git command-line tools to create and manage shadow repositories.
 
-### macOS
+#---
+
+## macOS
 
 1. **Install with Homebrew (recommended)**:
    ```
@@ -210,7 +248,9 @@ Checkpoints require Git to be installed on your system. The implementation uses 
    - Type `git --version`
    - You should see a version number like `git version 2.40.0`
 
-### Windows
+#---
+
+## Windows
 
 1. **Download Git for Windows**:
    - Visit https://git-scm.com/download/win
@@ -230,7 +270,9 @@ Checkpoints require Git to be installed on your system. The implementation uses 
    - Type `git --version`
    - You should see a version number like `git version 2.40.0.windows.1`
 
-### Linux
+#---
+
+## Linux
 
 **Debian/Ubuntu**:
 ```

@@ -8,6 +8,8 @@ Roo Code supports accessing models through Google Cloud Platform's Vertex AI, a 
 
 **Website:** [https://cloud.google.com/vertex-ai](https://cloud.google.com/vertex-ai)
 
+---
+
 ## Prerequisites
 
 *   **Google Cloud Account:** You need an active Google Cloud Platform (GCP) account.
@@ -17,6 +19,8 @@ Roo Code supports accessing models through Google Cloud Platform's Vertex AI, a 
     1.  Install the Google Cloud CLI: [https://cloud.google.com/sdk/docs/install](https://cloud.google.com/sdk/docs/install)
     2.  Authenticate using: `gcloud auth application-default login`
 *   **Service Account Key (Alternative):** Alternatively, you can authenticate using a Google Cloud Service Account key file. You'll need to generate this key in your GCP project. See the [Google Cloud documentation on creating service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
+
+---
 
 ## Supported Models
 
@@ -46,6 +50,8 @@ Roo Code supports the following models through Vertex AI (based on source code):
 
 Refer to the [Google Cloud documentation on Vertex AI Models](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) for the most up-to-date list of available models and their IDs.
 
+---
+
 ## Configuration in Roo Code
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
@@ -58,6 +64,8 @@ Refer to the [Google Cloud documentation on Vertex AI Models](https://cloud.goog
 4.  **Enter Project ID:** Enter your Google Cloud Project ID.
 5.  **Select Region:** Choose the region where your Vertex AI resources are located (e.g., `us-east5`).
 6.  **Select Model:** Choose your desired model from the "Model" dropdown.
+---
+
 ## Tips and Notes
 
 *   **Permissions:**  Ensure your Google Cloud account has the necessary permissions to access Vertex AI and the specific models you want to use.

@@ -15,7 +15,9 @@ While Roo Code can connect to any Model Context Protocol (MCP) server that follo
 
 `Context7` is our first-choice general-purpose MCP server. It ships a collection of highly-requested tools, installs with a single command, and has excellent support across every major editor that speaks MCP.
 
-### Why we recommend Context7
+#---
+
+## Why we recommend Context7
 
 * **One-command install** – everything is bundled, no local build step.
 * **Cross-platform** – runs on macOS, Windows, Linux, or inside Docker.
@@ -34,7 +36,9 @@ There are two common ways to register the server:
 
 We'll cover both below.
 
-### 1. Global configuration
+#---
+
+## 1. Global configuration
 
 1. Open the Roo Code **MCP settings** panel by clicking the <Codicon name="server" /> icon.
 2. Click **Edit Global MCP**.
@@ -69,7 +73,9 @@ Also on **Windows (cmd)** you may need to invoke `npx` through `cmd.exe`:
 
 <img src="/img/recommended-mcp-servers/context7-global-setup-fixed.png" alt="Adding Context7 to the global MCP settings" width="600" />
 
-### 2. Project-level configuration
+#---
+
+## 2. Project-level configuration
 
 If you prefer to commit the configuration to your repository, create a file called `.roo/mcp.json` at the project root and add the same snippet:
 

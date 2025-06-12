@@ -2,6 +2,8 @@
 
 The `access_mcp_resource` tool retrieves data from resources exposed by connected Model Context Protocol (MCP) servers. It allows Roo to access files, API responses, documentation, or system information that provides additional context for tasks.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -9,9 +11,13 @@ The tool accepts these parameters:
 - `server_name` (required): The name of the MCP server providing the resource
 - `uri` (required): The URI identifying the specific resource to access
 
+---
+
 ## What It Does
 
 This tool connects to MCP servers and fetches data from their exposed resources. Unlike `use_mcp_tool` which executes actions, this tool specifically retrieves information that serves as context for tasks.
+
+---
 
 ## When is it used?
 
@@ -19,6 +25,8 @@ This tool connects to MCP servers and fetches data from their exposed resources.
 - When Roo needs to access domain-specific data from specialized MCP servers
 - When Roo needs to retrieve reference documentation hosted by MCP servers
 - When Roo needs to integrate real-time data from external APIs via MCP
+
+---
 
 ## Key Features
 
@@ -33,6 +41,8 @@ This tool connects to MCP servers and fetches data from their exposed resources.
 - Processes structured response data with metadata
 - Handles image content special rendering
 
+---
+
 ## Limitations
 
 - Depends on external MCP servers being available and connected
@@ -42,6 +52,8 @@ This tool connects to MCP servers and fetches data from their exposed resources.
 - Resource access subject to configured timeouts
 - URI formats are determined by the specific MCP server implementation
 - No offline or cached resource access capabilities
+
+---
 
 ## How It Works
 
@@ -68,6 +80,8 @@ When the `access_mcp_resource` tool is invoked, it follows this process:
    - Handles image data specially for appropriate display
    - Returns the processed resource data to Roo for use in the current task
 
+---
+
 ## Resource Types
 
 MCP servers can provide two main types of resources:
@@ -84,12 +98,16 @@ MCP servers can provide two main types of resources:
    - Can represent queries or filtered views of data
    - More flexible but require additional URI formatting
 
+---
+
 ## Examples When Used
 
 - When helping with API development, Roo retrieves endpoint specifications from MCP resources to ensure correct implementation.
 - When assisting with data visualization, Roo accesses current data samples from connected MCP servers.
 - When working in specialized domains, Roo retrieves technical documentation to provide accurate guidance.
 - When generating industry-specific code, Roo references compliance requirements from documentation resources.
+
+---
 
 ## Usage Examples
 

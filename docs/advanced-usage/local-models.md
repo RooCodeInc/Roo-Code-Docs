@@ -14,12 +14,16 @@ Roo Code supports running language models locally on your own machine using [Oll
 *   **Model Performance:**  The performance of local models can vary significantly. While some are excellent, they may not always match the capabilities of the largest, most advanced cloud models.
 * **Limited Features**: Local models (and many online models) often do not support advanced features such as prompt caching, computer use, and others.
 
+---
+
 ## Supported Local Model Providers
 
 Roo Code currently supports two main local model providers:
 
 1.  **Ollama:**  A popular open-source tool for running large language models locally.  It supports a wide range of models.
 2.  **LM Studio:**  A user-friendly desktop application that simplifies the process of downloading, configuring, and running local models.  It also provides a local server that emulates the OpenAI API.
+
+---
 
 ## Setting Up Local Models
 
@@ -28,6 +32,8 @@ For detailed setup instructions, see:
 * [Setting up LM Studio](/providers/lmstudio)
 
 Both providers offer similar capabilities but with different user interfaces and workflows. Ollama provides more control through its command-line interface, while LM Studio offers a more user-friendly graphical interface.
+
+---
 
 ## Troubleshooting
 

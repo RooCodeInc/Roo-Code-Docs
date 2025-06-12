@@ -8,6 +8,8 @@ Codebase Indexing enables semantic code search across your entire project using 
 
 <img src="/img/codebase-indexing/codebase-indexing.png" alt="Codebase Indexing Settings" width="800" />
 
+---
+
 ## What It Does
 
 When enabled, the indexing system:
@@ -19,6 +21,8 @@ When enabled, the indexing system:
 
 This enables natural language queries like "user authentication logic" or "database connection handling" to find relevant code across your entire project.
 
+---
+
 ## Key Benefits
 
 - **Semantic Search**: Find code by meaning, not just keywords
@@ -26,9 +30,13 @@ This enables natural language queries like "user authentication logic" or "datab
 - **Cross-Project Discovery**: Search across all files, not just what's open
 - **Pattern Recognition**: Locate similar implementations and code patterns
 
+---
+
 ## Setup Requirements
 
-### Embedding Provider
+#---
+
+## Embedding Provider
 
 Choose one of these options for generating embeddings:
 
@@ -44,7 +52,9 @@ Choose one of these options for generating embeddings:
 - Supports any Ollama-compatible embedding model
 - Requires Ollama base URL configuration
 
-### Setting Up Ollama for Embeddings
+#---
+
+## Setting Up Ollama for Embeddings
 
 1. **Install Ollama**
    - **macOS**: `brew install ollama` or download from [ollama.com](https://ollama.com)
@@ -73,16 +83,22 @@ Choose one of these options for generating embeddings:
    - Set Ollama Base URL: `http://localhost:11434`
    - Select Model: `nomic-embed-text`
 
-### Vector Database
+#---
+
+## Vector Database
 
 **Qdrant** is required for storing and searching embeddings:
 - **Local**: `http://localhost:6333` (recommended for testing)
 - **Cloud**: Qdrant Cloud or self-hosted instance
 - **Authentication**: Optional API key for secured deployments
 
+---
+
 ## Setting Up Qdrant
 
-### Quick Local Setup
+#---
+
+## Quick Local Setup
 
 **Using Docker:**
 ```bash
@@ -103,12 +119,16 @@ volumes:
   qdrant_storage:
 ```
 
-### Production Deployment
+#---
+
+## Production Deployment
 
 For team or production use:
 - [Qdrant Cloud](https://cloud.qdrant.io/) - Managed service
 - Self-hosted on AWS, GCP, or Azure
 - Local server with network access for team sharing
+
+---
 
 ## Configuration
 
@@ -121,6 +141,8 @@ For team or production use:
 5. Set Qdrant URL and optional API key
 6. Click **Save** to start initial indexing
 
+---
+
 ## Understanding Index Status
 
 The interface shows real-time status with color indicators:
@@ -130,9 +152,13 @@ The interface shows real-time status with color indicators:
 - **Indexed** (Green): Up-to-date and ready for searches
 - **Error** (Red): Failed state requiring attention
 
+---
+
 ## How Files Are Processed
 
-### Smart Code Parsing
+#---
+
+## Smart Code Parsing
 - **Tree-sitter Integration**: Uses AST parsing to identify semantic code blocks
 - **Language Support**: All languages supported by Tree-sitter
 - **Fallback**: Line-based chunking for unsupported file types
@@ -141,7 +167,9 @@ The interface shows real-time status with color indicators:
   - Maximum: 1,000 characters
   - Splits large functions intelligently
 
-### Automatic File Filtering
+#---
+
+## Automatic File Filtering
 The indexer automatically excludes:
 - Binary files and images
 - Large files (&gt;1MB)
@@ -149,15 +177,21 @@ The indexer automatically excludes:
 - Dependencies (`node_modules`, `vendor`, etc.)
 - Files matching `.gitignore` and `.rooignore` patterns
 
-### Incremental Updates
+#---
+
+## Incremental Updates
 - **File Watching**: Monitors workspace for changes
 - **Smart Updates**: Only reprocesses modified files
 - **Hash-based Caching**: Avoids reprocessing unchanged content
 - **Branch Switching**: Automatically handles Git branch changes
 
+---
+
 ## Best Practices
 
-### Model Selection
+#---
+
+## Model Selection
 
 **For OpenAI:**
 - **`text-embedding-3-small`**: Best balance of performance and cost
@@ -169,11 +203,15 @@ The indexer automatically excludes:
 - **`nomic-embed-text`**: Best balance of performance and embedding quality.
 - **`all-minilm`**: Compact model with lower quality but faster performance.
 
-### Security Considerations
+#---
+
+## Security Considerations
 - **API Keys**: Stored securely in VS Code's encrypted storage
 - **Code Privacy**: Only small code snippets sent for embedding (not full files)
 - **Local Processing**: All parsing happens locally
 - **Qdrant Security**: Use authentication for production deployments
+
+---
 
 ## Current Limitations
 
@@ -182,6 +220,8 @@ The indexer automatically excludes:
 - **Single Workspace**: One workspace at a time
 - **Dependencies**: Requires external services (embedding provider + Qdrant)
 - **Language Coverage**: Limited to Tree-sitter supported languages
+
+---
 
 ## Using the Search Feature
 
@@ -199,6 +239,8 @@ The tool provides Roo with:
 - Similarity scores
 - Contextual information
 
+---
+
 ## Privacy & Security
 
 - **Code stays local**: Only small code snippets sent for embedding
@@ -206,6 +248,8 @@ The tool provides Roo with:
 - **Secure storage**: API keys encrypted in VS Code storage
 - **Local option**: Use Ollama for completely local processing
 - **Access control**: Respects existing file permissions
+
+---
 
 ## Future Enhancements
 

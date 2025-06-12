@@ -7,6 +7,8 @@ sidebar_label: MCP vs API
 
 Comparing REST APIs to the Model Context Protocol (MCP) is a category error. They operate at different layers of abstraction and serve fundamentally different purposes in AI systems.
 
+---
+
 ## Architectural Differences
 
 | Feature | MCP | REST APIs |
@@ -18,6 +20,8 @@ Comparing REST APIs to the Model Context Protocol (MCP) is a category error. The
 | Tool Discovery | Runtime discovery of available tools | Design-time integration requiring prior knowledge |
 | Integration Approach | Runtime integration with dynamic capabilities | Design-time integration requiring code changes |
 
+---
+
 ## Different Layers, Different Purposes
 
 REST APIs and MCP serve different tiers in the technology stack:
@@ -27,6 +31,8 @@ REST APIs and MCP serve different tiers in the technology stack:
 
 MCP often uses REST APIs internally, but abstracts them away for the AI. Think of MCP as middleware that turns discrete web services into a cohesive environment the AI can operate within.
 
+---
+
 ## Context Preservation: Critical for AI Workflows
 
 MCP's stateful design solves a key limitation of REST in AI applications:
@@ -35,6 +41,8 @@ MCP's stateful design solves a key limitation of REST in AI applications:
 - **MCP Approach**: One conversation context persists across multiple tool uses
 
 For example, an AI debugging a codebase can open a file, run tests, and identify errors without losing context between steps. The MCP session maintains awareness of previous actions and results.
+
+---
 
 ## Dynamic Tool Discovery
 
@@ -65,6 +73,8 @@ MCP enables an AI to discover and use tools at runtime:
 
 This "plug-and-play" capability allows new tools to be added without redeploying or modifying the AI itself.
 
+---
+
 ## Real-World Example: Multi-Tool Workflow
 
 Consider a task requiring multiple services: "Check recent commits, create a JIRA ticket for the bug fix, and post to Slack."
@@ -79,6 +89,8 @@ Consider a task requiring multiple services: "Check recent commits, create a JIR
 - Maintains context across the entire workflow
 - New tools can be swapped in without code changes
 
+---
+
 ## Why Roo Code Uses MCP
 
 Roo Code leverages MCP to provide:
@@ -89,6 +101,8 @@ Roo Code leverages MCP to provide:
 4. **Runtime flexibility**: Discover and use new capabilities on-the-fly
 
 MCP creates a universal connector between Roo Code and external services, with REST APIs often powering those services behind the scenes.
+
+---
 
 ## Conclusion: Complementary, Not Competing Technologies
 

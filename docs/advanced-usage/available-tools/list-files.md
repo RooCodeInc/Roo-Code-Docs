@@ -2,6 +2,8 @@
 
 The `list_files` tool displays the files and directories within a specified location. It helps Roo understand your project structure and navigate your codebase effectively.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -9,9 +11,13 @@ The tool accepts these parameters:
 - `path` (required): The path of the directory to list contents for, relative to the current working directory
 - `recursive` (optional): Whether to list files recursively. Use `true` for recursive listing, `false` or omit for top-level only.
 
+---
+
 ## What It Does
 
 This tool lists all files and directories in a specified location, providing a clear overview of your project structure. It can either show just the top-level contents or recursively explore subdirectories.
+
+---
 
 ## When is it used?
 
@@ -20,6 +26,8 @@ This tool lists all files and directories in a specified location, providing a c
 - When Roo maps a codebase to better understand its organization
 - Before using more targeted tools like `read_file` or `search_files`
 - When Roo needs to check for specific file types (like configuration files) across a project
+
+---
 
 ## Key Features
 
@@ -33,6 +41,8 @@ This tool lists all files and directories in a specified location, providing a c
 - Presents results in a clean, organized format
 - Automatically creates a mental map of your project structure
 
+---
+
 ## Limitations
 
 - File listing is capped at about 200 files by default to prevent performance issues
@@ -41,6 +51,8 @@ This tool lists all files and directories in a specified location, providing a c
 - Not designed for confirming the existence of files you've just created
 - May have reduced performance in very large directory structures
 - Cannot list files in root or home directories for security reasons
+
+---
 
 ## How It Works
 
@@ -63,6 +75,8 @@ When the `list_files` tool is invoked, it follows this process:
    - Marks ignored files with a lock symbol (🔒) when `showRooIgnoredFiles` is enabled
    - Caps results at 200 files by default with a note about using subdirectories
    - Organizes results for readability
+
+---
 
 ## File Listing Format
 
@@ -99,12 +113,16 @@ src/utils/helpers.ts
 src/index.ts
 ```
 
+---
+
 ## Examples When Used
 
 - When starting a new task, Roo may list the project files to understand its structure before diving into specific code.
 - When asked to find specific types of files (like all JavaScript files), Roo first lists directories to know where to look.
 - When providing recommendations for code organization, Roo examines the current project structure first.
 - When setting up a new feature, Roo lists related directories to understand the project conventions.
+
+---
 
 ## Usage Examples
 

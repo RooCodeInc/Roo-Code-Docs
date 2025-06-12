@@ -2,6 +2,8 @@
 
 This release introduces experimental codebase indexing with semantic search, enhanced AI reasoning capabilities, and several performance optimizations.
 
+---
+
 ## Codebase Indexing (Experimental)
 We've introduced a powerful new **experimental** [Codebase Indexing](/features/experimental/codebase-indexing) feature that enables semantic search across your entire project using AI embeddings. Remember, this is **disabled by default** and requires additional setup (enable in Settings (⚙️) > "Experimental").
 
@@ -18,6 +20,8 @@ Transform how you navigate large codebases - ask "find authentication logic" and
 
 For setup instructions and detailed usage, see the main [Codebase Indexing documentation](/features/experimental/codebase-indexing).
 
+---
+
 ## Provider Updates
 
 *   **Enhanced Reasoning**: Added reasoning support for Claude 4 and Gemini 2.5 Flash on [`OpenRouter`](/providers/openrouter), plus fixed o1-pro compatibility
@@ -26,15 +30,21 @@ For setup instructions and detailed usage, see the main [Codebase Indexing docum
 *   **OpenRouter Settings**: Model settings now persist when selecting specific [`OpenRouter`](/providers/openrouter) providers
 *   **LiteLLM Refresh**: Added ability to refresh [`LiteLLM`](/providers/litellm) models list for up-to-date model availability
 
+---
+
 ## QOL Improvements
 
 *   **Better Tool Selection**: Improved tool descriptions to guide AI in making better file editing decisions
+
+---
 
 ## Bug Fixes
 
 *   **Context Tracking**: Fixed mark-as-read logic in the context tracker (thanks samhvw8!)
 *   **Model Cleanup**: Removed deprecated claude-3.7-sonnet models from vscode-lm (thanks shariqriazz!)
 *   **MCP Server Loading**: Fixed MCP Server error when running with npx and bunx (thanks devxpain!)
+
+---
 
 ## Misc Improvements
 

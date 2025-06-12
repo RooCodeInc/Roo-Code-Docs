@@ -8,9 +8,13 @@ Groq specializes in providing very high-speed inference for large language model
 
 **Website:** [https://groq.com/](https://groq.com/)
 
+---
+
 ## Getting an API Key
 
 To use Groq with Roo Code, you'll need an API key from the [GroqCloud Console](https://console.groq.com/). After signing up or logging in, navigate to the API Keys section of your dashboard to create and copy your key.
+
+---
 
 ## Supported Models
 
@@ -22,6 +26,8 @@ Roo Code will attempt to fetch the list of available models from the Groq API. C
 *   `gemma-7b-it`
 
 Refer to the [Groq Documentation](https://console.groq.com/docs/models) for the most up-to-date list of supported models and their capabilities.
+
+---
 
 ## Configuration in Roo Code
 

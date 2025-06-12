@@ -2,9 +2,13 @@
 
 Roo Code implements a sophisticated tool system that allows AI models to interact with your development environment in a controlled and secure manner. This document explains how tools work, when they're called, and how they're managed.
 
+---
+
 ## Core Concepts
 
-### Tool Groups
+#---
+
+## Tool Groups
 
 Tools are organized into logical groups based on their functionality:
 
@@ -18,7 +22,9 @@ Tools are organized into logical groups based on their functionality:
 | **MCP Group** | External tool integration | [use_mcp_tool](/advanced-usage/available-tools/use-mcp-tool), [access_mcp_resource](/advanced-usage/available-tools/access-mcp-resource) | Specialized functionality through external servers |
 | **Workflow Group** | Mode and task management | [switch_mode](/advanced-usage/available-tools/switch-mode), [new_task](/advanced-usage/available-tools/new-task), [ask_followup_question](/advanced-usage/available-tools/ask-followup-question), [attempt_completion](/advanced-usage/available-tools/attempt-completion) | Context switching and task organization |
 
-### Always Available Tools
+#---
+
+## Always Available Tools
 
 Certain tools are accessible regardless of the current mode:
 
@@ -27,22 +33,30 @@ Certain tools are accessible regardless of the current mode:
 - [switch_mode](/advanced-usage/available-tools/switch-mode): Change operational modes
 - [new_task](/advanced-usage/available-tools/new-task): Create subtasks
 
+---
+
 ## Available Tools
 
-### Read Tools
+#---
+
+## Read Tools
 These tools help Roo understand your code and project:
 
 - [read_file](/advanced-usage/available-tools/read-file) - Examines the contents of files
 - [list_files](/advanced-usage/available-tools/list-files) - Maps your project's file structure
 - [list_code_definition_names](/advanced-usage/available-tools/list-code-definition-names) - Creates a structural map of your code
 
-### Search Tools
+#---
+
+## Search Tools
 These tools help Roo find patterns and functionality across your codebase:
 
 - [search_files](/advanced-usage/available-tools/search-files) - Finds patterns across multiple files using regex
 - [codebase_search](/advanced-usage/available-tools/codebase-search) - Performs semantic searches across your indexed codebase
 
-### Edit Tools
+#---
+
+## Edit Tools
 These tools help Roo make changes to your code:
 
 - [apply_diff](/advanced-usage/available-tools/apply-diff) - Makes precise, surgical changes to your code
@@ -50,23 +64,31 @@ These tools help Roo make changes to your code:
 - [search_and_replace](/advanced-usage/available-tools/search-and-replace) - Finds and replaces text or regex patterns within a file
 - [write_to_file](/advanced-usage/available-tools/write-to-file) - Creates new files or completely rewrites existing ones
 
-### Browser Tools
+#---
+
+## Browser Tools
 These tools help Roo interact with web applications:
 
 - [browser_action](/advanced-usage/available-tools/browser-action) - Automates browser interactions
 
-### Command Tools
+#---
+
+## Command Tools
 These tools help Roo execute commands:
 
 - [execute_command](/advanced-usage/available-tools/execute-command) - Runs system commands and programs
 
-### MCP Tools
+#---
+
+## MCP Tools
 These tools help Roo connect with external services:
 
 - [use_mcp_tool](/advanced-usage/available-tools/use-mcp-tool) - Uses specialized external tools
 - [access_mcp_resource](/advanced-usage/available-tools/access-mcp-resource) - Accesses external data sources
 
-### Workflow Tools
+#---
+
+## Workflow Tools
 These tools help manage the conversation and task flow:
 
 - [ask_followup_question](/advanced-usage/available-tools/ask-followup-question) - Gets additional information from you
@@ -74,9 +96,13 @@ These tools help manage the conversation and task flow:
 - [switch_mode](/advanced-usage/available-tools/switch-mode) - Changes to a different mode for specialized tasks
 - [new_task](/advanced-usage/available-tools/new-task) - Creates a new subtask
 
+---
+
 ## Tool Calling Mechanism
 
-### Handling Complex Tasks
+#---
+
+## Handling Complex Tasks
 
 For certain complex operations that require multiple steps, Roo doesn't just figure them out on the fly. Instead, it follows predefined, internal plans to ensure consistency and accuracy.
 
@@ -91,7 +117,9 @@ This specific workflow is initiated by Roo using its internal `fetch_instruction
 
 So, while the overall task (like `create_mcp_server`) is complex, it's ultimately accomplished by intelligently orchestrating the standard tools available in your environment. This approach allows Roo to reliably perform complex operations by leveraging the tools documented here.
 
-### When Tools Are Called
+#---
+
+## When Tools Are Called
 
 Tools are invoked under specific conditions:
 
@@ -110,7 +138,9 @@ Tools are invoked under specific conditions:
    - In response to system events
    - During error handling and recovery
 
-### Decision Process
+#---
+
+## Decision Process
 
 The system uses a multi-step process to determine tool availability:
 
@@ -135,9 +165,13 @@ The system uses a multi-step process to determine tool availability:
    - Parameter type checking
    - Value validation
 
+---
+
 ## Technical Implementation
 
-### Tool Call Processing
+#---
+
+## Tool Call Processing
 
 1. **Initialization**
    - Tool name and parameters are validated
@@ -159,7 +193,9 @@ The system uses a multi-step process to determine tool availability:
    - Result formatting
    - Error handling
 
-### Security and Permissions
+#---
+
+## Security and Permissions
 
 1. **Access Control**
    - File system restrictions
@@ -171,9 +207,13 @@ The system uses a multi-step process to determine tool availability:
    - Mode-based restrictions
    - System-level checks
 
+---
+
 ## Mode Integration
 
-### Mode-Based Tool Access
+#---
+
+## Mode-Based Tool Access
 
 Tools are made available based on the current mode:
 
@@ -182,7 +222,9 @@ Tools are made available based on the current mode:
 - **Architect Mode**: Design-focused tools, documentation capabilities, limited execution rights
 - **Custom Modes**: Can be configured with specific tool access for specialized workflows
 
-### Mode Switching
+#---
+
+## Mode Switching
 
 1. **Process**
    - Current mode state preservation
@@ -194,9 +236,13 @@ Tools are made available based on the current mode:
    - Permission adjustments
    - Context preservation
 
+---
+
 ## Best Practices
 
-### Tool Usage Guidelines
+#---
+
+## Tool Usage Guidelines
 
 1. **Efficiency**
    - Use the most specific tool for the task
@@ -213,7 +259,9 @@ Tools are made available based on the current mode:
    - Provide meaningful error messages
    - Handle failures gracefully
 
-### Common Patterns
+#---
+
+## Common Patterns
 
 1. **Information Gathering**
    ```
@@ -230,9 +278,13 @@ Tools are made available based on the current mode:
    [new_task](/advanced-usage/available-tools/new-task) → [switch_mode](/advanced-usage/available-tools/switch-mode) → [execute_command](/advanced-usage/available-tools/execute-command)
    ```
 
+---
+
 ## Error Handling and Recovery
 
-### Error Types
+#---
+
+## Error Types
 
 1. **Tool-Specific Errors**
    - Parameter validation failures
@@ -249,7 +301,9 @@ Tools are made available based on the current mode:
    - Missing requirements
    - State inconsistencies
 
-### Recovery Strategies
+#---
+
+## Recovery Strategies
 
 1. **Automatic Recovery**
    - Retry mechanisms

@@ -4,6 +4,8 @@
 
 An enhanced workflow orchestration mode based on [@mrubens](https://github.com/mrubens)' original design, with expanded capabilities for complex task management. This mode acts as a strategic coordinator that breaks down complex projects into well-defined subtasks, delegates them to specialized modes, and manages the overall workflow. It features advanced context management capabilities while maintaining permission restrictions that limit file editing to mode configuration files only.
 
+---
+
 ## Key Enhancements
 
 - **Granular Task Decomposition**: Strategies optimized for context length limitations.

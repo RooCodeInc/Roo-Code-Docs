@@ -2,6 +2,8 @@
 
 Terminal Shell Integration is a key feature that enables Roo Code to execute commands in your terminal and intelligently process their output. This bidirectional communication between the AI and your development environment unlocks powerful automation capabilities.
 
+---
+
 ## What is Shell Integration?
 
 Shell integration is automatically enabled in Roo Code and connects directly to your terminal's command execution lifecycle without requiring any setup from you. This built-in feature allows Roo to:
@@ -18,6 +20,8 @@ Shell integration is automatically enabled in Roo Code and connects directly to 
 
 When you ask Roo to perform tasks like installing dependencies, starting a development server, or analyzing build errors, shell integration works behind the scenes to make these interactions smooth and effective.
 
+---
+
 ## Troubleshooting Shell Integration
 
 Shell integration is built into Roo Code and works automatically in most cases. If you see "Shell Integration Unavailable" messages or experience issues with command execution, try these solutions:
@@ -26,6 +30,8 @@ Shell integration is built into Roo Code and works automatically in most cases. 
 2. **Ensure a compatible shell is selected**: Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`) → "Terminal: Select Default Profile" → Choose bash, zsh, PowerShell, or fish
 3. **Windows PowerShell users**: Run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` then restart VSCode
 4. **WSL users**: Add `. "$(code --locate-shell-integration-path bash)"` to your `~/.bashrc`
+
+---
 
 ## Command Execution Fallback
 
@@ -41,23 +47,33 @@ Roo Code has a fallback mechanism for executing commands. This is most relevant 
 *Example of Roo Code's recommended inline terminal.*
 
 
+---
+
 ## Terminal Integration Settings
 
 Roo Code provides settings to fine-tune how it interacts with terminals. To access these settings:
 1. Click the <Codicon name="gear" /> icon in the top-right corner of the Roo Code sidebar.
 2. In the settings pane that opens, select the "Terminal" group from the left-hand menu.
 
-### Basic Settings
+#---
 
-#### Terminal Output Limit
+## Basic Settings
+
+##---
+
+## Terminal Output Limit
 <img src="/img/shell-integration/shell-integration.png" alt="Terminal output limit slider set to 500" width="600" />
 This setting controls how much output Roo Code captures from your commands. Consider lowering it if you're concerned about token usage or if Roo seems slow processing very long outputs (you'll still get the beginning and end). Consider increasing it if you frequently need more middle content from long commands directly in Roo's context, but be mindful of potential token costs. Default: 500 lines.
 
-#### Compress progress bar output
+##---
+
+## Compress progress bar output
 <img src="/img/shell-integration/shell-integration-10.png" alt="Compress progress bar output checkbox" width="600" />
 Keep this enabled (default) for cleaner output and token savings. It makes Roo Code process dynamic output like progress bars or spinners more like a real terminal, showing only the final state. Disable this only in rare cases where you specifically need to debug the intermediate, raw output of a progress bar or similar dynamic display.
 
-### Advanced Settings
+#---
+
+## Advanced Settings
 
 :::info Important
 **Terminal restart required for these settings**
@@ -70,16 +86,22 @@ Changes to advanced terminal settings only take effect after restarting your ter
 Always restart all open terminals after changing any of these settings.
 :::
 
-#### Inherit environment variables
+##---
+
+## Inherit environment variables
 <img src="/img/shell-integration/shell-integration-11.png" alt="Inherit environment variables checkbox" width="600" />
 This setting controls whether Roo Code's terminal sessions use the same environment variables (like `PATH`, API keys, etc.) as your main VSCode/Cursor environment. It directly mirrors the VSCode global setting [`terminal.integrated.inheritEnv`](https://code.visualstudio.com/docs/editor/integrated-terminal#_inherit-environment-variables). Keep this enabled (default for VSCode) if you want Roo commands to operate with the same context and tools available in your regular VSCode terminal. Consider disabling it only if you need a completely clean, isolated environment for Roo's terminal tasks or are troubleshooting complex environment variable conflicts.
 
-### Runtime Environment
+#---
+
+## Runtime Environment
 On macOS (and possibly other operating systems) the environment provided to VSCode, and consequently Roo Code, can differ depending on how VSCode is launched.  
 If launched from the command line `vscode` command, VSCode and Roo Code will inherit the environment from the shell that launched it, and all will (usually) be well.
 If launched from the Finder, Dock, or Spotlight, environment exported from `.zshrc`, or `.zprofile` will likely be missing.  If you have environment variables set in one of those files, and find they are missing when running VSCode, move them to .zshenv, and log out and back in again, so the window manager will pick up the new environment settings.
 
-#### Disable terminal shell integration
+##---
+
+## Disable terminal shell integration
 <img src="/img/shell-integration/shell-integration-9.png" alt="Disable terminal shell integration checkbox" width="600" />
 This setting determines how Roo Code executes terminal commands.
 -   **Keep this checkbox CHECKED (recommended):** Roo Code will execute commands using its built-in inline terminal, displaying output directly within the chat interface. This method is generally robust, provides clear output, and is the preferred way for most users to interact with terminal commands through Roo Code. It ensures commands run in a consistent environment managed by Roo Code.
@@ -91,33 +113,49 @@ This setting determines how Roo Code executes terminal commands.
 
 The following settings are advanced options that apply **only if you have UNCHECKED 'Disable terminal shell integration'** (choosing to use VS Code's terminal integration instead of Roo Code's recommended inline terminal):
 
-##### Terminal shell integration timeout
+###---
+
+## Terminal shell integration timeout
 <img src="/img/shell-integration/shell-integration-1.png" alt="Terminal shell integration timeout slider set to 15s" width="600" />
 If shell integration is enabled but you still see 'Shell Integration Unavailable,' especially with complex shell setups (e.g., Zsh with many plugins, or a slow-loading corporate environment), your shell might be taking too long to initialize. Increase this value to give your shell more time to signal its readiness to Roo Code. Try increments of 5-10 seconds. Default: 15s (as shown in UI).
 
-##### Terminal command delay
+###---
+
+## Terminal command delay
 <img src="/img/shell-integration/shell-integration-2.png" alt="Terminal command delay slider set to 0ms" width="600" />
 If command output appears incomplete or Roo seems to miss the end of a command's output (even with shell integration enabled), a small delay might help. Introduce a small delay (e.g., 50ms or 100ms). This gives the terminal more time to flush all output before Roo Code considers the command complete. This is a workaround for potential timing issues in VSCode's terminal or certain shells (see VSCode bug [#237208](https://github.com/microsoft/vscode/issues/237208)). Default: 0ms.
 
-##### Enable PowerShell counter workaround
+###---
+
+## Enable PowerShell counter workaround
 <img src="/img/shell-integration/shell-integration-3.png" alt="Enable PowerShell counter workaround checkbox" width="600" />
 Specific to PowerShell users. Enable this if you find Roo Code struggles to run the *exact same PowerShell command multiple times in a row*, or if output capture from PowerShell commands is unreliable. This adds a unique counter to commands to help PowerShell differentiate them.
 
-##### Clear ZSH EOL mark
+###---
+
+## Clear ZSH EOL mark
 <img src="/img/shell-integration/shell-integration-4.png" alt="Clear ZSH EOL mark checkbox" width="600" />
 Specific to Zsh users. Zsh sometimes adds a special character (often `%`) at the end of a line if it doesn't end with a newline. Enable this if Roo Code seems to misinterpret or get confused by the output of Zsh commands, particularly if the last line of output appears to include an unexpected character. This attempts to remove that marker (`PROMPT_EOL_MARK=''`).
 
-##### Enable Oh My Zsh integration
+###---
+
+## Enable Oh My Zsh integration
 <img src="/img/shell-integration/shell-integration-5.png" alt="Enable Oh My Zsh integration checkbox" width="600" />
 For users of the popular Oh My Zsh framework for Zsh. Enable this if you use Oh My Zsh and experience general issues with terminal command execution or output rendering that aren't solved by other settings. This helps Roo Code align with Oh My Zsh's specific shell integration mechanisms by setting `ITERM_SHELL_INTEGRATION_INSTALLED=Yes`. Restarting the IDE might be necessary.
 
-##### Enable Powerlevel10k integration
+###---
+
+## Enable Powerlevel10k integration
 <img src="/img/shell-integration/shell-integration-6.png" alt="Enable Powerlevel10k integration checkbox" width="600" />
 For users of the Powerlevel10k theme for Zsh. Enable this if your Powerlevel10k prompt (which can be quite complex) seems to interfere with Roo Code's ability to correctly detect command boundaries, parse output, or track the current working directory. This sets `POWERLEVEL9K_TERM_SHELL_INTEGRATION=true`.
 
-##### Enable ZDOTDIR handling
+###---
+
+## Enable ZDOTDIR handling
 <img src="/img/shell-integration/shell-integration-7.png" alt="Enable ZDOTDIR handling checkbox" width="600" />
 An advanced option for Zsh users with customized Zsh startup file locations. Enable this if you use `ZDOTDIR` to specify a custom directory for your Zsh configuration files (like `.zshrc`). This setting helps Roo Code work correctly with such setups by creating an isolated, temporary `ZDOTDIR` for its own integration scripts, preventing conflicts with your personal Zsh environment.
+
+---
 
 ## How Shell Integration Works
 
@@ -136,9 +174,13 @@ Shell integration connects Roo to your terminal's command execution process in r
 
 4. **Information Gathering**: Roo can see what commands are running, where they're running, how long they take, whether they succeed, and their complete output - all without you having to copy and paste anything.
 
+---
+
 ## Troubleshooting Shell Integration
 
-### PowerShell Execution Policy (Windows)
+#---
+
+## PowerShell Execution Policy (Windows)
 
 PowerShell restricts script execution by default. To configure:
 
@@ -152,7 +194,9 @@ Common policies:
 - `Unrestricted`: All scripts run with warnings
 - `AllSigned`: All scripts must be signed
 
-### Manual Shell Integration Installation
+#---
+
+## Manual Shell Integration Installation
 
 If automatic integration fails, add the appropriate line to your shell configuration:
 
@@ -176,7 +220,9 @@ if ($env:TERM_PROGRAM -eq "vscode") { . "$(code --locate-shell-integration-path 
 string match -q "$TERM_PROGRAM" "vscode"; and . (code --locate-shell-integration-path fish)
 ```
 
-### Terminal Customization Issues
+#---
+
+## Terminal Customization Issues
 
 If you use terminal customization tools:
 
@@ -188,7 +234,9 @@ typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
 
 **Alternative**: Enable the Powerlevel10k Integration setting in Roo Code.
 
-### Verifying Shell Integration Status
+#---
+
+## Verifying Shell Integration Status
 
 Confirm shell integration is active with these commands:
 
@@ -223,11 +271,15 @@ Visual indicators of active shell integration:
 3. Working directory updates in terminal title
 4. Command duration and exit code reporting
 
+---
+
 ## WSL Terminal Integration Methods
 
 When using Windows Subsystem for Linux (WSL), there are two distinct ways to use VSCode with WSL, each with different implications for shell integration:
 
-### Method 1: VSCode Windows with WSL Terminal
+#---
+
+## Method 1: VSCode Windows with WSL Terminal
 
 In this setup:
 - VSCode runs natively in Windows
@@ -236,7 +288,9 @@ In this setup:
 - May experience additional latency due to Windows-WSL communication
 - Shell integration markers may be affected by the WSL-Windows boundary: you must make sure that `source "$(code --locate-shell-integration-path <shell>)"` is loaded for your shell within the WSL environment because it may not get automatically loaded; see above.
 
-### Method 2: VSCode Running Within WSL
+#---
+
+## Method 2: VSCode Running Within WSL
 
 In this setup:
 - You launch VSCode directly from within WSL using `code .`
@@ -252,9 +306,13 @@ For optimal shell integration with WSL, we recommend:
 3. Launch VSCode using `code .`
 4. Use the integrated terminal within VSCode
 
+---
+
 ## Known Issues and Workarounds
 
-### VS Code Shell Integration for Fish + Cygwin on Windows
+#---
+
+## VS Code Shell Integration for Fish + Cygwin on Windows
 
 For fellow Windows users running Fish terminal within a Cygwin environment, here's how VS Code's shell integration works:
 
@@ -331,7 +389,9 @@ For fellow Windows users running Fish terminal within a Cygwin environment, here
 This setup works reliably on Windows systems using Cygwin, Fish, and the Starship prompt, and should assist users with similar configurations.
 
 
-### Shell Integration Failures After VSCode 1.98
+#---
+
+## Shell Integration Failures After VSCode 1.98
 
 **Issue**: After VSCode updates beyond version 1.98, shell integration may fail with the error "VSCE output start escape sequence (]633;C or ]133;C) not received".
 
@@ -353,36 +413,50 @@ This setup works reliably on Windows systems using Cygwin, Fish, and the Starshi
    - Try enabling some or all ZSH-related workarounds in Roo settings
    - These settings can help regardless of your operating system
 
+---
+
 ## Known Issues and Workarounds
 
-### Ctrl+C Behavior
+#---
+
+## Ctrl+C Behavior
 
 **Issue**: If text is already typed in the terminal when Roo tries to run a command, Roo will press Ctrl+C first to clear the line, which can interrupt running processes.
 
 **Workaround**: Make sure your terminal prompt is empty (no partial commands typed) before asking Roo to execute terminal commands.
 
-### Multi-line Command Issues
+#---
+
+## Multi-line Command Issues
 
 **Issue**: Commands that span multiple lines can confuse Roo and may show output from previous commands mixed in with current output.
 
 **Workaround**: Instead of multi-line commands, use command chaining with `&&` to keep everything on one line (e.g., `echo a && echo b` instead of typing each command on a separate line).
 
-### PowerShell-Specific Issues
+#---
+
+## PowerShell-Specific Issues
 
 1. **Premature Completion**: PowerShell sometimes tells Roo a command is finished before all the output has been shown.
 2. **Repeated Commands**: PowerShell may refuse to run the same command twice in a row.
 
 **Workaround**: Enable the "PowerShell counter workaround" setting and set a terminal command delay of 150ms in the settings to give commands more time to complete.
 
-### Incomplete Terminal Output
+#---
+
+## Incomplete Terminal Output
 
 **Issue**: Sometimes VS Code doesn't show or capture all the output from a command.
 
 **Workaround**: If you notice missing output, try closing and reopening the terminal tab, then run the command again. This refreshes the terminal connection.
 
+---
+
 ## Troubleshooting Resources
 
-### Checking Debug Logs
+#---
+
+## Checking Debug Logs
 When shell integration issues occur, check the debug logs:
 1. Open Help → Toggle Developer Tools → Console
 2. Set "Show All Levels" to see all log messages
@@ -392,7 +466,9 @@ When shell integration issues occur, check the debug logs:
    - This indicates a potential VSCode shell integration issue, or an upstream bug that is out of our control
    - The absence of shell integration markers may require adjusting settings to work around possible upstream bugs or local workstation configuration issues related to shell initialization and VSCode's loading of special shell integration hooks
 
-### Using the VSCode Terminal Integration Test Extension
+#---
+
+## Using the VSCode Terminal Integration Test Extension
 The [VSCode Terminal Integration Test Extension](https://github.com/KJ7LNW/vsce-test-terminal-integration) helps diagnose shell integration issues by testing different settings combinations:
 
 
@@ -415,11 +491,15 @@ The [VSCode Terminal Integration Test Extension](https://github.com/KJ7LNW/vsce-
    - Note your environment (OS, VSCode version, shell, and any shell prompt customization)
    - Open an issue with these details to help improve shell integration
 
-### Additional Resources
+#---
+
+## Additional Resources
 
 - [VSCode Terminal Output Issue #237208](https://github.com/microsoft/vscode/issues/237208)
 - [VSCode Terminal Integration Test Repository](https://github.com/KJ7LNW/vsce-test-terminal-integration)
 - [Roo Code Shell Integration Architecture PR](https://github.com/RooCodeInc/Roo-Code/pull/1365)
+
+---
 
 ## Support
 

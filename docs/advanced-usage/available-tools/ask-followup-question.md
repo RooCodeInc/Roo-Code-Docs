@@ -2,6 +2,8 @@
 
 The `ask_followup_question` tool enables interactive communication by asking specific questions to gather additional information needed to complete tasks effectively.
 
+---
+
 ## Parameters
 
 The tool accepts these parameters:
@@ -9,9 +11,13 @@ The tool accepts these parameters:
 - `question` (required): The specific question to ask the user
 - `follow_up` (optional): A list of 2-4 suggested answers that help guide user responses, each within `<suggest>` tags
 
+---
+
 ## What It Does
 
 This tool creates a conversational interface between Roo and the user, allowing for gathering clarification, additional details, or user preferences when facing ambiguities or decision points. Each question can include suggested responses to streamline the interaction.
+
+---
 
 ## When is it used?
 
@@ -20,6 +26,8 @@ This tool creates a conversational interface between Roo and the user, allowing 
 - When technical details or preferences are required to proceed
 - When Roo encounters ambiguities that need resolution
 - When additional context would significantly improve the solution quality
+
+---
 
 ## Key Features
 
@@ -32,6 +40,8 @@ This tool creates a conversational interface between Roo and the user, allowing 
 - Formats responses with `<answer>` tags to distinguish them from regular conversation
 - Resets consecutive error counter when used successfully
 
+---
+
 ## Limitations
 
 - Limited to asking one specific question per tool use
@@ -41,6 +51,8 @@ This tool creates a conversational interface between Roo and the user, allowing 
 - Suggested answers must be complete, with no placeholders requiring user edits
 - No built-in validation for user responses
 - Contains no mechanism to enforce specific answer formats
+
+---
 
 ## How It Works
 
@@ -84,6 +96,8 @@ When the `ask_followup_question` tool is invoked, it follows this process:
    - Contains safeguards to prevent tool execution when required parameters are missing
    - Increments consecutive mistake count when errors occur
 
+---
+
 ## Workflow Sequence
 
 The question-answer cycle follows this sequence:
@@ -102,6 +116,8 @@ The question-answer cycle follows this sequence:
 9. **Context Integration**: Response is added to the conversation history
 10. **Task Continuation**: Roo proceeds with the task using the new information
 
+---
+
 ## Examples When Used
 
 - When developing a web application, Roo might ask about preferred styling frameworks (Bootstrap, Tailwind, custom CSS)
@@ -110,6 +126,8 @@ The question-answer cycle follows this sequence:
 - When setting up a database, Roo might ask about specific schema design preferences
 - When creating a custom feature, Roo might ask about specific behavior expectations
 - When troubleshooting errors, Roo might ask about specific environment details
+
+---
 
 ## Response Format
 
@@ -127,6 +145,8 @@ Key characteristics of the response format:
 - Preserves formatting of the original response
 - Maintains images if included in the response
 - Returns the complete text, even for long responses
+
+---
 
 ## Usage Examples
 

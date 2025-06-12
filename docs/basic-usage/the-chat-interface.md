@@ -4,6 +4,8 @@ import KangarooIcon from '@site/src/components/KangarooIcon';
 
 The Roo Code chat interface is your primary way of interacting with it. It's located in the Roo Code panel, which you can open by clicking the Roo Code icon (<KangarooIcon />) in the VS Code Activity Bar.
 
+---
+
 ## Components of the Chat Interface
 
 The chat interface consists of the following main elements:
@@ -26,11 +28,15 @@ The chat interface consists of the following main elements:
 
 *Numbered interface elements showing the key components of the Roo Code chat interface.*
 
+---
+
 ## Interacting with Messages
 
 * **Clickable Links:** File paths, URLs, and other mentions in the chat history are clickable.  Clicking a file path will open the file in the editor.  Clicking a URL will open it in your default browser.
 * **Copying Text:** You can copy text from the chat history by selecting it and using the standard copy command (Ctrl/Cmd + C).  Some elements, like code blocks, have a dedicated "Copy" button.
 * **Expanding and Collapsing**: Click on a message to expand or collapse it.
+
+---
 
 ## Status Indicators
 

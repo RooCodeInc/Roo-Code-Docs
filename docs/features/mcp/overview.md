@@ -7,6 +7,8 @@ sidebar_label: MCP Overview
 
 The Model Context Protocol (MCP) is a standard for extending Roo Code's capabilities by connecting to external tools and services. MCP servers provide additional tools and resources that help Roo accomplish tasks beyond its built-in capabilities, such as accessing databases, custom APIs, and specialized functionality.
 
+---
+
 ## MCP Documentation
 
 This documentation is organized into several sections:
