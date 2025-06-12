@@ -4,8 +4,6 @@ Roo Code is designed to understand natural language.  You don't need to use any 
 
 <img src="/img/typing-your-requests/naturally.gif" alt="Example of typing a request in Roo Code" width="600" />
 
----
-
 ## Effective Request Strategies
 
 Clearly state what you want Roo Code to do.  Avoid vague or ambiguous language.
@@ -16,8 +14,6 @@ Clearly state what you want Roo Code to do.  Avoid vague or ambiguous language.
 | **Provide context** | Use @ [Context Mentions](/basic-usage/context-mentions) for file and code references |
 | **Break down tasks** | Submit complex tasks in smaller manageable steps |
 | **Include examples** | Provide sample code when you need specific formatting or style |
-
----
 
 ## Example Requests
 
@@ -39,8 +35,6 @@ explain the function `calculateTotal` in @/src/utils.ts
 ```
 @problems address all detected problems
 ```
-
----
 
 ## Common Pitfalls to Avoid
 

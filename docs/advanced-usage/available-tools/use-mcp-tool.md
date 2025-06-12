@@ -2,8 +2,6 @@
 
 The `use_mcp_tool` tool enables interaction with external tools provided by connected Model Context Protocol (MCP) servers. It extends Roo's capabilities with domain-specific functionality through a standardized protocol.
 
----
-
 ## Parameters
 
 The tool accepts these parameters:
@@ -12,13 +10,9 @@ The tool accepts these parameters:
 - `tool_name` (required): The name of the tool to execute
 - `arguments` (required/optional): A JSON object containing the tool's input parameters, following the tool's input schema. May be optional for tools that require no input.
 
----
-
 ## What It Does
 
 This tool allows Roo to access specialized functionality provided by external MCP servers. Each MCP server can offer multiple tools with unique capabilities, extending Roo beyond its built-in functionality. The system validates arguments against schemas, manages server connections, and processes responses of various content types (text, image, resource).
-
----
 
 ## When is it used?
 
@@ -27,8 +21,6 @@ This tool allows Roo to access specialized functionality provided by external MC
 - When integration with external systems or services is needed
 - When working with data that requires specific processing or analysis
 - When accessing proprietary tools through a standardized interface
-
----
 
 ## Key Features
 
@@ -43,8 +35,6 @@ This tool allows Roo to access specialized functionality provided by external MC
 - Supports configurable timeouts (1-3600 seconds, default: 60 seconds)
 - Allows file watchers to automatically detect and reload server changes
 
----
-
 ## Limitations
 
 - Depends on external MCP servers being available and connected
@@ -53,8 +43,6 @@ This tool allows Roo to access specialized functionality provided by external MC
 - Network issues can affect reliability and performance
 - Requires user approval before execution (unless in the "always allow" list)
 - Cannot execute multiple MCP tool operations simultaneously
-
----
 
 ## Server Configuration
 
@@ -65,8 +53,6 @@ MCP servers can be configured globally or at the project level:
  - This allows project-specific server setups.
  - Project-level servers take precedence over global servers if they share the same name.
  - Since `.roo/mcp.json` can be committed to version control, it simplifies sharing configurations with your team.
-
----
 
 ## How It Works
 
@@ -102,8 +88,6 @@ When the `use_mcp_tool` tool is invoked, it follows this process:
    - File watchers monitor for server code changes and trigger automatic restarts
    - The security model requires approval for tool execution unless in the "always allow" list
 
----
-
 ## Security and Permissions
 
 The MCP architecture provides several security features:
@@ -114,8 +98,6 @@ The MCP architecture provides several security features:
 - Configurable timeouts prevent hanging operations (1-3600 seconds)
 - Server connections can be enabled or disabled through the UI
 
----
-
 ## Examples When Used
 
 - Analyzing specialized data formats using server-side processing tools
@@ -123,8 +105,6 @@ The MCP architecture provides several security features:
 - Executing complex domain-specific calculations without local implementation
 - Accessing proprietary APIs or services through a controlled interface
 - Retrieving data from specialized databases or data sources
-
----
 
 ## Usage Examples
 

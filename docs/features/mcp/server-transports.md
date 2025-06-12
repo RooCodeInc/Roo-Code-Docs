@@ -7,15 +7,11 @@ sidebar_label: STDIO, Streamable HTTP & SSE Transports
 
 Model Context Protocol (MCP) supports three primary transport mechanisms for communication between Roo Code and MCP servers: Standard Input/Output (STDIO), Streamable HTTP (the modern standard), and Server-Sent Events (SSE) (for legacy use). Each has distinct characteristics, advantages, and use cases.
 
----
-
 ## STDIO Transport
 
 STDIO transport runs locally on your machine and communicates via standard input/output streams.
 
-#---
-
-## How STDIO Transport Works
+### How STDIO Transport Works
 
 1. The client (Roo Code) spawns an MCP server as a child process
 2. Communication happens through process streams: client writes to server's STDIN, server responds to STDOUT
@@ -31,9 +27,7 @@ Client                    Server
   |                         |
 ```
 
-#---
-
-## STDIO Characteristics
+### STDIO Characteristics
 
 * **Locality**: Runs on the same machine as Roo Code
 * **Performance**: Very low latency and overhead (no network stack involved)
@@ -41,9 +35,7 @@ Client                    Server
 * **Relationship**: One-to-one relationship between client and server
 * **Security**: Inherently more secure as no network exposure
 
-#---
-
-## When to Use STDIO
+### When to Use STDIO
 
 STDIO transport is ideal for:
 
@@ -53,9 +45,7 @@ STDIO transport is ideal for:
 * Single-client scenarios (one Roo Code instance per server)
 * Command-line tools or IDE extensions
 
-#---
-
-## STDIO Implementation Example
+### STDIO Implementation Example
 
 ```typescript
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -68,15 +58,11 @@ const server = new Server({name: 'local-server', version: '1.0.0'});
 const transport = new StdioServerTransport(server);
 transport.listen();
 ```
----
-
 ## Streamable HTTP Transport
 
 Streamable HTTP transport is the modern standard for remote MCP server communication, replacing the older HTTP+SSE transport. It operates over HTTP/HTTPS and allows for more flexible server implementations.
 
-#---
-
-## How Streamable HTTP Transport Works
+### How Streamable HTTP Transport Works
 
 1. The server provides a single HTTP endpoint (MCP endpoint) that supports both POST and GET methods.
 2. The client (Roo Code) sends requests to this MCP endpoint using HTTP POST.
@@ -92,9 +78,7 @@ Client                             Server
   |                                  |
 ```
 
-#---
-
-## Streamable HTTP Characteristics
+### Streamable HTTP Characteristics
 
 * **Modern Standard**: Preferred method for new remote MCP server implementations.
 * **Remote Access**: Can be hosted on a different machine from Roo Code.
@@ -105,9 +89,7 @@ Client                             Server
 * **Authentication**: Can use standard HTTP authentication mechanisms.
 * **Backwards Compatibility**: Servers can maintain compatibility with older HTTP+SSE clients.
 
-#---
-
-## When to Use Streamable HTTP
+### When to Use Streamable HTTP
 
 Streamable HTTP transport is ideal for:
 
@@ -117,9 +99,7 @@ Streamable HTTP transport is ideal for:
 * Public services or centralized tools.
 * Replacing legacy SSE transport implementations.
 
-#---
-
-## Streamable HTTP Implementation Example
+### Streamable HTTP Implementation Example
 
 Configuration in `settings.json`:
 ```json
@@ -133,24 +113,18 @@ Configuration in `settings.json`:
 
 For server-side implementation, refer to the MCP SDK documentation for `StreamableHTTPClientTransport`.
 
-#---
-
-## Backwards Compatibility with HTTP+SSE
+### Backwards Compatibility with HTTP+SSE
 
 Clients and servers can maintain backwards compatibility with the deprecated HTTP+SSE transport (from protocol version 2024-11-05).
 
 Servers wanting to support older clients should:
 * Continue to host both the SSE (`/events`) and POST (`/message`) endpoints of the old transport, alongside the new “MCP endpoint” defined for the Streamable HTTP transport.
 
----
-
 ## SSE Transport (Legacy)
 
 Server-Sent Events (SSE) transport is a legacy method for remote server communication over HTTP/HTTPS. For new implementations, **Streamable HTTP transport is recommended.** SSE remains available for compatibility with older MCP servers.
 
-#---
-
-## How SSE Transport Works
+### How SSE Transport Works
 
 1. The client (Roo Code) connects to the server's SSE endpoint via HTTP GET request
 2. This establishes a persistent connection where the server can push events to the client
@@ -170,9 +144,7 @@ Client                             Server
   |                                  |
 ```
 
-#---
-
-## SSE Characteristics
+### SSE Characteristics
 
 * **Remote Access**: Can be hosted on a different machine from Roo Code
 * **Scalability**: Can handle multiple client connections concurrently
@@ -180,9 +152,7 @@ Client                             Server
 * **Persistence**: Maintains a persistent connection for server-to-client messages
 * **Authentication**: Can use standard HTTP authentication mechanisms
 
-#---
-
-## When to Use SSE
+### When to Use SSE
 
 SSE transport is better for:
 
@@ -192,9 +162,7 @@ SSE transport is better for:
 * Centralized tools that many users need to access
 * Integration with web services
 
-#---
-
-## SSE Implementation Example
+### SSE Implementation Example
 
 ```typescript
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
@@ -212,15 +180,11 @@ app.listen(3000, () => {
   console.log('MCP server listening on port 3000');
 });
 ```
----
-
 ## Local vs. Hosted: Deployment Aspects
 
 The choice between STDIO and SSE transports directly impacts how you'll deploy and manage your MCP servers.
 
-#---
-
-## STDIO: Local Deployment Model
+### STDIO: Local Deployment Model
 
 STDIO servers run locally on the same machine as Roo Code, which has several important implications:
 
@@ -233,9 +197,7 @@ STDIO servers run locally on the same machine as Roo Code, which has several imp
 * **Execution**: Starts and stops with Roo Code (child process lifecycle)
 * **Dependencies**: Any dependencies must be installed on the user's machine
 
-##---
-
-## Practical Example
+#### Practical Example
 
 A local file search tool using STDIO would:
 * Run on the user's machine
@@ -244,9 +206,7 @@ A local file search tool using STDIO would:
 * Not require network configuration
 * Need to be installed alongside Roo Code or via a package manager
 
-#---
-
-## Streamable HTTP / SSE (Legacy): Hosted Deployment Model
+### Streamable HTTP / SSE (Legacy): Hosted Deployment Model
 
 Streamable HTTP (recommended) and legacy SSE servers can be deployed to remote servers and accessed over the network:
 
@@ -259,9 +219,7 @@ Streamable HTTP (recommended) and legacy SSE servers can be deployed to remote s
 * **Execution**: Runs as an independent service (often continuously)
 * **Dependencies**: Managed on the server, not on user machines
 
-##---
-
-## Practical Example
+#### Practical Example
 
 A database query tool using SSE would:
 * Run on a central server
@@ -270,17 +228,13 @@ A database query tool using SSE would:
 * Require proper network security configuration
 * Be deployed using container or cloud technologies
 
-#---
-
-## Hybrid Approaches
+### Hybrid Approaches
 
 Some scenarios benefit from a hybrid approach:
 
 1. **STDIO with Network Access**: A local STDIO server that acts as a proxy to remote services
 2. **SSE with Local Commands**: A remote SSE server that can trigger operations on the client machine through callbacks
 3. **Gateway Pattern**: STDIO servers for local operations that connect to SSE servers for specialized functions
-
----
 
 ## Choosing Between Transports
 
@@ -298,8 +252,6 @@ Some scenarios benefit from a hybrid approach:
 | **Resource Usage** | Uses client resources | Uses server resources | Uses server resources |
 | **Dependencies** | Client-side dependencies | Server-side dependencies | Server-side dependencies |
 | **Recommendation** | Ideal for local, secure, single-client tools | **Modern standard for all new remote servers** | Legacy, for existing older servers |
-
----
 
 ## Configuring Transports in Roo Code
 

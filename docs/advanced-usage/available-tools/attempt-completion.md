@@ -2,8 +2,6 @@
 
 The `attempt_completion` tool signals that Roo believes a task is complete and presents results to the user. It provides a summary of what was accomplished, optionally includes a command to demonstrate the result, and supports continued refinement through user feedback.
 
----
-
 ## Parameters
 
 The tool accepts these parameters:
@@ -11,13 +9,9 @@ The tool accepts these parameters:
 - `result` (required): The final result description summarizing what was accomplished
 - `command` (optional): A CLI command to execute to demonstrate the result
 
----
-
 ## What It Does
 
 This tool marks the end of a task by presenting a final summary of what was accomplished. It signals to both the user and the system that the current task is complete. When a command is provided, it can also demonstrate the result through a live execution.
-
----
 
 ## When is it used?
 
@@ -26,8 +20,6 @@ This tool marks the end of a task by presenting a final summary of what was acco
 - When demonstrating the current result with a command execution
 - When providing a checkpoint for user feedback on the solution
 - When transitioning from one phase of work to potential refinements
-
----
 
 ## Key Features
 
@@ -42,8 +34,6 @@ This tool marks the end of a task by presenting a final summary of what was acco
 - Ensures users receive a clear summary of what was done
 - Available in all modes as part of the "always available" tool group
 
----
-
 ## Limitations
 
 - Should not be used until previous tool uses are confirmed successful (guideline, not enforced)
@@ -53,8 +43,6 @@ This tool marks the end of a task by presenting a final summary of what was acco
 - Limited to demonstrating results that can be shown via CLI commands
 - Cannot be used for partial task completion or progress updates
 - Result formatting strips XML closing tags through internal processing
-
----
 
 ## How It Works
 
@@ -90,8 +78,6 @@ When the `attempt_completion` tool is invoked, it follows this process:
    - Tool results are parsed through the system's parsing mechanism in `parse-assistant-message.ts`
    - The tool is part of the "ALWAYS_AVAILABLE_TOOLS" constant, making it available in all modes
 
----
-
 ## Result Formatting Guidelines
 
 The result message should follow these guidelines:
@@ -106,8 +92,6 @@ The result message should follow these guidelines:
 
 Note: The system automatically strips XML closing tags from the result text through the `removeClosingTag` function.
 
----
-
 ## Command Selection Guidelines
 
 When including a command, follow these guidelines:
@@ -121,8 +105,6 @@ When including a command, follow these guidelines:
 - Avoid commands that merely print text (like `echo` or `cat`)
 - Remember that commands require user approval before execution
 - Ensure the command is valid for the user's operating system
-
----
 
 ## Feedback and UI Representation
 
@@ -141,8 +123,6 @@ When used within subtasks:
 - The parent task resumes with context from the completed subtask
 - This enables complex, nested workflows while maintaining context
 
----
-
 ## Examples When Used
 
 - When creating a website, Roo presents the solution and uses `open index.html` to show the result. The user provides feedback, and Roo refines the design.
@@ -150,8 +130,6 @@ When used within subtasks:
 - When fixing bugs, Roo explains what was fixed and how the solution addresses the root cause. The user confirms the fix works.
 - When setting up a development environment, Roo confirms all components are installed. The user requests additional configuration, and Roo continues.
 - When creating a data processing script, Roo summarizes the functionality. The user suggests performance improvements, and Roo optimizes the code.
-
----
 
 ## Usage Examples
 

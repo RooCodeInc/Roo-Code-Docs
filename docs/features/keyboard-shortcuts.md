@@ -6,8 +6,6 @@ sidebar_label: Keyboard Shortcuts
 
 The Roo Code interface supports keyboard shortcuts to streamline your workflow and reduce dependence on mouse interactions.
 
----
-
 ## Available Keyboard Commands
 
 Roo Code offers keyboard commands to enhance your workflow. This page focuses on the `roo.acceptInput` command, but here's a quick reference to all keyboard commands:
@@ -17,37 +15,27 @@ Roo Code offers keyboard commands to enhance your workflow. This page focuses on
 | `roo.acceptInput` | Submit text or accept the primary suggestion | None (configurable) |
 | `roo.focus` | Focus the Roo input box | None (configurable) |
 
-#---
-
-## Key Benefits of Keyboard Commands
+### Key Benefits of Keyboard Commands
 
 * **Keyboard-Driven Interface**: Submit text or select the primary suggestion button without mouse interaction
 * **Improved Accessibility**: Essential for users with mobility limitations or those who experience discomfort with mouse usage
 * **Vim/Neovim Compatibility**: Supports seamless transitions for developers coming from keyboard-centric environments
 * **Workflow Efficiency**: Reduces context switching between keyboard and mouse during development tasks
 
----
-
 ## roo.acceptInput Command
 
 The `roo.acceptInput` command lets you submit text or accept suggestions with keyboard shortcuts instead of clicking buttons or pressing Enter in the input area.
 
-#---
-
-## What It Does
+### What It Does
 
 The `roo.acceptInput` command is a general-purpose input submission command. When triggered, it:
 
 - Submits your current text or image input when in the text input area (equivalent to pressing Enter)
 - Clicks the primary (first) button when action buttons are visible (such as confirm/cancel buttons or any other action buttons)
 
-#---
+### Detailed Setup Guide
 
-## Detailed Setup Guide
-
-##---
-
-## Method 1: Using the VS Code UI
+#### Method 1: Using the VS Code UI
 
 1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac)
 2. Type "Preferences: Open Keyboard Shortcuts"
@@ -58,9 +46,7 @@ The `roo.acceptInput` command is a general-purpose input submission command. Whe
 7. Press Enter to confirm
 
 
-##---
-
-## Method 2: Editing keybindings.json directly
+#### Method 2: Editing keybindings.json directly
 
 1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac)
 2. Type "Preferences: Open Keyboard Shortcuts (JSON)"
@@ -83,9 +69,7 @@ You can also use a more specific condition:
 }
 ```
 
-##---
-
-## Recommended Key Combinations
+#### Recommended Key Combinations
 
 Choose a key combination that doesn't conflict with existing VS Code shortcuts:
 
@@ -94,40 +78,30 @@ Choose a key combination that doesn't conflict with existing VS Code shortcuts:
 - `Ctrl+Enter` - Intuitive for command execution
 - `Alt+A` - Mnemonic for "Accept"
 
-#---
+### Practical Use Cases
 
-## Practical Use Cases
-
-##---
-
-## Quick Development Workflows
+#### Quick Development Workflows
 
 - **Text Submission**: Send messages to Roo without moving your hands from the keyboard
 - **Action Confirmations**: Accept operations like saving files, running commands, or applying diffs
 - **Multi-Step Processes**: Move quickly through steps that require confirmation or input
 - **Consecutive Tasks**: Chain multiple tasks together with minimal interruption
 
-##---
-
-## Keyboard-Centric Development
+#### Keyboard-Centric Development
 
 - **Vim/Neovim Workflows**: If you're coming from a Vim/Neovim background, maintain your keyboard-focused workflow
 - **IDE Integration**: Use alongside other VS Code keyboard shortcuts for a seamless experience
 - **Code Reviews**: Quickly accept suggestions when reviewing code with Roo
 - **Documentation Writing**: Submit text and accept formatting suggestions when generating documentation
 
-##---
-
-## Accessibility Use Cases
+#### Accessibility Use Cases
 
 - **Hand Mobility Limitations**: Essential for users who have difficulty using a mouse
 - **Repetitive Strain Prevention**: Reduce mouse usage to prevent or manage repetitive strain injuries
 - **Screen Reader Integration**: Works well with screen readers for visually impaired users
 - **Voice Control Compatibility**: Can be triggered via voice commands when using voice control software
 
-#---
-
-## Accessibility Benefits
+### Accessibility Benefits
 
 The `roo.acceptInput` command was designed with accessibility in mind:
 
@@ -136,15 +110,11 @@ The `roo.acceptInput` command was designed with accessibility in mind:
 - **Alternative Input Method**: Supports users with mobility impairments who rely on keyboard navigation
 - **Workflow Optimization**: Particularly valuable for users coming from keyboard-centric environments like Vim/Neovim
 
-#---
-
-## Keyboard-Centric Workflows
+### Keyboard-Centric Workflows
 
 Here are some complete workflow examples showing how to effectively use keyboard shortcuts with Roo:
 
-##---
-
-## Development Workflow Example
+#### Development Workflow Example
 
 1. Open VS Code and navigate to your project
 2. Open Roo via the sidebar
@@ -154,18 +124,14 @@ Here are some complete workflow examples showing how to effectively use keyboard
 6. When Roo offers to save the file, use the shortcut again to confirm
 7. Use VS Code's built-in shortcuts to navigate through the created files
 
-##---
-
-## Code Review Workflow
+#### Code Review Workflow
 
 1. Select code you want to review and use VS Code's "Copy" command
 2. Ask Roo to review it: "Review this code for security issues"
 3. As Roo asks clarifying questions about the code context, use your shortcut to accept suggestions
 4. When Roo provides improvement recommendations, use the shortcut again to accept implementation suggestions
 
-#---
-
-## Troubleshooting
+### Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
@@ -175,9 +141,7 @@ Here are some complete workflow examples showing how to effectively use keyboard
 | No visual feedback when used | This is normal - the command silently activates the function without visual confirmation |
 | Shortcut works inconsistently | Make sure the `when` clause is properly configured in your keybindings.json (either `rooViewFocused` or the webview-specific condition) |
 
-#---
-
-## Technical Implementation
+### Technical Implementation
 
 The `roo.acceptInput` command is implemented as follows:
 
@@ -188,9 +152,7 @@ The `roo.acceptInput` command is implemented as follows:
   - Sends the message if the text area is enabled and contains text/images
 - No default key binding - users assign their preferred shortcut
 
-#---
-
-## Limitations
+### Limitations
 
 - Works only when the Roo interface is active
 - Has no effect if no inputs or suggestions are currently available

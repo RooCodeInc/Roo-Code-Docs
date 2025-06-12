@@ -2,8 +2,6 @@
 
 The `browser_action` tool enables web automation and interaction via a Puppeteer-controlled browser. It allows Roo to launch browsers, navigate to websites, click elements, type text, and scroll pages with visual feedback through screenshots.
 
----
-
 ## Parameters
 
 The tool accepts these parameters:
@@ -19,13 +17,9 @@ The tool accepts these parameters:
 - `coordinate` (optional): The x,y coordinates for the `click` action (e.g., "450,300")
 - `text` (optional): The text to type when using the `type` action
 
----
-
 ## What It Does
 
 This tool creates an automated browser session that Roo can control to navigate websites, interact with elements, and perform tasks that require browser automation. Each action provides a screenshot of the current state, enabling visual verification of the process.
-
----
 
 ## When is it used?
 
@@ -33,8 +27,6 @@ This tool creates an automated browser session that Roo can control to navigate 
 - When testing user interfaces or web functionality
 - When capturing screenshots of web pages
 - When demonstrating web workflows visually
-
----
 
 ## Key Features
 
@@ -47,32 +39,24 @@ This tool creates an automated browser session that Roo can control to navigate 
 - Optimizes visual output with support for various formats and quality settings
 - Tracks interaction state with position indicators and action history
 
----
-
 ## Browser Modes
 
 The tool operates in two distinct modes:
 
-#---
-
-## Local Browser Mode (Default)
+### Local Browser Mode (Default)
 - Downloads and manages a local Chromium instance through Puppeteer
 - Creates a fresh browser environment with each launch
 - No access to existing user profiles, cookies, or extensions
 - Consistent, predictable behavior in a sandboxed environment
 - Completely closes the browser when the session ends
 
-#---
-
-## Remote Browser Mode
+### Remote Browser Mode
 - Connects to an existing Chrome/Chromium instance running with remote debugging enabled
 - Can access existing browser state, cookies, and potentially extensions
 - Faster startup as it reuses an existing browser process
 - Supports connecting to browsers in Docker containers or on remote machines
 - Only disconnects (doesn't close) from the browser when session ends
 - Requires Chrome to be running with remote debugging port open (typically port 9222)
-
----
 
 ## Limitations
 
@@ -85,8 +69,6 @@ The tool operates in two distinct modes:
 - Browser sessions are temporary and not persistent across Roo restarts
 - Works only with Chrome/Chromium browsers, not Firefox or Safari
 - Local mode has no access to existing cookies; remote mode requires Chrome with debugging enabled
-
----
 
 ## How It Works
 
@@ -113,8 +95,6 @@ When the `browser_action` tool is invoked, it follows this process:
    - Handles errors and automatically cleans up resources
    - Enforces proper workflow sequence (launch → interactions → close)
 
----
-
 ## Workflow Sequence
 
 Browser interactions must follow this specific sequence:
@@ -124,16 +104,12 @@ Browser interactions must follow this specific sequence:
 3. **Session Termination**: All browser workflows must end with a `close` action
 4. **Tool Switching**: After closing the browser, other tools can be used
 
----
-
 ## Examples When Used
 
 - When creating a web form submission process, Roo launches a browser, navigates to the form, fills out fields with the `type` action, and clicks submit.
 - When testing a responsive website, Roo navigates to the site and uses scroll actions to examine different sections.
 - When capturing screenshots of a web application, Roo navigates through different pages and takes screenshots at each step.
 - When demonstrating an e-commerce checkout flow, Roo simulates the entire process from product selection to payment confirmation.
-
----
 
 ## Usage Examples
 

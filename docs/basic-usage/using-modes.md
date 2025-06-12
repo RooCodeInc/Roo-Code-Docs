@@ -6,16 +6,12 @@ Modes in Roo Code are specialized personas that tailor the assistant's behavior 
 Each mode remembers your last-used model. When switching modes, Roo automatically selects that model—no manual selection needed. Assign different models to different modes (e.g., Gemini 2.5 Preview for `🏗️ Architect` mode, Claude Sonnet 3.7 for `💻 Code` mode) and Roo will switch models automatically when you change modes.
 :::
 
----
-
 ## Why Use Different Modes?
 
 - **Task specialization:** Get precisely the type of assistance you need for your current task
 - **Safety controls:** Prevent unintended file modifications when focusing on planning or learning
 - **Focused interactions:** Receive responses optimized for your current activity
 - **Workflow optimization:** Seamlessly transition between planning, implementing, debugging, and learning
-
----
 
 ## Switching Between Modes
 
@@ -41,13 +37,9 @@ Four ways to switch modes:
    
     <img src="/img/using-modes/using-modes-2.png" alt="Accepting a mode switch suggestion from Roo" width="400" />
 
----
-
 ## Built-in Modes
 
-#---
-
-## Code Mode (Default)
+### Code Mode (Default)
 
 | Aspect | Details |
 |--------|---------|
@@ -57,9 +49,7 @@ Four ways to switch modes:
 | **Ideal For** | Writing code, implementing features, debugging, and general development |
 | **Special Features** | No tool restrictions—full flexibility for all coding tasks |
 
-#---
-
-## Ask Mode
+### Ask Mode
 
 | Aspect | Details |
 |--------|---------|
@@ -69,9 +59,7 @@ Four ways to switch modes:
 | **Ideal For** | Code explanation, concept exploration, and technical learning |
 | **Special Features** | Optimized for detailed, informative responses, often using diagrams for clarity, without modifying your project. |
 
-#---
-
-## Architect Mode
+### Architect Mode
 
 | Aspect | Details |
 |--------|---------|
@@ -81,9 +69,7 @@ Four ways to switch modes:
 | **Ideal For** | System design, high-level planning, and architecture discussions |
 | **Special Features** | Follows a structured approach from information gathering to detailed planning |
 
-#---
-
-## Debug Mode
+### Debug Mode
 
 | Aspect | Details |
 |--------|---------|
@@ -93,9 +79,7 @@ Four ways to switch modes:
 | **Ideal For** | Tracking down bugs, diagnosing errors, and resolving complex issues |
 | **Special Features** | Uses a methodical approach of analyzing, narrowing possibilities, and fixing issues. Includes custom instructions to reflect, distill possibilities, add logs, and confirm before fixing. |
 
-#---
-
-## Orchestrator Mode (aka Boomerang Mode)
+### Orchestrator Mode (aka Boomerang Mode)
 
 | Aspect | Details |
 |--------|---------|
@@ -104,8 +88,6 @@ Four ways to switch modes:
 | **Tool Access** | Access to `read`, `browser`, `command`, `mcp`, and restricted `edit` (mode configuration files only: `.roomodes`, `custom_modes.json`) |
 | **Ideal For** | Managing multi-step projects, coordinating work across different modes, and automating complex workflows |
 | **Special Features** | Uses the [`new_task`](/advanced-usage/available-tools/new-task) tool to delegate subtasks to other modes. |
-
----
 
 ## Customizing Modes
 

@@ -4,8 +4,6 @@
 
 The Roo Code Memory Bank project solves a critical challenge in AI-assisted development: **maintaining context across sessions**. By providing a structured memory system integrated with VS Code, it ensures your AI assistant maintains a deep understanding of your project across sessions.
 
----
-
 ## Key Features
 
 - 🧠 **Persistent Context**: Remembers project details across sessions and maintains consistent understanding of your codebase

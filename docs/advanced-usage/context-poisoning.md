@@ -6,8 +6,6 @@ Context poisoning is a persistent issue within a given session. Once a chat sess
 
 Context poisoning occurs when inaccurate or irrelevant data contaminates the language model's active context. This leads the model to draw incorrect conclusions, provide erroneous information to tools, and progressively deviate from the intended task with each interaction.
 
----
-
 ## Symptoms of Context Poisoning
 
 Identify context poisoning by observing these behaviors:
@@ -17,8 +15,6 @@ Identify context poisoning by observing these behaviors:
 *   **Orchestration Failures:** Orchestrator chains may stall, loop indefinitely, or fail to complete.
 *   **Temporary Fixes:** Re-applying a clean prompt or instructions offers only brief respite before issues resurface.
 *   **Tool Usage Confusion:** The model struggles to correctly use or recall how to use tools defined in the system prompt.
-
----
 
 ## Common Causes
 
@@ -30,8 +26,6 @@ Context poisoning can be triggered by several factors:
 *   **Context Window Overflow:** As a session grows, older, useful information may be pushed out of the model's limited context window, allowing "poisoned" data to have a greater relative impact.
 
 Once bad data enters the context, it tends to persist. The model re-evaluates this tainted information in subsequent reasoning cycles, similar to a permanent flaw affecting its perception until the context is completely reset.
-
----
 
 ## Can a "Wake-Up Prompt" Resolve Context Poisoning?
 
@@ -45,8 +39,6 @@ A corrective prompt might temporarily suppress symptoms, but the problematic dat
 *   However, the underlying poisoned context remains. Any query or task outside the immediate "patch" will likely re-trigger the original issue.
 *   This approach is unreliable, akin to placing a warning label on a leaking pipe instead of repairing it.
 
----
-
 ## Effective Recovery Strategies
 
 To reliably recover from context poisoning:
@@ -55,8 +47,6 @@ To reliably recover from context poisoning:
 *   **Minimize Manual Data Dumps:** When pasting logs or other data, be selective. Only include the essential information the model requires.
 *   **Manage Context Window Size:** For large or complex tasks, consider breaking them into smaller, focused chat sessions. This helps ensure that stale or irrelevant information ages out of the context window more quickly.
 *   **Validate Tool Output:** If a tool returns nonsensical or clearly incorrect data, delete that message from the chat history before the model can process it and incorporate it into its context.
-
----
 
 ## Addressing a Common Question: The "Magic Bullet" Prompt
 

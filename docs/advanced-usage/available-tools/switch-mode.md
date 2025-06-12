@@ -2,8 +2,6 @@
 
 The `switch_mode` tool enables Roo to change between different operational modes, each with specialized capabilities for specific types of tasks. This allows seamless transitions between modes like Code, Architect, Ask, or Debug when the current task requires different expertise.
 
----
-
 ## Parameters
 
 The tool accepts these parameters:
@@ -11,13 +9,9 @@ The tool accepts these parameters:
 - `mode_slug` (required): The slug of the mode to switch to (e.g., "code", "ask", "architect")
 - `reason` (optional): The reason for switching modes, providing context for the user
 
----
-
 ## What It Does
 
 This tool requests a mode change when the current task would be better handled by another mode's capabilities. It maintains context while shifting Roo's focus and available toolsets to match the requirements of the new task phase.
-
----
 
 ## When is it used?
 
@@ -25,8 +19,6 @@ This tool requests a mode change when the current task would be better handled b
 - When shifting from coding to architecture or design
 - When the current task requires capabilities only available in a different mode
 - When specialized expertise is needed for a particular phase of a complex project
-
----
 
 ## Key Features
 
@@ -40,8 +32,6 @@ This tool requests a mode change when the current task would be better handled b
 - Uses XML-style formatting for parameter specification
 - Handles file type restrictions specific to certain modes
 
----
-
 ## Limitations
 
 - Cannot switch to modes that don't exist in the system
@@ -50,8 +40,6 @@ This tool requests a mode change when the current task would be better handled b
 - Applies a 500ms delay after mode switching to allow the change to take effect
 - Some modes have file type restrictions (e.g., Architect mode can only edit markdown files)
 - Mode preservation for resumption applies only to the `new_task` functionality, not general mode switching
-
----
 
 ## How It Works
 
@@ -78,8 +66,6 @@ When the `switch_mode` tool is invoked, it follows this process:
    - Proceeds with the task using the capabilities of the new mode
    - Retains relevant context from the previous interaction
 
----
-
 ## Tool Group Association
 
 The `switch_mode` tool belongs to the "modes" tool group but is also included in the "always available" tools list. This means:
@@ -87,8 +73,6 @@ The `switch_mode` tool belongs to the "modes" tool group but is also included in
 - It can be used in any mode regardless of the mode's configured tool groups
 - It's available alongside other core tools like `ask_followup_question` and `attempt_completion`
 - It allows mode transitions at any point in a workflow when task requirements change
-
----
 
 ## Mode Structure
 
@@ -100,8 +84,6 @@ Each mode in the system has a specific structure:
 - `customInstructions`: Optional mode-specific instructions that guide behavior
 - `groups`: Tool groups available to the mode with optional restrictions
 
----
-
 ## Mode Capabilities
 
 The core modes provide these specialized capabilities:
@@ -110,8 +92,6 @@ The core modes provide these specialized capabilities:
 - **Architect Mode**: Specialized for system design and architecture planning, limited to editing markdown files only
 - **Ask Mode**: Optimized for answering questions and providing information
 - **Debug Mode**: Equipped for systematic problem diagnosis and resolution
-
----
 
 ## Custom Modes
 
@@ -122,8 +102,6 @@ Beyond the core modes, the system supports custom project-specific modes:
 - The system checks custom modes first before falling back to core modes
 - Custom mode definitions take precedence over core modes with the same slug
 
----
-
 ## File Restrictions
 
 Different modes may have specific file type restrictions:
@@ -132,15 +110,11 @@ Different modes may have specific file type restrictions:
 - Attempting to edit restricted file types results in a `FileRestrictionError`
 - These restrictions help enforce proper separation of concerns between modes
 
----
-
 ## Examples When Used
 
 - When discussing a new feature, Roo switches from Ask mode to Architect mode to help design the system structure.
 - After completing architecture planning in Architect mode, Roo switches to Code mode to implement the designed features.
 - When encountering bugs during development, Roo switches from Code mode to Debug mode for systematic troubleshooting.
-
----
 
 ## Usage Examples
 

@@ -7,23 +7,17 @@ The `read_file` tool examines the contents of files in a project. It allows Roo 
 When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
 :::
 
----
-
 ## Parameters
 
 The tool accepts parameters in two formats depending on your configuration:
 
-#---
-
-## Standard Format (Single File)
+### Standard Format (Single File)
 
 - `path` (required): The path of the file to read relative to the current working directory
 - `start_line` (optional): The starting line number to read from (1-based indexing)
 - `end_line` (optional): The ending line number to read to (1-based, inclusive)
 
-#---
-
-## Enhanced Format (Multi-File - Experimental)
+### Enhanced Format (Multi-File - Experimental)
 
 When [Concurrent File Reads](/features/experimental/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
 
@@ -32,13 +26,9 @@ When [Concurrent File Reads](/features/experimental/concurrent-file-reads) is en
     - `path` (required): The path of the file to read
     - `lines` (optional): Line range specification (e.g., "1-50" or "100-150")
 
----
-
 ## What It Does
 
 This tool reads the content of a specified file and returns it with line numbers for easy reference. It can read entire files or specific sections, and even extract text from PDFs and Word documents.
-
----
 
 ## When is it used?
 
@@ -47,8 +37,6 @@ This tool reads the content of a specified file and returns it with line numbers
 - When Roo needs to extract information from text files
 - When Roo needs to see code before suggesting changes
 - When specific line numbers need to be referenced in discussions
-
----
 
 ## Key Features
 
@@ -61,44 +49,32 @@ This tool reads the content of a specified file and returns it with line numbers
 - Makes it easy to discuss specific parts of code with line numbering
 - **Multi-file support** (experimental): Read multiple files simultaneously with batch approval
 
----
-
 ## Multi-File Capabilities (Experimental)
 
 When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
 
-#---
-
-## Batch Processing
+### Batch Processing
 - Read up to 100 files in a single request (configurable, default 15)
 - Parallel processing for improved performance
 - Batch approval interface for user consent
 
-#---
-
-## Enhanced User Experience
+### Enhanced User Experience
 - Single approval dialog for multiple files
 - Individual file override options
 - Clear visibility into which files will be accessed
 - Graceful handling of mixed success/failure scenarios
 
-#---
-
-## Improved Efficiency
+### Improved Efficiency
 - Reduces interruptions from multiple approval dialogs
 - Faster processing through parallel file reading
 - Smart batching of related files
 - Configurable concurrency limits to match system capabilities
-
----
 
 ## Limitations
 
 - May not handle extremely large files efficiently without using line range parameters
 - For binary files (except PDF and DOCX), may return content that isn't human-readable
 - **Multi-file mode**: Requires experimental feature to be enabled and may have stability issues
-
----
 
 ## How It Works
 
@@ -113,8 +89,6 @@ When the `read_file` tool is invoked, it follows this process:
    - Adds line numbers to the content (e.g., "1 | const x = 13") where `1 |` is the line number.
    - For truncated files, adds truncation notice and method definitions
    - For special formats (PDF, DOCX), extracts readable text
-
----
 
 ## Reading Strategy Priority
 
@@ -139,23 +113,17 @@ The tool uses a clear decision hierarchy to determine how to read a file:
    - If neither an explicit range is given nor automatic truncation applies (e.g., the file is within the line limit, or it's a supported binary type), the tool reads the entire content.
    - For supported formats like PDF and DOCX, it attempts to extract the full text content.
 
----
-
 ## Examples When Used
 
 - When asked to explain or improve code, Roo first reads the relevant files to understand the current implementation.
 - When troubleshooting configuration issues, Roo reads config files to identify potential problems.
 - When working with documentation, Roo reads existing docs to understand the current content before suggesting improvements.
 
----
-
 ## Usage Examples
 
 Here are several scenarios demonstrating how the `read_file` tool is used and the typical output you might receive.
 
-#---
-
-## Reading an Entire File
+### Reading an Entire File
 
 To read the complete content of a file:
 
@@ -174,9 +142,7 @@ To read the complete content of a file:
 ```
 *(Output will vary based on the actual file content)*
 
-#---
-
-## Reading Specific Lines
+### Reading Specific Lines
 
 To read only a specific range of lines (e.g., 46-68):
 
@@ -196,9 +162,7 @@ To read only a specific range of lines (e.g., 46-68):
 ```
 *(Output shows only the requested lines with their original line numbers)*
 
-#---
-
-## Reading a Large Text File (Automatic Truncation)
+### Reading a Large Text File (Automatic Truncation)
 
 When reading a large text file without specifying a line range, the tool automatically truncates the content if it exceeds the internal line limit (e.g., 500 lines).
 
@@ -221,9 +185,7 @@ When reading a large text file without specifying a line range, the tool automat
 ```
 *(Output shows the beginning lines up to the internal limit, plus a truncation notice. Use line ranges for full access.)*
 
-#---
-
-## Attempting to Read a Non-Existent File
+### Attempting to Read a Non-Existent File
 
 If the specified file does not exist:
 
@@ -239,9 +201,7 @@ If the specified file does not exist:
 Error: File not found at path 'non_existent_file.txt'.
 ```
 
-#---
-
-## Attempting to Read a Blocked File
+### Attempting to Read a Blocked File
 
 If the file is excluded by rules in a `.rooignore` file:
 
@@ -257,15 +217,11 @@ If the file is excluded by rules in a `.rooignore` file:
 Error: Access denied to file '.env' due to .rooignore rules.
 ```
 
----
-
 ## Multi-File Examples (Experimental)
 
 When the [Concurrent File Reads](/features/experimental/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
 
-#---
-
-## Reading Multiple Complete Files
+### Reading Multiple Complete Files
 
 To read several complete files at once:
 
@@ -317,9 +273,7 @@ To read several complete files at once:
 </files>
 ```
 
-#---
-
-## Reading Specific Line Ranges from Multiple Files
+### Reading Specific Line Ranges from Multiple Files
 
 To read specific sections from multiple files:
 
@@ -369,9 +323,7 @@ To read specific sections from multiple files:
 </files>
 ```
 
-#---
-
-## Handling Mixed Results (Some Files Denied/Blocked)
+### Handling Mixed Results (Some Files Denied/Blocked)
 
 When some files are approved and others are denied or blocked:
 
@@ -413,9 +365,7 @@ When some files are approved and others are denied or blocked:
 </files>
 ```
 
-#---
-
-## Batch Approval Interface
+### Batch Approval Interface
 
 When requesting multiple files, you'll see a batch approval interface that allows you to:
 
@@ -425,8 +375,6 @@ When requesting multiple files, you'll see a batch approval interface that allow
 - **File Preview**: Click file headers to open them in your editor
 
 The interface displays each file path clearly, making it easy to understand what Roo wants to access before granting permission.
-
----
 
 ## Backward Compatibility
 

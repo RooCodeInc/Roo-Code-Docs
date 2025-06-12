@@ -5,8 +5,6 @@
 SPARC orchestrates set and forget agentic development workflows through a structured framework using Roo Code Boomerang Tasks. It automates complex code development while maintaining complete developer control.
 The framework is open-source with comprehensive documentation and examples, supporting everything from simple applications to complex systems.
 
----
-
 ## Key Features
 
 - **Scaffolding**: Generate complete project structures by running `npx create-sparc init` in your root folder, including sub directories, configurations, and boilerplate code
@@ -17,9 +15,7 @@ The framework is open-source with comprehensive documentation and examples, supp
 - **MCP Services**: Extend Roo's capabilities with specialized tools and resources through Model Context Protocol integration
 - **Mode Management**: Context-aware settings that optimize behavior for specific development phases
 
-#---
-
-## Quick Start
+### Quick Start
 You don't need to install this [package directly](https://www.npmjs.com/package/create-sparc). Just run npx from your root directory to install it:
 
 ```bash

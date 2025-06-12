@@ -21,15 +21,11 @@ Auto-approve settings speed up your workflow by eliminating repetitive confirmat
 </div>
 <br />
 
----
-
 ## Quick Start Guide
 
 1. Click the Auto-Approve Toolbar above the chat input
 2. Select which actions Roo can perform without asking permission
 3. Use the master toggle (leftmost checkbox) to quickly enable/disable all permissions
-
----
 
 ## Auto-Approve Toolbar
 
@@ -43,9 +39,7 @@ Click the toolbar to expand it and configure individual permissions:
 
 *Prompt text box and Expanded toolbar with all options*
 
-#---
-
-## Available Permissions
+### Available Permissions
 
 | Permission | What it does | Risk level |
 |------------|--------------|------------|
@@ -57,8 +51,6 @@ Click the toolbar to expand it and configure individual permissions:
 | **Switch modes** | Changes between Roo modes automatically | Low |
 | **Create & complete subtasks** | Manages subtasks without confirmation | Low |
 | **Retry failed requests** | Automatically retries failed API requests | Low |
-
----
 
 ## Master Toggle for Quick Control
 
@@ -72,8 +64,6 @@ Use the master toggle when:
 - Working in sensitive code (turn off)
 - Doing rapid development (turn on)
 - Switching between exploration and editing tasks
-
----
 
 ## Advanced Settings Panel
 
@@ -90,9 +80,7 @@ To access these settings:
 
 *Complete settings panel view*
 
-#---
-
-## Read Operations
+### Read Operations
 
 :::caution Read Operations
 <img src="/img/auto-approving-actions/auto-approving-actions-6.png" alt="Read-only operations setting" width="550" />
@@ -106,9 +94,7 @@ To access these settings:
 While this setting only allows reading files (not modifying them), it could potentially expose sensitive data. Still recommended as a starting point for most users, but be mindful of what files Roo can access.
 :::
 
-#---
-
-## Write Operations
+### Write Operations
 
 :::caution Write Operations
 <img src="/img/auto-approving-actions/auto-approving-actions-7.png" alt="Write operations setting with delay slider" width="550" />
@@ -127,9 +113,7 @@ This setting allows Roo to modify your files without confirmation. The delay tim
 - Lower values: Use only when speed is critical and you're in a controlled environment
 - Zero: No delay for diagnostics (not recommended for critical code)
 
-##---
-
-## Write Delay & Problems Pane Integration
+#### Write Delay & Problems Pane Integration
 
 <img src="/img/auto-approving-actions/auto-approving-actions-5.png" alt="VSCode Problems pane showing diagnostic information" width="600" />
 
@@ -149,9 +133,7 @@ This works like a human developer pausing to check for errors after changing cod
 - How important error detection is for your workflow
 :::
 
-#---
-
-## Browser Actions
+### Browser Actions
 
 :::info Browser Actions
 <img src="/img/auto-approving-actions/auto-approving-actions-8.png" alt="Browser actions setting" width="550" />
@@ -172,9 +154,7 @@ Allows Roo to control a headless browser without confirmation. This can include:
 Consider the security implications of allowing automated browser access.
 :::
 
-#---
-
-## API Requests
+### API Requests
 
 :::info API Requests
 <img src="/img/auto-approving-actions/auto-approving-actions-9.png" alt="API requests retry setting with delay slider" width="550" />
@@ -192,9 +172,7 @@ This setting automatically retries API calls when they fail. The delay controls 
 - Shorter delays give faster recovery from transient errors
 :::
 
-#---
-
-## MCP Tools
+### MCP Tools
 
 :::caution MCP Tools
 <img src="/img/auto-approving-actions/auto-approving-actions-10.png" alt="MCP tools setting" width="550" />
@@ -208,9 +186,7 @@ This setting automatically retries API calls when they fail. The delay controls 
 This setting works in conjunction with individual tool permissions in the MCP Servers view. Both this global setting and the tool-specific permission must be enabled for auto-approval.
 :::
 
-#---
-
-## Mode Switching
+### Mode Switching
 
 :::info Mode Switching
 <img src="/img/auto-approving-actions/auto-approving-actions-11.png" alt="Mode switching setting" width="550" />
@@ -224,9 +200,7 @@ This setting works in conjunction with individual tool permissions in the MCP Se
 Allows Roo to change between different modes (Code, Architect, etc.) without asking for permission. This primarily affects the AI's behavior rather than system access.
 :::
 
-#---
-
-## Subtasks
+### Subtasks
 
 :::info Subtasks
 <img src="/img/auto-approving-actions/auto-approving-actions-12.png" alt="Subtasks setting" width="550" />
@@ -240,9 +214,7 @@ Allows Roo to change between different modes (Code, Architect, etc.) without ask
 Enables Roo to create and complete subtasks automatically. This relates to workflow organization rather than system access.
 :::
 
-#---
-
-## Command Execution
+### Command Execution
 
 :::caution Command Execution
 <img src="/img/auto-approving-actions/auto-approving-actions-13.png" alt="Command execution setting with whitelist interface" width="550" />

@@ -6,14 +6,10 @@ sidebar_label: 'Multi-File Reads'
 
 The Concurrent File Reads feature allows Roo to read multiple files from your workspace in a single step. This significantly improves efficiency when working on tasks that require context from several files, as Roo can gather all the necessary information at once instead of reading files one by one.
 
-#---
-
-## Key Features
+### Key Features
 - Read up to 100 files in a single request.
 - Enabled by default for a faster, more streamlined workflow.
 - Configurable to allow disabling the feature or changing the concurrency limit.
-
----
 
 ## Benefits
 
@@ -31,8 +27,6 @@ The Concurrent File Reads feature allows Roo to read multiple files from your wo
 - "And can I read `src/config.json`?" → You approve
 
 **With concurrent file reads**: Roo asks once to read all related files together, getting the full picture immediately and providing better assistance faster.
-
----
 
 ## How it Works
 

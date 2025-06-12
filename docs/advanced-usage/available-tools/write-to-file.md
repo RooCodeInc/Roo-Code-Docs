@@ -2,8 +2,6 @@
 
 The `write_to_file` tool creates new files or completely replaces existing file content with an interactive approval process. It provides a diff view for reviewing changes before they're applied.
 
----
-
 ## Parameters
 
 The tool accepts these parameters:
@@ -12,13 +10,9 @@ The tool accepts these parameters:
 - `content` (required): The complete content to write to the file
 - `line_count` (required): The number of lines in the file, including empty lines
 
----
-
 ## What It Does
 
 This tool writes content to a specified file, either creating a new file if it doesn't exist or completely overwriting an existing file. All changes require explicit user approval through a diff view interface, where users can review and even edit the proposed changes before they're applied.
-
----
 
 ## When is it used?
 
@@ -27,8 +21,6 @@ This tool writes content to a specified file, either creating a new file if it d
 - When creating multiple files for a new project
 - When generating configuration files, documentation, or source code
 - When you need to review changes before they're applied
-
----
 
 ## Key Features
 
@@ -41,8 +33,6 @@ This tool writes content to a specified file, either creating a new file if it d
 - Parent Directories: May handle directory creation through system dependencies
 - Complete Replacement: Provides a fully transformed file in a single operation
 
----
-
 ## Limitations
 
 - Not suitable for existing files: Much slower and less efficient than `apply_diff` for modifying existing files
@@ -51,8 +41,6 @@ This tool writes content to a specified file, either creating a new file if it d
 - Line count required: Needs accurate line count to detect potential content truncation
 - Review overhead: The approval process adds extra steps compared to direct edits
 - Interactive only: Cannot be used in automated workflows that require non-interactive execution
-
----
 
 ## How It Works
 
@@ -96,16 +84,12 @@ When the `write_to_file` tool is invoked, it follows this process:
    - Provides confirmation of successful write
    - Resets the consecutive mistakes counter on success
 
----
-
 ## Examples When Used
 
 - When creating a new project, Roo generates multiple files but lets you review each before committing changes.
 - When setting up configuration files, Roo shows the proposed configuration in a diff view for approval.
 - When generating documentation, Roo creates markdown files but lets you make final adjustments in the diff view.
 - When developing a prototype, Roo shows complete source files in a diff view where you can fine-tune before saving.
-
----
 
 ## Usage Examples
 
