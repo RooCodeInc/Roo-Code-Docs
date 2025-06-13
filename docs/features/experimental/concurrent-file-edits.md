@@ -1,10 +1,16 @@
-# Concurrent File Edits
+---
+sidebar_label: 'Multi-File Edits'
+---
+
+# Concurrent File Edits (AKA Multi-File Edits)
 
 Edit multiple files in a single operation, dramatically speeding up refactoring and multi-file changes.
 
 ---
 
 ## What It Does
+
+<img src="/img/concurrent-file-edits/concurrent-file-edits-1.png" alt="Batch diff approval interface showing multiple file changes" width="800" />
 
 Concurrent File Edits allows Roo to modify multiple files in your workspace within a single request. Instead of approving each file edit individually, you review and approve all changes at once through a unified batch approval interface.
 
@@ -31,17 +37,15 @@ This reduces interruptions and speeds up complex tasks like:
 
 ## How to Enable
 
-1. Open VS Code Settings (Cmd/Ctrl + ,)
-2. Search for "experimental.MULTI_FILE_APPLY_DIFF"
-3. Enable the setting
-4. Restart VS Code for changes to take effect
+:::info Experimental Feature
+Multi-File Edits is an experimental feature and must be enabled in settings.
 
-Or add to your settings.json:
-```json
-{
-  "roo.experimental.MULTI_FILE_APPLY_DIFF": true
-}
-```
+1. Open Roo Code settings (click the gear icon in Roo Code)
+2. Navigate to **Roo Code > Experimental Settings**
+3. Enable the **Enable multi-file edits** option
+
+<img src="/img/concurrent-file-edits/concurrent-file-edits.png" alt="Enable multi-file edits toggle in experimental settings" width="400" />
+:::
 
 ---
 

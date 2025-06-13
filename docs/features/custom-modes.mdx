@@ -49,7 +49,7 @@ Custom modes are defined by several key properties. Understanding these concepts
 | Slug (`slug`)                            | A **unique internal identifier** for the mode. It's used by Roo Code to reference the mode, especially for associating [mode-specific instruction files](#mode-specific-instructions-via-filesdirectories).                                                                                                                                                                                                   |
 | Name (`name`)                            | The **display name** for the mode as it appears in the Roo Code user interface. This should be human-readable and descriptive.                                                                                                                                                                                                                                                                               |
 | Role Definition (`roleDefinition`)       | Defines the **core identity and expertise** of the mode. This text is placed at the beginning of the system prompt.<br />- Its primary function is to define Roo's personality and behavior when this mode is active.<br />- The **first sentence** (up to the first period `.`) serves as a default concise summary for Roo to understand the mode's general purpose. <br />- **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode switching. In such cases, the first sentence of `roleDefinition` is less critical for this specific summarization task, though the entire `roleDefinition` is still used when the mode is active to guide its overall behavior. |
-| Available Tools (`groups`)               | Defines the **allowed toolsets and file access permissions** for the mode.<br />- In the UI, this corresponds to selecting which general categories of tools (like reading files, editing files, browsing, or executing commands) the mode can use.<br />- File type restrictions for the "edit" group are typically managed via manual YAML/JSON configuration or by asking Roo to set them up, as detailed in the [Property Details for `groups`](#groups). |
+| Available Tools (`groups`)               | Defines the **allowed toolsets and file access permissions** for the mode.<br />- In the UI, this corresponds to selecting which general categories of tools (like reading files, editing files, browsing, or executing commands) the mode can use.<br />- The UI shows which files can be edited in the 'Allowed files' section under each mode.<br />- File type restrictions for the "edit" group are typically managed via manual YAML/JSON configuration or by asking Roo to set them up, as detailed in the [Property Details for `groups`](#groups). |
 | When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Roo to understand the mode's purpose**, especially for automated decisions.<br />- This text is used by Roo, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Roo decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- If populated, this description is used by Roo to understand the mode's function; otherwise, the first sentence of the `roleDefinition` is used by default. |
 | Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Roo's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
 
@@ -263,7 +263,7 @@ When editing YAML manually, keep these points in mind:
 
 ### Migration to YAML Format
 
-*   **Global Modes:** The migration from `custom_modes.json` to `custom_modes.yaml` happens automatically when Roo Code starts up, under these conditions:
+*   **Global Modes:** The migration from `custom_modes.json` to `custom_modes.yaml` happens automatically **for global modes** when Roo Code starts up, under these conditions:
     1.  Roo Code starts up.
     2.  A `custom_modes.json` file exists.
     3.  No `custom_modes.yaml` file exists yet.
@@ -271,7 +271,7 @@ When editing YAML manually, keep these points in mind:
 
 *   **Project Modes (`.roomodes`):**
     *   **No automatic startup migration:** Unlike global modes, project-specific `.roomodes` files are not automatically converted from JSON to YAML simply when Roo Code starts.
-    *   **Format Detection:** Roo Code can read `.roomodes` files in either YAML or JSON format.
+    *   **Format Detection:** Roo Code can read `.roomodes` files in either YAML or JSON format. Roo Code automatically detects the format of `.roomodes` files by attempting to parse them as YAML first.
     *   **Conversion on UI Edit:** If you edit a project-specific mode through the Roo Code UI (e.g., via the Prompts Tab), and the existing `.roomodes` file is in JSON format, Roo Code will save the changes in YAML format. This effectively converts the file to YAML. The original JSON content will be overwritten with YAML.
     *   **Manual Conversion:** If you want to convert an existing `.roomodes` JSON file to YAML without making UI edits, you'll need to do this manually. You can:
         1.  Open your existing JSON `.roomodes` file.
@@ -319,7 +319,7 @@ There are two ways Roo Code loads these instructions, with a clear preference fo
 **1. Preferred Method: Directory-Based Instructions (`.roo/rules-{mode-slug}/`)**
 
 *   **Structure:** Create a directory named `.roo/rules-{mode-slug}/` in your workspace root. Replace `{mode-slug}` with your mode's slug (e.g., `.roo/rules-docs-writer/`).
-*   **Content:** Place one or more files (e.g., `.md`, `.txt`) containing your instructions inside this directory. You can organize instructions further using subdirectories; Roo Code reads files recursively, appending their content to the system prompt in **alphabetical order** based on filename.
+*   **Content:** Place one or more files (e.g., `.md`, `.txt`) containing your instructions inside this directory. You can organize instructions further using subdirectories. Files within the `.roo/rules-{mode-slug}/` directory are read recursively and appended in alphabetical order based on filename.
 *   **Loading:** All instruction files found within this directory structure will be loaded and applied to the specified mode.
 
 **2. Fallback (Backward Compatibility): File-Based Instructions (`.roorules-{mode-slug}`)**
@@ -347,7 +347,7 @@ Mode configurations are applied in this order:
 2. Global mode configurations (from `custom_modes.yaml`, then `custom_modes.json` if YAML not found)
 3. Default mode configurations
 
-This means that project-specific configurations will override global configurations, which in turn override default configurations. You can override any default mode by including a mode with the same slug in your global or project-specific configuration.
+This means that project-specific configurations will override global configurations, which in turn override default configurations. For instance, if you have a global 'code' mode and a project-specific 'code' mode in `.roomodes`, the project version will be used when working in that project. You can override any default mode by including a mode with the same slug in your global or project-specific configuration.
 
 *   **Note on Instruction Files:** Within the loading of mode-specific instructions from the filesystem, the directory `.roo/rules-{mode-slug}/` takes precedence over the single file `.roorules-{mode-slug}` found in the workspace root.
 
@@ -478,7 +478,7 @@ When you specify `fileRegex`, you're creating a pattern that file paths must mat
 *   **Case Sensitivity:** Regex patterns are case-sensitive by default.
 
 **Common Pattern Examples:**
-(Note: JSON examples show double backslashes; YAML would typically use single backslashes for these.)
+In the table below, the 'Pattern (Conceptual / YAML-like)' column shows patterns as they would appear in YAML. For JSON, remember to double-escape backslashes.
 
 | Pattern (Conceptual / YAML-like) | JSON `fileRegex` Value          | Matches                                   | Doesn't Match                         |
 | -------------------------------- | ------------------------------- | ----------------------------------------- | ------------------------------------- |
@@ -501,6 +501,10 @@ When you specify `fileRegex`, you're creating a pattern that file paths must mat
 1.  Test on sample file paths. Online regex testers are helpful.
 2.  Remember the escaping rules for JSON vs. YAML.
 3.  Start simple and build complexity.
+
+:::info Error Handling
+When a mode attempts to edit a file that doesn't match its `fileRegex` pattern, you'll see a `FileRestrictionError` with details about which patterns are allowed.
+:::
 
 ---
 

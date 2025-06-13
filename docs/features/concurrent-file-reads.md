@@ -6,10 +6,11 @@ sidebar_label: 'Multi-File Reads'
 
 The Concurrent File Reads feature allows Roo to read multiple files from your workspace in a single step. This significantly improves efficiency when working on tasks that require context from several files, as Roo can gather all the necessary information at once instead of reading files one by one.
 
+
 ### Key Features
 - Read up to 100 files in a single request.
 - Enabled by default for a faster, more streamlined workflow.
-- Configurable to allow disabling the feature or changing the concurrency limit.
+- Configurable limit from 1 to 100 files (setting to 1 effectively disables concurrent reads).
 
 ---
 
@@ -49,18 +50,16 @@ When Roo requests to read multiple files, you'll see a batch approval interface 
 - Clickable file headers to open files in your editor
 - **Approve All** and **Deny All** buttons for quick decisions
 
+<img src="/img/concurrent-file-reads/concurrent-file-reads-2.png" alt="Batch approval interface for reading multiple files" width="600" />
+
 ---
 
 ## Configuration
 
 You can configure the Multi-File Read feature by clicking the <Codicon name="gear" /> icon and navigating to the "Context" section of the settings.
 
-<img src="/img/concurrent-file-reads/concurrent-file-reads.png" alt="Concurrent file reads settings" width="600" />
+<img src="/img/concurrent-file-reads/concurrent-file-reads-1.png" alt="Concurrent file reads settings showing limit slider" width="600" />
 
-1.  **Enable/Disable Concurrent File Reads**:
-    *   **Setting**: `Enable concurrent file reads`
-    *   **Description**: This toggle switch controls whether Roo can read multiple files at once. It is enabled by default. You might want to disable this if you are using a less capable model or if you prefer to have more granular control over which files Roo is accessing.
-
-2.  **Concurrent File Reads Limit**:
+1.  **Concurrent File Reads Limit**:
     *   **Setting**: `Concurrent file reads limit`
-    *   **Description**: This setting determines the maximum number of files that Roo can read in a single request. The default is 15, but it can be set to a maximum of 100. Higher values can speed up tasks involving many small files but may use more memory.
+    *   **Description**: This setting determines the maximum number of files that Roo can read in a single request. The default is 5, with a range of 1-100 files. Higher values can speed up tasks involving many small files but may use more memory. Setting the value to 1 effectively disables concurrent reads, reverting to single-file reads.

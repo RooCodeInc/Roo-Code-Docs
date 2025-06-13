@@ -18,11 +18,21 @@ Clicking the lightbulb, right-clicking and selecting "Roo Code", or using the ke
 
 ## Roo Code's Code Actions
 
-Roo Code provides the following Code Actions:
+Roo Code provides 5 code actions, though their availability varies by context:
 
+### Context Menu Actions (Right-Click)
 *   **Add to Context:** Quickly adds the selected code to your chat with Roo, including the filename and line numbers so Roo knows exactly where the code is from. It's listed first in the menu for easy access.
 *   **Explain Code:** Asks Roo Code to explain the selected code.
 *   **Improve Code:** Asks Roo Code to suggest improvements to the selected code.
+
+### Additional Actions
+*   **Fix Code:** Available through the lightbulb menu and command palette (but not the right-click menu). Asks Roo Code to fix problems in the selected code.
+*   **New Task:** Creates a new task with the selected code. Available through the command palette.
+
+### Conditional Display Logic
+The lightbulb menu shows different actions based on context:
+- **When diagnostics (errors/warnings) are present:** Only "Add to Context" and "Fix Code" appear
+- **When no diagnostics are present:** "Add to Context", "Explain Code", and "Improve Code" are shown
 
 ### Add to Context Deep Dive
 
@@ -70,13 +80,35 @@ There are three main ways to use Roo Code's Code Actions:
 
 ---
 
+## Terminal Actions
+
+Roo Code also provides similar actions for terminal output:
+
+*   **Terminal: Add to Context:** Adds selected terminal output to your chat
+*   **Terminal: Fix Command:** Asks Roo Code to fix a failed terminal command
+*   **Terminal: Explain Command:** Asks Roo Code to explain terminal output or commands
+
+These actions are available when you select text in the terminal and right-click.
+
+---
+
 ## Customizing Code Action Prompts
 
-You can customize the prompts used for each Code Action by modifying the "Support Prompts" in the **Prompts** tab.  This allows you to fine-tune the instructions given to the AI model and tailor the responses to your specific needs.
+You can customize the prompts used for each Code Action by modifying the "Support Prompts" in the **Prompts** tab. This allows you to fine-tune the instructions given to the AI model and tailor the responses to your specific needs.
 
 1.  **Open the Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
-2. **Find "Support Prompts":** You will see the support prompts, including "Enhance Prompt", "Explain Code", and "Improve Code".
-3. **Edit the Prompts:**  Modify the text in the text area for the prompt you want to customize. You can use placeholders like `${filePath}` and `${selectedText}` to include information about the current file and selection.
+2. **Find "Support Prompts":** You will see the support prompts, including "Enhance Prompt", "Explain Code", "Improve Code", and "Fix Code".
+3. **Edit the Prompts:** Modify the text in the text area for the prompt you want to customize. The prompts use placeholders in the format `${placeholder}`:
+    - `${filePath}` - The path of the current file
+    - `${selectedText}` - The currently selected text
+    - `${diagnostics}` - Any error or warning messages (for Fix Code)
 4. **Click "Done":** Save your changes.
+
+### Example Prompt Template
+```
+Please explain the following code from ${filePath}:
+
+${selectedText}
+```
 
 By using Roo Code's Code Actions, you can quickly get AI-powered assistance directly within your coding workflow. This can save you time and help you write better code.
