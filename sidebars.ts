@@ -119,7 +119,6 @@ const sidebars: SidebarsConfig = {
         'providers/gemini',
         'providers/glama',
         'providers/groq',
-'update-notes/v3.20.0',
         'providers/human-relay',
         'providers/lmstudio',
         'providers/litellm',
@@ -187,6 +186,14 @@ const sidebars: SidebarsConfig = {
       label: 'Update Notes',
       items: [
         'update-notes/index',
+        {
+          type: 'category',
+          label: '3.20',
+          items: [
+            { type: 'doc', id: 'update-notes/v3.20', label: '3.20 Combined' },
+            { type: 'doc', id: 'update-notes/v3.20.0', label: '3.20.0' },
+          ],
+        },
         {
           type: 'category',
           label: '3.19',
