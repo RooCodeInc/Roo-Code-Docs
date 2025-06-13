@@ -21,6 +21,8 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Features',
+      collapsed: false,
+      collapsible: false,
       items: [
         'features/api-configuration-profiles',
         'features/auto-approving-actions',

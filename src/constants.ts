@@ -11,6 +11,9 @@ export const GITHUB_NEW_ISSUE_URL = `${GITHUB_ISSUES_URL}/new`;
 export const DISCORD_URL = 'https://discord.gg/roocode';
 export const REDDIT_URL = 'https://www.reddit.com/r/RooCode/';
 export const TWITTER_URL = 'https://x.com/roo_code';
+export const BLUESKY_URL = 'https://bsky.app/profile/roocode.bsky.social';
+export const LINKEDIN_URL = 'https://www.linkedin.com/company/roo-code';
+export const TIKTOK_URL = 'https://www.tiktok.com/@roo.code';
 
 // GitHub links
 export const GITHUB_MAIN_REPO_URL = 'https://github.com/RooCodeInc/Roo-Code';

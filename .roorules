@@ -6,3 +6,6 @@
 - Example: [link text](/basic-usage/how-tools-work) NOT [link text](basic-usage/how-tools-work.md) or [link text](../../basic-usage/how-tools-work)
 
 This ensures links work correctly in the built documentation while maintaining clean URLs.
+
+## Context7 MCP
+When making structural or formatting changes beyond simple .md or .mdx files, always check the Context7 MCP, the `context7CompatibleLibraryID` will be `/facebook/docusaurus`
