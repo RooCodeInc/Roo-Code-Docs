@@ -46,6 +46,10 @@ Added support for reading Excel (.xlsx) files in tools (thanks @chrarnoldus!) ([
 
 ## Bug Fixes
 
+* **Parser Reliability**: Fixed an issue that could prevent the parser from loading correctly in certain environments, improving overall stability ([#4857](https://github.com/RooCodeInc/Roo-Code/pull/4857))
+* **Windows Stability**: Resolved a crash that could occur when using MCP servers on Windows with node version managers ([#4711](https://github.com/RooCodeInc/Roo-Code/pull/4711))
+* **Subtask Rate Limiting**: Implemented global rate-limiting to prevent errors when creating subtasks, ensuring more reliable task execution (thanks olweraltuve!) ([#4453](https://github.com/RooCodeInc/Roo-Code/pull/4453))
+* **Codebase Search Errors**: Improved error messages for codebase search, making it easier to diagnose and resolve issues with embeddings ([#4432](https://github.com/RooCodeInc/Roo-Code/pull/4432))
 * **API Conversation History**: Added proper error handling for conversation history issues (thanks @KJ7LNW!) ([#4741](https://github.com/RooCodeInc/Roo-Code/pull/4741), [#4738](https://github.com/RooCodeInc/Roo-Code/pull/4738))
 * **Model ID Errors**: Fixed ambiguous model ID error messages (thanks @elianiva!) ([#4709](https://github.com/RooCodeInc/Roo-Code/pull/4709), [#4710](https://github.com/RooCodeInc/Roo-Code/pull/4710))
 * **Prompt Settings**: Fixed save/discard/revert flow for Prompt Settings (thanks @hassoncs!) ([#4623](https://github.com/RooCodeInc/Roo-Code/pull/4623), [#4312](https://github.com/RooCodeInc/Roo-Code/pull/4312))
@@ -55,6 +59,9 @@ Added support for reading Excel (.xlsx) files in tools (thanks @chrarnoldus!) ([
 
 ## Misc Improvements
 
+* **Anthropic Cost Tracking**: Improved the accuracy of cost reporting for Anthropic models ([#4849](https://github.com/RooCodeInc/Roo-Code/pull/4849))
+* **Performance Optimization**: The "Enable MCP Server Creation" setting is now disabled by default, reducing token usage and simplifying prompts for most users ([#4838](https://github.com/RooCodeInc/Roo-Code/pull/4838))
+* **Security**: Addressed security vulnerabilities by updating dependencies ([#4844](https://github.com/RooCodeInc/Roo-Code/pull/4844))
 * **Test Mode Update**: Updated test mode to support Vitest testing framework ([#4778](https://github.com/RooCodeInc/Roo-Code/pull/4778))
 * **Working Directory Warning**: Removed unnecessary warning about working directory changes ([#4795](https://github.com/RooCodeInc/Roo-Code/pull/4795))
 * **Telemetry**: Added marketplace tab view and install click tracking ([#4781](https://github.com/RooCodeInc/Roo-Code/pull/4781))
