@@ -369,10 +369,6 @@ This setup works reliably on Windows systems using Cygwin, Fish, and the Starshi
    - Try enabling some or all ZSH-related workarounds in Roo settings
    - These settings can help regardless of your operating system
 
----
-
-## Known Issues and Workarounds
-
 ### Ctrl+C Behavior
 
 **Issue**: If text is already typed in the terminal when Roo tries to run a command, Roo will press Ctrl+C first to clear the line, which can interrupt running processes.
