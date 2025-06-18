@@ -124,6 +124,6 @@
     <criterion>Index and sidebar files updated</criterion>
     <criterion>Combined release notes updated (for patch releases)</criterion>
     <criterion>All links and references are correct</criterion>
-    <criterion>The final release notes need to specifically include only the items (or groups) refered to in the changlog for the version we are working on</criterion>
+    <criterion>The final release notes need to specifically include only the items (or groups) referred to in the changelog for the version we are working on</criterion>
   </completion_criteria>
 </workflow_instructions>
