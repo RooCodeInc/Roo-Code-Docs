@@ -25,86 +25,98 @@
     </step>
   </initialization_steps>
 
-  <main_workflow>
-    <phase name="gather_technical_information">
-      <description>Collect PR data from GitHub</description>
-      <steps>
-        <step number="1">
-          <action>Fetch commit SHAs</action>
-          <tool>github.get_tag</tool>
-          <details>Get commit SHAs for both new and previous version tags</details>
-        </step>
-        
-        <step number="2">
-          <action>List commits and extract PR numbers</action>
-          <tool>github.list_commits</tool>
-          <details>
-            Use start and end SHAs to get all commits in the release range.
-            Parse commit messages to extract PR numbers (format: "Merge pull request #1234...")
+	<main_workflow>
+		<phase name="gather_technical_information">
+			<description>Collect PR data from GitHub. This phase is skipped if the user provides a list of PR numbers.</description>
+			<steps>
+		             <step number="1">
+		                 <action>Check for user-provided PR list</action>
+		                 <details>If the user provides a list of PR numbers with the version, skip to the 'process_each_pr' phase.</details>
+		             </step>
+				<step number="2">
+					<action>Fetch release dates</action>
+					<tool>github.get_tag</tool>
+					<details>Get the commit dates for both new and previous version tags to establish a date range.</details>
+				</step>
+				<step number="3">
+					<action>Search for merged PRs within the date range</action>
+					<tool>github.search_issues</tool>
+					<details>
+		          Use the release date range to search for all merged PRs.
+		          Example query: `is:pr is:merged repo:RooCodeInc/Roo-Code merged:YYYY-MM-DD..YYYY-MM-DD`
+		        </details>
+				</step>
+			</steps>
+		</phase>
+		<phase name="process_each_pr">
+			<description>For each PR, follow a micro-workflow to gather, analyze, and write to a temporary file.</description>
+			<micro_workflow>
+				<step number="1">
+					<action>Gather comprehensive PR details</action>
+					<tools>
+						<tool>github.get_pull_request - Title, author, description</tool>
+						<tool>github.get_pull_request_files - Changed files</tool>
+						<tool>github.get_pull_request_diff - Code changes</tool>
+						<tool>github.get_pull_request_comments - Additional context if needed</tool>
+					</tools>
+				</step>
+				<step number="2">
+					<action>Gather related issue details</action>
+					<tools>
+						<tool>github.get_issue</tool>
+					</tools>
+					<details>From the PR description, extract the issue number and retrieve details.</details>
+				</step>
+				<step number="3">
+					<action>Append analysis to temporary file</action>
+					<details>
+            Analyze the gathered information for a single PR and append the summary
+            to a temporary file. This builds a comprehensive dataset incrementally.
           </details>
-        </step>
-        
-        <step number="3">
-          <action>Gather comprehensive PR details</action>
-          <tools>
-            <tool>github.get_pull_request - Title, author, description</tool>
-            <tool>github.get_pull_request_files - Changed files</tool>
-            <tool>github.get_pull_request_diff - Code changes</tool>
-            <tool>github.get_pull_request_comments - Additional context if needed</tool>
-          </tools>
-          <details>
-            For each PR number, gather all relevant information.
-            Store in a temporary file for analysis.
-          </details>
-        </step>
-      </steps>
-    </phase>
-
-    <phase name="transform_to_user_benefits">
-      <description>Analyze technical changes and convert to user-facing benefits</description>
-      <steps>
-        <step>Identify what changed (core functionality/feature)</step>
-        <step>Understand why it changed (problem being solved)</step>
-        <step>Determine user impact (benefits in plain language)</step>
-        <step>Categorize changes (features, fixes, improvements)</step>
-      </steps>
-    </phase>
-
-    <phase name="generate_documentation">
-      <description>Create and update all necessary documentation files</description>
-      <steps>
-        <step number="1">
-          <action>Create release notes file</action>
-          <details>
+				</step>
+			</micro_workflow>
+		</phase>
+		<phase name="transform_to_user_benefits">
+			<description>Analyze technical changes from the temporary file and convert to user-facing benefits based on the official changelog</description>
+			<steps>
+				<step>Identify what changed (core functionality/feature)</step>
+				<step>Understand why it changed (problem being solved)</step>
+				<step>Determine user impact (benefits in plain language)</step>
+				<step>Categorize changes (features, fixes, improvements)</step>
+			</steps>
+		</phase>
+		<phase name="generate_documentation">
+			<description>Create and update all necessary documentation files</description>
+			<steps>
+				<step number="1">
+					<action>Create release notes file</action>
+					<details>
             Create docs/update-notes/vX.Y.Z.mdx with proper formatting,
             title, date, and organized sections
           </details>
-        </step>
-        
-        <step number="2">
-          <action>Update index.md</action>
-          <details>
+				</step>
+				<step number="2">
+					<action>Update index.md</action>
+					<details>
             Add new release entry to the chronological list with proper link format
           </details>
-        </step>
-        
-        <step number="3">
-          <action>Update sidebars.ts</action>
-          <details>
+				</step>
+				<step number="3">
+					<action>Update sidebars.ts</action>
+					<details>
             Add the new release to the Update Notes section in the sidebar configuration
           </details>
-        </step>
-        
-        <step number="4">
-          <action>Update combined release notes</action>
-          <details>
+				</step>
+				<step number="4">
+					<action>Update combined release notes</action>
+					<details>
             For patch releases, update the corresponding minor/major release file
             (e.g., update v3.20.mdx when creating v3.20.3.mdx)
           </details>
-        </step>
-      </steps>
-    </phase>
-  </main_workflow>
+				</step>
+			</steps>
+		</phase>
+	</main_workflow>
 
   <completion_criteria>
     <criterion>Release notes file created with proper formatting</criterion>
@@ -112,5 +124,6 @@
     <criterion>Index and sidebar files updated</criterion>
     <criterion>Combined release notes updated (for patch releases)</criterion>
     <criterion>All links and references are correct</criterion>
+    <criterion>The final release notes need to specifically include only the items (or groups) refered to in the changlog for the version we are working on</criterion>
   </completion_criteria>
 </workflow_instructions>

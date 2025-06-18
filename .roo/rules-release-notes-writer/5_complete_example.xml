@@ -22,7 +22,7 @@
     </step>
 
     <step number="2">
-      <description>Get commit SHAs for version tags</description>
+      <description>Get release dates for version tags</description>
       <tool_use><![CDATA[
 <use_mcp_tool>
 <server_name>github</server_name>
@@ -36,21 +36,23 @@
 </arguments>
 </use_mcp_tool>
       ]]></tool_use>
-      <result>SHA: abc123...</result>
+      <result>
+        - v3.20.3 date: 2025-01-13
+        - v3.20.2 date: 2025-01-10
+      </result>
     </step>
 
     <step number="3">
-      <description>List commits and extract PR numbers</description>
+      <description>Search for merged PRs and extract numbers</description>
       <tool_use><![CDATA[
 <use_mcp_tool>
 <server_name>github</server_name>
-<tool_name>list_commits</tool_name>
+<tool_name>search_issues</tool_name>
 <arguments>
 {
   "owner": "RooCodeInc",
   "repo": "Roo-Code",
-  "sha": "abc123...",
-  "since": "def456..."
+  "q": "is:pr is:merged repo:RooCodeInc/Roo-Code merged:2025-01-10..2025-01-13"
 }
 </arguments>
 </use_mcp_tool>

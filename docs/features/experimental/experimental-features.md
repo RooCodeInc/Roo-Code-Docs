@@ -23,7 +23,6 @@ The following experimental features are currently available:
 - [Codebase Indexing](/features/experimental/codebase-indexing) - Semantic search through AI-powered codebase indexing
 - [Concurrent File Edits](/features/experimental/concurrent-file-edits) - Edit multiple files in a single operation
 - [Power Steering](/features/experimental/power-steering)
-- [Marketplace](/features/marketplace) - Discover and install modes and MCP servers to extend Roo Code
 
 ---
 

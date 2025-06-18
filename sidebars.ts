@@ -37,6 +37,7 @@ const sidebars: SidebarsConfig = {
         'features/settings-management',
         'features/intelligent-context-condensing',
         'features/keyboard-shortcuts',
+        'features/marketplace',
         'features/model-temperature',
         'features/concurrent-file-reads',
         'features/rooignore',
@@ -66,7 +67,6 @@ const sidebars: SidebarsConfig = {
             'features/experimental/codebase-indexing',
             'features/experimental/concurrent-file-edits',
             'features/experimental/power-steering',
-            'features/marketplace',
           ],
         },
         'features/more-features',
@@ -189,6 +189,14 @@ const sidebars: SidebarsConfig = {
       label: 'Update Notes',
       items: [
         'update-notes/index',
+        {
+          type: 'category',
+          label: '3.21',
+          items: [
+            { type: 'doc', id: 'update-notes/v3.21', label: '3.21 Combined' },
+            { type: 'doc', id: 'update-notes/v3.21.0', label: '3.21.0' },
+          ],
+        },
         {
           type: 'category',
           label: '3.20',

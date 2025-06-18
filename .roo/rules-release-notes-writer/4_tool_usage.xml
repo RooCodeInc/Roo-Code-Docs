@@ -6,7 +6,7 @@
 
   <github_tools>
     <tool name="github.get_tag">
-      <purpose>Fetch commit SHA for a specific version tag</purpose>
+      <purpose>Fetch release date for a specific version tag</purpose>
       <usage><![CDATA[
 <use_mcp_tool>
 <server_name>github</server_name>
@@ -20,28 +20,26 @@
 </arguments>
 </use_mcp_tool>
       ]]></usage>
-      <output>Returns commit SHA associated with the tag</output>
+      <output>Returns commit date associated with the tag, which is used to establish the date range for the PR search.</output>
     </tool>
 
-    <tool name="github.list_commits">
-      <purpose>Get all commits between two SHAs</purpose>
+    <tool name="github.search_issues">
+      <purpose>Get all merged PRs between two dates</purpose>
       <usage><![CDATA[
 <use_mcp_tool>
 <server_name>github</server_name>
-<tool_name>list_commits</tool_name>
+<tool_name>search_issues</tool_name>
 <arguments>
 {
   "owner": "RooCodeInc",
   "repo": "Roo-Code",
-  "sha": "end_commit_sha",
-  "since": "start_commit_sha"
+  "q": "is:pr is:merged repo:RooCodeInc/Roo-Code merged:2025-01-10..2025-01-13"
 }
 </arguments>
 </use_mcp_tool>
       ]]></usage>
       <parsing_tip>
-        Extract PR numbers from commit messages that match pattern:
-        "Merge pull request #XXXX from ..."
+        The search query returns a list of PRs. The PR numbers can be extracted directly from the results.
       </parsing_tip>
     </tool>
 
