@@ -1,13 +1,31 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import {
+  DISCORD_URL,
+  REDDIT_URL,
+  TWITTER_URL,
+  BLUESKY_URL,
+  LINKEDIN_URL,
+  TIKTOK_URL,
+  GITHUB_MAIN_REPO_URL,
+  GITHUB_ISSUES_MAIN_URL,
+  GITHUB_FEATURES_URL,
+  VSCODE_MARKETPLACE_URL,
+  OPEN_VSX_URL,
+  CONTACT_EMAIL,
+  CAREERS_URL,
+  WEBSITE_PRIVACY_URL,
+  EXTENSION_PRIVACY_URL,
+  GITHUB_REPO_URL
+} from './src/constants';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
   title: 'Roo Code Docs',
   tagline: 'Roo Code Documentation',
-  favicon: 'img/roo-code-logo-white.png',
+  favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
   url: 'https://docs.roocode.com',
@@ -15,12 +33,8 @@ const config: Config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'RooVetGit', // Usually your GitHub org/user name.
-  projectName: 'Roo-Code-Docs', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
@@ -38,9 +52,10 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
-          editUrl: 'https://github.com/RooVetGit/Roo-Code-Docs/edit/main/',
+          editUrl: `${GITHUB_REPO_URL}/edit/main/`,
           showLastUpdateTime: true,
         },
+        blog: false, // Disable blog feature
         sitemap: {
           lastmod: 'date',
           priority: null,
@@ -66,44 +81,235 @@ const config: Config = {
     ],
   ],
 
+  plugins: [
+    ...(process.env.POSTHOG_API_KEY ? [
+      [
+        "posthog-docusaurus",
+        {
+          apiKey: process.env.POSTHOG_API_KEY,
+          appUrl: "https://us.i.posthog.com",
+          enableInDevelopment: true,
+        },
+      ],
+    ] : []),
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          // Files moved from advanced-usage to features
+          {
+            to: '/features/checkpoints',
+            from: ['/advanced-usage/checkpoints'],
+          },
+          {
+            to: '/features/code-actions',
+            from: ['/advanced-usage/code-actions'],
+          },
+          {
+            to: '/features/custom-instructions',
+            from: ['/advanced-usage/custom-instructions'],
+          },
+          {
+            to: '/features/custom-modes',
+            from: ['/advanced-usage/custom-modes'],
+          },
+          {
+            to: '/features/enhance-prompt',
+            from: ['/advanced-usage/enhance-prompt'],
+          },
+          {
+            to: '/features/experimental/experimental-features',
+            from: ['/advanced-usage/experimental-features'],
+          },
+          {
+            to: '/features/concurrent-file-reads',
+            from: ['/features/experimental/concurrent-file-reads'],
+          },
+          {
+            to: '/features/model-temperature',
+            from: ['/advanced-usage/model-temperature'],
+          },
+          {
+            to: '/features/auto-approving-actions',
+            from: ['/advanced-usage/auto-approving-actions'],
+          },
+          {
+            to: '/features/api-configuration-profiles',
+            from: ['/advanced-usage/api-configuration-profiles'],
+          },
+          {
+            to: '/features/intelligent-context-condensing',
+            from: ['/features/experimental/intelligent-context-condensing', '/features/experimental/intelligent-context-condensation'],
+          },
+          {
+            to: '/advanced-usage/footgun-prompting',
+            from: ['/features/footgun-prompting'],
+          },
+          
+          // MCP related redirects
+          {
+            to: '/features/mcp/overview',
+            from: ['/advanced-usage/mcp', '/mcp/overview'],
+          },
+          {
+            to: '/features/mcp/using-mcp-in-roo',
+            from: ['/mcp/using-mcp-in-roo'],
+          },
+          {
+            to: '/features/mcp/what-is-mcp',
+            from: ['/mcp/what-is-mcp'],
+          },
+          {
+            to: '/features/mcp/server-transports',
+            from: ['/mcp/server-transports'],
+          },
+          {
+            to: '/features/mcp/mcp-vs-api',
+            from: ['/mcp/mcp-vs-api'],
+          },
+          {
+            to: '/features/shell-integration',
+            from: ['/troubleshooting/shell-integration'],
+          },
+          
+          // Tools folder moved from features to advanced-usage
+          {
+            to: '/advanced-usage/available-tools/access-mcp-resource',
+            from: ['/features/tools/access-mcp-resource'],
+          },
+          {
+            to: '/advanced-usage/available-tools/apply-diff',
+            from: ['/features/tools/apply-diff'],
+          },
+          {
+            to: '/advanced-usage/available-tools/ask-followup-question',
+            from: ['/features/tools/ask-followup-question'],
+          },
+          {
+            to: '/advanced-usage/available-tools/attempt-completion',
+            from: ['/features/tools/attempt-completion'],
+          },
+          {
+            to: '/advanced-usage/available-tools/browser-action',
+            from: ['/features/tools/browser-action'],
+          },
+          {
+            to: '/advanced-usage/available-tools/execute-command',
+            from: ['/features/tools/execute-command'],
+          },
+          {
+            to: '/advanced-usage/available-tools/insert-content',
+            from: ['/features/tools/insert-content'],
+          },
+          {
+            to: '/advanced-usage/available-tools/list-code-definition-names',
+            from: ['/features/tools/list-code-definition-names'],
+          },
+          {
+            to: '/advanced-usage/available-tools/list-files',
+            from: ['/features/tools/list-files'],
+          },
+          {
+            to: '/advanced-usage/available-tools/new-task',
+            from: ['/features/tools/new-task'],
+          },
+          {
+            to: '/advanced-usage/available-tools/read-file',
+            from: ['/features/tools/read-file'],
+          },
+          {
+            to: '/advanced-usage/available-tools/search-and-replace',
+            from: ['/features/tools/search-and-replace'],
+          },
+          {
+            to: '/advanced-usage/available-tools/search-files',
+            from: ['/features/tools/search-files'],
+          },
+          {
+            to: '/advanced-usage/available-tools/switch-mode',
+            from: ['/features/tools/switch-mode'],
+          },
+          {
+            to: '/advanced-usage/available-tools/tool-use-overview',
+            from: ['/features/tools/tool-use-overview'],
+          },
+          {
+            to: '/advanced-usage/available-tools/use-mcp-tool',
+            from: ['/features/tools/use-mcp-tool'],
+          },
+          {
+            to: '/advanced-usage/available-tools/write-to-file',
+            from: ['/features/tools/write-to-file'],
+          },
+          {
+            to: '/advanced-usage/roo-code-nightly',
+            from: ['/advanced-usage/prerelease-build'],
+          },
+        ],
+      },
+    ],
+  ],
+
   themeConfig: {
-    image: 'img/roo-code-logo-white.png',
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false,
+    },
+    image: 'img/social-share.png',
     navbar: {
-      title: 'Roo Code Docs',
       logo: {
         alt: 'Roo Code Logo',
         src: 'img/roo-code-logo-white.png',
+        srcDark: 'img/roo-code-logo-dark.png',
       },
       items: [
         {
-          href: 'https://github.com/RooVetGit/Roo-Code',
-          label: 'GitHub',
-          position: 'right',
-        },
-        {
-          href: 'https://marketplace.visualstudio.com/items?itemName=RooVeterinaryInc.roo-cline',
-          label: 'Install Extension',
-          position: 'right',
+          type: 'search',
+          position: 'left',
         },
       ],
     },
     footer: {
       style: 'dark',
+      logo: {
+        alt: 'Roo Code Logo',
+        src: 'img/roo-code-logo-white.png',
+        srcDark: 'img/roo-code-logo-dark.png',
+        width: 120,
+        height: 24,
+      },
       links: [
         {
           title: 'Community',
           items: [
             {
               label: 'Discord',
-              href: 'https://discord.gg/roocode',
+              href: DISCORD_URL,
             },
             {
               label: 'Reddit',
-              href: 'https://www.reddit.com/r/RooCode/',
+              href: REDDIT_URL,
             },
             {
               label: 'Twitter',
-              href: 'https://x.com/roo_code',
+              href: TWITTER_URL,
+            },
+            {
+              label: 'Bluesky',
+              href: BLUESKY_URL,
+            },
+            {
+              label: 'GitHub',
+              href: GITHUB_MAIN_REPO_URL,
+            },
+            {
+              label: 'LinkedIn',
+              href: LINKEDIN_URL,
+            },
+            {
+              label: 'TikTok',
+              href: TIKTOK_URL,
             },
           ],
         },
@@ -112,11 +318,11 @@ const config: Config = {
           items: [
             {
               label: 'Issues',
-              href: 'https://github.com/RooVetGit/Roo-Code/issues',
+              href: GITHUB_ISSUES_MAIN_URL,
             },
             {
               label: 'Feature Requests',
-              href: 'https://github.com/RooVetGit/Roo-Code/discussions/categories/feature-requests?discussions_q=is%3Aopen+category%3A%22Feature+Requests%22+sort%3Atop',
+              href: GITHUB_FEATURES_URL,
             },
           ],
         },
@@ -125,11 +331,33 @@ const config: Config = {
           items: [
             {
               label: 'VS Code Marketplace',
-              href: 'https://marketplace.visualstudio.com/items?itemName=RooVeterinaryInc.roo-cline',
+              href: VSCODE_MARKETPLACE_URL,
             },
             {
               label: 'Open VSX Registry',
-              href: 'https://open-vsx.org/extension/RooVeterinaryInc/roo-cline',
+              href: OPEN_VSX_URL,
+            },
+          ],
+        },
+        {
+          title: 'Company',
+          items: [
+            {
+              label: 'Contact',
+              href: CONTACT_EMAIL,
+              target: '_self',
+            },
+            {
+              label: 'Careers',
+              href: CAREERS_URL,
+            },
+            {
+              label: 'Website Privacy Policy',
+              href: WEBSITE_PRIVACY_URL,
+            },
+            {
+              label: 'Extension Privacy Policy',
+              href: EXTENSION_PRIVACY_URL,
             },
           ],
         },

@@ -1,68 +1,132 @@
 # Context Mentions
 
-Context mentions are a powerful way to provide Roo Code with specific information about your project, allowing it to perform tasks more accurately and efficiently.  You can use mentions to refer to files, folders, problems, and Git commits.  Context mentions start with the `@` symbol.
+Context mentions are a powerful way to provide Roo Code with specific information about your project, allowing it to perform tasks more accurately and efficiently. You can use mentions to refer to files, folders, problems, and Git commits. Context mentions start with the `@` symbol.
+
+<img src="/img/context-mentions/context-mentions.png" alt="Context Mentions Overview - showing the @ symbol dropdown menu in the chat interface" width="600" />
+
+*Context mentions overview showing the @ symbol dropdown menu in the chat interface.*
+
+---
 
 ## Types of Mentions
 
-### File Mentions (`@/path/to/file.ts`)
+<img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
 
-Use file mentions to include the contents of a specific file in your request.
+*File mentions add actual code content into the conversation for direct reference and analysis.*
 
-*   **Example:** "Explain the function `calculateTotal` in the file @/src/utils.ts."
-*   **How it works:** Roo Code will read the contents of the specified file and include it in the context sent to the AI model.
-* **Best Practices**: Always include the `/` to tell Roo you're specifying a file path.
-* **Note:** You can use the `@` character in any chat field, so you may use it while also providing feedback.
+| Mention Type | Format | Description | Example Usage |
+|--------------|--------|-------------|--------------|
+| **File** | `@/path/to/file.ts` | Includes file contents in request context | "Explain the function in @/src/utils.ts" |
+| **Folder** | `@/path/to/folder` | Includes contents of all files directly in the folder (non-recursive) | "Analyze the code in @/src/components" |
+| **Problems** | `@problems` | Includes VS Code Problems panel diagnostics | "@problems Fix all errors in my code" |
+| **Terminal** | `@terminal` | Includes recent terminal command and output | "Fix the errors shown in @terminal" |
+| **Git Commit** | `@a1b2c3d` | References specific commit by hash | "What changed in commit @a1b2c3d?" |
+| **Git Changes** | `@git-changes` | Shows uncommitted changes | "Suggest a message for @git-changes" |
+| **URL** | `@https://example.com` | Imports website content | "Summarize @https://docusaurus.io/" |
 
-### Folder Mentions (`@/path/to/folder/`)
+### File Mentions
 
-Use folder mentions to refer to a directory.  Roo Code will be able to use the *names* of the files and subdirectories within that folder.
+<img src="/img/context-mentions/context-mentions-1.png" alt="File mention example showing a file being referenced with @ and its contents appearing in the conversation" width="600" />
 
-*   **Example:** "What files are in the @/src/components/ folder?"
-* **Note**: To find files inside of that folder, you will need to ask Roo to use one of its tools, `list files`.
+*File mentions incorporate source code with line numbers for precise references.*
+| Capability | Details |
+|------------|---------|
+| **Format** | `@/path/to/file.ts` (always start with `/` from workspace root) |
+| **Provides** | Complete file contents with line numbers |
+| **Supports** | Text files, PDFs, and DOCX files (with text extraction) |
+| **Works in** | Initial requests, feedback responses, and follow-up messages |
+| **Limitations** | Very large files may be truncated; binary files not supported |
 
-### Problems Mention (`@problems`)
+### Folder Mentions
 
-Use the `@problems` mention to include a list of all current errors and warnings from the VS Code Problems panel in your request.
+<img src="/img/context-mentions/context-mentions-2.png" alt="Folder mention example showing directory contents being referenced in the chat" width="600" />
 
-*   **Example:** "@problems Fix all errors in the current file."
-* **Note:** This is especially useful when you see errors in the Problems panel and want Roo Code to address them.
+*Folder mentions include the content of all files within the specified directory.*
+| Capability | Details |
+|------------|---------|
+| **Format** | `@/path/to/folder` (no trailing slash) |
+| **Provides** | Complete contents of all files within the directory |
+| **Includes** | Contents of non-binary text files directly within the folder (not recursive) |
+| **Best for** | Providing context from multiple files in a directory |
+| **Tip** | Be mindful of context window limits when mentioning large directories |
 
-### Terminal Mention (`@terminal`)
+### Problems Mention
 
-Use the `@terminal` mention to include the last command run in the terminal along with its output.
+<img src="/img/context-mentions/context-mentions-3.png" alt="Problems mention example showing VS Code problems panel being referenced with @problems" width="600" />
 
-*   **Example:** "Fix the warnings in the @terminal."
+*Problems mentions import diagnostics directly from VS Code's problems panel.*
+| Capability | Details |
+|------------|---------|
+| **Format** | `@problems` |
+| **Provides** | All errors and warnings from VS Code's problems panel |
+| **Includes** | File paths, line numbers, and diagnostic messages |
+| **Groups** | Problems organized by file for better clarity |
+| **Best for** | Fixing errors without manual copying |
 
-### Git Commit Mentions (`@a1b2c3d`)
+### Terminal Mention
+<img src="/img/context-mentions/context-mentions-4.png" alt="Terminal mention example showing terminal output being included in Roo's context" width="600" />
 
-Use a Git commit hash (short or long) to include information about a specific commit.
+*Terminal mentions capture recent command output for debugging and analysis.*
 
-*   **Example:** "What changes were made in commit @a1b2c3d?"
-* **Note:** Roo Code will include the commit message, author, date, and a diff of the changes.
+| Capability | Details |
+|------------|---------|
+| **Format** | `@terminal` |
+| **Captures** | Last command and its complete output |
+| **Preserves** | Terminal state (doesn't clear the terminal) |
+| **Limitation** | Limited to visible terminal buffer content |
+| **Best for** | Debugging build errors or analyzing command output |
 
-If you want to refer to the working changes in the git repository, you can use the `@git-changes` mention.
+### Git Mentions
 
-*   **Example:** "Can you propose a commit message for @git-changes?"
+<img src="/img/context-mentions/context-mentions-5.png" alt="Git commit mention example showing commit details being analyzed by Roo" width="600" />
 
-### URL Mentions (`@https://example.com`)
+*Git mentions provide commit details and diffs for context-aware version analysis.*
+| Type | Format | Provides | Limitations |
+|------|--------|----------|------------|
+| **Commit** | `@a1b2c3d` | Commit message, author, date, and complete diff | Only works in Git repositories |
+| **Working Changes** | `@git-changes` | `git status` output and diff of uncommitted changes | Only works in Git repositories |
 
-Use a URL to have Roo Code fetch and include the content of a website.
+### URL Mentions
+<img src="/img/context-mentions/context-mentions-6.png" alt="URL mention example showing website content being converted to Markdown in the chat" width="600" />
 
-*   **Example:** "Summarize the content of @https://docusaurus.io/."
-*   **Note:** Roo Code will convert the website content to Markdown.
+*URL mentions import external web content and convert it to readable Markdown format.*
 
-## Using Mentions
+| Capability | Details |
+|------------|---------|
+| **Format** | `@https://example.com` |
+| **Processing** | Uses headless browser to fetch content |
+| **Cleaning** | Removes scripts, styles, and navigation elements |
+| **Output** | Converts content to Markdown for readability |
+| **Limitation** | Complex pages may not convert perfectly |
 
-*   **Type `@`:** Start typing `@` in the chat input field.  A dropdown menu will appear with suggestions.
-*   **Select a Mention:** Use the arrow keys or your mouse to select the desired mention from the dropdown, and press Enter or click to insert it.
-*   **Type to Search:** As you type after the `@` symbol, the suggestions will be filtered.
-* **Multiple Mentions:** You can include multiple mentions in a single message.
-*   **Combine with Text:** You can combine mentions with regular text to create your request.  For example: "Check the function in @/src/utils.ts and fix any @problems".
+---
 
-## Tips
+## How to Use Mentions
 
-*   **Be Specific:** The more specific your mentions are, the better Roo Code will understand your request.
-*   **Use Relative Paths:** When referring to files within your workspace, use paths relative to the workspace root.
-*   **Check for Typos:** Make sure the file paths and commit hashes are correct.
+1. Type `@` in the chat input to trigger the suggestions dropdown
+2. Continue typing to filter suggestions or use arrow keys to navigate
+3. Select with Enter key or mouse click
+4. Combine multiple mentions in a request: "Fix @problems in @/src/component.ts"
 
-Context mentions are a powerful tool for providing Roo Code with the information it needs to complete your tasks effectively.  Experiment with different types of mentions to see how they can improve your workflow.
+The dropdown automatically suggests:
+- Recently opened files
+- Visible folders
+- Recent git commits
+- Special keywords (`problems`, `terminal`, `git-changes`)
+- **All currently open files** (regardless of ignore settings or directory filters)
+
+The dropdown automatically filters out common directories like `node_modules`, `.git`, `dist`, and `out` to reduce noise, even though their content could be included if manually typed.
+
+---
+
+## Important Behaviors
+
+### Ignore File Interactions
+
+| Behavior | Description |
+|----------|-------------|
+| **`.rooignore` bypass** | File and folder `@mentions` bypass `.rooignore` checks when fetching content for context. Content from ignored files will be included if directly mentioned. |
+| **`.gitignore` bypass** | Similarly, file and folder `@mentions` do not respect `.gitignore` rules when fetching content. |
+| **Git command respect** | Git-related mentions (`@git-changes`, `@commit-hash`) do respect `.gitignore` since they rely on Git commands. |
+
+

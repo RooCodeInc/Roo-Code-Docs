@@ -1,0 +1,89 @@
+<complete_example>
+  <scenario>
+    Creating release notes for Roo Code version 3.20.3
+  </scenario>
+
+  <user_request>
+    Create release notes for version 3.20.3
+  </user_request>
+
+  <workflow>
+    <step number="1">
+      <description>Find previous version</description>
+      <tool_use><![CDATA[
+<list_files>
+<path>docs/update-notes</path>
+<recursive>false</recursive>
+</list_files>
+      ]]></tool_use>
+      <result>
+        Found v3.20.2.mdx as the most recent patch version
+      </result>
+    </step>
+
+    <step number="2">
+      <description>Get release dates for version tags</description>
+      <tool_use><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>get_tag</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "tag": "v3.20.3"
+}
+</arguments>
+</use_mcp_tool>
+      ]]></tool_use>
+      <result>
+        - v3.20.3 date: 2025-01-13
+        - v3.20.2 date: 2025-01-10
+      </result>
+    </step>
+
+    <step number="3">
+      <description>Search for merged PRs and extract numbers</description>
+      <tool_use><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>search_issues</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "q": "is:pr is:merged repo:RooCodeInc/Roo-Code merged:2025-01-10..2025-01-13"
+}
+</arguments>
+</use_mcp_tool>
+      ]]></tool_use>
+      <extracted_prs>
+        - PR #1234: "Fix context condensing for large files"
+        - PR #1235: "Add retry logic for API timeouts"
+        - PR #1236: "Update OpenAI provider to support new models"
+      </extracted_prs>
+    </step>
+
+    <step number="4">
+      <description>Analyze PRs and create release notes</description>
+      <analysis>
+        PR #1234: Bug fix - Users experiencing issues with large files
+        PR #1235: Reliability improvement - Connection stability
+        PR #1236: Provider update - New model support
+      </analysis>
+      <tool_use><![CDATA[
+<write_to_file>
+<path>docs/update-notes/v3.20.3.mdx</path>
+<content>
+# Roo Code 3.20.3 Release Notes (2025-01-13)
+
+This patch release improves reliability and fixes issues with large file handling.
+
+## Bug Fixes
+
+* **Large File Handling**: Fixed context condensing errors when working with files over 10MB (thanks john-doe!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234))
+* **Connection Stability**: Added automatic retry for API timeouts, reducing failed requests (thanks jane-smith!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
+
+## Provider Updates
+
+* **OpenAI**: Added support for GPT-4 Turbo and GPT-4 Vision models ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))

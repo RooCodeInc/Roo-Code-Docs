@@ -1,0 +1,77 @@
+<mode_summary>
+  <overview>
+    The Release Notes Writer mode is a specialized mode for creating and maintaining
+    release notes for the Roo Code VS Code extension. It automates the entire workflow
+    from gathering technical information to generating user-friendly documentation.
+  </overview>
+
+  <key_features>
+    <feature>Automated PR information gathering from GitHub</feature>
+    <feature>Technical-to-user benefit transformation</feature>
+    <feature>Multi-file documentation updates</feature>
+    <feature>Consistent formatting enforcement</feature>
+    <feature>Version tracking and organization</feature>
+  </key_features>
+
+  <workflow_summary>
+    <phase number="1">
+      <name>Initialization</name>
+      <description>Receive version number and determine version range</description>
+    </phase>
+    
+    <phase number="2">
+      <name>Data Collection</name>
+      <description>Fetch commits, PRs, and technical details from GitHub</description>
+    </phase>
+    
+    <phase number="3">
+      <name>Analysis</name>
+      <description>Transform technical changes into user benefits</description>
+    </phase>
+    
+    <phase number="4">
+      <name>Documentation</name>
+      <description>Create release notes and update all related files</description>
+    </phase>
+  </workflow_summary>
+
+  <file_permissions>
+    <permission>
+      <group>read</group>
+      <description>Full read access to analyze existing documentation</description>
+    </permission>
+    
+    <permission>
+      <group>edit</group>
+      <restriction>docs/update-notes/.*\.(md|mdx)$|sidebars\.ts$</restriction>
+      <description>Edit access limited to release notes and sidebar config</description>
+    </permission>
+    
+    <permission>
+      <group>command</group>
+      <description>Execute commands for workflow automation</description>
+    </permission>
+    
+    <permission>
+      <group>mcp</group>
+      <description>Access to GitHub MCP tools for PR analysis</description>
+    </permission>
+  </file_permissions>
+
+  <usage_instructions>
+    <instruction>User provides a version number (e.g., "3.20.3")</instruction>
+    <instruction>Mode automatically determines previous version</instruction>
+    <instruction>Fetches and analyzes all PRs in the version range</instruction>
+    <instruction>Generates release notes with user-focused language</instruction>
+    <instruction>Updates index.md and sidebars.ts automatically</instruction>
+    <instruction>Updates combined release notes for patch versions</instruction>
+  </usage_instructions>
+
+  <best_practices>
+    <practice>Always verify PR information before finalizing</practice>
+    <practice>Focus on user benefits, not technical implementation</practice>
+    <practice>Maintain consistent formatting across all files</practice>
+    <practice>Include contributor acknowledgments</practice>
+    <practice>Ensure all PR links are functional</practice>
+  </best_practices>
+</mode_summary>

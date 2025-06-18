@@ -1,12 +1,15 @@
 ---
 sidebar_label: Ollama
 ---
+import KangarooIcon from '@site/src/components/KangarooIcon';
 
 # Using Ollama With Roo Code
 
 Roo Code supports running models locally using Ollama. This provides privacy, offline access, and potentially lower costs, but requires more setup and a powerful computer.
 
 **Website:** [https://ollama.com/](https://ollama.com/)
+
+---
 
 ## Setting up Ollama
 
@@ -59,16 +62,19 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     ```
 
 4.  **Configure Roo Code:**
-    *   Open the Roo Code sidebar (<Codicon name="rocket" /> icon).
+    *   Open the Roo Code sidebar (<KangarooIcon /> icon).
     *   Click the settings gear icon (<Codicon name="gear" />).
     *   Select "ollama" as the API Provider.
     *   Enter the Model name from the previous step (e.g., `your_model_name`).
     *   (Optional) You can configure the base URL if you're running Ollama on a different machine. The default is `http://localhost:11434`.
     *   (Optional) Configure Model context size in Advanced settings, so Roo Code knows how to manage its sliding window.
 
+---
+
 ## Tips and Notes
 
 *   **Resource Requirements:** Running large language models locally can be resource-intensive.  Make sure your computer meets the minimum requirements for the model you choose.
 *   **Model Selection:** Experiment with different models to find the one that best suits your needs.
 *   **Offline Use:** Once you've downloaded a model, you can use Roo Code offline with that model.
+*   **Token Tracking:** Roo Code tracks token usage for models run via Ollama, helping you monitor consumption.
 *   **Ollama Documentation:** Refer to the [Ollama documentation](https://ollama.com/docs) for more information on installing, configuring, and using Ollama.

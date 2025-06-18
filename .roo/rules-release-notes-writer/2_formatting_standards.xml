@@ -1,0 +1,163 @@
+<formatting_standards>
+  <overview>
+    Comprehensive formatting and content standards for release notes in the docs/update-notes directory.
+    These standards ensure consistency, clarity, and proper organization across all release documentation.
+  </overview>
+
+  <file_naming_conventions>
+    <convention type="patch_release">
+      <format>vX.Y.Z.mdx</format>
+      <example>v3.20.3.mdx</example>
+      <description>Full version number for patch releases with specific bug fixes</description>
+    </convention>
+    
+    <convention type="minor_major_release">
+      <format>vX.Y.mdx</format>
+      <example>v3.20.mdx</example>
+      <description>Major.minor version for summarizing entire version cycle</description>
+    </convention>
+  </file_naming_conventions>
+
+  <file_structure>
+    <element name="title">
+      <format># Roo Code X.Y.Z Release Notes (YYYY-MM-DD)</format>
+      <requirements>
+        <requirement>Must include version number</requirement>
+        <requirement>Must include release date in ISO format</requirement>
+        <requirement>Date must reflect actual release date</requirement>
+      </requirements>
+    </element>
+
+    <element name="summary_sentence">
+      <location>Directly below title</location>
+      <description>Brief sentence summarizing key changes</description>
+      <example>This release introduces intelligent context condensing, improves performance, and fixes several UI issues.</example>
+    </element>
+
+    <element name="content_sections">
+      <expanded_sections>
+        <description>Major features with detailed explanations</description>
+        <format><![CDATA[
+## Feature Name
+
+Brief description of what the feature does (thanks contributor!) ([#PR](link)):
+
+- **Key Point 1**: Detailed explanation of this aspect
+- **Key Point 2**: Another detailed explanation
+- **Key Point 3**: Additional important details
+
+Concluding sentence about the overall benefit to users.
+        ]]></format>
+      </expanded_sections>
+
+      <grouped_sections>
+        <description>Smaller fixes and improvements</description>
+        <format><![CDATA[
+## Section Name
+
+* **Item Name**: Brief description on a single line (thanks contributor!) ([#PR](link))
+* **Another Item**: Another brief description ([#PR](link))
+        ]]></format>
+      </grouped_sections>
+    </element>
+  </file_structure>
+
+  <section_headings>
+    <recommended_headings>
+      <heading>Major feature names (e.g., "## Intelligent Context Condensing Now Default")</heading>
+      <heading>## Bug Fixes</heading>
+      <heading>## QOL Improvements</heading>
+      <heading>## Misc Improvements</heading>
+      <heading>## Provider Updates</heading>
+      <heading>## Documentation Updates</heading>
+    </recommended_headings>
+    
+    <avoid>
+      <heading>## Changes</heading>
+      <heading>## Updates</heading>
+      <heading>## Highlights</heading>
+      <reason>Too generic and don't provide meaningful categorization</reason>
+    </avoid>
+  </section_headings>
+
+  <contributor_acknowledgments>
+    <format>(thanks username!)</format>
+    <rules>
+      <rule>Omit @ symbol from GitHub usernames</rule>
+      <rule>Place before PR link in parentheses</rule>
+      <rule>Use consistent format throughout</rule>
+    </rules>
+  </contributor_acknowledgments>
+
+  <pr_links>
+    <format>([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER))</format>
+    <placement>
+      <expanded>In introductory paragraph or bullet points</expanded>
+      <grouped>At end of each bullet point</grouped>
+    </placement>
+  </pr_links>
+
+  <index_file_updates>
+    <location>docs/update-notes/index.md</location>
+    <format>[X.Y.Z](/update-notes/vX.Y.Z) (YYYY-MM-DD)</format>
+    <rules>
+      <rule>List chronologically, newest first</rule>
+      <rule>Use absolute paths from /docs/</rule>
+      <rule>Omit .md extension</rule>
+      <rule>Include release date</rule>
+    </rules>
+  </index_file_updates>
+
+  <sidebar_updates>
+    <location>sidebars.ts</location>
+    <format>'update-notes/vX.Y.Z'</format>
+    <rules>
+      <rule>Add to Update Notes category</rule>
+      <rule>Use Docusaurus ID format</rule>
+      <rule>Maintain chronological order</rule>
+    </rules>
+  </sidebar_updates>
+
+  <combined_notes_updates>
+    <description>When creating patch releases, update the minor/major file</description>
+    <rules>
+      <rule>Add changes to relevant sections</rule>
+      <rule>Do NOT include patch version numbers in combined notes</rule>
+      <rule>Maintain consistent formatting</rule>
+    </rules>
+  </combined_notes_updates>
+
+  <content_guidelines>
+    <guideline priority="high">
+      <name>User-focused language</name>
+      <description>Focus on benefits, not implementation details</description>
+    </guideline>
+    
+    <guideline priority="high">
+      <name>Clear and concise</name>
+      <description>Use plain language, avoid technical jargon</description>
+    </guideline>
+    
+    <guideline priority="high">
+      <name>Present tense</name>
+      <description>Use "We've improved..." not "We improved..."</description>
+    </guideline>
+    
+    <guideline priority="medium">
+      <name>Consistent formatting</name>
+      <description>Follow established patterns throughout</description>
+    </guideline>
+    
+    <guideline priority="medium">
+      <name>Accurate claims</name>
+      <description>Verify all statements against actual changes</description>
+    </guideline>
+  </content_guidelines>
+
+  <forbidden_elements>
+    <element>Summary or Highlights sections</element>
+    <element>Version numbers in feature documentation outside update-notes</element>
+    <element>Temporal references like "as of version X.Y.Z"</element>
+    <element>Marketing language or buzzwords</element>
+  </forbidden_elements>
+</formatting_standards>

@@ -10,7 +10,9 @@ Roo Code supports a wide range of AI model providers that offer APIs compatible 
 *   **Cloud providers** like Perplexity, Together AI, Anyscale, and others.
 *   **Any other provider** offering an OpenAI-compatible API endpoint.
 
-This document focuses on setting up providers *other than* the official OpenAI API (which has its own [dedicated configuration page](./openai.md)).
+This document focuses on setting up providers *other than* the official OpenAI API (which has its own [dedicated configuration page](/providers/openai)).
+
+---
 
 ## General Configuration
 
@@ -25,7 +27,7 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
 *   **API Provider:** Select "OpenAI Compatible".
 *   **Base URL:** Enter the base URL provided by your chosen provider.  **This is crucial.**
 *   **API Key:** Enter your API key.
-*   **Model:** Chooose a model.
+*   **Model:** Choose a model.
 *   **Model Configuration:** This lets you customize advanced configuration for the model
     - Max Output Tokens
     - Context Window
@@ -33,6 +35,26 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
     - Computer Use
     - Input Price
     - Output Price
+
+---
+
+## Supported Models (for OpenAI Native Endpoint)
+
+While this provider type allows connecting to various endpoints, if you are connecting directly to the official OpenAI API (or an endpoint mirroring it exactly), Roo Code recognizes the following model IDs based on the `openAiNativeModels` definition in its source code:
+
+*   `o3-mini`
+*   `o3-mini-high`
+*   `o3-mini-low`
+*   `o1`
+*   `o1-preview`
+*   `o1-mini`
+*   `gpt-4.5-preview`
+*   `gpt-4o`
+*   `gpt-4o-mini`
+
+**Note:** If you are using a different OpenAI-compatible provider (like Together AI, Anyscale, etc.), the available model IDs will vary. Always refer to your specific provider's documentation for their supported model names.
+
+---
 
 ## Troubleshooting
 

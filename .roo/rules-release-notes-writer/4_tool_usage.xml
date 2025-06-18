@@ -1,0 +1,202 @@
+<tool_usage_guide>
+  <overview>
+    Specific guidance for using GitHub MCP tools and file manipulation tools
+    in the release notes creation workflow.
+  </overview>
+
+  <github_tools>
+    <tool name="github.get_tag">
+      <purpose>Fetch release date for a specific version tag</purpose>
+      <usage><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>get_tag</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "tag": "v3.20.3"
+}
+</arguments>
+</use_mcp_tool>
+      ]]></usage>
+      <output>Returns commit date associated with the tag, which is used to establish the date range for the PR search.</output>
+    </tool>
+
+    <tool name="github.search_issues">
+      <purpose>Get all merged PRs between two dates</purpose>
+      <usage><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>search_issues</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "q": "is:pr is:merged repo:RooCodeInc/Roo-Code merged:2025-01-10..2025-01-13"
+}
+</arguments>
+</use_mcp_tool>
+      ]]></usage>
+      <parsing_tip>
+        The search query returns a list of PRs. The PR numbers can be extracted directly from the results.
+      </parsing_tip>
+    </tool>
+
+    <tool name="github.get_pull_request">
+      <purpose>Get detailed information about a specific PR</purpose>
+      <usage><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>get_pull_request</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "pull_number": 1234
+}
+</arguments>
+</use_mcp_tool>
+      ]]></usage>
+      <extract>
+        <field>title - PR title for understanding the change</field>
+        <field>user.login - Author username for acknowledgment</field>
+        <field>body - Description for additional context</field>
+      </extract>
+    </tool>
+
+    <tool name="github.get_pull_request_files">
+      <purpose>See which files were changed in a PR</purpose>
+      <usage><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>get_pull_request_files</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "pull_number": 1234
+}
+</arguments>
+</use_mcp_tool>
+      ]]></usage>
+      <analysis>
+        Use file paths to understand scope of changes:
+        - src/extension/* - Core functionality
+        - webview-ui/* - UI changes
+        - src/providers/* - Provider updates
+      </analysis>
+    </tool>
+
+    <tool name="github.get_pull_request_diff">
+      <purpose>Get actual code changes for deeper analysis</purpose>
+      <when_to_use>
+        When PR title/description isn't clear enough to determine user impact
+      </when_to_use>
+    </tool>
+  </github_tools>
+
+  <file_tools>
+    <tool name="list_files">
+      <purpose>Find previous version files</purpose>
+      <usage><![CDATA[
+<list_files>
+<path>docs/update-notes</path>
+<recursive>false</recursive>
+</list_files>
+      ]]></usage>
+      <parsing>
+        Look for most recent vX.Y.Z.mdx file to determine previous version
+      </parsing>
+    </tool>
+
+    <tool name="write_to_file">
+      <purpose>Create new release notes file</purpose>
+      <best_practices>
+        <practice>Always include complete content</practice>
+        <practice>Use .mdx extension for new files</practice>
+        <practice>Include proper frontmatter if needed</practice>
+      </best_practices>
+    </tool>
+
+    <tool name="read_file">
+      <purpose>Read existing files for updates</purpose>
+      <files_to_read>
+        <file>docs/update-notes/index.md - For adding new entry</file>
+        <file>sidebars.ts - For sidebar configuration</file>
+        <file>docs/update-notes/vX.Y.mdx - For combined notes updates</file>
+      </files_to_read>
+    </tool>
+
+    <tool name="apply_diff">
+      <purpose>Update existing files</purpose>
+      <usage><![CDATA[
+<apply_diff>
+<args>
+<file>
+  <path>docs/update-notes/index.md</path>
+  <diff>
+    <content>
+<<<<<<< SEARCH
+## Release Notes
+
+### 2025
+=======
+## Release Notes
+
+### 2025
+
+- [3.20.3](/update-notes/v3.20.3) (2025-01-13)
+>>>>>>> REPLACE
+    </content>
+  </diff>
+</file>
+</args>
+</apply_diff>
+      ]]></usage>
+    </tool>
+  </file_tools>
+
+  <workflow_optimization>
+    <tip priority="high">
+      <description>Batch PR analysis</description>
+      <details>
+        Collect all PR numbers first, then fetch details for all PRs
+        before starting analysis. Store in temporary file for reference.
+      </details>
+    </tip>
+
+    <tip priority="high">
+      <description>Use structured data storage</description>
+      <details>
+        Create a temporary markdown or JSON file to organize PR data
+        before transforming to release notes.
+      </details>
+    </tip>
+
+    <tip priority="medium">
+      <description>Verify changes before finalizing</description>
+      <details>
+        Read generated files to ensure formatting is correct
+        and all links work properly.
+      </details>
+    </tip>
+  </workflow_optimization>
+
+  <error_handling>
+    <scenario>
+      <error>PR not found or access denied</error>
+      <action>Skip that PR and note it in comments</action>
+    </scenario>
+    
+    <scenario>
+      <error>Tag not found</error>
+      <action>Ask user to verify version number format</action>
+    </scenario>
+    
+    <scenario>
+      <error>File already exists</error>
+      <action>Ask user if they want to overwrite</action>
+    </scenario>
+  </error_handling>
+</tool_usage_guide>

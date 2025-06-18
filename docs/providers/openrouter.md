@@ -8,15 +8,21 @@ OpenRouter is an AI platform that provides access to a wide variety of language 
 
 **Website:** [https://openrouter.ai/](https://openrouter.ai/)
 
+---
+
 ## Getting an API Key
 
 1.  **Sign Up/Sign In:** Go to the [OpenRouter website](https://openrouter.ai/).  Sign in with your Google or GitHub account.
 2.  **Get an API Key:** Go to the [keys page](https://openrouter.ai/keys).  You should see an API key listed.  If not, create a new key.
 3.  **Copy the Key:** Copy the API key.
 
+---
+
 ## Supported Models
 
 OpenRouter supports a large and growing number of models.  Roo Code automatically fetches the list of available models. Refer to the [OpenRouter Models page](https://openrouter.ai/models) for the complete and up-to-date list.
+
+---
 
 ## Configuration in Roo Code
 
@@ -26,12 +32,21 @@ OpenRouter supports a large and growing number of models.  Roo Code automaticall
 4.  **Select Model:** Choose your desired model from the "Model" dropdown.
 5.  **(Optional) Custom Base URL:** If you need to use a custom base URL for the OpenRouter API, check "Use custom base URL" and enter the URL. Leave this blank for most users.
 
+---
+
 ## Supported Transforms
 
 OpenRouter provides an [optional "middle-out" message transform](https://openrouter.ai/docs/features/message-transforms) to help with prompts that exceed the maximum context size of a model. You can enable it by checking the "Compress prompts and message chains to the context size" box.
+
+---
 
 ## Tips and Notes
 
 * **Model Selection:** OpenRouter offers a wide range of models. Experiment to find the best one for your needs.
 * **Pricing:**  OpenRouter charges based on the underlying model's pricing.  See the [OpenRouter Models page](https://openrouter.ai/models) for details.
-* **Prompt Caching:** Some providers support prompt caching. See the OpenRouter documentation for supported models.
+*   **Prompt Caching:**
+    *   OpenRouter passes caching requests to underlying models that support it. Check the [OpenRouter Models page](https://openrouter.ai/models) to see which models offer caching.
+    *   For most models, caching should activate automatically if supported by the model itself (similar to how Requesty works).
+    *   **Exception for Gemini Models via OpenRouter:** Due to potential response delays sometimes observed with Google's caching mechanism when accessed via OpenRouter, a manual activation step is required *specifically for Gemini models*.
+    *   If using a **Gemini model** via OpenRouter, you **must manually check** the "Enable Prompt Caching" box in the provider settings to activate caching for that model. This checkbox serves as a temporary workaround. For non-Gemini models on OpenRouter, this checkbox is not necessary for caching.
+*   **Bring Your Own Key (BYOK):** If you use your own key for the underlying service, OpenRouter charges 5% of what it normally would. Roo Code automatically adjusts the cost calculation to reflect this.

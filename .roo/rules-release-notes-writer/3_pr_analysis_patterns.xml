@@ -1,0 +1,190 @@
+<pr_analysis_patterns>
+  <overview>
+    Patterns and templates for analyzing pull requests and transforming technical changes
+    into user-friendly release notes that focus on benefits rather than implementation details.
+  </overview>
+
+  <analysis_framework>
+    <step number="1">
+      <question>What changed?</question>
+      <focus>Identify the core functionality or feature affected</focus>
+      <examples>
+        <example>
+          <technical>Modified context condensing algorithm</technical>
+          <user_facing>Context management system</user_facing>
+        </example>
+        <example>
+          <technical>Updated file diff parsing logic</technical>
+          <user_facing>File editing capabilities</user_facing>
+        </example>
+      </examples>
+    </step>
+
+    <step number="2">
+      <question>Why did it change?</question>
+      <focus>Understand the problem being solved or improvement made</focus>
+      <examples>
+        <example>
+          <technical>Fixed race condition in concurrent reads</technical>
+          <user_facing>Preventing file reading errors</user_facing>
+        </example>
+        <example>
+          <technical>Optimized token counting algorithm</technical>
+          <user_facing>Improving performance and responsiveness</user_facing>
+        </example>
+      </examples>
+    </step>
+
+    <step number="3">
+      <question>How does this impact users?</question>
+      <focus>Determine concrete benefits in plain language</focus>
+      <examples>
+        <example>
+          <technical>Reduced memory usage by 30%</technical>
+          <user_facing>Roo Code now runs more smoothly on systems with limited resources</user_facing>
+        </example>
+        <example>
+          <technical>Added retry logic for API calls</technical>
+          <user_facing>More reliable connections with fewer interruptions</user_facing>
+        </example>
+      </examples>
+    </step>
+  </analysis_framework>
+
+  <pr_templates>
+    <template type="major_feature">
+      <structure><![CDATA[
+## [User-Friendly Feature Name]
+
+We've [high-level description of improvement] (thanks [Author]!) ([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER)):
+
+- **[Benefit Category 1]**: [How this helps users in plain language]
+- **[Benefit Category 2]**: [Another user benefit explained simply]
+- **[Benefit Category 3]**: [Additional user benefit if applicable]
+
+[Concluding sentence about overall impact on user experience]
+      ]]></structure>
+      <example><![CDATA[
+## Intelligent Context Condensing Now Default
+
+We've made our smart context management the default behavior for all conversations (thanks john-doe!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234)):
+
+- **Better Performance**: Conversations stay fast even with large codebases
+- **Smarter Responses**: Roo focuses on the most relevant code for your current task
+- **Reduced Errors**: Less chance of hitting token limits during complex operations
+
+This means you can work with larger projects without worrying about context management.
+      ]]></example>
+    </template>
+
+    <template type="bug_fix">
+      <structure><![CDATA[
+* **[Problem Fixed]**: [Brief description of what users can now do] (thanks [Author]!) ([#PR](link))
+      ]]></structure>
+      <example><![CDATA[
+* **File Editing**: Fixed issue where large files couldn't be edited properly (thanks jane-smith!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
+      ]]></example>
+    </template>
+
+    <template type="improvement">
+      <structure><![CDATA[
+* **[Area Improved]**: [What's better for users] ([#PR](link))
+      ]]></structure>
+      <example><![CDATA[
+* **Search Performance**: Code searches now complete 2x faster for large projects ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))
+      ]]></example>
+    </template>
+  </pr_templates>
+
+  <categorization_guide>
+    <category name="major_features">
+      <criteria>
+        <criterion>New functionality that significantly changes user experience</criterion>
+        <criterion>Features mentioned in marketing or announcements</criterion>
+        <criterion>Changes affecting core workflows</criterion>
+      </criteria>
+      <section_placement>Own ## heading with expanded description</section_placement>
+    </category>
+
+    <category name="bug_fixes">
+      <criteria>
+        <criterion>Resolves user-reported issues</criterion>
+        <criterion>Fixes broken functionality</criterion>
+        <criterion>Addresses error messages or crashes</criterion>
+      </criteria>
+      <section_placement>## Bug Fixes section with bullet points</section_placement>
+    </category>
+
+    <category name="qol_improvements">
+      <criteria>
+        <criterion>UI/UX enhancements</criterion>
+        <criterion>Workflow optimizations</criterion>
+        <criterion>Quality of life changes</criterion>
+      </criteria>
+      <section_placement>## QOL Improvements section</section_placement>
+    </category>
+
+    <category name="performance">
+      <criteria>
+        <criterion>Speed improvements</criterion>
+        <criterion>Memory optimizations</criterion>
+        <criterion>Efficiency gains</criterion>
+      </criteria>
+      <section_placement>## Misc Improvements section</section_placement>
+    </category>
+
+    <category name="provider_updates">
+      <criteria>
+        <criterion>Changes to API provider integrations</criterion>
+        <criterion>New provider support</criterion>
+        <criterion>Provider-specific fixes</criterion>
+      </criteria>
+      <section_placement>## Provider Updates section</section_placement>
+    </category>
+  </categorization_guide>
+
+  <language_transformations>
+    <transformation>
+      <technical>Refactored</technical>
+      <user_friendly>Improved</user_friendly>
+    </transformation>
+    <transformation>
+      <technical>Implemented</technical>
+      <user_friendly>Added</user_friendly>
+    </transformation>
+    <transformation>
+      <technical>Deprecated</technical>
+      <user_friendly>Replaced with better alternative</user_friendly>
+    </transformation>
+    <transformation>
+      <technical>Optimized algorithm</technical>
+      <user_friendly>Made faster/more efficient</user_friendly>
+    </transformation>
+    <transformation>
+      <technical>Fixed race condition</technical>
+      <user_friendly>Resolved timing issue</user_friendly>
+    </transformation>
+    <transformation>
+      <technical>Updated dependencies</technical>
+      <user_friendly>Enhanced compatibility and security</user_friendly>
+    </transformation>
+  </language_transformations>
+
+  <benefit_categories>
+    <category name="Performance">
+      <keywords>faster, quicker, responsive, efficient, smooth</keywords>
+    </category>
+    <category name="Reliability">
+      <keywords>stable, consistent, dependable, robust</keywords>
+    </category>
+    <category name="Usability">
+      <keywords>easier, simpler, intuitive, convenient</keywords>
+    </category>
+    <category name="Compatibility">
+      <keywords>supports, works with, compatible</keywords>
+    </category>
+    <category name="Security">
+      <keywords>secure, safe, protected</keywords>
+    </category>
+  </benefit_categories>
+</pr_analysis_patterns>
