@@ -408,6 +408,30 @@ This setup works reliably on Windows systems using Cygwin, Fish, and the Starshi
    - These settings can help regardless of your operating system
 
 
+### Ctrl+C Behavior
+
+**Issue**: If text is already typed in the terminal when Roo tries to run a command, Roo will press Ctrl+C first to clear the line, which can interrupt running processes.
+
+**Workaround**: Make sure your terminal prompt is empty (no partial commands typed) before asking Roo to execute terminal commands.
+
+### Multi-line Command Issues
+
+**Issue**: Commands that span multiple lines can confuse Roo and may show output from previous commands mixed in with current output.
+
+**Workaround**: Instead of multi-line commands, use command chaining with `&amp;&amp;` to keep everything on one line (e.g., `echo a &amp;&amp; echo b` instead of typing each command on a separate line).
+
+### PowerShell-Specific Issues
+
+1. **Premature Completion**: PowerShell sometimes tells Roo a command is finished before all the output has been shown.
+2. **Repeated Commands**: PowerShell may refuse to run the same command twice in a row.
+
+**Workaround**: Enable the "PowerShell counter workaround" setting and set a terminal command delay of 150ms in the settings to give commands more time to complete.
+
+### Incomplete Terminal Output
+
+**Issue**: Sometimes VS Code doesn't show or capture all the output from a command.
+
+**Workaround**: If you notice missing output, try closing and reopening the terminal tab, then run the command again. This refreshes the terminal connection.
 ---
 
 ## Troubleshooting Resources
