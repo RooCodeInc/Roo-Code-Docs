@@ -4,7 +4,7 @@ sidebar_label: VS Code Language Model API
 
 # Using VS Code Language Model API With Roo Code
 
-Roo Code includes *experimental* support for the [VS Code Language Model API](https://code.visualstudio.com/api/language-extensions/language-model-access). This API allows extensions to provide access to language models directly within VS Code.  This means you can potentially use models from:
+Roo Code includes *experimental* support for the [VS Code Language Model API](https://code.visualstudio.com/api/extension-guides/language-model). This API allows extensions to provide access to language models directly within VS Code.  This means you can potentially use models from:
 
 *   **GitHub Copilot:** If you have a Copilot subscription and the extension installed.
 *   **Other VS Code Extensions:** Any extension that implements the Language Model API.
