@@ -369,6 +369,9 @@ For fellow Windows users running Fish terminal within a Cygwin environment, here
       },
 
       // Optional: Set fish as your default if desired
+---
+
+## Known Issues and Workarounds
       // "terminal.integrated.defaultProfile.windows": "fish", // or "fish-direct" depending what you use.
 
       // ... other settings ...
