@@ -94,7 +94,89 @@
         When PR title/description isn't clear enough to determine user impact
       </when_to_use>
     </tool>
+
+    <tool name="github.get_issue">
+      <purpose>Get details about issues linked to PRs for complete contributor acknowledgment</purpose>
+      <usage><![CDATA[
+<use_mcp_tool>
+<server_name>github</server_name>
+<tool_name>get_issue</tool_name>
+<arguments>
+{
+  "owner": "RooCodeInc",
+  "repo": "Roo-Code",
+  "issue_number": 987
+}
+</arguments>
+</use_mcp_tool>
+      ]]></usage>
+      <extract>
+        <field>title - Issue title for context</field>
+        <field>user.login - Issue reporter username for acknowledgment</field>
+        <field>body - Issue description for additional understanding</field>
+      </extract>
+      <issue_extraction_patterns>
+        <description>Look for these patterns in PR descriptions to find linked issues:</description>
+        <pattern>Fixes #123</pattern>
+        <pattern>Closes #456</pattern>
+        <pattern>Resolves #789</pattern>
+        <pattern>Fix #101</pattern>
+        <pattern>Close #202</pattern>
+        <pattern>Resolve #303</pattern>
+        <pattern>#123 (standalone issue reference)</pattern>
+      </issue_extraction_patterns>
+    </tool>
   </github_tools>
+
+  <subtask_tools>
+    <tool name="new_task">
+      <purpose>Create subtasks for processing individual PRs</purpose>
+      <when_to_use>
+        When processing multiple PRs, create a subtask for each PR to investigate
+        it thoroughly and document findings in the temporary analysis file
+      </when_to_use>
+      <parameters>
+        <parameter name="mode">Always "release-notes-writer" for PR investigation subtasks</parameter>
+        <parameter name="message">Structured message with PR number and version</parameter>
+      </parameters>
+      <subtask_recognition>
+        The release-notes-writer mode recognizes subtask requests by the message pattern:
+        "Investigate PR #[number] for release notes v[version]"
+      </subtask_recognition>
+      <usage><![CDATA[
+<new_task>
+<mode>release-notes-writer</mode>
+<message>Investigate PR #1234 for release notes v3.20.3.
+
+Your task is to:
+1. Get full PR details using github.get_pull_request
+2. Extract any linked issues from the PR description (e.g., "Fixes #123")
+3. Get details for each linked issue using github.get_issue
+4. Analyze the change and categorize it (bug fix, feature, improvement, etc.)
+5. Write your findings to temp_pr_analysis.md in this format:
+
+## PR #1234: [Title]
+
+**Author**: [username]
+**Linked Issues**: #[issue] (reporter: [username]), ...
+**Category**: [Bug Fix/Feature/Improvement/etc.]
+**User Impact**: [Clear description of benefit to users]
+**Contributors**: [all contributors including PR author and issue reporters]
+
+---
+
+Use insert_content with line 0 to append to the file.</message>
+</new_task>
+      ]]></usage>
+      <subtask_workflow>
+        <step>Main task creates subtask with specific PR number</step>
+        <step>Subtask investigates PR and linked issues</step>
+        <step>Subtask writes findings to temp_pr_analysis.md</step>
+        <step>Subtask uses attempt_completion to report success</step>
+        <step>Main task continues with next PR</step>
+      </subtask_workflow>
+    </tool>
+  </subtask_tools>
 
   <file_tools>
     <tool name="list_files">
@@ -111,20 +193,51 @@
     </tool>
 
     <tool name="write_to_file">
-      <purpose>Create new release notes file</purpose>
+      <purpose>Create new release notes file and temporary analysis file</purpose>
+      <uses>
+        <use>Create final release notes file (docs/update-notes/vX.Y.Z.mdx)</use>
+        <use>Create temporary analysis file (temp_pr_analysis.md)</use>
+      </uses>
       <best_practices>
         <practice>Always include complete content</practice>
-        <practice>Use .mdx extension for new files</practice>
+        <practice>Use .mdx extension for final release notes</practice>
+        <practice>Use .md extension for temporary analysis file</practice>
         <practice>Include proper frontmatter if needed</practice>
       </best_practices>
     </tool>
 
+    <tool name="insert_content">
+      <purpose>Append PR analysis to temporary file</purpose>
+      <usage><![CDATA[
+<insert_content>
+<path>temp_pr_analysis.md</path>
+<line>0</line>
+<content>
+## PR #1234: Fix context condensing for large files
+
+**Author**: john-doe
+**Linked Issues**: #987 (reporter: bug-reporter-user)
+**Category**: Bug Fix
+**User Impact**: Fixed context condensing errors when working with files over 10MB
+**Contributors**: john-doe, bug-reporter-user
+
+---
+</content>
+</insert_content>
+      ]]></usage>
+      <when_to_use>
+        After analyzing each individual PR, append the structured findings
+        to the temporary analysis file for later compilation.
+      </when_to_use>
+    </tool>
+
     <tool name="read_file">
-      <purpose>Read existing files for updates</purpose>
+      <purpose>Read existing files for updates and compilation</purpose>
       <files_to_read>
         <file>docs/update-notes/index.md - For adding new entry</file>
         <file>sidebars.ts - For sidebar configuration</file>
         <file>docs/update-notes/vX.Y.mdx - For combined notes updates</file>
+        <file>temp_pr_analysis.md - For compiling final release notes</file>
       </files_to_read>
     </tool>
 
@@ -159,18 +272,39 @@
 
   <workflow_optimization>
     <tip priority="high">
+      <description>Use subtasks for PR processing</description>
+      <details>
+        Create individual subtasks for each PR investigation. This allows for:
+        - Clear separation of concerns
+        - Incremental progress tracking
+        - Better error isolation
+        - Potential for parallel processing
+      </details>
+    </tip>
+
+    <tip priority="high">
       <description>Batch PR analysis</description>
       <details>
-        Collect all PR numbers first, then fetch details for all PRs
-        before starting analysis. Store in temporary file for reference.
+        Collect all PR numbers first, then create subtasks for each PR.
+        Each subtask handles one PR completely before moving to the next.
       </details>
     </tip>
 
     <tip priority="high">
       <description>Use structured data storage</description>
       <details>
-        Create a temporary markdown or JSON file to organize PR data
-        before transforming to release notes.
+        Each subtask appends to temp_pr_analysis.md with a consistent format
+        that can be easily parsed when generating final release notes.
+      </details>
+    </tip>
+
+    <tip priority="high">
+      <description>Track all contributors</description>
+      <details>
+        For each PR, extract linked issue numbers from the description.
+        Fetch issue details to get reporter information.
+        Store both PR author and issue reporter for acknowledgments.
+        Remove duplicates when the same person is both PR author and issue reporter.
       </details>
     </tip>
 

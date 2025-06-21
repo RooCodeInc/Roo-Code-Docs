@@ -65,12 +65,68 @@
     </step>
 
     <step number="4">
-      <description>Analyze PRs and create release notes</description>
-      <analysis>
-        PR #1234: Bug fix - Users experiencing issues with large files
-        PR #1235: Reliability improvement - Connection stability
-        PR #1236: Provider update - New model support
-      </analysis>
+      <description>Create subtask to process PR #1234</description>
+      <tool_use><![CDATA[
+<new_task>
+<mode>release-notes-writer</mode>
+<message>Investigate PR #1234 for release notes v3.20.3.
+
+Your task is to:
+1. Get full PR details using github.get_pull_request
+2. Extract any linked issues from the PR description (e.g., "Fixes #123")
+3. Get details for each linked issue using github.get_issue
+4. Analyze the change and categorize it (bug fix, feature, improvement, etc.)
+5. Write your findings to temp_pr_analysis.md in this format:
+
+## PR #1234: [Title]
+
+**Author**: [username]
+**Linked Issues**: #[issue] (reporter: [username]), ...
+**Category**: [Bug Fix/Feature/Improvement/etc.]
+**User Impact**: [Clear description of benefit to users]
+**Contributors**: [all contributors including PR author and issue reporters]
+
+---
+
+Use insert_content with line 0 to append to the file.</message>
+</new_task>
+      ]]></tool_use>
+      <subtask_execution>
+        <note>The subtask will execute independently and perform the following:</note>
+        <actions>
+          <action>Fetch PR #1234 details (title: "Fix context condensing for large files", author: john-doe)</action>
+          <action>Extract linked issue #987 from description "Fixes #987"</action>
+          <action>Fetch issue #987 details (reporter: bug-reporter-user)</action>
+          <action>Analyze and categorize as Bug Fix</action>
+          <action>Write structured findings to temp_pr_analysis.md</action>
+          <action>Use attempt_completion to report success</action>
+        </actions>
+      </subtask_execution>
+      <result>Subtask completed successfully, findings written to temp_pr_analysis.md</result>
+    </step>
+
+    <step number="5">
+      <description>Create subtasks for remaining PRs</description>
+      <note>
+        Similar subtasks are created for PR #1235 and PR #1236, each investigating
+        and documenting their respective changes in the temporary file.
+      </note>
+    </step>
+
+    <step number="6">
+      <description>Read compiled analysis and create release notes</description>
+      <tool_use><![CDATA[
+<read_file>
+<path>temp_pr_analysis.md</path>
+</read_file>
+      ]]></tool_use>
+      <compiled_data>
+        All PR investigations have been completed and stored in a structured format,
+        ready to be transformed into the final release notes.
+      </compiled_data>
+
+    <step number="7">
+      <description>Create release notes with proper acknowledgments</description>
       <tool_use><![CDATA[
 <write_to_file>
 <path>docs/update-notes/v3.20.3.mdx</path>
@@ -81,9 +137,54 @@ This patch release improves reliability and fixes issues with large file handlin
 
 ## Bug Fixes
 
-* **Large File Handling**: Fixed context condensing errors when working with files over 10MB (thanks john-doe!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234))
-* **Connection Stability**: Added automatic retry for API timeouts, reducing failed requests (thanks jane-smith!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
+* **Large File Handling**: Fixed context condensing errors when working with files over 10MB (thanks john-doe, bug-reporter-user!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234))
+* **Connection Stability**: Added automatic retry for API timeouts, reducing failed requests (thanks jane-smith, reliability-tester!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
 
 ## Provider Updates
 
-* **OpenAI**: Added support for GPT-4 Turbo and GPT-4 Vision models ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))
+* **OpenAI**: Added support for GPT-4 Turbo and GPT-4 Vision models (thanks provider-dev!) ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))
+</content>
+<line_count>15</line_count>
+</write_to_file>
+      ]]></tool_use>
+      <note>
+        Notice how each acknowledgment includes both the PR author and the issue reporter
+        when available, properly crediting all contributors to the improvement.
+      </note>
+    </step>
+  </workflow>
+
+  <key_improvements>
+    <improvement>
+      <description>Subtask-based PR processing</description>
+      <details>
+        Each PR is now processed by an independent subtask, allowing for better
+        organization, error isolation, and potential parallel processing.
+      </details>
+    </improvement>
+    
+    <improvement>
+      <description>Enhanced contributor tracking</description>
+      <details>
+        The workflow now extracts linked issue information to identify and acknowledge
+        both PR authors and issue reporters, giving credit to all contributors.
+      </details>
+    </improvement>
+    
+    <improvement>
+      <description>Incremental documentation</description>
+      <details>
+        Each subtask writes its findings immediately to a temporary file, ensuring
+        no data is lost and progress can be tracked throughout the process.
+      </details>
+    </improvement>
+    
+    <improvement>
+      <description>Clear separation of concerns</description>
+      <details>
+        The main task orchestrates the workflow while subtasks handle individual
+        PR investigations, making the process more modular and maintainable.
+      </details>
+    </improvement>
+  </key_improvements>
+</complete_example>

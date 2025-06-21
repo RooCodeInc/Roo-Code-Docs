@@ -11,6 +11,8 @@
     <feature>Multi-file documentation updates</feature>
     <feature>Consistent formatting enforcement</feature>
     <feature>Version tracking and organization</feature>
+    <feature>Subtask-based PR processing for better organization</feature>
+    <feature>Comprehensive contributor acknowledgment including issue reporters</feature>
   </key_features>
 
   <workflow_summary>
@@ -25,15 +27,35 @@
     </phase>
     
     <phase number="3">
-      <name>Analysis</name>
-      <description>Transform technical changes into user benefits</description>
+      <name>PR Processing via Subtasks</name>
+      <description>Create individual subtasks to investigate each PR thoroughly</description>
+      <details>
+        Each subtask analyzes one PR, extracts linked issues, identifies all contributors,
+        and writes findings to a temporary file for later compilation
+      </details>
     </phase>
     
     <phase number="4">
-      <name>Documentation</name>
-      <description>Create release notes and update all related files</description>
+      <name>Compilation and Documentation</name>
+      <description>Read compiled PR analyses and create final release notes</description>
+    </phase>
+    
+    <phase number="5">
+      <name>File Updates</name>
+      <description>Update index.md, sidebars.ts, and combined release notes</description>
     </phase>
   </workflow_summary>
+
+  <operating_modes>
+    <mode type="main">
+      <trigger>User requests release notes for a version</trigger>
+      <behavior>Full workflow from PR discovery to documentation</behavior>
+    </mode>
+    <mode type="subtask">
+      <trigger>Message starts with "Investigate PR #"</trigger>
+      <behavior>Single PR investigation and documentation in temp file</behavior>
+    </mode>
+  </operating_modes>
 
   <file_permissions>
     <permission>
@@ -59,12 +81,24 @@
   </file_permissions>
 
   <usage_instructions>
-    <instruction>User provides a version number (e.g., "3.20.3")</instruction>
-    <instruction>Mode automatically determines previous version</instruction>
-    <instruction>Fetches and analyzes all PRs in the version range</instruction>
-    <instruction>Generates release notes with user-focused language</instruction>
-    <instruction>Updates index.md and sidebars.ts automatically</instruction>
-    <instruction>Updates combined release notes for patch versions</instruction>
+    <main_workflow>
+      <instruction>User provides a version number (e.g., "3.20.3")</instruction>
+      <instruction>Mode automatically determines previous version</instruction>
+      <instruction>Fetches and analyzes all PRs in the version range</instruction>
+      <instruction>Creates subtasks for each PR to investigate thoroughly</instruction>
+      <instruction>Each subtask documents findings in temp_pr_analysis.md</instruction>
+      <instruction>Compiles all findings into user-focused release notes</instruction>
+      <instruction>Updates index.md and sidebars.ts automatically</instruction>
+      <instruction>Updates combined release notes for patch versions</instruction>
+    </main_workflow>
+    <subtask_workflow>
+      <instruction>Receives PR number via "Investigate PR #X" message</instruction>
+      <instruction>Fetches PR details and extracts linked issues</instruction>
+      <instruction>Identifies all contributors (PR author and issue reporters)</instruction>
+      <instruction>Analyzes change and determines user impact</instruction>
+      <instruction>Appends findings to temp_pr_analysis.md</instruction>
+      <instruction>Reports completion to main task</instruction>
+    </subtask_workflow>
   </usage_instructions>
 
   <best_practices>

@@ -56,7 +56,7 @@
       <structure><![CDATA[
 ## [User-Friendly Feature Name]
 
-We've [high-level description of improvement] (thanks [Author]!) ([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER)):
+We've [high-level description of improvement] (thanks [Contributors]!) ([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER)):
 
 - **[Benefit Category 1]**: [How this helps users in plain language]
 - **[Benefit Category 2]**: [Another user benefit explained simply]
@@ -67,7 +67,7 @@ We've [high-level description of improvement] (thanks [Author]!) ([#PR_NUMBER](h
       <example><![CDATA[
 ## Intelligent Context Condensing Now Default
 
-We've made our smart context management the default behavior for all conversations (thanks john-doe!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234)):
+We've made our smart context management the default behavior for all conversations (thanks john-doe, issue-reporter!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234)):
 
 - **Better Performance**: Conversations stay fast even with large codebases
 - **Smarter Responses**: Roo focuses on the most relevant code for your current task
@@ -79,21 +79,45 @@ This means you can work with larger projects without worrying about context mana
 
     <template type="bug_fix">
       <structure><![CDATA[
-* **[Problem Fixed]**: [Brief description of what users can now do] (thanks [Author]!) ([#PR](link))
+* **[Problem Fixed]**: [Brief description of what users can now do] (thanks [Contributors]!) ([#PR](link))
       ]]></structure>
       <example><![CDATA[
-* **File Editing**: Fixed issue where large files couldn't be edited properly (thanks jane-smith!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
+* **File Editing**: Fixed issue where large files couldn't be edited properly (thanks jane-smith, bug-reporter!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
       ]]></example>
     </template>
 
     <template type="improvement">
       <structure><![CDATA[
-* **[Area Improved]**: [What's better for users] ([#PR](link))
+* **[Area Improved]**: [What's better for users] (thanks [Contributors]!) ([#PR](link))
       ]]></structure>
       <example><![CDATA[
-* **Search Performance**: Code searches now complete 2x faster for large projects ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))
+* **Search Performance**: Code searches now complete 2x faster for large projects (thanks perf-dev, suggester!) ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))
       ]]></example>
     </template>
+
+    <contributor_identification>
+      <pr_author>
+        <description>Always include the PR author as the primary contributor</description>
+        <source>user.login field from github.get_pull_request</source>
+      </pr_author>
+      <issue_reporter>
+        <description>Include issue reporter when PR references an issue</description>
+        <source>user.login field from github.get_issue for linked issues</source>
+        <patterns>
+          <pattern>Fixes #123</pattern>
+          <pattern>Closes #456</pattern>
+          <pattern>Resolves #789</pattern>
+          <pattern>Fix #101</pattern>
+          <pattern>Close #202</pattern>
+        </patterns>
+      </issue_reporter>
+      <ordering>
+        <rule>List PR author first</rule>
+        <rule>List issue reporter(s) second</rule>
+        <rule>Separate multiple contributors with commas</rule>
+        <rule>Remove duplicates if same person is both PR author and issue reporter</rule>
+      </ordering>
+    </contributor_identification>
   </pr_templates>
 
   <categorization_guide>
@@ -187,4 +211,50 @@ This means you can work with larger projects without worrying about context mana
       <keywords>secure, safe, protected</keywords>
     </category>
   </benefit_categories>
+
+  <subtask_mode_patterns>
+    <description>
+      Patterns specific to operating as a subtask for single PR investigation
+    </description>
+    <message_recognition>
+      <pattern>Investigate PR #(\d+) for release notes v([\d.]+)</pattern>
+      <extraction>
+        <field name="pr_number">First capture group</field>
+        <field name="version">Second capture group</field>
+      </extraction>
+    </message_recognition>
+    <workflow_differences>
+      <difference>
+        <main_mode>Processes multiple PRs in sequence</main_mode>
+        <subtask_mode>Focuses on single PR investigation</subtask_mode>
+      </difference>
+      <difference>
+        <main_mode>Creates complete release notes files</main_mode>
+        <subtask_mode>Appends findings to temp_pr_analysis.md</subtask_mode>
+      </difference>
+      <difference>
+        <main_mode>Updates multiple documentation files</main_mode>
+        <subtask_mode>Only writes to temporary analysis file</subtask_mode>
+      </difference>
+    </workflow_differences>
+    <output_format>
+      <description>Standardized format for subtask findings</description>
+      <template><![CDATA[
+## PR #[number]: [Title]
+
+**Author**: [username]
+**Linked Issues**: #[issue] (reporter: [username]), ...
+**Category**: [Bug Fix/Feature/Improvement/etc.]
+**User Impact**: [Clear description of benefit to users]
+**Contributors**: [all contributors including PR author and issue reporters]
+
+---
+      ]]></template>
+      <notes>
+        <note>Always append to temp_pr_analysis.md using insert_content with line 0</note>
+        <note>Include the separator (---) to clearly delineate entries</note>
+        <note>Maintain consistent formatting for easy parsing</note>
+      </notes>
+    </output_format>
+  </subtask_mode_patterns>
 </pr_analysis_patterns>

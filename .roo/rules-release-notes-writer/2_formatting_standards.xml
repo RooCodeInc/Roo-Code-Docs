@@ -82,11 +82,28 @@ Concluding sentence about the overall benefit to users.
 
   <contributor_acknowledgments>
     <format>(thanks username!)</format>
+    <multiple_contributors>
+      <format>(thanks username1, username2!)</format>
+      <description>When multiple contributors are involved (PR author + issue reporter)</description>
+    </multiple_contributors>
     <rules>
       <rule>Omit @ symbol from GitHub usernames</rule>
       <rule>Place before PR link in parentheses</rule>
       <rule>Use consistent format throughout</rule>
+      <rule>Include both PR author and issue reporter when available</rule>
+      <rule>List PR author first, then issue reporter</rule>
+      <rule>Separate multiple usernames with commas</rule>
     </rules>
+    <examples>
+      <example>
+        <description>PR author only</description>
+        <format>(thanks john-doe!)</format>
+      </example>
+      <example>
+        <description>PR author + issue reporter</description>
+        <format>(thanks john-doe, jane-smith!)</format>
+      </example>
+    </examples>
   </contributor_acknowledgments>
 
   <pr_links>

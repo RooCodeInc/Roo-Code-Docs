@@ -49,40 +49,98 @@
 			</steps>
 		</phase>
 		<phase name="process_each_pr">
-			<description>For each PR, follow a micro-workflow to gather, analyze, and write to a temporary file.</description>
-			<micro_workflow>
+			<description>Process PRs individually, investigating each one thoroughly and storing findings in a temporary file for later compilation.</description>
+			<iterative_workflow>
+				<overview>
+					For each PR in the list, execute a complete investigation workflow and immediately
+					store the findings in a temporary markdown file (e.g., temp_pr_analysis.md).
+					This allows for incremental building of release note data.
+				</overview>
+				
+				<per_pr_steps>
+					<step number="1">
+						<action>Gather comprehensive PR details</action>
+						<tools>
+							<tool>github.get_pull_request - Title, author, description</tool>
+							<tool>github.get_pull_request_files - Changed files (optional)</tool>
+							<tool>github.get_pull_request_diff - Code changes (if needed for clarity)</tool>
+						</tools>
+						<details>Extract PR title, author username, and description for analysis</details>
+					</step>
+					
+					<step number="2">
+						<action>Extract and gather linked issue details</action>
+						<process>
+							<substep>Parse PR description for issue references (Fixes #123, Closes #456, etc.)</substep>
+							<substep>For each found issue number, use github.get_issue to gather details</substep>
+							<substep>Extract issue reporter username and title for context</substep>
+						</process>
+						<tools>
+							<tool>github.get_issue - For each linked issue found</tool>
+						</tools>
+					</step>
+					
+					<step number="3">
+						<action>Analyze and categorize the change</action>
+						<analysis_framework>
+							<question>What changed? (core functionality/feature affected)</question>
+							<question>Why did it change? (problem being solved)</question>
+							<question>How does this impact users? (benefits in plain language)</question>
+							<question>What category? (bug fix, feature, improvement, etc.)</question>
+						</analysis_framework>
+					</step>
+					
+					<step number="4">
+						<action>Write findings to temporary file</action>
+						<process>
+							<substep>Create or append to temp_pr_analysis.md</substep>
+							<substep>Include structured data for this PR</substep>
+							<substep>Store all contributor information</substep>
+							<substep>Include categorization and user impact analysis</substep>
+						</process>
+						<file_format>
+							Use a consistent markdown format that can be easily parsed later
+							for generating the final release notes
+						</file_format>
+					</step>
+				</per_pr_steps>
+				
+				<completion_per_pr>
+					After each PR analysis is complete and written to the temporary file,
+					move on to the next PR. This ensures thorough investigation of each
+					change before proceeding.
+				</completion_per_pr>
+			</iterative_workflow>
+		</phase>
+		<phase name="compile_final_release_notes">
+			<description>Read the temporary analysis file and compile all findings into the final release notes format</description>
+			<steps>
 				<step number="1">
-					<action>Gather comprehensive PR details</action>
-					<tools>
-						<tool>github.get_pull_request - Title, author, description</tool>
-						<tool>github.get_pull_request_files - Changed files</tool>
-						<tool>github.get_pull_request_diff - Code changes</tool>
-						<tool>github.get_pull_request_comments - Additional context if needed</tool>
-					</tools>
+					<action>Read temporary analysis file</action>
+					<details>
+						Read the complete temp_pr_analysis.md file that contains all individual PR investigations
+					</details>
 				</step>
 				<step number="2">
-					<action>Gather related issue details</action>
-					<tools>
-						<tool>github.get_issue</tool>
-					</tools>
-					<details>From the PR description, extract the issue number and retrieve details.</details>
+					<action>Group and organize findings</action>
+					<details>
+						Group PRs by category (Bug Fixes, QOL Improvements, Provider Updates, etc.)
+						based on the analysis stored for each PR
+					</details>
 				</step>
 				<step number="3">
-					<action>Append analysis to temporary file</action>
+					<action>Format for release notes</action>
 					<details>
-            Analyze the gathered information for a single PR and append the summary
-            to a temporary file. This builds a comprehensive dataset incrementally.
-          </details>
+						Transform the organized findings into the final release notes format
+						with proper acknowledgments and user-friendly language
+					</details>
 				</step>
-			</micro_workflow>
-		</phase>
-		<phase name="transform_to_user_benefits">
-			<description>Analyze technical changes from the temporary file and convert to user-facing benefits based on the official changelog</description>
-			<steps>
-				<step>Identify what changed (core functionality/feature)</step>
-				<step>Understand why it changed (problem being solved)</step>
-				<step>Determine user impact (benefits in plain language)</step>
-				<step>Categorize changes (features, fixes, improvements)</step>
+				<step number="4">
+					<action>Clean up temporary file</action>
+					<details>
+						Optionally remove or archive the temporary analysis file after successful completion
+					</details>
+				</step>
 			</steps>
 		</phase>
 		<phase name="generate_documentation">

@@ -1,0 +1,147 @@
+<subtask_handling_instructions>
+  <overview>
+    The release-notes-writer mode can operate in two contexts:
+    1. Main workflow - Creating complete release notes for a version
+    2. Subtask mode - Investigating a single PR and documenting findings
+  </overview>
+
+  <mode_detection>
+    <description>
+      The mode determines its operating context by examining the user's initial message
+    </description>
+    <patterns>
+      <pattern type="subtask">
+        <regex>^Investigate PR #(\d+) for release notes</regex>
+        <action>Execute single PR investigation workflow</action>
+      </pattern>
+      <pattern type="main">
+        <regex>^(Create|Generate|Make) release notes for (version |v)?[\d.]+</regex>
+        <action>Execute full release notes workflow</action>
+      </pattern>
+    </patterns>
+  </mode_detection>
+
+  <subtask_workflow>
+    <when_triggered>
+      When the message matches the subtask pattern "Investigate PR #[number] for release notes"
+    </when_triggered>
+    
+    <steps>
+      <step number="1">
+        <action>Extract PR number from message</action>
+        <details>
+          Parse the message to get the PR number to investigate
+        </details>
+      </step>
+      
+      <step number="2">
+        <action>Fetch PR details</action>
+        <tool>github.get_pull_request</tool>
+        <extract>
+          - Title
+          - Author username
+          - Description/body
+          - Merge date
+        </extract>
+      </step>
+      
+      <step number="3">
+        <action>Extract linked issues</action>
+        <process>
+          <substep>Search PR description for issue references</substep>
+          <substep>Look for patterns: Fixes #123, Closes #456, Resolves #789</substep>
+          <substep>Extract all issue numbers found</substep>
+        </process>
+      </step>
+      
+      <step number="4">
+        <action>Fetch issue details</action>
+        <tool>github.get_issue</tool>
+        <details>
+          For each linked issue found, fetch:
+          - Issue title
+          - Reporter username
+          - Additional context if needed
+        </details>
+      </step>
+      
+      <step number="5">
+        <action>Analyze and categorize</action>
+        <analysis>
+          <question>What type of change is this?</question>
+          <categories>
+            <category>Bug Fix - Fixes broken functionality</category>
+            <category>Feature - Adds new capability</category>
+            <category>QOL Improvement - Enhances existing features</category>
+            <category>Provider Update - Changes to API providers</category>
+            <category>Performance - Speed or efficiency improvements</category>
+          </categories>
+        </analysis>
+      </step>
+      
+      <step number="6">
+        <action>Write findings to temporary file</action>
+        <tool>insert_content</tool>
+        <format><![CDATA[
+## PR #[number]: [Title]
+
+**Author**: [username]
+**Linked Issues**: #[issue] (reporter: [username]), ...
+**Category**: [Category]
+**User Impact**: [Clear description of benefit to users]
+**Contributors**: [all contributors including PR author and issue reporters]
+
+---
+        ]]></format>
+        <file>temp_pr_analysis.md</file>
+        <note>Use line 0 to append to end of file</note>
+      </step>
+      
+      <step number="7">
+        <action>Report completion</action>
+        <tool>attempt_completion</tool>
+        <message>
+          Successfully investigated PR #[number] and documented findings in temp_pr_analysis.md
+        </message>
+      </step>
+    </steps>
+  </subtask_workflow>
+
+  <error_handling>
+    <scenario>
+      <error>PR not found</error>
+      <action>
+        Report error via attempt_completion with details about the missing PR
+      </action>
+    </scenario>
+    
+    <scenario>
+      <error>No linked issues found</error>
+      <action>
+        Continue with just PR author as contributor
+      </action>
+    </scenario>
+    
+    <scenario>
+      <error>Issue not accessible</error>
+      <action>
+        Note the issue reference but skip reporter details
+      </action>
+    </scenario>
+  </error_handling>
+
+  <best_practices>
+    <practice>
+      Always append to temp_pr_analysis.md, never overwrite
+    </practice>
+    <practice>
+      Include all contributors, removing duplicates if someone is both author and reporter
+    </practice>
+    <practice>
+      Focus on user impact rather than technical implementation details
+    </practice>
+    <practice>
+      Use consistent formatting for easy parsing later
+    </practice>
+  </best_practices>
+</subtask_handling_instructions>
