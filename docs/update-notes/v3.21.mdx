@@ -68,6 +68,9 @@ Added support for reading Excel (.xlsx) files in tools ([#4751](https://github.c
 
 ## Bug Fixes
 
+* **Qdrant Vector Store**: Fixed URL prefix handling during QdrantClient initialization for deployments with path prefixes (thanks CW-B-W!) ([#5033](https://github.com/RooCodeInc/Roo-Code/pull/5033))
+* **Claude Code Provider**: Resolved JSON parsing issues and improved reasoning block display to show collapsible reasoning blocks instead of raw JSON ([#5049](https://github.com/RooCodeInc/Roo-Code/pull/5049))
+* **LM Studio**: Improved model detection to display all downloaded models instead of only currently loaded models (thanks daniel-lxs!) ([#5047](https://github.com/RooCodeInc/Roo-Code/pull/5047))
 * **Apply Diff Accuracy**: Fixed start line parameter not working correctly when applying multiple file diffs (thanks samhvw8!) ([#5019](https://github.com/RooCodeInc/Roo-Code/pull/5019))
 * **Ollama Compatibility**: Resolved validation errors that prevented Ollama from working with certain models (thanks daniel-lxs, MartinHarding1998!) ([#5014](https://github.com/RooCodeInc/Roo-Code/pull/5014))
 *   **Ollama & LM Studio Context Length**: The context length for models served by Ollama and LM Studio is now automatically detected and displayed correctly, so you no longer need to configure it manually (thanks thecolorblue, Fade78!) ([#4314](https://github.com/RooCodeInc/Roo-Code/pull/4314)).
