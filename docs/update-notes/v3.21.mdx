@@ -12,6 +12,18 @@ We're excited to announce the official launch of the [Roo Marketplace](/features
 
 The Roo Marketplace makes it easy to extend Roo Code's functionality with powerful integrations created by our vibrant community.
 
+## Use Your Claude Max Subscription with Roo Code
+
+You can now use your Claude Max subscription directly in Roo Code through our new Claude Code provider ([#4864](https://github.com/RooCodeInc/Roo-Code/pull/4864), [#5038](https://github.com/RooCodeInc/Roo-Code/pull/5038)):
+
+- **Leverage Your Existing Subscription**: Connect your Claude Max plan to Roo Code through the Claude CLI
+- **No Additional API Costs**: Use your subscription benefits instead of paying per-token API rates
+- **Access Premium Models**: Use Claude Sonnet 4, Opus 4, and other advanced models included in your plan
+- **Zero Setup Complexity**: Select Claude Code as your provider during initial setup - no API keys needed
+- **Advanced Reasoning Support**: Full access to Claude's thinking modes and reasoning capabilities
+
+Perfect for Claude Max subscribers who want to maximize their subscription value while coding.
+
 ## [Gemini 2.5 Models Support](https://blog.google/products/gemini/gemini-2-5-model-family-expands/)
 
 We've added support for [Google's latest Gemini 2.5 models](https://blog.google/products/gemini/gemini-2-5-model-family-expands/) ([#4762](https://github.com/RooCodeInc/Roo-Code/pull/4762), [#4770](https://github.com/RooCodeInc/Roo-Code/pull/4770), [#4767](https://github.com/RooCodeInc/Roo-Code/pull/4767)):
@@ -56,6 +68,8 @@ Added support for reading Excel (.xlsx) files in tools ([#4751](https://github.c
 
 ## Bug Fixes
 
+* **Apply Diff Accuracy**: Fixed start line parameter not working correctly when applying multiple file diffs (thanks samhvw8!) ([#5019](https://github.com/RooCodeInc/Roo-Code/pull/5019))
+* **Ollama Compatibility**: Resolved validation errors that prevented Ollama from working with certain models (thanks daniel-lxs, MartinHarding1998!) ([#5014](https://github.com/RooCodeInc/Roo-Code/pull/5014))
 *   **Ollama & LM Studio Context Length**: The context length for models served by Ollama and LM Studio is now automatically detected and displayed correctly, so you no longer need to configure it manually (thanks thecolorblue, Fade78!) ([#4314](https://github.com/RooCodeInc/Roo-Code/pull/4314)).
 *   **MCP Tool UI**: Resolved an issue where the eye icon for MCP tools was showing the incorrect state and was visible in chat contexts where it should have been hidden (thanks daniel-lxs!) ([#4994](https://github.com/RooCodeInc/Roo-Code/pull/4994)).
 * **Marketplace**: Fixed an issue where the marketplace would go blank after being populated and resolved timeout issues (thanks yangbinbin48!) ([#4941](https://github.com/RooCodeInc/Roo-Code/pull/4941))
