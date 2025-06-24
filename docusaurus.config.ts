@@ -256,7 +256,7 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
-    image: 'img/social-share.png',
+    image: 'img/social-share.jpg',
     navbar: {
       logo: {
         alt: 'Roo Code Logo',
