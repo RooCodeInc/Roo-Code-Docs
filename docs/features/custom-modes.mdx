@@ -163,25 +163,39 @@ customModes:
 *   *JSON Example:* `"roleDefinition": "You are a technical writer specializing in clear documentation."`
 
 ##### `groups`
-*   **Purpose:** Array/list defining which tool groups the mode can access and any file restrictions.
-*   **Available Tool Groups (Strings):** `"read"`, `"edit"`, `"browser"`, `"command"`, `"mcp"`.
-*   **File Restrictions for "edit" group:**
-    *   To apply file restrictions, the "edit" entry becomes a list (YAML) or array (JSON) where the first element is `"edit"` and the second is a map/object defining the restrictions.
-    *   `fileRegex`: A regular expression string to control which files the mode can edit.
-        *   In YAML, typically use single backslashes for regex special characters (e.g., `\.md$`).
-        *   In JSON, backslashes must be double-escaped (e.g., `\\.md$`).
-    *   `description`: An optional string describing the restriction.
-    *   For more complex patterns, see [Understanding Regex in Custom Modes](#understanding-regex-in-custom-modes).
-*   *YAML Example:*
+* **Purpose:** Array/list defining which tool groups the mode can access and any file restrictions.
+* **Available Tool Groups (Strings):** `"read"`, `"edit"`, `"browser"`, `"command"`, `"mcp"`.
+* **File Restrictions for "edit" group (Advanced - Use with Caution):**
+
+    :::caution
+    This feature has been found to be **unstable** and may cause the entire file to fail parsing, even with valid syntax. It is strongly recommended to use simple `edit` permissions (`groups: [read, edit]`) instead of `fileRegex` where possible.
+    :::
+
+    * `fileRegex`: A regular expression string to control which files the mode can edit.
+        * In YAML, typically use single backslashes for regex special characters (e.g., `\.md$`).
+        * In JSON, backslashes must be double-escaped (e.g., `\\.md$`).
+    * `description`: An optional string describing the restriction.
+    * For more complex patterns, see [Understanding Regex in Custom Modes](#understanding-regex-in-custom-modes).
+
+* *YAML Example (Simple Permissions - **Recommended**):*
     ```yaml
     groups:
       - read
-      - - edit # Start of "edit" tool with restrictions
-        - fileRegex: \.(js|ts)$ # Restriction map for JS/TS files
+      - edit # Grants general edit permission
+      - browser
+    ```
+
+* *YAML Example (Advanced `fileRegex` - **Potentially Unstable**):*
+    ```yaml
+    groups:
+      - read
+      - - "edit" # Start of "edit" tool with restrictions
+        - fileRegex: \.(js|ts)$
           description: JS/TS files only
       - command
     ```
-*   *JSON Example:*
+
+* *JSON Example:*
     ```json
     "groups": [
       "read",
@@ -256,10 +270,22 @@ While JSON is still fully supported, new modes created via the UI or by asking R
 
 When editing YAML manually, keep these points in mind:
 
-*   **Indentation is Key:** YAML uses indentation (spaces, not tabs) to define structure. Incorrect indentation is the most common source of errors. Ensure consistent spacing for nested elements.
-*   **Colons for Key-Value Pairs:** Keys must be followed by a colon and a space (e.g., `slug: my-mode`).
-*   **Hyphens for List Items:** List items start with a hyphen and a space (e.g., `- read`).
-*   **Validate Your YAML:** If you encounter issues, use an online YAML validator or your editor's built-in validation to check for syntax errors.
+* **Indentation is Key:** YAML uses indentation (spaces, not tabs) to define structure. Incorrect indentation is the most common source of errors. Ensure consistent spacing for nested elements.
+* **Colons for Key-Value Pairs:** Keys must be followed by a colon and a space (e.g., `slug: my-mode`).
+* **Hyphens for List Items:** List items start with a hyphen and a space (e.g., `- read`).
+* **Validate Your YAML:** If you encounter issues, use an online YAML validator or your editor's built-in validation to check for syntax errors.
+
+:::danger Troubleshooting & Known Limitations
+Based on real-world use, the Roo Code YAML parser has several specific behaviors to be aware of to prevent parsing errors:
+* **YAML Anchors/Aliases Not Supported**: The parser does not support YAML anchors (`&`) or aliases (`*`) for reusing content. All instructions must be written out fully in each mode.
+
+* **Use Simple `groups` Permissions**: The complex `fileRegex` syntax for restricting file edits has been found to be unstable and can cause the entire file to fail parsing.
+    * **Recommended:** Use simple, proven lists for permissions (e.g., `groups: [read, edit]`).
+    * **Avoid (Unstable):** `groups: - ["edit", { "fileRegex": "..." }]`. While this may work in some YAML environments, it is not reliably parsed by Roo Code.
+    
+* **File Encoding Must Be UTF-8**: To support special characters and emojis (e.g., `📝`) in mode names, your `.roomodes` or `custom_modes.yaml` file must be saved with **UTF-8** encoding.
+
+* **Check for Invisible Characters**: Some text editors or copy-pasting from web pages can insert non-standard characters (like "non-breaking spaces") instead of regular spaces for indentation. The parser will reject this. If you encounter a stubborn error, try re-typing the indentation for the problematic lines.
 
 ### Migration to YAML Format
 
@@ -457,6 +483,10 @@ When overriding default modes, test carefully. Consider backing up configuration
 
 ## Understanding Regex in Custom Modes
 
+:::caution Important Note
+The `fileRegex` feature can be unstable and may cause parsing errors. When debugging, simplifying your `groups` list to `[read, edit]` is a recommended first step before troubleshooting your regex pattern.
+:::
+
 Regular expressions (`fileRegex`) offer fine-grained control over file editing permissions.
 
 :::tip
@@ -510,3 +540,4 @@ When a mode attempts to edit a file that doesn't match its `fileRegex` pattern, 
 
 ## Community Gallery
 Ready to explore more? Check out the [Custom Modes Gallery](/community/#custom-modes-gallery) section on the main community page to discover and share custom modes created by the community!
+
