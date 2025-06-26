@@ -20,6 +20,16 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Roo Code Cloud',
+      items: [
+        'roo-code-cloud/what-is-roo-code-cloud',
+        'roo-code-cloud/login',
+        'roo-code-cloud/dashboard',
+        'roo-code-cloud/task-sharing',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Features',
       collapsed: false,
       collapsible: false,
@@ -191,6 +201,14 @@ const sidebars: SidebarsConfig = {
       label: 'Update Notes',
       items: [
         'update-notes/index',
+        {
+          type: 'category',
+          label: '3.22',
+          items: [
+            { type: 'doc', id: 'update-notes/v3.22', label: '3.22 Combined' },
+            { type: 'doc', id: 'update-notes/v3.22.0', label: '3.22.0' },
+          ],
+        },
         {
           type: 'category',
           label: '3.21',

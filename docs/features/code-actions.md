@@ -1,6 +1,6 @@
 # Code Actions
 
-Code Actions are a powerful feature of VS Code that provide quick fixes, refactorings, and other code-related suggestions directly within the editor. Roo Code integrates with this system to offer AI-powered assistance for common coding tasks.
+Code Actions provide instant access to Roo Code's AI assistance directly within your code editor through VSCode's lightbulb (quick fix) system. This context-aware feature automatically detects relevant code situations and offers appropriate AI-powered actions without requiring you to switch to the chat interface.
 
 ---
 
@@ -29,10 +29,17 @@ Roo Code provides 5 code actions, though their availability varies by context:
 *   **Fix Code:** Available through the lightbulb menu and command palette (but not the right-click menu). Asks Roo Code to fix problems in the selected code.
 *   **New Task:** Creates a new task with the selected code. Available through the command palette.
 
-### Conditional Display Logic
-The lightbulb menu shows different actions based on context:
-- **When diagnostics (errors/warnings) are present:** Only "Add to Context" and "Fix Code" appear
-- **When no diagnostics are present:** "Add to Context", "Explain Code", and "Improve Code" are shown
+### Context-Aware Actions
+The lightbulb menu intelligently shows different actions based on your code's current state:
+
+**For Code with Problems** (when VSCode shows red/yellow squiggles):
+- **Fix Code** - Get step-by-step guidance to resolve the specific error or warning
+- **Add to Context** - Add the problematic code to Roo's context for discussion
+
+**For Clean Code** (no diagnostics):
+- **Explain Code** - Get detailed explanations of what the code does
+- **Improve Code** - Receive optimization suggestions and best practices
+- **Add to Context** - Add the code to Roo's context for further work
 
 ### Add to Context Deep Dive
 
@@ -89,6 +96,22 @@ Roo Code also provides similar actions for terminal output:
 *   **Terminal: Explain Command:** Asks Roo Code to explain terminal output or commands
 
 These actions are available when you select text in the terminal and right-click.
+
+---
+
+## Disabling/Enabling Code Actions
+
+You can control Code Actions through VSCode settings:
+
+### Enable/Disable Code Actions
+- **Setting**: [`roo-cline.enableCodeActions`](vscode://settings/roo-cline.enableCodeActions)
+- **Default**: Enabled
+- **Description**: Controls whether Roo Code quick fix options appear in the editor
+
+To access this setting:
+1. Open VSCode Settings (`Ctrl/Cmd + ,`)
+2. Search for "enableCodeActions"
+3. Toggle the checkbox to enable or disable
 
 ---
 

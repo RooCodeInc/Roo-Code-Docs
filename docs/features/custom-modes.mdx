@@ -48,9 +48,10 @@ Custom modes are defined by several key properties. Understanding these concepts
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Slug (`slug`)                            | A **unique internal identifier** for the mode. It's used by Roo Code to reference the mode, especially for associating [mode-specific instruction files](#mode-specific-instructions-via-filesdirectories).                                                                                                                                                                                                   |
 | Name (`name`)                            | The **display name** for the mode as it appears in the Roo Code user interface. This should be human-readable and descriptive.                                                                                                                                                                                                                                                                               |
-| Role Definition (`roleDefinition`)       | Defines the **core identity and expertise** of the mode. This text is placed at the beginning of the system prompt.<br />- Its primary function is to define Roo's personality and behavior when this mode is active.<br />- The **first sentence** (up to the first period `.`) serves as a default concise summary for Roo to understand the mode's general purpose. <br />- **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode switching. In such cases, the first sentence of `roleDefinition` is less critical for this specific summarization task, though the entire `roleDefinition` is still used when the mode is active to guide its overall behavior. |
+| Description (`description`)              | A **short, user-friendly summary** of the mode's purpose displayed in the mode selector UI.<br />- This text appears below the mode's name in the redesigned mode selector, offering users a quick understanding of the mode's function.<br />- Keep this concise and focused on what the mode does for the user.                                                                                              |
+| Role Definition (`roleDefinition`)       | Defines the **core identity and expertise** of the mode. This text is placed at the beginning of the system prompt.<br />- Its primary function is to define Roo's personality and behavior when this mode is active.<br />- With the introduction of the `description` field, the `roleDefinition` should provide a detailed description of the mode's identity, while the `description` field handles the short summary for the UI.<br />- The `whenToUse` property now takes precedence for summarization in automated contexts like task orchestration. |
 | Available Tools (`groups`)               | Defines the **allowed toolsets and file access permissions** for the mode.<br />- In the UI, this corresponds to selecting which general categories of tools (like reading files, editing files, browsing, or executing commands) the mode can use.<br />- The UI shows which files can be edited in the 'Allowed files' section under each mode.<br />- File type restrictions for the "edit" group are typically managed via manual YAML/JSON configuration or by asking Roo to set them up, as detailed in the [Property Details for `groups`](#groups). |
-| When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Roo to understand the mode's purpose**, especially for automated decisions.<br />- This text is used by Roo, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Roo decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- If populated, this description is used by Roo to understand the mode's function; otherwise, the first sentence of the `roleDefinition` is used by default. |
+| When to Use (optional) (`whenToUse`)     | (Optional) Provides **guidance for Roo's automated decision-making**, particularly for mode selection and task orchestration.<br />- This text is used by Roo, particularly the [`🪃 Orchestrator`](/basic-usage/using-modes#orchestrator-mode-aka-boomerang-mode) mode, for [orchestrating tasks](/features/boomerang-tasks) (e.g., via the [`new_task`](/advanced-usage/available-tools/new-task) tool).<br />- It also helps Roo decide which mode is appropriate when [switching modes](/basic-usage/using-modes#switching-between-modes) (e.g., via the [`switch_mode`](/advanced-usage/available-tools/switch-mode) tool).<br />- This field is **not displayed in the mode selector UI** - that's handled by the `description` field. |
 | Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Roo's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
 
 ---
@@ -75,9 +76,9 @@ Roo Code will guide you through the process, prompting for necessary information
 
 <img src="/img/custom-modes/custom-modes-4.png" alt="Custom mode creation interface in the Prompts tab" width="600" />
 
-    *The custom mode creation interface showing fields for name, slug, save location, role definition, available tools, custom instructions.*
+    *The custom mode creation interface showing fields for name, slug, description, save location, role definition, available tools, custom instructions.*
 
-    The interface provides fields for `Name`, `Slug`, `Save Location`, `Role Definition`, `When to Use (optional)`, `Available Tools`, and `Custom Instructions`. After filling these, click the "Create Mode" button. Roo Code will save the new mode in YAML format.
+    The interface provides fields for `Name`, `Slug`, `Description`, `Save Location`, `Role Definition`, `When to Use (optional)`, `Available Tools`, and `Custom Instructions`. After filling these, click the "Create Mode" button. Roo Code will save the new mode in YAML format.
 
 *Refer to the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table for conceptual explanations of each property. File type restrictions for the "edit" tool group can be added by asking Roo or through manual YAML/JSON configuration.*
 
@@ -95,6 +96,7 @@ These files define an array/list of custom modes.
 customModes:
   - slug: docs-writer
     name: 📝 Documentation Writer
+    description: A specialized mode for writing and editing technical documentation.
     roleDefinition: You are a technical writer specializing in clear documentation.
     whenToUse: Use this mode for writing and editing documentation.
     customInstructions: Focus on clarity and completeness in documentation.
@@ -116,6 +118,7 @@ customModes:
     {
       "slug": "docs-writer",
       "name": "📝 Documentation Writer",
+      "description": "A specialized mode for writing and editing technical documentation.",
       "roleDefinition": "You are a technical writer specializing in clear documentation.",
       "whenToUse": "Use this mode for writing and editing documentation.",
       "customInstructions": "Focus on clarity and completeness in documentation.",
@@ -149,17 +152,24 @@ customModes:
 *   *YAML Example:* `name: 📝 Documentation Writer`
 *   *JSON Example:* `"name": "Documentation Writer"`
 
+##### `description`
+*   **Purpose:** A short, user-friendly summary displayed below the mode name in the mode selector UI.
+*   **Format:** Keep this concise and focused on what the mode does for the user.
+*   **UI Display:** This text appears in the redesigned mode selector, offering users a quick understanding of the mode's function.
+*   *YAML Example:* `description: A specialized mode for writing and editing technical documentation.`
+*   *JSON Example:* `"description": "A specialized mode for writing and editing technical documentation."`
+
 ##### `roleDefinition`
 *   **Purpose:** Detailed description of the mode's role, expertise, and personality.
 *   **Placement:** This text is placed at the beginning of the system prompt when the mode is active.
-*   **Important First Sentence:** The first sentence (up to the first period `.`) serves as a default concise summary for Roo to understand the mode's general purpose. **However, if the `whenToUse` property is defined, `whenToUse` takes precedence** for summarizing the mode's function, especially in contexts like task orchestration or mode selection.
+*   **Updated Role:** With the introduction of the `description` field, the `roleDefinition` should provide a detailed description of the mode's identity, while the `description` field handles the short summary for the UI. The `whenToUse` property now takes precedence for summarization in automated contexts.
 *   *YAML Example (multi-line):*
-    ```yaml
-    roleDefinition: >-
-      You are a test engineer with expertise in:
-      - Writing comprehensive test suites
-      - Test-driven development
-    ```
+     ```yaml
+     roleDefinition: >-
+       You are a test engineer with expertise in:
+       - Writing comprehensive test suites
+       - Test-driven development
+     ```
 *   *JSON Example:* `"roleDefinition": "You are a technical writer specializing in clear documentation."`
 
 ##### `groups`
@@ -191,9 +201,9 @@ customModes:
     ```
 
 ##### `whenToUse`
-*   **Purpose:** (Optional) Provides guidance for Roo to understand what this mode does. Used by the Orchestrator mode and for mode switching.
+*   **Purpose:** (Optional) Provides guidance for Roo's automated decision-making, particularly for mode selection and task orchestration.
 *   **Format:** A string describing ideal scenarios or task types for this mode.
-*   **Usage:** If populated, Roo uses this description. Otherwise, the first sentence of `roleDefinition` is used.
+*   **Usage:** This field is used by Roo for automated decisions and is **not displayed in the mode selector UI** - that's handled by the `description` field. If populated, Roo uses this description for orchestration and mode switching; otherwise, the first sentence of `roleDefinition` is used.
 *   *YAML Example:* `whenToUse: This mode is best for refactoring Python code.`
 *   *JSON Example:* `"whenToUse": "This mode is best for refactoring Python code."`
 

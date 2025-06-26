@@ -3,9 +3,13 @@
 Custom Instructions allow you to personalize how Roo behaves, providing specific guidance that shapes responses, coding style, and decision-making processes.
 
 :::info Instruction File Locations
-You can provide custom instructions using dedicated files or directories within your workspace. This allows for better organization and version control.
+You can provide custom instructions using global rules (applied across all projects), workspace rules (project-specific), or through the Prompts tab interface.
 
-**Workspace-Wide Instructions:** Apply to all modes in the project.
+**Global Rules Directory:** Apply to all projects automatically.
+*   **Linux/macOS:** `~/.roo/rules/` and `~/.roo/rules-{modeSlug}/`
+*   **Windows:** `%USERPROFILE%\.roo\rules\` and `%USERPROFILE%\.roo\rules-{modeSlug}\`
+
+**Workspace Rules:** Apply only to the current project, can override global rules.
 *   **Preferred Method: Directory (`.roo/rules/`)**
     ```
     .
@@ -38,7 +42,8 @@ You can provide custom instructions using dedicated files or directories within 
     ├── .roorules-code      # Rules for "code" mode (single file)
     └── ... (other project files)
     ```
-The directory methods take precedence if they exist and contain files. See [Workspace-Level Instructions](#workspace-level-instructions) and [Mode-Specific Instructions](#mode-specific-instructions) for details.
+
+Rules are loaded in order: Global rules first, then workspace rules (which can override global rules). See [Global Rules Directory](#global-rules-directory) for details.
 :::
 
 ---
@@ -62,6 +67,108 @@ These instructions apply across all workspaces and maintain your preferences reg
 2.  **Find Section:** Find the "Custom Instructions for All Modes" section
 3.  **Enter Instructions:** Enter your instructions in the text area
 4.  **Save Changes:** Click "Done" to save your changes
+
+### Global Rules Directory
+
+The Global Rules Directory feature provides reusable rules and custom instructions that automatically apply across all your projects. This system supports both global configurations and project-specific overrides.
+
+#### Key Benefits
+
+**Without Global Rules**: You had to maintain separate rule files in each project:
+- Copy the same rules to every new project
+- Update rules manually across multiple projects
+- No consistency between projects
+
+**With Global Rules**: Create rules once and use them everywhere:
+- Set up your preferred coding standards globally
+- Override specific rules per project when needed
+- Maintain consistency across all your work
+- Easy to update rules for all projects at once
+
+#### Directory Structure
+
+The global rules directory location is fixed and cannot be customized:
+
+**Linux/macOS:**
+```
+~/.roo/                           # Your global Roo configuration
+├── rules/                        # General rules applied to all projects
+│   ├── coding-standards.md
+│   ├── formatting-rules.md
+│   └── security-guidelines.md
+├── rules-code/                   # Rules specific to Code mode
+│   ├── typescript-rules.md
+│   └── testing-requirements.md
+├── rules-docs-extractor/         # Rules for documentation extraction
+│   └── documentation-style.md
+└── rules-{mode}/                 # Rules for other specific modes
+    └── mode-specific-rules.md
+```
+
+**Windows:**
+```
+%USERPROFILE%\.roo\               # Your global Roo configuration
+├── rules\                        # General rules applied to all projects
+│   ├── coding-standards.md
+│   ├── formatting-rules.md
+│   └── security-guidelines.md
+├── rules-code\                   # Rules specific to Code mode
+│   ├── typescript-rules.md
+│   └── testing-requirements.md
+└── rules-{mode}\                 # Rules for other specific modes
+    └── mode-specific-rules.md
+```
+
+#### Setting Up Global Rules
+
+1. **Create Global Rules Directory:**
+   ```bash
+   # Linux/macOS
+   mkdir -p ~/.roo/rules
+   
+   # Windows
+   mkdir %USERPROFILE%\.roo\rules
+   ```
+
+2. **Add General Rules** (`~/.roo/rules/coding-standards.md`):
+   ```markdown
+   # Global Coding Standards
+   
+   1. Always use TypeScript for new projects
+   2. Write unit tests for all new functions
+   3. Use descriptive variable names
+   4. Add JSDoc comments for public APIs
+   ```
+
+3. **Add Mode-Specific Rules** (`~/.roo/rules-code/typescript-rules.md`):
+   ```markdown
+   # TypeScript Code Mode Rules
+   
+   1. Use strict mode in tsconfig.json
+   2. Prefer interfaces over type aliases for object shapes
+   3. Always specify return types for functions
+   ```
+
+#### Available Rule Directories
+
+| Directory | Purpose |
+|-----------|---------|
+| `rules/` | General rules applied to all modes |
+| `rules-code/` | Rules specific to Code mode |
+| `rules-docs-extractor/` | Rules for documentation extraction |
+| `rules-architect/` | Rules for system architecture tasks |
+| `rules-debug/` | Rules for debugging workflows |
+| `rules-{mode}/` | Rules for any custom mode |
+
+#### Rule Loading Order
+
+Rules are loaded in this order:
+
+1. **Global Rules** (from `~/.roo/`)
+2. **Project Rules** (from `project/.roo/`) - can override global rules
+3. **Legacy Files** (`.roorules`, `.clinerules` - for backward compatibility)
+
+Within each level, mode-specific rules are loaded before general rules.
 
 ### Workspace-Level Instructions
 
@@ -104,7 +211,7 @@ Mode-specific instructions can be set in two independent ways that can be used s
         *   If `.roo/rules-{modeSlug}/` doesn't exist or is empty, Roo Code looks for a single `.roorules-{modeSlug}` file (e.g., `.roorules-code`) in the workspace root.
         *   If found, its content is loaded for that mode.
 
-Instructions from the Prompts tab, the mode-specific directory/file, and the workspace-wide directory/file are all combined. See the section below for the exact order.
+Instructions from the Prompts tab, global rules, workspace rules, and mode-specific rules are all combined. See the section below for the exact order.
 
 ---
 
@@ -124,6 +231,10 @@ The following additional instructions are provided by the user, and should be fo
 
 [Mode-specific Instructions (from Prompts Tab for the current mode)]
 
+Global Rules (from ~/.roo/):
+[Contents of files in ~/.roo/rules-{modeSlug}/ (if directory exists and is not empty)]
+[Contents of files in ~/.roo/rules/ (if directory exists and is not empty)]
+
 Mode-Specific Instructions (from Files/Directories):
 [Contents of files in .roo/rules-{modeSlug}/ (if directory exists and is not empty)]
 [Contents of .roorules-{modeSlug} file (if .roo/rules-{modeSlug}/ does not exist or is empty, and file exists)]
@@ -135,7 +246,7 @@ Workspace-Wide Instructions (from Files/Directories):
 ====
 ```
 
-*Note: The exact order ensures that more specific instructions (mode-level) appear before more general ones (workspace-wide), and directory-based rules take precedence over file-based fallbacks within each level.*
+*Note: Global rules load first, followed by workspace rules that can override them. Mode-specific rules appear before general rules within each level, and directory-based rules take precedence over file-based fallbacks.*
 
 ---
 
@@ -158,8 +269,16 @@ Workspace-Wide Instructions (from Files/Directories):
 * "Prioritize using the most common library in the community"
 * "When adding new features to websites, ensure they are responsive and accessible"
 
-:::tip Pro Tip: File-Based Team Standards
-When working in team environments, using the `.roo/rules/` directory structure (and potentially `.roo/rules-{modeSlug}/` directories for specific modes) under version control is the recommended way to standardize Roo's behavior across your team. This allows for better organization of multiple instruction files and ensures consistent code style, documentation practices, and development workflows. The older `.roorules` file method can still be used but offers less flexibility.
+:::tip Pro Tip: Team Standardization
+For team environments, consider these approaches:
+
+**Project Standards**: Use workspace `.roo/rules/` directories under version control to standardize Roo's behavior for specific projects. This ensures consistent code style and development workflows across team members.
+
+**Organization Standards**: Use global rules (`~/.roo/rules/`) to establish organization-wide coding standards that apply to all projects. Team members can set up identical global rules for consistency across all work.
+
+**Hybrid Approach**: Combine global rules for organization standards with project-specific workspace rules for project-specific requirements. Workspace rules can override global rules when needed.
+
+The directory-based approach offers better organization than single `.roorules` files and supports both global and project-level customization.
 :::
 
 ---
