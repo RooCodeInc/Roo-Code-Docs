@@ -1,6 +1,6 @@
 # Roo Code 3.22 Release Notes
 
-This major release introduces 1-click task sharing, global rule directories, enhanced mode discovery, and comprehensive bug fixes for memory leaks and provider integration.
+This major release introduces 1-click task sharing, global rule directories, free Gemini access, enhanced mode discovery, and comprehensive bug fixes for memory leaks and provider integration.
 
 ## 1-Click Task Sharing
 
@@ -23,6 +23,17 @@ We've added support for cross-workspace custom instruction sharing through globa
 
 This enables configuration management across projects and machines, perfect for organizational onboarding and maintaining consistent development environments. [Learn how to set up global rules](/features/custom-instructions#setting-up-global-rules).
 
+## Gemini CLI Provider (Free Access)
+
+We've added a new Gemini CLI provider that enables free access to Google's Gemini models without requiring API keys:
+
+- **OAuth Authentication**: Sign in with your Google account to access Gemini models at no cost
+- **Automatic Project Discovery**: Seamlessly connects to your Google Cloud projects
+- **Streaming Responses**: Real-time response streaming for better interactivity
+- **Complete Integration**: Full UI support with comprehensive setup guidance
+
+This gives you another powerful free option alongside local models and other free providers.
+
 ## QOL Improvements
 
 * **Mode Discovery**: Enhanced mode selector with highlighting for new users, redesigned interface, and descriptive text. Also moved the [Roo Code Marketplace](/features/marketplace) and [Mode configuration](/features/custom-modes) buttons out of the top menu for better organization (thanks brunobergher!) ([#4902](https://github.com/RooCodeInc/Roo-Code/pull/4902))
@@ -33,8 +44,22 @@ This enables configuration management across projects and machines, perfect for 
 
 <img src="/img/v3.22.0/v3.22.0-1.png" alt="VSCode settings showing the Enable Roo Code quick fixes toggle option" width="300" />
 
+* **Consistent Tooltips**: Standardized tooltip delays to 300ms across the entire application for smooth, predictable behavior ([#5098](https://github.com/RooCodeInc/Roo-Code/pull/5098))
+* **Cost Transparency**: Improved OpenRouter BYOK cost calculation accuracy using official upstream costs and restored cached token count visibility ([#5145](https://github.com/RooCodeInc/Roo-Code/pull/5145))
+
+## Security Fixes
+
+* **Code Display**: Eliminated XSS vulnerability in code block rendering for enhanced security (thanks KJ7LNW!) ([#5157](https://github.com/RooCodeInc/Roo-Code/pull/5157))
+
 ## Bug Fixes
 
+* **Custom Modes**: Fixed JSON backwards compatibility for `.roomodes` files, ensuring older custom modes work correctly after updating from previous versions (thanks daniel-lxs, domc66, africa1207!) ([#5199](https://github.com/RooCodeInc/Roo-Code/pull/5199))
+* **Checkpoint Menu**: Fixed checkpoint popover not opening when clicked, restoring access to checkpoint functionality (thanks daniel-lxs, aprpure!) ([#5192](https://github.com/RooCodeInc/Roo-Code/pull/5192))
+* **Terminal Integration**: Fixed keyboard shortcut errors when adding terminal content to context (thanks MuriloFP, iamhenry!) ([#5161](https://github.com/RooCodeInc/Roo-Code/pull/5161))
+* **Gemini CLI**: Corrected error message translation paths across all supported languages (thanks daniel-lxs!) ([#5194](https://github.com/RooCodeInc/Roo-Code/pull/5194))
+* **Code Index**: Fixed Qdrant service connection reliability when updating configuration settings - services now automatically recreate when configurations change (thanks catrielmuller!) ([#5152](https://github.com/RooCodeInc/Roo-Code/pull/5152))
+* **MCP Server Display**: Fixed "undefined" text appearing in system prompts for HTTP SSE MCP servers like Figma MCP ([#5107](https://github.com/RooCodeInc/Roo-Code/pull/5107))
+* **Groq Model Limits**: Corrected maximum token limit for Qwen3-32B model from 131,072 to 40,960 tokens, preventing API errors (thanks KanTakahiro, Maxxoto!) ([#5138](https://github.com/RooCodeInc/Roo-Code/pull/5138))
 * **Task File Corruption**: Fixed race condition that corrupted task files, eliminating "No existing API conversation history" errors (thanks KJ7LNW!) ([#4733](https://github.com/RooCodeInc/Roo-Code/pull/4733))
 * **Memory Leaks**: Fixed multiple memory leaks in chat interface and CodeBlock component that could cause crashes and grey screens (thanks kiwina, xyOz-dev!) ([#4244](https://github.com/RooCodeInc/Roo-Code/pull/4244), [#4190](https://github.com/RooCodeInc/Roo-Code/pull/4190))
 * **Task Names**: Fixed blank entries in task history - tasks now display meaningful names like "Task #1 (Incomplete)" (thanks daniel-lxs!) ([#5071](https://github.com/RooCodeInc/Roo-Code/pull/5071))

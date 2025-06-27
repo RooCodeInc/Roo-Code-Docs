@@ -131,6 +131,7 @@ const sidebars: SidebarsConfig = {
         'providers/deepseek',
         'providers/chutes',
         'providers/gemini',
+        'providers/gemini-cli',
         'providers/glama',
         'providers/groq',
         'providers/human-relay',
@@ -205,6 +206,9 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: '3.22',
           items: [
+            { type: 'doc', id: 'update-notes/v3.22.3', label: '3.22.3' },
+            { type: 'doc', id: 'update-notes/v3.22.2', label: '3.22.2' },
+            { type: 'doc', id: 'update-notes/v3.22.1', label: '3.22.1' },
             { type: 'doc', id: 'update-notes/v3.22', label: '3.22 Combined' },
             { type: 'doc', id: 'update-notes/v3.22.0', label: '3.22.0' },
           ],
