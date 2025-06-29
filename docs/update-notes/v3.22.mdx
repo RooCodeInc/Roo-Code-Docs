@@ -54,6 +54,10 @@ This gives you another powerful free option alongside local models and other fre
 
 ## Bug Fixes
 
+* **Repository URL Handling**: Fixed telemetry functionality to properly handle git repository URLs by automatically converting SSH URLs to HTTPS format, ensuring telemetry works correctly regardless of which URL format users have configured (thanks liwilliam2021!) ([#5202](https://github.com/RooCodeInc/Roo-Code/pull/5202))
+* **Cloud Telemetry**: Fixed cloud telemetry capture for assistant messages that was accidentally broken by a previous optimization ([#5220](https://github.com/RooCodeInc/Roo-Code/pull/5220))
+* **Internal Telemetry**: Improved internal telemetry system to prevent duplicate event capturing, enhancing data accuracy and system efficiency ([#5211](https://github.com/RooCodeInc/Roo-Code/pull/5211))
+* **Type Error Prevention**: Fixed internal type errors when the gemini-cli provider is removed, ensuring smoother operation ([#5226](https://github.com/RooCodeInc/Roo-Code/pull/5226))
 * **Task Sharing**: Fixed share button popover not opening when clicked - now works properly while maintaining tooltip functionality (thanks daniel-lxs!) ([#5203](https://github.com/RooCodeInc/Roo-Code/pull/5203))
 * **Claude Code Reliability**: Fixed hanging and failures when working with large conversation histories on Linux and Code-Server environments by implementing stdin streaming instead of command-line arguments (thanks Fovty, edgan, flyguy7299!) ([#5186](https://github.com/RooCodeInc/Roo-Code/pull/5186))
 * **Custom Modes**: Fixed JSON backwards compatibility for `.roomodes` files, ensuring older custom modes work correctly after updating from previous versions (thanks daniel-lxs, domc66, africa1207!) ([#5199](https://github.com/RooCodeInc/Roo-Code/pull/5199))
@@ -71,6 +75,7 @@ This gives you another powerful free option alongside local models and other fre
 
 ## Provider Updates
 
+* **Gemini CLI Removal**: The Gemini CLI provider has been removed per Google's request for a more standard implementation. Users previously using the Gemini CLI provider should migrate to the standard Gemini provider for continued access to Gemini models ([#5223](https://github.com/RooCodeInc/Roo-Code/pull/5223))
 * **Claude Code**: Fixed token counting issues, message handling for long tasks, removed misleading UI controls, and improved caching/image upload ([#5108](https://github.com/RooCodeInc/Roo-Code/pull/5108), [#5072](https://github.com/RooCodeInc/Roo-Code/pull/5072), [#5105](https://github.com/RooCodeInc/Roo-Code/pull/5105), [#5113](https://github.com/RooCodeInc/Roo-Code/pull/5113))
 * **Azure OpenAI**: Fixed compatibility with reasoning models by removing unsupported temperature parameter (thanks ExactDoug!) ([#5116](https://github.com/RooCodeInc/Roo-Code/pull/5116))
 * **AWS Bedrock**: Improved throttling error detection and retry functionality ([#4748](https://github.com/RooCodeInc/Roo-Code/pull/4748))
