@@ -176,6 +176,41 @@ Use insert_content with line 0 to append to the file.</message>
         <step>Main task continues with next PR</step>
       </subtask_workflow>
     </tool>
+    
+    <tool name="new_task">
+      <purpose>Create subtask for Discord formatting of release notes</purpose>
+      <when_to_use>
+        When user requests Discord formatting of the completed release notes
+      </when_to_use>
+      <parameters>
+        <parameter name="mode">Always "release-notes-writer" for Discord formatting subtasks</parameter>
+        <parameter name="message">Structured message with version and formatting requirements</parameter>
+      </parameters>
+      <usage><![CDATA[
+<new_task>
+<mode>release-notes-writer</mode>
+<message>Generate Discord-formatted release notes for version X.Y.Z.
+
+Requirements:
+1. Strip all PR links and references to PR numbers (#XXXX)
+2. Keep structure and content identical to the existing release notes
+3. Replace all internal documentation links to use https://docs.roocode.com/ prefix
+4. If requested to compress sections, summarize using this format:
+   ## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
+   This release includes X additional enhancements, covering [list key areas]. A huge thank you to the contributors in these sections: [list contributors]!
+5. At the bottom, include links to full release notes:
+   [Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
+
+Convert the release notes from docs/update-notes/vX.Y.Z.mdx to Discord format.</message>
+</new_task>
+      ]]></usage>
+      <compression_guidelines>
+        <guideline>When compressing sections, only thank contributors from the compressed sections</guideline>
+        <guideline>Maintain the overall structure but summarize detailed points</guideline>
+        <guideline>Use emojis like :wrench: for compressed sections</guideline>
+        <guideline>Always link to the full release notes for complete details</guideline>
+      </compression_guidelines>
+    </tool>
   </subtask_tools>
 
   <file_tools>

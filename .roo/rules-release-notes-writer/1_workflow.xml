@@ -49,68 +49,59 @@
 			</steps>
 		</phase>
 		<phase name="process_each_pr">
-			<description>Process PRs individually, investigating each one thoroughly and storing findings in a temporary file for later compilation.</description>
-			<iterative_workflow>
+			<description>Process PRs individually by creating subtasks for each PR investigation, storing findings in a temporary file for later compilation.</description>
+			<subtask_workflow>
 				<overview>
-					For each PR in the list, execute a complete investigation workflow and immediately
-					store the findings in a temporary markdown file (e.g., temp_pr_analysis.md).
-					This allows for incremental building of release note data.
+					For each PR in the list, create a dedicated subtask using the new_task tool.
+					Each subtask will investigate one PR thoroughly and store findings in temp_pr_analysis.md.
+					This allows for clear separation of concerns and incremental progress tracking.
 				</overview>
 				
 				<per_pr_steps>
 					<step number="1">
-						<action>Gather comprehensive PR details</action>
-						<tools>
-							<tool>github.get_pull_request - Title, author, description</tool>
-							<tool>github.get_pull_request_files - Changed files (optional)</tool>
-							<tool>github.get_pull_request_diff - Code changes (if needed for clarity)</tool>
-						</tools>
-						<details>Extract PR title, author username, and description for analysis</details>
+						<action>Create PR investigation subtask</action>
+						<tool>new_task</tool>
+						<details>
+							Create a new task in release-notes-writer mode to investigate the specific PR
+						</details>
+						<message_format>
+							Investigate PR #[number] for release notes v[version].
+							
+							Your task is to:
+							1. Get full PR details using github.get_pull_request
+							2. Extract any linked issues from the PR description (e.g., "Fixes #123")
+							3. Get details for each linked issue using github.get_issue
+							4. Analyze the change and categorize it (bug fix, feature, improvement, etc.)
+							5. Write your findings to temp_pr_analysis.md in the specified format
+							
+							Use insert_content with line 0 to append to the file.
+						</message_format>
 					</step>
 					
 					<step number="2">
-						<action>Extract and gather linked issue details</action>
-						<process>
-							<substep>Parse PR description for issue references (Fixes #123, Closes #456, etc.)</substep>
-							<substep>For each found issue number, use github.get_issue to gather details</substep>
-							<substep>Extract issue reporter username and title for context</substep>
-						</process>
-						<tools>
-							<tool>github.get_issue - For each linked issue found</tool>
-						</tools>
+						<action>Wait for subtask completion</action>
+						<details>
+							The subtask will handle all investigation steps:
+							- Fetching PR details and linked issues
+							- Analyzing and categorizing the change
+							- Writing structured findings to temp_pr_analysis.md
+							- Reporting completion via attempt_completion
+						</details>
 					</step>
 					
 					<step number="3">
-						<action>Analyze and categorize the change</action>
-						<analysis_framework>
-							<question>What changed? (core functionality/feature affected)</question>
-							<question>Why did it change? (problem being solved)</question>
-							<question>How does this impact users? (benefits in plain language)</question>
-							<question>What category? (bug fix, feature, improvement, etc.)</question>
-						</analysis_framework>
-					</step>
-					
-					<step number="4">
-						<action>Write findings to temporary file</action>
-						<process>
-							<substep>Create or append to temp_pr_analysis.md</substep>
-							<substep>Include structured data for this PR</substep>
-							<substep>Store all contributor information</substep>
-							<substep>Include categorization and user impact analysis</substep>
-						</process>
-						<file_format>
-							Use a consistent markdown format that can be easily parsed later
-							for generating the final release notes
-						</file_format>
+						<action>Move to next PR</action>
+						<details>
+							After subtask completion confirmation, proceed to create the next PR investigation subtask
+						</details>
 					</step>
 				</per_pr_steps>
 				
 				<completion_per_pr>
-					After each PR analysis is complete and written to the temporary file,
-					move on to the next PR. This ensures thorough investigation of each
-					change before proceeding.
+					After each subtask completes and confirms it has written findings to the temporary file,
+					move on to the next PR. This ensures thorough investigation of each change before proceeding.
 				</completion_per_pr>
-			</iterative_workflow>
+			</subtask_workflow>
 		</phase>
 		<phase name="compile_final_release_notes">
 			<description>Read the temporary analysis file and compile all findings into the final release notes format</description>
@@ -174,9 +165,48 @@
 				</step>
 			</steps>
 		</phase>
+		<phase name="discord_formatting" optional="true">
+			<description>Generate Discord-formatted release notes by creating a subtask that converts the existing release notes to Discord format</description>
+			<when_to_use>Use this phase when the user specifically asks for Discord formatting of the release notes</when_to_use>
+			<steps>
+				<step number="1">
+					<action>Create Discord formatting subtask</action>
+					<tool>new_task</tool>
+					<details>
+						Create a new task in release-notes-writer mode to generate Discord-formatted release notes
+						based on the completed release notes file
+					</details>
+					<task_instructions>
+						Generate Discord-formatted release notes for version X.Y.Z.
+
+						Requirements:
+						1. Strip all PR links and references to PR numbers (#XXXX)
+						2. Keep structure and content identical to the existing release notes
+						3. Replace all internal documentation links to use https://docs.roocode.com/ prefix
+						4. If requested to compress sections, summarize using this format:
+						   ## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
+						   This release includes X additional enhancements, covering [list key areas]. A huge thank you to the contributors in these sections: [list contributors]!
+						5. At the bottom, include links to full release notes:
+						   [Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
+						
+						Convert the release notes from docs/update-notes/vX.Y.Z.mdx to Discord format.
+					</task_instructions>
+				</step>
+				<step number="2">
+					<action>Handle compression requests</action>
+					<details>
+						If the user asks to compress specific sections, the subtask should:
+						- Summarize the overall changes of the requested sections/points
+						- Use the specified format for compressed sections
+						- Thank only contributors from the compressed sections, not the overall release
+						- Maintain links to the full release notes for detailed information
+					</details>
+				</step>
+			</steps>
+		</phase>
 	</main_workflow>
 
-  <completion_criteria>
+		<completion_criteria>
     <criterion>Release notes file created with proper formatting</criterion>
     <criterion>All PRs analyzed and converted to user benefits</criterion>
     <criterion>Index and sidebar files updated</criterion>

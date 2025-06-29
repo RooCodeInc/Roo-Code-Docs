@@ -1,0 +1,130 @@
+<discord_formatting_instructions>
+  <overview>
+    Instructions for generating Discord-formatted release notes from completed release notes files.
+    This workflow is triggered when users specifically request Discord formatting.
+  </overview>
+
+  <recognition_patterns>
+    <trigger_phrases>
+      <phrase>Generate Discord format</phrase>
+      <phrase>Discord formatted release notes</phrase>
+      <phrase>Convert to Discord format</phrase>
+      <phrase>Discord announcement</phrase>
+    </trigger_phrases>
+    <message_format>
+      Discord formatting requests will typically include:
+      - Version number reference
+      - Request for format conversion
+      - Optional compression instructions
+    </message_format>
+  </recognition_patterns>
+
+  <workflow_steps>
+    <step number="1">
+      <action>Read the completed release notes file</action>
+      <file_location>docs/update-notes/vX.Y.Z.mdx</file_location>
+      <tool>read_file</tool>
+    </step>
+
+    <step number="2">
+      <action>Process content for Discord format</action>
+      <transformations>
+        <transformation>Remove all PR links and references (#XXXX)</transformation>
+        <transformation>Convert internal docs links to https://docs.roocode.com/ format</transformation>
+        <transformation>Preserve all structure and content</transformation>
+        <transformation>Maintain formatting but adapt for Discord markdown</transformation>
+      </transformations>
+    </step>
+
+    <step number="3">
+      <action>Handle compression requests (if any)</action>
+      <compression_format><![CDATA[
+## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
+This release includes X additional enhancements, covering [list key areas]. A huge thank you to the contributors in these sections: [list contributors]!
+      ]]></compression_format>
+      <compression_rules>
+        <rule>Only thank contributors from the compressed sections</rule>
+        <rule>Summarize the overall changes of the compressed sections</rule>
+        <rule>Use appropriate emojis for section headers</rule>
+        <rule>Link to the full release notes section</rule>
+      </compression_rules>
+    </step>
+
+    <step number="4">
+      <action>Add footer with full release notes links</action>
+      <footer_format><![CDATA[
+[Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
+      ]]></footer_format>
+    </step>
+
+    <step number="5">
+      <action>Present the Discord-formatted content</action>
+      <delivery>Present the formatted content in the completion message for easy copying</delivery>
+    </step>
+  </workflow_steps>
+
+  <link_conversion_rules>
+    <rule>
+      <from>/update-notes/vX.Y.Z</from>
+      <to>https://docs.roocode.com/update-notes/vX.Y.Z</to>
+    </rule>
+    <rule>
+      <from>/features/feature-name</from>
+      <to>https://docs.roocode.com/features/feature-name</to>
+    </rule>
+    <rule>
+      <from>/basic-usage/guide-name</from>
+      <to>https://docs.roocode.com/basic-usage/guide-name</to>
+    </rule>
+    <rule>
+      <from>/advanced-usage/tool-name</from>
+      <to>https://docs.roocode.com/advanced-usage/tool-name</to>
+    </rule>
+  </link_conversion_rules>
+
+  <pr_reference_removal>
+    <patterns_to_remove>
+      <pattern>([#5123](https://github.com/RooCodeInc/Roo-Code/pull/5123))</pattern>
+      <pattern>(#5123)</pattern>
+      <pattern>[#5123]</pattern>
+      <pattern>PR #5123</pattern>
+      <pattern>pull request #5123</pattern>
+    </patterns_to_remove>
+    <replacement>Empty string (complete removal)</replacement>
+  </pr_reference_removal>
+
+  <discord_specific_adaptations>
+    <adaptation>
+      <description>Emoji compatibility</description>
+      <details>Ensure emojis work properly in Discord format</details>
+    </adaptation>
+    <adaptation>
+      <description>Link formatting</description>
+      <details>Use Discord-compatible markdown link format [text](url)</details>
+    </adaptation>
+    <adaptation>
+      <description>Code blocks</description>
+      <details>Preserve code block formatting with triple backticks</details>
+    </adaptation>
+  </discord_specific_adaptations>
+
+  <example_transformations>
+    <example>
+      <before>* **Repository URL Handling**: Fixed telemetry functionality ([#5202](https://github.com/RooCodeInc/Roo-Code/pull/5202)) (thanks liwilliam2021!)</before>
+      <after>* **Repository URL Handling**: Fixed telemetry functionality (thanks liwilliam2021!)</after>
+    </example>
+    <example>
+      <before>[Learn more](/features/custom-modes)</before>
+      <after>[Learn more](https://docs.roocode.com/features/custom-modes)</after>
+    </example>
+  </example_transformations>
+
+  <quality_checklist>
+    <item>All PR references removed</item>
+    <item>All internal links converted to full URLs</item>
+    <item>Structure and content preserved</item>
+    <item>Contributor acknowledgments maintained</item>
+    <item>Footer with full release notes link included</item>
+    <item>Discord markdown compatibility verified</item>
+  </quality_checklist>
+</discord_formatting_instructions>

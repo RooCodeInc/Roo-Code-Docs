@@ -10,9 +10,13 @@
       The mode determines its operating context by examining the user's initial message
     </description>
     <patterns>
-      <pattern type="subtask">
-        <regex>^Investigate PR #(\d+) for release notes</regex>
+      <pattern type="subtask_pr">
+        <regex>^Investigate PR #(\d+) for release notes v([\d.]+)</regex>
         <action>Execute single PR investigation workflow</action>
+      </pattern>
+      <pattern type="subtask_discord">
+        <regex>^Generate Discord-formatted release notes for version ([\d.]+)</regex>
+        <action>Execute Discord formatting workflow</action>
       </pattern>
       <pattern type="main">
         <regex>^(Create|Generate|Make) release notes for (version |v)?[\d.]+</regex>
@@ -21,9 +25,9 @@
     </patterns>
   </mode_detection>
 
-  <subtask_workflow>
+  <pr_investigation_workflow>
     <when_triggered>
-      When the message matches the subtask pattern "Investigate PR #[number] for release notes"
+      When the message matches the PR investigation pattern "Investigate PR #[number] for release notes v[version]"
     </when_triggered>
     
     <steps>
@@ -105,7 +109,69 @@
         </message>
       </step>
     </steps>
-  </subtask_workflow>
+  </pr_investigation_workflow>
+
+  <discord_formatting_workflow>
+    <when_triggered>
+      When the message matches the Discord formatting pattern "Generate Discord-formatted release notes for version [version]"
+    </when_triggered>
+    
+    <steps>
+      <step number="1">
+        <action>Extract version number from message</action>
+        <details>
+          Parse the message to get the version number for which to format Discord release notes
+        </details>
+      </step>
+      
+      <step number="2">
+        <action>Read completed release notes file</action>
+        <tool>read_file</tool>
+        <file>docs/update-notes/vX.Y.Z.mdx</file>
+        <details>
+          Read the existing release notes file that was created by the main workflow
+        </details>
+      </step>
+      
+      <step number="3">
+        <action>Transform content for Discord</action>
+        <transformations>
+          <transformation>Remove all PR links and references (#XXXX)</transformation>
+          <transformation>Convert internal docs links to https://docs.roocode.com/ format</transformation>
+          <transformation>Preserve structure and content</transformation>
+          <transformation>Handle compression requests if specified</transformation>
+        </transformations>
+      </step>
+      
+      <step number="4">
+        <action>Apply compression (if requested)</action>
+        <compression_format><![CDATA[
+## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
+This release includes X additional enhancements, covering [list key areas]. A huge thank you to the contributors in these sections: [list contributors]!
+        ]]></compression_format>
+        <rules>
+          <rule>Only thank contributors from compressed sections</rule>
+          <rule>Summarize overall changes of compressed sections</rule>
+          <rule>Link to full release notes section</rule>
+        </rules>
+      </step>
+      
+      <step number="5">
+        <action>Add footer links</action>
+        <footer><![CDATA[
+[Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
+        ]]></footer>
+      </step>
+      
+      <step number="6">
+        <action>Present Discord-formatted content</action>
+        <tool>attempt_completion</tool>
+        <message>
+          Present the Discord-formatted release notes content for easy copying
+        </message>
+      </step>
+    </steps>
+  </discord_formatting_workflow>
 
   <error_handling>
     <scenario>
