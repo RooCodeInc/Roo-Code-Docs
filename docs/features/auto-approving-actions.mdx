@@ -21,6 +21,8 @@ Auto-approve settings speed up your workflow by eliminating repetitive confirmat
 </div>
 <br />
 
+\* **Update:** We've added an auto-approve Question action since this video was made. [You can find it below](#follow-up-questions)!
+
 ---
 
 ## Quick Start Guide
@@ -55,6 +57,7 @@ Click the toolbar to expand it and configure individual permissions:
 | **Switch modes** | Changes between Roo modes automatically | Low |
 | **Create & complete subtasks** | Manages subtasks without confirmation | Low |
 | **Retry failed requests** | Automatically retries failed API requests | Low |
+| **Answer follow-up questions** | Selects default answer for follow-up questions| Low |
 
 ---
 
@@ -246,4 +249,25 @@ This setting allows terminal command execution with controls. While risky, the w
 - Text field to enter command prefixes (e.g., 'git')
 - "Add" button to add new prefixes
 - Clickable command buttons with X to remove them
+:::
+
+### Follow-Up Questions
+
+:::info Follow-Up Questions
+<img src="/img/auto-approving-actions/auto-approving-actions-15.png" alt="Follow-up question operations setting with timeout slider" width="550" />
+
+**Setting:** "Always default answer for follow-up questions"
+
+**Description:** "Automatically select the first AI suggested answer for follow-up questions after the configured timeout."
+
+**Timeout slider:**  "Time before the default answer is selected" (Default: 60s)
+
+**Note:** "Will not switch modes unless Mode Switching is enabled"
+
+**Risk level:** Low
+
+When Roo needs clarification, it will ask a follow-up question with 2-4 suggested answers. With this setting enabled, Roo will automatically select its preferred answer after a configurable timeout. This is recommended for autonomous operation to prevent Roo from getting stuck waiting for input.
+- Longer time outs give the you more time to read through suggested answers
+- Shorter time outs allow Roo to work faster
+
 :::
