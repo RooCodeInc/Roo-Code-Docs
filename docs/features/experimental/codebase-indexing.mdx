@@ -199,6 +199,47 @@ The indexer automatically excludes:
 - **Branch Switching**: Automatically handles Git branch changes
 
 ---
+## Search Score Threshold
+
+Control the relevance of semantic search results by adjusting the minimum similarity score.
+
+### Key Features
+- **Fine-Tune Relevancy**: Adjust the threshold to balance between the number of results and their precision.
+- **Intuitive Slider Control**: Easily set your preferred threshold with a simple slider.
+- **Real-Time Feedback**: See the exact threshold value as you adjust it.
+- **Smart Priority System**: Your setting overrides model-specific defaults, giving you full control.
+
+### Use Case
+
+**Before**: The similarity threshold for semantic search was a fixed value that depended on the embedding model being used. This meant you had no control over the relevance of your search results.
+
+**Now**: You can directly control the search sensitivity to match your needs.
+- **Low Threshold (e.g., 0.15)**: Returns more results, which is useful for broad exploration but may include less relevant code.
+- **High Threshold (e.g., 0.65)**: Returns fewer, more precise matches, ideal for targeted searches.
+
+### How it Works
+
+The "Search Score Threshold" setting determines the minimum similarity score required for a code snippet to be included in semantic search results. When you perform a search, Roo compares your query with the indexed code and only shows results that meet or exceed your chosen threshold.
+
+This setting gives you the power to customize the search behavior based on your specific task.
+
+### Configuration
+
+You can configure this feature in the settings:
+
+1. **Navigate to Settings**: Open the Roo Code settings in your editor.
+2. **Find Code Indexing**: Go to the "Code Indexing" section.
+3. **Expand Advanced Configuration**: Click on "Advanced Configuration" to reveal more options.
+4. **Adjust the Slider**:
+   - **Setting**: `Search Score Threshold`
+   - **Description**: Use the slider to set a value between 0.0 and 1.0. The value is displayed in real-time.
+   - **Default**: `0.4`. A reset button is available to restore this default.
+
+### FAQ
+
+**"What's the difference between a low and high score?"**
+- A **low score** (e.g., 0.2) is like a broad, "fuzzy" search. You'll get more hits, but some might be only loosely related.
+- A **high score** (e.g., 0.8) is like a strict, precise search. You'll get fewer hits, but they will be highly relevant to your query.
 
 ## Best Practices
 

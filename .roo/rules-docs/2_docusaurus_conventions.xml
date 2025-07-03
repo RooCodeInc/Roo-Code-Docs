@@ -1,0 +1,35 @@
+<docusaurus_conventions>
+  <overview>
+    This guide covers Docusaurus-specific formatting rules for Roo Code documentation.
+  </overview>
+
+  <linking>
+    <rule name="internal_links">
+      <description>Use absolute paths from `/docs/`. Do not include the `.md` extension.</description>
+      <good>[Link to Guide](/intro/)</good>
+      <bad>[Link to Guide](../intro.md)</bad>
+    </rule>
+    <rule name="site_alias">
+      <description>Use `@site` for code imports or asset references from the project root. Do not use it for Markdown links.</description>
+      <good>import Header from \'@site/src/components/Header\';</good>
+      <bad>[Link](@site/docs/intro.md)</bad>
+    </rule>
+  </linking>
+
+  <media>
+    <rule name="images">
+      <description>Place images in `/static/img/`. Use a relative path in `src`.</description>
+      <example>
+        <![CDATA[
+<img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
+        ]]>
+      </example>
+    </rule>
+  </media>
+
+  <versioning>
+    <rule name="no_version_numbers">
+      <description>Do not include version numbers or phrases like "as of version X.Y" in general documentation. Version information belongs only in `docs/update-notes`.</description>
+    </rule>
+  </versioning>
+</docusaurus_conventions>

@@ -55,6 +55,78 @@ Custom modes are defined by several key properties. Understanding these concepts
 | Custom Instructions (optional) (`customInstructions`) | **Specific behavioral guidelines** or rules for the mode.<br />- These instructions are added near the end of the system prompt to further refine Roo's behavior beyond the `roleDefinition`.<br />- This can be provided directly in the configuration or via separate instruction files.                                                                                                                               |
 
 ---
+## Import/Export Modes
+
+Easily share, back up, and template your custom modes. This feature lets you export any mode—and its associated rules—into a single, portable YAML file that you can import into any project.
+
+### Key Features
+- **Shareable Setups**: Package a mode and its rules into one file to easily share with your team.
+- **Easy Backups**: Save your custom mode configurations so you never lose them.
+- **Project Templates**: Create standardized mode templates for different types of projects.
+- **Simple Migration**: Move modes between your global settings and specific projects effortlessly.
+
+---
+
+### Use Case
+
+**Before**: Manually recreating custom modes and copying `.roo/rules-{slug}/` folders for each new project or team member. This was tedious and error-prone.
+
+**With this feature**: A single click exports a mode and all its rules to a YAML file. Another click imports it, setting everything up automatically.
+
+### How it Works
+
+The import/export functionality is managed from the **Modes** view.
+
+![Mode Export and Import Buttons](/img/custom-modes/custom-modes-5.png)
+
+#### Exporting a Mode
+1.  Navigate to the **Modes** view.
+2.  Select the mode you wish to export.
+3.  Click the **Export Mode** button (the download icon).
+4.  Choose a location to save the `.yaml` file.
+
+Roo packages the mode's configuration and any rules found in the project's `.roo/rules-{slug}/` directory into the YAML file.
+
+#### Importing a Mode
+1.  Click the **Import Mode** button (the upload icon) in the **Modes** view.
+2.  Select the mode's YAML file.
+3.  Choose the import level in the dialog that appears:
+    ![Import Level Dialog](/img/custom-modes/custom-modes-6.png)
+    -   **Project**: The mode is available only in the current workspace. It's added to the `.roomodes` file, and its rules are saved to the `.roo/rules-{slug}/` directory within the project.
+    -   **Global**: The mode is available in all your projects. It's added to your global settings, and its rules are stored in your system's global Roo configuration directory (e.g., `~/.roo/rules-{slug}/`).
+
+---
+
+### Exported YAML file format:
+
+```yaml
+customModes:
+  - slug: "my-custom-mode"
+    name: "My Custom Mode"
+    roleDefinition: "You are a helpful assistant."
+    groups: ["read", "edit"]
+    rulesFiles:
+      - relativePath: "rules-my-custom-mode/rules.md"
+        content: "These are the rules for my custom mode."
+```
+
+---
+
+### FAQ
+
+**"What happens if I import a mode that has the same 'slug' as an existing one?"**
+- The existing mode will be overwritten with the configuration from the imported file.
+
+**"What's the main difference between a Global and Project import?"**
+- **Global** modes are available across all your VS Code projects. **Project** modes are specific to the workspace where they are imported and are stored in a `.roomodes` file at the root of your project.
+
+**"Can I export built-in modes like Code or Architect?"**
+- Yes. If you have customized a built-in mode (e.g., by changing its instructions), you can export it to save your customizations.
+
+**"What if I import a mode with rules at the Global level?"**
+- The rules are still preserved. They are stored in a global `rules-{slug}` folder in your user home directory (e.g., `~/.roo/rules-my-custom-mode/`) instead of the project-specific `.roo` folder.
+
+---
 
 ## Methods for Creating and Configuring Custom Modes
 

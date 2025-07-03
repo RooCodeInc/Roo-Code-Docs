@@ -43,6 +43,78 @@ Clicking the **Import** button allows you to load settings from a previously exp
 
 ---
 
+## Automatic Configuration Import
+
+Automatically import your Roo Code settings from a file every time you start VS Code. This is a powerful way to sync your configuration across multiple machines or standardize settings for your entire team.
+
+### Key Features
+- **Effortless Sync**: Keep your settings consistent across different workspaces and devices.
+- **Team Standardization**: Share a single configuration file to ensure your whole team uses the same settings.
+- **Flexible Pathing**: Works with absolute paths, or paths relative to your home directory (e.g., `~/Documents/roo-settings.json`).
+- **Silent & Safe**: If the file isn't found or contains errors, Roo Code starts up normally without blocking your workflow.
+
+### Use Case
+
+**Before**: Manually exporting and importing settings every time you moved to a new machine or wanted to share your setup.
+- Manually open the settings panel.
+- Export your current settings to a file.
+- Send the file to a teammate or a new machine.
+- Manually import the file.
+
+**With this feature**: Configure the path once, and Roo Code handles the rest on every launch.
+
+### How it Works
+
+When VS Code starts, Roo Code checks for a specific setting: `roo-cline.autoImportSettingsPath`. If this setting contains a path to a valid Roo Code configuration file (`.json`), Roo Code will load it automatically.
+
+- Upon successful import, you will see a notification: `Successfully imported settings from [your-file-name.json]`.
+- If the file is invalid or can't be found, you'll get a non-intrusive warning, and the extension will start with your last known settings. The `autoImportSettings` function is designed to never block the extension from activating.
+
+### Configuration
+
+To use this feature, add the following to your VS Code `settings.json` file:
+
+1.  **Open your `settings.json` file**:
+    *   Use the Command Palette (`Ctrl/Cmd + Shift + P`) and search for "Preferences: Open User Settings (JSON)".
+
+2.  **Add the setting**:
+    *   Add the `roo-cline.autoImportSettingsPath` key with the path to your configuration file.
+
+**Examples**:
+
+*   **Absolute Path (Recommended)**
+    ```json
+    {
+      "roo-cline.autoImportSettingsPath": "/Users/your-username/Documents/dev-configs/roo-code.json"
+    }
+    ```
+
+*   **Home Directory Path** (using `~`)
+    ```json
+    {
+      "roo-cline.autoImportSettingsPath": "~/roo-code-settings.json"
+    }
+    ```
+
+*   **To disable**, simply leave the path empty or remove the line entirely:
+    ```json
+    {
+      "roo-cline.autoImportSettingsPath": ""
+    }
+    ```
+
+### FAQ
+
+**"What happens if my file has an error?"**
+- Roo Code will show a warning notification with the error details. The extension will continue to load normally with your previously saved settings.
+
+**"Where does Roo Code look for relative paths?"**
+- For safety and consistency, paths that are not absolute or home-directory-based are resolved relative to your home directory.
+
+**"Can I use this to manage settings for my team?"**
+- Yes. Place the configuration file in a shared location (like a synced cloud folder or a shared network drive) and have each team member point to that file.
+---
+
 ## Reset Settings
 
 Clicking the **Reset** button completely clears all Roo Code configuration data and returns the extension to its default state. This is a destructive action intended for troubleshooting or starting fresh.

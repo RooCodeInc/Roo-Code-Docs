@@ -1,20 +1,20 @@
-<formatting_standards>
+  <formatting_standards>
   <overview>
-    Comprehensive formatting and content standards for release notes in the docs/update-notes directory.
-    These standards ensure consistency, clarity, and proper organization across all release documentation.
+    Formatting and content standards for release notes in docs/update-notes.
+    Ensures consistent and clear release documentation.
   </overview>
 
   <file_naming_conventions>
     <convention type="patch_release">
       <format>vX.Y.Z.mdx</format>
       <example>v3.20.3.mdx</example>
-      <description>Full version number for patch releases with specific bug fixes</description>
+      <description>Full version for patch releases.</description>
     </convention>
     
     <convention type="minor_major_release">
       <format>vX.Y.mdx</format>
       <example>v3.20.mdx</example>
-      <description>Major.minor version for summarizing entire version cycle</description>
+      <description>Major.minor version to summarize a release cycle.</description>
     </convention>
   </file_naming_conventions>
 
@@ -22,41 +22,41 @@
     <element name="title">
       <format># Roo Code X.Y.Z Release Notes (YYYY-MM-DD)</format>
       <requirements>
-        <requirement>Must include version number</requirement>
-        <requirement>Must include release date in ISO format</requirement>
-        <requirement>Date must reflect actual release date</requirement>
+        <requirement>Include version number.</requirement>
+        <requirement>Include release date (ISO format).</requirement>
+        <requirement>Date must be the actual release date.</requirement>
       </requirements>
     </element>
 
     <element name="summary_sentence">
-      <location>Directly below title</location>
-      <description>Brief sentence summarizing key changes</description>
-      <example>This release introduces intelligent context condensing, improves performance, and fixes several UI issues.</example>
+      <location>Below title.</location>
+      <description>One sentence summarizing key changes.</description>
+      <example>This release adds context condensing, improves performance, and fixes UI bugs.</example>
     </element>
 
     <element name="content_sections">
       <expanded_sections>
-        <description>Major features with detailed explanations</description>
+        <description>Major features with details.</description>
         <format><![CDATA[
 ## Feature Name
 
-Brief description of what the feature does (thanks contributor!) ([#PR](link)):
+Description of what the feature does (thanks contributor!) ([#PR](link)):
 
-- **Key Point 1**: Detailed explanation of this aspect
-- **Key Point 2**: Another detailed explanation
-- **Key Point 3**: Additional important details
+- **Key Point 1**: Explanation of this aspect.
+- **Key Point 2**: Another explanation.
+- **Key Point 3**: More details.
 
-Concluding sentence about the overall benefit to users.
+Concluding sentence about the benefit.
         ]]></format>
       </expanded_sections>
 
       <grouped_sections>
-        <description>Smaller fixes and improvements</description>
+        <description>Smaller fixes and improvements.</description>
         <format><![CDATA[
 ## Section Name
 
-* **Item Name**: Brief description on a single line (thanks contributor!) ([#PR](link))
-* **Another Item**: Another brief description ([#PR](link))
+* **Item Name**: Single-line description (thanks contributor!) ([#PR](link))
+* **Another Item**: Another description ([#PR](link))
         ]]></format>
       </grouped_sections>
     </element>
@@ -64,7 +64,7 @@ Concluding sentence about the overall benefit to users.
 
   <section_headings>
     <recommended_headings>
-      <heading>Major feature names (e.g., "## Intelligent Context Condensing Now Default")</heading>
+      <heading>Major feature names (e.g., "## Context Condensing is Now Default")</heading>
       <heading>## Bug Fixes</heading>
       <heading>## QOL Improvements</heading>
       <heading>## Misc Improvements</heading>
@@ -76,7 +76,7 @@ Concluding sentence about the overall benefit to users.
       <heading>## Changes</heading>
       <heading>## Updates</heading>
       <heading>## Highlights</heading>
-      <reason>Too generic and don't provide meaningful categorization</reason>
+      <reason>Generic; do not use.</reason>
     </avoid>
   </section_headings>
 
@@ -84,15 +84,14 @@ Concluding sentence about the overall benefit to users.
     <format>(thanks username!)</format>
     <multiple_contributors>
       <format>(thanks username1, username2!)</format>
-      <description>When multiple contributors are involved (PR author + issue reporter)</description>
+      <description>For multiple contributors (PR author + issue reporter).</description>
     </multiple_contributors>
     <rules>
-      <rule>Omit @ symbol from GitHub usernames</rule>
-      <rule>Place before PR link in parentheses</rule>
-      <rule>Use consistent format throughout</rule>
-      <rule>Include both PR author and issue reporter when available</rule>
-      <rule>List PR author first, then issue reporter</rule>
-      <rule>Separate multiple usernames with commas</rule>
+      <rule>Omit @ from GitHub usernames.</rule>
+      <rule>Place inside parentheses before PR link.</rule>
+      <rule>Include both PR author and issue reporter.</rule>
+      <rule>List PR author first.</rule>
+      <rule>Separate usernames with commas.</rule>
     </rules>
     <examples>
       <example>
@@ -109,8 +108,8 @@ Concluding sentence about the overall benefit to users.
   <pr_links>
     <format>([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER))</format>
     <placement>
-      <expanded>In introductory paragraph or bullet points</expanded>
-      <grouped>At end of each bullet point</grouped>
+      <expanded>In intro paragraph or bullet points.</expanded>
+      <grouped>At end of each bullet point.</grouped>
     </placement>
   </pr_links>
 
@@ -118,10 +117,10 @@ Concluding sentence about the overall benefit to users.
     <location>docs/update-notes/index.md</location>
     <format>[X.Y.Z](/update-notes/vX.Y.Z) (YYYY-MM-DD)</format>
     <rules>
-      <rule>List chronologically, newest first</rule>
-      <rule>Use absolute paths from /docs/</rule>
-      <rule>Omit .md extension</rule>
-      <rule>Include release date</rule>
+      <rule>List chronologically, newest first.</rule>
+      <rule>Use absolute paths from /docs/.</rule>
+      <rule>Omit .md extension.</rule>
+      <rule>Include release date.</rule>
     </rules>
   </index_file_updates>
 
@@ -129,52 +128,52 @@ Concluding sentence about the overall benefit to users.
     <location>sidebars.ts</location>
     <format>'update-notes/vX.Y.Z'</format>
     <rules>
-      <rule>Add to Update Notes category</rule>
-      <rule>Use Docusaurus ID format</rule>
-      <rule>Maintain chronological order</rule>
+      <rule>Add to "Update Notes" category.</rule>
+      <rule>Use Docusaurus ID format.</rule>
+      <rule>Maintain chronological order.</rule>
     </rules>
   </sidebar_updates>
 
   <combined_notes_updates>
-    <description>When creating patch releases, update the minor/major file</description>
+    <description>When creating patch releases, update the parent minor/major file.</description>
     <rules>
-      <rule>Add changes to relevant sections</rule>
-      <rule>Do NOT include patch version numbers in combined notes</rule>
-      <rule>Maintain consistent formatting</rule>
+      <rule>Add changes to relevant sections.</rule>
+      <rule>Do not include patch version numbers.</rule>
+      <rule>Maintain consistent formatting.</rule>
     </rules>
   </combined_notes_updates>
 
   <content_guidelines>
     <guideline priority="high">
-      <name>User-focused language</name>
-      <description>Focus on benefits, not implementation details</description>
+      <name>User-focused</name>
+      <description>Focus on benefits, not implementation.</description>
     </guideline>
     
     <guideline priority="high">
       <name>Clear and concise</name>
-      <description>Use plain language, avoid technical jargon</description>
+      <description>Use plain language, no jargon.</description>
     </guideline>
     
     <guideline priority="high">
       <name>Present tense</name>
-      <description>Use "We've improved..." not "We improved..."</description>
+      <description>Write "adds" not "added".</description>
     </guideline>
     
     <guideline priority="medium">
       <name>Consistent formatting</name>
-      <description>Follow established patterns throughout</description>
+      <description>Follow established patterns.</description>
     </guideline>
     
     <guideline priority="medium">
-      <name>Accurate claims</name>
-      <description>Verify all statements against actual changes</description>
+      <name>Accurate</name>
+      <description>Verify statements against changes.</description>
     </guideline>
   </content_guidelines>
 
   <forbidden_elements>
-    <element>Summary or Highlights sections</element>
-    <element>Version numbers in feature documentation outside update-notes</element>
-    <element>Temporal references like "as of version X.Y.Z"</element>
-    <element>Marketing language or buzzwords</element>
+    <element>"Summary" or "Highlights" sections.</element>
+    <element>Version numbers in docs outside update-notes.</element>
+    <element>Temporal references like "as of version X.Y.Z".</element>
+    <element>Marketing language or buzzwords.</element>
   </forbidden_elements>
 </formatting_standards>

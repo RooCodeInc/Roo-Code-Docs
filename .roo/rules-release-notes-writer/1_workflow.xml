@@ -1,15 +1,14 @@
-<workflow_instructions>
+  <workflow_instructions>
   <mode_overview>
-    The Release Notes Writer mode automates the creation of release notes for new versions of Roo Code.
-    It fetches pull request information from GitHub, analyzes changes, and generates user-friendly
-    release notes following the project's documentation standards.
+    Automates creating release notes for new Roo Code versions. Fetches pull requests
+    from GitHub, analyzes changes, and generates notes based on doc standards.
   </mode_overview>
 
   <initialization_steps>
     <step number="1">
       <action>Receive version number from user</action>
       <details>
-        The user provides the new version number (e.g., 3.20.3) to begin the workflow
+        User provides the new version number (e.g., 3.20.3) to start.
       </details>
     </step>
     
@@ -19,42 +18,39 @@
         <tool>list_files - Find previous version in docs/update-notes</tool>
       </tools>
       <details>
-        List files in docs/update-notes to identify the most recent version file
-        and establish the range for fetching changes
+        List files in docs/update-notes to find the last version file and set the range for fetching changes.
       </details>
     </step>
   </initialization_steps>
 
 	<main_workflow>
 		<phase name="gather_technical_information">
-			<description>Collect PR data from GitHub. This phase is skipped if the user provides a list of PR numbers.</description>
+			<description>Collect PR data from GitHub. Skipped if user provides a PR number list.</description>
 			<steps>
 		             <step number="1">
 		                 <action>Check for user-provided PR list</action>
-		                 <details>If the user provides a list of PR numbers with the version, skip to the 'process_each_pr' phase.</details>
+		                 <details>If user gives a list of PR numbers, skip to 'process_each_pr' phase.</details>
 		             </step>
 				<step number="2">
 					<action>Fetch release dates</action>
 					<tool>github.get_tag</tool>
-					<details>Get the commit dates for both new and previous version tags to establish a date range.</details>
+					<details>Get commit dates for new and previous version tags to set a date range.</details>
 				</step>
 				<step number="3">
-					<action>Search for merged PRs within the date range</action>
+					<action>Search for merged PRs within date range</action>
 					<tool>github.search_issues</tool>
 					<details>
-		          Use the release date range to search for all merged PRs.
-		          Example query: `is:pr is:merged repo:RooCodeInc/Roo-Code merged:YYYY-MM-DD..YYYY-MM-DD`
+		          Use release date range to search for merged PRs.
+		          Query: `is:pr is:merged repo:RooCodeInc/Roo-Code merged:YYYY-MM-DD..YYYY-MM-DD`
 		        </details>
 				</step>
 			</steps>
 		</phase>
 		<phase name="process_each_pr">
-			<description>Process PRs individually by creating subtasks for each PR investigation, storing findings in a temporary file for later compilation.</description>
+			<description>Process PRs with subtasks. Each subtask investigates one PR, storing findings in a temp file.</description>
 			<subtask_workflow>
 				<overview>
-					For each PR in the list, create a dedicated subtask using the new_task tool.
-					Each subtask will investigate one PR thoroughly and store findings in temp_pr_analysis.md.
-					This allows for clear separation of concerns and incremental progress tracking.
+					For each PR, create a subtask with new_task. Each subtask investigates one PR and appends findings to temp_pr_analysis.md.
 				</overview>
 				
 				<per_pr_steps>
@@ -62,144 +58,128 @@
 						<action>Create PR investigation subtask</action>
 						<tool>new_task</tool>
 						<details>
-							Create a new task in release-notes-writer mode to investigate the specific PR
+							Create a release-notes-writer subtask to investigate the PR.
 						</details>
 						<message_format>
 							Investigate PR #[number] for release notes v[version].
 							
-							Your task is to:
-							1. Get full PR details using github.get_pull_request
-							2. Extract any linked issues from the PR description (e.g., "Fixes #123")
-							3. Get details for each linked issue using github.get_issue
-							4. Analyze the change and categorize it (bug fix, feature, improvement, etc.)
-							5. Write your findings to temp_pr_analysis.md in the specified format
-							
-							Use insert_content with line 0 to append to the file.
+							Task:
+							1. Get PR details with github.get_pull_request
+							2. Extract linked issues from PR description (e.g., "Fixes #123")
+							3. Get details for linked issues with github.get_issue
+							4. Analyze and categorize the change (bug fix, feature, etc.)
+							5. Append findings to temp_pr_analysis.md in the specified format. Use insert_content with line 0.
 						</message_format>
 					</step>
 					
 					<step number="2">
 						<action>Wait for subtask completion</action>
 						<details>
-							The subtask will handle all investigation steps:
-							- Fetching PR details and linked issues
-							- Analyzing and categorizing the change
-							- Writing structured findings to temp_pr_analysis.md
-							- Reporting completion via attempt_completion
+							The subtask handles these steps: fetch PR/issue details, analyze change, write findings to temp_pr_analysis.md, and report completion.
 						</details>
 					</step>
 					
 					<step number="3">
 						<action>Move to next PR</action>
 						<details>
-							After subtask completion confirmation, proceed to create the next PR investigation subtask
+							After subtask is confirmed complete, create the next PR investigation subtask.
 						</details>
 					</step>
 				</per_pr_steps>
 				
 				<completion_per_pr>
-					After each subtask completes and confirms it has written findings to the temporary file,
-					move on to the next PR. This ensures thorough investigation of each change before proceeding.
+					After each subtask writes its findings, move to the next PR.
 				</completion_per_pr>
 			</subtask_workflow>
 		</phase>
 		<phase name="compile_final_release_notes">
-			<description>Read the temporary analysis file and compile all findings into the final release notes format</description>
+			<description>Read temporary analysis file and compile findings into the final release notes.</description>
 			<steps>
 				<step number="1">
 					<action>Read temporary analysis file</action>
 					<details>
-						Read the complete temp_pr_analysis.md file that contains all individual PR investigations
+						Read temp_pr_analysis.md, which contains all PR investigation findings.
 					</details>
 				</step>
 				<step number="2">
 					<action>Group and organize findings</action>
 					<details>
-						Group PRs by category (Bug Fixes, QOL Improvements, Provider Updates, etc.)
-						based on the analysis stored for each PR
+						Group PRs by category (Bug Fixes, QOL Improvements, etc.) based on the analysis.
 					</details>
 				</step>
 				<step number="3">
 					<action>Format for release notes</action>
 					<details>
-						Transform the organized findings into the final release notes format
-						with proper acknowledgments and user-friendly language
+						Convert findings into final release note format with acknowledgments and direct language.
 					</details>
 				</step>
-				<step number="4">
+				<step number="4"gt;
 					<action>Clean up temporary file</action>
 					<details>
-						Optionally remove or archive the temporary analysis file after successful completion
+						Optionally remove the temporary analysis file after completion.
 					</details>
 				</step>
 			</steps>
 		</phase>
 		<phase name="generate_documentation">
-			<description>Create and update all necessary documentation files</description>
+			<description>Create and update all documentation files.</description>
 			<steps>
 				<step number="1">
 					<action>Create release notes file</action>
 					<details>
-            Create docs/update-notes/vX.Y.Z.mdx with proper formatting,
-            title, date, and organized sections
+            Create docs/update-notes/vX.Y.Z.mdx with correct title, date, and sections.
           </details>
 				</step>
 				<step number="2">
 					<action>Update index.md</action>
 					<details>
-            Add new release entry to the chronological list with proper link format
+            Add new release entry to the list.
           </details>
 				</step>
 				<step number="3">
 					<action>Update sidebars.ts</action>
 					<details>
-            Add the new release to the Update Notes section in the sidebar configuration
+            Add new release to the "Update Notes" sidebar.
           </details>
 				</step>
 				<step number="4">
 					<action>Update combined release notes</action>
 					<details>
-            For patch releases, update the corresponding minor/major release file
-            (e.g., update v3.20.mdx when creating v3.20.3.mdx)
+            For patch releases, update the parent minor/major release file (e.g., update v3.20.mdx for v3.20.3).
           </details>
 				</step>
 			</steps>
 		</phase>
 		<phase name="discord_formatting" optional="true">
-			<description>Generate Discord-formatted release notes by creating a subtask that converts the existing release notes to Discord format</description>
-			<when_to_use>Use this phase when the user specifically asks for Discord formatting of the release notes</when_to_use>
+			<description>Generate Discord-formatted release notes via a subtask.</description>
+			<when_to_use>When user asks for Discord formatting.</when_to_use>
 			<steps>
 				<step number="1">
 					<action>Create Discord formatting subtask</action>
 					<tool>new_task</tool>
 					<details>
-						Create a new task in release-notes-writer mode to generate Discord-formatted release notes
-						based on the completed release notes file
+						Create a subtask to convert the release notes file to Discord format.
 					</details>
 					<task_instructions>
 						Generate Discord-formatted release notes for version X.Y.Z.
 
 						Requirements:
-						1. Strip all PR links and references to PR numbers (#XXXX)
-						2. Keep structure and content identical to the existing release notes
-						3. Replace all internal documentation links to use https://docs.roocode.com/ prefix
-						4. If requested to compress sections, summarize using this format:
+						1. Strip all PR links and numbers (#XXXX).
+						2. Keep structure and content.
+						3. Prepend https://docs.roocode.com/ to all internal doc links.
+						4. If compressing, summarize with this format:
 						   ## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
-						   This release includes X additional enhancements, covering [list key areas]. A huge thank you to the contributors in these sections: [list contributors]!
-						5. At the bottom, include links to full release notes:
+						   This release includes X other fixes covering [list key areas]. Thanks to contributors: [list contributors].
+						5. Add footer link:
 						   [Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
 						
-						Convert the release notes from docs/update-notes/vX.Y.Z.mdx to Discord format.
+						Convert docs/update-notes/vX.Y.Z.mdx to Discord format.
 					</task_instructions>
 				</step>
 				<step number="2">
 					<action>Handle compression requests</action>
 					<details>
-						If the user asks to compress specific sections, the subtask should:
-						- Summarize the overall changes of the requested sections/points
-						- Use the specified format for compressed sections
-						- Thank only contributors from the compressed sections, not the overall release
-						- Maintain links to the full release notes for detailed information
+						If user asks to compress sections, the subtask should summarize changes, thank only contributors from those sections, and link to the full notes.
 					</details>
 				</step>
 			</steps>
@@ -207,11 +187,11 @@
 	</main_workflow>
 
 		<completion_criteria>
-    <criterion>Release notes file created with proper formatting</criterion>
-    <criterion>All PRs analyzed and converted to user benefits</criterion>
-    <criterion>Index and sidebar files updated</criterion>
-    <criterion>Combined release notes updated (for patch releases)</criterion>
-    <criterion>All links and references are correct</criterion>
-    <criterion>The final release notes need to specifically include only the items (or groups) referred to in the changelog for the version we are working on</criterion>
+    <criterion>Release notes file created with correct formatting.</criterion>
+    <criterion>All PRs analyzed and described by user benefit.</criterion>
+    <criterion>Index and sidebar files updated.</criterion>
+    <criterion>Combined release notes updated for patch releases.</criterion>
+    <criterion>Links and references are correct.</criterion>
+    <criterion>Final release notes include only items from the version's changelog.</criterion>
   </completion_criteria>
 </workflow_instructions>

@@ -1,213 +1,151 @@
-<subtask_handling_instructions>
+  <subtask_handling_instructions>
   <overview>
-    The release-notes-writer mode can operate in two contexts:
-    1. Main workflow - Creating complete release notes for a version
-    2. Subtask mode - Investigating a single PR and documenting findings
+    The release-notes-writer mode operates in two contexts:
+    1. Main workflow: Creating full release notes.
+    2. Subtask mode: Investigating a single PR.
   </overview>
 
   <mode_detection>
     <description>
-      The mode determines its operating context by examining the user's initial message
+      The mode determines its context from the initial user message.
     </description>
     <patterns>
       <pattern type="subtask_pr">
         <regex>^Investigate PR #(\d+) for release notes v([\d.]+)</regex>
-        <action>Execute single PR investigation workflow</action>
+        <action>Run single PR investigation.</action>
       </pattern>
       <pattern type="subtask_discord">
         <regex>^Generate Discord-formatted release notes for version ([\d.]+)</regex>
-        <action>Execute Discord formatting workflow</action>
+        <action>Run Discord formatting.</action>
       </pattern>
       <pattern type="main">
-        <regex>^(Create|Generate|Make) release notes for (version |v)?[\d.]+</regex>
-        <action>Execute full release notes workflow</action>
+        <regex>^(Create|Generate|Make) release notes for (version |v)?[\d.]</regex>
+        <action>Run full release notes workflow.</action>
       </pattern>
     </patterns>
   </mode_detection>
 
   <pr_investigation_workflow>
     <when_triggered>
-      When the message matches the PR investigation pattern "Investigate PR #[number] for release notes v[version]"
+      When message matches "Investigate PR #[number] for release notes v[version]".
     </when_triggered>
     
     <steps>
       <step number="1">
-        <action>Extract PR number from message</action>
-        <details>
-          Parse the message to get the PR number to investigate
-        </details>
+        <action>Extract PR number from message.</action>
       </step>
       
       <step number="2">
-        <action>Fetch PR details</action>
+        <action>Fetch PR details.</action>
         <tool>github.get_pull_request</tool>
-        <extract>
-          - Title
-          - Author username
-          - Description/body
-          - Merge date
-        </extract>
+        <extract>Title, author, description, merge date.</extract>
       </step>
       
       <step number="3">
-        <action>Extract linked issues</action>
-        <process>
-          <substep>Search PR description for issue references</substep>
-          <substep>Look for patterns: Fixes #123, Closes #456, Resolves #789</substep>
-          <substep>Extract all issue numbers found</substep>
-        </process>
+        <action>Extract linked issues from PR description.</action>
+        <process>Search for patterns like "Fixes #123".</process>
       </step>
       
       <step number="4">
-        <action>Fetch issue details</action>
+        <action>Fetch issue details.</action>
         <tool>github.get_issue</tool>
-        <details>
-          For each linked issue found, fetch:
-          - Issue title
-          - Reporter username
-          - Additional context if needed
-        </details>
+        <details>For each linked issue, get title and reporter.</details>
       </step>
       
       <step number="5">
-        <action>Analyze and categorize</action>
-        <analysis>
-          <question>What type of change is this?</question>
-          <categories>
-            <category>Bug Fix - Fixes broken functionality</category>
-            <category>Feature - Adds new capability</category>
-            <category>QOL Improvement - Enhances existing features</category>
-            <category>Provider Update - Changes to API providers</category>
-            <category>Performance - Speed or efficiency improvements</category>
-          </categories>
-        </analysis>
+        <action>Analyze and categorize the change.</action>
+        <categories>Bug Fix, Feature, QOL Improvement, Provider Update, Performance.</categories>
       </step>
       
       <step number="6">
-        <action>Write findings to temporary file</action>
-        <tool>insert_content</tool>
+        <action>Write findings to temp file.</action>
+        <tool>insert_content (line 0)</tool>
         <format><![CDATA[
 ## PR #[number]: [Title]
 
 **Author**: [username]
-**Linked Issues**: #[issue] (reporter: [username]), ...
+**Linked Issues**: #[issue] (reporter: [username])
 **Category**: [Category]
-**User Impact**: [Clear description of benefit to users]
-**Contributors**: [all contributors including PR author and issue reporters]
+**User Impact**: [Benefit description]
+**Contributors**: [list of contributors]
 
 ---
         ]]></format>
         <file>temp_pr_analysis.md</file>
-        <note>Use line 0 to append to end of file</note>
       </step>
       
       <step number="7">
-        <action>Report completion</action>
+        <action>Report completion.</action>
         <tool>attempt_completion</tool>
-        <message>
-          Successfully investigated PR #[number] and documented findings in temp_pr_analysis.md
-        </message>
+        <message>Investigated PR #[number], findings documented in temp_pr_analysis.md.</message>
       </step>
     </steps>
   </pr_investigation_workflow>
 
   <discord_formatting_workflow>
     <when_triggered>
-      When the message matches the Discord formatting pattern "Generate Discord-formatted release notes for version [version]"
+      When message matches "Generate Discord-formatted release notes for version [version]".
     </when_triggered>
     
     <steps>
       <step number="1">
-        <action>Extract version number from message</action>
-        <details>
-          Parse the message to get the version number for which to format Discord release notes
-        </details>
+        <action>Extract version number from message.</action>
       </step>
       
       <step number="2">
-        <action>Read completed release notes file</action>
+        <action>Read completed release notes file.</action>
         <tool>read_file</tool>
         <file>docs/update-notes/vX.Y.Z.mdx</file>
-        <details>
-          Read the existing release notes file that was created by the main workflow
-        </details>
       </step>
       
       <step number="3">
-        <action>Transform content for Discord</action>
+        <action>Transform content for Discord.</action>
         <transformations>
-          <transformation>Remove all PR links and references (#XXXX)</transformation>
-          <transformation>Convert internal docs links to https://docs.roocode.com/ format</transformation>
-          <transformation>Preserve structure and content</transformation>
-          <transformation>Handle compression requests if specified</transformation>
+          <transformation>Remove PR links/numbers.</transformation>
+          <transformation>Convert internal links to full URLs.</transformation>
+          <transformation>Handle compression requests.</transformation>
         </transformations>
       </step>
       
       <step number="4">
-        <action>Apply compression (if requested)</action>
+        <action>Apply compression if requested.</action>
         <compression_format><![CDATA[
-## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
-This release includes X additional enhancements, covering [list key areas]. A huge thank you to the contributors in these sections: [list contributors]!
+## :wrench: [Other Improvements and Fixes](link)
+This release includes N other fixes... Thanks to contributors: [list]
         ]]></compression_format>
-        <rules>
-          <rule>Only thank contributors from compressed sections</rule>
-          <rule>Summarize overall changes of compressed sections</rule>
-          <rule>Link to full release notes section</rule>
-        </rules>
       </step>
       
       <step number="5">
-        <action>Add footer links</action>
-        <footer><![CDATA[
-[Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></footer>
+        <action>Add footer link.</action>
+        <footer>[Full X.Y.Z Release Notes](link)</footer>
       </step>
       
       <step number="6">
-        <action>Present Discord-formatted content</action>
+        <action>Present Discord-formatted content.</action>
         <tool>attempt_completion</tool>
-        <message>
-          Present the Discord-formatted release notes content for easy copying
-        </message>
       </step>
     </steps>
   </discord_formatting_workflow>
 
   <error_handling>
     <scenario>
-      <error>PR not found</error>
-      <action>
-        Report error via attempt_completion with details about the missing PR
-      </action>
+      <error>PR not found.</error>
+      <action>Report error with PR details.</action>
     </scenario>
-    
     <scenario>
-      <error>No linked issues found</error>
-      <action>
-        Continue with just PR author as contributor
-      </action>
+      <error>No linked issues found.</error>
+      <action>Proceed with only PR author as contributor.</action>
     </scenario>
-    
     <scenario>
-      <error>Issue not accessible</error>
-      <action>
-        Note the issue reference but skip reporter details
-      </action>
+      <error>Issue not accessible.</error>
+      <action>Note issue reference but skip reporter details.</action>
     </scenario>
   </error_handling>
 
   <best_practices>
-    <practice>
-      Always append to temp_pr_analysis.md, never overwrite
-    </practice>
-    <practice>
-      Include all contributors, removing duplicates if someone is both author and reporter
-    </practice>
-    <practice>
-      Focus on user impact rather than technical implementation details
-    </practice>
-    <practice>
-      Use consistent formatting for easy parsing later
-    </practice>
+    <practice>Always append to temp_pr_analysis.md.</practice>
+    <practice>Include all contributors, remove duplicates.</practice>
+    <practice>Focus on user impact, not implementation.</practice>
+    <practice>Use consistent formatting for parsing.</practice>
   </best_practices>
 </subtask_handling_instructions>

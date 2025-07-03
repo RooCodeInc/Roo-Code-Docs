@@ -1,0 +1,46 @@
+<writing_style_guide>
+  <overview>
+    This guide defines the writing style for Roo Code documentation. The style is direct, concise, and technical. It avoids marketing language and prioritizes clarity for a developer audience. All output must be in markdown.
+  </overview>
+
+  <core_principles>
+    <principle name="directness">
+      <rule>Start with the most important information. No filler introductions.</rule>
+      <bad>In this guide, we will explore how to configure the tool.</bad>
+      <good>To configure the tool, open...</good>
+    </principle>
+    <principle name="brevity">
+      <rule>Use short sentences. Cut unnecessary words. If it doesn't add value, remove it.</rule>
+    </principle>
+    <principle name="utility">
+      <rule>Focus on what the user can do and why it matters. Provide actionable steps.</rule>
+    </principle>
+    <principle name="consistency">
+      <rule>When editing a document, use its existing style, structure, and format as a guideline for any updates. Do not make major changes unless explicitly asked.</rule>
+    </principle>
+  </core_principles>
+
+  <banned_language>
+    <description>Avoid marketing jargon, buzzwords, and clichés. These words are ambiguous and reduce signal.</description>
+    <words>
+      <word>seamlessly</word>
+      <word>comprehensive</word>
+      <word>enhanced</word>
+      <word>streamlined</word>
+      <word>powerful</word>
+      <word>improved</word>
+      <word>intuitive</word>
+      <word>state-of-the-art</word>
+      <word>revolutionary</word>
+      <word>robust</word>
+      <word>easily</word>
+      <word>simply</word>
+    </words>
+  </banned_language>
+
+  <formatting>
+    <guideline>Use structured headings, lists, and short paragraphs for scannability.</guideline>
+    <guideline>Provide clear, copy-pasteable code snippets.</guideline>
+    <guideline>Assume user familiarity with basic concepts. Do not over-explain.</guideline>
+  </formatting>
+</writing_style_guide>

@@ -1,51 +1,50 @@
-<pr_analysis_patterns>
+  <pr_analysis_patterns>
   <overview>
-    Patterns and templates for analyzing pull requests and transforming technical changes
-    into user-friendly release notes that focus on benefits rather than implementation details.
+    Patterns for analyzing PRs and converting technical changes into user-focused release notes.
   </overview>
 
   <analysis_framework>
     <step number="1">
       <question>What changed?</question>
-      <focus>Identify the core functionality or feature affected</focus>
+      <focus>Identify the core feature affected.</focus>
       <examples>
         <example>
-          <technical>Modified context condensing algorithm</technical>
-          <user_facing>Context management system</user_facing>
+          <technical>Modified context condensing algorithm.</technical>
+          <user_facing>Context management system.</user_facing>
         </example>
         <example>
-          <technical>Updated file diff parsing logic</technical>
-          <user_facing>File editing capabilities</user_facing>
+          <technical>Updated file diff parsing logic.</technical>
+          <user_facing>File editing.</user_facing>
         </example>
       </examples>
     </step>
 
     <step number="2">
       <question>Why did it change?</question>
-      <focus>Understand the problem being solved or improvement made</focus>
+      <focus>Understand the problem solved or improvement made. **For bug fixes, the linked issue is the primary source of truth for the problem description.**</focus>
       <examples>
         <example>
-          <technical>Fixed race condition in concurrent reads</technical>
-          <user_facing>Preventing file reading errors</user_facing>
+          <technical>Fixed race condition in concurrent reads.</technical>
+          <user_facing>Prevented file reading errors.</user_facing>
         </example>
         <example>
-          <technical>Optimized token counting algorithm</technical>
-          <user_facing>Improving performance and responsiveness</user_facing>
+          <technical>Optimized token counting algorithm.</technical>
+          <user_facing>Improved performance.</user_facing>
         </example>
       </examples>
     </step>
 
     <step number="3">
       <question>How does this impact users?</question>
-      <focus>Determine concrete benefits in plain language</focus>
+      <focus>State the concrete benefits.</focus>
       <examples>
         <example>
-          <technical>Reduced memory usage by 30%</technical>
-          <user_facing>Roo Code now runs more smoothly on systems with limited resources</user_facing>
+          <technical>Reduced memory usage by 30%.</technical>
+          <user_facing>Roo Code runs better on systems with less memory.</user_facing>
         </example>
         <example>
-          <technical>Added retry logic for API calls</technical>
-          <user_facing>More reliable connections with fewer interruptions</user_facing>
+          <technical>Added retry logic for API calls.</technical>
+          <user_facing>More reliable connections, fewer interruptions.</user_facing>
         </example>
       </examples>
     </step>
@@ -54,68 +53,75 @@
   <pr_templates>
     <template type="major_feature">
       <structure><![CDATA[
-## [User-Friendly Feature Name]
+## [Feature Name]
 
-We've [high-level description of improvement] (thanks [Contributors]!) ([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER)):
+We've [description of improvement] (thanks [Contributors]!) ([#PR_NUMBER](link)):
 
-- **[Benefit Category 1]**: [How this helps users in plain language]
-- **[Benefit Category 2]**: [Another user benefit explained simply]
-- **[Benefit Category 3]**: [Additional user benefit if applicable]
+- **[Benefit 1]**: [How this helps users].
+- **[Benefit 2]**: [Another benefit].
+- **[Benefit 3]**: [Additional benefit].
 
-[Concluding sentence about overall impact on user experience]
+[Concluding sentence about impact.]
       ]]></structure>
       <example><![CDATA[
-## Intelligent Context Condensing Now Default
+## Context Condensing is Now Default
 
-We've made our smart context management the default behavior for all conversations (thanks john-doe, issue-reporter!) ([#1234](https://github.com/RooCodeInc/Roo-Code/pull/1234)):
+Smart context management is now the default (thanks john-doe!) ([#1234](link)):
 
-- **Better Performance**: Conversations stay fast even with large codebases
-- **Smarter Responses**: Roo focuses on the most relevant code for your current task
-- **Reduced Errors**: Less chance of hitting token limits during complex operations
+- **Performance**: Conversations are faster with large codebases.
+- **Smarter Responses**: Focuses on the most relevant code for the task.
+- **Reduced Errors**: Less chance of hitting token limits.
 
-This means you can work with larger projects without worrying about context management.
+This lets you work with larger projects without managing context.
       ]]></example>
     </template>
 
     <template type="bug_fix">
       <structure><![CDATA[
-* **[Problem Fixed]**: [Brief description of what users can now do] (thanks [Contributors]!) ([#PR](link))
+* **[Problem Fixed]**: [What users can now do] (thanks [Contributors]!) ([#PR](link))
       ]]></structure>
       <example><![CDATA[
-* **File Editing**: Fixed issue where large files couldn't be edited properly (thanks jane-smith, bug-reporter!) ([#1235](https://github.com/RooCodeInc/Roo-Code/pull/1235))
+* **File Editing**: Fixed issue preventing edits in large files (thanks jane-smith!) ([#1235](link))
       ]]></example>
+    </template>
+
+    <template type="bug_fix_from_issue">
+      <structure><![CDATA[
+    * **[User-facing problem]**: [How the fix helps users] (thanks [Contributors]!) ([#PR](link))
+          ]]></structure>
+      <example><![CDATA[
+    * **Incorrect cancellation messages**: Fixed an issue where canceling a task would show a misleading "API Streaming Failed" error. Now, canceling at any stage of a task will correctly display the "API Request Cancelled" message (thanks roomote, hannesrudolph!) ([#4904](https://github.com/RooCodeInc/Roo-Code/pull/4904))
+          ]]></example>
     </template>
 
     <template type="improvement">
       <structure><![CDATA[
-* **[Area Improved]**: [What's better for users] (thanks [Contributors]!) ([#PR](link))
+* **[Area Improved]**: [What's better] (thanks [Contributors]!) ([#PR](link))
       ]]></structure>
       <example><![CDATA[
-* **Search Performance**: Code searches now complete 2x faster for large projects (thanks perf-dev, suggester!) ([#1236](https://github.com/RooCodeInc/Roo-Code/pull/1236))
+* **Search Performance**: Code searches are 2x faster in large projects (thanks perf-dev!) ([#1236](link))
       ]]></example>
     </template>
 
     <contributor_identification>
       <pr_author>
-        <description>Always include the PR author as the primary contributor</description>
-        <source>user.login field from github.get_pull_request</source>
+        <description>Always include PR author.</description>
+        <source>user.login from github.get_pull_request</source>
       </pr_author>
       <issue_reporter>
-        <description>Include issue reporter when PR references an issue</description>
-        <source>user.login field from github.get_issue for linked issues</source>
+        <description>Include issue reporter if PR references an issue. Always check for a linked issue, even if not explicitly mentioned in the description.</description>
+        <source>user.login from github.get_issue for linked issues</source>
         <patterns>
           <pattern>Fixes #123</pattern>
           <pattern>Closes #456</pattern>
           <pattern>Resolves #789</pattern>
-          <pattern>Fix #101</pattern>
-          <pattern>Close #202</pattern>
         </patterns>
       </issue_reporter>
       <ordering>
-        <rule>List PR author first</rule>
-        <rule>List issue reporter(s) second</rule>
-        <rule>Separate multiple contributors with commas</rule>
-        <rule>Remove duplicates if same person is both PR author and issue reporter</rule>
+        <rule>PR author first.</rule>
+        <rule>Issue reporter(s) second.</rule>
+        <rule>Separate with commas.</rule>
+        <rule>Remove duplicates.</rule>
       </ordering>
     </contributor_identification>
   </pr_templates>
@@ -123,47 +129,42 @@ This means you can work with larger projects without worrying about context mana
   <categorization_guide>
     <category name="major_features">
       <criteria>
-        <criterion>New functionality that significantly changes user experience</criterion>
-        <criterion>Features mentioned in marketing or announcements</criterion>
-        <criterion>Changes affecting core workflows</criterion>
+        <criterion>New functionality changing user experience.</criterion>
+        <criterion>Changes affecting core workflows.</criterion>
       </criteria>
-      <section_placement>Own ## heading with expanded description</section_placement>
+      <section_placement>Own ## heading.</section_placement>
     </category>
 
     <category name="bug_fixes">
       <criteria>
-        <criterion>Resolves user-reported issues</criterion>
-        <criterion>Fixes broken functionality</criterion>
-        <criterion>Addresses error messages or crashes</criterion>
+        <criterion>Resolves user-reported issues.</criterion>
+        <criterion>Fixes broken functionality.</criterion>
+        <criterion>Addresses errors or crashes.</criterion>
       </criteria>
-      <section_placement>## Bug Fixes section with bullet points</section_placement>
+      <section_placement>Under ## Bug Fixes.</section_placement>
     </category>
 
     <category name="qol_improvements">
       <criteria>
-        <criterion>UI/UX enhancements</criterion>
-        <criterion>Workflow optimizations</criterion>
-        <criterion>Quality of life changes</criterion>
+        <criterion>UI/UX enhancements.</criterion>
+        <criterion>Workflow optimizations.</criterion>
       </criteria>
-      <section_placement>## QOL Improvements section</section_placement>
+      <section_placement>Under ## QOL Improvements.</section_placement>
     </category>
 
     <category name="performance">
       <criteria>
-        <criterion>Speed improvements</criterion>
-        <criterion>Memory optimizations</criterion>
-        <criterion>Efficiency gains</criterion>
+        <criterion>Speed or memory improvements.</criterion>
       </criteria>
-      <section_placement>## Misc Improvements section</section_placement>
+      <section_placement>Under ## Misc Improvements.</section_placement>
     </category>
 
     <category name="provider_updates">
       <criteria>
-        <criterion>Changes to API provider integrations</criterion>
-        <criterion>New provider support</criterion>
-        <criterion>Provider-specific fixes</criterion>
+        <criterion>Changes to API provider integrations.</criterion>
+        <criterion>New provider support.</criterion>
       </criteria>
-      <section_placement>## Provider Updates section</section_placement>
+      <section_placement>Under ## Provider Updates.</section_placement>
     </category>
   </categorization_guide>
 
@@ -178,34 +179,34 @@ This means you can work with larger projects without worrying about context mana
     </transformation>
     <transformation>
       <technical>Deprecated</technical>
-      <user_friendly>Replaced with better alternative</user_friendly>
+      <user_friendly>Replaced</user_friendly>
     </transformation>
     <transformation>
       <technical>Optimized algorithm</technical>
-      <user_friendly>Made faster/more efficient</user_friendly>
+      <user_friendly>Made faster</user_friendly>
     </transformation>
     <transformation>
       <technical>Fixed race condition</technical>
-      <user_friendly>Resolved timing issue</user_friendly>
+      <user_friendly>Fixed timing issue</user_friendly>
     </transformation>
     <transformation>
       <technical>Updated dependencies</technical>
-      <user_friendly>Enhanced compatibility and security</user_friendly>
+      <user_friendly>Improved compatibility and security</user_friendly>
     </transformation>
   </language_transformations>
 
   <benefit_categories>
     <category name="Performance">
-      <keywords>faster, quicker, responsive, efficient, smooth</keywords>
+      <keywords>faster, quicker, responsive, efficient</keywords>
     </category>
     <category name="Reliability">
-      <keywords>stable, consistent, dependable, robust</keywords>
+      <keywords>stable, consistent, dependable</keywords>
     </category>
     <category name="Usability">
-      <keywords>easier, simpler, intuitive, convenient</keywords>
+      <keywords>easier, simpler, intuitive</keywords>
     </category>
     <category name="Compatibility">
-      <keywords>supports, works with, compatible</keywords>
+      <keywords>supports, works with</keywords>
     </category>
     <category name="Security">
       <keywords>secure, safe, protected</keywords>
@@ -214,46 +215,45 @@ This means you can work with larger projects without worrying about context mana
 
   <subtask_mode_patterns>
     <description>
-      Patterns specific to operating as a subtask for single PR investigation
+      Patterns for when operating as a subtask for single PR investigation.
     </description>
     <message_recognition>
       <pattern>Investigate PR #(\d+) for release notes v([\d.]+)</pattern>
       <extraction>
-        <field name="pr_number">First capture group</field>
-        <field name="version">Second capture group</field>
+        <field name="pr_number">Group 1</field>
+        <field name="version">Group 2</field>
       </extraction>
     </message_recognition>
     <workflow_differences>
       <difference>
-        <main_mode>Processes multiple PRs in sequence</main_mode>
-        <subtask_mode>Focuses on single PR investigation</subtask_mode>
+        <main_mode>Processes multiple PRs.</main_mode>
+        <subtask_mode>Focuses on a single PR.</subtask_mode>
       </difference>
       <difference>
-        <main_mode>Creates complete release notes files</main_mode>
-        <subtask_mode>Appends findings to temp_pr_analysis.md</subtask_mode>
+        <main_mode>Creates release notes files.</main_mode>
+        <subtask_mode>Appends findings to temp_pr_analysis.md.</subtask_mode>
       </difference>
       <difference>
-        <main_mode>Updates multiple documentation files</main_mode>
-        <subtask_mode>Only writes to temporary analysis file</subtask_mode>
+        <main_mode>Updates multiple doc files.</main_mode>
+        <subtask_mode>Only writes to the temp file.</subtask_mode>
       </difference>
     </workflow_differences>
     <output_format>
-      <description>Standardized format for subtask findings</description>
+      <description>Standardized format for findings.</description>
       <template><![CDATA[
 ## PR #[number]: [Title]
 
 **Author**: [username]
 **Linked Issues**: #[issue] (reporter: [username]), ...
 **Category**: [Bug Fix/Feature/Improvement/etc.]
-**User Impact**: [Clear description of benefit to users]
-**Contributors**: [all contributors including PR author and issue reporters]
+**User Impact**: [Description of benefit]
+**Contributors**: [list of contributors]
 
 ---
       ]]></template>
       <notes>
-        <note>Always append to temp_pr_analysis.md using insert_content with line 0</note>
-        <note>Include the separator (---) to clearly delineate entries</note>
-        <note>Maintain consistent formatting for easy parsing</note>
+        <note>Append to temp_pr_analysis.md with insert_content (line 0).</note>
+        <note>Include separator (---) between entries.</note>
       </notes>
     </output_format>
   </subtask_mode_patterns>

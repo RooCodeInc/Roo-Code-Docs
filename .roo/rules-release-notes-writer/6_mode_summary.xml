@@ -1,111 +1,92 @@
-<mode_summary>
+  <mode_summary>
   <overview>
-    The Release Notes Writer mode is a specialized mode for creating and maintaining
-    release notes for the Roo Code VS Code extension. It automates the entire workflow
-    from gathering technical information to generating user-friendly documentation.
+    A mode for creating and maintaining release notes for the Roo Code extension.
+    It automates the workflow from gathering PR info to generating documentation.
   </overview>
 
   <key_features>
-    <feature>Automated PR information gathering from GitHub</feature>
-    <feature>Technical-to-user benefit transformation</feature>
-    <feature>Multi-file documentation updates</feature>
-    <feature>Consistent formatting enforcement</feature>
-    <feature>Version tracking and organization</feature>
-    <feature>Subtask-based PR processing for better organization</feature>
-    <feature>Comprehensive contributor acknowledgment including issue reporters</feature>
+    <feature>Automated PR info gathering from GitHub.</feature>
+    <feature>Technical-to-user benefit transformation.</feature>
+    <feature>Multi-file documentation updates.</feature>
+    <feature>Consistent formatting enforcement.</feature>
+    <feature>Subtask-based PR processing.</feature>
+    <feature>Contributor acknowledgment (authors and issue reporters).</feature>
   </key_features>
 
   <workflow_summary>
     <phase number="1">
       <name>Initialization</name>
-      <description>Receive version number and determine version range</description>
+      <description>Get version number and determine version range.</description>
     </phase>
-    
     <phase number="2">
       <name>Data Collection</name>
-      <description>Fetch commits, PRs, and technical details from GitHub</description>
+      <description>Fetch PRs and technical details from GitHub.</description>
     </phase>
-    
     <phase number="3">
-      <name>PR Processing via Subtasks</name>
-      <description>Create individual subtasks to investigate each PR thoroughly</description>
-      <details>
-        Each subtask analyzes one PR, extracts linked issues, identifies all contributors,
-        and writes findings to a temporary file for later compilation
-      </details>
+      <name>PR Processing (Subtasks)</name>
+      <description>Create subtasks to investigate each PR, extract info, and write findings to a temp file.</description>
     </phase>
-    
     <phase number="4">
-      <name>Compilation and Documentation</name>
-      <description>Read compiled PR analyses and create final release notes</description>
+      <name>Compilation</name>
+      <description>Read compiled findings and create final release notes.</description>
     </phase>
-    
     <phase number="5">
       <name>File Updates</name>
-      <description>Update index.md, sidebars.ts, and combined release notes</description>
+      <description>Update index.md, sidebars.ts, and combined release notes.</description>
     </phase>
   </workflow_summary>
 
   <operating_modes>
     <mode type="main">
-      <trigger>User requests release notes for a version</trigger>
-      <behavior>Full workflow from PR discovery to documentation</behavior>
+      <trigger>User requests release notes for a version.</trigger>
+      <behavior>Full workflow from PR discovery to documentation.</behavior>
     </mode>
     <mode type="subtask">
-      <trigger>Message starts with "Investigate PR #"</trigger>
-      <behavior>Single PR investigation and documentation in temp file</behavior>
+      <trigger>Message starts with "Investigate PR #".</trigger>
+      <behavior>Single PR investigation, appends to temp file.</behavior>
     </mode>
   </operating_modes>
 
   <file_permissions>
     <permission>
       <group>read</group>
-      <description>Full read access to analyze existing documentation</description>
+      <description>Read access to analyze existing documentation.</description>
     </permission>
-    
     <permission>
       <group>edit</group>
-      <restriction>docs/update-notes/.*\.(md|mdx)$|sidebars\.ts$</restriction>
-      <description>Edit access limited to release notes and sidebar config</description>
+      <restriction>docs/update-notes/.*\\.(md|mdx)$|sidebars\\.ts$</restriction>
+      <description>Edit access for release notes and sidebar config.</description>
     </permission>
-    
     <permission>
       <group>command</group>
-      <description>Execute commands for workflow automation</description>
+      <description>Command execution for workflow automation.</description>
     </permission>
-    
     <permission>
       <group>mcp</group>
-      <description>Access to GitHub MCP tools for PR analysis</description>
+      <description>Access to GitHub MCP tools.</description>
     </permission>
   </file_permissions>
 
   <usage_instructions>
     <main_workflow>
-      <instruction>User provides a version number (e.g., "3.20.3")</instruction>
-      <instruction>Mode automatically determines previous version</instruction>
-      <instruction>Fetches and analyzes all PRs in the version range</instruction>
-      <instruction>Creates subtasks for each PR to investigate thoroughly</instruction>
-      <instruction>Each subtask documents findings in temp_pr_analysis.md</instruction>
-      <instruction>Compiles all findings into user-focused release notes</instruction>
-      <instruction>Updates index.md and sidebars.ts automatically</instruction>
-      <instruction>Updates combined release notes for patch versions</instruction>
+      <instruction>User provides a version number.</instruction>
+      <instruction>Mode determines previous version, fetches and analyzes all PRs in range.</instruction>
+      <instruction>Creates subtasks to investigate each PR.</instruction>
+      <instruction>Subtasks document findings in temp_pr_analysis.md.</instruction>
+      <instruction>Mode compiles findings into release notes and updates doc files.</instruction>
     </main_workflow>
     <subtask_workflow>
-      <instruction>Receives PR number via "Investigate PR #X" message</instruction>
-      <instruction>Fetches PR details and extracts linked issues</instruction>
-      <instruction>Identifies all contributors (PR author and issue reporters)</instruction>
-      <instruction>Analyzes change and determines user impact</instruction>
-      <instruction>Appends findings to temp_pr_analysis.md</instruction>
-      <instruction>Reports completion to main task</instruction>
+      <instruction>Receives "Investigate PR #X" message.</instruction>
+      <instruction>Fetches PR/issue details, identifies contributors.</instruction>
+      <instruction>Analyzes change and determines user impact.</instruction>
+      <instruction>Appends findings to temp_pr_analysis.md.</instruction>
+      <instruction>Reports completion to main task.</instruction>
     </subtask_workflow>
   </usage_instructions>
 
   <best_practices>
-    <practice>Always verify PR information before finalizing</practice>
-    <practice>Focus on user benefits, not technical implementation</practice>
-    <practice>Maintain consistent formatting across all files</practice>
-    <practice>Include contributor acknowledgments</practice>
-    <practice>Ensure all PR links are functional</practice>
+    <practice>Focus on user benefits, not technical details.</practice>
+    <practice>Maintain consistent formatting.</practice>
+    <practice>Acknowledge all contributors.</practice>
   </best_practices>
 </mode_summary>
