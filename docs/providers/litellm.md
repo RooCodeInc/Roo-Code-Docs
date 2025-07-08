@@ -23,18 +23,63 @@ LiteLLM is a versatile tool that provides a unified interface to over 100 Large 
 
 To use LiteLLM with Roo Code, you first need to set up and run a LiteLLM server.
 
-1.  **Installation:** Follow the official [LiteLLM installation guide](https://docs.litellm.ai/docs/proxy_server) to install LiteLLM and its dependencies.
-2.  **Configuration:** Configure your LiteLLM server with the models you want to use. This typically involves setting API keys for the underlying providers (e.g., OpenAI, Anthropic) in your LiteLLM server's configuration.
-3.  **Start the Server:** Run your LiteLLM server. By default, it usually starts on `http://localhost:4000`.
-    *   You can also configure an API key for your LiteLLM server itself for added security.
+### Installation
 
-Refer to the [LiteLLM documentation](https://docs.litellm.ai/docs/) for detailed instructions on server setup, model configuration, and advanced features.
+1. Install LiteLLM with proxy support:
+   ```bash
+   pip install 'litellm[proxy]'
+   ```
+
+### Configuration
+
+2. Create a configuration file (`config.yaml`) to define your models and providers:
+   ```yaml
+   model_list:
+     # Configure Anthropic models
+     - model_name: claude-3-7-sonnet
+       litellm_params:
+         model: anthropic/claude-3-7-sonnet-20250219
+         api_key: os.environ/ANTHROPIC_API_KEY
+     
+     # Configure OpenAI models
+     - model_name: gpt-4o
+       litellm_params:
+         model: openai/gpt-4o
+         api_key: os.environ/OPENAI_API_KEY
+     
+     # Configure Azure OpenAI
+     - model_name: azure-gpt-4
+       litellm_params:
+         model: azure/my-deployment-name
+         api_base: https://your-resource.openai.azure.com/
+         api_version: "2023-05-15"
+         api_key: os.environ/AZURE_API_KEY
+   ```
+
+### Starting the Server
+
+3. Start the LiteLLM proxy server:
+   ```bash
+   # Using configuration file (recommended)
+   litellm --config config.yaml
+   
+   # Or quick start with a single model
+   export ANTHROPIC_API_KEY=your-anthropic-key
+   litellm --model claude-3-7-sonnet-20250219
+   ```
+
+4. The proxy will run at `http://0.0.0.0:4000` by default (accessible as `http://localhost:4000`).
+   *   You can also configure an API key for your LiteLLM server itself for added security.
+
+Refer to the [LiteLLM documentation](https://docs.litellm.ai/docs/) for detailed instructions on advanced server configuration and features.
 
 ---
 
 ## Configuration in Roo Code
 
-Once your LiteLLM server is running:
+Once your LiteLLM server is running, you have two options for configuring it in Roo Code:
+
+### Option 1: Using the LiteLLM Provider (Recommended)
 
 1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2.  **Select Provider:** Choose "LiteLLM" from the "API Provider" dropdown.
@@ -49,6 +94,16 @@ Once your LiteLLM server is running:
     *   The models displayed in the dropdown are sourced from this endpoint.
     *   Use the refresh button to update the model list if you've added new models to your LiteLLM server.
     *   If no model is selected, Roo Code defaults to `anthropic/claude-3-7-sonnet-20250219` (this is `litellmDefaultModelId`). Ensure this model (or your desired default) is configured and available on your LiteLLM server.
+
+### Option 2: Using OpenAI Compatible Provider
+
+Alternatively, you can configure LiteLLM using the "OpenAI Compatible" provider:
+
+1.  **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
+2.  **Select Provider:** Choose "OpenAI Compatible" from the "API Provider" dropdown.
+3.  **Enter Base URL:** Input your LiteLLM proxy URL (e.g., `http://localhost:4000`).
+4.  **Enter API Key:** Use any string as the API key (e.g., `"sk-1234"`) since LiteLLM handles the actual provider authentication.
+5.  **Select Model:** Choose the model name you configured in your `config.yaml` file.
 
 <img src="/img/litellm/litellm.png" alt="Roo Code LiteLLM Provider Settings" width="600" />
 
@@ -82,6 +137,7 @@ Roo Code uses default values for some of these properties if they are not explic
 ## Tips and Notes
 
 *   **LiteLLM Server is Key:** The primary configuration for models, API keys for downstream providers (like OpenAI, Anthropic), and other advanced features are managed on your LiteLLM server. Roo Code acts as a client to this server.
+*   **Configuration Options:** You can use either the dedicated "LiteLLM" provider (recommended) for automatic model discovery, or the "OpenAI Compatible" provider for simple manual configuration.
 *   **Model Availability:** The models available in Roo Code's "Model" dropdown depend entirely on what your LiteLLM server exposes through its `/v1/model/info` endpoint.
 *   **Network Accessibility:** Ensure your LiteLLM server is running and accessible from the machine where VS Code and Roo Code are running (e.g., check firewall rules if not on `localhost`).
 *   **Troubleshooting:** If models aren't appearing or requests fail:

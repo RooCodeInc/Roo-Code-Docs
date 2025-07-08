@@ -29,49 +29,6 @@ LLM routers let you access multiple AI models with one API key, simplifying cost
 
 *OpenRouter dashboard with "Create key" button. Name your key and copy it after creation.*
 
-#### LiteLLM
-
-[LiteLLM](https://litellm.ai/) is an open-source LLM gateway that provides access to 100+ AI models through a unified OpenAI-compatible API. Set up a self-hosted proxy server to route requests to multiple providers through a single endpoint.
-
-1. Install LiteLLM: `pip install 'litellm[proxy]'`
-
-2. Create a configuration file (`config.yaml`) to define your models:
-   ```yaml
-   model_list:
-     # Configure multiple Anthropic models
-     - model_name: claude-3-7-sonnet
-       litellm_params:
-         model: anthropic/claude-3-7-sonnet-20250219
-         api_key: os.environ/ANTHROPIC_API_KEY
-     
-     # Configure OpenAI models
-     - model_name: gpt-4o
-       litellm_params:
-         model: openai/gpt-4o
-         api_key: os.environ/OPENAI_API_KEY
-     
-     # Configure Azure OpenAI
-     - model_name: azure-gpt-4
-       litellm_params:
-         model: azure/my-deployment-name
-         api_base: https://your-resource.openai.azure.com/
-         api_version: "2023-05-15"
-         api_key: os.environ/AZURE_API_KEY
-   ```
-
-3. Start the LiteLLM proxy server:
-   ```bash
-   # Using configuration file (recommended)
-   litellm --config config.yaml
-   
-   # Or quick start with a single model
-   export ANTHROPIC_API_KEY=your-anthropic-key
-   litellm --model claude-3-7-sonnet-20250219
-   ```
-
-4. The proxy will run at `http://0.0.0.0:4000` by default
-
-
 #### Requesty
 
 1. Go to [requesty.ai](https://requesty.ai/)
@@ -121,11 +78,6 @@ Once you have your API key:
 4. Select your model:
    - For **OpenRouter**: select `anthropic/claude-3.7-sonnet` ([model details](https://openrouter.ai/anthropic/claude-3.7-sonnet))
    - For **Anthropic**: select `claude-3-7-sonnet-20250219` ([model details](https://www.anthropic.com/pricing#anthropic-api))
-   - For **LiteLLM**: 
-     - Set the API provider to "OpenAI Compatible"
-     - Enter your proxy URL (e.g., `http://localhost:4000`)
-     - Use any string as the API key (e.g., "sk-1234")
-     - Select the model name you configured in your `config.yaml`
 
 :::info Model Selection Advice
 We strongly recommend **Claude 3.7 Sonnet** for the best experience—it generally "just works" out of the box. Roo Code has been extensively optimized for this model's capabilities and instruction-following behavior.
