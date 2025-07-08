@@ -131,7 +131,6 @@ const sidebars: SidebarsConfig = {
         'providers/deepseek',
         'providers/chutes',
         'providers/gemini',
-        'providers/gemini-cli',
         'providers/glama',
         'providers/groq',
         'providers/human-relay',
