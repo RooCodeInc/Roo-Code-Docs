@@ -1,16 +1,14 @@
 # Task Todo List
 
-Keep your tasks on track with integrated todo management that helps you stay organized and focused on your development goals.
+Keep your tasks on track with integrated todo management that helps you stay organized and focused on your development goals. Task Todo Lists provide interactive, persistent checklists that track your progress through complex, multi-step workflows directly within the chat interface.
 
-Task Todo Lists provide interactive, persistent checklists that track your progress through complex, multi-step workflows directly within the chat interface.
+<img src="/img/task-todo-list/task-todo-list-3.png" alt="Task Todo List overview showing interactive checklist in Roo Code" width="600" />
 
-Key benefits:
-- **Visual Progress Tracking**: See exactly what's been completed and what remains
-- **AI-Driven Management**: Roo Code automatically manages your todo list based on task progress
-- **User Feedback Integration**: Provide input and modifications when Roo presents updates for approval
-- **Persistent State**: Your todo list is saved with your task, so you can always pick up where you left off
-- **Real-time Updates**: Watch as Roo Code marks items complete and starts new ones
-- **Environment Integration**: AI has persistent access to your current todo state as "REMINDERS"
+:::tip Todo List Triggers
+Todo lists are automatically created for complex tasks, multi-step workflows, or when using Architect mode. You can also manually trigger them by asking Roo to "use the update_todo_list tool" or "create a todo list".
+
+See [When Roo Creates Todo Lists](#when-roo-creates-todo-lists) for detailed information about automatic and manual triggers.
+:::
 
 ---
 
@@ -28,29 +26,13 @@ The Task Todo List feature is powered by the [`update_todo_list`](/advanced-usag
 
 ### When Roo Creates Todo Lists
 
-Roo Code decides to create todo lists based on several factors:
+Roo creates todo lists through both automatic detection and manual requests:
 
-- **Task Complexity**: Multiple steps, complex workflows, or tasks requiring coordination across different areas
-- **Mode-Specific Behavior**: Architect mode ALWAYS creates todo lists as its primary planning tool for structuring work
-- **Automatic Triggers**:
-  - User requests involving multiple tasks or complex requirements
-  - New items discovered during task execution that warrant structured tracking
-  - Tasks that benefit from step-by-step verification and progress tracking
-- **Reminder System**: If no todo list exists for a complex task, Roo receives prompts to create one to maintain organized workflow
+- **Task complexity detected** - Multiple steps, phases, or dependencies identified in your request
+- **Working in Architect mode** - Always creates todo lists as the primary planning tool for structuring work
+- **Direct tool request** - Say "use the update_todo_list tool" or "please use update_todo_list"
 
-### Automatic Creation Process
-
-When Roo determines a todo list would be beneficial, it automatically creates one and presents it to you for approval. This ensures you can provide feedback before the list becomes active in your workflow.
-
-### Input Formats
-
-The `update_todo_list` tool accepts todo lists in standard markdown checklist format:
-
-```markdown
-- [ ] Pending task (not started)
-- [-] In progress task (currently being worked on)  
-- [x] Completed task (fully finished)
-```
+Remember: Even when manually triggered, Roo maintains control over the todo list content and workflow. You provide feedback during approval dialogs, but Roo manages the list based on task needs.
 
 ### Display and Interaction
 
@@ -70,230 +52,36 @@ Todo lists appear in multiple places:
 
 3. **Environment Details**: Todo lists appear as a "REMINDERS" table in the environment_details section, giving the AI persistent access to current todo state
 
-### Status Tracking
+### Understanding Task Status
 
-Each todo item has one of three states:
-- **`- [ ]` Pending**: Not yet started
-- **`- [-]` In Progress**: Currently being worked on  
-- **`- [x]` Completed**: Fully finished
+Roo Code automatically manages status progression based on task progress. Each todo item has one of three states:
 
-### Dynamic Updates
+**Pending**: Shows an empty checkbox, indicating the task hasn't been started yet
+![Pending todo item with empty checkbox](../../static/img/task-todo-list/task-todo-list-4.png)
 
-As Roo Code works through your task, it automatically:
-- Marks completed items as done
-- Starts new items by marking them as in progress
-- Adds newly discovered tasks to the list
-- Updates the list based on changing requirements
+**In Progress**: Displays a yellow dot indicator, showing the task is currently being worked on
+![In progress todo item with yellow dot indicator](../../static/img/task-todo-list/task-todo-list-5.png)
 
----
-
-## Key Features
-
-### AI-Driven Task Management
-Roo Code automatically creates, updates, and manages your todo list based on task progress and complexity.
-
-### Real-time Status Updates
-Track tasks as Roo Code progresses through `pending`, `in_progress`, and `completed` states.
-
-### User Feedback Integration
-When Roo Code presents a todo list update, you can provide modifications directly in the approval dialog. The system detects changes and incorporates your feedback.
-
-### Staged Edit Capability
-Use the "Edit" button in tool blocks to stage changes that will be applied when Roo next updates the todo list, allowing you to prepare feedback for future updates.
-
-### Persistent State and Automatic Restoration
-Your todo list is saved with your task via `restoreTodoListForTask()`, ensuring continuity across sessions. When you resume a task, your todo list is automatically restored.
-
-### Environment Details Integration
-Todo lists are integrated into the environment_details as a "REMINDERS" table, giving the AI persistent access to your current todo state throughout the conversation.
-
-### Progress Visualization
-Clear visual indicators show completion status and overall progress in both the compact header display and the full interface.
-
-### Step-by-Step Tracking
-Roo Code confirms completion of each step before updating and proceeding to the next.
-
----
-
-## Working with Todo Lists
-
-### Viewing Progress
-
-Todo lists appear automatically in the chat when Roo Code determines they would be helpful. You'll see:
-- A summary in the task header showing overall progress (via `TodoListDisplay`)
-- A tool block with the full list (via `UpdateTodoListToolBlock`)
-- Current todos in the environment_details REMINDERS section
-
-### Providing Feedback
-
-You can provide input to Roo Code's todo management in two ways:
-
-1. **During Approval**: When Roo Code presents a todo list update, you can modify it directly in the approval dialog before accepting. This is the primary method for influencing the todo list.
-
-2. **Staging Changes**: Click the "Edit" button in the "Todo List Updated" tool block to stage changes. These staged modifications will only take effect when Roo Code next uses the `update_todo_list` tool.
-
-The system detects when you make changes and acknowledges your modifications.
-
-### Understanding Status Management
-
-Each item has one of three states using markdown checkbox syntax:
-- **`- [ ]` Pending**: Work hasn't started
-- **`- [-]` In Progress**: Currently being worked on
-- **`- [x]` Completed**: Work is finished
-
-Roo Code automatically manages status progression based on task progress. While you can provide feedback on status during approval, Roo Code maintains control over the todo workflow.
-
----
-
-## Configuration
-
-### Settings
-
-Access todo list settings in Roo Code configuration:
-
-- **`alwaysAllowUpdateTodoList`**: Global setting that enables auto-approval of todo list updates, bypassing the approval dialog for faster workflow
-
-### Mode-Specific Behavior
-
-Different modes have varying behaviors with todo lists:
-
-- **Architect Mode**: Has special instructions for todo usage and may create todo lists differently than other modes
-- **Other Modes**: May have specific todo list creation patterns or restrictions
-
----
-
-## Technical Implementation
-
-### Backend Components
-
-- **[`updateTodoListTool.ts`](pathname:///src/core/tools/updateTodoListTool.ts)**: Core logic for the `update_todo_list` tool, handling parsing, validation, and state management
-- **[`update-todo-list.ts`](pathname:///src/core/prompts/tools/update-todo-list.ts)**: AI instructions and examples for using the tool effectively
-- **[`todo.ts`](pathname:///src/shared/todo.ts)**: Helper functions for managing and retrieving todo list data including `restoreTodoListForTask()`
-
-### Frontend Components
-
-- **[`UpdateTodoListToolBlock.tsx`](pathname:///webview-ui/src/components/chat/UpdateTodoListToolBlock.tsx)**: Interactive todo list component with full editing capabilities
-- **[`TodoListDisplay.tsx`](pathname:///webview-ui/src/components/chat/TodoListDisplay.tsx)**: Compact read-only component for the task header
-
-### Data Format
-
-Todo lists use standard markdown checklist syntax with dashes:
-
-```markdown
-- [ ] Pending task
-- [-] In progress task  
-- [x] Completed task
-```
-
-This format ensures compatibility and readability while supporting the three distinct status states.
-
-### Environment Details Integration
-
-Todo lists appear in environment_details as a REMINDERS table:
-
-```
-# REMINDERS
-- [ ] Pending task
-- [-] In progress task  
-- [x] Completed task
-```
-
-This provides the AI with persistent access to current todo state throughout the conversation.
-
-### Error Handling
-
-The system includes comprehensive error handling:
-- **Format validation**: Ensures checklist format is correct
-- **Consecutive mistake tracking**: Monitors repeated formatting errors
-- **Specific error messages**: Provides clear feedback for different types of errors
-- **Error recovery**: Prevents malformed data from corrupting task state
-
-Common error scenarios:
-- Invalid markdown checkbox format
-- Malformed todo list structure
-- Missing required fields
-
----
-
-## Best Practices
-
-### For Users
-
-- **Review and provide feedback**: Carefully review todo lists during approval and provide modifications to match your priorities
-- **Add detail**: Make todo descriptions specific and actionable when editing during approval
-- **Suggest improvements**: Use the approval dialog to suggest removing outdated items or adding missing tasks
-- **Understand AI control**: Remember that Roo Code manages status progression automatically based on task progress
-- **Leverage persistence**: Know that your lists are automatically saved and restored across sessions
-- **Use staging edits**: Use the "Edit" button to prepare feedback for future Roo updates
-
-### For Complex Tasks
-
-- **Break down large items**: Split complex tasks into smaller, manageable pieces
-- **Order by dependency**: Arrange items in logical execution order
-- **Add discovered work**: Don't hesitate to add new items as they become apparent
-- **Track blockers**: Use in-progress status for items waiting on external dependencies
-- **Use environment awareness**: The AI can see your current todos in REMINDERS, so reference them in your requests
-
----
-
-## Examples
-
-### Basic Todo List Creation
-
-```markdown
-- [ ] Analyze requirements
-- [ ] Design architecture  
-- [ ] Implement core logic
-- [ ] Write tests
-- [ ] Update documentation
-```
-
-### Todo List with Mixed Status
-
-```markdown
-- [x] Analyze requirements
-- [-] Design architecture
-- [ ] Implement core logic
-- [ ] Write tests
-- [ ] Update documentation
-```
-
-### Adding Newly Discovered Tasks
-
-```markdown
-- [x] Analyze requirements
-- [x] Design architecture
-- [x] Implement core logic
-- [-] Write tests
-- [ ] Update documentation
-- [ ] Add performance benchmarks
-- [ ] Create deployment script
-```
+**Completed**: Features a green checkmark, confirming the task is fully finished
+![Completed todo item with green checkmark](../../static/img/task-todo-list/task-todo-list-6.png)
 
 ---
 
 ## FAQ
 
-**"How do I provide input on the todo list?"**
-You can provide feedback in two ways: 1) Directly in the approval dialog when Roo Code presents an update (primary method), or 2) Click the "Edit" button in the "Todo List Updated" tool block to stage changes that will be applied when Roo next updates the list. Remember, this is an AI-driven system where Roo maintains control of the workflow.
-
-**"What happens if Roo Code provides a badly formatted list?"**
-The system includes validation to ensure the checklist format is correct. If the format is invalid, the tool returns a specific error message and the todo list won't be updated, preventing malformed data from affecting your task state. Consecutive mistakes are tracked to help identify recurring issues.
-
 **"Can I create my own todo lists?"**
-No, todo lists are automatically created and managed by Roo Code when appropriate for the task complexity. You cannot manually invoke the tool or independently create lists. However, you can provide extensive feedback on any list that's created through the approval dialog.
-
-**"Do todo lists persist between sessions?"**
-Yes, todo lists are automatically saved with your task via `restoreTodoListForTask()` and will be available when you return to continue your work. They also appear in the environment_details REMINDERS section.
+Yes, you can manually trigger todo list creation by asking Roo to "use the update_todo_list tool" or "create a todo list". However, Roo maintains control over the todo list content and workflow - you provide feedback during approval dialogs, but Roo manages the list based on task needs.
 
 **"Can I use todo lists for simple tasks?"**
 Roo Code typically only creates todo lists for complex, multi-step tasks where they provide clear value. For simple tasks, the overhead of list management isn't necessary.
 
-**"How does the AI see my todo list?"**
-Your current todo list appears as a "REMINDERS" table in the environment_details section that the AI receives with each interaction, ensuring persistent awareness of your current tasks and progress.
-
-**"Can I configure todo list behavior?"**
-Yes, there's an `alwaysAllowUpdateTodoList` setting that enables auto-approval of todo list updates for faster workflow. Different modes may also have specific todo list behaviors.
-
 **"Why can't I directly control the todo list?"**
 This is an architectural design decision where Roo Code maintains authority over task management. You provide guidance and feedback, but Roo controls the workflow to ensure consistent task progression and accurate status tracking.
+
+---
+
+## Auto-Approving Todo List Updates
+
+You can enable automatic approval of todo list updates to reduce interruptions during long workflows. When enabled, Roo will automatically update task progress without requiring confirmation for each change.
+
+To configure this feature, see the [Update Todo List auto-approval settings](/features/auto-approving-actions#update-todo-list).

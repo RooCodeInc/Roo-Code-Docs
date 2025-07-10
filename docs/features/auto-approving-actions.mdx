@@ -45,6 +45,20 @@ Click the toolbar to expand it and configure individual permissions:
 
 *Prompt text box and Expanded toolbar with all options*
 
+### API Request Limit
+
+The toolbar includes an input field to set the maximum number of API requests Roo can make automatically:
+
+- **Purpose**: Prevents runaway API usage and unexpected costs
+- **Default**: No limit (empty field)
+- **Recommended**: Set a reasonable limit based on your task complexity (e.g., 50-100 for most tasks)
+- **How it works**: Once the limit is reached, Roo will pause and ask for permission to continue
+
+This safety feature is particularly useful when:
+- Working with expensive API models
+- Testing new workflows
+- Letting Roo work autonomously for extended periods
+
 ### Available Permissions
 
 | Permission | What it does | Risk level |
@@ -58,6 +72,7 @@ Click the toolbar to expand it and configure individual permissions:
 | **Create & complete subtasks** | Manages subtasks without confirmation | Low |
 | **Retry failed requests** | Automatically retries failed API requests | Low |
 | **Answer follow-up questions** | Selects default answer for follow-up questions| Low |
+| **Update todo list** | Automatically updates task progress | Low |
 
 ---
 
@@ -69,10 +84,21 @@ The leftmost checkbox works as a master toggle:
 
 *Master toggle (checkbox) controls all auto-approve permissions at once*
 
+**How it works:**
+- **Checked**: Activates all configured auto-approve permissions
+- **Unchecked**: Temporarily disables all auto-approvals without changing individual settings
+- **Important**: Individual permission settings are preserved when toggling
+
+This means you can:
+1. Configure your preferred permissions once
+2. Use the master toggle to quickly enable/disable them all
+3. Your configuration remains intact for next time
+
 Use the master toggle when:
 - Working in sensitive code (turn off)
 - Doing rapid development (turn on)
 - Switching between exploration and editing tasks
+- Temporarily pausing automation without losing settings
 
 ---
 
@@ -87,42 +113,65 @@ To access these settings:
 1. Click <Codicon name="gear" /> in the top-right corner
 2. Navigate to Auto-Approve Settings
 
-<img src="/img/auto-approving-actions/auto-approving-actions-4.png" alt="Settings panel auto-approve options" width="550" />
-
+<img src="/img/auto-approving-actions/auto-approving-actions-19.png" alt="Settings panel auto-approve options" width="550" />
 *Complete settings panel view*
 
 ### Read Operations
 
-:::caution Read Operations
-<img src="/img/auto-approving-actions/auto-approving-actions-6.png" alt="Read-only operations setting" width="550" />
+:::info Read Operations (Risk: Medium)
+
+<img src="/img/auto-approving-actions/auto-approving-actions-3.png" alt="Read-only operations setting" width="550" />
 
 **Setting:** "Always approve read-only operations"
 
 **Description:** "When enabled, Roo will automatically view directory contents and read files without requiring you to click the Approve button."
 
+**Additional option:**
+- **Include files outside workspace:** Allow Roo to read files outside the current workspace directory
+
 **Risk level:** Medium
 
 While this setting only allows reading files (not modifying them), it could potentially expose sensitive data. Still recommended as a starting point for most users, but be mindful of what files Roo can access.
+
+#### Workspace Boundary Protection
+
+By default, Roo can only read files within your current workspace directory. The "Include files outside workspace" option extends read access beyond the workspace boundary. Consider the security implications:
+
+- **Default (unchecked)**: Roo can only read files in your project directory
+- **Enabled**: Roo can read any file on your system that you have access to
+- **Recommendation**: Keep disabled unless you specifically need Roo to access external files
 :::
 
 ### Write Operations
 
-:::caution Write Operations
-<img src="/img/auto-approving-actions/auto-approving-actions-7.png" alt="Write operations setting with delay slider" width="550" />
+:::caution Write Operations (Risk: High)
+<img src="/img/auto-approving-actions/auto-approving-actions-16.png" alt="Write operations setting with delay slider" width="550" />
 
 **Setting:** "Always approve write operations"
 
 **Description:** "Automatically create and edit files without requiring approval"
 
-**Delay slider:** "Delay after writes to allow diagnostics to detect potential problems" (Default: 1000ms)
+**Delay slider:** "Delay after writes to allow diagnostics to detect potential problems" (Default: 0ms)
+
+**Additional options:**
+- **Include files outside workspace:** Allow Roo to modify files outside the current workspace directory
+- **Include protected files:** Allow Roo to modify files normally protected by .rooignore and .roo/ directory
 
 **Risk level:** High
 
 This setting allows Roo to modify your files without confirmation. The delay timer is crucial:
 - Higher values (2000ms+): Recommended for complex projects where diagnostics take longer
-- Default (1000ms): Suitable for most projects
-- Lower values: Use only when speed is critical and you're in a controlled environment
-- Zero: No delay for diagnostics (not recommended for critical code)
+- Default (0ms): No delay - use when speed is critical
+- 1000ms: Suitable for most projects with active diagnostics
+- Lower values: Use only when in a controlled environment
+
+#### Security Boundaries
+
+The write operations setting includes two important security controls:
+
+1. **Workspace Boundary Protection**: By default, Roo can only modify files within your current workspace. Enable "Include files outside workspace" with extreme caution.
+
+2. **Protected Files**: Files in .rooignore and the .roo/ directory are protected by default. The "Include protected files" option bypasses this protection - use only when necessary.
 
 #### Write Delay & Problems Pane Integration
 
@@ -146,8 +195,7 @@ This works like a human developer pausing to check for errors after changing cod
 
 ### Browser Actions
 
-:::info Browser Actions
-<img src="/img/auto-approving-actions/auto-approving-actions-8.png" alt="Browser actions setting" width="550" />
+:::info Browser Actions (Risk: Medium)
 
 **Setting:** "Always approve browser actions"
 
@@ -167,8 +215,8 @@ Consider the security implications of allowing automated browser access.
 
 ### API Requests
 
-:::info API Requests
-<img src="/img/auto-approving-actions/auto-approving-actions-9.png" alt="API requests retry setting with delay slider" width="550" />
+:::info API Requests (Risk: Low)
+<img src="/img/auto-approving-actions/auto-approving-actions-17.png" alt="API requests retry setting with delay slider" width="550" />
 
 **Setting:** "Always retry failed API requests"
 
@@ -185,8 +233,7 @@ This setting automatically retries API calls when they fail. The delay controls 
 
 ### MCP Tools
 
-:::caution MCP Tools
-<img src="/img/auto-approving-actions/auto-approving-actions-10.png" alt="MCP tools setting" width="550" />
+:::caution MCP Tools (Risk: Medium-High)
 
 **Setting:** "Always approve MCP tools"
 
@@ -194,13 +241,24 @@ This setting automatically retries API calls when they fail. The delay controls 
 
 **Risk level:** Medium-High (depends on configured MCP tools)
 
-This setting works in conjunction with individual tool permissions in the MCP Servers view. Both this global setting and the tool-specific permission must be enabled for auto-approval.
+This setting requires a two-step permission process for security:
+
+1. **Enable this global setting** - Acts as a master switch for all MCP tool auto-approval
+2. **Enable individual tool permissions** - In the MCP Servers view, check "Always allow" for specific tools
+
+**Important:** Both permissions must be active for a tool to auto-approve. This dual-permission system ensures you maintain granular control over which MCP tools can execute without confirmation.
+
+Example workflow:
+- Enable "Always approve MCP tools" in settings
+- Navigate to MCP Servers view
+- Find the specific tool (e.g., filesystem operations)
+- Check its "Always allow" checkbox
+- Only then will that specific tool auto-approve
 :::
 
 ### Mode Switching
 
-:::info Mode Switching
-<img src="/img/auto-approving-actions/auto-approving-actions-11.png" alt="Mode switching setting" width="550" />
+:::info Mode Switching (Risk: Low)
 
 **Setting:** "Always approve mode switching"
 
@@ -213,8 +271,7 @@ Allows Roo to change between different modes (Code, Architect, etc.) without ask
 
 ### Subtasks
 
-:::info Subtasks
-<img src="/img/auto-approving-actions/auto-approving-actions-12.png" alt="Subtasks setting" width="550" />
+:::info Subtasks (Risk: Low)
 
 **Setting:** "Always approve creation & completion of subtasks"
 
@@ -227,8 +284,8 @@ Enables Roo to create and complete subtasks automatically. This relates to workf
 
 ### Command Execution
 
-:::caution Command Execution
-<img src="/img/auto-approving-actions/auto-approving-actions-13.png" alt="Command execution setting with whitelist interface" width="550" />
+:::caution Command Execution (Risk: High)
+<img src="/img/auto-approving-actions/auto-approving-actions-18.png" alt="Command execution setting with whitelist interface" width="550" />
 
 **Setting:** "Always approve allowed execute operations"
 
@@ -246,23 +303,77 @@ This setting allows terminal command execution with controls. While risky, the w
 - Always verify commands that interact with external systems
 
 **Interface elements:**
-- Text field to enter command prefixes (e.g., 'git')
+- Text field to enter command prefixes
 - "Add" button to add new prefixes
 - Clickable command buttons with X to remove them
+
+**Common whitelist examples:**
+- `git` - Version control operations
+- `npm run` - Run package.json scripts
+- `python -m pytest` - Run Python tests
+- `cargo test` - Run Rust tests
+- `go test` - Run Go tests
+- `docker ps` - List Docker containers
+- `ls` - List directory contents
+- `cat` - Display file contents
+
+**Security tip:** Be specific with prefixes. Instead of allowing all `python` commands, limit to `python -m pytest` for test execution only.
 :::
 
 ### Follow-Up Questions
 
-:::info Follow-Up Questions
+:::info Follow-Up Questions (Risk: Low)
 <img src="/img/auto-approving-actions/auto-approving-actions-15.png" alt="Follow-up question operations setting with timeout slider" width="550" />
 
 **Setting:** `Always default answer for follow-up questions`
 
-**Description:** Automatically selects the first AI-suggested answer for a follow-up question after a configurable timeout. This speeds up your workflow by letting Roo proceed without manual intervention. A visual countdown appears on the first suggestion.
+**Description:** Automatically selects the first AI-suggested answer for a follow-up question after a configurable timeout. This speeds up your workflow by letting Roo proceed without manual intervention.
+
+**Visual countdown:** When enabled, a countdown timer appears on the first suggestion button, showing the remaining time before auto-selection. The timer is displayed as a circular progress indicator that depletes as time passes.
 
 **Timeout slider:** Use the slider to set the wait time from 1 to 300 seconds (Default: 60s).
 
-**Note:** You can override the timer at any point by clicking a different suggestion, editing a suggestion, or typing a response.
+**Override options:** You can cancel the auto-selection at any time by:
+- Clicking a different suggestion
+- Editing any suggestion
+- Typing your own response
+- Clicking the timer to pause it
 
 **Risk level:** Low
+
+**Use cases:**
+- Overnight runs where you want Roo to continue working
+- Repetitive tasks where the default suggestions are usually correct
+- Testing workflows where interaction isn't critical
+:::
+
+### Update Todo List
+
+:::info Update Todo List (Risk: Low)
+
+**Setting:** "Always approve todo list updates"
+
+**Description:** "Automatically update the to-do list without requiring approval"
+
+**Risk level:** Low
+
+This setting allows Roo to automatically update task progress and todo lists during work sessions. This includes:
+- Marking tasks as completed
+- Adding new discovered tasks
+- Updating task status (pending, in progress, completed)
+- Reorganizing task priorities
+
+**Benefits:**
+- Maintains real-time task progress visibility
+- Reduces interruptions during multi-step workflows
+- Keeps project status accurately reflected
+- Helps track complex task dependencies
+
+**Use cases:**
+- Long-running development sessions
+- Multi-step refactoring projects
+- Complex debugging workflows
+- Feature implementation with many subtasks
+
+This is particularly useful when combined with the Subtasks permission, as it allows Roo to maintain a complete picture of project progress without constant approval requests.
 :::
