@@ -20,51 +20,57 @@ This release introduces a new todo list feature to help you keep track of comple
 
 Thank you to qdaxb for this feature! ([#5182](https://github.com/RooCodeInc/Roo-Code/pull/5182), [#5472](https://github.com/RooCodeInc/Roo-Code/pull/5472), [#5473](https://github.com/RooCodeInc/Roo-Code/pull/5473), [#5482](https://github.com/RooCodeInc/Roo-Code/pull/5482))
 
-## New: Message Editing
-
-You can now edit sent messages, giving you more flexibility and control over your conversation history.
-
-- **Edit and Replace**: All edits now replace the selected message and all subsequent messages, making the feature more straightforward to use (thanks liwilliam2021!) ([#5488](https://github.com/RooCodeInc/Roo-Code/pull/5488), [#5359](https://github.com/RooCodeInc/Roo-Code/pull/5359))
-- **Edit Halting**: Prevents users from attempting to edit a message while a response is streaming (thanks mrubens!) ([#5494](https://github.com/RooCodeInc/Roo-Code/pull/5494))
-
-## Orchestrator Mode Improvements
-
-We've added and improved several orchestrator modes to streamline complex workflows.
-
-- **Issue Fixer Orchestrator**: Introduces a new mode that automates the entire workflow for resolving GitHub issues, from analysis to PR creation (thanks MuriloFP!) ([#5379](https://github.com/RooCodeInc/Roo-Code/pull/5379), [#5366](https://github.com/RooCodeInc/Roo-Code/pull/5366))
-- **PR Fixer Orchestrator**: Adds a user approval checkpoint before committing changes, handles large diffs by summarizing them, and uses targeted file staging (thanks MuriloFP!) ([#5407](https://github.com/RooCodeInc/Roo-Code/pull/5407))
-- **PR Reviewer Orchestrator**: Now delegates specialized analysis to other modes for more comprehensive code reviews (thanks MuriloFP!) ([#5406](https://github.com/RooCodeInc/Roo-Code/pull/5406))
-
 ## QOL Improvements
 
-- **Configurable Search Results**: You can now configure the maximum number of codebase search results (from 10 to 1000) in the experimental settings (thanks MuriloFP, SannidhyaSah, seedlord!) ([#5402](https://github.com/RooCodeInc/Roo-Code/pull/5402))
-- **Simplified Prompt History**: Navigate your prompt history using only the up and down arrow keys when the cursor is at the start of the input field (thanks mrubens!) ([#5467](https://github.com/RooCodeInc/Roo-Code/pull/5467))
+- **Simplified Prompt History**: Navigate your prompt history using only the up and down arrow keys when the cursor is at the start of the input field ([#5467](https://github.com/RooCodeInc/Roo-Code/pull/5467))
 - **API Provider Search**: You can now search and filter the list of API providers in the settings (thanks GOODBOY008!) ([#5278](https://github.com/RooCodeInc/Roo-Code/pull/5278))
+<img src="/img/v3.23.0/v3.23.0-1.png" alt="API Provider Search interface showing search and filter functionality" width="400" />
 - **Copy Prompt Button**: Adds a 'Copy Prompt' button to the task actions (thanks Juice10, vultrnerd!) ([#5392](https://github.com/RooCodeInc/Roo-Code/pull/5392))
+<img src="/img/v3.23.0/v3.23.0.png" alt="Copy Prompt button in task actions interface" width="400" />
 - **Chat UI**: Fixes several UI inconsistencies and layout shifting issues in the chat view to create a more stable and polished user experience (thanks seedlord!) ([#5237](https://github.com/RooCodeInc/Roo-Code/pull/5237))
-- **Clean Custom Mode Deletion**: Deleting a custom mode now also deletes its corresponding `.roo/rules-{mode}` folder (thanks hannesrudolph!) ([#5317](https://github.com/RooCodeInc/Roo-Code/pull/5317))
+- **Model Search Dropdown**: Fixed an issue where the model search input was pre-filled with the current model, now starts with a clean search field (thanks kevinvandijk!) ([#5449](https://github.com/RooCodeInc/Roo-Code/pull/5449))
+- **Chat Interface Polish**: Added proper spacing to the camera icon and made placeholder text non-selectable, preventing accidental highlighting (thanks MuriloFP!) ([#5477](https://github.com/RooCodeInc/Roo-Code/pull/5477))
+- **Clean Custom Mode Deletion**: Deleting a custom mode now also deletes its corresponding `.roo/rules-{mode}` folder ([#5317](https://github.com/RooCodeInc/Roo-Code/pull/5317))
+- **File Listing Performance**: Optimized file listing in large repositories when workspace file listing is disabled, resolving slow initial requests (thanks daniel-lxs, jcaplan!) ([#5421](https://github.com/RooCodeInc/Roo-Code/pull/5421))
+- **`insert_content` Tool**: The `insert_content` tool can now create new files when inserting content at the beginning or end of a file (thanks Ruakij, KJ7LNW!) ([#4382](https://github.com/RooCodeInc/Roo-Code/pull/4382))
+- **Indexing Status**: The code indexing indicator is now always visible in the chat area, making it easier to track indexing progress ([#5505](https://github.com/RooCodeInc/Roo-Code/pull/5505))
+- **Chat Interface**: Removed outdated feature announcement for a cleaner chat experience ([#5510](https://github.com/RooCodeInc/Roo-Code/pull/5510))
+- **Chat Interface**: Improved tooltip consistency across chat interface buttons for a more polished experience (thanks daniel-lxs!) ([#5528](https://github.com/RooCodeInc/Roo-Code/pull/5528))
+- **Interface Organization**: Cleaner Roo Code view header with reduced visual clutter - less frequently used actions moved to VS Code's overflow menu (thanks dlab-anton!) ([#3060](https://github.com/RooCodeInc/Roo-Code/pull/3060))
+- **Command Organization**: Better organized VS Code extension interface with commands properly grouped in overflow menus ([#5525](https://github.com/RooCodeInc/Roo-Code/pull/5525))
+- **Indexing Status**: Improved visual alignment and consistency of the indexing status indicator ([#5523](https://github.com/RooCodeInc/Roo-Code/pull/5523))
+- **Interface Icons**: More consistent and clearer icons throughout the interface for better visibility of codebase indexing status ([#5520](https://github.com/RooCodeInc/Roo-Code/pull/5520))
+- **Account Access**: Account features are now more accessible - the account tab is visible in the main navigation instead of being hidden in the overflow menu ([#5534](https://github.com/RooCodeInc/Roo-Code/pull/5534))
+- **User-Agent Headers**: All API requests now include a standard User-Agent header for improved tool identification and compliance ([#5492](https://github.com/RooCodeInc/Roo-Code/pull/5492))
 
 ## Bug Fixes
 
-- **`apply_diff` Tool**: Fixed an issue where the `apply_diff` tool would hang indefinitely on an error ([#5391](https://github.com/RooCodeInc/Roo-Code/pull/5391))
-- **Chat Focus**: Prevents the chat from losing focus during automated workflows, stopping user input from being accidentally redirected to files being edited by Roo (thanks hannesrudolph, ColbySerpa!) ([#5349](https://github.com/RooCodeInc/Roo-Code/pull/5349))
-- **Architect Mode File Restrictions**: Fixed an issue where Architect mode was not properly enforcing file restrictions (thanks roomote-bot, shanemmattner!) ([#5447](https://github.com/RooCodeInc/Roo-Code/pull/5447))
-- **Slash Command Descriptions**: Standardizes mode descriptions in slash commands for a more consistent user experience (thanks mrubens!) ([#5388](https://github.com/RooCodeInc/Roo-Code/pull/5388))
-- **`insert_content` Tool**: The `insert_content` tool can now create new files when inserting content at the beginning or end of a file (thanks Ruakij, KJ7LNW!) ([#4382](https://github.com/RooCodeInc/Roo-Code/pull/4382))
+- **`apply_diff` Tool**: Fixed an issue where the `apply_diff` tool would hang indefinitely on an error (thanks lhish!) ([#5391](https://github.com/RooCodeInc/Roo-Code/pull/5391))
+- **Chat Focus**: Prevents the chat from losing focus during automated workflows, stopping user input from being accidentally redirected to files being edited by Roo (thanks ColbySerpa!) ([#5349](https://github.com/RooCodeInc/Roo-Code/pull/5349))
+- **Architect Mode File Restrictions**: Fixed an issue where Architect mode was not properly enforcing file restrictions (thanks shanemmattner!) ([#5447](https://github.com/RooCodeInc/Roo-Code/pull/5447))
+- **Slash Command Descriptions**: Standardizes mode descriptions in slash commands for a more consistent user experience ([#5388](https://github.com/RooCodeInc/Roo-Code/pull/5388))
 - **Follow-up Question Timer**: Fixed an issue where the auto-approval timer for follow-up questions would continue even after a user responded (thanks liwilliam2021!) ([#5368](https://github.com/RooCodeInc/Roo-Code/pull/5368))
 - **TypeScript Watch Path**: Fixes an issue where TypeScript compiler errors in watch mode would not correctly link back to the source file (thanks bbenshalom, KJ7LNW!) ([#5155](https://github.com/RooCodeInc/Roo-Code/pull/5155))
-- **Code Indexing Silent Failures**: Prevents silent failures in code indexing when using incompatible or misconfigured OpenAI-compatible endpoints by providing clear error messages (thanks hannesrudolph, sfz009900!) ([#5352](https://github.com/RooCodeInc/Roo-Code/pull/5352))
 - **Completion Sound**: Prevents annoying repetitive completion sounds when reopening completed tasks, making the completion notification more meaningful and less intrusive (thanks SannidhyaSah!) ([#5249](https://github.com/RooCodeInc/Roo-Code/pull/5249))
+- **New Task Streaming**: Fixed an issue where creating a new task with large instructions would cause the UI to appear frozen ([#5432](https://github.com/RooCodeInc/Roo-Code/pull/5432))
 - **MCP Image Resources**: Fixed MCP image resource handling to support servers that don't use standard data URI format, allowing users to successfully process images from a wider range of MCP servers (thanks s97712!) ([#5254](https://github.com/RooCodeInc/Roo-Code/pull/5254))
+- **`create_mode` Instructions**: The `create_mode` instructions now include the `description` field ([#5433](https://github.com/RooCodeInc/Roo-Code/pull/5433))
+- **OpenRouter**: Fixes an issue where the number of reserved tokens for OpenRouter models was displayed incorrectly (thanks shariqriazz!) ([#5240](https://github.com/RooCodeInc/Roo-Code/pull/5240))
+- **Auto-Approval**: Fixed issue where subsequent tools required manual approval after using `update_todo_list`, even when auto-approval was enabled (thanks daniel-lxs!) ([#5508](https://github.com/RooCodeInc/Roo-Code/pull/5508))
+- **Custom Modes**: Fixed crashes when custom modes configuration files were empty or contained null content (thanks daniel-lxs!) ([#5526](https://github.com/RooCodeInc/Roo-Code/pull/5526))
+- **File Listing**: Fixed issue where the [`list_files`](/advanced-usage/available-tools/list-files) tool incorrectly showed directories that should be ignored according to .gitignore patterns (thanks X9VoiD!) ([#5394](https://github.com/RooCodeInc/Roo-Code/pull/5394))
+- **Error Messages**: Fixed display of raw translation keys in embedding provider error messages - now shows properly localized messages (thanks daniel-lxs!) ([#5535](https://github.com/RooCodeInc/Roo-Code/pull/5535))
+- **File Opening**: Fixed file opening functionality for files and folders with special characters like brackets in their names (thanks vivekfyi, nielpattin!) ([#5504](https://github.com/RooCodeInc/Roo-Code/pull/5504))
+- **MDM Security**: Fixed security vulnerability where users could bypass organizational MDM policies by opening the extension in new tabs/windows (thanks liwilliam2021!) ([#5540](https://github.com/RooCodeInc/Roo-Code/pull/5540))
 
 ## Provider Updates
 
-- **OpenRouter**: Fixes an issue where the number of reserved tokens for OpenRouter models was displayed incorrectly (thanks shariqriazz!) ([#5240](https://github.com/RooCodeInc/Roo-Code/pull/5240))
-- **Azure OpenAI Compatibility**: Fixed Azure OpenAI compatibility issues in codebase indexing by supporting full endpoint URLs, resolving 404 "Resource not found" errors (thanks SannidhyaSah, koberghe!) ([#5214](https://github.com/RooCodeInc/Roo-Code/pull/5214))
-- **Gemini Embedding Provider**: Added Google Gemini as a new embedding provider option for codebase indexing, expanding choice beyond OpenAI and Ollama with optimized performance using text-embedding-004 model (thanks SannidhyaSah, ChuKhaLi, HahaBill!) ([#5228](https://github.com/RooCodeInc/Roo-Code/pull/5228))
+- **xAI Grok-4**: Added support for Grok-4 model with 256K context window, image support, and prompt cache support ([#5559](https://github.com/RooCodeInc/Roo-Code/pull/5559))
 
-## Documentation Updates
+## Repo Level Updates
 
-- **`create_mode` Instructions**: The `create_mode` instructions now include the `description` field (thanks roomote-bot!) ([#5433](https://github.com/RooCodeInc/Roo-Code/pull/5433))
+- **Issue Fixer Orchestrator**: Internal mode improvements for GitHub issue resolution workflows (thanks MuriloFP!) ([#5379](https://github.com/RooCodeInc/Roo-Code/pull/5379), [#5366](https://github.com/RooCodeInc/Roo-Code/pull/5366))
+- **PR Fixer Orchestrator**: Enhanced internal PR fixing workflow with better safety and user control (thanks MuriloFP!) ([#5407](https://github.com/RooCodeInc/Roo-Code/pull/5407))
+- **PR Reviewer Orchestrator**: Improved internal code review delegation to specialized modes (thanks MuriloFP!) ([#5406](https://github.com/RooCodeInc/Roo-Code/pull/5406))
 - **Testing Guidelines**: Added clear and compact testing guidelines to the project rules documentation (thanks daniel-lxs!) ([#5353](https://github.com/RooCodeInc/Roo-Code/pull/5353))
-- **`docs-extractor` Mode**: Improved the `docs-extractor` mode for more reliable documentation generation (thanks hannesrudolph!) ([#5381](https://github.com/RooCodeInc/Roo-Code/pull/5381))
+- **`docs-extractor` Mode**: Improved the `docs-extractor` mode for more reliable documentation generation ([#5381](https://github.com/RooCodeInc/Roo-Code/pull/5381))
