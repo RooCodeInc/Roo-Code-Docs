@@ -15,4 +15,4 @@ Never Thank cte, hannesrudolph, jr, roomote, dleffel or mrubens in release notes
 
 
 ## Misc
-When moving a section, make sure to add the forwarding link to in docusaurus.config.ts
+When moving a section, make sure to add the forwarding link in docusaurus.config.ts
