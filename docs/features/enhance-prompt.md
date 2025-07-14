@@ -1,6 +1,6 @@
 # Enhance Prompt
 
-The "Enhance Prompt" feature in Roo Code helps you improve the quality and effectiveness of your prompts before sending them to the AI model.  By clicking the <Codicon name="sparkle" /> icon in the chat input, you can automatically refine your initial request, making it clearer, more specific, and more likely to produce the desired results.
+The "Enhance Prompt" feature in Roo Code helps you improve the quality and effectiveness of your prompts before sending them to the AI model.  By clicking the <Codicon name="wand" /> icon in the chat input, you can automatically refine your initial request, making it clearer, more specific, and more likely to produce the desired results.
 
 ---
 
@@ -17,7 +17,7 @@ The "Enhance Prompt" feature in Roo Code helps you improve the quality and effec
 ## How to Use Enhance Prompt
 
 1.  **Type your initial prompt:**  Enter your request in the Roo Code chat input box as you normally would.  This can be a simple question, a complex task description, or anything in between.
-2.  **Click the <Codicon name="sparkle" /> Icon:**  Instead of pressing Enter, click the <Codicon name="sparkle" /> icon located in the bottom right of the chat input box.
+2.  **Click the <Codicon name="wand" /> Icon:**  Instead of pressing Enter, click the <Codicon name="wand" /> icon located in the bottom right of the chat input box.
 3.  **Review the Enhanced Prompt:**  Roo Code will replace your original prompt with an enhanced version.  Review the enhanced prompt to make sure it accurately reflects your intent. You can further refine the enhanced prompt before sending.
 4.  **Send the Enhanced Prompt:**  Press Enter or click the Send icon (<Codicon name="send" />) to send the enhanced prompt to Roo Code.
 
