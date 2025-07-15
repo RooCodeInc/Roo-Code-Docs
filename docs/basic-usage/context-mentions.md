@@ -63,6 +63,8 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Groups** | Problems organized by file for better clarity |
 | **Best for** | Fixing errors without manual copying |
 
+For comprehensive details on how Roo Code integrates with VSCode's diagnostics system, see [Diagnostics Integration](/features/diagnostics-integration).
+
 ### Terminal Mention
 <img src="/img/context-mentions/context-mentions-4.png" alt="Terminal mention example showing terminal output being included in Roo's context" width="600" />
 
@@ -129,4 +131,11 @@ The dropdown automatically filters out common directories like `node_modules`, `
 | **`.gitignore` bypass** | Similarly, file and folder `@mentions` do not respect `.gitignore` rules when fetching content. |
 | **Git command respect** | Git-related mentions (`@git-changes`, `@commit-hash`) do respect `.gitignore` since they rely on Git commands. |
 
+---
+
+## Related Features
+
+- [Diagnostics Integration](/features/diagnostics-integration) - Learn about automatic error detection and smart severity filtering
+- [Code Actions](/features/code-actions) - Discover quick fixes and AI assistance directly in your editor
+- [Shell Integration](/features/shell-integration) - Understand how terminal mentions work with shell integration
 

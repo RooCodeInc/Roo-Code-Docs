@@ -42,6 +42,7 @@ const sidebars: SidebarsConfig = {
         'features/code-actions',
         'features/codebase-indexing',
         'features/custom-instructions',
+        'features/diagnostics-integration',
         'features/custom-modes',
         'features/fast-edits',
         'features/enhance-prompt',
