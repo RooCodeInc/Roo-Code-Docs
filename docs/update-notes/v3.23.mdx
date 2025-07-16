@@ -20,13 +20,41 @@ This release introduces a new todo list feature to help you keep track of comple
 
 Thank you to qdaxb for this feature! ([#5182](https://github.com/RooCodeInc/Roo-Code/pull/5182), [#5472](https://github.com/RooCodeInc/Roo-Code/pull/5472), [#5473](https://github.com/RooCodeInc/Roo-Code/pull/5473), [#5482](https://github.com/RooCodeInc/Roo-Code/pull/5482))
 
+## New: Command Denylist
+
+We've added the ability to automatically reject unwanted commands in your workflows:
+
+- **Always Reject**: Mark commands as "always reject" to prevent accidental execution
+- **Time Saving**: No need to manually reject the same commands repeatedly
+- **Workflow Control**: Complements existing auto-approval functionality with "always reject" option
+
+This gives you better control over command execution in automated workflows.
+
+## Windows Support for Claude Code
+
+We've added native Windows support for the Claude Code provider (thanks SannidhyaSah, kwk9892!) ([#5615](https://github.com/RooCodeInc/Roo-Code/pull/5615)):
+
+- **Fixed Windows Compatibility**: Claude Code provider no longer gets stuck on Windows systems
+- **Improved Input Handling**: Uses stdin-based input to eliminate command-line length limitations
+- **Cross-Platform**: Works reliably across Windows, macOS, and Linux
+
+## Command Execution Improvements
+
+Added configurable timeout settings for command execution:
+
+- **Timeout Control**: Set timeouts from 0-600 seconds to prevent long-running commands from blocking workflows
+- **Clear Error Messages**: Commands that timeout display helpful error messages
+- **Better Visual Feedback**: Timeout errors now appear in red for better visibility
+
 ## QOL Improvements
 
 - **Simplified Prompt History**: Navigate your prompt history using only the up and down arrow keys when the cursor is at the start of the input field ([#5467](https://github.com/RooCodeInc/Roo-Code/pull/5467))
 - **API Provider Search**: You can now search and filter the list of API providers in the settings (thanks GOODBOY008!) ([#5278](https://github.com/RooCodeInc/Roo-Code/pull/5278))
 <img src="/img/v3.23.0/v3.23.0-1.png" alt="API Provider Search interface showing search and filter functionality" width="400" />
+
 - **Copy Prompt Button**: Adds a 'Copy Prompt' button to the task actions (thanks Juice10, vultrnerd!) ([#5392](https://github.com/RooCodeInc/Roo-Code/pull/5392))
 <img src="/img/v3.23.0/v3.23.0.png" alt="Copy Prompt button in task actions interface" width="400" />
+
 - **Chat UI**: Fixes several UI inconsistencies and layout shifting issues in the chat view to create a more stable and polished user experience (thanks seedlord!) ([#5237](https://github.com/RooCodeInc/Roo-Code/pull/5237))
 - **Model Search Dropdown**: Fixed an issue where the model search input was pre-filled with the current model, now starts with a clean search field (thanks kevinvandijk!) ([#5449](https://github.com/RooCodeInc/Roo-Code/pull/5449))
 - **Chat Interface Polish**: Added proper spacing to the camera icon and made placeholder text non-selectable, preventing accidental highlighting (thanks MuriloFP!) ([#5477](https://github.com/RooCodeInc/Roo-Code/pull/5477))
@@ -42,6 +70,17 @@ Thank you to qdaxb for this feature! ([#5182](https://github.com/RooCodeInc/Roo-
 - **Interface Icons**: More consistent and clearer icons throughout the interface for better visibility of codebase indexing status ([#5520](https://github.com/RooCodeInc/Roo-Code/pull/5520))
 - **Account Access**: Account features are now more accessible - the account tab is visible in the main navigation instead of being hidden in the overflow menu ([#5534](https://github.com/RooCodeInc/Roo-Code/pull/5534))
 - **User-Agent Headers**: All API requests now include a standard User-Agent header for improved tool identification and compliance ([#5492](https://github.com/RooCodeInc/Roo-Code/pull/5492))
+- **Codebase Indexing Toggle**: Added enable/disable checkbox for codebase indexing in settings with state persistence across sessions (thanks daniel-lxs, elasticdotventures!) ([#5599](https://github.com/RooCodeInc/Roo-Code/pull/5599))
+- **Chat Interface**: Improved chat layout with better organization and increased task history visibility (3 tasks instead of 2) ([#5643](https://github.com/RooCodeInc/Roo-Code/pull/5643))
+- **Command Messaging**: Clearer messaging when command prefixes are denied - users now see that denial is due to their settings rather than automatic system behavior ([#5637](https://github.com/RooCodeInc/Roo-Code/pull/5637))
+- **History Navigation**: Added "View all history" link to the HistoryPreview component for easier access to full task history when the history tab is hidden ([#5630](https://github.com/RooCodeInc/Roo-Code/pull/5630))
+- **Marketplace Access**: Added Marketplace buttons to both MCP and modes tabs for easier discovery and access ([#5580](https://github.com/RooCodeInc/Roo-Code/pull/5580))
+- **MCP Interface**: Improved MCP UI with toggle switches instead of eye buttons for enabling/disabling tools and servers, providing clearer visual feedback ([#5576](https://github.com/RooCodeInc/Roo-Code/pull/5576))
+- **Codebase Search**: Cleaner and more readable codebase search results with improved visual styling and better internationalization ([#5571](https://github.com/RooCodeInc/Roo-Code/pull/5571))
+- **Error Messages**: Friendlier error messages when API configuration profiles aren't compatible with organization settings ([#5561](https://github.com/RooCodeInc/Roo-Code/pull/5561))
+- **Architect Mode**: Intelligently selects the best available tools for context discovery, including semantic search when available ([#5607](https://github.com/RooCodeInc/Roo-Code/pull/5607))
+- **Model Selection Interface**: Improved visual appearance and spacing in the code index model selection interface for better usability ([#5706](https://github.com/RooCodeInc/Roo-Code/pull/5706))
+- **Mode Navigation**: Added bidirectional mode cycling with Cmd+Shift+. keyboard shortcut to switch to previous mode, making mode navigation more efficient when you overshoot your target mode (thanks mkdir700!) ([#5695](https://github.com/RooCodeInc/Roo-Code/pull/5695))
 
 ## Bug Fixes
 
@@ -62,10 +101,34 @@ Thank you to qdaxb for this feature! ([#5182](https://github.com/RooCodeInc/Roo-
 - **Error Messages**: Fixed display of raw translation keys in embedding provider error messages - now shows properly localized messages (thanks daniel-lxs!) ([#5535](https://github.com/RooCodeInc/Roo-Code/pull/5535))
 - **File Opening**: Fixed file opening functionality for files and folders with special characters like brackets in their names (thanks vivekfyi, nielpattin!) ([#5504](https://github.com/RooCodeInc/Roo-Code/pull/5504))
 - **MDM Security**: Fixed security vulnerability where users could bypass organizational MDM policies by opening the extension in new tabs/windows (thanks liwilliam2021!) ([#5540](https://github.com/RooCodeInc/Roo-Code/pull/5540))
+- **Context Token Display**: Fixed inflated context token count displays by excluding cache tokens from calculation, showing accurate context window usage (thanks daniel-lxs!) ([#5603](https://github.com/RooCodeInc/Roo-Code/pull/5603))
+- **Codebase Indexing Errors**: Fixed cryptic error messages when configuring codebase indexing - users now see clear, understandable error messages instead of translation keys (thanks daniel-lxs, nikhil-swamix!) ([#5574](https://github.com/RooCodeInc/Roo-Code/pull/5574))
+- **Embedding Model Switching**: Fixed issues when switching between embedding models with different vector dimensions, allowing use of models beyond 1536 dimensions like Google Gemini's text-embedding-004 (thanks daniel-lxs, mkdir700!) ([#5565](https://github.com/RooCodeInc/Roo-Code/pull/5565))
+- **Mermaid Diagrams**: Fixed Mermaid diagram rendering issues in architect mode by preventing common syntax errors (thanks MuriloFP, joshmouch!) ([#5530](https://github.com/RooCodeInc/Roo-Code/pull/5530))
+- **UI Button Overlap**: Fixed overlapping enhancement and text-to-speech buttons, making both features accessible when text-to-speech is enabled (thanks sensei-woo!) ([#5586](https://github.com/RooCodeInc/Roo-Code/pull/5586))
+- **Directory Tracking**: Fixed command execution directory tracking - Roo Code now properly maintains awareness of the current working directory when executing commands, preventing issues where subsequent commands would run in the wrong location after using `cd` commands (thanks chris-garrett!) ([#5667](https://github.com/RooCodeInc/Roo-Code/pull/5667))
+- **Embedding Model Switching**: Fixed vector dimension mismatch errors when switching between embedding models with different dimensions, allowing successful transitions from high-dimensional models to lower-dimensional models like Google Gemini (thanks hubeizys!) ([#5617](https://github.com/RooCodeInc/Roo-Code/pull/5617))
+- **Code Indexing**: Fixed code indexing to use optimal model dimensions, improving indexing reliability and performance (thanks daniel-lxs!) ([#5705](https://github.com/RooCodeInc/Roo-Code/pull/5705))
 
 ## Provider Updates
 
 - **xAI Grok-4**: Added support for Grok-4 model with 256K context window, image support, and prompt cache support ([#5559](https://github.com/RooCodeInc/Roo-Code/pull/5559))
+- **Mistral Devstral Medium**: Added support for Mistral's Devstral Medium model with 131,000 token context window and image support capabilities
+- **Claude Code**: Added configurable maximum output tokens setting (8,000-64,000 tokens) for complex code generation tasks
+- **Vertex AI**: Expanded region configuration to include all available GCP Vertex AI regions for better compliance and access to third-party models like Anthropic Claude (thanks shubhamgupta731!) ([#5557](https://github.com/RooCodeInc/Roo-Code/pull/5557))
+- **Google Gemini**: Added support for Google's new gemini-embedding-001 model with improved performance and higher dimensional embeddings (3072 vs 768) for better codebase indexing and search (thanks daniel-lxs!) ([#5698](https://github.com/RooCodeInc/Roo-Code/pull/5698))
+- **Groq Kimi K2**: Added Kimi K2 model option for Groq users with improved token handling reliability for models with equal max tokens and context window
+
+## Misc Improvements
+
+- **Error Telemetry**: Improved debugging capabilities for better reliability and faster issue resolution, with enhanced privacy protection through hashed file paths (thanks daniel-lxs!) ([#5595](https://github.com/RooCodeInc/Roo-Code/pull/5595))
+- **Type Definitions**: Updated internal type definitions for improved compatibility and development experience
+- **GitHub Actions**: Fixed GitHub Actions workflow warnings by removing invalid parameters from CI/CD configuration (thanks hamirmahal!) ([#5676](https://github.com/RooCodeInc/Roo-Code/pull/5676))
+- **Token Handling**: Improved consistency in token handling across API providers with centralized max-token calculation logic for better reliability
+
+## Documentation Updates
+
+- **Typo Fixes**: Improved accuracy and clarity of documentation and code comments across multiple files (thanks noritaka1166!) ([#5569](https://github.com/RooCodeInc/Roo-Code/pull/5569))
 
 ## Repo Level Updates
 
