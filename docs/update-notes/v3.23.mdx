@@ -2,7 +2,7 @@ import Codicon from '@site/src/components/Codicon';
 
 # Roo Code 3.23 Release Notes
 
-This release graduates codebase indexing to a stable feature, introduces a powerful new todo list for managing complex tasks, and a whole lot of bug fixes!
+This release graduates codebase indexing to a stable feature, introduces a powerful new todo list for managing complex tasks, and includes critical performance improvements and bug fixes!
 
 ## Codebase Indexing: Always On, Always Ready
 
@@ -10,7 +10,7 @@ Codebase indexing has graduated from an experimental feature and is now a core p
 
 <img src="/img/v3.23/v3.23-1.png" alt="Codebase Indexing Status Icon" width="600" />
 
-Thank you to MuriloFP, OleynikAleksandr, sxueck, CW-B-W, WAcry, bughaver, daniel-lxs, SannidhyaSah, ChuKhaLi, HahaBill, koberghe, sfz009900, and tmchow for helping get this across the finish line! ([#5378](https://github.com/RooCodeInc/Roo-Code/pull/5378), [#5377](https://github.com/RooCodeInc/Roo-Code/pull/5377), [#5383](https://github.com/RooCodeInc/Roo-Code/pull/5383), [#5483](https://github.com/RooCodeInc/Roo-Code/pull/5483), [#5481](https://github.com/RooCodeInc/Roo-Code/pull/5481), [#5228](https://github.com/RooCodeInc/Roo-Code/pull/5228), [#5214](https://github.com/RooCodeInc/Roo-Code/pull/5214), [#5158](https://github.com/RooCodeInc/Roo-Code/pull/5158), [#5402](https://github.com/RooCodeInc/Roo-Code/pull/5402), [#5451](https://github.com/RooCodeInc/Roo-Code/pull/5451), [#5352](https://github.com/RooCodeInc/Roo-Code/pull/5352), [#5403](https://github.com/RooCodeInc/Roo-Code/pull/5403))
+Thank you to MuriloFP, OleynikAleksandr, sxueck, CW-B-W, WAcry, bughaver, daniel-lxs, SannidhyaSah, ChuKhaLi, HahaBill, koberghe, sfz009900, tmchow, rxpjd, buck-0x, and BenWilles for helping get this across the finish line! ([#5378](https://github.com/RooCodeInc/Roo-Code/pull/5378), [#5377](https://github.com/RooCodeInc/Roo-Code/pull/5377), [#5383](https://github.com/RooCodeInc/Roo-Code/pull/5383), [#5483](https://github.com/RooCodeInc/Roo-Code/pull/5483), [#5481](https://github.com/RooCodeInc/Roo-Code/pull/5481), [#5228](https://github.com/RooCodeInc/Roo-Code/pull/5228), [#5214](https://github.com/RooCodeInc/Roo-Code/pull/5214), [#5158](https://github.com/RooCodeInc/Roo-Code/pull/5158), [#5402](https://github.com/RooCodeInc/Roo-Code/pull/5402), [#5451](https://github.com/RooCodeInc/Roo-Code/pull/5451), [#5352](https://github.com/RooCodeInc/Roo-Code/pull/5352), [#5403](https://github.com/RooCodeInc/Roo-Code/pull/5403), [#5785](https://github.com/RooCodeInc/Roo-Code/pull/5785))
 
 ## New: Task Todo List
 
@@ -45,6 +45,7 @@ Added configurable timeout settings for command execution:
 - **Timeout Control**: Set timeouts from 0-600 seconds to prevent long-running commands from blocking workflows
 - **Clear Error Messages**: Commands that timeout display helpful error messages
 - **Better Visual Feedback**: Timeout errors now appear in red for better visibility
+- **API Task Control**: Added ability to set command execution timeout via API when starting tasks ([#5825](https://github.com/RooCodeInc/Roo-Code/pull/5825))
 
 ## QOL Improvements
 
@@ -81,6 +82,12 @@ Added configurable timeout settings for command execution:
 - **Architect Mode**: Intelligently selects the best available tools for context discovery, including semantic search when available ([#5607](https://github.com/RooCodeInc/Roo-Code/pull/5607))
 - **Model Selection Interface**: Improved visual appearance and spacing in the code index model selection interface for better usability ([#5706](https://github.com/RooCodeInc/Roo-Code/pull/5706))
 - **Mode Navigation**: Added bidirectional mode cycling with Cmd+Shift+. keyboard shortcut to switch to previous mode, making mode navigation more efficient when you overshoot your target mode (thanks mkdir700!) ([#5695](https://github.com/RooCodeInc/Roo-Code/pull/5695))
+- **Ollama Timeout**: Increased API timeouts from 10s/5s to 60s/30s to prevent failures with slower models (thanks daniel-lxs, danntee, vshvedov!) ([#5778](https://github.com/RooCodeInc/Roo-Code/pull/5778))
+- **Ollama UI**: Updated to use text inputs instead of dropdowns for model selection, matching other providers (thanks daniel-lxs!) ([#5818](https://github.com/RooCodeInc/Roo-Code/pull/5818))
+- **Settings Organization**: Moved less commonly used provider settings into an "Advanced settings" dropdown for cleaner UI ([#5762](https://github.com/RooCodeInc/Roo-Code/pull/5762))
+- **Error Control**: Added configurable "Error & Repetition Limit" setting to control when "Roo is having trouble" dialogs appear, with option to disable them entirely (thanks MuriloFP, anojndr!) ([#5752](https://github.com/RooCodeInc/Roo-Code/pull/5752))
+- **Checkpoint Efficiency**: Excluded Terraform and Terragrunt cache directories from checkpoints, reducing storage usage by up to 10x (thanks MuriloFP, ijin!) ([#5750](https://github.com/RooCodeInc/Roo-Code/pull/5750))
+- **Message Editing**: Overhauled message edit/delete interface with custom modals and improved workflow (thanks liwilliam2021!) ([#5538](https://github.com/RooCodeInc/Roo-Code/pull/5538))
 
 ## Bug Fixes
 
@@ -109,6 +116,13 @@ Added configurable timeout settings for command execution:
 - **Directory Tracking**: Fixed command execution directory tracking - Roo Code now properly maintains awareness of the current working directory when executing commands, preventing issues where subsequent commands would run in the wrong location after using `cd` commands (thanks chris-garrett!) ([#5667](https://github.com/RooCodeInc/Roo-Code/pull/5667))
 - **Embedding Model Switching**: Fixed vector dimension mismatch errors when switching between embedding models with different dimensions, allowing successful transitions from high-dimensional models to lower-dimensional models like Google Gemini (thanks hubeizys!) ([#5617](https://github.com/RooCodeInc/Roo-Code/pull/5617))
 - **Code Indexing**: Fixed code indexing to use optimal model dimensions, improving indexing reliability and performance (thanks daniel-lxs!) ([#5705](https://github.com/RooCodeInc/Roo-Code/pull/5705))
+- **Custom Mode Names**: Fixed an issue where clearing a custom mode name would corrupt the YAML file and make all custom modes disappear (thanks daniel-lxs, kfxmvp!) ([#5794](https://github.com/RooCodeInc/Roo-Code/pull/5794))
+- **Auto-Approve Checkbox**: Resolved confusing checkbox states where it could show as checked with "None" selected or unchecked with options selected ([#5602](https://github.com/RooCodeInc/Roo-Code/pull/5602))
+- **Date Format Clarity**: Changed date format to ISO 8601 to prevent LLMs from misinterpreting dates like 7/11/2025 as November 7th instead of July 11th (thanks chrarnoldus!) ([#5793](https://github.com/RooCodeInc/Roo-Code/pull/5793))
+- **Settings Save Issue**: Fixed a bug where opening provider settings with OpenRouter required discarding non-existent changes ([#5779](https://github.com/RooCodeInc/Roo-Code/pull/5779))
+- **LiteLLM URL Handling**: Fixed baseURL handling when paths are included, ensuring requests go to the correct endpoints (thanks ChuKhaLi!) ([#5697](https://github.com/RooCodeInc/Roo-Code/pull/5697))
+- **Project Analysis**: Fixed list-files tool to ensure complete directory structure is visible when analyzing large projects (thanks qdaxb!) ([#5303](https://github.com/RooCodeInc/Roo-Code/pull/5303))
+- **API Task Logging**: Fixed an issue where API-initiated tasks would attempt to write logs to workspace directories that might not exist. Logs now write to the system's temporary directory instead ([#5833](https://github.com/RooCodeInc/Roo-Code/pull/5833))
 
 ## Provider Updates
 
@@ -118,6 +132,7 @@ Added configurable timeout settings for command execution:
 - **Vertex AI**: Expanded region configuration to include all available GCP Vertex AI regions for better compliance and access to third-party models like Anthropic Claude (thanks shubhamgupta731!) ([#5557](https://github.com/RooCodeInc/Roo-Code/pull/5557))
 - **Google Gemini**: Added support for Google's new gemini-embedding-001 model with improved performance and higher dimensional embeddings (3072 vs 768) for better codebase indexing and search (thanks daniel-lxs!) ([#5698](https://github.com/RooCodeInc/Roo-Code/pull/5698))
 - **Groq Kimi K2**: Added Kimi K2 model option for Groq users with improved token handling reliability for models with equal max tokens and context window
+- **Claude Code + Vertex AI**: Added support for Vertex AI model name formatting when using Claude Code provider (thanks janaki-sasidhar!) ([#5728](https://github.com/RooCodeInc/Roo-Code/pull/5728))
 
 ## Misc Improvements
 
@@ -125,6 +140,9 @@ Added configurable timeout settings for command execution:
 - **Type Definitions**: Updated internal type definitions for improved compatibility and development experience
 - **GitHub Actions**: Fixed GitHub Actions workflow warnings by removing invalid parameters from CI/CD configuration (thanks hamirmahal!) ([#5676](https://github.com/RooCodeInc/Roo-Code/pull/5676))
 - **Token Handling**: Improved consistency in token handling across API providers with centralized max-token calculation logic for better reliability
+- **Telemetry**: Added tracking for todo list statistics ([#5746](https://github.com/RooCodeInc/Roo-Code/pull/5746))
+- **Documentation**: Updated evals repository link ([#5758](https://github.com/RooCodeInc/Roo-Code/pull/5758))
+- **Internal Workflow Simplification**: Removed unnecessary orchestrator modes and unified all GitHub operations to use the GitHub CLI instead of MCP tools, making internal development processes more efficient ([#5832](https://github.com/RooCodeInc/Roo-Code/pull/5832))
 
 ## Documentation Updates
 
