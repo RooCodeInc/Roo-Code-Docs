@@ -1,5 +1,4 @@
 ---
-title: Typing Requests in Roo Code - Natural Language AI Commands
 description: Learn how to effectively communicate with Roo Code using natural language. Best practices for typing requests, examples, and common pitfalls to avoid.
 keywords:
   - Roo Code requests

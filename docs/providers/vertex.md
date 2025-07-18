@@ -1,5 +1,4 @@
 ---
-title: GCP Vertex AI - Google Cloud AI Models in Roo Code
 description: Access Google Gemini and Anthropic Claude models through GCP Vertex AI in Roo Code. Configure authentication and start using enterprise AI.
 keywords:
   - Vertex AI

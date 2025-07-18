@@ -1,5 +1,4 @@
 ---
-title: Documentation Writer Mode - Technical Documentation Expert
 description: Specialized mode for creating clear, comprehensive technical documentation with best practices and consistent style guidelines
 keywords:
   - documentation writer

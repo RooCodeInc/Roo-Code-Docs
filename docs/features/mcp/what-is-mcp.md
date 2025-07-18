@@ -1,5 +1,4 @@
 ---
-title: What is MCP? - Model Context Protocol Explained
 description: Understand the Model Context Protocol (MCP) and how it enables AI systems to interact with external tools. Learn about MCP architecture and benefits.
 keywords:
   - what is MCP

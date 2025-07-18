@@ -1,5 +1,4 @@
 ---
-title: ask_followup_question - Interactive User Communication
 description: Enable interactive communication in Roo Code with the ask_followup_question tool for gathering clarification and user preferences.
 keywords:
   - ask_followup_question

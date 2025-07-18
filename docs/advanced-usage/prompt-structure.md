@@ -1,5 +1,4 @@
 ---
-title: Prompt Structure in Roo Code - Technical Deep Dive
 description: Understand the technical structure of prompts in Roo Code. Learn how messages are constructed, system prompts work, and optimize your interactions.
 keywords:
   - prompt structure

@@ -1,6 +1,5 @@
 ---
 sidebar_label: LiteLLM
-title: LiteLLM Provider for Roo Code - 100+ LLMs Through One API
 description: Access over 100 LLMs through LiteLLM's unified OpenAI-compatible API in Roo Code. Simplify multi-model management and reduce costs.
 keywords:
   - litellm

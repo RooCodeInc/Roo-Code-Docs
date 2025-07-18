@@ -1,5 +1,4 @@
 ---
-title: Requesty Provider - Optimized API for 150+ Language Models
 description: Configure Requesty in Roo Code to access 150+ LLMs with cost optimizations, unified billing, and comprehensive usage tracking features.
 keywords:
   - roo code

@@ -1,5 +1,4 @@
 ---
-title: Roo Commander - Multi-Agent Development Management
 description: Sophisticated custom modes for Roo Code that manage software projects with a virtual development team and structured workflows
 keywords:
   - roo commander

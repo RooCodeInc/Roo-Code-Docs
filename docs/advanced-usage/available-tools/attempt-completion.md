@@ -1,5 +1,4 @@
 ---
-title: attempt_completion - Task Completion and Result Presentation
 description: Learn how the attempt_completion tool signals task completion, presents results, and enables iterative refinement in Roo Code.
 keywords:
   - attempt_completion

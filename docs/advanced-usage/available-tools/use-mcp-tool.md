@@ -1,5 +1,4 @@
 ---
-title: use_mcp_tool - Connect External Tools via Model Context Protocol in Roo Code
 description: Discover how use_mcp_tool integrates external MCP servers to extend Roo Code with specialized tools, domain-specific functionality, and external services.
 keywords:
   - use_mcp_tool

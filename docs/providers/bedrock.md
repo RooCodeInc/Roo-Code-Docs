@@ -1,6 +1,5 @@
 ---
 sidebar_label: AWS Bedrock
-title: AWS Bedrock Provider for Roo Code - Access Multiple AI Models
 description: Use Amazon Bedrock with Roo Code to access Claude, Llama, and other foundation models through AWS. Configure credentials and VPC endpoints.
 keywords:
   - aws bedrock

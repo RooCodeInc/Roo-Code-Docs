@@ -1,5 +1,4 @@
 ---
-title: SPARC - Agentic Development Workflows for Roo Code
 description: Orchestrate automated development workflows with SPARC's structured framework using Roo Code Boomerang Tasks for efficient coding
 keywords:
   - sparc

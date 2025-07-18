@@ -1,5 +1,4 @@
 ---
-title: VibeMode - Natural Language Programming with Continuous Testing
 description: Transform natural language descriptions into working code with VibeMode, embracing intuitive flow-based development and automated testing.
 keywords:
   - natural language programming

@@ -1,6 +1,5 @@
 ---
 sidebar_label: Anthropic
-title: Anthropic API Provider for Roo Code - Claude AI Models
 description: Configure Anthropic's Claude AI models in Roo Code. Access Claude Opus, Sonnet, and Haiku models with prompt caching and large context windows.
 keywords:
   - anthropic

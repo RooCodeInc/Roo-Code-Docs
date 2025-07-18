@@ -1,5 +1,4 @@
 ---
-title: Using Local Models with Roo Code - Ollama & LM Studio Guide
 description: Learn how to run Roo Code with local AI models using Ollama and LM Studio. Complete setup guide for offline AI coding assistance.
 keywords:
   - local models

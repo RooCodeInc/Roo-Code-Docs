@@ -1,5 +1,4 @@
 ---
-title: Working with Large Projects in Roo Code - Best Practices
 description: Learn strategies for effectively using Roo Code with large codebases. Manage context limits, optimize token usage, and handle complex refactoring tasks.
 keywords:
   - large projects

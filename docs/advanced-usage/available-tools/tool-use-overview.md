@@ -1,5 +1,4 @@
 ---
-title: Tool Use Overview - Understanding Roo Code's Tool System Architecture
 description: Comprehensive guide to Roo Code's tool system, including tool groups, calling mechanisms, mode integration, and best practices for AI-powered development.
 keywords:
   - Roo Code tools

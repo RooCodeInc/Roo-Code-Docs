@@ -1,5 +1,4 @@
 ---
-title: insert_content - Add Content to Files Without Modification
 description: Insert new content at specific line numbers in existing files without modifying original content using Roo Code's insert_content tool.
 keywords:
   - insert_content

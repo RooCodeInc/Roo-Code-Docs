@@ -1,5 +1,4 @@
 ---
-title: Roo Code FAQ - Frequently Asked Questions
 description: Find answers to common questions about Roo Code, including setup, usage, troubleshooting, and advanced features. Get help with API keys, modes, and more.
 keywords:
   - Roo Code FAQ

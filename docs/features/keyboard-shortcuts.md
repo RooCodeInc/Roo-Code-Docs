@@ -1,5 +1,4 @@
 ---
-title: Keyboard Navigation in Roo Code - Shortcuts and Commands
 description: Master keyboard navigation in Roo Code with customizable shortcuts, command execution, and prompt history navigation for efficient coding workflows.
 keywords:
   - keyboard shortcuts

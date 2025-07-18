@@ -1,5 +1,4 @@
 ---
-title: Context Poisoning in Roo Code - Understanding and Prevention
 description: Learn about context poisoning in AI coding assistants, its symptoms, causes, and effective recovery strategies to maintain accurate AI responses.
 keywords:
   - context poisoning

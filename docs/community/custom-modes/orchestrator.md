@@ -1,5 +1,4 @@
 ---
-title: Orchestrator Mode - Workflow Automation and Task Delegation
 description: An orchestrator mode that manages complex workflows by delegating subtasks to specialized modes, coordinating multi-step projects efficiently.
 keywords:
   - orchestrator

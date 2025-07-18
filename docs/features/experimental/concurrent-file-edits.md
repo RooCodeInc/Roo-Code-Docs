@@ -1,6 +1,5 @@
 ---
 sidebar_label: 'Multi-File Edits'
-title: 'Concurrent File Edits - Edit Multiple Files Simultaneously | Roo Code'
 description: 'Speed up refactoring and multi-file changes with Roo Code''s experimental Concurrent File Edits feature. Edit multiple files in a single operation with batch approval.'
 keywords:
   - concurrent file edits

@@ -1,6 +1,5 @@
 ---
 sidebar_label: LM Studio
-title: LM Studio Integration - Run Local AI Models with Roo Code
 description: Learn how to set up and use LM Studio with Roo Code for running local language models with OpenAI-compatible API support.
 keywords:
   - LM Studio

@@ -1,5 +1,4 @@
 ---
-title: Context Mentions in Roo Code - Reference Files, Folders & More
 description: Learn how to use context mentions (@) in Roo Code to reference files, folders, problems, terminal output, and Git commits for more accurate AI assistance.
 keywords:
   - "Roo Code context mentions"

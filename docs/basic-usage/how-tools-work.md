@@ -1,5 +1,4 @@
 ---
-title: How Tools Work in Roo Code - Understanding AI Actions
 description: Learn how Roo Code uses tools to interact with your system. Understand file operations, command execution, browser control, and the approval workflow.
 keywords:
   - Roo Code tools

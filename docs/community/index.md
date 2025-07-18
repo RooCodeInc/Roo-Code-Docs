@@ -1,5 +1,4 @@
 ---
-title: Roo Code Community - Projects & Custom Modes Gallery
 description: Explore community projects that extend Roo Code's capabilities and discover custom modes shared by developers to enhance your workflow
 keywords:
   - roo code community

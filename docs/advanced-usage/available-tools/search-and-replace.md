@@ -1,5 +1,4 @@
 ---
-title: search_and_replace Tool - Find and Replace Text with Regex Support in Roo Code
 description: Master the search_and_replace tool for finding and replacing text or regex patterns in files, with line range support and interactive diff approval.
 keywords:
   - search_and_replace

@@ -1,6 +1,5 @@
 ---
 sidebar_label: Mistral AI
-title: Mistral AI Integration - Use Mistral and Codestral Models with Roo Code
 description: Configure Roo Code to use Mistral AI models including Codestral for code generation, with support for function calling and vision.
 keywords:
   - Mistral AI

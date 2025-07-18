@@ -1,6 +1,5 @@
 ---
 sidebar_label: Your First Task
-title: Your First Task with Roo Code - Getting Started Guide
 description: Learn how to start your first task with Roo Code AI assistant. Step-by-step guide for beginners to understand the approval workflow and iterative process.
 keywords:
   - Roo Code tutorial

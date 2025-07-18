@@ -1,5 +1,4 @@
 ---
-title: execute_command - Run CLI Commands and System Operations
 description: Execute terminal commands in Roo Code for system operations, dependency installation, builds, and development workflows.
 keywords:
   - execute_command

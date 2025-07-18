@@ -1,5 +1,4 @@
 ---
-title: Jest Test Engineer - Custom Mode for Test-Driven Development
 description: A specialized Roo Code mode for writing and maintaining Jest test suites with TypeScript support, focusing on TDD practices and test quality.
 keywords:
   - Jest testing

@@ -1,5 +1,4 @@
 ---
-title: Rate Limits and Costs - Managing API Usage in Roo Code
 description: Understand token usage, cost calculation, and optimization strategies for Roo Code. Learn how to manage API costs and set request limits effectively.
 keywords:
   - rate limits

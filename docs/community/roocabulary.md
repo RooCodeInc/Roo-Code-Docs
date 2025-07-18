@@ -1,5 +1,4 @@
 ---
-title: Roocabulary - The Living Dictionary of Roo Code Terms
 description: A fun, AI-inspired dictionary defining the unique language of the Rooniverse, from Rooploying to Roocrastinating and beyond
 keywords:
   - roocabulary

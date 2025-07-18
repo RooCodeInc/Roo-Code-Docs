@@ -1,5 +1,4 @@
 ---
-title: Roo Code Dynamic Rules - Define Rules On The Fly
 description: Define and manage project-specific rules dynamically in Roo Code by simply writing RULE/NORULE commands in your messages
 keywords:
   - roo code dynamic rules

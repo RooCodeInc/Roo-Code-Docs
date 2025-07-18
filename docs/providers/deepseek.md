@@ -1,6 +1,5 @@
 ---
 sidebar_label: DeepSeek
-title: DeepSeek Provider for Roo Code - Advanced Reasoning AI Models
 description: Configure DeepSeek's chat and reasoning models in Roo Code. Access deepseek-chat and deepseek-reasoner for coding and complex reasoning tasks.
 keywords:
   - deepseek

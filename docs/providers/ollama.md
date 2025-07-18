@@ -1,6 +1,5 @@
 ---
 sidebar_label: Ollama
-title: Ollama Integration - Run Open Source Models Locally with Roo Code
 description: Set up Ollama with Roo Code to run open source language models locally for privacy, offline access, and cost-effective AI coding.
 keywords:
   - Ollama

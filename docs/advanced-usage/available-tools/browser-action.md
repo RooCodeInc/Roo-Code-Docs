@@ -1,5 +1,4 @@
 ---
-title: browser_action - Web Automation with Puppeteer
 description: Automate web interactions in Roo Code using the browser_action tool for navigation, clicking, typing, and visual feedback.
 keywords:
   - browser_action

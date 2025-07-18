@@ -1,5 +1,4 @@
 ---
-title: list_code_definition_names - Extract Code Structure Overview
 description: Get a structural overview of your codebase by listing classes, functions, and interfaces with the list_code_definition_names tool.
 keywords:
   - list_code_definition_names

@@ -1,5 +1,4 @@
 ---
-title: Model Temperature Settings in Roo Code - Control AI Output Randomness
 description: Learn how to adjust model temperature in Roo Code to optimize AI responses for different tasks, from precise code generation to creative brainstorming.
 keywords:
   - model temperature

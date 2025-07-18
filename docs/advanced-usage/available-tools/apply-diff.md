@@ -1,5 +1,4 @@
 ---
-title: apply_diff - Precise File Modifications with Fuzzy Matching
 description: Master the apply_diff tool for making surgical code changes using fuzzy matching and line hints in Roo Code with multi-file support.
 keywords:
   - apply_diff

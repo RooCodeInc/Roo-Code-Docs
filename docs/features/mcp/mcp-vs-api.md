@@ -1,5 +1,4 @@
 ---
-title: MCP vs API - Understanding the Fundamental Distinction
 description: Learn the key differences between Model Context Protocol (MCP) and REST APIs. Understand why MCP is AI-native and how it enables stateful, contextual interactions.
 keywords:
   - MCP vs API

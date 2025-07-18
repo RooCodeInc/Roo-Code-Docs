@@ -1,5 +1,4 @@
 ---
-title: access_mcp_resource - Retrieve MCP Server Resources
 description: Learn how the access_mcp_resource tool retrieves data from Model Context Protocol servers for additional context in Roo Code tasks.
 keywords:
   - access_mcp_resource

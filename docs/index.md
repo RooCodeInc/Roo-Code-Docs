@@ -1,6 +1,5 @@
 ---
 sidebar_label: Welcome
-title: Roo Code Documentation - AI-Powered Coding Assistant for VS Code
 description: Learn how to use Roo Code, the autonomous AI coding agent that helps you code faster and smarter in VS Code. Complete guides, tutorials, and documentation.
 keywords:
   - Roo Code

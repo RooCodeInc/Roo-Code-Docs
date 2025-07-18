@@ -1,5 +1,4 @@
 ---
-title: list_files Tool - File and Directory Listing for Roo Code
 description: Learn how the list_files tool helps Roo Code explore project structures, list directories, and navigate codebases with recursive and filtered listing capabilities.
 keywords:
   - list_files

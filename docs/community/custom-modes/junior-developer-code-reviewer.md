@@ -1,5 +1,4 @@
 ---
-title: Junior Developer Code Reviewer - Educational Code Review Mode
 description: A supportive mentor-reviewer mode that provides educational, encouraging code reviews focused on junior developers' growth and learning.
 keywords:
   - code review

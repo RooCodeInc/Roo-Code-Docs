@@ -1,5 +1,4 @@
 ---
-title: Using Modes in Roo Code - Code, Ask, Architect, Debug & More
 description: Learn how to use Roo Code's specialized modes for different tasks. Switch between Code, Ask, Architect, Debug, and Orchestrator modes for optimal AI assistance.
 keywords:
   - Roo Code modes

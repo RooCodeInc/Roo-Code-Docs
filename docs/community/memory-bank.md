@@ -1,5 +1,4 @@
 ---
-title: Memory Bank - Persistent Context for Roo Code
 description: Maintain context across Roo Code sessions with a structured memory system that ensures deep project understanding and continuity
 keywords:
   - memory bank

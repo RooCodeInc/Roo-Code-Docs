@@ -1,5 +1,4 @@
 ---
-title: Fast Edits in Roo Code - Efficient Diff-Based File Editing
 description: Discover how Roo Code's Fast Edits feature uses diffs for faster, safer file modifications. Learn about match precision and configuration options.
 keywords:
   - fast edits

@@ -1,5 +1,4 @@
 ---
-title: Senior Developer Code Reviewer - Architectural Code Review Mode
 description: A technical architect mode for high-level code reviews focused on architectural impact, scalability, security, and long-term maintainability.
 keywords:
   - code review

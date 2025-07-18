@@ -1,5 +1,4 @@
 ---
-title: switch_mode Tool - Change Between Operational Modes in Roo Code
 description: Understand how switch_mode enables seamless transitions between Code, Architect, Ask, and Debug modes for specialized task handling in Roo Code.
 keywords:
   - switch_mode

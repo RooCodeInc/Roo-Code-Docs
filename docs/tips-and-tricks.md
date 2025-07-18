@@ -1,5 +1,4 @@
 ---
-title: Roo Code Tips and Tricks - Get the Most Out of Your AI Assistant
 description: Discover expert tips and tricks for using Roo Code effectively. Learn best practices, productivity hacks, and advanced techniques.
 keywords:
   - Roo Code tips

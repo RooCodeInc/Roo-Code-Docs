@@ -1,5 +1,4 @@
 ---
-title: Prompt Engineering Tips for Roo Code - Write Better AI Prompts
 description: Master the art of writing effective prompts for Roo Code. Learn principles, techniques, and examples to get better AI coding assistance results.
 keywords:
   - prompt engineering

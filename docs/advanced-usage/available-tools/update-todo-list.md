@@ -1,5 +1,4 @@
 ---
-title: update_todo_list Tool - Interactive Task Management in Roo Code
 description: Learn how update_todo_list creates dynamic TODO lists with status tracking, enabling step-by-step task management for complex workflows in Roo Code.
 keywords:
   - update_todo_list

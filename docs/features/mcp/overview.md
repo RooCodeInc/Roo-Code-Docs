@@ -1,5 +1,4 @@
 ---
-title: MCP (Model Context Protocol) Overview - Extend Roo Code's Capabilities
 sidebar_label: MCP Overview
 description: Learn about the Model Context Protocol (MCP) in Roo Code. Discover how to extend AI capabilities with custom tools, resources, and server integrations.
 keywords:

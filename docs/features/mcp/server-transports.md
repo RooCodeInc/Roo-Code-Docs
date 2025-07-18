@@ -1,5 +1,4 @@
 ---
-title: MCP Server Transports - STDIO, Streamable HTTP & SSE Guide
 description: Comprehensive guide to MCP transport mechanisms in Roo Code. Compare STDIO, Streamable HTTP, and SSE transports for local and remote server deployments.
 keywords:
   - MCP transports

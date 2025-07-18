@@ -1,5 +1,4 @@
 ---
-title: Enhance Prompt in Roo Code - Optimize Your AI Prompts Automatically
 description: Improve your AI interactions with Roo Code's Enhance Prompt feature. Automatically refine prompts for clarity, context, and better results with one click.
 keywords:
   - enhance prompt

@@ -1,6 +1,5 @@
 
 ---
-title: search_files Tool - Regex Search Across Multiple Files in Roo Code
 description: Learn how search_files performs powerful regex searches across your codebase, finding patterns with context using Ripgrep for high-performance results.
 keywords:
   - search_files

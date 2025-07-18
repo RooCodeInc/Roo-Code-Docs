@@ -1,5 +1,4 @@
 ---
-title: OpenRouter Provider - Access Multiple AI Models Through One API
 description: Configure OpenRouter in Roo Code to access 100+ language models from various providers through a single API with automatic model discovery.
 keywords:
   - roo code

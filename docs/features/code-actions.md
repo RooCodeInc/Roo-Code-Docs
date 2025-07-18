@@ -1,5 +1,4 @@
 ---
-title: Code Actions in Roo Code - AI-Powered Quick Fixes and Enhancements
 description: Access Roo Code's AI assistance directly in your editor with Code Actions. Get instant fixes, explanations, and improvements through VSCode's lightbulb system.
 keywords:
   - code actions

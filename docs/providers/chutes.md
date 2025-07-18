@@ -1,6 +1,5 @@
 ---
 sidebar_label: Chutes AI
-title: Chutes AI Provider for Roo Code - Free LLM API Access
 description: Configure Chutes AI with Roo Code for free access to various large language models. Get started with open-source and proprietary AI models.
 keywords:
   - chutes ai

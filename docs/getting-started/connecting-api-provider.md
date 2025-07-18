@@ -1,6 +1,5 @@
 ---
 sidebar_label: Connecting To AI Provider
-title: Connect AI Provider to Roo Code - API Key Setup Guide
 description: Learn how to connect Roo Code to AI providers like Anthropic Claude, OpenAI, and OpenRouter. Step-by-step guide for API key setup and configuration.
 keywords:
   - Roo Code API key

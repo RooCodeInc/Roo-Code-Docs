@@ -1,5 +1,4 @@
 ---
-title: Custom Instructions in Roo Code - Personalize Your AI Assistant
 description: Learn how to use custom instructions to tailor Roo Code's behavior to your preferences, coding style, and project requirements.
 keywords:
   - custom instructions

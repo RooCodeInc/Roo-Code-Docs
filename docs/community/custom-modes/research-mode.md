@@ -1,5 +1,4 @@
 ---
-title: ResearchMode - AI-Powered Research for Software Engineering
 description: Integrates Perplexity API and Lynx browser for autonomous research-augmented software engineering, enabling web search and page analysis within Roo Code.
 keywords:
   - research mode

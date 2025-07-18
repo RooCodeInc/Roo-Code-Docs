@@ -1,5 +1,4 @@
 ---
-title: 'Roo Code Features - Complete Feature Overview | Roo Code'
 description: 'Explore all Roo Code features including AI-powered coding assistance, multi-file editing, codebase indexing, MCP integration, custom modes, and experimental capabilities.'
 keywords:
   - Roo Code features

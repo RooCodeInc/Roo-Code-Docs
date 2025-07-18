@@ -1,5 +1,4 @@
 ---
-title: User Story Creator - Agile Requirements Specialist Mode
 description: An agile requirements specialist mode for creating clear, valuable user stories with structured templates and comprehensive acceptance criteria.
 keywords:
   - user stories

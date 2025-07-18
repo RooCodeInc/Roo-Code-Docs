@@ -1,5 +1,4 @@
 ---
-title: Unbound - Secure Enterprise LLM Gateway for Roo Code
 description: Configure Unbound in Roo Code for secure access to multiple LLMs through a single API. Enterprise-grade security and compliance features.
 keywords:
   - Unbound

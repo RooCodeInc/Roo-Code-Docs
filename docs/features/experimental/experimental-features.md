@@ -1,5 +1,4 @@
 ---
-title: 'Experimental Features - Try Cutting-Edge Capabilities | Roo Code'
 description: 'Explore Roo Code''s experimental features including codebase indexing, concurrent file edits, and power steering. Enable advanced capabilities that are still under development.'
 keywords:
   - experimental features

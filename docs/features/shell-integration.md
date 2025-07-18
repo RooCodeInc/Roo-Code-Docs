@@ -1,5 +1,4 @@
 ---
-title: Shell Integration in Roo Code - Terminal Command Execution
 description: Learn how Roo Code integrates with your shell to execute commands. Troubleshooting guide for terminal issues and shell configuration.
 keywords:
   - shell integration

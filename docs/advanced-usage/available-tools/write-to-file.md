@@ -1,5 +1,4 @@
 ---
-title: write_to_file Tool - Create and Overwrite Files with Approval in Roo Code
 description: Explore write_to_file for creating new files or replacing content with interactive diff view approval, ensuring safe file operations in Roo Code.
 keywords:
   - write_to_file

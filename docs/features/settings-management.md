@@ -1,5 +1,4 @@
 ---
-title: Import, Export, and Reset Settings
 sidebar_label: Import/Export/Reset Settings
 description: Manage your Roo Code settings by exporting, importing, or resetting them to defaults.
 keywords:

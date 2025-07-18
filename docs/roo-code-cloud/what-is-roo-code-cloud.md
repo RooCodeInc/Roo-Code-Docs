@@ -1,5 +1,4 @@
 ---
-title: What is Roo Code Cloud? - AI Development Platform
 description: Discover Roo Code Cloud, the web platform that extends your Roo Code extension with cloud features for collaboration, persistence, and analytics.
 keywords:
   - Roo Code Cloud

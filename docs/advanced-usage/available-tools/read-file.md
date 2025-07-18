@@ -1,6 +1,5 @@
 
 ---
-title: read_file Tool - File Content Reading with Multi-File Support in Roo Code
 description: Explore the read_file tool's capabilities for examining file contents, supporting line ranges, PDF/DOCX extraction, and experimental multi-file concurrent reading.
 keywords:
   - read_file

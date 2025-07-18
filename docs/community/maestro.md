@@ -1,5 +1,4 @@
 ---
-title: Maestro Project - Orchestrated Development Team for Roo Code
 description: A comprehensive system of specialized Roo modes working as an integrated development team, managing the entire software lifecycle
 keywords:
   - maestro project

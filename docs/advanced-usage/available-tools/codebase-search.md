@@ -1,5 +1,4 @@
 ---
-title: codebase_search - Semantic Code Search with AI Embeddings
 description: Perform intelligent semantic searches across your codebase using AI embeddings to find relevant code by meaning, not just keywords.
 keywords:
   - codebase_search

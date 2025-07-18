@@ -1,5 +1,4 @@
 ---
-title: new_task Tool - Create Subtasks with Specialized Modes in Roo Code
 description: Discover how the new_task tool enables complex workflow management by creating subtasks with different modes, maintaining parent-child relationships for organized development.
 keywords:
   - new_task

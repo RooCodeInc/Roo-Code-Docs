@@ -1,5 +1,4 @@
 ---
-title: Roo Code Tips & Tricks - Maximize Your Productivity
 description: A collection of productivity-boosting tips and tricks for Roo Code, including the powerful Handoff System for memory management
 keywords:
   - roo code tips
