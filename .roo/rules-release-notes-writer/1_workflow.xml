@@ -13,6 +13,30 @@
     </step>
     
     <step number="2">
+      <action>Initialize todo list for tracking progress</action>
+      <tool>update_todo_list</tool>
+      <details>
+        Create a comprehensive todo list to track all phases of release notes creation.
+      </details>
+      <example><![CDATA[
+<update_todo_list>
+<todos>
+[ ] Determine version range and previous version
+[ ] Fetch release dates from GitHub
+[ ] Search for merged PRs in date range
+[ ] Process each PR (create subtasks)
+[ ] Compile and organize PR findings
+[ ] Create release notes file
+[ ] Update index.md
+[ ] Update sidebars.ts
+[ ] Update combined release notes (if patch release)
+[ ] Generate Discord format (if requested)
+</todos>
+</update_todo_list>
+      ]]></example>
+    </step>
+    
+    <step number="3">
       <action>Determine version range</action>
       <tools>
         <tool>list_files - Find previous version in docs/update-notes</tool>
@@ -20,6 +44,7 @@
       <details>
         List files in docs/update-notes to find the last version file and set the range for fetching changes.
       </details>
+      <todo_update>Mark "Determine version range and previous version" as complete</todo_update>
     </step>
   </initialization_steps>
 
@@ -35,6 +60,7 @@
 					<action>Fetch release dates</action>
 					<tool>gh api (get tag)</tool>
 					<details>Get commit dates for new and previous version tags to set a date range using gh CLI.</details>
+					<todo_update>Mark "Fetch release dates from GitHub" as complete</todo_update>
 				</step>
 				<step number="3">
 					<action>Search for merged PRs within date range</action>
@@ -43,6 +69,7 @@
 				        Use release date range to search for merged PRs.
 				        Query: `--state merged --search "merged:YYYY-MM-DD..YYYY-MM-DD"`
 				      </details>
+					<todo_update>Mark "Search for merged PRs in date range" as complete</todo_update>
 				</step>
 			</steps>
 		</phase>
@@ -57,6 +84,12 @@
 
 </content>
 					<details>Create an empty temp file that subtasks will append to.</details>
+				</step>
+				<step>
+					<action>Update todo list with PR processing status</action>
+					<tool>update_todo_list</tool>
+					<details>Update the main todo to show PR processing is in progress</details>
+					<todo_update>Mark "Process each PR (create subtasks)" as in progress [-]</todo_update>
 				</step>
 			</initialization>
 			<subtask_workflow>
@@ -104,6 +137,10 @@
 					After each subtask writes its findings, move to the next PR.
 				</completion_per_pr>
 			</subtask_workflow>
+			<phase_completion>
+				<action>Update todo after all PRs processed</action>
+				<todo_update>Mark "Process each PR (create subtasks)" as complete [x]</todo_update>
+			</phase_completion>
 		</phase>
 		<phase name="compile_final_release_notes">
 			<description>Read temporary analysis file and compile findings into the final release notes.</description>
@@ -119,6 +156,7 @@
 					<details>
 						Group PRs by category (Bug Fixes, QOL Improvements, etc.) based on the analysis.
 					</details>
+					<todo_update>Mark "Compile and organize PR findings" as complete</todo_update>
 				</step>
 				<step number="3">
 					<action>Format for release notes</action>
@@ -140,26 +178,38 @@
 				<step number="1">
 					<action>Create release notes file</action>
 					<details>
-            Create docs/update-notes/vX.Y.Z.mdx with correct title, date, and sections.
-          </details>
+				        Create docs/update-notes/vX.Y.Z.mdx with correct title, date, and sections.
+				      </details>
+					<todo_update>Mark "Create release notes file" as complete</todo_update>
 				</step>
 				<step number="2">
 					<action>Update index.md</action>
 					<details>
-            Add new release entry to the list.
-          </details>
+				        Add new release entry to the list.
+				      </details>
+					<todo_update>Mark "Update index.md" as complete</todo_update>
 				</step>
 				<step number="3">
 					<action>Update sidebars.ts</action>
 					<details>
-            Add new release to the "Update Notes" sidebar.
-          </details>
+				        Add new release to the "Update Notes" sidebar.
+				      </details>
+					<todo_update>Mark "Update sidebars.ts" as complete</todo_update>
 				</step>
 				<step number="4">
 					<action>Update combined release notes</action>
 					<details>
-            For patch releases, update the parent minor/major release file (e.g., update v3.20.mdx for v3.20.3).
-          </details>
+				        For patch releases, intelligently integrate changes into the parent minor/major release file.
+				        Follow the detailed workflow in 9_combined_notes_integration.xml to:
+				        - Read and parse the existing combined notes structure
+				        - Categorize new changes by section
+				        - Strip PR links and numbers
+				        - Merge items into appropriate existing sections
+				        - Maintain chronological order within sections
+				        - Handle edge cases like duplicate fixes
+				        Example: For v3.20.3, update v3.20.mdx by merging changes into existing sections.
+				      </details>
+					<todo_update>Mark "Update combined release notes (if patch release)" as complete</todo_update>
 				</step>
 			</steps>
 		</phase>

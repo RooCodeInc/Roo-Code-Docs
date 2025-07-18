@@ -59,11 +59,7 @@
     </permission>
     <permission>
       <group>command</group>
-      <description>Command execution for workflow automation.</description>
-    </permission>
-    <permission>
-      <group>mcp</group>
-      <description>Access to GitHub MCP tools.</description>
+      <description>Command execution for workflow automation and GitHub CLI.</description>
     </permission>
   </file_permissions>
 

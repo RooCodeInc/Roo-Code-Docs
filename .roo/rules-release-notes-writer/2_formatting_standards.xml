@@ -135,12 +135,22 @@ Concluding sentence about the benefit.
   </sidebar_updates>
 
   <combined_notes_updates>
-    <description>When creating patch releases, update the parent minor/major file.</description>
+    <description>When creating patch releases, intelligently integrate changes into the parent minor/major file.</description>
     <rules>
-      <rule>Add changes to relevant sections.</rule>
-      <rule>Do not include patch version numbers.</rule>
-      <rule>Maintain consistent formatting.</rule>
+      <rule>Add changes to their corresponding existing sections (Bug Fixes to Bug Fixes, etc.)</rule>
+      <rule>Do not include patch version numbers or PR links in combined notes</rule>
+      <rule>Maintain consistent formatting and section order</rule>
+      <rule>Append new items to the end of their respective sections</rule>
+      <rule>Consolidate duplicate fixes across patches</rule>
+      <rule>Update summary sentence if significant features were added</rule>
     </rules>
+    <integration_approach>
+      <step>Read and parse existing combined notes structure</step>
+      <step>Map new changes to appropriate sections</step>
+      <step>Strip PR references from new items</step>
+      <step>Use apply_diff to insert items at the end of each section</step>
+      <step>See 9_combined_notes_integration.xml for detailed workflow</step>
+    </integration_approach>
   </combined_notes_updates>
 
   <content_guidelines>

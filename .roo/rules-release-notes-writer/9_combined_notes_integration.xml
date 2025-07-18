@@ -1,0 +1,259 @@
+<combined_notes_integration>
+  <overview>
+    Detailed workflow for intelligently integrating patch release notes into combined minor/major release files.
+    This ensures changes are merged thoughtfully into existing sections rather than appended at the end.
+  </overview>
+
+  <integration_principles>
+    <principle priority="critical">
+      <name>Preserve existing structure</name>
+      <description>Never reorganize or reorder existing sections in the combined notes</description>
+    </principle>
+    <principle priority="critical">
+      <name>Merge by category</name>
+      <description>Add new items to their corresponding sections (Bug Fixes, Features, etc.)</description>
+    </principle>
+    <principle priority="high">
+      <name>Maintain chronological order within sections</name>
+      <description>Add new items at the end of their respective sections</description>
+    </principle>
+    <principle priority="high">
+      <name>Remove PR links from combined notes</name>
+      <description>Combined notes should not include PR numbers or links</description>
+    </principle>
+    <principle priority="medium">
+      <name>Consolidate contributors</name>
+      <description>Merge contributor lists when the same person contributes multiple times</description>
+    </principle>
+  </integration_principles>
+
+  <workflow_steps>
+    <step number="0">
+      <title>Initialize integration todo list</title>
+      <action>Create a todo list for tracking integration steps</action>
+      <tool>update_todo_list</tool>
+      <example><![CDATA[
+<update_todo_list>
+<todos>
+[ ] Read existing combined release notes
+[ ] Parse and map existing sections
+[ ] Read new patch release notes
+[ ] Categorize new changes by section
+[ ] Strip PR links from new items
+[ ] Update each section with new items
+[ ] Update summary sentence if needed
+[ ] Validate integration completeness
+</todos>
+</update_todo_list>
+      ]]></example>
+    </step>
+
+    <step number="1">
+      <title>Read existing combined release notes</title>
+      <action>Read the parent minor/major release file</action>
+      <details>
+        For version 3.20.3, read docs/update-notes/v3.20.mdx
+      </details>
+      <tool>read_file</tool>
+      <todo_update>Mark "Read existing combined release notes" as complete</todo_update>
+    </step>
+
+    <step number="2">
+      <title>Parse existing structure</title>
+      <action>Identify all existing sections and their content</action>
+      <details>
+        Create a mental map of:
+        - Section headings (## Bug Fixes, ## Features, etc.)
+        - Items within each section
+        - Special sections (major features with expanded format)
+      </details>
+      <todo_update>Mark "Parse and map existing sections" as complete</todo_update>
+    </step>
+
+    <step number="3">
+      <title>Read new patch release notes</title>
+      <action>Read the newly created patch release file</action>
+      <details>
+        Read the file just created (e.g., v3.20.3.mdx)
+      </details>
+      <tool>read_file</tool>
+      <todo_update>Mark "Read new patch release notes" as complete</todo_update>
+    </step>
+
+    <step number="4">
+      <title>Categorize new changes</title>
+      <action>Map each new change to its target section</action>
+      <mapping>
+        <map>
+          <from>## Bug Fixes in patch notes</from>
+          <to>## Bug Fixes in combined notes</to>
+        </map>
+        <map>
+          <from>## QOL Improvements in patch notes</from>
+          <to>## QOL Improvements in combined notes</to>
+        </map>
+        <map>
+          <from>## Provider Updates in patch notes</from>
+          <to>## Provider Updates in combined notes</to>
+        </map>
+        <map>
+          <from>Major feature sections</from>
+          <to>Add as new ## section if truly major, otherwise merge into appropriate section</to>
+        </map>
+      </mapping>
+      <todo_update>Mark "Categorize new changes by section" as complete</todo_update>
+    </step>
+
+    <step number="5">
+      <title>Process each section for integration</title>
+      <action>For each section with new items, prepare the merged content</action>
+      <substeps>
+        <substep>
+          <action>Strip PR links and numbers from new items</action>
+          <example>
+            <before>* **File Handling**: Fixed large file errors (thanks user!) ([#1234](link))</before>
+            <after>* **File Handling**: Fixed large file errors (thanks user!)</after>
+          </example>
+        </substep>
+        <substep>
+          <action>Check for duplicate fixes</action>
+          <details>If the same issue was fixed multiple times, consolidate into one entry</details>
+        </substep>
+        <substep>
+          <action>Append new items to the end of the existing section</action>
+        </substep>
+      </substeps>
+      <todo_update>Mark "Strip PR links from new items" as complete</todo_update>
+    </step>
+
+    <step number="6">
+      <title>Update combined release notes file</title>
+      <action>Use apply_diff to add new items to appropriate sections</action>
+      <best_practices>
+        <practice>Use multiple SEARCH/REPLACE blocks in one apply_diff call</practice>
+        <practice>Search for the last item in each section to append after it</practice>
+        <practice>Preserve exact formatting and indentation</practice>
+      </best_practices>
+      <todo_update>Mark "Update each section with new items" as complete</todo_update>
+      <example><![CDATA[
+<apply_diff>
+<path>docs/update-notes/v3.20.mdx</path>
+<diff>
+<<<<<<< SEARCH
+:start_line:25
+-------
+## Bug Fixes
+
+* **Context Management**: Fixed memory leak in large projects (thanks alice!)
+* **File Editing**: Resolved race condition in concurrent edits (thanks bob!)
+=======
+## Bug Fixes
+
+* **Context Management**: Fixed memory leak in large projects (thanks alice!)
+* **File Editing**: Resolved race condition in concurrent edits (thanks bob!)
+* **Large File Handling**: Fixed context condensing errors with files over 10MB (thanks john-doe, bug-reporter!)
+* **Connection Stability**: Added retry for API timeouts to reduce failed requests (thanks jane-smith!)
+>>>>>>> REPLACE
+
+<<<<<<< SEARCH
+:start_line:35
+-------
+## Provider Updates
+
+* **OpenAI**: Added GPT-4 Turbo support (thanks charlie!)
+=======
+## Provider Updates
+
+* **OpenAI**: Added GPT-4 Turbo support (thanks charlie!)
+* **OpenAI**: Added support for new GPT-4 models (thanks provider-dev!)
+>>>>>>> REPLACE
+</diff>
+</apply_diff>
+      ]]></example>
+    </step>
+
+    <step number="7">
+      <title>Update summary sentence if needed</title>
+      <action>If patch added significant features, update the summary</action>
+      <details>
+        The summary sentence below the title may need updating to reflect new major features
+      </details>
+      <todo_update>Mark "Update summary sentence if needed" as complete</todo_update>
+    </step>
+
+    <step number="8">
+      <title>Final validation</title>
+      <action>Verify all changes were integrated correctly</action>
+      <details>
+        Check that all new items are in appropriate sections and formatting is consistent
+      </details>
+      <todo_update>Mark "Validate integration completeness" as complete</todo_update>
+    </step>
+  </workflow_steps>
+
+  <section_handling_rules>
+    <rule section="Bug Fixes">
+      <format>Bullet list with bold titles</format>
+      <integration>Append new fixes to the end</integration>
+      <pr_handling>Remove all PR references</pr_handling>
+    </rule>
+    
+    <rule section="QOL Improvements">
+      <format>Bullet list with bold titles</format>
+      <integration>Append new improvements to the end</integration>
+      <pr_handling>Remove all PR references</pr_handling>
+    </rule>
+    
+    <rule section="Major Features">
+      <format>Expanded format with description and bullet points</format>
+      <integration>Add as new section only if truly major</integration>
+      <decision_criteria>
+        <criterion>Does it fundamentally change how users work?</criterion>
+        <criterion>Is it a headline feature for the minor release?</criterion>
+        <criterion>Does it deserve expanded explanation?</criterion>
+      </decision_criteria>
+    </rule>
+    
+    <rule section="New Section">
+      <when>Patch introduces a category not in combined notes</when>
+      <action>Add the new section in appropriate order</action>
+      <order>
+        <position>Major features first</position>
+        <position>Bug Fixes</position>
+        <position>QOL Improvements</position>
+        <position>Misc Improvements</position>
+        <position>Provider Updates</position>
+        <position>Documentation Updates</position>
+      </order>
+    </rule>
+  </section_handling_rules>
+
+  <edge_cases>
+    <case name="duplicate_fixes">
+      <scenario>Same bug fixed in multiple patches</scenario>
+      <action>Keep only the most recent fix description</action>
+      <contributor_handling>Acknowledge all contributors who worked on it</contributor_handling>
+    </case>
+    
+    <case name="conflicting_changes">
+      <scenario>Later patch reverts or modifies earlier patch's change</scenario>
+      <action>Update the description to reflect the final state</action>
+      <example>If 3.20.1 adds a feature and 3.20.3 modifies it, describe the final implementation</example>
+    </case>
+    
+    <case name="no_existing_section">
+      <scenario>Patch has a section type not in combined notes</scenario>
+      <action>Add the section in the standard order</action>
+    </case>
+  </edge_cases>
+
+  <validation_checklist>
+    <item>All new changes are integrated into appropriate sections</item>
+    <item>No PR links or numbers remain in combined notes</item>
+    <item>No duplicate entries exist</item>
+    <item>Section order follows standard pattern</item>
+    <item>Formatting is consistent throughout</item>
+    <item>All contributors are acknowledged</item>
+    <item>Summary sentence reflects all major changes</item>
+  </validation_checklist>
+</combined_notes_integration>

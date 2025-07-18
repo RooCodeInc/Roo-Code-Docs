@@ -22,23 +22,25 @@
     <step number="2">
       <description>Get release dates for version tags.</description>
       <tool_use><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>get_tag</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "tag": "v3.20.3" }</arguments>
-</use_mcp_tool>
+<execute_command>
+<command>gh api repos/RooCodeInc/Roo-Code/git/refs/tags/v3.20.3 --jq '.object.sha' | xargs -I {} gh api repos/RooCodeInc/Roo-Code/git/commits/{} --jq '.committer.date'</command>
+</execute_command>
       ]]></tool_use>
-      <result>v3.20.3: 2025-01-13, v3.20.2: 2025-01-10.</result>
+      <result>v3.20.3: 2025-01-13</result>
+      <tool_use><![CDATA[
+<execute_command>
+<command>gh api repos/RooCodeInc/Roo-Code/git/refs/tags/v3.20.2 --jq '.object.sha' | xargs -I {} gh api repos/RooCodeInc/Roo-Code/git/commits/{} --jq '.committer.date'</command>
+</execute_command>
+      ]]></tool_use>
+      <result>v3.20.2: 2025-01-10</result>
     </step>
 
     <step number="3">
       <description>Search for merged PRs and extract numbers.</description>
       <tool_use><![CDATA[
-<use_mcp_tool>
-<server_name>github</server_name>
-<tool_name>search_issues</tool_name>
-<arguments>{ "owner": "RooCodeInc", "repo": "Roo-Code", "q": "is:pr is:merged repo:RooCodeInc/Roo-Code merged:2025-01-10..2025-01-13" }</arguments>
-</use_mcp_tool>
+<execute_command>
+<command>gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:2025-01-10..2025-01-13" --json number,title,author,mergedAt --limit 1000</command>
+</execute_command>
       ]]></tool_use>
       <extracted_prs>
         - PR #1234: "Fix context condensing"
@@ -55,11 +57,11 @@
 <message>Investigate PR #1234 for release notes v3.20.3.
 
 Task:
-1. Get PR details (github.get_pull_request).
-2. Extract linked issues from description.
-3. Get issue details (github.get_issue).
-4. Analyze and categorize change.
-5. Write findings to temp_pr_analysis.md. Use insert_content with line 0.
+1. Get PR details with gh pr view
+2. Extract linked issues from PR description (e.g., "Fixes #123")
+3. Get details for linked issues with gh issue view
+4. Analyze and categorize the change (bug fix, feature, etc.)
+5. Append findings to temp_pr_analysis.md in the specified format. Use insert_content with line 0 to append to the end of the file.
 
 Use update_todo_list to track your progress through these steps.
 </message>
@@ -72,7 +74,7 @@ Use update_todo_list to track your progress through these steps.
             <tool_use><![CDATA[
 <update_todo_list>
 <todos>
-[ ] Fetch PR details with github.get_pull_request
+[ ] Fetch PR details with gh pr view
 [ ] Extract linked issues from PR description
 [ ] Get details for each linked issue
 [ ] Analyze and categorize the change
@@ -86,7 +88,7 @@ Use update_todo_list to track your progress through these steps.
             <tool_use><![CDATA[
 <update_todo_list>
 <todos>
-[x] Fetch PR details with github.get_pull_request
+[x] Fetch PR details with gh pr view
 [x] Extract linked issues from PR description
 [-] Get details for each linked issue
 [ ] Analyze and categorize the change
@@ -100,7 +102,7 @@ Use update_todo_list to track your progress through these steps.
             <tool_use><![CDATA[
 <update_todo_list>
 <todos>
-[x] Fetch PR details with github.get_pull_request
+[x] Fetch PR details with gh pr view
 [x] Extract linked issues from PR description
 [x] Get details for each linked issue
 [x] Analyze and categorize the change

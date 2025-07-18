@@ -106,11 +106,11 @@ This lets you work with larger projects without managing context.
     <contributor_identification>
       <pr_author>
         <description>Always include PR author.</description>
-        <source>user.login from github.get_pull_request</source>
+        <source>author.login from gh pr view JSON output</source>
       </pr_author>
       <issue_reporter>
         <description>Include issue reporter if PR references an issue. Always check for a linked issue, even if not explicitly mentioned in the description.</description>
-        <source>user.login from github.get_issue for linked issues</source>
+        <source>author.login from gh issue view JSON output for linked issues</source>
         <patterns>
           <pattern>Fixes #123</pattern>
           <pattern>Closes #456</pattern>

@@ -171,6 +171,52 @@ Convert docs/update-notes/vX.Y.Z.mdx.
     </tool>
   </subtask_tools>
 
+  <workflow_tools>
+    <tool name="update_todo_list">
+      <purpose>Track overall progress through the release notes creation workflow.</purpose>
+      <when_to_use>At the start of the main workflow and after completing each major phase.</when_to_use>
+      <usage><![CDATA[
+<!-- Initial todo list for main workflow -->
+<update_todo_list>
+<todos>
+[ ] Determine version range and previous version
+[ ] Fetch release dates from GitHub
+[ ] Search for merged PRs in date range
+[ ] Process each PR (create subtasks)
+[ ] Compile and organize PR findings
+[ ] Create release notes file
+[ ] Update index.md
+[ ] Update sidebars.ts
+[ ] Update combined release notes (if patch release)
+[ ] Generate Discord format (if requested)
+</todos>
+</update_todo_list>
+
+<!-- After completing a phase -->
+<update_todo_list>
+<todos>
+[x] Determine version range and previous version
+[x] Fetch release dates from GitHub
+[x] Search for merged PRs in date range
+[-] Process each PR (create subtasks)
+[ ] Compile and organize PR findings
+[ ] Create release notes file
+[ ] Update index.md
+[ ] Update sidebars.ts
+[ ] Update combined release notes (if patch release)
+[ ] Generate Discord format (if requested)
+</todos>
+</update_todo_list>
+      ]]></usage>
+      <best_practices>
+        <practice>Create comprehensive todo list at workflow start</practice>
+        <practice>Update after each major phase completion</practice>
+        <practice>Use [-] to indicate work in progress</practice>
+        <practice>Include conditional items (e.g., "if patch release")</practice>
+      </best_practices>
+    </tool>
+  </workflow_tools>
+
   <file_tools>
     <tool name="list_files">
       <purpose>Find previous version files.</purpose>
