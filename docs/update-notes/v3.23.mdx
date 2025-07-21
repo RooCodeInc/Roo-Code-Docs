@@ -50,15 +50,6 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 - **Improved Input Handling**: Uses stdin-based input to eliminate command-line length limitations
 - **Cross-Platform**: Works reliably across Windows, macOS, and Linux
 
-## Command Execution Improvements
-
-Added configurable timeout settings for command execution:
-
-- **Timeout Control**: Set timeouts from 0-600 seconds to prevent long-running commands from blocking workflows
-- **Clear Error Messages**: Commands that timeout display helpful error messages
-- **Better Visual Feedback**: Timeout errors now appear in red for better visibility
-- **API Task Control**: Added ability to set command execution timeout via API when starting tasks ([#5825](https://github.com/RooCodeInc/Roo-Code/pull/5825))
-
 ## QOL Improvements
 
 - **Simplified Prompt History**: Navigate your prompt history using only the up and down arrow keys when the cursor is at the start of the input field ([#5467](https://github.com/RooCodeInc/Roo-Code/pull/5467))
@@ -100,6 +91,12 @@ Added configurable timeout settings for command execution:
 - **Error Control**: Added configurable "Error & Repetition Limit" setting to control when "Roo is having trouble" dialogs appear, with option to disable them entirely (thanks MuriloFP, anojndr!) ([#5752](https://github.com/RooCodeInc/Roo-Code/pull/5752))
 - **Checkpoint Efficiency**: Excluded Terraform and Terragrunt cache directories from checkpoints, reducing storage usage by up to 10x (thanks MuriloFP, ijin!) ([#5750](https://github.com/RooCodeInc/Roo-Code/pull/5750))
 - **Message Editing**: Overhauled message edit/delete interface with custom modals and improved workflow (thanks liwilliam2021!) ([#5538](https://github.com/RooCodeInc/Roo-Code/pull/5538))
+- **Task Safety**: New setting prevents accidentally completing tasks with unfinished todo items
+- **Go Diagnostics**: Configurable delay prevents false error reports about unused imports (thanks mmhobi7!)
+- **Marketplace Access**: Marketplace icon moved to top navigation for easier access
+- **Custom Modes**: Added helpful descriptions and usage guidance to custom modes (thanks RandalSchwartz!)
+- **YouTube Footer**: Quick access to Roo Code's YouTube channel from the website (thanks thill2323!)
+- **PR Templates**: Issue-fixer mode now uses the official Roo Code PR template (thanks MuriloFP!)
 
 ## Bug Fixes
 
@@ -135,6 +132,7 @@ Added configurable timeout settings for command execution:
 - **LiteLLM URL Handling**: Fixed baseURL handling when paths are included, ensuring requests go to the correct endpoints (thanks ChuKhaLi!) ([#5697](https://github.com/RooCodeInc/Roo-Code/pull/5697))
 - **Project Analysis**: Fixed list-files tool to ensure complete directory structure is visible when analyzing large projects (thanks qdaxb!) ([#5303](https://github.com/RooCodeInc/Roo-Code/pull/5303))
 - **API Task Logging**: Fixed an issue where API-initiated tasks would attempt to write logs to workspace directories that might not exist. Logs now write to the system's temporary directory instead ([#5833](https://github.com/RooCodeInc/Roo-Code/pull/5833))
+- **Claude Model Detection**: Fixed context length errors when using Claude models through alternative providers like Google Vertex AI (thanks daniel-lxs, TheFynx!)
 
 ## Provider Updates
 
@@ -155,6 +153,9 @@ Added configurable timeout settings for command execution:
 - **Telemetry**: Added tracking for todo list statistics ([#5746](https://github.com/RooCodeInc/Roo-Code/pull/5746))
 - **Documentation**: Updated evals repository link ([#5758](https://github.com/RooCodeInc/Roo-Code/pull/5758))
 - **Internal Workflow Simplification**: Removed unnecessary orchestrator modes and unified all GitHub operations to use the GitHub CLI instead of MCP tools, making internal development processes more efficient ([#5832](https://github.com/RooCodeInc/Roo-Code/pull/5832))
+- **Internal Modes**: Added Issue Investigator mode and enhanced Issue Writer mode for internal GitHub workflows ([#5913](https://github.com/RooCodeInc/Roo-Code/pull/5913))
+- **Command Execution Improvements**: Added configurable timeout settings (0-600 seconds) with clear error messages, visual feedback, and API task control ([#5825](https://github.com/RooCodeInc/Roo-Code/pull/5825))
+- **Command Timeout Allowlist**: Added ability to exclude specific commands from timeout restrictions for long-running tasks like builds and deployments
 
 ## Documentation Updates
 

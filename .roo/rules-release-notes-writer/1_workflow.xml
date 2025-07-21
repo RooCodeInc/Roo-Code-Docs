@@ -30,6 +30,7 @@
 [ ] Update index.md
 [ ] Update sidebars.ts
 [ ] Update combined release notes (if patch release)
+[ ] Ask if user wants to create a PR
 [ ] Generate Discord format (if requested)
 </todos>
 </update_todo_list>
@@ -213,6 +214,81 @@
 				</step>
 			</steps>
 		</phase>
+		<phase name="review_and_refine">
+			<description>Iterative review process allowing users to refine release notes before creating a PR.</description>
+			<loop_structure>
+				<description>This phase loops until the user chooses to create a PR.</description>
+			</loop_structure>
+			<steps>
+				<step number="1">
+					<action>Ask if user wants to make changes</action>
+					<tool>ask_followup_question</tool>
+					<details>
+						Ask if the user wants to make any changes to the generated release notes before creating a PR.
+						This question will be repeated after each change until the user is satisfied.
+					</details>
+					<example><![CDATA[
+<ask_followup_question>
+<question>The release notes for version X.Y.Z have been created and all documentation files have been updated. Would you like to make any changes to the release notes before creating a PR?</question>
+<follow_up>
+<suggest>No, create a PR with the title "Release notes for vX.Y.Z"</suggest>
+<suggest>Yes, I'd like to make some changes to the release notes</suggest>
+<suggest>Show me the current release notes file</suggest>
+<suggest>Show me all changed files</suggest>
+</follow_up>
+</ask_followup_question>
+					]]></example>
+				</step>
+				<step number="2">
+					<action>Process user response</action>
+					<details>
+						Handle the user's response:
+						- If response contains "no, create a pr" (case-insensitive): Proceed to PR creation
+						- If "show me the current release notes": Display the vX.Y.Z.mdx file content
+						- If "show me all changed files": List all modified files
+						- Any other response: Treat as requested changes to implement
+					</details>
+					<decision_logic>
+						<condition>Response contains "no, create a pr"</condition>
+						<action>Exit loop and proceed to PR creation</action>
+						<condition>Any other response</condition>
+						<action>Implement requested changes and loop back to step 1</action>
+					</decision_logic>
+				</step>
+				<step number="3">
+					<action>Implement requested changes</action>
+					<details>
+						If user provides specific changes:
+						1. Parse the user's request
+						2. Apply the changes to the appropriate files
+						3. Confirm changes were made
+						4. Loop back to step 1 to ask again
+					</details>
+					<todo_update>Update "Ask if user wants to create a PR" to reflect ongoing review</todo_update>
+				</step>
+				<step number="4">
+					<action>Create PR when ready</action>
+					<details>
+						When user selects "No, create a PR":
+						1. Create PR using gh pr create with title "Release notes for vX.Y.Z"
+						2. Include a standard PR description
+						3. Mark the todo item as complete
+					</details>
+					<example><![CDATA[
+<execute_command>
+<command>gh pr create --repo RooCodeInc/Roo-Code --title "Release notes for vX.Y.Z" --body "This PR adds release notes for version X.Y.Z.
+
+## Changes
+- Created release notes file
+- Updated index.md
+- Updated sidebars.ts
+- Updated combined release notes (if applicable)"</command>
+</execute_command>
+					]]></example>
+					<todo_update>Mark "Ask if user wants to create a PR" as complete</todo_update>
+				</step>
+			</steps>
+		</phase>
 		<phase name="discord_formatting" optional="true">
 			<description>Generate Discord-formatted release notes via a subtask.</description>
 			<when_to_use>When user asks for Discord formatting.</when_to_use>
@@ -250,11 +326,13 @@
 	</main_workflow>
 
 		<completion_criteria>
-    <criterion>Release notes file created with correct formatting.</criterion>
-    <criterion>All PRs analyzed and described by user benefit.</criterion>
-    <criterion>Index and sidebar files updated.</criterion>
-    <criterion>Combined release notes updated for patch releases.</criterion>
-    <criterion>Links and references are correct.</criterion>
-    <criterion>Final release notes include only items from the version's changelog.</criterion>
-  </completion_criteria>
+		  <criterion>Release notes file created with correct formatting.</criterion>
+		  <criterion>All PRs analyzed and described by user benefit.</criterion>
+		  <criterion>Index and sidebar files updated.</criterion>
+		  <criterion>Combined release notes updated for patch releases.</criterion>
+		  <criterion>Links and references are correct.</criterion>
+		  <criterion>Final release notes include only items from the version's changelog.</criterion>
+		  <criterion>User has reviewed release notes and confirmed readiness for PR creation.</criterion>
+		  <criterion>PR has been created (or user explicitly declined PR creation).</criterion>
+		</completion_criteria>
 </workflow_instructions>
