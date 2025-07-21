@@ -133,6 +133,7 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 - **Project Analysis**: Fixed list-files tool to ensure complete directory structure is visible when analyzing large projects (thanks qdaxb!) ([#5303](https://github.com/RooCodeInc/Roo-Code/pull/5303))
 - **API Task Logging**: Fixed an issue where API-initiated tasks would attempt to write logs to workspace directories that might not exist. Logs now write to the system's temporary directory instead ([#5833](https://github.com/RooCodeInc/Roo-Code/pull/5833))
 - **Claude Model Detection**: Fixed context length errors when using Claude models through alternative providers like Google Vertex AI (thanks daniel-lxs, TheFynx!)
+- **Development Environment**: Fixed Docker port conflicts for evaluation services by using ports 5433 (PostgreSQL) and 6380 (Redis) instead of default ports (thanks roomote!)
 
 ## Provider Updates
 
@@ -146,6 +147,10 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 
 ## Misc Improvements
 
+- **Code Indexing**: Added memory-safe batch limiting to prevent overflow when scanning large codebases (thanks daniel-lxs!)
+- **API Rate Limiting**: Implemented global rate limiting with exponential backoff for OpenAI-compatible embeddings, preventing API overload and improving reliability (thanks daniel-lxs!)
+- **Release Engineering**: Enhanced release notes generation to include issue numbers and reporters for better attribution (thanks roomote!)
+- **Repository Statistics**: Excluded non-English translation files from GitHub language statistics for more accurate codebase representation (thanks roomote!)
 - **Error Telemetry**: Improved debugging capabilities for better reliability and faster issue resolution, with enhanced privacy protection through hashed file paths (thanks daniel-lxs!) ([#5595](https://github.com/RooCodeInc/Roo-Code/pull/5595))
 - **Type Definitions**: Updated internal type definitions for improved compatibility and development experience
 - **GitHub Actions**: Fixed GitHub Actions workflow warnings by removing invalid parameters from CI/CD configuration (thanks hamirmahal!) ([#5676](https://github.com/RooCodeInc/Roo-Code/pull/5676))
