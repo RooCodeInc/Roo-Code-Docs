@@ -60,36 +60,60 @@
     </step>
 
     <step number="3">
-      <title>Process Each Version</title>
-      <action>Generate Discord format for each existing version</action>
+      <title>Process Each Version Using Subtasks</title>
+      <action>Create Discord formatting subtask for each existing version</action>
+      <details>
+        For each version that exists, create a subtask to handle the Discord formatting.
+        This ensures consistency with the standard workflow's Discord formatting approach.
+      </details>
       <substeps>
         <substep number="1">
-          <action>Read release notes file</action>
-          <tool>read_file</tool>
-          <file>docs/update-notes/vX.Y.Z.mdx</file>
+          <action>Create temporary results file</action>
+          <tool>write_to_file</tool>
+          <file>temp_discord_results.md</file>
+          <content># Discord Release Notes Results
+
+</content>
+          <details>Initialize a file to collect results from subtasks</details>
         </substep>
         <substep number="2">
-          <action>Apply Discord transformations</action>
-          <transformations>
-            <transform>Remove frontmatter</transform>
-            <transform>Strip PR links and numbers</transform>
-            <transform>Convert internal links to full URLs</transform>
-            <transform>Preserve emoji and formatting</transform>
-            <transform>Add version-specific footer</transform>
-          </transformations>
+          <action>Create Discord formatting subtask for each version</action>
+          <tool>new_task</tool>
+          <details>
+            For each existing version, create a release-notes-writer subtask.
+          </details>
+          <message_format>
+            Generate Discord-formatted release notes for version X.Y.Z.
+
+            Requirements:
+            1. Strip all PR links and numbers (#XXXX).
+            2. Keep structure and content.
+            3. Prepend https://docs.roocode.com/ to all internal doc links.
+            4. If compressing, summarize with this format:
+               ## :wrench: [Other Improvements and Fixes](https://docs.roocode.com/update-notes/vX.Y.Z#section-anchor)
+               This release includes X other fixes covering [list key areas]. Thanks to contributors: [list contributors].
+            5. Add footer link:
+               [Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
+            
+            Convert docs/update-notes/vX.Y.Z.mdx to Discord format.
+            Write the result to temp_discord_release_notes.md.
+            
+            Special handling: [Include any compression or highlights-only requests from user]
+          </message_format>
         </substep>
         <substep number="3">
-          <action>Handle special requests</action>
-          <options>
-            <option name="compression">
-              <trigger>User mentions "compress" or "summarize"</trigger>
-              <action>Compress minor sections into summary</action>
-            </option>
-            <option name="highlights_only">
-              <trigger>User mentions "highlights" or "major features"</trigger>
-              <action>Include only major features and important fixes</action>
-            </option>
-          </options>
+          <action>Wait for subtask completion</action>
+          <details>
+            The subtask will handle reading the file, applying transformations, and writing results.
+          </details>
+        </substep>
+        <substep number="4">
+          <action>Read subtask results and append to collection</action>
+          <tool>read_file</tool>
+          <file>temp_discord_release_notes.md</file>
+          <details>
+            After each subtask completes, read its output and append to the results collection.
+          </details>
         </substep>
       </substeps>
     </step>
@@ -132,71 +156,41 @@
     </step>
 
     <step number="5">
-      <title>Format Output</title>
-      <action>Present Discord-ready text based on version count</action>
-      <single_version_format><![CDATA[
-# Roo Code X.Y.Z Release Notes
-
-[Summary sentence from original]
-
-## [Major Feature Name]
-
-[Feature description without PR links]
-
-## Bug Fixes
-
-* **[Fix Name]**: [Description] (thanks [contributors]!)
-* **[Another Fix]**: [Description] (thanks [contributors]!)
-
-[Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
-      ]]></single_version_format>
-      <multiple_versions_combined_format><![CDATA[
-# Roo Code Release Notes (vX.Y.Z - vA.B.C)
-
-Combined release notes for versions X.Y.Z through A.B.C.
-
-## Major Features
-
-* **[Feature Name]** (vX.Y.Z): [Description without PR links]
-* **[Another Feature]** (vA.B.C): [Description]
-
-## Bug Fixes
-
-* **[Category]**: [Fix description] (vX.Y.Z) (thanks [contributor]!)
-* **[Category]**: [Another fix] (vA.B.C) (thanks [contributor]!)
-
-## Improvements
-
-* **[Improvement Type]**: [Description] (vX.Y.Z)
-* **[Another Type]**: [Description] (vA.B.C)
-
----
-Full release notes:
-- [X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
-- [A.B.C Release Notes](https://docs.roocode.com/update-notes/vA.B.C)
-      ]]></multiple_versions_combined_format>
-      <multiple_versions_separate_format><![CDATA[
-# Roo Code Release Notes
-
-## Version X.Y.Z
-
-[Summary and key changes]
-
-## Version A.B.C
-
-[Summary and key changes]
-
----
-Full release notes:
-- [X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
-- [A.B.C Release Notes](https://docs.roocode.com/update-notes/vA.B.C)
-      ]]></multiple_versions_separate_format>
-      <format_selection>
-        <rule>Use combined format when user explicitly requests "combined" or "merge"</rule>
-        <rule>Use combined format for 2-3 closely related patch versions (e.g., 3.23.14, 3.23.15)</rule>
-        <rule>Use separate format for many versions or major/minor releases</rule>
-        <rule>Ask user preference if unclear</rule>
-      </format_selection>
+      <title>Compile and Format Final Output</title>
+      <action>Read all subtask results and format based on version count</action>
+      <substeps>
+        <substep number="1">
+          <action>Read collected results</action>
+          <tool>read_file</tool>
+          <file>temp_discord_results.md</file>
+          <details>Read all Discord-formatted content from subtasks</details>
+        </substep>
+        <substep number="2">
+          <action>Determine output format</action>
+          <details>
+            Based on number of versions and user preferences, choose appropriate format:
+            - Single version: Present as-is from subtask
+            - Multiple versions with "combine" request: Merge into unified sections
+            - Multiple versions default: Present separately
+          </details>
+        </substep>
+        <substep number="3">
+          <action>Apply final formatting if needed</action>
+          <details>
+            For multiple versions, may need to:
+            - Combine sections by category
+            - Add version indicators to items
+            - Consolidate duplicate contributors
+            - Create unified header and footer
+          </details>
+        </substep>
+      </substeps>
+      <single_version_note>
+        For single versions, the subtask output can be used directly without additional formatting.
+      </single_version_note>
+      <multiple_versions_note>
+        For multiple versions, additional processing may be needed to combine or organize the content appropriately.
+      </multiple_versions_note>
     </step>
 
     <step number="6">
@@ -215,17 +209,24 @@ Full release notes:
   </workflow_steps>
 
   <implementation_details>
-    <detail name="no_file_creation">
-      <description>This workflow does not create or modify any files</description>
-      <reason>It only reads existing files and outputs formatted text</reason>
+    <detail name="no_permanent_files">
+      <description>This workflow does not create or modify any permanent files</description>
+      <reason>It only reads existing files and uses temporary files for subtask coordination</reason>
     </detail>
     <detail name="no_github_api">
       <description>No GitHub API calls are needed</description>
       <reason>All information comes from existing release note files</reason>
     </detail>
-    <detail name="immediate_response">
-      <description>Workflow completes quickly without subtasks</description>
-      <reason>Simple file reading and text transformation</reason>
+    <detail name="subtask_based">
+      <description>Uses subtasks for consistency with standard workflow</description>
+      <reason>Ensures Discord formatting logic remains consistent across all workflows</reason>
+    </detail>
+    <detail name="temporary_files">
+      <description>Uses temporary files for subtask communication</description>
+      <files>
+        <file>temp_discord_results.md - Collects all subtask outputs</file>
+        <file>temp_discord_release_notes.md - Individual subtask output</file>
+      </files>
     </detail>
   </implementation_details>
 
@@ -235,8 +236,9 @@ Full release notes:
       <workflow>
         1. Parse version: 3.23.14
         2. Check file exists: docs/update-notes/v3.23.14.mdx ✓
-        3. Read file and transform
-        4. Output Discord-formatted text
+        3. Create Discord formatting subtask
+        4. Subtask reads file and transforms content
+        5. Read subtask output and present to user
       </workflow>
     </example>
 
@@ -246,9 +248,10 @@ Full release notes:
         1. Parse versions: 3.23.14, 3.23.15, 3.23.16
         2. Check files: v3.23.14.mdx ✓, v3.23.15.mdx ✓, v3.23.16.mdx ✗
         3. Ask user how to proceed with missing v3.23.16
-        4. Process existing versions
-        5. Determine format: separate sections for each version
-        6. Output Discord announcement with version sections
+        4. Create subtasks for existing versions
+        5. Collect subtask outputs
+        6. Format as separate sections for each version
+        7. Output Discord announcement with version sections
       </workflow>
     </example>
 
@@ -257,10 +260,11 @@ Full release notes:
       <workflow>
         1. Parse versions: 3.23.14, 3.23.15
         2. Check both files exist
-        3. Read and process both versions
-        4. Detect "combine" keyword - use combined format
-        5. Merge features, fixes, and improvements with version tags
-        6. Output single combined announcement
+        3. Create subtasks for each version
+        4. Collect subtask outputs
+        5. Detect "combine" keyword - use combined format
+        6. Merge features, fixes, and improvements with version tags
+        7. Output single combined announcement
       </workflow>
     </example>
 
@@ -269,8 +273,9 @@ Full release notes:
       <workflow>
         1. Parse version and compression request
         2. Check file exists
-        3. Read and transform with compression
-        4. Output condensed Discord format
+        3. Create subtask with compression instructions
+        4. Subtask applies compression during transformation
+        5. Output condensed Discord format
       </workflow>
     </example>
 
@@ -279,9 +284,10 @@ Full release notes:
       <workflow>
         1. Parse range: 3.23.14 to 3.23.16
         2. Find all versions in range
-        3. Process each version's content
-        4. Combine into unified sections with version indicators
-        5. Output merged announcement
+        3. Create subtasks for each version
+        4. Collect all subtask outputs
+        5. Combine into unified sections with version indicators
+        6. Output merged announcement
       </workflow>
     </example>
   </examples>
