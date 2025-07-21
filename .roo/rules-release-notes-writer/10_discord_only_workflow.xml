@@ -95,8 +95,45 @@
     </step>
 
     <step number="4">
+      <title>Combine Multiple Versions</title>
+      <action>When multiple versions requested, intelligently combine content</action>
+      <combination_strategy>
+        <substep number="1">
+          <action>Sort versions in descending order (newest first)</action>
+          <reason>Present most recent changes first for better visibility</reason>
+        </substep>
+        <substep number="2">
+          <action>Extract and merge content by category</action>
+          <categories>
+            <category name="major_features">
+              <description>Combine all major features across versions</description>
+              <format>List under unified "## Major Features" section</format>
+            </category>
+            <category name="bug_fixes">
+              <description>Merge all bug fixes</description>
+              <format>Group under "## Bug Fixes" with version indicators</format>
+            </category>
+            <category name="improvements">
+              <description>Combine QOL and other improvements</description>
+              <format>List under "## Improvements" section</format>
+            </category>
+          </categories>
+        </substep>
+        <substep number="3">
+          <action>Add version indicators to each item</action>
+          <format>Append (vX.Y.Z) to each bullet point</format>
+          <example>* **File Handling**: Fixed large file errors (v3.23.15) (thanks user!)</example>
+        </substep>
+        <substep number="4">
+          <action>Consolidate duplicate contributors</action>
+          <details>If same contributor appears in multiple versions, list once</details>
+        </substep>
+      </combination_strategy>
+    </step>
+
+    <step number="5">
       <title>Format Output</title>
-      <action>Present Discord-ready text</action>
+      <action>Present Discord-ready text based on version count</action>
       <single_version_format><![CDATA[
 # Roo Code X.Y.Z Release Notes
 
@@ -113,7 +150,32 @@
 
 [Full X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
       ]]></single_version_format>
-      <multiple_versions_format><![CDATA[
+      <multiple_versions_combined_format><![CDATA[
+# Roo Code Release Notes (vX.Y.Z - vA.B.C)
+
+Combined release notes for versions X.Y.Z through A.B.C.
+
+## Major Features
+
+* **[Feature Name]** (vX.Y.Z): [Description without PR links]
+* **[Another Feature]** (vA.B.C): [Description]
+
+## Bug Fixes
+
+* **[Category]**: [Fix description] (vX.Y.Z) (thanks [contributor]!)
+* **[Category]**: [Another fix] (vA.B.C) (thanks [contributor]!)
+
+## Improvements
+
+* **[Improvement Type]**: [Description] (vX.Y.Z)
+* **[Another Type]**: [Description] (vA.B.C)
+
+---
+Full release notes:
+- [X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
+- [A.B.C Release Notes](https://docs.roocode.com/update-notes/vA.B.C)
+      ]]></multiple_versions_combined_format>
+      <multiple_versions_separate_format><![CDATA[
 # Roo Code Release Notes
 
 ## Version X.Y.Z
@@ -128,10 +190,16 @@
 Full release notes:
 - [X.Y.Z Release Notes](https://docs.roocode.com/update-notes/vX.Y.Z)
 - [A.B.C Release Notes](https://docs.roocode.com/update-notes/vA.B.C)
-      ]]></multiple_versions_format>
+      ]]></multiple_versions_separate_format>
+      <format_selection>
+        <rule>Use combined format when user explicitly requests "combined" or "merge"</rule>
+        <rule>Use combined format for 2-3 closely related patch versions (e.g., 3.23.14, 3.23.15)</rule>
+        <rule>Use separate format for many versions or major/minor releases</rule>
+        <rule>Ask user preference if unclear</rule>
+      </format_selection>
     </step>
 
-    <step number="5">
+    <step number="6">
       <title>Provide Copy Instructions</title>
       <action>Give user the formatted text with copy guidance</action>
       <completion_message>
@@ -139,6 +207,10 @@ Full release notes:
         
         [Include formatted text in a code block for easy copying]
       </completion_message>
+      <length_warning>
+        <condition>If output exceeds 2000 characters</condition>
+        <action>Warn user about Discord's character limit and suggest splitting</action>
+      </length_warning>
     </step>
   </workflow_steps>
 
@@ -168,14 +240,27 @@ Full release notes:
       </workflow>
     </example>
 
-    <example name="multiple_versions">
+    <example name="multiple_versions_separate">
       <user_request>Generate Discord announcement for v3.23.14, v3.23.15, v3.23.16</user_request>
       <workflow>
         1. Parse versions: 3.23.14, 3.23.15, 3.23.16
         2. Check files: v3.23.14.mdx ✓, v3.23.15.mdx ✓, v3.23.16.mdx ✗
         3. Ask user how to proceed with missing v3.23.16
         4. Process existing versions
-        5. Output combined Discord announcement
+        5. Determine format: separate sections for each version
+        6. Output Discord announcement with version sections
+      </workflow>
+    </example>
+
+    <example name="multiple_versions_combined">
+      <user_request>Combine Discord release notes for 3.23.14 and 3.23.15</user_request>
+      <workflow>
+        1. Parse versions: 3.23.14, 3.23.15
+        2. Check both files exist
+        3. Read and process both versions
+        4. Detect "combine" keyword - use combined format
+        5. Merge features, fixes, and improvements with version tags
+        6. Output single combined announcement
       </workflow>
     </example>
 
@@ -186,6 +271,17 @@ Full release notes:
         2. Check file exists
         3. Read and transform with compression
         4. Output condensed Discord format
+      </workflow>
+    </example>
+
+    <example name="range_request_combined">
+      <user_request>Discord release notes for 3.23.14-3.23.16 combined</user_request>
+      <workflow>
+        1. Parse range: 3.23.14 to 3.23.16
+        2. Find all versions in range
+        3. Process each version's content
+        4. Combine into unified sections with version indicators
+        5. Output merged announcement
       </workflow>
     </example>
   </examples>

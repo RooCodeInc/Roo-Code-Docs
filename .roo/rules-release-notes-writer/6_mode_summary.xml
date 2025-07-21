@@ -14,6 +14,7 @@
     <feature>Contributor acknowledgment (authors and issue reporters).</feature>
     <feature>Direct Discord formatting for existing releases.</feature>
     <feature>Multi-version Discord announcement support.</feature>
+    <feature>Intelligent combining of multiple release notes into unified Discord announcements.</feature>
   </key_features>
 
   <workflow_summary>
@@ -55,6 +56,7 @@
         <example>Discord release notes for 3.23.14</example>
         <example>Generate Discord format for v3.23.14, v3.23.15</example>
         <example>Discord announcement for 3.23.14</example>
+        <example>Combine Discord release notes for 3.23.14 and 3.23.15</example>
       </examples>
     </mode>
     <mode type="subtask">
@@ -93,6 +95,8 @@
       <instruction>Reads existing files and applies Discord formatting.</instruction>
       <instruction>Outputs Discord-ready text without creating files.</instruction>
       <instruction>Supports multiple versions in a single request.</instruction>
+      <instruction>Can combine multiple versions into a unified announcement with version indicators.</instruction>
+      <instruction>Automatically detects when to combine consecutive patch versions.</instruction>
     </discord_only_workflow>
     <subtask_workflow>
       <instruction>Receives "Investigate PR #X" message.</instruction>

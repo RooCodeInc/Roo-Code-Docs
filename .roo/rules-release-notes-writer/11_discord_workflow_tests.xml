@@ -117,6 +117,57 @@
         - Combined output for all versions
       </validation>
     </scenario>
+
+    <scenario id="8">
+      <name>Combined format request</name>
+      <user_input>Combine Discord release notes for 3.23.14 and 3.23.15</user_input>
+      <expected_behavior>
+        1. Detect "combine" keyword
+        2. Parse versions: 3.23.14, 3.23.15
+        3. Check both files exist
+        4. Read and process both versions
+        5. Merge content by category with version indicators
+        6. Output single combined announcement
+      </expected_behavior>
+      <validation>
+        - Features from both versions in one section
+        - Bug fixes merged with version tags
+        - No duplicate sections
+        - Version indicators on each item
+      </validation>
+    </scenario>
+
+    <scenario id="9">
+      <name>Multiple patch versions auto-combine</name>
+      <user_input>Discord release notes for 3.23.14, 3.23.15</user_input>
+      <expected_behavior>
+        1. Detect consecutive patch versions
+        2. Automatically choose combined format
+        3. Merge all content with version tags
+        4. Present unified announcement
+      </expected_behavior>
+      <validation>
+        - Smart format selection based on version proximity
+        - Clear version attribution for each change
+        - Consolidated contributor list
+      </validation>
+    </scenario>
+
+    <scenario id="10">
+      <name>Mixed major/minor versions</name>
+      <user_input>Discord notes for 3.22.0, 3.23.0, 3.23.14</user_input>
+      <expected_behavior>
+        1. Detect mix of major/minor versions
+        2. Use separate format (not combined)
+        3. Create section for each version
+        4. Maintain clear separation
+      </expected_behavior>
+      <validation>
+        - Each version gets its own section
+        - No attempt to merge different minor versions
+        - Clear version headers
+      </validation>
+    </scenario>
   </test_scenarios>
 
   <edge_cases>
@@ -133,6 +184,16 @@
     <case name="very_long_version_list">
       <input>Discord format for v3.23.1, v3.23.2, v3.23.3, ... (20+ versions)</input>
       <expected>Process all but suggest breaking into smaller groups</expected>
+    </case>
+
+    <case name="explicit_separate_request">
+      <input>Discord release notes for 3.23.14 and 3.23.15 separately</input>
+      <expected>Use separate format even for consecutive patches</expected>
+    </case>
+
+    <case name="combine_non_consecutive">
+      <input>Combine Discord notes for 3.23.14, 3.23.20</input>
+      <expected>Still combine but note version gap</expected>
     </case>
   </edge_cases>
 
@@ -159,6 +220,43 @@
           <should_match>discord_only</should_match>
         </case>
       </cases>
+    </test>
+
+    <test name="format_selection_logic">
+      <description>Verify correct format selection based on context</description>
+      <cases>
+        <case>
+          <versions>3.23.14, 3.23.15</versions>
+          <keyword>none</keyword>
+          <expected_format>combined (auto-detected for consecutive patches)</expected_format>
+        </case>
+        <case>
+          <versions>3.23.14, 3.23.15, 3.23.16</versions>
+          <keyword>combine</keyword>
+          <expected_format>combined (explicit request)</expected_format>
+        </case>
+        <case>
+          <versions>3.22.0, 3.23.0</versions>
+          <keyword>combine</keyword>
+          <expected_format>combined (respecting user request despite major versions)</expected_format>
+        </case>
+        <case>
+          <versions>3.23.14, 3.23.15</versions>
+          <keyword>separately</keyword>
+          <expected_format>separate (explicit request overrides auto-detection)</expected_format>
+        </case>
+      </cases>
+    </test>
+
+    <test name="content_merging">
+      <description>Verify proper content merging in combined format</description>
+      <validations>
+        <validation>Version tags added to each item</validation>
+        <validation>Categories properly merged</validation>
+        <validation>No duplicate content</validation>
+        <validation>Contributors consolidated</validation>
+        <validation>Proper sorting (newest first)</validation>
+      </validations>
     </test>
   </integration_tests>
 
