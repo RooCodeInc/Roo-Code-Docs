@@ -1,4 +1,51 @@
   <complete_example>
+  <date_validation_example>
+    <scenario>
+      Validating and formatting dates correctly when creating release notes
+    </scenario>
+    
+    <common_mistakes>
+      <mistake>
+        <wrong>2025-18-07</wrong>
+        <issue>This would mean the 18th month, which doesn't exist</issue>
+        <correct>2025-07-18</correct>
+        <explanation>ISO 8601 format is YYYY-MM-DD where MM is month (01-12)</explanation>
+      </mistake>
+      <mistake>
+        <wrong>Using January (01) when it should be July (07)</wrong>
+        <issue>Confusing month and day positions in ISO 8601 format</issue>
+        <correct>Always use YYYY-MM-DD format where MM is month (01-12)</correct>
+      </mistake>
+    </common_mistakes>
+
+    <validation_steps>
+      <step>When given PR list directly, use current date</step>
+      <step>Format: new Date().toISOString().split('T')[0]</step>
+      <step>Always verify month is 01-12</step>
+      <step>Always verify day is appropriate for the month</step>
+      <step>Remember: ISO 8601 format is YYYY-MM-DD (year-month-day)</step>
+    </validation_steps>
+
+    <example_dates>
+      <correct>
+        <date>2025-07-18</date>
+        <meaning>July 18, 2025</meaning>
+      </correct>
+      <correct>
+        <date>2025-01-13</date>
+        <meaning>January 13, 2025</meaning>
+      </correct>
+      <incorrect>
+        <date>2025-18-07</date>
+        <reason>Month cannot be 18</reason>
+      </incorrect>
+      <incorrect>
+        <date>2025-13-01</date>
+        <reason>Month cannot be 13</reason>
+      </incorrect>
+    </example_dates>
+  </date_validation_example>
+
   <scenario>
     Creating release notes for Roo Code v3.20.3.
   </scenario>

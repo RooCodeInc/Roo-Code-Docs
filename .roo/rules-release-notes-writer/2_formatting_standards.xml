@@ -38,9 +38,16 @@ image: /img/social-share.jpg
       <format># Roo Code X.Y.Z Release Notes (YYYY-MM-DD)</format>
       <requirements>
         <requirement>Include version number.</requirement>
-        <requirement>Include release date (ISO format).</requirement>
-        <requirement>Date must be the actual release date.</requirement>
+        <requirement>Include release date in ISO 8601 format: YYYY-MM-DD.</requirement>
+        <requirement>Date must be the actual release date from GitHub tag OR current date if PR list provided.</requirement>
+        <requirement>CRITICAL: Month comes before day (MM-DD not DD-MM). Example: 2025-07-18 is July 18th.</requirement>
       </requirements>
+      <date_format_examples>
+        <correct>2025-07-18 (July 18, 2025)</correct>
+        <correct>2025-01-13 (January 13, 2025)</correct>
+        <incorrect>2025-18-07 (Invalid - would mean 18th month)</incorrect>
+        <incorrect>2025-13-01 (Invalid - would mean 13th month)</incorrect>
+      </date_format_examples>
     </element>
 
     <element name="summary_sentence">
@@ -135,7 +142,8 @@ Concluding sentence about the benefit.
       <rule>List chronologically, newest first.</rule>
       <rule>Use absolute paths from /docs/.</rule>
       <rule>Omit .md extension.</rule>
-      <rule>Include release date.</rule>
+      <rule>Include release date in ISO 8601 format (YYYY-MM-DD).</rule>
+      <rule>CRITICAL: Verify date format - month before day.</rule>
     </rules>
   </index_file_updates>
 

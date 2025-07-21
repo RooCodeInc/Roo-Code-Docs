@@ -55,7 +55,7 @@
 			<steps>
 		             <step number="1">
 		                 <action>Check for user-provided PR list</action>
-		                 <details>If user gives a list of PR numbers, skip to 'process_each_pr' phase.</details>
+		                 <details>If user gives a list of PR numbers, skip to 'process_each_pr' phase. When skipping, use the current date or explicitly ask the user for the release date.</details>
 		             </step>
 				<step number="2">
 					<action>Fetch release dates</action>
@@ -71,6 +71,27 @@
 				        Query: `--state merged --search "merged:YYYY-MM-DD..YYYY-MM-DD"`
 				      </details>
 					<todo_update>Mark "Search for merged PRs in date range" as complete</todo_update>
+				</step>
+			</steps>
+		</phase>
+		<phase name="determine_release_date" optional="true">
+			<description>Determine the release date when user provides PR list directly.</description>
+			<when_to_use>Only when user provides a PR list instead of using GitHub date range search.</when_to_use>
+			<steps>
+				<step number="1">
+					<action>Check if user provided a date</action>
+					<details>
+						Look for date in user's message (e.g., "3.23.15" followed by a date like "2025-07-18").
+						If no date provided, use current date.
+					</details>
+				</step>
+				<step number="2">
+					<action>Validate date format</action>
+					<details>
+						Ensure date is in YYYY-MM-DD format (ISO 8601).
+						Common mistake: Confusing MM-DD with DD-MM.
+						Example: 2025-07-18 is July 18, not January 18.
+					</details>
 				</step>
 			</steps>
 		</phase>
