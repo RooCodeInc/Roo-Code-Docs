@@ -139,6 +139,7 @@ const sidebars: SidebarsConfig = {
         'providers/human-relay',
         'providers/lmstudio',
         'providers/litellm',
+        'providers/archgw',
         'providers/mistral',
         'providers/ollama',
         'providers/openai',
