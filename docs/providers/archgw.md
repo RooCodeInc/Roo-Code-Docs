@@ -46,7 +46,7 @@ To use Arch Gateway with Roo Code, you first need to set up and run archgw with 
 ### Installation
 
 1. Install Arch gateway pre-requisites:
-  Follow (these steps)[https://github.com/katanemo/archgw?tab=readme-ov-file#prerequisites] to ensure that you have pre-requisites installed.
+  Follow [these steps](https://github.com/katanemo/archgw?tab=readme-ov-file#prerequisites) to ensure that you have pre-requisites installed.
 
 ### Configuration
 
