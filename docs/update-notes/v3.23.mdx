@@ -97,6 +97,13 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 - **Custom Modes**: Added helpful descriptions and usage guidance to custom modes (thanks RandalSchwartz!)
 - **YouTube Footer**: Quick access to Roo Code's YouTube channel from the website (thanks thill2323!)
 - **PR Templates**: Issue-fixer mode now uses the official Roo Code PR template (thanks MuriloFP!)
+- **Jump to New Files**: Added jump icon for newly created files, matching the experience of edited files (thanks mkdir700!)
+- **Apply Diff Error Messages**: Added case sensitivity reminder when apply_diff fails, helping users understand matching requirements (thanks maskelihileci!)
+- **Context Condensing Prompt Location**: Moved to Prompts section for better discoverability and persistent visibility (thanks SannidhyaSah, notadamking!)
+- **Todo List Tool Control**: Added checkbox in provider settings to enable/disable the todo list tool
+- **MCP Content Optimization**: Automatically omits MCP-related prompts when no servers are configured
+- **Git Installation Check**: Shows clear warning with download link when Git is not installed for checkpoints feature (thanks MuriloFP!)
+- **Configurable Eval Timeouts**: Added slider to set evaluation timeouts between 5-10 minutes
 
 ## Bug Fixes
 
@@ -134,6 +141,15 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 - **API Task Logging**: Fixed an issue where API-initiated tasks would attempt to write logs to workspace directories that might not exist. Logs now write to the system's temporary directory instead ([#5833](https://github.com/RooCodeInc/Roo-Code/pull/5833))
 - **Claude Model Detection**: Fixed context length errors when using Claude models through alternative providers like Google Vertex AI (thanks daniel-lxs, TheFynx!)
 - **Development Environment**: Fixed Docker port conflicts for evaluation services by using ports 5433 (PostgreSQL) and 6380 (Redis) instead of default ports (thanks roomote!)
+- **Terminal Output Limits**: Fixed critical crashes caused by terminal commands outputting extremely long lines. Now properly limits output to prevent context explosion (thanks robottwo!)
+- **API Error Messages**: Fixed issue where all API failures showed as "API Request Cancelled". Now displays correct error messages for better troubleshooting (thanks MDean-Slalom, daniel-lxs!)
+- **AWS Bedrock Token Counting**: Fixed inaccurate token counts and false context window errors for Bedrock users (thanks daniel-lxs, fedorbass!)
+- **Export During API Operations**: Restored ability to export, share, and copy content while API is running (thanks MuriloFP, KJ7LNW!)
+- **Symlinked Rules Files**: Fixed sorting of symlinked rules files to use symlink names, allowing proper ordering with numbered prefixes (thanks dsent!)
+- **Global Mode Export**: Fixed issue where exporting global modes didn't include associated rules files
+- **Vitest Command**: Added missing run parameter to prevent tests hanging in watch mode (thanks KJ7LNW!)
+- **Evaluation System**: Fixed evaluation timeout handling that was broken in a previous update
+- **Cloud Session Handling**: Improved session error handling to prevent unnecessary logouts during service issues
 
 ## Provider Updates
 
@@ -144,6 +160,10 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 - **Google Gemini**: Added support for Google's new gemini-embedding-001 model with improved performance and higher dimensional embeddings (3072 vs 768) for better codebase indexing and search (thanks daniel-lxs!) ([#5698](https://github.com/RooCodeInc/Roo-Code/pull/5698))
 - **Groq Kimi K2**: Added Kimi K2 model option for Groq users with improved token handling reliability for models with equal max tokens and context window
 - **Claude Code + Vertex AI**: Added support for Vertex AI model name formatting when using Claude Code provider (thanks janaki-sasidhar!) ([#5728](https://github.com/RooCodeInc/Roo-Code/pull/5728))
+- **Mistral Embedding Provider**: Codebase indexing gets a major upgrade with Mistral as a new embedding provider, offering superior performance at no cost. Simply select Mistral's codestral-embed model in your embedding settings for better code understanding and more accurate AI responses (thanks SannidhyaSah, shariqriazz!)
+- **Qwen3-235B Model**: Added support for Qwen3-235B-A22B-Instruct-2507 with massive 262K token context window on Chutes AI (thanks apple-techie!)
+- **Moonshot AI**: Added Moonshot as a new AI provider option (thanks CellenLee!)
+- **Llama 4 Maverick**: Added Llama 4 Maverick model (128K context) to Google Vertex AI in US-EAST5 region (thanks MuriloFP, konstantinosbotonakis!)
 
 ## Misc Improvements
 
@@ -161,6 +181,9 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 - **Internal Modes**: Added Issue Investigator mode and enhanced Issue Writer mode for internal GitHub workflows ([#5913](https://github.com/RooCodeInc/Roo-Code/pull/5913))
 - **Command Execution Improvements**: Added configurable timeout settings (0-600 seconds) with clear error messages, visual feedback, and API task control ([#5825](https://github.com/RooCodeInc/Roo-Code/pull/5825))
 - **Command Timeout Allowlist**: Added ability to exclude specific commands from timeout restrictions for long-running tasks like builds and deployments
+- **Merge Resolver Mode**: Added intelligent merge conflict resolution mode that analyzes commit history to make smart decisions about which changes to keep (thanks daniel-lxs!)
+- **Token Fallback Logic**: Improved sliding window with consistent 8192 token fallback for more predictable context handling
+- **Todo List Clarification**: Updated documentation to clarify that todo list tool is for complicated tasks, not just multi-step ones
 
 ## Documentation Updates
 
