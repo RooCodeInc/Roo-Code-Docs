@@ -63,7 +63,7 @@ The toolbar includes an input field to set the maximum number of API requests Ro
 - **Purpose**: Prevents runaway API usage and unexpected costs
 - **Default**: No limit (empty field)
 - **Recommended**: Set a reasonable limit based on your task complexity (e.g., 50-100 for most tasks)
-- **How it works**: Once the limit is reached, Roo will pause and ask for permission to continue
+- **How it works**: Once the limit is exceeded, Roo will pause and show a dialog allowing you to reset the counter and continue
 
 This safety feature is particularly useful when:
 - Working with expensive API models
@@ -99,6 +99,7 @@ The leftmost checkbox works as a master toggle:
 - **Checked**: Activates all configured auto-approve permissions
 - **Unchecked**: Temporarily disables all auto-approvals without changing individual settings
 - **Important**: Individual permission settings are preserved when toggling
+- **Note**: The master toggle is temporarily disabled while the auto-approve menu is expanded
 
 This means you can:
 1. Configure your preferred permissions once
@@ -162,7 +163,7 @@ By default, Roo can only read files within your current workspace directory. The
 
 **Description:** "Automatically create and edit files without requiring approval"
 
-**Delay slider:** "Delay after writes to allow diagnostics to detect potential problems" (Default: 0ms)
+**Delay slider:** "Delay after writes to allow diagnostics to detect potential problems" (Default: 1000ms / 1 second)
 
 **Additional options:**
 - **Include files outside workspace:** Allow Roo to modify files outside the current workspace directory
@@ -172,8 +173,8 @@ By default, Roo can only read files within your current workspace directory. The
 
 This setting allows Roo to modify your files without confirmation. The delay timer is crucial:
 - Higher values (2000ms+): Recommended for complex projects where diagnostics take longer
-- Default (0ms): No delay - use when speed is critical
-- 1000ms: Suitable for most projects with active diagnostics
+- Default (1000ms): Suitable for most projects with active diagnostics
+- 0ms: No delay - use when speed is critical
 - Lower values: Use only when in a controlled environment
 
 #### Security Boundaries
@@ -182,7 +183,12 @@ The write operations setting includes two important security controls:
 
 1. **Workspace Boundary Protection**: By default, Roo can only modify files within your current workspace. Enable "Include files outside workspace" with extreme caution.
 
-2. **Protected Files**: Files in .rooignore and the .roo/ directory are protected by default. The "Include protected files" option bypasses this protection - use only when necessary.
+2. **Protected Files**: Roo has built-in protection for sensitive configuration files to prevent accidental modifications. This includes:
+   - Files in the `.roo/` directory
+   - Files listed in `.rooignore`
+   - Roo's own configuration files (package.json, tsconfig.json, etc. when they contain Roo-specific settings)
+   
+   The "Include protected files" option bypasses this protection - use only when you specifically need to modify these protected files.
 
 #### Write Delay & Problems Pane Integration
 
@@ -233,13 +239,25 @@ Consider the security implications of allowing automated browser access.
 
 **Description:** "Automatically retry failed API requests when server returns an error response"
 
-**Delay slider:** "Delay before retrying the request" (Default: 5s)
+**Delay slider:** "Delay before retrying the request" (Default: 10 seconds)
 
 **Risk level:** Low
 
-This setting automatically retries API calls when they fail. The delay controls how long Roo waits before trying again:
-- Longer delays are gentler on API rate limits
-- Shorter delays give faster recovery from transient errors
+This setting automatically retries API calls when they fail. The retry mechanism uses exponential backoff:
+- **Initial delay**: Set by the slider (default: 10 seconds)
+- **Backoff formula**: `min(baseDelay * 2^retryAttempt, 600)`
+- **Maximum delay**: 600 seconds (10 minutes)
+
+Example retry sequence with 10s base delay:
+- 1st retry: 10 seconds
+- 2nd retry: 20 seconds
+- 3rd retry: 40 seconds
+- 4th retry: 80 seconds
+- 5th retry: 160 seconds
+- 6th retry: 320 seconds
+- 7th+ retry: 600 seconds (capped)
+
+This exponential backoff helps prevent overwhelming APIs while still recovering from transient errors.
 :::
 
 ### MCP Tools
@@ -258,6 +276,8 @@ This setting requires a two-step permission process for security:
 2. **Enable individual tool permissions** - In the MCP Servers view, check "Always allow" for specific tools
 
 **Important:** Both permissions must be active for a tool to auto-approve. This dual-permission system ensures you maintain granular control over which MCP tools can execute without confirmation.
+
+**Permission Storage:** Your MCP tool permissions are saved and will be remembered next time you use Roo Code.
 
 Example workflow:
 - Enable "Always approve MCP tools" in settings
@@ -342,7 +362,12 @@ This setting allows terminal command execution with controls. While risky, the w
 
 **Visual countdown:** When enabled, a countdown timer appears on the first suggestion button, showing the remaining time before auto-selection. The timer is displayed as a circular progress indicator that depletes as time passes.
 
-**Timeout slider:** Use the slider to set the wait time from 1 to 300 seconds (Default: 60s).
+**Timeout slider:** Use the slider to set the wait time from 1 to 300 seconds (Default: 60 seconds)
+
+**How it works:**
+- The countdown starts at your configured time (default: 60 seconds)
+- When the timer reaches zero, the first suggestion is automatically selected
+- You can pause the countdown by clicking on the timer
 
 **Override options:** You can cancel the auto-selection at any time by:
 - Clicking a different suggestion
