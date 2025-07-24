@@ -1,0 +1,100 @@
+<pr_analysis_patterns>
+  <overview>
+    Patterns for analyzing PRs and converting technical changes into user-focused release notes.
+  </overview>
+
+  <analysis_framework>
+    <step number="1">
+      <question>What changed?</question>
+      <focus>Identify the core feature affected</focus>
+    </step>
+    <step number="2">
+      <question>Why did it change?</question>
+      <focus>Understand the problem solved (check linked issues for bug fixes)</focus>
+    </step>
+    <step number="3">
+      <question>How does this impact users?</question>
+      <focus>State concrete benefits in plain language</focus>
+    </step>
+  </analysis_framework>
+
+  <categorization>
+    <category name="major_features">
+      <criteria>New functionality changing user experience</criteria>
+      <format>Own ## heading with expanded description</format>
+    </category>
+    <category name="bug_fixes">
+      <criteria>Resolves issues, fixes errors</criteria>
+      <format>Under ## Bug Fixes as bullet points</format>
+    </category>
+    <category name="qol_improvements">
+      <criteria>UI/UX enhancements, workflow optimizations</criteria>
+      <format>Under ## QOL Improvements</format>
+    </category>
+    <category name="provider_updates">
+      <criteria>API provider changes</criteria>
+      <format>Under ## Provider Updates</format>
+    </category>
+  </categorization>
+
+  <templates>
+    <template type="major_feature">
+      <format><![CDATA[
+## [Feature Name]
+
+We've [improvement description] (thanks [contributors]!) ([#PR](link)):
+
+- **[Benefit 1]**: [How this helps users]
+- **[Benefit 2]**: [Another benefit]
+
+[Concluding sentence about impact]
+      ]]></format>
+    </template>
+    
+    <template type="bug_fix">
+      <format><![CDATA[
+* **[Problem Fixed]**: [What users can now do] (thanks [contributors]!) ([#PR](link))
+      ]]></format>
+    </template>
+    
+    <template type="improvement">
+      <format><![CDATA[
+* **[Area Improved]**: [What's better] (thanks [contributors]!) ([#PR](link))
+      ]]></format>
+    </template>
+  </templates>
+
+  <contributor_rules>
+    <rule>Always include PR author (from gh pr view)</rule>
+    <rule>Include issue reporter if PR fixes an issue</rule>
+    <rule>Format: (thanks author, reporter!)</rule>
+    <rule>No @ symbols in usernames</rule>
+  </contributor_rules>
+
+  <language_guide>
+    <avoid>Technical jargon, implementation details</avoid>
+    <prefer>User benefits, plain language, concrete improvements</prefer>
+    <transformations>
+      <from>Refactored</from><to>Improved</to>
+      <from>Implemented</from><to>Added</to>
+      <from>Optimized algorithm</from><to>Made faster</to>
+      <from>Fixed race condition</from><to>Fixed timing issue</to>
+    </transformations>
+  </language_guide>
+
+  <subtask_output_format>
+    <description>Format for PR investigation findings</description>
+    <template><![CDATA[
+## PR #[number]: [Title]
+
+**Author**: [username]
+**Linked Issues**: #[issue] (reporter: [username])
+**Category**: [Category]
+**User Impact**: [Benefit description]
+**Contributors**: [list]
+
+---
+    ]]></template>
+    <critical>Append to temp_pr_analysis.md using insert_content line 0</critical>
+  </subtask_output_format>
+</pr_analysis_patterns>

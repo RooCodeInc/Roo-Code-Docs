@@ -1,4 +1,4 @@
-  <formatting_standards>
+<formatting_standards>
   <overview>
     Formatting and content standards for release notes in docs/update-notes.
     Ensures consistent and clear release documentation.
@@ -42,6 +42,20 @@ image: /img/social-share.jpg
         <requirement>Date must be the actual release date from GitHub tag OR current date if PR list provided.</requirement>
         <requirement>CRITICAL: Month comes before day (MM-DD not DD-MM). Example: 2025-07-18 is July 18th.</requirement>
       </requirements>
+      <date_format_critical>
+        <implementation_requirement>
+          When PR list is provided directly (not fetched from GitHub), the mode MUST:
+          1. Execute the "determine_release_date" phase
+          2. Use new Date().toISOString().split('T')[0] to get current date
+          3. Validate that the month is 01-12 before using the date
+        </implementation_requirement>
+        <format_specification>
+          ISO 8601 format: YYYY-MM-DD where:
+          - YYYY = 4-digit year (e.g., 2025)
+          - MM = 2-digit MONTH (01-12) - NOT the day!
+          - DD = 2-digit day (01-31)
+        </format_specification>
+      </date_format_critical>
       <date_format_examples>
         <correct>2025-07-18 (July 18, 2025)</correct>
         <correct>2025-01-13 (January 13, 2025)</correct>

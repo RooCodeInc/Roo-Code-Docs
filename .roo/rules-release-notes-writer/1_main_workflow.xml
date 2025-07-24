@@ -1,0 +1,200 @@
+<workflow_instructions>
+  <mode_overview>
+    Automates creating release notes for new Roo Code versions. Fetches pull requests
+    from GitHub, analyzes changes, and generates notes based on doc standards.
+    Also handles Discord formatting, version-only requests, and auto-detection of missing versions.
+  </mode_overview>
+
+  <entry_patterns>
+    <pattern type="create_new">
+      <trigger>Create release notes for X.Y.Z</trigger>
+      <action>Full release notes workflow</action>
+    </pattern>
+    <pattern type="discord_only">
+      <trigger>Discord release notes for X.Y.Z</trigger>
+      <action>Generate Discord format from existing files</action>
+    </pattern>
+    <pattern type="version_only">
+      <trigger>^v?[\d.]+$</trigger>
+      <action>Extract PR list and ask how to proceed</action>
+    </pattern>
+    <pattern type="latest">
+      <trigger>latest</trigger>
+      <action>Auto-detect missing versions from changelog</action>
+    </pattern>
+  </entry_patterns>
+
+  <main_workflow>
+    <phase name="initialization">
+      <step number="1">
+        <action>Analyze request type and route to appropriate workflow</action>
+        <decision_tree>
+          <if condition="latest">Execute latest_version_detection</if>
+          <if condition="discord_only">Execute discord_workflow</if>
+          <if condition="version_only">Execute pr_extraction_workflow</if>
+          <else>Continue with standard workflow</else>
+        </decision_tree>
+      </step>
+      
+      <step number="2">
+        <action>Initialize tracking</action>
+        <tool>update_todo_list</tool>
+        <todos>
+          - Determine version range
+          - Fetch PRs (if needed)
+          - Process and analyze PRs
+          - Create documentation files
+          - Update indexes and sidebars
+          - Handle user review
+        </todos>
+      </step>
+    </phase>
+
+    <phase name="data_collection">
+      <step number="1">
+        <action>Determine version range</action>
+        <tool>list_files in docs/update-notes</tool>
+      </step>
+      
+      <step number="2" optional="true">
+        <action>Handle user-provided PR list</action>
+        <when>User provides PR numbers directly</when>
+        <critical>
+          MUST execute date validation:
+          - Use new Date().toISOString().split('T')[0] for current date
+          - Validate format YYYY-MM-DD where MM is month (01-12)
+          - Common error: Confusing MM-DD order
+        </critical>
+      </step>
+      
+      <step number="3">
+        <action>Fetch PRs from GitHub</action>
+        <skip_if>User provided PR list</skip_if>
+        <tools>
+          - gh api for release dates
+          - gh pr list for merged PRs in date range
+        </tools>
+      </step>
+    </phase>
+
+    <phase name="pr_processing">
+      <initialization priority="CRITICAL">
+        <action>Create temp_pr_analysis.md</action>
+        <details>
+          Parent task MUST create this file before ANY subtasks.
+          Subtasks will ONLY append using insert_content.
+        </details>
+      </initialization>
+      
+      <subtask_pattern>
+        <for_each>PR in list</for_each>
+        <action>Create investigation subtask</action>
+        <message>
+          Investigate PR #[number] for release notes v[version].
+          1. Get PR details (gh pr view)
+          2. Extract linked issues
+          3. Get issue details
+          4. Categorize change
+          5. Append to temp_pr_analysis.md using insert_content line 0
+          
+          CRITICAL: Never create/overwrite files, only append.
+        </message>
+      </subtask_pattern>
+    </phase>
+
+    <phase name="compilation">
+      <step number="1">
+        <action>Read and organize PR findings</action>
+        <categories>Bug Fixes, Features, QOL Improvements, Provider Updates</categories>
+      </step>
+      
+      <step number="2">
+        <action>Create release notes file</action>
+        <format>docs/update-notes/vX.Y.Z.mdx</format>
+      </step>
+      
+      <step number="3">
+        <action>Update documentation indexes</action>
+        <files>
+          - index.md (chronological list)
+          - sidebars.ts (navigation)
+          - Combined notes for patch releases
+        </files>
+      </step>
+    </phase>
+
+    <phase name="review" optional="true">
+      <step number="1">
+        <action>Cross-reference with changelog if exists</action>
+        <details>Compare generated notes with changelog entries</details>
+      </step>
+      
+      <step number="2">
+        <action>User review loop</action>
+        <loop_until>User approves or cancels</loop_until>
+        <options>
+          - Create PR
+          - Make changes
+          - Show files
+        </options>
+      </step>
+    </phase>
+  </main_workflow>
+
+  <special_workflows>
+    <workflow name="discord_only">
+      <description>Generate Discord format from existing release files</description>
+      <steps>
+        <step>Parse version numbers from request</step>
+        <step>Verify files exist</step>
+        <step>Apply Discord transformations:
+          - Remove PR links
+          - Convert internal links to full URLs
+          - Add footer link
+          - Handle compression if requested
+        </step>
+        <step>Output formatted text (no files created)</step>
+      </steps>
+    </workflow>
+
+    <workflow name="version_only">
+      <description>Extract PR list when user provides just a version</description>
+      <steps>
+        <step>Spawn PR extraction subtask</step>
+        <step>Subtask writes PR list to temp_pr_list.md</step>
+        <step>Ask user how to proceed:
+          - Create full release notes
+          - Show PR list
+          - Select specific PRs
+          - Cancel
+        </step>
+      </steps>
+    </workflow>
+
+    <workflow name="latest">
+      <description>Auto-detect missing versions</description>
+      <steps>
+        <step>Find most recent release notes</step>
+        <step>Read changelog (or GitHub releases)</step>
+        <step>Identify missing versions</step>
+        <step>Ask which to process</step>
+        <step>Process selected versions sequentially</step>
+      </steps>
+    </workflow>
+  </special_workflows>
+
+  <critical_rules>
+    <rule priority="CRITICAL">
+      Date format is YYYY-MM-DD (ISO 8601) where MM is month (01-12)
+    </rule>
+    <rule priority="CRITICAL">
+      Parent task creates temp files, subtasks only append
+    </rule>
+    <rule priority="HIGH">
+      Always acknowledge PR author AND issue reporter
+    </rule>
+    <rule priority="HIGH">
+      Focus on user benefits, not technical implementation
+    </rule>
+  </critical_rules>
+</workflow_instructions>

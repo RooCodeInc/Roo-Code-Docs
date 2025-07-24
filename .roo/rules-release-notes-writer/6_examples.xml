@@ -1,0 +1,139 @@
+<key_examples>
+  <overview>
+    Essential examples demonstrating the main workflow patterns.
+  </overview>
+
+  <example name="standard_release_notes">
+    <user_request>Create release notes for version 3.20.3</user_request>
+    <workflow>
+      1. Find previous version (3.20.2)
+      2. Get release dates from GitHub tags
+      3. Search for merged PRs between dates
+      4. Create subtasks to investigate each PR
+      5. Compile findings into release notes
+      6. Update all documentation files
+      7. Ask user to review and create PR
+    </workflow>
+    <key_points>
+      - Standard full workflow
+      - Uses GitHub API for PR discovery
+      - Creates all documentation updates
+    </key_points>
+  </example>
+
+  <example name="pr_list_provided">
+    <user_request>3.23.15
+PRs: #1234, #1235, #1236</user_request>
+    <workflow>
+      1. Detect PR list provided
+      2. Skip GitHub date range search
+      3. Use current date (CRITICAL: YYYY-MM-DD format)
+      4. Process provided PRs directly
+      5. Continue with standard workflow
+    </workflow>
+    <key_points>
+      - Bypasses PR discovery phase
+      - Must validate date format
+      - Common error: Wrong month/day order
+    </key_points>
+  </example>
+
+  <example name="discord_single_version">
+    <user_request>Discord release notes for 3.23.14</user_request>
+    <workflow>
+      1. Detect Discord-only pattern
+      2. Check if v3.23.14.mdx exists
+      3. Read file and apply transformations
+      4. Output formatted text (no files created)
+    </workflow>
+    <transformations>
+      - Remove: ([#1234](link)) → (empty)
+      - Convert: [text](/path) → [text](https://docs.roocode.com/path)
+      - Add: Footer with full release notes link
+    </transformations>
+  </example>
+
+  <example name="discord_multiple_combined">
+    <user_request>Combine Discord release notes for 3.23.14 and 3.23.15</user_request>
+    <workflow>
+      1. Parse multiple versions
+      2. Process each version
+      3. Detect "combine" keyword
+      4. Merge by category with version tags
+      5. Output unified announcement
+    </workflow>
+    <output_format>
+      ## Bug Fixes
+      * **File Handling**: Fixed errors (v3.23.14) (thanks user1!)
+      * **API Calls**: Added retry logic (v3.23.15) (thanks user2!)
+    </output_format>
+  </example>
+
+  <example name="version_only_request">
+    <user_request>3.23.14</user_request>
+    <workflow>
+      1. Detect version-only pattern
+      2. Spawn PR extraction subtask
+      3. Subtask fetches PR list
+      4. Ask user how to proceed
+      5. Based on choice:
+         - Create full notes
+         - Show PR list
+         - Select specific PRs
+         - Cancel
+    </workflow>
+  </example>
+
+  <example name="latest_versions">
+    <user_request>latest</user_request>
+    <workflow>
+      1. Find last documented: v3.23.14
+      2. Read CHANGELOG.md
+      3. Find missing: 3.23.15, 3.23.16
+      4. Ask which to process
+      5. Create notes for selected versions
+    </workflow>
+    <fallbacks>
+      - No changelog → Check GitHub releases
+      - No new versions → "Up to date!"
+    </fallbacks>
+  </example>
+
+  <example name="pr_investigation_subtask">
+    <subtask_message>Investigate PR #1234 for release notes v3.20.3</subtask_message>
+    <workflow>
+      1. Get PR details: gh pr view 1234
+      2. Find linked issue: "Fixes #987"
+      3. Get issue details: gh issue view 987
+      4. Categorize: Bug Fix
+      5. Write to temp_pr_analysis.md:
+    </workflow>
+    <output><![CDATA[
+## PR #1234: Fix context condensing
+
+**Author**: john-doe
+**Linked Issues**: #987 (reporter: bug-finder)
+**Category**: Bug Fix
+**User Impact**: Fixed errors when processing large files
+**Contributors**: john-doe, bug-finder
+
+---
+    ]]></output>
+  </example>
+
+  <example name="combined_notes_update">
+    <scenario>Updating v3.20.mdx with v3.20.3 changes</scenario>
+    <workflow>
+      1. Read existing v3.20.mdx
+      2. Parse new changes from v3.20.3.mdx
+      3. Strip PR links from new items
+      4. Add to appropriate sections
+      5. Use apply_diff to update
+    </workflow>
+    <rules>
+      - Append to existing sections
+      - No PR numbers in combined notes
+      - Maintain section order
+    </rules>
+  </example>
+</key_examples>

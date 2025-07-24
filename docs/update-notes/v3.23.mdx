@@ -42,6 +42,16 @@ We've added the ability to automatically reject unwanted commands in your workfl
 
 This gives you better control over command execution in automated workflows.
 
+## Roo Code Cloud Waitlist
+
+We're excited to announce early access signup for Roo Code Cloud! (thanks brunobergher!):
+
+- **Website Signup**: New call-to-action button in the website header for easy waitlist registration
+- **In-Extension Access**: Users with 3+ tasks will see waitlist signup options directly in the extension
+- **Early Access**: Be among the first to experience the power of Roo Code Cloud
+
+Join the waitlist today to get early access to cloud-powered features!
+
 ## Windows Support for Claude Code
 
 We've added native Windows support for the Claude Code provider (thanks SannidhyaSah, kwk9892!) ([#5615](https://github.com/RooCodeInc/Roo-Code/pull/5615)):
@@ -52,6 +62,8 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 
 ## QOL Improvements
 
+- **Smarter Command Validation**: Improved command validation logic that only auto-denies subshell commands if they contain denied prefixes, making the system more intelligent about which commands to allow
+- **Multi-line Command Support**: Commands with newlines are now properly parsed, making it easier to work with multi-line commands across different operating systems (Unix, Windows, and old Mac formats)
 - **Simplified Prompt History**: Navigate your prompt history using only the up and down arrow keys when the cursor is at the start of the input field ([#5467](https://github.com/RooCodeInc/Roo-Code/pull/5467))
 - **API Provider Search**: You can now search and filter the list of API providers in the settings (thanks GOODBOY008!) ([#5278](https://github.com/RooCodeInc/Roo-Code/pull/5278))
 <img src="/img/v3.23.0/v3.23.0-1.png" alt="API Provider Search interface showing search and filter functionality" width="400" />
@@ -107,6 +119,9 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 
 ## Bug Fixes
 
+- **Todo List Toggle**: Fixed the todo list toggle in provider advanced settings that wasn't working properly (thanks chrarnoldus!)
+- **Command Parsing**: Fixed crashes when running complex bash commands with special syntax like arithmetic expressions and array variables, allowing users to create advanced GitHub CLI aliases and other sophisticated shell scripts (thanks daniel-lxs, KJ7LNW!)
+- **Error Handling**: Added error boundaries to prevent the entire Roo Code interface from crashing when errors occur. Instead of seeing a blank screen, users now see helpful error messages with debugging information, allowing them to continue using other parts of the extension (thanks KJ7LNW, elianiva!)
 - **`apply_diff` Tool**: Fixed an issue where the `apply_diff` tool would hang indefinitely on an error (thanks lhish!) ([#5391](https://github.com/RooCodeInc/Roo-Code/pull/5391))
 - **Chat Focus**: Prevents the chat from losing focus during automated workflows, stopping user input from being accidentally redirected to files being edited by Roo (thanks ColbySerpa!) ([#5349](https://github.com/RooCodeInc/Roo-Code/pull/5349))
 - **Architect Mode File Restrictions**: Fixed an issue where Architect mode was not properly enforcing file restrictions (thanks shanemmattner!) ([#5447](https://github.com/RooCodeInc/Roo-Code/pull/5447))
@@ -167,6 +182,7 @@ We've added native Windows support for the Claude Code provider (thanks Sannidhy
 
 ## Misc Improvements
 
+- **Process Termination**: Roo Code now more reliably terminates unresponsive processes, preventing hanging commands from blocking your workflow
 - **Code Indexing**: Added memory-safe batch limiting to prevent overflow when scanning large codebases (thanks daniel-lxs!)
 - **API Rate Limiting**: Implemented global rate limiting with exponential backoff for OpenAI-compatible embeddings, preventing API overload and improving reliability (thanks daniel-lxs!)
 - **Release Engineering**: Enhanced release notes generation to include issue numbers and reporters for better attribution (thanks roomote!)

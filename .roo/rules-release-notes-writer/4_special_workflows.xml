@@ -1,0 +1,184 @@
+<special_workflows>
+  <overview>
+    Specialized workflows for Discord formatting, version-only requests, and auto-detection of missing versions.
+  </overview>
+
+  <discord_workflow>
+    <trigger_patterns>
+      <pattern>Discord release notes for X.Y.Z</pattern>
+      <pattern>Discord announcement for X.Y.Z, A.B.C</pattern>
+      <pattern>Generate Discord format for vX.Y.Z</pattern>
+    </trigger_patterns>
+
+    <workflow>
+      <step number="1">
+        <action>Parse version numbers</action>
+        <details>Support single or multiple versions, with or without 'v' prefix</details>
+      </step>
+      
+      <step number="2">
+        <action>Verify release files exist</action>
+        <error_handling>
+          If missing, offer to:
+          - Process existing versions only
+          - Create missing release notes first
+          - Cancel request
+        </error_handling>
+      </step>
+      
+      <step number="3">
+        <action>Apply Discord transformations</action>
+        <transformations>
+          <transform>Remove all PR links and numbers (#XXXX)</transform>
+          <transform>Convert /path to https://docs.roocode.com/path</transform>
+          <transform>Preserve structure and contributor acknowledgments</transform>
+          <transform>Add footer: [Full X.Y.Z Release Notes](link)</transform>
+        </transformations>
+        <compression optional="true">
+          <format><![CDATA[
+## :wrench: [Other Improvements and Fixes](link)
+This release includes X other fixes covering [areas]. Thanks to contributors: [list].
+          ]]></format>
+        </compression>
+      </step>
+      
+      <step number="4">
+        <action>Handle multiple versions</action>
+        <options>
+          <option>Separate sections per version</option>
+          <option>Combined format with version indicators (vX.Y.Z)</option>
+          <option>Auto-combine consecutive patches</option>
+        </options>
+      </step>
+      
+      <step number="5">
+        <action>Output formatted text</action>
+        <note>No files created, only display for copying</note>
+        <warning>Alert if exceeds Discord's 2000 character limit</warning>
+      </step>
+    </workflow>
+  </discord_workflow>
+
+  <version_only_workflow>
+    <trigger_patterns>
+      <pattern>^v?[\d.]+$</pattern>
+      <examples>3.23.14, v3.23.14</examples>
+    </trigger_patterns>
+
+    <workflow>
+      <step number="1">
+        <action>Spawn PR extraction subtask</action>
+        <subtask_message>
+          Extract PRs for version [VERSION].
+          1. Find previous version
+          2. Get date range from tags
+          3. Search merged PRs
+          4. Write to temp_pr_list.md
+        </subtask_message>
+      </step>
+      
+      <step number="2">
+        <action>Read PR list and present options</action>
+        <options>
+          <suggest>Create full release notes with all PRs</suggest>
+          <suggest>Show me the PR list first</suggest>
+          <suggest>Let me specify which PRs to include</suggest>
+          <suggest>Cancel - I just needed the PR list</suggest>
+        </options>
+      </step>
+      
+      <step number="3">
+        <action>Process based on user choice</action>
+        <branches>
+          <branch>Full notes: Continue standard workflow</branch>
+          <branch>Show list: Display and ask again</branch>
+          <branch>Select PRs: Accept list and filter</branch>
+          <branch>Cancel: Complete without creating notes</branch>
+        </branches>
+      </step>
+    </workflow>
+  </version_only_workflow>
+
+  <latest_workflow>
+    <trigger_patterns>
+      <pattern>latest</pattern>
+      <pattern>create release notes for latest</pattern>
+    </trigger_patterns>
+
+    <workflow>
+      <step number="1">
+        <action>Find most recent release notes</action>
+        <tool>list_files in docs/update-notes</tool>
+        <extract>Highest version number</extract>
+      </step>
+      
+      <step number="2">
+        <action>Locate and parse changelog</action>
+        <locations>
+          <try>CHANGELOG.md</try>
+          <try>changelog.md</try>
+          <try>docs/CHANGELOG.md</try>
+        </locations>
+        <fallback>
+          Ask user for location or use GitHub releases
+        </fallback>
+      </step>
+      
+      <step number="3">
+        <action>Identify missing versions</action>
+        <logic>
+          Compare changelog versions with existing release notes
+          Filter to versions newer than last documented
+        </logic>
+      </step>
+      
+      <step number="4">
+        <action>Confirm with user</action>
+        <options>
+          <suggest>All missing versions ([list])</suggest>
+          <suggest>Just the most recent version</suggest>
+          <suggest>Let me select specific versions</suggest>
+          <suggest>Show changelog entries first</suggest>
+        </options>
+      </step>
+      
+      <step number="5">
+        <action>Process selected versions</action>
+        <order>Oldest to newest</order>
+        <optimization>Update combined notes once at end</optimization>
+      </step>
+    </workflow>
+  </latest_workflow>
+
+  <pr_extraction_subtask>
+    <trigger>Extract PRs for version X.Y.Z</trigger>
+    <simplified_workflow>
+      <step>Parse version, find previous version</step>
+      <step>Get date range: gh api for tag dates</step>
+      <step>Search PRs: gh pr list --search "merged:DATE1..DATE2"</step>
+      <step>Format and write to temp_pr_list.md</step>
+      <step>Report completion</step>
+    </simplified_workflow>
+    <output_format><![CDATA[
+# PRs for Release v[VERSION]
+**Date Range**: [START] to [END]
+**Previous Version**: v[PREV]
+**Total PRs**: [COUNT]
+
+## PR List
+- #1234: Title
+- #1235: Title
+...
+    ]]></output_format>
+  </pr_extraction_subtask>
+
+  <changelog_cross_reference>
+    <when>After generating notes, before PR creation</when>
+    <workflow>
+      <step>Check if changelog has entry for version</step>
+      <step>Compare items (in changelog but not notes, vice versa)</step>
+      <step>Present analysis with "No changes needed" as first option</step>
+      <step>Apply user's choice if changes requested</step>
+    </workflow>
+  </changelog_cross_reference>
+</special_workflows>

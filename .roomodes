@@ -1,15 +1,4 @@
 customModes:
-  - slug: release-notes-writer
-    name: Release Notes Writer
-    roleDefinition: "You are a technical writer for Roo Code release notes. Your job is to: - Automate release note creation. - Fetch and analyze GitHub pull requests. - Convert technical changes into user benefits. - Ensure updates align with documentation standards. - Update all required documentation files in the docs/update-notes directory."
-    whenToUse: Use this mode to create release notes for a new Roo Code version. It automates the full workflow from fetching PRs to updating documentation. Provide a version number to start. You can also use this mode to quickly generate Discord-formatted announcements from existing release notes by saying "Discord release notes for X.Y.Z".
-    groups:
-      - read
-      - command
-      - - edit
-        - fileRegex: (docs/update-notes/.*\.(md|mdx)$|sidebars\.ts$)
-    description: Release notes files and sidebar configuration
-    source: project
   - slug: documentation-writer
     name: 📝 Documentation Writer
     roleDefinition: You are a technical documentation writer for the Roo Code project. Your writing is direct, concise, and technical. You write for a developer audience and follow the instructions in the .roo/rules-docs/ directory to produce clear, high-signal Markdown documentation.
@@ -50,4 +39,15 @@ customModes:
           description: Mode configuration files and XML instructions
       - command
       - mcp
+    source: project
+  - slug: release-notes-writer
+    name: Release Notes Writer
+    roleDefinition: "You are a technical writer for Roo Code release notes. Your job is to: - Automate release note creation. - Fetch and analyze GitHub pull requests. - Convert technical changes into user benefits. - Ensure updates align with documentation standards. - Update all required documentation files in the docs/update-notes directory."
+    whenToUse: Use this mode to create release notes for a new Roo Code version. It automates the full workflow from fetching PRs to updating documentation. Provide a version number to start. You can also use this mode to quickly generate Discord-formatted announcements from existing release notes by saying "Discord release notes for X.Y.Z".
+    description: Release notes files and sidebar configuration
+    groups:
+      - read
+      - command
+      - - edit
+        - fileRegex: (docs/update-notes/.*\.(md|mdx)$|sidebars\.ts$)
     source: project

@@ -1,0 +1,131 @@
+<tool_usage_guide>
+  <overview>
+    Essential tool usage patterns for the release notes workflow.
+  </overview>
+
+  <tool_priorities>
+    <priority level="1">
+      <tool>list_files</tool>
+      <use>Find previous versions, check file existence</use>
+    </priority>
+    <priority level="2">
+      <tool>execute_command (gh cli)</tool>
+      <use>Fetch GitHub data (tags, PRs, issues)</use>
+    </priority>
+    <priority level="3">
+      <tool>new_task</tool>
+      <use>Create subtasks for PR investigation</use>
+    </priority>
+    <priority level="4">
+      <tool>write_to_file / apply_diff</tool>
+      <use>Create and update documentation</use>
+    </priority>
+  </tool_priorities>
+
+  <github_cli_commands>
+    <command name="get_tag_date">
+      <purpose>Get release date for a version tag</purpose>
+      <syntax><![CDATA[
+gh api repos/RooCodeInc/Roo-Code/git/refs/tags/vX.Y.Z --jq '.object.sha' | xargs -I {} gh api repos/RooCodeInc/Roo-Code/git/commits/{} --jq '.committer.date'
+      ]]></syntax>
+    </command>
+    
+    <command name="search_prs">
+      <purpose>Find merged PRs in date range</purpose>
+      <syntax><![CDATA[
+gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:YYYY-MM-DD..YYYY-MM-DD" --json number,title,author,mergedAt --limit 1000
+      ]]></syntax>
+    </command>
+    
+    <command name="get_pr_details">
+      <purpose>Get PR details including linked issues</purpose>
+      <syntax><![CDATA[
+gh pr view NUMBER --repo RooCodeInc/Roo-Code --json number,title,author,body,mergedAt,files
+      ]]></syntax>
+    </command>
+    
+    <command name="get_issue_details">
+      <purpose>Get issue reporter for acknowledgment</purpose>
+      <syntax><![CDATA[
+gh issue view NUMBER --repo RooCodeInc/Roo-Code --json number,title,author,body
+      ]]></syntax>
+    </command>
+  </github_cli_commands>
+
+  <subtask_patterns>
+    <pattern name="pr_investigation">
+      <trigger>new_task with mode="release-notes-writer"</trigger>
+      <message_template><![CDATA[
+Investigate PR #[number] for release notes v[version].
+
+Task:
+1. Get PR details with gh pr view
+2. Extract linked issues from PR description
+3. Get details for linked issues with gh issue view
+4. Analyze and categorize the change
+5. Append findings to temp_pr_analysis.md using insert_content line 0
+
+CRITICAL: The temp file already exists. Only append, never overwrite.
+      ]]></message_template>
+    </pattern>
+    
+    <pattern name="discord_formatting">
+      <trigger>When user requests Discord format</trigger>
+      <message_template><![CDATA[
+Generate Discord-formatted release notes for version X.Y.Z.
+
+Requirements:
+1. Strip all PR links and numbers
+2. Convert internal links to full URLs
+3. Handle compression if requested
+4. Add footer link
+5. Write to temp_discord_release_notes.md
+      ]]></message_template>
+    </pattern>
+  </subtask_patterns>
+
+  <file_operations>
+    <operation name="create_release_notes">
+      <tool>write_to_file</tool>
+      <path>docs/update-notes/vX.Y.Z.mdx</path>
+      <includes>Frontmatter, title with date, content sections</includes>
+    </operation>
+    
+    <operation name="update_index">
+      <tool>apply_diff</tool>
+      <path>docs/update-notes/index.md</path>
+      <action>Add new version to chronological list</action>
+    </operation>
+    
+    <operation name="update_sidebar">
+      <tool>apply_diff</tool>
+      <path>sidebars.ts</path>
+      <action>Add 'update-notes/vX.Y.Z' to Update Notes section</action>
+    </operation>
+    
+    <operation name="update_combined_notes">
+      <tool>apply_diff</tool>
+      <path>docs/update-notes/vX.Y.mdx</path>
+      <action>Merge patch changes into minor/major release file</action>
+      <rules>
+        - Strip PR links
+        - Add to existing sections
+        - Maintain chronological order
+      </rules>
+    </operation>
+  </file_operations>
+
+  <critical_patterns>
+    <pattern name="temp_file_handling">
+      <rule>Parent creates temp files with write_to_file</rule>
+      <rule>Subtasks append with insert_content line 0</rule>
+      <rule>Never use write_to_file in subtasks for temp files</rule>
+    </pattern>
+    
+    <pattern name="todo_tracking">
+      <rule>Create comprehensive todo at workflow start</rule>
+      <rule>Update after each major phase</rule>
+      <rule>Mark complete only when verified</rule>
+    </pattern>
+  </critical_patterns>
+</tool_usage_guide>
