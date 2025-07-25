@@ -41,6 +41,19 @@ The chat interface consists of the following main elements:
 
 ---
 
+## Tip: Using the Secondary Sidebar
+
+For a better workflow, you can drag Roo Code to VS Code's [Secondary Sidebar](https://code.visualstudio.com/api/ux-guidelines/sidebars#secondary-sidebar). This allows you to keep Roo Code visible while still having access to the Explorer, Search, Source Control, and other panels in the primary sidebar.
+
+To set this up:
+1. Click and drag the Roo Code icon from the Activity Bar
+2. Drop it on the right side of your editor to create a secondary sidebar
+3. Now you can use both sidebars simultaneously!
+
+For more productivity tips, check out our [Tips & Tricks](/tips-and-tricks) guide.
+
+---
+
 ## Interacting with Messages
 
 * **Clickable Links:** File paths, URLs, and other mentions in the chat history are clickable.  Clicking a file path will open the file in the editor.  Clicking a URL will open it in your default browser.
