@@ -1,5 +1,5 @@
 ---
-description: Explore additional Roo Code features including suggested responses for faster interaction, text-to-speech capabilities, and support for 17 languages.
+description: Explore additional Roo Code features including suggested responses for faster interaction, text-to-speech capabilities, and support for 18 languages.
 keywords:
   - additional features
   - suggested responses
@@ -37,8 +37,9 @@ To use Text-to-Speech, simply enable it in the Roo Code settings. Once enabled, 
 
 ## Global Language Support
 
-Roo Code supports 17 languages, making it accessible to a wider range of users globally. You can now use Roo Code in:
+Roo Code supports 18 languages, making it accessible to a wider range of users globally. You can now use Roo Code in:
 
+- English
 - Simplified Chinese
 - Traditional Chinese
 - Spanish
