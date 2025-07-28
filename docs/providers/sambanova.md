@@ -26,7 +26,7 @@ SambaNova specializes in providing high-speed inference for large language model
 
 ## Getting an API Key
 
-To use SambaNova with Roo Code, you'll need an API key from the [SambaCloud](http://cloud.sambanova.ai?utm_source=roocode&utm_medium=external&utm_campaign=cloud_signup). Signing up and navigate to the API Keys section in the left panel to create and copy your SambaCloud API key.
+To use SambaNova with Roo Code, you'll need an API key from the [SambaCloud](https://cloud.sambanova.ai?utm_source=roocode&utm_medium=external&utm_campaign=cloud_signup). After signing up, navigate to the API Keys section in the left panel to create and copy your SambaCloud API key.
 
 ---
 
