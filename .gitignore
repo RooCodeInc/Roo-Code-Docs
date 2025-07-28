@@ -9,7 +9,6 @@
 .cache-loader
 *.js
 !src/**/*.js
-!plugins/**/*.js
 
 # Misc
 .DS_Store

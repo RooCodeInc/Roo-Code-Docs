@@ -6,7 +6,6 @@
     "docusaurus": "docusaurus",
     "start": "node -r dotenv/config node_modules/.bin/docusaurus start",
     "build": "node -r dotenv/config node_modules/.bin/docusaurus build",
-    "build:quiet": "NODE_OPTIONS='--no-warnings' node -r dotenv/config node_modules/.bin/docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
