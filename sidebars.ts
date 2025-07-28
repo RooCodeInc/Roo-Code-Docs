@@ -169,6 +169,7 @@ const sidebars: SidebarsConfig = {
         'providers/openai-compatible',
         'providers/openrouter',
         'providers/requesty',
+        'providers/sambanova',
         'providers/unbound',
         'providers/vertex',
         'providers/vscode-lm',
