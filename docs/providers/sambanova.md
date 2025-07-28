@@ -18,7 +18,7 @@ image: /img/social-share.jpg
 
 # Using SambaNova With Roo Code
 
-SambaNova specializes in providing high-speed inference for large language models, utilizing their Reconfigurable Dataflow Units (RDUs) through their SambaCloud portal. This increasing response times for supported models.
+SambaNova specializes in providing high-speed inference for large language models, utilizing their Reconfigurable Dataflow Units (RDUs) through their SambaCloud portal. This delivers fast response times for supported models.
 
 **Website:** [https://cloud.sambanova.ai/](https://cloud.sambanova.ai/)
 
