@@ -160,6 +160,7 @@ const sidebars: SidebarsConfig = {
         'providers/gemini',
         'providers/glama',
         'providers/groq',
+        'providers/huggingface',
         'providers/human-relay',
         'providers/lmstudio',
         'providers/litellm',
