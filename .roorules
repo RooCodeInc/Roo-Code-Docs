@@ -10,9 +10,12 @@ This ensures links work correctly in the built documentation while maintaining c
 ## Context7 MCP
 When making structural or formatting changes beyond simple .md or .mdx files, always check the Context7 MCP, the `context7CompatibleLibraryID` will be `/facebook/docusaurus`
 
-## Release Notes
-Never Thank cte, hannesrudolph, jr, roomote, dleffel or mrubens in release notes
+## Release Notes "thank you"
+Remove thank yous for daniel-lxs, cte, hannesrudolph, jr, roomote, app/roomote, dleffel or mrubens in release notes
 
 
 ## Misc
 When moving a section, make sure to add the forwarding link in docusaurus.config.ts
+
+## Image Tag Format
+example: `<img src="<PATH>" alt="<ALT>" width="<WIDTH>" />`
