@@ -14,9 +14,13 @@
     </priority>
     <priority level="3">
       <tool>new_task</tool>
-      <use>Create subtasks for PR investigation</use>
+      <use>Create subtasks for PR investigation and documentation updates</use>
     </priority>
     <priority level="4">
+      <tool>ask_followup_question</tool>
+      <use>Confirm features and get user approval at key points</use>
+    </priority>
+    <priority level="5">
       <tool>write_to_file / apply_diff</tool>
       <use>Create and update documentation</use>
     </priority>
@@ -63,9 +67,35 @@ Task:
 2. Extract linked issues from PR description
 3. Get details for linked issues with gh issue view
 4. Analyze and categorize the change
-5. Append findings to temp_pr_analysis.md using insert_content line 0
+5. Identify documentation needs:
+   - docs-new: Completely new features
+   - docs-update: Changed behavior
+   - docs-example: New usage patterns
+   - docs-migration: Breaking changes
+6. Append findings to temp_pr_analysis.md using insert_content line 0
 
 CRITICAL: The temp file already exists. Only append, never overwrite.
+      ]]></message_template>
+    </pattern>
+    
+    <pattern name="documentation_update">
+      <trigger>After release notes completion, if doc flags exist</trigger>
+      <message_template><![CDATA[
+Update documentation for Roo Code v[VERSION] release.
+
+Based on the release notes, the following documentation updates are needed:
+
+[DOCUMENTATION_UPDATES_SECTION]
+
+Release notes reference: /update-notes/v[VERSION]
+
+Please:
+1. Review each flagged item
+2. Create or update the appropriate documentation pages
+3. Add examples where indicated
+4. Ensure all new features are properly documented
+5. Update any changed behaviors or deprecated features
+6. Add cross-references between related documentation
       ]]></message_template>
     </pattern>
     
@@ -107,10 +137,12 @@ Requirements:
       <tool>apply_diff</tool>
       <path>docs/update-notes/vX.Y.mdx</path>
       <action>Merge patch changes into minor/major release file</action>
+      <prerequisite>User must confirm patch notes are final</prerequisite>
       <rules>
         - Strip PR links
         - Add to existing sections
         - Maintain chronological order
+        - QOL Improvements before Bug Fixes
       </rules>
     </operation>
   </file_operations>

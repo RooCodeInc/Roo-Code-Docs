@@ -3,6 +3,15 @@
     This guide defines the writing style for Roo Code documentation. The style is direct, concise, and technical. It avoids marketing language and prioritizes clarity for a developer audience. All output must be in markdown.
   </overview>
 
+  <discovery_principle>
+    <rule>Before writing or editing documentation, always explore existing documentation to understand established patterns, style, and structure.</rule>
+    <steps>
+      <step>Use list_files to explore the documentation structure</step>
+      <step>Read similar existing documents to understand the style</step>
+      <step>Follow established patterns rather than imposing new ones</step>
+    </steps>
+  </discovery_principle>
+
   <core_principles>
     <principle name="directness">
       <rule>Start with the most important information. No filler introductions.</rule>
@@ -17,11 +26,17 @@
     </principle>
     <principle name="consistency">
       <rule>When editing a document, use its existing style, structure, and format as a guideline for any updates. Do not make major changes unless explicitly asked.</rule>
+      <discovery_approach>
+        <step>Read the entire document first to understand its current style</step>
+        <step>Identify patterns in headings, formatting, and tone</step>
+        <step>Match the existing style in your edits</step>
+      </discovery_approach>
     </principle>
   </core_principles>
 
   <banned_language>
     <description>Avoid marketing jargon, buzzwords, and clichés. These words are ambiguous and reduce signal.</description>
+    <discovery_note>When editing existing documentation, check if any of these words are already used and maintain consistency with the existing approach.</discovery_note>
     <words>
       <word>seamlessly</word>
       <word>comprehensive</word>
@@ -42,5 +57,21 @@
     <guideline>Use structured headings, lists, and short paragraphs for scannability.</guideline>
     <guideline>Provide clear, copy-pasteable code snippets.</guideline>
     <guideline>Assume user familiarity with basic concepts. Do not over-explain.</guideline>
+    <discovery_approach>
+      <step>Before formatting new content, examine existing documentation for:
+        - Heading hierarchy patterns (H1, H2, H3 usage)
+        - List formatting preferences (bullets vs numbers)
+        - Code block styling and language tags
+        - Paragraph length and structure
+      </step>
+      <step>Match the discovered patterns to maintain consistency</step>
+    </discovery_approach>
   </formatting>
+
+  <before_writing_checklist>
+    <item>Have I explored the existing documentation structure?</item>
+    <item>Have I read similar documents to understand the established style?</item>
+    <item>Have I identified the patterns for paths, links, and references?</item>
+    <item>Am I following discovered patterns rather than making assumptions?</item>
+  </before_writing_checklist>
 </writing_style_guide>

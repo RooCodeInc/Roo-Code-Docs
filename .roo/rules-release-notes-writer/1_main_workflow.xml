@@ -95,7 +95,14 @@
           2. Extract linked issues
           3. Get issue details
           4. Categorize change
-          5. Append to temp_pr_analysis.md using insert_content line 0
+          5. Identify documentation needs (new features, behavior changes, deprecations)
+          6. Append to temp_pr_analysis.md using insert_content line 0
+          
+          Include documentation flags:
+          - docs-new: Completely new feature
+          - docs-update: Existing docs need updating
+          - docs-example: New examples needed
+          - docs-migration: Breaking changes
           
           CRITICAL: Never create/overwrite files, only append.
         </message>
@@ -105,21 +112,45 @@
     <phase name="compilation">
       <step number="1">
         <action>Read and organize PR findings</action>
-        <categories>Bug Fixes, Features, QOL Improvements, Provider Updates</categories>
+        <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
+        <note>QOL Improvements must come before Bug Fixes</note>
       </step>
       
       <step number="2">
-        <action>Create release notes file</action>
-        <format>docs/update-notes/vX.Y.Z.mdx</format>
+        <action>Confirm feature highlighting with user</action>
+        <details>See user_confirmation_workflow for detailed process</details>
+        <critical>Must get explicit confirmation before writing notes</critical>
       </step>
       
       <step number="3">
+        <action>Create release notes file</action>
+        <format>docs/update-notes/vX.Y.Z.mdx</format>
+        <includes>
+          - Proper documentation links for features
+          - See documentation_handling for link patterns
+        </includes>
+      </step>
+      
+      <step number="4">
+        <action>For patch releases: Get user confirmation</action>
+        <critical>
+          Do NOT update combined notes until user confirms patch notes are final
+        </critical>
+      </step>
+      
+      <step number="5">
         <action>Update documentation indexes</action>
         <files>
           - index.md (chronological list)
           - sidebars.ts (navigation)
-          - Combined notes for patch releases
+          - Combined notes for patch releases (ONLY after confirmation)
         </files>
+      </step>
+      
+      <step number="6">
+        <action>Create documentation update task</action>
+        <when>If any documentation flags were identified</when>
+        <tool>new_task with mode="documentation-writer"</tool>
       </step>
     </phase>
 

@@ -9,15 +9,19 @@
       1. Find previous version (3.20.2)
       2. Get release dates from GitHub tags
       3. Search for merged PRs between dates
-      4. Create subtasks to investigate each PR
-      5. Compile findings into release notes
-      6. Update all documentation files
-      7. Ask user to review and create PR
+      4. Create subtasks to investigate each PR (including doc needs)
+      5. Ask user which features to highlight
+      6. Compile findings into release notes (QOL before Bugs)
+      7. For patch: Get user confirmation before updating combined notes
+      8. Update all documentation files
+      9. Create documentation update task if needed
+      10. Ask user to review and create PR
     </workflow>
     <key_points>
-      - Standard full workflow
-      - Uses GitHub API for PR discovery
-      - Creates all documentation updates
+      - Includes documentation identification
+      - User confirmation at key points
+      - QOL Improvements before Bug Fixes
+      - Documentation task creation
     </key_points>
   </example>
 
@@ -106,7 +110,8 @@ PRs: #1234, #1235, #1236</user_request>
       2. Find linked issue: "Fixes #987"
       3. Get issue details: gh issue view 987
       4. Categorize: Bug Fix
-      5. Write to temp_pr_analysis.md:
+      5. Analyze documentation needs
+      6. Write to temp_pr_analysis.md:
     </workflow>
     <output><![CDATA[
 ## PR #1234: Fix context condensing
@@ -116,9 +121,124 @@ PRs: #1234, #1235, #1236</user_request>
 **Category**: Bug Fix
 **User Impact**: Fixed errors when processing large files
 **Contributors**: john-doe, bug-finder
+**Documentation Needs**: none
+**Documentation Notes**: Bug fix only, no doc changes needed
 
 ---
     ]]></output>
+  </example>
+
+  <example name="feature_pr_with_docs">
+    <subtask_message>Investigate PR #1235 for release notes v3.20.3</subtask_message>
+    <output><![CDATA[
+## PR #1235: Add new MCP server support
+
+**Author**: feature-dev
+**Linked Issues**: #990 (reporter: feature-requester)
+**Category**: Major Feature
+**User Impact**: Enables integration with custom MCP servers for extended functionality
+**Contributors**: feature-dev, feature-requester
+**Documentation Needs**: docs-new, docs-example
+**Documentation Notes**: Need new page at /docs/features/mcp/custom-servers with setup guide and examples
+
+---
+    ]]></output>
+  </example>
+
+  <example name="user_confirmation_flow">
+    <scenario>After PR analysis, before writing notes</scenario>
+    <interaction><![CDATA[
+<ask_followup_question>
+<question>I've analyzed all PRs for v3.20.3. Here are the changes I found:
+
+**Major Features:**
+- MCP Server Support: Enables custom MCP server integration
+- Fast Edit Mode: New editing mode for quick changes
+
+**Bug Fixes:** 5 fixes
+- Context condensing errors with large files
+- Terminal output streaming issues
+- File path resolution on Windows
+
+**QOL Improvements:** 3 improvements
+- Improved error messages for API failures
+- Added keyboard shortcuts for common actions
+- Better progress indicators during long operations
+
+**Other Changes:** 2 items
+
+Which features should I highlight with expanded sections in the release notes?</question>
+<follow_up>
+<suggest>Highlight all major features as listed above</suggest>
+<suggest>Focus on MCP Server Support and Fast Edit Mode</suggest>
+<suggest>Keep all changes in grouped sections (no expanded features)</suggest>
+<suggest>Let me specify which features to expand</suggest>
+</follow_up>
+</ask_followup_question>
+    ]]></interaction>
+  </example>
+
+  <example name="patch_confirmation_flow">
+    <scenario>After creating patch notes, before updating combined</scenario>
+    <interaction><![CDATA[
+<ask_followup_question>
+<question>I've created the release notes for v3.20.3. The file includes:
+
+- 5 bug fixes
+- 3 QOL improvements
+- 2 other changes
+
+Would you like to:
+1. Review the release notes before I update the combined v3.20 notes?
+2. Make any adjustments to the content or ordering?
+3. Proceed with updating all documentation files?</question>
+<follow_up>
+<suggest>Show me the release notes file for review</suggest>
+<suggest>The content looks good, proceed with all updates</suggest>
+<suggest>Let me make some adjustments first</suggest>
+<suggest>Change the emphasis on certain features</suggest>
+</follow_up>
+</ask_followup_question>
+    ]]></interaction>
+  </example>
+
+  <example name="documentation_task_creation">
+    <scenario>After completing release notes with doc needs</scenario>
+    <task_creation><![CDATA[
+<new_task>
+<mode>documentation-writer</mode>
+<message>
+Update documentation for Roo Code v3.20.3 release.
+
+Based on the release notes, the following documentation updates are needed:
+
+### New Documentation Required
+- **MCP Server Support**: Custom MCP server integration (docs-new)
+  - Suggested location: /docs/features/mcp/custom-servers
+  - Key points to cover: Setup, configuration, examples
+
+### Updates to Existing Documentation
+- **Fast Edit Mode**: Update editing modes documentation (docs-update)
+  - Current location: /docs/features/modes
+  - Changes needed: Add fast edit mode section
+
+### Examples to Add
+- **MCP Server Examples**: Integration examples (docs-example)
+  - Target page: /docs/features/mcp/custom-servers
+  - Use case: Common server configurations
+
+Release notes reference: /update-notes/v3.20.3
+
+Please:
+1. Review each flagged item
+2. Create or update the appropriate documentation pages
+3. Add examples where indicated
+4. Ensure all new features are properly documented
+5. Update any changed behaviors or deprecated features
+6. Add cross-references between related documentation
+</message>
+</new_task>
+    ]]></task_creation>
   </example>
 
   <example name="combined_notes_update">

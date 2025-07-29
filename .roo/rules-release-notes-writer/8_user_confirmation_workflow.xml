@@ -1,0 +1,207 @@
+<user_confirmation_workflow>
+  <overview>
+    Workflow for obtaining user confirmation at critical points, especially for
+    patch releases and feature highlighting, to prevent repeated edits.
+  </overview>
+
+  <confirmation_points>
+    <point name="post_research_features">
+      <when>After PR analysis is complete, before writing release notes</when>
+      <purpose>Verify which features to highlight and their priority</purpose>
+      <workflow>
+        <step number="1">
+          <action>Analyze all PRs and categorize changes</action>
+          <output>Comprehensive list of all changes by category</output>
+        </step>
+        
+        <step number="2">
+          <action>Present findings and ask for feature priorities</action>
+          <tool>ask_followup_question</tool>
+          <template><![CDATA[
+<ask_followup_question>
+<question>I've analyzed all PRs for v[VERSION]. Here are the changes I found:
+
+**Major Features:**
+[List major features with brief descriptions]
+
+**Bug Fixes:** [COUNT] fixes
+[List significant bug fixes]
+
+**QOL Improvements:** [COUNT] improvements
+[List notable QOL changes]
+
+**Other Changes:** [COUNT] items
+
+Which features should I highlight with expanded sections in the release notes?</question>
+<follow_up>
+<suggest>Highlight all major features as listed above</suggest>
+<suggest>Focus on [specific feature 1] and [specific feature 2]</suggest>
+<suggest>Keep all changes in grouped sections (no expanded features)</suggest>
+<suggest>Let me specify which features to expand</suggest>
+</follow_up>
+</ask_followup_question>
+          ]]></template>
+        </step>
+        
+        <step number="3">
+          <action>Continue asking until clear confirmation</action>
+          <loop_until>User provides explicit feature selection</loop_until>
+        </step>
+      </workflow>
+    </point>
+
+    <point name="patch_release_review">
+      <when>After creating patch release notes, before updating combined notes</when>
+      <purpose>Ensure patch notes are finalized before propagating changes</purpose>
+      <workflow>
+        <step number="1">
+          <action>Complete patch release notes file</action>
+          <files>docs/update-notes/vX.Y.Z.mdx</files>
+        </step>
+        
+        <step number="2">
+          <action>Present for review</action>
+          <tool>ask_followup_question</tool>
+          <template><![CDATA[
+<ask_followup_question>
+<question>I've created the release notes for v[VERSION]. The file includes:
+
+- [COUNT] bug fixes
+- [COUNT] QOL improvements  
+- [COUNT] other changes
+
+Would you like to:
+1. Review the release notes before I update the combined v[X.Y] notes?
+2. Make any adjustments to the content or ordering?
+3. Proceed with updating all documentation files?</question>
+<follow_up>
+<suggest>Show me the release notes file for review</suggest>
+<suggest>The content looks good, proceed with all updates</suggest>
+<suggest>Let me make some adjustments first</suggest>
+<suggest>Change the emphasis on certain features</suggest>
+</follow_up>
+</ask_followup_question>
+          ]]></template>
+        </step>
+        
+        <step number="3">
+          <action>Handle review feedback</action>
+          <options>
+            <option name="show_file">
+              <action>Display release notes content</action>
+              <next>Ask for specific changes</next>
+            </option>
+            <option name="make_adjustments">
+              <action>Apply requested changes</action>
+              <next>Ask for confirmation again</next>
+            </option>
+            <option name="proceed">
+              <action>Update combined notes and indexes</action>
+              <next>Complete workflow</next>
+            </option>
+          </options>
+        </step>
+        
+        <step number="4">
+          <action>Repeat confirmation after each adjustment</action>
+          <critical>
+            NEVER update combined notes until user explicitly confirms
+            the patch release notes are final
+          </critical>
+        </step>
+      </workflow>
+    </point>
+
+    <point name="combined_notes_update">
+      <when>Only after patch notes are confirmed final</when>
+      <purpose>Prevent repeated edits to both patch and combined files</purpose>
+      <workflow>
+        <step number="1">
+          <action>Read confirmed patch notes</action>
+        </step>
+        
+        <step number="2">
+          <action>Update combined vX.Y.mdx file</action>
+          <rules>
+            <rule>Strip PR numbers and links</rule>
+            <rule>Merge into existing sections</rule>
+            <rule>Maintain chronological order</rule>
+          </rules>
+        </step>
+        
+        <step number="3">
+          <action>Update all indexes and sidebars</action>
+        </step>
+        
+        <step number="4">
+          <action>Final confirmation</action>
+          <template><![CDATA[
+<ask_followup_question>
+<question>I've completed all updates for v[VERSION]:
+
+✓ Patch release notes created
+✓ Combined v[X.Y] notes updated
+✓ Index and sidebar updated
+✓ Documentation tasks identified: [COUNT]
+
+Would you like to create a PR or make any final adjustments?</question>
+<follow_up>
+<suggest>Create a PR with all changes</suggest>
+<suggest>Create documentation update task first</suggest>
+<suggest>Show me all modified files</suggest>
+<suggest>Make additional adjustments</suggest>
+</follow_up>
+</ask_followup_question>
+          ]]></template>
+        </step>
+      </workflow>
+    </point>
+  </confirmation_points>
+
+  <adjustment_handling>
+    <principle>
+      Each adjustment request triggers a new confirmation cycle
+    </principle>
+    
+    <workflow>
+      <step>User requests change</step>
+      <step>Apply specific change only</step>
+      <step>Show result of change</step>
+      <step>Ask for confirmation before proceeding</step>
+      <step>Only move to next phase after explicit approval</step>
+    </workflow>
+    
+    <common_adjustments>
+      <adjustment type="reorder_sections">
+        <action>Move sections without changing content</action>
+      </adjustment>
+      <adjustment type="change_emphasis">
+        <action>Convert between expanded and grouped format</action>
+      </adjustment>
+      <adjustment type="edit_descriptions">
+        <action>Modify feature descriptions or benefits</action>
+      </adjustment>
+      <adjustment type="add_missing_item">
+        <action>Include additional PR or feature</action>
+      </adjustment>
+    </common_adjustments>
+  </adjustment_handling>
+
+  <confirmation_best_practices>
+    <practice priority="critical">
+      Never assume approval - require explicit confirmation
+    </practice>
+    <practice priority="high">
+      Show concrete examples in confirmation questions
+    </practice>
+    <practice priority="high">
+      Provide clear options that cover common scenarios
+    </practice>
+    <practice priority="medium">
+      Keep confirmation cycles focused on specific decisions
+    </practice>
+    <practice priority="medium">
+      Track confirmation state to avoid re-asking
+    </practice>
+  </confirmation_best_practices>
+</user_confirmation_workflow>

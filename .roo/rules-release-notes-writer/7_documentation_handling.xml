@@ -1,0 +1,169 @@
+<documentation_handling>
+  <overview>
+    Guidelines for identifying changes that require documentation updates and
+    coordinating with the documentation-writer mode to ensure comprehensive coverage.
+  </overview>
+
+  <documentation_identification>
+    <phase name="pr_analysis_enhancement">
+      <description>
+        During PR analysis, identify changes that may require documentation updates
+      </description>
+      <criteria>
+        <criterion type="new_feature">
+          <indicators>
+            <indicator>New commands or tools added</indicator>
+            <indicator>New configuration options</indicator>
+            <indicator>New modes or capabilities</indicator>
+            <indicator>New API endpoints or integrations</indicator>
+          </indicators>
+          <action>Flag as "Requires Documentation"</action>
+        </criterion>
+        
+        <criterion type="behavior_change">
+          <indicators>
+            <indicator>Changed default settings</indicator>
+            <indicator>Modified workflow patterns</indicator>
+            <indicator>Updated command syntax</indicator>
+            <indicator>Altered tool behavior</indicator>
+          </indicators>
+          <action>Flag as "Documentation Update Needed"</action>
+        </criterion>
+        
+        <criterion type="deprecation">
+          <indicators>
+            <indicator>Removed features</indicator>
+            <indicator>Deprecated commands</indicator>
+            <indicator>Legacy mode removal</indicator>
+          </indicators>
+          <action>Flag as "Documentation Removal/Update"</action>
+        </criterion>
+      </criteria>
+    </phase>
+
+    <documentation_labels>
+      <label name="docs-new">
+        <description>Completely new feature requiring new documentation page</description>
+        <example>New MCP server integration</example>
+      </label>
+      <label name="docs-update">
+        <description>Existing documentation needs updating</description>
+        <example>Changed tool parameters</example>
+      </label>
+      <label name="docs-example">
+        <description>New examples or use cases to add</description>
+        <example>New mode usage patterns</example>
+      </label>
+      <label name="docs-migration">
+        <description>Migration guide needed</description>
+        <example>Breaking changes requiring user action</example>
+      </label>
+    </documentation_labels>
+  </documentation_identification>
+
+  <documentation_task_creation>
+    <workflow>
+      <step number="1">
+        <action>Collect all documentation-flagged items</action>
+        <format><![CDATA[
+## Documentation Updates Needed
+
+### New Documentation Required
+- **[Feature Name]**: [Brief description] (docs-new)
+  - Suggested location: /docs/[category]/[feature-name]
+  - Key points to cover: [list]
+
+### Updates to Existing Documentation
+- **[Page/Section]**: [What needs updating] (docs-update)
+  - Current location: /docs/[path]
+  - Changes needed: [list]
+
+### Examples to Add
+- **[Feature/Tool]**: [Example type needed] (docs-example)
+  - Target page: /docs/[path]
+  - Use case: [description]
+        ]]></format>
+      </step>
+
+      <step number="2">
+        <action>Create documentation task after release notes completion</action>
+        <tool>new_task</tool>
+        <template><![CDATA[
+<new_task>
+<mode>documentation-writer</mode>
+<message>
+Update documentation for Roo Code v[VERSION] release.
+
+Based on the release notes, the following documentation updates are needed:
+
+[DOCUMENTATION_UPDATES_SECTION]
+
+Release notes reference: /update-notes/v[VERSION]
+
+Please:
+1. Review each flagged item
+2. Create or update the appropriate documentation pages
+3. Add examples where indicated
+4. Ensure all new features are properly documented
+5. Update any changed behaviors or deprecated features
+6. Add cross-references between related documentation
+</message>
+</new_task>
+        ]]></template>
+      </step>
+    </workflow>
+  </documentation_task_creation>
+
+  <documentation_linking>
+    <principle>
+      All major features in release notes should link to their documentation
+    </principle>
+    
+    <link_patterns>
+      <pattern name="inline_feature_link">
+        <format>[Feature Name](/docs/path/to/feature)</format>
+        <usage>Within feature descriptions</usage>
+      </pattern>
+      
+      <pattern name="see_also_section">
+        <format><![CDATA[
+> **📚 Documentation**: See [Feature Guide](/docs/path) for detailed usage instructions.
+        ]]></format>
+        <usage>After feature description</usage>
+      </pattern>
+      
+      <pattern name="migration_link">
+        <format><![CDATA[
+> **🔄 Migration Guide**: If upgrading from v[OLD], see our [migration guide](/docs/migration/vX-to-vY).
+        ]]></format>
+        <usage>For breaking changes</usage>
+      </pattern>
+    </link_patterns>
+
+    <auto_link_detection>
+      <rule>
+        When mentioning a mode, link to /docs/features/modes/[mode-slug]
+      </rule>
+      <rule>
+        When mentioning a tool, link to /docs/advanced-usage/available-tools#[tool-name]
+      </rule>
+      <rule>
+        When mentioning MCP servers, link to /docs/features/mcp/
+      </rule>
+      <rule>
+        When mentioning providers, link to /docs/providers/
+      </rule>
+    </auto_link_detection>
+  </documentation_linking>
+
+  <documentation_verification>
+    <checklist>
+      <item>All new features have documentation links</item>
+      <item>Breaking changes include migration guides</item>
+      <item>Examples reference documentation for details</item>
+      <item>Documentation task created with all flagged items</item>
+      <item>Links use absolute paths from /docs/ root</item>
+      <item>No .md extensions in links</item>
+    </checklist>
+  </documentation_verification>
+</documentation_handling>

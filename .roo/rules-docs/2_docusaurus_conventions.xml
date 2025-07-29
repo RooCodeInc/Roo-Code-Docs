@@ -1,26 +1,43 @@
 <docusaurus_conventions>
   <overview>
-    This guide covers Docusaurus-specific formatting rules for Roo Code documentation.
+    This guide covers Docusaurus-specific formatting rules for Roo Code documentation. Before applying these conventions, always explore the project structure to understand the actual directory layout.
   </overview>
+
+  <discovery_first>
+    <principle>Always use list_files to discover the actual project structure before making assumptions about paths</principle>
+    <principle>Check for existing patterns in similar files before creating new content</principle>
+    <principle>Verify directory existence before referencing specific paths</principle>
+  </discovery_first>
 
   <linking>
     <rule name="internal_links">
-      <description>Use absolute paths from `/docs/`. Do not include the `.md` extension.</description>
+      <description>Use paths relative to the documentation root. Do not include the `.md` extension. Discover the documentation structure first.</description>
+      <discovery_steps>
+        <step>Use list_files to find the documentation root directory</step>
+        <step>Identify the path structure used in existing documentation</step>
+        <step>Follow the established pattern</step>
+      </discovery_steps>
       <good>[Link to Guide](/intro/)</good>
       <bad>[Link to Guide](../intro.md)</bad>
     </rule>
     <rule name="site_alias">
       <description>Use `@site` for code imports or asset references from the project root. Do not use it for Markdown links.</description>
-      <good>import Header from \'@site/src/components/Header\';</good>
+      <good>import Header from '@site/src/components/Header';</good>
       <bad>[Link](@site/docs/intro.md)</bad>
     </rule>
   </linking>
 
   <media>
     <rule name="images">
-      <description>Place images in `/static/img/`. Use a relative path in `src`.</description>
+      <description>Discover the image storage location in the project before placing images. Look for existing image references to understand the pattern.</description>
+      <discovery_steps>
+        <step>Use list_files to find where images are stored (commonly in static/img or similar)</step>
+        <step>Check existing documentation for image reference patterns</step>
+        <step>Follow the established convention</step>
+      </discovery_steps>
       <example>
         <![CDATA[
+<!-- First discover the actual image path structure, then use it -->
 <img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
         ]]>
       </example>
@@ -29,12 +46,23 @@
 
   <versioning>
     <rule name="no_version_numbers">
-      <description>Do not include version numbers or phrases like "as of version X.Y" in general documentation. Version information belongs only in `docs/update-notes`.</description>
+      <description>Do not include version numbers or phrases like "as of version X.Y" in general documentation. First discover where version information is stored in the project.</description>
+      <discovery_steps>
+        <step>Use list_files to find version-related documentation directories</step>
+        <step>Check for patterns like update-notes, changelog, or release directories</step>
+        <step>Place version-specific information in the appropriate location</step>
+      </discovery_steps>
     </rule>
   </versioning>
+
   <frontmatter>
     <rule name="metadata">
-      <description>All pages must include frontmatter with description, keywords, and a social share image. The title will be automatically generated from the first H1 heading.</description>
+      <description>Check existing documentation files for frontmatter patterns before adding new ones. The required fields may vary by project.</description>
+      <discovery_steps>
+        <step>Read several existing documentation files to understand the frontmatter pattern</step>
+        <step>Identify which fields are consistently used</step>
+        <step>Follow the established pattern</step>
+      </discovery_steps>
       <example>
         <![CDATA[
 ---
@@ -50,4 +78,12 @@ image: /img/social-share.jpg
       </example>
     </rule>
   </frontmatter>
+
+  <general_discovery_workflow>
+    <step number="1">Use list_files to explore the project structure</step>
+    <step number="2">Read existing files similar to what you're creating/editing</step>
+    <step number="3">Identify patterns in paths, formatting, and conventions</step>
+    <step number="4">Follow the established patterns rather than assuming standard locations</step>
+    <step number="5">When in doubt, ask for clarification rather than making assumptions</step>
+  </general_discovery_workflow>
 </docusaurus_conventions>

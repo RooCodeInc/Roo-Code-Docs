@@ -22,14 +22,17 @@
     <category name="major_features">
       <criteria>New functionality changing user experience</criteria>
       <format>Own ## heading with expanded description</format>
-    </category>
-    <category name="bug_fixes">
-      <criteria>Resolves issues, fixes errors</criteria>
-      <format>Under ## Bug Fixes as bullet points</format>
+      <documentation>Usually requires docs-new or docs-update</documentation>
     </category>
     <category name="qol_improvements">
       <criteria>UI/UX enhancements, workflow optimizations</criteria>
       <format>Under ## QOL Improvements</format>
+      <order>MUST come before Bug Fixes section</order>
+    </category>
+    <category name="bug_fixes">
+      <criteria>Resolves issues, fixes errors</criteria>
+      <format>Under ## Bug Fixes as bullet points</format>
+      <order>MUST come after QOL Improvements section</order>
     </category>
     <category name="provider_updates">
       <criteria>API provider changes</criteria>
@@ -92,9 +95,31 @@ We've [improvement description] (thanks [contributors]!) ([#PR](link)):
 **Category**: [Category]
 **User Impact**: [Benefit description]
 **Contributors**: [list]
+**Documentation Needs**: [none|docs-new|docs-update|docs-example|docs-migration]
+**Documentation Notes**: [If applicable, what needs documenting]
 
 ---
     ]]></template>
     <critical>Append to temp_pr_analysis.md using insert_content line 0</critical>
   </subtask_output_format>
+
+  <documentation_analysis>
+    <triggers>
+      <trigger type="new_feature">
+        <keywords>adds, implements, introduces, new</keywords>
+        <files>New files in src/, new commands, new tools</files>
+        <label>docs-new</label>
+      </trigger>
+      <trigger type="behavior_change">
+        <keywords>changes, updates, modifies, improves</keywords>
+        <files>Modified tool behavior, changed defaults</files>
+        <label>docs-update</label>
+      </trigger>
+      <trigger type="deprecation">
+        <keywords>removes, deprecates, deletes</keywords>
+        <files>Deleted features, removed commands</files>
+        <label>docs-migration</label>
+      </trigger>
+    </triggers>
+  </documentation_analysis>
 </pr_analysis_patterns>

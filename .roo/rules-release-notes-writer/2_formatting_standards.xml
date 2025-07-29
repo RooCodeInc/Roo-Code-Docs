@@ -83,7 +83,14 @@ Description of what the feature does (thanks contributor!) ([#PR](link)):
 - **Key Point 3**: More details.
 
 Concluding sentence about the benefit.
+
+> **📚 Documentation**: See [Feature Guide](/docs/path/to/feature) for detailed usage instructions.
         ]]></format>
+        <documentation_links>
+          <rule>Include documentation link for all major features</rule>
+          <rule>Use absolute paths from /docs/ root</rule>
+          <rule>No .md extensions in links</rule>
+        </documentation_links>
       </expanded_sections>
 
       <grouped_sections>
@@ -101,12 +108,15 @@ Concluding sentence about the benefit.
   <section_headings>
     <recommended_headings>
       <heading>Major feature names (e.g., "## Context Condensing is Now Default")</heading>
-      <heading>## Bug Fixes</heading>
       <heading>## QOL Improvements</heading>
+      <heading>## Bug Fixes</heading>
       <heading>## Misc Improvements</heading>
       <heading>## Provider Updates</heading>
       <heading>## Documentation Updates</heading>
     </recommended_headings>
+    <ordering_note>
+      CRITICAL: QOL Improvements must always come before Bug Fixes
+    </ordering_note>
     
     <avoid>
       <heading>## Changes</heading>
@@ -204,6 +214,11 @@ Concluding sentence about the benefit.
     <guideline priority="high">
       <name>Present tense</name>
       <description>Write "adds" not "added".</description>
+    </guideline>
+    
+    <guideline priority="high">
+      <name>Documentation links</name>
+      <description>Link to relevant docs for all major features.</description>
     </guideline>
     
     <guideline priority="medium">
