@@ -74,9 +74,11 @@ const sidebars: SidebarsConfig = {
         'features/intelligent-context-condensing',
         'features/keyboard-shortcuts',
         'features/marketplace',
+        'features/message-queueing',
         'features/model-temperature',
         'features/concurrent-file-reads',
         'features/rooignore',
+        'features/slash-commands',
         'features/suggested-responses',
         'features/task-todo-list',
         'features/shell-integration',
@@ -103,6 +105,7 @@ const sidebars: SidebarsConfig = {
             'features/experimental/experimental-features',
             'features/experimental/concurrent-file-edits',
             'features/experimental/power-steering',
+            'features/experimental/background-editing',
           ],
         },
         'features/more-features',
@@ -206,21 +209,6 @@ const sidebars: SidebarsConfig = {
             'community/roocabulary',
           ],
         },
-        {
-          type: 'category',
-          label: 'Custom Modes Gallery', 
-          items: [
-            'community/custom-modes/jest-test-engineer',
-            'community/custom-modes/research-mode',
-            'community/custom-modes/vibe-mode',
-            'community/custom-modes/documentation-writer',
-            'community/custom-modes/user-story-creator',
-            'community/custom-modes/junior-developer-code-reviewer',
-            'community/custom-modes/senior-developer-code-reviewer',
-            'community/custom-modes/orchestrator',
-            'community/custom-modes/advanced-orchestrator',
-          ],
-        },
       ],
     },
     {
@@ -228,6 +216,13 @@ const sidebars: SidebarsConfig = {
       label: 'Update Notes',
       items: [
         'update-notes/index',
+        {
+          type: 'category',
+          label: '3.25',
+          items: [
+            { type: 'doc', id: 'update-notes/v3.25.0', label: '3.25.0' },
+          ],
+        },
         {
           type: 'category',
           label: '3.24',

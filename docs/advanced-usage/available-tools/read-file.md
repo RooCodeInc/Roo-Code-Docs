@@ -1,6 +1,6 @@
 
 ---
-description: Explore the read_file tool's capabilities for examining file contents, supporting line ranges, PDF/DOCX extraction, and experimental multi-file concurrent reading.
+description: Explore the read_file tool's capabilities for examining file contents, supporting line ranges, PDF/DOCX extraction, image reading, and experimental multi-file concurrent reading.
 keywords:
   - read_file
   - Roo Code tools
@@ -9,6 +9,8 @@ keywords:
   - line numbers
   - PDF extraction
   - DOCX support
+  - image support
+  - OCR workflows
   - code analysis
   - VS Code AI
 image: /img/social-share.jpg
@@ -16,10 +18,12 @@ image: /img/social-share.jpg
 
 # read_file
 
-The `read_file` tool examines the contents of files in a project. It allows Roo to understand code, configuration files, and documentation to provide better assistance.
+The `read_file` tool examines the contents of files in a project. It allows Roo to understand code, configuration files, documentation, and now images to provide better assistance.
 
 :::info Multi-File Support
-When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, this tool can read multiple files simultaneously using an enhanced XML parameter format. This significantly improves efficiency for tasks requiring analysis of multiple related files.
+The `read_file` tool can read multiple files simultaneously when the `maxConcurrentFileReads` setting is greater than 1. This significantly improves efficiency for tasks requiring analysis of multiple related files.
+
+**Note:** When reading files (even single files), the LLM will see a message encouraging multi-file reads: "Reading multiple files at once is more efficient for the LLM. If other files are relevant to your current task, please read them simultaneously."
 :::
 
 ---
@@ -38,20 +42,20 @@ The tool accepts parameters in two formats depending on your configuration:
 While the single-file parameters (`path`, `start_line`, `end_line`) are still supported for backward compatibility, we recommend using the newer `args` format for consistency and future compatibility.
 :::
 
-### Enhanced Format (Multi-File - Experimental)
+### Enhanced Format (Multi-File)
 
-When [Concurrent File Reads](/features/concurrent-file-reads) is enabled, the tool accepts an `args` parameter containing multiple file entries:
+When `maxConcurrentFileReads` is set to a value greater than 1 (found in Settings > Context > "Concurrent file reads limit"), the tool accepts an `args` parameter containing multiple file entries:
 
 - `args` (required): Container for multiple file specifications
   - `file` (required): Individual file specification
     - `path` (required): The path of the file to read
-    - `line_range` (optional): Line range specification (e.g., "1-50" or "100-150")
+    - `line_range` (optional): Line range specification (e.g., "1-50" or "100-150"). Multiple `line_range` elements can be specified per file.
 
 ---
 
 ## What It Does
 
-This tool reads the content of a specified file and returns it with line numbers for easy reference. It can read entire files or specific sections, and even extract text from PDFs and Word documents.
+This tool reads the content of a specified file and returns it with line numbers for easy reference. It can read entire files or specific sections, extract text from PDFs and Word documents, and display images in various formats.
 
 ---
 
@@ -70,20 +74,27 @@ This tool reads the content of a specified file and returns it with line numbers
 - Displays file content with line numbers for easy reference
 - Can read specific portions of files by specifying line ranges
 - Extracts readable text from PDF and DOCX files
+- **Image support**: Displays images in multiple formats (PNG, JPG, JPEG, GIF, WebP, SVG, BMP, ICO, TIFF)
 - Automatically truncates large text files when no line range is specified, showing the beginning of the file
 - Provides method summaries with line ranges for truncated large code files
 - Efficiently streams only requested line ranges for better performance
 - Makes it easy to discuss specific parts of code with line numbering
-- **Multi-file support** (experimental): Read multiple files simultaneously with batch approval
+- **Multi-file support**: Read multiple files simultaneously with batch approval (when `maxConcurrentFileReads` > 1)
 
 ---
 
-## Multi-File Capabilities (Experimental)
+## Multi-File Capabilities
 
-When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, the `read_file` tool gains enhanced capabilities:
+When the `maxConcurrentFileReads` setting is greater than 1, the `read_file` tool gains enhanced capabilities:
+
+### Configuration
+- **Location**: Settings > Context > "Concurrent file reads limit"
+- **Description**: "Maximum number of files the 'read_file' tool can process concurrently. Higher values may speed up reading multiple small files but increase memory usage."
+- **Range**: 1-100 (slider control)
+- **Default**: 5
 
 ### Batch Processing
-- Read up to 100 files in a single request (configurable, default 15)
+- Read up to 100 files in a single request (configurable, default 5)
 - Parallel processing for improved performance
 - Batch approval interface for user consent
 
@@ -104,8 +115,11 @@ When the [Concurrent File Reads](/features/concurrent-file-reads) experimental f
 ## Limitations
 
 - May not handle extremely large files efficiently without using line range parameters
-- For binary files (except PDF and DOCX), may return content that isn't human-readable
-- **Multi-file mode**: Requires experimental feature to be enabled and may have stability issues
+- For binary files (except PDF, DOCX, and supported image formats), may return content that isn't human-readable
+- **Multi-file mode**: Requires `maxConcurrentFileReads` > 1 in settings
+- **Image files**: Returns base64-encoded data URLs which may be large for high-resolution images
+  - Default max single image size: 20MB
+  - Default max total image size: 20MB
 
 ---
 
@@ -122,6 +136,7 @@ When the `read_file` tool is invoked, it follows this process:
    - Adds line numbers to the content (e.g., "1 | const x = 13") where `1 |` is the line number.
    - For truncated files, adds truncation notice and method definitions
    - For special formats (PDF, DOCX), extracts readable text
+   - For image formats, returns base64-encoded data URLs with MIME type
 
 ---
 
@@ -146,8 +161,9 @@ The tool uses a clear decision hierarchy to determine how to read a file:
    - **Special Case - Definitions Only Mode**: When `maxReadFileLine` is set to `0`, the tool returns only source code definitions without any file content.
 
 3. **Default Behavior: Read Entire File**
-   - If neither an explicit range is given nor automatic truncation applies (e.g., the file is within the line limit, or it's a supported binary type), the tool reads the entire content.
-   - For supported formats like PDF and DOCX, it attempts to extract the full text content.
+    - If neither an explicit range is given nor automatic truncation applies (e.g., the file is within the line limit, or it's a supported binary type), the tool reads the entire content.
+    - For supported formats like PDF and DOCX, it attempts to extract the full text content.
+    - For image formats, it returns a base64-encoded data URL that can be displayed in the chat interface.
 
 ---
 
@@ -246,7 +262,7 @@ When `maxReadFileLine` is set to `0` in user settings, the tool returns only sou
       method validateUser
       method generateToken
   </list_code_definition_names>
-  <notice>Showing only 0 of 150 total lines. Use start_line and end_line to read specific ranges.</notice>
+  <notice>Showing only 0 of 150 total lines. Use line_range if you need to read more lines</notice>
 </file>
 ```
 *(This mode provides a quick overview of file structure without reading content.)*
@@ -279,15 +295,122 @@ If the file is excluded by rules in a `.rooignore` file:
 ```
 
 **Simulated Output (Error):**
-```
-Error: Access denied by .rooignore rules
+```xml
+<file>
+  <path>.env</path>
+  <error>Access denied by .rooignore rules</error>
+</file>
 ```
 
 ---
 
-## Multi-File Examples (Experimental)
+## Image Reading Examples
 
-When the [Concurrent File Reads](/features/concurrent-file-reads) experimental feature is enabled, you can read multiple files simultaneously using the enhanced XML format.
+The `read_file` tool now supports reading and displaying images directly in the chat interface. This enables powerful visual analysis workflows.
+
+### Reading a Single Image
+
+**Input:**
+```xml
+<read_file>
+<path>assets/logo.png</path>
+</read_file>
+```
+
+**Output:**
+```xml
+<image_content>
+<path>assets/logo.png</path>
+<mime_type>image/png</mime_type>
+<dimensions>width: 512, height: 512</dimensions>
+<data_url>data:image/png;base64,iVBORw0KGgoAAAANS...</data_url>
+</image_content>
+```
+
+The image will be displayed directly in the chat interface, allowing Roo to analyze visual content.
+
+### OCR Workflow Example
+
+Reading multiple images from a folder for text extraction:
+
+**Input:**
+```xml
+<read_file>
+<args>
+  <file>
+    <path>screenshots/page1.png</path>
+  </file>
+  <file>
+    <path>screenshots/page2.png</path>
+  </file>
+  <file>
+    <path>screenshots/page3.png</path>
+  </file>
+</args>
+</read_file>
+```
+
+**Usage:**
+```
+Please extract all text from these screenshot images and compile them into a single markdown document.
+```
+
+### Design Review Workflow
+
+Analyzing multiple design mockups:
+
+**Input:**
+```xml
+<read_file>
+<args>
+  <file>
+    <path>designs/homepage-v1.jpg</path>
+  </file>
+  <file>
+    <path>designs/homepage-v2.jpg</path>
+  </file>
+  <file>
+    <path>designs/mobile-view.png</path>
+  </file>
+</args>
+</read_file>
+```
+
+**Usage:**
+```
+Compare these design mockups and provide feedback on:
+1. Visual consistency
+2. Mobile responsiveness
+3. Accessibility concerns
+4. UI/UX improvements
+```
+
+### Supported Image Formats
+
+The tool supports the following image formats:
+- **PNG** - With dimension extraction
+- **JPG/JPEG** - Standard and progressive
+- **GIF** - Static and animated
+- **WebP** - Modern web format
+- **SVG** - Scalable vector graphics
+- **BMP** - Bitmap images
+- **ICO** - Icon files
+- **TIFF** - Tagged image format
+
+### Image Analysis Use Cases
+
+1. **Documentation Screenshots**: Extract text and create documentation from UI screenshots
+2. **Error Debugging**: Analyze error screenshots to understand issues
+3. **Design Reviews**: Compare mockups and provide visual feedback
+4. **Diagram Analysis**: Understand architecture diagrams and flowcharts
+5. **Code Screenshots**: Extract code from images when text isn't available
+6. **UI Testing**: Verify visual elements and layouts
+
+---
+
+## Multi-File Examples
+
+When `maxConcurrentFileReads` is set to a value greater than 1, you can read multiple files simultaneously using the enhanced XML format.
 
 ### Reading Multiple Complete Files
 
@@ -444,8 +567,29 @@ When requesting multiple files, you'll see a batch approval interface that allow
 
 The interface displays each file path clearly, making it easy to understand what Roo wants to access before granting permission.
 
----
+### Mixed Content Types
 
-## Backward Compatibility
+You can read different types of files in a single request:
 
-The enhanced multi-file format is fully backward compatible. Existing single-file requests using the `path` parameter continue to work exactly as before, regardless of whether the experimental feature is enabled or disabled.
+**Input:**
+```xml
+<read_file>
+<args>
+  <file>
+    <path>README.md</path>
+  </file>
+  <file>
+    <path>architecture-diagram.png</path>
+  </file>
+  <file>
+    <path>config.json</path>
+  </file>
+  <file>
+    <path>requirements.pdf</path>
+  </file>
+</args>
+</read_file>
+```
+
+This allows Roo to analyze documentation, visual diagrams, configuration, and specifications all in one context.
+

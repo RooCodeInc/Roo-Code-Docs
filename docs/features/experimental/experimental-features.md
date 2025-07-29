@@ -1,10 +1,9 @@
 ---
-description: 'Explore Roo Code''s experimental features including codebase indexing, concurrent file edits, and power steering. Enable advanced capabilities that are still under development.'
+description: 'Explore Roo Code''s experimental features including concurrent file edits and power steering. Enable advanced capabilities that are still under development.'
 keywords:
   - experimental features
   - "Roo Code beta"
   - "advanced features"
-  - "codebase indexing"
   - "concurrent file edits"
   - "power steering"
   - "feature flags"
@@ -33,9 +32,9 @@ To enable or disable experimental features:
 
 The following experimental features are currently available:
 
-- [Codebase Indexing](/features/codebase-indexing) - Semantic search through AI-powered codebase indexing
 - [Concurrent File Edits](/features/experimental/concurrent-file-edits) - Edit multiple files in a single operation
-- [Power Steering](/features/experimental/power-steering)
+- [Power Steering](/features/experimental/power-steering) - Enhanced consistency in AI responses
+- [Prevent Editor Focus Disruption](/features/experimental/prevent-editor-focus-disruption) - Work uninterrupted while Roo edits files in the background
 
 ---
 

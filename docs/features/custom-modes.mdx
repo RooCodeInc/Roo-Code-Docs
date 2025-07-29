@@ -76,14 +76,15 @@ Easily share, back up, and template your custom modes. This feature lets you exp
 - **Easy Backups**: Save your custom mode configurations so you never lose them.
 - **Project Templates**: Create standardized mode templates for different types of projects.
 - **Simple Migration**: Move modes between your global settings and specific projects effortlessly.
+- **Flexible Slug Changes**: Change mode slugs in exported files without manual path editing.
 
 ---
 
 ### Use Case
 
-**Before**: Manually recreating custom modes and copying `.roo/rules-{slug}/` folders for each new project or team member. This was tedious and error-prone.
+**Before**: Manually recreating custom modes and copying `.roo/rules-{slug}/` folders for each new project or team member. Changing slugs required manual path updates in the YAML file.
 
-**With this feature**: A single click exports a mode and all its rules to a YAML file. Another click imports it, setting everything up automatically.
+**With this feature**: A single click exports a mode and all its rules to a YAML file. Another click imports it, setting everything up automatically. You can now change the slug in the exported file and the import process handles all path updates automatically.
 
 ### How it Works
 
@@ -107,6 +108,8 @@ Roo packages the mode's configuration and any rules found in the project's `.roo
     -   **Project**: The mode is available only in the current workspace. It's added to the `.roomodes` file, and its rules are saved to the `.roo/rules-{slug}/` directory within the project.
     -   **Global**: The mode is available in all your projects. It's added to your global settings, and its rules are stored in your system's global Roo configuration directory (e.g., `~/.roo/rules-{slug}/`).
 
+**Note:** When exporting modes with rules, all file paths are normalized to use forward slashes for cross-platform compatibility. This ensures modes can be shared between team members using different operating systems.
+
 ---
 
 ### Exported YAML file format:
@@ -121,6 +124,18 @@ customModes:
       - relativePath: "rules-my-custom-mode/rules.md"
         content: "These are the rules for my custom mode."
 ```
+
+### Changing Slugs on Import
+
+When importing modes, you can change the slug in the exported YAML file before importing:
+
+1. **Export a mode** with slug `original-mode`
+2. **Edit the YAML file** and change the slug to `new-mode`
+3. **Import the file** - the import process will:
+   - Create the new mode with the updated slug
+   - Update rule file paths to match the new slug
+
+Note: The automatic slug change handling during import ensures that rule file paths are updated correctly when you change the mode slug in the exported file.
 
 ---
 
@@ -137,6 +152,9 @@ customModes:
 
 **"What if I import a mode with rules at the Global level?"**
 - The rules are still preserved. They are stored in a global `rules-{slug}` folder in your user home directory (e.g., `~/.roo/rules-my-custom-mode/`) instead of the project-specific `.roo` folder.
+
+**"How does the slug change feature work?"**
+- When you change the slug in an exported YAML file before importing, the import process updates the rule file paths to match the new slug. This ensures the mode works correctly with its new identity.
 
 ---
 
@@ -186,8 +204,8 @@ customModes:
     customInstructions: Focus on clarity and completeness in documentation.
     groups:
       - read
-      - - edit # This group allows editing specific files
-        - fileRegex: \.(md|mdx)$ # Regex for Markdown files
+      - - edit  # First element of tuple
+        - fileRegex: \.(md|mdx)$  # Second element is the options object
           description: Markdown files only
       - browser
   - slug: another-mode
@@ -224,9 +242,10 @@ customModes:
 
 ##### `slug`
 *   **Purpose:** A unique identifier for the mode.
-*   **Format:** Use lowercase letters, numbers, and hyphens.
+*   **Format:** Must match the pattern `/^[a-zA-Z0-9-]+$/` (only letters, numbers, and hyphens).
 *   **Usage:** Used internally and in file/directory names for mode-specific rules (e.g., `.roo/rules-{slug}/`).
 *   **Recommendation:** Keep it short and descriptive.
+*   **Note:** The `source` property is automatically added by the system and shouldn't be manually set.
 *   *YAML Example:* `slug: docs-writer`
 *   *JSON Example:* `"slug": "docs-writer"`
 
@@ -259,8 +278,11 @@ customModes:
 ##### `groups`
 *   **Purpose:** Array/list defining which tool groups the mode can access and any file restrictions.
 *   **Available Tool Groups (Strings):** `"read"`, `"edit"`, `"browser"`, `"command"`, `"mcp"`.
+*   **Structure:** The `groups` property uses a specific structure:
+    *   Simple string for unrestricted access: `"edit"`
+    *   Tuple (two-element array) for restricted access: `["edit", { fileRegex: "pattern", description: "optional" }]`
 *   **File Restrictions for "edit" group:**
-    *   To apply file restrictions, the "edit" entry becomes a list (YAML) or array (JSON) where the first element is `"edit"` and the second is a map/object defining the restrictions.
+    *   To apply file restrictions, the "edit" entry becomes a tuple (YAML list or JSON array) where the first element is `"edit"` and the second is a map/object defining the restrictions.
     *   `fileRegex`: A regular expression string to control which files the mode can edit.
         *   In YAML, typically use single backslashes for regex special characters (e.g., `\.md$`).
         *   In JSON, backslashes must be double-escaped (e.g., `\\.md$`).
@@ -270,8 +292,8 @@ customModes:
     ```yaml
     groups:
       - read
-      - - edit # Start of "edit" tool with restrictions
-        - fileRegex: \.(js|ts)$ # Restriction map for JS/TS files
+      - - edit  # First element of tuple
+        - fileRegex: \.(js|ts)$  # Second element is the options object
           description: JS/TS files only
       - command
     ```
@@ -344,7 +366,7 @@ YAML is now the preferred format for defining custom modes due to several advant
 *   **Less Punctuation:** YAML generally requires less punctuation (like commas and braces) compared to JSON, reducing syntax errors.
 *   **Editor Support:** Most modern code editors provide excellent syntax highlighting and validation for YAML files, further enhancing readability and reducing errors.
 
-While JSON is still fully supported, new modes created via the UI or by asking Roo will default to YAML.
+While JSON is still fully supported and won't be deprecated, new modes created via the UI or by asking Roo will default to YAML. Both `.roomodes` files and global configuration files can be either YAML or JSON format.
 
 #### Tips for Working with YAML
 
@@ -357,14 +379,14 @@ When editing YAML manually, keep these points in mind:
 
 ### Migration to YAML Format
 
-*   **Global Modes:** The migration from `custom_modes.json` to `custom_modes.yaml` happens automatically **for global modes** when Roo Code starts up, under these conditions:
+*   **Global Modes:** The automatic migration from `custom_modes.json` to `custom_modes.yaml` happens only for global modes when Roo Code starts up, under these conditions:
     1.  Roo Code starts up.
     2.  A `custom_modes.json` file exists.
     3.  No `custom_modes.yaml` file exists yet.
     The migration process reads the existing JSON file, converts it to YAML format, creates a new `custom_modes.yaml` file, and preserves the original JSON file (e.g., by renaming it) for rollback purposes. If `custom_modes.yaml` already exists, it will be used, and no automatic migration of `custom_modes.json` will occur.
 
 *   **Project Modes (`.roomodes`):**
-    *   **No automatic startup migration:** Unlike global modes, project-specific `.roomodes` files are not automatically converted from JSON to YAML simply when Roo Code starts.
+    *   **No automatic startup migration:** Unlike global modes, project-specific `.roomodes` files are not automatically converted from JSON to YAML when Roo Code starts. Manual conversion is required for existing JSON `.roomodes` files.
     *   **Format Detection:** Roo Code can read `.roomodes` files in either YAML or JSON format. Roo Code automatically detects the format of `.roomodes` files by attempting to parse them as YAML first.
     *   **Conversion on UI Edit:** If you edit a project-specific mode through the Roo Code UI (e.g., via the Prompts Tab), and the existing `.roomodes` file is in JSON format, Roo Code will save the changes in YAML format. This effectively converts the file to YAML. The original JSON content will be overwritten with YAML.
     *   **Manual Conversion:** If you want to convert an existing `.roomodes` JSON file to YAML without making UI edits, you'll need to do this manually. You can:
@@ -399,7 +421,15 @@ You can provide instructions for custom modes using dedicated files or directori
 ├── .roorules-docs-writer  # Example for mode slug "docs-writer"
 └── ... (other project files)
 ```
+
+**Legacy Fallback: `.clinerules-{mode-slug}`**
+For backward compatibility, the system also checks for `.clinerules-{mode-slug}` files as an additional fallback, though this is not recommended for new projects.
+
 The directory method takes precedence if it exists and contains files.
+
+**Rules Directory Scope:**
+- **Global modes:** Rules are stored in `~/.roo/rules-{slug}/` (note the trailing slash)
+- **Project modes:** Rules are stored in `{workspace}/.roo/rules-{slug}/` (note the trailing slash)
 :::
 
 In addition to the `customInstructions` property, you can provide mode-specific instructions via files in your workspace. This is particularly useful for:
@@ -413,8 +443,9 @@ There are two ways Roo Code loads these instructions, with a clear preference fo
 **1. Preferred Method: Directory-Based Instructions (`.roo/rules-{mode-slug}/`)**
 
 *   **Structure:** Create a directory named `.roo/rules-{mode-slug}/` in your workspace root. Replace `{mode-slug}` with your mode's slug (e.g., `.roo/rules-docs-writer/`).
-*   **Content:** Place one or more files (e.g., `.md`, `.txt`) containing your instructions inside this directory. You can organize instructions further using subdirectories. Files within the `.roo/rules-{mode-slug}/` directory are read recursively and appended in alphabetical order based on filename.
-*   **Loading:** All instruction files found within this directory structure will be loaded and applied to the specified mode.
+*   **Content:** Place one or more files (e.g., `.md`, `.txt`) containing your instructions inside this directory. You can organize instructions further using subdirectories. Files within the `.roo/rules-{mode-slug}/` directory are read recursively and appended in alphabetical order based on filename (case-insensitive).
+*   **Loading:** All instruction files found within this directory structure will be loaded and applied to the specified mode. System files (`.DS_Store`, `.swp`, etc.) and cache files are automatically excluded.
+*   **Advanced Features:** The system supports symbolic links with cycle detection for advanced file organization.
 
 **2. Fallback (Backward Compatibility): File-Based Instructions (`.roorules-{mode-slug}`)**
 
@@ -441,7 +472,9 @@ Mode configurations are applied in this order:
 2. Global mode configurations (from `custom_modes.yaml`, then `custom_modes.json` if YAML not found)
 3. Default mode configurations
 
-This means that project-specific configurations will override global configurations, which in turn override default configurations. For instance, if you have a global 'code' mode and a project-specific 'code' mode in `.roomodes`, the project version will be used when working in that project. You can override any default mode by including a mode with the same slug in your global or project-specific configuration.
+**Important:** When modes with the same slug exist in both `.roomodes` and global settings, the `.roomodes` version completely overrides the global one. This applies to ALL properties, not just some. For instance, if you have a global 'code' mode and a project-specific 'code' mode in `.roomodes`, the project version will be used when working in that project, and all properties from the global version are ignored.
+
+You can override any default mode by including a mode with the same slug in your global or project-specific configuration.
 
 *   **Note on Instruction Files:** Within the loading of mode-specific instructions from the filesystem, the directory `.roo/rules-{mode-slug}/` takes precedence over the single file `.roorules-{mode-slug}` found in the workspace root.
 
@@ -567,9 +600,10 @@ When you specify `fileRegex`, you're creating a pattern that file paths must mat
 
 **Important Rules for `fileRegex`:**
 *   **Escaping in JSON:** In JSON strings, backslashes (`\`) must be double-escaped (e.g., `\\.md$`).
-*   **Escaping in YAML:** In unquoted or single-quoted YAML strings, a single backslash is usually sufficient for regex special characters (e.g., `\.md$`).
+*   **Escaping in YAML:** In unquoted or single-quoted YAML strings, a single backslash is usually sufficient for regex special characters (e.g., `\.md$`). However, YAML regex patterns in quoted strings may need double escaping similar to JSON.
 *   **Path Matching:** Patterns match against the full relative file path from your workspace root (e.g., `src/components/button.js`).
 *   **Case Sensitivity:** Regex patterns are case-sensitive by default.
+*   **Validation:** Invalid regex patterns are rejected with an "Invalid regular expression pattern" error message.
 
 **Common Pattern Examples:**
 In the table below, the 'Pattern (Conceptual / YAML-like)' column shows patterns as they would appear in YAML. For JSON, remember to double-escape backslashes.
@@ -597,10 +631,35 @@ In the table below, the 'Pattern (Conceptual / YAML-like)' column shows patterns
 3.  Start simple and build complexity.
 
 :::info Error Handling
-When a mode attempts to edit a file that doesn't match its `fileRegex` pattern, you'll see a `FileRestrictionError` with details about which patterns are allowed.
+When a mode attempts to edit a file that doesn't match its `fileRegex` pattern, you'll see a `FileRestrictionError` that includes:
+- The mode name
+- The allowed file pattern
+- The description (if provided)
+- The attempted file path
+- The tool that was blocked
+
+This information helps you understand why your operation was blocked and what file types are allowed for the current mode.
 :::
 
 ---
+
+## Additional Features
+
+### Built-in Mode Customization
+When exporting built-in modes (like Code, Architect, Ask, Debug), any customizations you've made are included in the export. This allows you to share your personalized versions of built-in modes with others.
+
+### Mode Deletion and Rules
+When deleting a mode through the UI, Roo Code will prompt you about deleting the associated rules folder, showing the exact path before deletion. This helps prevent accidental loss of custom instructions.
+
+### Global Rules Directory
+In addition to mode-specific rules directories, there's also a generic `.roo/rules/` directory (without mode suffix) that can be used for shared rules across all modes.
+
+### Troubleshooting
+
+**Common Issues:**
+- **Mode not appearing:** After creating or importing a mode, you may need to reload the VS Code window for it to appear in the mode selector.
+- **Invalid regex patterns:** If your `fileRegex` pattern is invalid, you'll receive an error message. Test your patterns using online regex testers before applying them.
+- **Precedence confusion:** Remember that project modes completely override global modes with the same slug - no properties are merged.
 
 ## Community Gallery
 Ready to explore more? Check out the [Custom Modes Gallery](/community/#custom-modes-gallery) section on the main community page to discover and share custom modes created by the community!
