@@ -1,0 +1,233 @@
+<docusaurus_conventions>
+  <overview>
+    This guide covers Docusaurus-specific formatting rules for Roo Code documentation. Before applying these conventions, always explore the project structure to understand the actual directory layout.
+  </overview>
+
+  <discovery_first>
+    <principle>Always use list_files to discover the actual project structure before making assumptions about paths</principle>
+    <principle>Check for existing patterns in similar files before creating new content</principle>
+    <principle>Verify directory existence before referencing specific paths</principle>
+  </discovery_first>
+
+  <linking>
+    <rule name="internal_links">
+      <description>Use paths relative to the documentation root. Do not include the `.md` extension. Discover the documentation structure first.</description>
+      <discovery_steps>
+        <step>Use list_files to find the documentation root directory</step>
+        <step>Identify the path structure used in existing documentation</step>
+        <step>Follow the established pattern</step>
+      </discovery_steps>
+      <good>[Link to Guide](/intro/)</good>
+      <bad>[Link to Guide](../intro.md)</bad>
+    </rule>
+    <rule name="site_alias">
+      <description>Use `@site` for code imports or asset references from the project root. Do not use it for Markdown links.</description>
+      <good>import Header from '@site/src/components/Header';</good>
+      <bad>[Link](@site/docs/intro.md)</bad>
+    </rule>
+  </linking>
+
+  <media>
+    <rule name="images">
+      <description>Discover the image storage location in the project before placing images. Look for existing image references to understand the pattern.</description>
+      <discovery_steps>
+        <step>Use list_files to find where images are stored (commonly in static/img or similar)</step>
+        <step>Check existing documentation for image reference patterns</step>
+        <step>Follow the established convention</step>
+      </discovery_steps>
+      <example>
+        <![CDATA[
+<!-- First discover the actual image path structure, then use it -->
+<img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
+        ]]>
+      </example>
+    </rule>
+  </media>
+
+  <versioning>
+    <rule name="no_version_numbers">
+      <description>Do not include version numbers or phrases like "as of version X.Y" in general documentation. First discover where version information is stored in the project.</description>
+      <discovery_steps>
+        <step>Use list_files to find version-related documentation directories</step>
+        <step>Check for patterns like update-notes, changelog, or release directories</step>
+        <step>Place version-specific information in the appropriate location</step>
+      </discovery_steps>
+    </rule>
+  </versioning>
+
+  <frontmatter>
+    <rule name="metadata">
+      <description>Check existing documentation files for frontmatter patterns before adding new ones. The required fields may vary by project.</description>
+      <discovery_steps>
+        <step>Read several existing documentation files to understand the frontmatter pattern</step>
+        <step>Identify which fields are consistently used</step>
+        <step>Follow the established pattern</step>
+      </discovery_steps>
+      <example>
+        <![CDATA[
+---
+description: A concise summary of the page content.
+keywords:
+  - relevant
+  - keywords
+  - for
+  - search
+image: /img/social-share.jpg
+---
+        ]]>
+      </example>
+    </rule>
+  </frontmatter>
+
+  <general_discovery_workflow>
+    <step number="1">Use list_files to explore the project structure</step>
+    <step number="2">Read existing files similar to what you're creating/editing</step>
+    <step number="3">Identify patterns in paths, formatting, and conventions</step>
+    <step number="4">Follow the established patterns rather than assuming standard locations</step>
+    <step number="5">When in doubt, ask for clarification rather than making assumptions</step>
+  </general_discovery_workflow>
+
+  <redundancy_prevention_workflow>
+    <overview>
+      Before making any documentation changes, follow this workflow to prevent redundancy and ensure cohesion.
+    </overview>
+    
+    <step number="1">
+      <title>Content Discovery</title>
+      <actions>
+        <action>Use codebase_search to find all mentions of the topic or feature</action>
+        <action>Search for variations of key terms (e.g., "configuration", "config", "setup")</action>
+        <action>Note all locations where related information exists</action>
+      </actions>
+      <example>
+        <![CDATA[
+<!-- Search for existing content about a feature -->
+<codebase_search>
+<query>authentication setup configuration</query>
+<path>docs</path>
+</codebase_search>
+        ]]>
+      </example>
+    </step>
+
+    <step number="2">
+      <title>Duplication Analysis</title>
+      <actions>
+        <action>Read all discovered related content thoroughly</action>
+        <action>Identify if the requested change would duplicate existing information</action>
+        <action>Determine if consolidation is needed instead of addition</action>
+      </actions>
+      <decision_matrix>
+        <scenario condition="Content exists and is complete">
+          <action>Inform user and suggest updating existing location</action>
+        </scenario>
+        <scenario condition="Content exists but is incomplete">
+          <action>Enhance existing content rather than creating new</action>
+        </scenario>
+        <scenario condition="Content is scattered across multiple files">
+          <action>Consider consolidation into a single authoritative location</action>
+        </scenario>
+        <scenario condition="Content doesn't exist">
+          <action>Proceed with creating new content</action>
+        </scenario>
+      </decision_matrix>
+    </step>
+
+    <step number="3">
+      <title>Cross-Reference Validation</title>
+      <actions>
+        <action>Check all internal links that might be affected</action>
+        <action>Verify that moving or changing content won't break existing references</action>
+        <action>Update docusaurus.config.ts redirects if moving content</action>
+      </actions>
+    </step>
+
+    <step number="4">
+      <title>Terminology Consistency</title>
+      <actions>
+        <action>Ensure consistent use of technical terms across all documentation</action>
+        <action>Check glossary or terminology guide if one exists</action>
+        <action>Maintain consistent naming for features, tools, and concepts</action>
+      </actions>
+    </step>
+  </redundancy_prevention_workflow>
+
+  <cohesion_guidelines>
+    <guideline name="information_architecture">
+      <description>Maintain logical information hierarchy and flow</description>
+      <checks>
+        <check>Does this content belong in the current section?</check>
+        <check>Would users expect to find this information here?</check>
+        <check>Does it follow the progression from basic to advanced?</check>
+      </checks>
+    </guideline>
+    
+    <guideline name="single_source_of_truth">
+      <description>Each piece of information should have one authoritative location</description>
+      <implementation>
+        <step>Core information lives in one place</step>
+        <step>Other locations reference the authoritative source</step>
+        <step>Use includes or references rather than duplication</step>
+      </implementation>
+    </guideline>
+
+    <guideline name="contextual_linking">
+      <description>Connect related content through meaningful links</description>
+      <best_practices>
+        <practice>Link to prerequisites before advanced topics</practice>
+        <practice>Provide "See also" sections for related content</practice>
+        <practice>Ensure bidirectional linking where appropriate</practice>
+      </best_practices>
+    </guideline>
+  </cohesion_guidelines>
+  <documentation_update_protocol>
+    <overview>
+      When updating existing documentation, follow this protocol to maintain quality and prevent issues.
+    </overview>
+    
+    <pre_update_validation>
+      <step>Identify all documents that reference the content being updated</step>
+      <step>Check for dependent examples or tutorials that might need updating</step>
+      <step>Verify that the update won't invalidate existing instructions</step>
+      <step>Consider backward compatibility if documenting changed features</step>
+    </pre_update_validation>
+
+    <update_impact_assessment>
+      <question>Will this update require changes to other documents?</question>
+      <question>Are there code examples that need to be updated?</question>
+      <question>Do any quickstart guides or tutorials reference this content?</question>
+      <question>Will this change affect the logical flow of the documentation?</question>
+    </update_impact_assessment>
+
+    <post_update_checklist>
+      <item>All cross-references have been updated</item>
+      <item>No broken links have been introduced</item>
+      <item>Terminology remains consistent across all affected documents</item>
+      <item>The update enhances rather than contradicts existing content</item>
+      <item>Version-specific information is properly handled</item>
+    </post_update_checklist>
+  </documentation_update_protocol>
+
+  <ask_before_proceeding>
+    <description>Use ask_followup_question when uncertainty exists about redundancy or impact</description>
+    <scenarios>
+      <scenario>When similar content exists in multiple locations</scenario>
+      <scenario>When the requested change might contradict existing documentation</scenario>
+      <scenario>When consolidation might be better than addition</scenario>
+      <scenario>When the impact on other documents is unclear</scenario>
+    </scenarios>
+    <example>
+      <![CDATA[
+<ask_followup_question>
+<question>I found existing content about this topic in three different locations. How would you like me to proceed?</question>
+<follow_up>
+<suggest>Update the main guide and add cross-references from the other locations</suggest>
+<suggest>Consolidate all information into a single comprehensive guide</suggest>
+<suggest>Keep them separate but ensure they're consistent and cross-linked</suggest>
+<suggest>Show me the existing locations first so I can decide</suggest>
+</follow_up>
+</ask_followup_question>
+      ]]>
+    </example>
+  </ask_before_proceeding>
+</docusaurus_conventions>

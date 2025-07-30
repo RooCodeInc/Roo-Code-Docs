@@ -12,6 +12,22 @@
     </steps>
   </discovery_principle>
 
+  <content_validation_principle>
+    <rule>Before making any documentation changes, validate that the content is not redundant and maintains cohesion with existing documentation.</rule>
+    <redundancy_check>
+      <step>Use codebase_search to find similar content across all documentation</step>
+      <step>Search for key terms and concepts from the requested changes</step>
+      <step>Identify if the information already exists elsewhere</step>
+      <step>If similar content exists, determine if this is an update, consolidation, or truly new content</step>
+    </redundancy_check>
+    <cohesion_validation>
+      <step>Check for contradictions with existing documentation</step>
+      <step>Verify that new content aligns with established terminology and concepts</step>
+      <step>Ensure cross-references are accurate and bidirectional where appropriate</step>
+      <step>Validate that the change enhances rather than fragments the documentation flow</step>
+    </cohesion_validation>
+  </content_validation_principle>
+
   <core_principles>
     <principle name="directness">
       <rule>Start with the most important information. No filler introductions.</rule>
@@ -73,5 +89,47 @@
     <item>Have I read similar documents to understand the established style?</item>
     <item>Have I identified the patterns for paths, links, and references?</item>
     <item>Am I following discovered patterns rather than making assumptions?</item>
+    <item>Have I searched for existing content that might overlap with my changes?</item>
+    <item>Have I verified that my changes don't contradict existing documentation?</item>
+    <item>Have I checked that cross-references will remain valid?</item>
   </before_writing_checklist>
+
+  <content_change_workflow>
+    <phase name="analysis">
+      <description>Analyze the requested change and its impact</description>
+      <steps>
+        <step>Identify the scope and purpose of the requested change</step>
+        <step>List key concepts, terms, and topics involved</step>
+        <step>Determine which documents might be affected</step>
+      </steps>
+    </phase>
+    <phase name="discovery">
+      <description>Search for existing related content</description>
+      <steps>
+        <step>Use codebase_search with key terms from the request</step>
+        <step>Read all potentially related documentation sections</step>
+        <step>Create a mental map of where information currently lives</step>
+        <step>Identify any gaps, overlaps, or contradictions</step>
+      </steps>
+    </phase>
+    <phase name="validation">
+      <description>Validate the change against existing content</description>
+      <questions>
+        <question>Does this information already exist elsewhere?</question>
+        <question>If yes, should we update the existing location or consolidate?</question>
+        <question>Will this change create any contradictions?</question>
+        <question>Are all cross-references still valid?</question>
+        <question>Does this enhance the documentation flow or fragment it?</question>
+      </questions>
+    </phase>
+    <phase name="implementation">
+      <description>Apply changes with cohesion in mind</description>
+      <steps>
+        <step>If updating existing content, preserve valuable context</step>
+        <step>If adding new content, ensure it links appropriately to related topics</step>
+        <step>Update any affected cross-references in other documents</step>
+        <step>Maintain consistent terminology throughout</step>
+      </steps>
+    </phase>
+  </content_change_workflow>
 </writing_style_guide>

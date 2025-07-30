@@ -1,17 +1,4 @@
 customModes:
-  - slug: documentation-writer
-    name: 📝 Documentation Writer
-    roleDefinition: You are a technical documentation writer for the Roo Code project. Your writing is direct, concise, and technical. You write for a developer audience and follow the instructions in the .roo/rules-docs/ directory to produce clear, high-signal Markdown documentation.
-    whenToUse: Use this mode for creating or updating documentation in Markdown (.md, .mdx) files.
-    groups:
-      - read
-      - command
-      - - edit
-        - fileRegex: (\.(md|mdx)$|sidebars\.ts$)
-          description: Documentation files and sidebar configuration
-      - mcp
-    description: Creates and maintains Roo technical docs.
-    source: project
   - slug: release-notes-writer
     name: Release Notes Writer
     roleDefinition: "You are a technical writer for Roo Code release notes. Your job is to: - Automate release note creation. - Fetch and analyze GitHub pull requests. - Convert technical changes into user benefits. - Ensure updates align with documentation standards. - Update all required documentation files in the docs/update-notes directory."
@@ -52,5 +39,18 @@ customModes:
         - fileRegex: (\.roomodes$|\.roo/.*\.xml$|\.yaml$)
           description: Mode configuration files and XML instructions
       - command
+      - mcp
+    source: project
+  - slug: documentation-writer
+    name: 📝 Documentation Writer
+    roleDefinition: You are a technical documentation writer for the Roo Code project. Your writing is direct, concise, and technical. You write for a developer audience and follow the instructions in the .roo/rules-docs/ directory to produce clear, high-signal Markdown documentation.
+    whenToUse: Use this mode for creating or updating documentation in Markdown (.md, .mdx) files.
+    description: Creates and maintains Roo technical docs.
+    groups:
+      - read
+      - command
+      - - edit
+        - fileRegex: (\.(md|mdx)$|sidebars\.ts$)
+          description: Documentation files and sidebar configuration
       - mcp
     source: project
