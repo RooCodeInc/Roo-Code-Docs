@@ -13,19 +13,41 @@
   </discovery_principle>
 
   <content_validation_principle>
-    <rule>Before making any documentation changes, validate that the content is not redundant and maintains cohesion with existing documentation.</rule>
-    <redundancy_check>
-      <step>Use codebase_search to find similar content across all documentation</step>
-      <step>Search for key terms and concepts from the requested changes</step>
-      <step>Identify if the information already exists elsewhere</step>
-      <step>If similar content exists, determine if this is an update, consolidation, or truly new content</step>
+    <rule>MANDATORY: Before making ANY changes to existing documentation files, you MUST complete the redundancy validation workflow. This is NOT optional.</rule>
+    <enforcement>
+      <requirement>You CANNOT proceed with edits until validation is complete</requirement>
+      <requirement>You MUST document validation results before making changes</requirement>
+      <requirement>Skipping validation steps will result in task rejection</requirement>
+    </enforcement>
+    <redundancy_check priority="CRITICAL">
+      <mandatory_step order="1">Use codebase_search to find ALL mentions of the topic across documentation</mandatory_step>
+      <mandatory_step order="2">Search for multiple variations of key terms (e.g., if editing "authentication", also search "auth", "login", "security", "credentials")</mandatory_step>
+      <mandatory_step order="3">Read and analyze EVERY discovered location thoroughly</mandatory_step>
+      <mandatory_step order="4">Create a validation report listing:
+        - All locations where similar content exists
+        - The current state of each location
+        - Potential conflicts or duplications
+        - Recommendation for how to proceed
+      </mandatory_step>
+      <mandatory_step order="5">If similar content exists, you MUST determine:
+        - Is this an update to existing content? (proceed to that location)
+        - Is this a consolidation opportunity? (merge content)
+        - Is this truly new, non-redundant content? (proceed with caution)
+      </mandatory_step>
     </redundancy_check>
-    <cohesion_validation>
-      <step>Check for contradictions with existing documentation</step>
-      <step>Verify that new content aligns with established terminology and concepts</step>
-      <step>Ensure cross-references are accurate and bidirectional where appropriate</step>
-      <step>Validate that the change enhances rather than fragments the documentation flow</step>
+    <cohesion_validation priority="CRITICAL">
+      <mandatory_step>Check for contradictions with existing documentation</mandatory_step>
+      <mandatory_step>Verify that new content aligns with established terminology and concepts</mandatory_step>
+      <mandatory_step>Ensure cross-references are accurate and bidirectional where appropriate</mandatory_step>
+      <mandatory_step>Validate that the change enhances rather than fragments the documentation flow</mandatory_step>
+      <mandatory_step>Document how the change improves overall documentation cohesion</mandatory_step>
     </cohesion_validation>
+    <validation_gate>
+      <rule>You MUST use ask_followup_question to confirm validation results with the user BEFORE proceeding with any edits</rule>
+      <template>
+        "I've completed the mandatory redundancy validation. Here's what I found: [validation results]. Based on this analysis, I recommend: [recommendation]. Should I proceed with this approach?"
+      </template>
+    </validation_gate>
   </content_validation_principle>
 
   <core_principles>
@@ -95,40 +117,76 @@
   </before_writing_checklist>
 
   <content_change_workflow>
-    <phase name="analysis">
+    <mandatory_notice>
+      <warning>This workflow is MANDATORY for ALL documentation changes. Each phase MUST be completed in order.</warning>
+      <enforcement>Skipping any phase or step will invalidate the entire change request.</enforcement>
+    </mandatory_notice>
+    
+    <phase name="analysis" status="MANDATORY">
       <description>Analyze the requested change and its impact</description>
+      <blocking_requirement>You CANNOT proceed to the next phase until ALL steps are complete</blocking_requirement>
       <steps>
-        <step>Identify the scope and purpose of the requested change</step>
-        <step>List key concepts, terms, and topics involved</step>
-        <step>Determine which documents might be affected</step>
+        <step validation="required">Identify the scope and purpose of the requested change</step>
+        <step validation="required">List ALL key concepts, terms, and their variations (e.g., "config" → "configuration", "setup", "settings")</step>
+        <step validation="required">Determine which documents might be affected (use list_files to verify)</step>
+        <step validation="required">Document your analysis results before proceeding</step>
       </steps>
     </phase>
-    <phase name="discovery">
-      <description>Search for existing related content</description>
+    
+    <phase name="discovery" status="MANDATORY">
+      <description>Search for ALL existing related content - this phase is NOT optional</description>
+      <blocking_requirement>You MUST find and analyze ALL related content before proceeding</blocking_requirement>
       <steps>
-        <step>Use codebase_search with key terms from the request</step>
-        <step>Read all potentially related documentation sections</step>
-        <step>Create a mental map of where information currently lives</step>
-        <step>Identify any gaps, overlaps, or contradictions</step>
+        <step validation="required">Use codebase_search with the primary term from the request</step>
+        <step validation="required">Use codebase_search with EACH variation of key terms identified in analysis</step>
+        <step validation="required">Read ALL potentially related documentation sections in full</step>
+        <step validation="required">Create a comprehensive map documenting:
+          - Every location where related information exists
+          - The specific content at each location
+          - How each location relates to the requested change
+        </step>
+        <step validation="required">Identify any gaps, overlaps, or contradictions</step>
+        <step validation="required">If you find existing content, you MUST read it completely before proceeding</step>
       </steps>
     </phase>
-    <phase name="validation">
-      <description>Validate the change against existing content</description>
-      <questions>
-        <question>Does this information already exist elsewhere?</question>
-        <question>If yes, should we update the existing location or consolidate?</question>
-        <question>Will this change create any contradictions?</question>
-        <question>Are all cross-references still valid?</question>
-        <question>Does this enhance the documentation flow or fragment it?</question>
-      </questions>
+    
+    <phase name="validation" status="MANDATORY">
+      <description>Validate the change against existing content - MUST be completed before ANY edits</description>
+      <blocking_requirement>You MUST answer ALL questions and get user confirmation before implementation</blocking_requirement>
+      <validation_checklist>
+        <check mandatory="true">Does this exact information already exist elsewhere? (If yes, STOP and redirect to existing location)</check>
+        <check mandatory="true">Does similar but incomplete information exist? (If yes, enhance existing rather than duplicate)</check>
+        <check mandatory="true">Will this change create any contradictions with existing docs?</check>
+        <check mandatory="true">Have you verified ALL cross-references will remain valid?</check>
+        <check mandatory="true">Does this enhance the documentation flow or fragment it?</check>
+        <check mandatory="true">Have you identified ALL files that need updates to maintain consistency?</check>
+      </validation_checklist>
+      <user_confirmation_required>
+        <rule>You MUST use ask_followup_question to present validation findings and get approval</rule>
+        <rule>Include specific file paths and line numbers in your validation report</rule>
+        <rule>Provide clear recommendations based on your findings</rule>
+      </user_confirmation_required>
     </phase>
-    <phase name="implementation">
-      <description>Apply changes with cohesion in mind</description>
+    
+    <phase name="implementation" status="CONDITIONAL">
+      <description>Apply changes ONLY after validation is approved by user</description>
+      <blocking_requirement>You can ONLY enter this phase after user approves validation results</blocking_requirement>
       <steps>
-        <step>If updating existing content, preserve valuable context</step>
-        <step>If adding new content, ensure it links appropriately to related topics</step>
-        <step>Update any affected cross-references in other documents</step>
-        <step>Maintain consistent terminology throughout</step>
+        <step validation="required">If updating existing content, preserve ALL valuable context</step>
+        <step validation="required">If adding new content, ensure it links appropriately to ALL related topics discovered in phase 2</step>
+        <step validation="required">Update ALL affected cross-references in other documents</step>
+        <step validation="required">Maintain consistent terminology throughout ALL affected files</step>
+        <step validation="required">Verify no information is lost or contradicted by your changes</step>
+      </steps>
+    </phase>
+    
+    <phase name="post_implementation_verification" status="MANDATORY">
+      <description>Verify the changes maintain documentation integrity</description>
+      <steps>
+        <step validation="required">Re-run codebase_search to ensure no duplicates were created</step>
+        <step validation="required">Verify all cross-references still work</step>
+        <step validation="required">Confirm terminology remains consistent</step>
+        <step validation="required">Document what was changed and why for future reference</step>
       </steps>
     </phase>
   </content_change_workflow>

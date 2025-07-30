@@ -88,66 +88,122 @@ image: /img/social-share.jpg
   </general_discovery_workflow>
 
   <redundancy_prevention_workflow>
+    <mandatory_enforcement>
+      <rule>This workflow is MANDATORY for ALL edits to existing documentation files</rule>
+      <rule>You CANNOT skip any step - each must be completed and documented</rule>
+      <rule>Failure to complete this workflow will result in rejection of changes</rule>
+    </mandatory_enforcement>
+    
     <overview>
-      Before making any documentation changes, follow this workflow to prevent redundancy and ensure cohesion.
+      CRITICAL: This workflow MUST be completed BEFORE making ANY changes to existing documentation. No exceptions.
     </overview>
     
-    <step number="1">
-      <title>Content Discovery</title>
+    <step number="1" status="MANDATORY">
+      <title>Comprehensive Content Discovery</title>
+      <blocking_requirement>You CANNOT proceed without completing ALL searches</blocking_requirement>
       <actions>
-        <action>Use codebase_search to find all mentions of the topic or feature</action>
-        <action>Search for variations of key terms (e.g., "configuration", "config", "setup")</action>
-        <action>Note all locations where related information exists</action>
+        <action mandatory="true">Use codebase_search with the exact topic/feature name</action>
+        <action mandatory="true">Use codebase_search with ALL variations of key terms (minimum 3-5 variations required)</action>
+        <action mandatory="true">Search for related concepts that might contain overlapping information</action>
+        <action mandatory="true">Document EVERY location found with file path and line numbers</action>
       </actions>
+      <validation_requirement>
+        You MUST provide evidence of searches performed:
+        - List each search query used
+        - Number of results found for each
+        - File paths discovered
+      </validation_requirement>
       <example>
         <![CDATA[
-<!-- Search for existing content about a feature -->
+<!-- MANDATORY: Search with multiple variations -->
 <codebase_search>
 <query>authentication setup configuration</query>
+<path>docs</path>
+</codebase_search>
+
+<!-- Then search variations -->
+<codebase_search>
+<query>auth config login security</query>
+<path>docs</path>
+</codebase_search>
+
+<!-- Then related concepts -->
+<codebase_search>
+<query>user access credentials permissions</query>
 <path>docs</path>
 </codebase_search>
         ]]>
       </example>
     </step>
 
-    <step number="2">
-      <title>Duplication Analysis</title>
+    <step number="2" status="MANDATORY">
+      <title>Exhaustive Duplication Analysis</title>
+      <blocking_requirement>You MUST read EVERY discovered file before proceeding</blocking_requirement>
       <actions>
-        <action>Read all discovered related content thoroughly</action>
-        <action>Identify if the requested change would duplicate existing information</action>
-        <action>Determine if consolidation is needed instead of addition</action>
+        <action mandatory="true">Read ALL discovered related content in full - no skimming</action>
+        <action mandatory="true">Create a detailed comparison table showing:
+          - What information exists where
+          - How it relates to the requested change
+          - Overlap percentage with requested content
+        </action>
+        <action mandatory="true">Identify if the requested change would duplicate ANY existing information</action>
+        <action mandatory="true">Document your findings in a structured format</action>
       </actions>
-      <decision_matrix>
+      <decision_matrix status="MANDATORY">
         <scenario condition="Content exists and is complete">
-          <action>Inform user and suggest updating existing location</action>
+          <required_action>STOP immediately. Inform user with specific file location. DO NOT create duplicate content.</required_action>
         </scenario>
         <scenario condition="Content exists but is incomplete">
-          <action>Enhance existing content rather than creating new</action>
+          <required_action>STOP creating new content. Enhance existing content at its current location instead.</required_action>
         </scenario>
         <scenario condition="Content is scattered across multiple files">
-          <action>Consider consolidation into a single authoritative location</action>
+          <required_action>STOP and propose consolidation plan to user before any edits.</required_action>
         </scenario>
         <scenario condition="Content doesn't exist">
-          <action>Proceed with creating new content</action>
+          <required_action>Document this finding and proceed with caution to next step.</required_action>
         </scenario>
       </decision_matrix>
     </step>
 
-    <step number="3">
-      <title>Cross-Reference Validation</title>
+    <step number="3" status="MANDATORY">
+      <title>Impact Analysis and Cross-Reference Validation</title>
+      <blocking_requirement>Complete impact analysis before ANY file modifications</blocking_requirement>
       <actions>
-        <action>Check all internal links that might be affected</action>
-        <action>Verify that moving or changing content won't break existing references</action>
-        <action>Update docusaurus.config.ts redirects if moving content</action>
+        <action mandatory="true">List ALL internal links that reference or might reference this content</action>
+        <action mandatory="true">Identify ALL files that would need updates if content is moved or changed</action>
+        <action mandatory="true">Check for hardcoded references in:
+          - Other documentation files
+          - Configuration files
+          - Code examples
+          - Tutorials or guides
+        </action>
+        <action mandatory="true">Create an impact report listing all affected files</action>
+        <action mandatory="true">Plan redirect updates for docusaurus.config.ts if needed</action>
       </actions>
     </step>
 
-    <step number="4">
-      <title>Terminology Consistency</title>
+    <step number="4" status="MANDATORY">
+      <title>Terminology and Consistency Verification</title>
       <actions>
-        <action>Ensure consistent use of technical terms across all documentation</action>
-        <action>Check glossary or terminology guide if one exists</action>
-        <action>Maintain consistent naming for features, tools, and concepts</action>
+        <action mandatory="true">Create a terminology map of all technical terms used</action>
+        <action mandatory="true">Verify terms match existing usage across ALL documentation</action>
+        <action mandatory="true">Check glossary or terminology guide for standard definitions</action>
+        <action mandatory="true">Document any terminology conflicts found</action>
+      </actions>
+    </step>
+
+    <step number="5" status="MANDATORY">
+      <title>User Approval Gate</title>
+      <blocking_requirement>You CANNOT proceed with edits without explicit user approval</blocking_requirement>
+      <actions>
+        <action mandatory="true">Present complete validation findings using ask_followup_question</action>
+        <action mandatory="true">Include:
+          - All discovered duplicate or related content with specific locations
+          - Impact analysis results
+          - Recommended approach (update existing, consolidate, or create new)
+          - List of all files that would be affected
+        </action>
+        <action mandatory="true">Wait for explicit user approval before making ANY changes</action>
       </actions>
     </step>
   </redundancy_prevention_workflow>
@@ -181,31 +237,74 @@ image: /img/social-share.jpg
     </guideline>
   </cohesion_guidelines>
   <documentation_update_protocol>
+    <mandatory_notice>
+      <enforcement>This protocol is MANDATORY for ALL updates to existing documentation</enforcement>
+      <consequence>Skipping any validation step will invalidate the entire update</consequence>
+    </mandatory_notice>
+    
     <overview>
-      When updating existing documentation, follow this protocol to maintain quality and prevent issues.
+      CRITICAL: When updating existing documentation, this protocol MUST be followed completely. No shortcuts allowed.
     </overview>
     
-    <pre_update_validation>
-      <step>Identify all documents that reference the content being updated</step>
-      <step>Check for dependent examples or tutorials that might need updating</step>
-      <step>Verify that the update won't invalidate existing instructions</step>
-      <step>Consider backward compatibility if documenting changed features</step>
+    <pre_update_validation status="MANDATORY">
+      <blocking_gate>You CANNOT begin updates until ALL validation steps are complete</blocking_gate>
+      <step mandatory="true">Run codebase_search to identify ALL documents that reference the content being updated</step>
+      <step mandatory="true">Create a dependency map showing:
+        - Which files reference this content
+        - Which examples depend on this content
+        - Which tutorials or guides link to this content
+      </step>
+      <step mandatory="true">Read EVERY dependent file to understand impact</step>
+      <step mandatory="true">Verify that the update won't invalidate ANY existing instructions</step>
+      <step mandatory="true">Document backward compatibility concerns if features have changed</step>
+      <step mandatory="true">Create a comprehensive update plan BEFORE making any changes</step>
     </pre_update_validation>
 
-    <update_impact_assessment>
-      <question>Will this update require changes to other documents?</question>
-      <question>Are there code examples that need to be updated?</question>
-      <question>Do any quickstart guides or tutorials reference this content?</question>
-      <question>Will this change affect the logical flow of the documentation?</question>
+    <update_impact_assessment status="MANDATORY">
+      <requirement>You MUST answer ALL questions with evidence before proceeding</requirement>
+      <question mandatory="true">Will this update require changes to other documents? List each file.</question>
+      <question mandatory="true">Are there code examples that need to be updated? Provide file paths.</question>
+      <question mandatory="true">Do any quickstart guides or tutorials reference this content? List them.</question>
+      <question mandatory="true">Will this change affect the logical flow of the documentation? Explain how.</question>
+      <question mandatory="true">Have you verified this won't create contradictions? Provide evidence.</question>
+      <validation_gate>
+        If ANY answer is "yes" or "maybe", you MUST:
+        1. Document all required changes
+        2. Get user approval for the full scope
+        3. Update ALL affected files in the correct order
+      </validation_gate>
     </update_impact_assessment>
 
-    <post_update_checklist>
-      <item>All cross-references have been updated</item>
-      <item>No broken links have been introduced</item>
-      <item>Terminology remains consistent across all affected documents</item>
-      <item>The update enhances rather than contradicts existing content</item>
-      <item>Version-specific information is properly handled</item>
+    <update_execution status="CONDITIONAL">
+      <condition>Only proceed after pre-update validation is complete and approved</condition>
+      <requirement>Updates must be made in dependency order to prevent broken states</requirement>
+      <steps>
+        <step>Update the primary content first</step>
+        <step>Update all dependent content in order of dependency</step>
+        <step>Verify each update before proceeding to the next</step>
+        <step>Test all cross-references after each change</step>
+      </steps>
+    </update_execution>
+
+    <post_update_checklist status="MANDATORY">
+      <requirement>EVERY item must be verified before considering the update complete</requirement>
+      <item mandatory="true">Re-run codebase_search to verify all references are still valid</item>
+      <item mandatory="true">Test EVERY cross-reference link in affected documents</item>
+      <item mandatory="true">Verify NO broken links have been introduced (use search for old paths)</item>
+      <item mandatory="true">Confirm terminology remains consistent across ALL affected documents</item>
+      <item mandatory="true">Verify the update enhances rather than contradicts existing content</item>
+      <item mandatory="true">Ensure version-specific information is properly isolated</item>
+      <item mandatory="true">Document what was changed and why in a change log</item>
     </post_update_checklist>
+
+    <final_validation_gate status="MANDATORY">
+      <requirement>Use ask_followup_question to confirm all updates are complete and validated</requirement>
+      <requirement>Provide a summary of:
+        - All files that were updated
+        - All validation checks performed
+        - Any remaining concerns or follow-up needed
+      </requirement>
+    </final_validation_gate>
   </documentation_update_protocol>
 
   <ask_before_proceeding>
