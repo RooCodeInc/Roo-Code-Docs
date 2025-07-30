@@ -34,7 +34,7 @@ The following experimental features are currently available:
 
 - [Concurrent File Edits](/features/experimental/concurrent-file-edits) - Edit multiple files in a single operation
 - [Power Steering](/features/experimental/power-steering) - Enhanced consistency in AI responses
-- [Prevent Editor Focus Disruption](/features/experimental/prevent-editor-focus-disruption) - Work uninterrupted while Roo edits files in the background
+- [Background Editing](/features/experimental/background-editing) - Work uninterrupted while Roo edits files in the background
 
 ---
 

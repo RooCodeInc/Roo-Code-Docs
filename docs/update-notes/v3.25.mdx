@@ -28,7 +28,7 @@ Create your own slash commands to automate repetitive workflows ([#6263](https:/
 
 Turn complex workflows into simple commands like `/deploy` or `/review` for faster development.
 
-> **📚 Documentation**: See [Slash Commands Guide](/docs/features/slash-commands) for detailed usage instructions.
+> **📚 Documentation**: See [Slash Commands Guide](/features/slash-commands) for detailed usage instructions.
 
 ### Message Queueing
 
@@ -41,11 +41,11 @@ Continue typing while Roo processes your requests with the new message queueing 
 
 Keeps your workflow smooth when you have multiple quick questions or corrections.
 
-> **📚 Documentation**: See [Message Queueing Guide](/docs/features/message-queueing) for detailed information.
+> **📚 Documentation**: See [Message Queueing Guide](/features/message-queueing) for detailed information.
 
 ### Image Support for read_file Tool
 
-The [`read_file`](/docs/advanced-usage/available-tools#read_file) tool now supports reading and analyzing images (thanks samhvw8!) ([#5172](https://github.com/RooCodeInc/Roo-Code/pull/5172)):
+The [`read_file`](/advanced-usage/available-tools/read-file) tool now supports reading and analyzing images (thanks samhvw8!) ([#5172](https://github.com/RooCodeInc/Roo-Code/pull/5172)):
 
 - **Multiple Formats**: Supports PNG, JPG, JPEG, GIF, WebP, SVG, BMP, ICO, and TIFF
 - **OCR Capabilities**: Extract text from screenshots and scanned documents
@@ -65,7 +65,7 @@ Gemini models can now access web content and perform Google searches for more ac
 
 Perfect for researching new libraries, verifying solutions, or getting current API information.
 
-> **📚 Documentation**: See [Gemini Provider Guide](/docs/providers/gemini) for setup and usage instructions.
+> **📚 Documentation**: See [Gemini Provider Guide](/providers/gemini) for setup and usage instructions.
 
 ### Quality of Life Improvements
 
@@ -88,7 +88,7 @@ Critical fixes that improve stability and compatibility:
 * **Multi-file Edit Fix**: Fixed issue where Git diff views interfered with file operations (thanks hassoncs, szermatt!) ([#6350](https://github.com/RooCodeInc/Roo-Code/pull/6350))
 * **Non-QWERTY Keyboard Support**: Fixed keyboard shortcuts for Dvorak, AZERTY, and other layouts (thanks shlgug!) ([#6162](https://github.com/RooCodeInc/Roo-Code/pull/6162))
 * **Mode Export/Import**: Fixed custom mode export to handle slug changes correctly ([#6186](https://github.com/RooCodeInc/Roo-Code/pull/6186))
-* **Hidden Directory Support**: [`list_files`](/docs/advanced-usage/available-tools#list_files) now properly shows contents of dot directories (thanks MuriloFP, avtc, zhang157686!) ([#5176](https://github.com/RooCodeInc/Roo-Code/pull/5176))
+* **Hidden Directory Support**: [`list_files`](/advanced-usage/available-tools/list-files) now properly shows contents of dot directories (thanks MuriloFP, avtc, zhang157686!) ([#5176](https://github.com/RooCodeInc/Roo-Code/pull/5176))
 * **Scrollbar Stability**: Fixed flickering scrollbar when streaming tables and code blocks ([#6266](https://github.com/RooCodeInc/Roo-Code/pull/6266))
 * **Settings Link Fix**: Restored working "View Settings" link in command permissions tooltip ([#6253](https://github.com/RooCodeInc/Roo-Code/pull/6253))
 * **@mention Parsing**: Fixed mentions to work in all input contexts including follow-up questions ([#6331](https://github.com/RooCodeInc/Roo-Code/pull/6331))
@@ -103,7 +103,7 @@ Critical fixes that improve stability and compatibility:
 
 ### Misc. Improvements
 
-* **Background Editing (Experimental)**: Work uninterrupted while Roo edits files in the background—no more losing focus from automatic diff views ([#6214](https://github.com/RooCodeInc/Roo-Code/pull/6214)). Files change silently while you keep coding, with diagnostics and error checking still active. See [Background Editing](/docs/features/experimental/background-editing) for details.
+* **Background Editing (Experimental)**: Work uninterrupted while Roo edits files in the background—no more losing focus from automatic diff views ([#6214](https://github.com/RooCodeInc/Roo-Code/pull/6214)). Files change silently while you keep coding, with diagnostics and error checking still active. See [Background Editing](/features/experimental/background-editing) for details.
 * **Security Update**: Updated form-data dependency to address security vulnerability ([#6332](https://github.com/RooCodeInc/Roo-Code/pull/6332))
 * **Contributor Updates**: Refreshed contributor acknowledgments across all localizations ([#6302](https://github.com/RooCodeInc/Roo-Code/pull/6302))
 * **Release Engineering**: Converted release engineer role to slash command for easier releases ([#6333](https://github.com/RooCodeInc/Roo-Code/pull/6333))
