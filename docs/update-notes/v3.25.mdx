@@ -80,6 +80,8 @@ Small changes that make a big difference in your daily workflow:
 * **Sticky Task Modes**: Tasks remember their last-used mode and restore it automatically ([#6177](https://github.com/RooCodeInc/Roo-Code/pull/6177))
 * **ESC Key Support**: Close popovers with ESC for better keyboard navigation ([#6175](https://github.com/RooCodeInc/Roo-Code/pull/6175))
 * **Improved Command Highlighting**: Only valid commands are highlighted in the input field ([#6336](https://github.com/RooCodeInc/Roo-Code/pull/6336))
+* **Subshell Validation**: Improved handling and validation of complex shell commands with subshells, preventing potential errors when using command substitution patterns
+* **Slash Command Icon Hover State**: Fixed the hover state for the slash command icon to provide better visual feedback during interactions
 
 ### Bug Fixes
 
@@ -96,10 +98,12 @@ Critical fixes that improve stability and compatibility:
 * **Command Highlighting Fix**: Fixed inconsistent slash command highlighting behavior ([#6325](https://github.com/RooCodeInc/Roo-Code/pull/6325))
 * **Text Wrapping**: Fixed text overflow for long command patterns in permissions UI ([#6255](https://github.com/RooCodeInc/Roo-Code/pull/6255))
 * **Cross-Platform Mode Export**: Windows path separators now convert correctly for Unix systems ([#6308](https://github.com/RooCodeInc/Roo-Code/pull/6308))
+* **Diff View Display**: Fixed an issue where the diff view wasn't showing before approval when background edits were disabled
 
 ### Provider Updates
 
 * **Prompt Caching for LiteLLM**: Reduce API costs and improve response times with caching support for Claude 3.5 Sonnet and compatible models (thanks MuriloFP, steve-gore-snapdocs!) ([#6074](https://github.com/RooCodeInc/Roo-Code/pull/6074))
+* **GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!)
 
 ### Misc. Improvements
 
@@ -108,31 +112,4 @@ Critical fixes that improve stability and compatibility:
 * **Contributor Updates**: Refreshed contributor acknowledgments across all localizations ([#6302](https://github.com/RooCodeInc/Roo-Code/pull/6302))
 * **Release Engineering**: Converted release engineer role to slash command for easier releases ([#6333](https://github.com/RooCodeInc/Roo-Code/pull/6333))
 * **PR Reviewer Improvements**: Made PR reviewer mode generic for any GitHub repository ([#6357](https://github.com/RooCodeInc/Roo-Code/pull/6357), [#6328](https://github.com/RooCodeInc/Roo-Code/pull/6328), [#6324](https://github.com/RooCodeInc/Roo-Code/pull/6324))
-
-## 3.25.1 (2025-07-29)
-
-This release adds a powerful new AI model to the Chutes AI provider and improves command execution reliability.
-
-### Provider Updates
-
-* **GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!) ([#6377](https://github.com/RooCodeInc/Roo-Code/pull/6377))
-
-### QOL Improvements
-
-* **Subshell Validation**: Improved handling and validation of complex shell commands with subshells, preventing potential errors when using command substitution patterns ([#6379](https://github.com/RooCodeInc/Roo-Code/pull/6379))
-
-## 3.25.2 (2025-07-29)
-
-This release fixes the diff view display when background edits are disabled, adds organization-level MCP controls, and improves UI interactions.
-
-### QOL Improvements
-
-* **Slash Command Icon Hover State**: Fixed the hover state for the slash command icon to provide better visual feedback during interactions ([#6388](https://github.com/RooCodeInc/Roo-Code/pull/6388))
-
-### Bug Fixes
-
-* **Diff View Display**: Fixed an issue where the diff view wasn't showing before approval when background edits were disabled ([#6386](https://github.com/RooCodeInc/Roo-Code/pull/6386))
-
-### Misc Improvements
-
-* **Organization MCP Controls**: Added support for managing MCP servers at the organization level, allowing centralized configuration across teams ([#6378](https://github.com/RooCodeInc/Roo-Code/pull/6378))
+* **Organization MCP Controls**: Added support for managing MCP servers at the organization level, allowing centralized configuration across teams
