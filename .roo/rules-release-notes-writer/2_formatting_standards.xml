@@ -196,7 +196,6 @@ Concluding sentence about the benefit.
       <step>Map new changes to appropriate sections</step>
       <step>Strip PR references from new items</step>
       <step>Use apply_diff to insert items at the end of each section</step>
-      <step>See 9_combined_notes_integration.xml for detailed workflow</step>
     </integration_approach>
   </combined_notes_updates>
 

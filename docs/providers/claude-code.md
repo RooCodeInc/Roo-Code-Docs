@@ -72,8 +72,6 @@ The provider integrates with Roo Code's interface, giving you the same experienc
 
 ## Configuration
 
-You only need to configure one optional setting:
-
 ### **Claude Code Path**
 - **Setting**: `claudeCodePath`
 - **Description**: Path to your Claude CLI executable.
@@ -82,6 +80,17 @@ You only need to configure one optional setting:
 
 **Example custom paths:**
 - macOS/Linux: `/usr/local/bin/claude` or `~/bin/claude`
+
+### **Max Output Tokens**
+- **Default**: 16,384 tokens (16k) - increased from previous 8k default
+- **Environment Variable**: `CLAUDE_CODE_MAX_OUTPUT_TOKENS`
+- **Description**: Controls the maximum number of tokens Claude can generate in a single response.
+- **When to change**: If you need longer responses or want to limit output length for cost/performance reasons.
+
+**Example configuration:**
+```bash
+export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32768  # Set to 32k tokens
+```
 
 ---
 
@@ -100,6 +109,17 @@ The specific models available depend on your Claude CLI subscription and plan.
 
 ---
 
+## Output Token Limits
+
+The Claude Code provider now defaults to 16,384 (16k) max output tokens, allowing for longer and more complete responses. This is particularly useful for:
+- Generating large code files
+- Detailed explanations and documentation
+- Complex refactoring operations
+- Multi-file changes
+
+You can customize this limit using the `CLAUDE_CODE_MAX_OUTPUT_TOKENS` environment variable if you need different limits for your use case.
+
+---
 
 ## Common Questions
 

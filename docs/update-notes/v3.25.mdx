@@ -67,6 +67,19 @@ Perfect for researching new libraries, verifying solutions, or getting current A
 
 > **📚 Documentation**: See [Gemini Provider Guide](/providers/gemini) for setup and usage instructions.
 
+### Context-Aware Prompt Enhancement
+
+Prompt enhancement now uses your conversation history for better suggestions (thanks liwilliam2021!) ([#6343](https://github.com/RooCodeInc/Roo-Code/pull/6343)):
+
+- **Smarter Suggestions**: Enhancement considers your last 10 messages to generate more relevant prompts
+- **Reduced Hallucinations**: Context awareness prevents the AI from making unfounded suggestions
+- **Flexible Configuration**: Use a separate API configuration for enhancement operations
+- **Toggle Control**: Enable or disable task history inclusion based on your needs
+
+To enable this feature: Settings → Prompts tab → Select "ENHANCE" → Check "Include task history in enhancement" for better context.
+
+> **📚 Documentation**: See [Prompt Enhancement Guide](/features/enhance-prompt) for configuration options.
+
 ### Quality of Life Improvements
 
 Small changes that make a big difference in your daily workflow:
@@ -80,8 +93,14 @@ Small changes that make a big difference in your daily workflow:
 * **Sticky Task Modes**: Tasks remember their last-used mode and restore it automatically ([#6177](https://github.com/RooCodeInc/Roo-Code/pull/6177))
 * **ESC Key Support**: Close popovers with ESC for better keyboard navigation ([#6175](https://github.com/RooCodeInc/Roo-Code/pull/6175))
 * **Improved Command Highlighting**: Only valid commands are highlighted in the input field ([#6336](https://github.com/RooCodeInc/Roo-Code/pull/6336))
-* **Subshell Validation**: Improved handling and validation of complex shell commands with subshells, preventing potential errors when using command substitution patterns
-* **Slash Command Icon Hover State**: Fixed the hover state for the slash command icon to provide better visual feedback during interactions
+* **Subshell Validation**: Improved handling and validation of complex shell commands with subshells, preventing potential errors when using command substitution patterns ([#6379](https://github.com/RooCodeInc/Roo-Code/pull/6379))
+* **Slash Command Icon Hover State**: Fixed the hover state for the slash command icon to provide better visual feedback during interactions ([#6388](https://github.com/RooCodeInc/Roo-Code/pull/6388))
+* **Cleaner Welcome View**: Gemini checkboxes are now hidden on the welcome screen for a cleaner interface ([#6415](https://github.com/RooCodeInc/Roo-Code/pull/6415))
+* **Slash Commands Documentation**: Added a direct link to slash commands documentation for easier access ([#6409](https://github.com/RooCodeInc/Roo-Code/pull/6409))
+* **Documentation Updates**: Clarified apply_diff tool descriptions to emphasize surgical edits ([#6278](https://github.com/RooCodeInc/Roo-Code/pull/6278))
+* **Task Resumption Message**: Improved LLM instructions by removing misleading message about resuming tasks (thanks KJ7LNW!) ([#5851](https://github.com/RooCodeInc/Roo-Code/pull/5851))
+* **AGENTS.md Support**: Added symlink support for AGENTS.md file loading ([#6326](https://github.com/RooCodeInc/Roo-Code/pull/6326))
+* **Marketplace Updates**: Auto-refresh marketplace data when organization settings change ([#6446](https://github.com/RooCodeInc/Roo-Code/pull/6446))
 
 ### Bug Fixes
 
@@ -98,12 +117,22 @@ Critical fixes that improve stability and compatibility:
 * **Command Highlighting Fix**: Fixed inconsistent slash command highlighting behavior ([#6325](https://github.com/RooCodeInc/Roo-Code/pull/6325))
 * **Text Wrapping**: Fixed text overflow for long command patterns in permissions UI ([#6255](https://github.com/RooCodeInc/Roo-Code/pull/6255))
 * **Cross-Platform Mode Export**: Windows path separators now convert correctly for Unix systems ([#6308](https://github.com/RooCodeInc/Roo-Code/pull/6308))
-* **Diff View Display**: Fixed an issue where the diff view wasn't showing before approval when background edits were disabled
+* **Diff View Display**: Fixed an issue where the diff view wasn't showing before approval when background edits were disabled ([#6386](https://github.com/RooCodeInc/Roo-Code/pull/6386))
+* **Chat Input Preservation**: Fixed an issue where clicking chat buttons would clear your typed message (thanks hassoncs!) ([#6222](https://github.com/RooCodeInc/Roo-Code/pull/6222))
+* **Image Queueing**: Fixed image queueing functionality that was not working properly ([#6414](https://github.com/RooCodeInc/Roo-Code/pull/6414))
+* **Claude Code Output Tokens**: Fixed truncated responses by increasing default max output tokens from 8k to 16k (thanks bpeterson1991!) ([#6312](https://github.com/RooCodeInc/Roo-Code/pull/6312))
+* **Execute Command Kill Button**: Fixed the kill button functionality for the execute_command tool ([#6457](https://github.com/RooCodeInc/Roo-Code/pull/6457))
+* **Token Counting**: Fixed accuracy issues by extracting text from messages using VSCode LM API (thanks NaccOll!) ([#6424](https://github.com/RooCodeInc/Roo-Code/pull/6424))
 
 ### Provider Updates
 
 * **Prompt Caching for LiteLLM**: Reduce API costs and improve response times with caching support for Claude 3.5 Sonnet and compatible models (thanks MuriloFP, steve-gore-snapdocs!) ([#6074](https://github.com/RooCodeInc/Roo-Code/pull/6074))
-* **GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!)
+* **GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!) ([#6377](https://github.com/RooCodeInc/Roo-Code/pull/6377))
+* **Doubao Provider**: Added support for ByteDance's AI model provider with full integration including API handling and embedding support (thanks AntiMoron!) ([#6345](https://github.com/RooCodeInc/Roo-Code/pull/6345))
+* **SambaNova Provider**: Integrated SambaNova as a new LLM provider offering high-speed inference and broader model selection (thanks snova-jorgep!) ([#6188](https://github.com/RooCodeInc/Roo-Code/pull/6188))
+* **Chutes AI**: Added zai-org/GLM-4.5-FP8 model support ([#6441](https://github.com/RooCodeInc/Roo-Code/pull/6441))
+* **OpenRouter**: Set horizon-alpha model max tokens to 32k ([#6470](https://github.com/RooCodeInc/Roo-Code/pull/6470))
+* **Databricks**: Added support for /invocations endpoints pattern (thanks adambrand!) ([#6317](https://github.com/RooCodeInc/Roo-Code/pull/6317))
 
 ### Misc. Improvements
 
@@ -112,4 +141,9 @@ Critical fixes that improve stability and compatibility:
 * **Contributor Updates**: Refreshed contributor acknowledgments across all localizations ([#6302](https://github.com/RooCodeInc/Roo-Code/pull/6302))
 * **Release Engineering**: Converted release engineer role to slash command for easier releases ([#6333](https://github.com/RooCodeInc/Roo-Code/pull/6333))
 * **PR Reviewer Improvements**: Made PR reviewer mode generic for any GitHub repository ([#6357](https://github.com/RooCodeInc/Roo-Code/pull/6357), [#6328](https://github.com/RooCodeInc/Roo-Code/pull/6328), [#6324](https://github.com/RooCodeInc/Roo-Code/pull/6324))
-* **Organization MCP Controls**: Added support for managing MCP servers at the organization level, allowing centralized configuration across teams
+* **Organization MCP Controls**: Added support for managing MCP servers at the organization level, allowing centralized configuration across teams ([#6378](https://github.com/RooCodeInc/Roo-Code/pull/6378))
+* **Extension Title Update**: Removed "(prev Roo Cline)" from the extension title across all languages ([#6426](https://github.com/RooCodeInc/Roo-Code/pull/6426))
+* **Translation Improvements**: Updated auto-translate prompt and added translation check action ([#6430](https://github.com/RooCodeInc/Roo-Code/pull/6430), [#6393](https://github.com/RooCodeInc/Roo-Code/pull/6393))
+* **Mode Configuration**: Updated PR reviewer rules and mode configuration ([#6391](https://github.com/RooCodeInc/Roo-Code/pull/6391), [#6428](https://github.com/RooCodeInc/Roo-Code/pull/6428))
+* **Navigator Global Error**: Resolved errors by updating mammoth and bluebird dependencies ([#6363](https://github.com/RooCodeInc/Roo-Code/pull/6363))
+* **Nightly Build Fixes**: Resolved marketplace freezing issues with separate changelog ([#6449](https://github.com/RooCodeInc/Roo-Code/pull/6449))
