@@ -192,24 +192,9 @@ const sidebars: SidebarsConfig = {
       href: 'https://github.com/RooCodeInc/Roo-Code/blob/main/CONTRIBUTING.md',
     },
     {
-      type: 'category',
-      label: 'Community',
-      items: [
-        'community/index',
-        {
-          type: 'category',
-          label: 'Projects',
-          items: [
-            'community/sparc',
-            'community/memory-bank',
-            'community/tips-and-tricks',
-            'community/dynamic-rules',
-            'community/roo-commander',
-            'community/maestro',
-            'community/roocabulary',
-          ],
-        },
-      ],
+      type: 'link',
+      label: 'Roocabulary (GitHub)',
+      href: 'https://github.com/cannuri/Roocabulary',
     },
     {
       type: 'category',
