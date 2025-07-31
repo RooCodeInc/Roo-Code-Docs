@@ -113,12 +113,6 @@ Four ways to switch modes:
 
 ---
 
-## Additional Modes
-
-Additional specialized modes may be available depending on your Roo Code configuration, including Test, Design Engineer, Release Engineer, Translate, Issue Fixer, Issue Writer, Integration Tester, PR Reviewer, and Docs Extractor modes. Check your mode selector for the complete list available in your installation.
-
----
-
 ## Customizing Modes
 
 Tailor Roo Code's behavior by customizing existing modes or creating new specialized assistants. Define tool access, file permissions, and behavior instructions to enforce team standards or create purpose-specific assistants. See [Custom Modes documentation](/features/custom-modes) for setup instructions.
