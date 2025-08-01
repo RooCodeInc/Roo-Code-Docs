@@ -158,6 +158,7 @@ const sidebars: SidebarsConfig = {
         'providers/anthropic',
         'providers/claude-code',
         'providers/bedrock',
+        'providers/cerebras',
         'providers/deepseek',
         'providers/chutes',
         'providers/gemini',
@@ -206,6 +207,7 @@ const sidebars: SidebarsConfig = {
           label: '3.25',
           items: [
             { type: 'doc', id: 'update-notes/v3.25', label: '3.25 Combined' },
+            { type: 'doc', id: 'update-notes/v3.25.5', label: '3.25.5' },
             { type: 'doc', id: 'update-notes/v3.25.4', label: '3.25.4' },
             { type: 'doc', id: 'update-notes/v3.25.3', label: '3.25.3' },
             { type: 'doc', id: 'update-notes/v3.25.2', label: '3.25.2' },

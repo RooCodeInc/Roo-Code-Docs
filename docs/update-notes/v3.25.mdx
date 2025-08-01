@@ -1,19 +1,19 @@
 ---
-description: Roo Code 3.25 introduces custom slash commands, Gemini web tools, image support, message queueing, and many quality-of-life improvements.
+description: Roo Code 3.25 introduces custom slash commands, Gemini web tools, image support, message queueing, Cerebras AI provider, cost limits, and many quality-of-life improvements.
 keywords:
   - roo code 3.25
   - custom slash commands
   - gemini tools
   - image support
   - message queueing
+  - cerebras provider
+  - cost limits
 image: /img/social-share.jpg
 ---
 
 # Roo Code 3.25 Release Notes
 
-## 3.25.0 (2025-07-29)
-
-This release brings powerful new capabilities to Roo Code, including custom slash commands for workflow automation, enhanced Gemini models with web access, comprehensive image support, and seamless message queueing for uninterrupted conversations.
+This release brings powerful new capabilities to Roo Code, including custom slash commands for workflow automation, enhanced Gemini models with web access, comprehensive image support, seamless message queueing for uninterrupted conversations, the new Cerebras AI provider, and auto-approved cost limits for budget control.
 
 ### Custom Slash Commands
 
@@ -80,6 +80,18 @@ To enable this feature: Settings → Prompts tab → Select "ENHANCE" → Check 
 
 > **📚 Documentation**: See [Prompt Enhancement Guide](/features/enhance-prompt) for configuration options.
 
+### Auto-approved Cost Limits
+
+We've introduced a new cost control feature in the auto-approve settings to help manage API spending:
+
+- **Budget Protection**: Set a maximum cost limit in your auto-approve settings to control total API spending
+- **Automatic Prompting**: Roo Code will prompt for approval when approaching your cost limit
+- **Complements Request Limits**: Works alongside existing request count limits for comprehensive control
+
+<img src="/img/v3.25.5/v3.25.5.png" alt="Auto-approve settings showing the new Max Cost field" width="600" />
+
+This feature provides peace of mind when using expensive models or running long sessions, ensuring you stay within budget. You can find this new "Max Cost" setting alongside the existing "Max Count" in the auto-approve configuration panel.
+
 ### Quality of Life Improvements
 
 Small changes that make a big difference in your daily workflow:
@@ -90,9 +102,11 @@ Small changes that make a big difference in your daily workflow:
   <img src="/img/v3.25.0/v3.25.0.png" alt="Mode Selector Popover with Search" width="600" />
 * **API Selector Popover Redesign**: Updated to match the new mode selector design with improved layout ([#6148](https://github.com/RooCodeInc/Roo-Code/pull/6148))
   <img src="/img/v3.25.0/v3.25.0-1.png" alt="API Configuration Selector Redesign" width="600" />
+* **Auto-approve UI**: Cleaner and more streamlined interface with improved localization
 * **Sticky Task Modes**: Tasks remember their last-used mode and restore it automatically ([#6177](https://github.com/RooCodeInc/Roo-Code/pull/6177))
 * **ESC Key Support**: Close popovers with ESC for better keyboard navigation ([#6175](https://github.com/RooCodeInc/Roo-Code/pull/6175))
 * **Improved Command Highlighting**: Only valid commands are highlighted in the input field ([#6336](https://github.com/RooCodeInc/Roo-Code/pull/6336))
+* **Command Validation**: Better handling of background execution (`&`) and subshell patterns like `(cmd1; cmd2)`
 * **Subshell Validation**: Improved handling and validation of complex shell commands with subshells, preventing potential errors when using command substitution patterns ([#6379](https://github.com/RooCodeInc/Roo-Code/pull/6379))
 * **Slash Command Icon Hover State**: Fixed the hover state for the slash command icon to provide better visual feedback during interactions ([#6388](https://github.com/RooCodeInc/Roo-Code/pull/6388))
 * **Cleaner Welcome View**: Gemini checkboxes are now hidden on the welcome screen for a cleaner interface ([#6415](https://github.com/RooCodeInc/Roo-Code/pull/6415))
@@ -106,6 +120,12 @@ Small changes that make a big difference in your daily workflow:
 
 Critical fixes that improve stability and compatibility:
 
+* **VB.NET Indexing**: Files are now properly indexed in large monorepos using fallback chunking
+* **Message Sending**: Restored functionality when clicking the save button
+* **Search/Replace Tolerance**: More forgiving of AI-generated diffs with extra `>` characters
+* **Qdrant Deletion**: Gracefully handles deletion errors to prevent indexing interruption
+* **LM Studio Context Length**: Models now correctly display their actual context length instead of "1"
+* **Claude Code Errors**: ENOENT errors now show helpful installation guidance
 * **Multi-file Edit Fix**: Fixed issue where Git diff views interfered with file operations (thanks hassoncs, szermatt!) ([#6350](https://github.com/RooCodeInc/Roo-Code/pull/6350))
 * **Non-QWERTY Keyboard Support**: Fixed keyboard shortcuts for Dvorak, AZERTY, and other layouts (thanks shlgug!) ([#6162](https://github.com/RooCodeInc/Roo-Code/pull/6162))
 * **Mode Export/Import**: Fixed custom mode export to handle slug changes correctly ([#6186](https://github.com/RooCodeInc/Roo-Code/pull/6186))
@@ -126,6 +146,7 @@ Critical fixes that improve stability and compatibility:
 
 ### Provider Updates
 
+* **Cerebras Provider**: Added support for Cerebras as a new AI provider with Qwen 3 Coder models, offering both free and paid tier options with automatic thinking token filtering
 * **Prompt Caching for LiteLLM**: Reduce API costs and improve response times with caching support for Claude 3.5 Sonnet and compatible models (thanks MuriloFP, steve-gore-snapdocs!) ([#6074](https://github.com/RooCodeInc/Roo-Code/pull/6074))
 * **Chutes AI - GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model to the Chutes AI provider with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!) ([#6377](https://github.com/RooCodeInc/Roo-Code/pull/6377))
 * **Doubao Provider**: Added support for ByteDance's AI model provider with full integration including API handling (thanks AntiMoron!) ([#6345](https://github.com/RooCodeInc/Roo-Code/pull/6345))
@@ -136,6 +157,10 @@ Critical fixes that improve stability and compatibility:
 
 ### Misc. Improvements
 
+* **Slash Command Interpolation**: Skip interpolation for non-existent commands
+* **Linter Coverage**: Applied to locale README files
+* **Cloud Service Events**: Migrated from callbacks to event-based architecture
+* **Website Updates**: Phase 1 improvements
 * **Background Editing (Experimental)**: Work uninterrupted while Roo edits files in the background—no more losing focus from automatic diff views ([#6214](https://github.com/RooCodeInc/Roo-Code/pull/6214)). Files change silently while you keep coding, with diagnostics and error checking still active. See [Background Editing](/features/experimental/background-editing) for details.
 * **Security Update**: Updated form-data dependency to address security vulnerability ([#6332](https://github.com/RooCodeInc/Roo-Code/pull/6332))
 * **Contributor Updates**: Refreshed contributor acknowledgments across all localizations ([#6302](https://github.com/RooCodeInc/Roo-Code/pull/6302))
