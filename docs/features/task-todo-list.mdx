@@ -79,7 +79,7 @@ Todo lists appear in multiple places:
 
    <img src="/img/task-todo-list/task-todo-list-2.png" alt="Interactive todo list tool block in chat" width="600" />
 
-3. **Environment Details**: Todo lists appear as a "REMINDERS" table in the environment_details section, giving the AI persistent access to current todo state
+3. **Environment Details**: Todo lists appear as a "REMINDERS" table in the environment_details section, giving the AI persistent access to current todo state. Note: If the `todoListEnabled` setting is disabled, the reminders section will not appear in environment details.
 
 ### Understanding Task Status
 
@@ -109,7 +109,16 @@ This is an architectural design decision where Roo Code maintains authority over
 
 ---
 
-## Auto-Approving Todo List Updates
+## Configuration
+
+### Disabling Todo Lists
+
+You can disable todo lists entirely through the `todoListEnabled` setting. When disabled:
+- Roo will not create todo lists for any tasks
+- The REMINDERS section will not appear in environment details
+- Existing todo lists will remain visible but won't be updated
+
+### Auto-Approving Todo List Updates
 
 You can enable automatic approval of todo list updates to reduce interruptions during long workflows. When enabled, Roo will automatically update task progress without requiring confirmation for each change.
 

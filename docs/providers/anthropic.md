@@ -36,10 +36,9 @@ Anthropic is an AI safety and research company that builds reliable, interpretab
 
 Roo Code supports the following Anthropic Claude models:
 
+*   `claude-opus-4-1-20250805`
 *   `claude-opus-4-20250514`
-*   `claude-opus-4-20250514:thinking` (Extended Thinking variant)
 *   `claude-sonnet-4-20250514` (Recommended)
-*   `claude-sonnet-4-20250514:thinking` (Extended Thinking variant)
 *   `claude-3-7-sonnet-20250219`
 *   `claude-3-7-sonnet-20250219:thinking` (Extended Thinking variant)
 *   `claude-3-5-sonnet-20241022`
@@ -63,7 +62,7 @@ See [Anthropic's Model Documentation](https://docs.anthropic.com/en/docs/about-c
 
 ## Tips and Notes
 
-*   **Prompt Caching:** Claude 3 models support [prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching), which can significantly reduce costs and latency for repeated prompts.
+*   **Prompt Caching:** Claude models support [prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching), which can significantly reduce costs and latency for repeated prompts.
 *   **Context Window:** Claude models have large context windows (200,000 tokens), allowing you to include a significant amount of code and context in your prompts.
 *   **Pricing:** Refer to the [Anthropic Pricing](https://www.anthropic.com/pricing) page for the latest pricing information.
 *   **Rate Limits:** Anthropic has strict rate limits based on [usage tiers](https://docs.anthropic.com/en/api/rate-limits#requirements-to-advance-tier). If you're repeatedly hitting rate limits, consider contacting Anthropic sales or accessing Claude through a different provider like [OpenRouter](/providers/openrouter) or [Requesty](/providers/requesty).
