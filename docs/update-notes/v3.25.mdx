@@ -96,6 +96,15 @@ This feature provides peace of mind when using expensive models or running long 
 
 Small changes that make a big difference in your daily workflow:
 
+* **Multi-Folder Workspace Support**: Code indexing now works correctly across all folders in multi-folder workspaces
+* **Checkpoint Timing**: Checkpoints now save before file changes are made, allowing easy undo of unwanted modifications
+* **Redesigned Task Header**: Cleaner, more intuitive interface with improved visual hierarchy
+* **Consistent Checkpoint Terminology**: Removed "Initial Checkpoint" terminology for better consistency
+* **Responsive Mode Dropdowns**: Mode selection dropdowns now resize properly with the window
+* **Performance Boost**: Significantly improved performance when processing long AI responses
+* **Cleaner Command Approval UI**: Simplified interface shows only unique command patterns
+* **Smart Todo List Reminder**: Todo list reminder now respects configuration settings
+* **Cleaner Task History**: Improved task history display showing more content (3 lines), up to 5 tasks in preview, and simplified footer
 * **Markdown Table Rendering**: Tables now display with proper formatting instead of raw markdown for better readability ([#6252](https://github.com/RooCodeInc/Roo-Code/pull/6252))
   <img src="/img/v3.25.0/v3.25.0-2.png" alt="Markdown table rendering in Roo Code" width="600" />
 * **Mode Selector Popover Redesign**: Improved layout with search functionality when you have many modes installed ([#6140](https://github.com/RooCodeInc/Roo-Code/pull/6140))
@@ -120,6 +129,9 @@ Small changes that make a big difference in your daily workflow:
 
 Critical fixes that improve stability and compatibility:
 
+* **Mode Name Validation**: Prevents empty mode names from causing YAML parsing errors
+* **Text Highlight Alignment**: Fixed misalignment in chat input area highlights
+* **MCP Server Setting**: Properly respects the "Enable MCP Server Creation" setting
 * **VB.NET Indexing**: Files are now properly indexed in large monorepos using fallback chunking
 * **Message Sending**: Restored functionality when clicking the save button
 * **Search/Replace Tolerance**: More forgiving of AI-generated diffs with extra `>` characters
@@ -147,6 +159,11 @@ Critical fixes that improve stability and compatibility:
 
 ### Provider Updates
 
+* **Claude Opus 4.1 Support**: Added support for the new Claude Opus 4.1 model across Anthropic, Claude Code, Bedrock, Vertex AI, and LiteLLM providers with 8192 max tokens, reasoning budget support, and prompt caching
+* **Z AI Provider**: Z AI (formerly Zhipu AI) is now available with GLM-4.5 series models, offering dual regional support for both international and mainland China users
+* **Fireworks AI Provider**: New provider offering hosted versions of popular open-source models like Kimi and Qwen
+* **Groq GPT-OSS Models**: Added GPT-OSS-120b and GPT-OSS-20b models with 131K context windows and support for tool use, browser search, code execution, and JSON object mode
+* **Cerebras GPT-OSS-120b**: Added OpenAI's GPT-OSS-120b model - free to use with 64K context and ~2800 tokens/sec
 * **Cerebras Provider**: Added support for Cerebras as a new AI provider with Qwen 3 Coder models, offering both free and paid tier options with automatic thinking token filtering
 * **Prompt Caching for LiteLLM**: Reduce API costs and improve response times with caching support for Claude 3.5 Sonnet and compatible models (thanks MuriloFP, steve-gore-snapdocs!) ([#6074](https://github.com/RooCodeInc/Roo-Code/pull/6074))
 * **Chutes AI - GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model to the Chutes AI provider with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!) ([#6377](https://github.com/RooCodeInc/Roo-Code/pull/6377))

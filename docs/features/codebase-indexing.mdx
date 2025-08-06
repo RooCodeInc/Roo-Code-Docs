@@ -139,6 +139,8 @@ The color of the icon indicates the state:
 - 🔴 **Red**: **Error**. An issue has occurred (e.g., failed to connect to Qdrant or the embedding provider). See the Troubleshooting section for help.
 - ⚪ **Gray**: **Standby**. The indexer is waiting for configuration or has been disabled.
 
+**Multi-Folder Workspaces**: In multi-folder workspaces, each folder maintains its own indexing status and configuration. The status icon reflects the combined state of all workspace folders.
+
 ### The Configuration Popover
 
 Clicking the status icon opens the main configuration popover. Here, you can view the detailed status and manage all settings.
@@ -239,6 +241,7 @@ The indexer respects your project's ignore patterns:
 - **Smart Updates**: Only reprocesses modified files
 - **Branch Aware**: Automatically handles Git branch switches
 - **Hash-based Caching**: Avoids reprocessing unchanged content
+- **Multi-Folder Workspaces**: Each folder in a multi-folder workspace maintains its own index with separate settings and status
 
 ---
 
@@ -336,7 +339,6 @@ The tool provides:
 ## Current Limitations
 
 - **File Size**: 1MB maximum per file
-- **Single Workspace**: One workspace indexed at a time
 - **External Dependencies**: Requires embedding provider + Qdrant
 - **Language Support**: Best results with Tree-sitter supported languages
 

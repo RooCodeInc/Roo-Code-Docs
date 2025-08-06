@@ -48,9 +48,8 @@ Roo Code supports the following models through Vertex AI (based on source code):
     *   `gemini-1.5-flash-002`
     *   `gemini-1.5-pro-002`
 *   **Anthropic Claude Models:**
-    *   `claude-opus-4@20250514:thinking`
+    *   `claude-opus-4-1@20250805`
     *   `claude-opus-4@20250514`
-    *   `claude-sonnet-4@20250514:thinking`
     *   `claude-sonnet-4@20250514`
     *   `claude-3-7-sonnet@20250219:thinking`
     *   `claude-3-7-sonnet@20250219`

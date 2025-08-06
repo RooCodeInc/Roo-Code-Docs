@@ -61,7 +61,7 @@ Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
 
 ## How Checkpoints Work
 
-Roo Code captures snapshots of your project's state using a shadow Git repository, separate from your main version control system. These snapshots, called checkpoints, automatically record changes throughout your AI-assisted workflow—whenever tasks begin, files change, or commands run.
+Roo Code captures snapshots of your project's state using a shadow Git repository, separate from your main version control system. These snapshots, called checkpoints, are automatically created **before** file modifications occur, ensuring you can always undo unwanted changes. Checkpoints are recorded throughout your AI-assisted workflow—when tasks begin, before files change, and before commands run.
 
 Checkpoints are stored as Git commits in the shadow repository, capturing:
 
@@ -77,12 +77,12 @@ Checkpoints are stored as Git commits in the shadow repository, capturing:
 
 Checkpoints are integrated directly into your workflow through the chat interface.
 
-Checkpoints appear directly in your chat history in two forms:
+Checkpoints appear directly in your chat history:
 
-- **Initial checkpoint** marks your starting project state
-   <img src="/img/checkpoints/checkpoints-1.png" alt="Initial checkpoint indicator in chat" width="500" />
+- **Task checkpoint** marks your starting project state
+   <img src="/img/checkpoints/checkpoints-1.png" alt="Task checkpoint indicator in chat" width="500" />
 
-- **Regular checkpoints** appear after file modifications or command execution
+- **Regular checkpoints** are created before file modifications or command execution, allowing easy undo of any changes
    <img src="/img/checkpoints/checkpoints-2.png" alt="Regular checkpoint indicator in chat" width="500" />
 
 Each checkpoint provides two primary functions:
@@ -128,6 +128,7 @@ To restore a project to a previous checkpoint state:
 - **External changes**: Modifications made outside of tasks (manual edits, other tools) aren't included
 - **Large files**: Very large binary files may impact performance
 - **Unsaved work**: Restoration will overwrite any unsaved changes in your workspace
+- **Timing**: Checkpoints are created before changes are applied, providing a safety net for all modifications
 
 ---
 
