@@ -96,6 +96,7 @@ This feature provides peace of mind when using expensive models or running long 
 
 Small changes that make a big difference in your daily workflow:
 
+* **Gemini 2.5 Pro Thinking Budget Flexibility**: The minimum thinking budget is reduced from 1024 to 128 tokens, perfect for tasks that need quick, focused responses without extensive reasoning. You'll need to manually adjust the thinking budget to 128 in your settings to take advantage of this feature.
 * **Multi-Folder Workspace Support**: Code indexing now works correctly across all folders in multi-folder workspaces
 * **Checkpoint Timing**: Checkpoints now save before file changes are made, allowing easy undo of unwanted modifications
 * **Redesigned Task Header**: Cleaner, more intuitive interface with improved visual hierarchy
@@ -129,6 +130,16 @@ Small changes that make a big difference in your daily workflow:
 
 Critical fixes that improve stability and compatibility:
 
+* **Memory Leak Fix**: Resolved a critical memory leak in long conversations that was causing excessive memory usage and grey screens. Virtual scrolling now limits viewport rendering and optimizes caching for stable performance regardless of conversation length.
+* **Disabled MCP Servers**: Fixed issue where disabled MCP servers were still starting processes and consuming resources. Disabled servers now truly stay disabled with clear status indicators and immediate cleanup when MCP is globally disabled.
+* **MCP Server Refresh**: Settings changes no longer trigger unnecessary MCP server refreshes
+* **Codebase Search**: The tool now correctly searches the entire workspace when using "." as the path
+* **Swift File Support**: Fixed VS Code crashes when indexing projects containing Swift files
+* **Context Management**: Model max tokens now intelligently capped at 20% of context window to prevent excessive condensing
+* **OpenAI Configuration**: Extra whitespace in base URLs no longer breaks model detection
+* **URL Fetching**: Better error recovery when fetching content from URLs
+* **Qdrant Recovery**: Code indexing automatically recovers when Qdrant becomes available after startup errors
+* **Chat Scrolling**: Eliminated scroll jitter during message streaming
 * **Mode Name Validation**: Prevents empty mode names from causing YAML parsing errors
 * **Text Highlight Alignment**: Fixed misalignment in chat input area highlights
 * **MCP Server Setting**: Properly respects the "Enable MCP Server Creation" setting
