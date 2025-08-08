@@ -177,6 +177,7 @@ const sidebars: SidebarsConfig = {
         'providers/openrouter',
         'providers/requesty',
         'providers/sambanova',
+        'providers/tars',
         'providers/unbound',
         'providers/vertex',
         'providers/vscode-lm',
