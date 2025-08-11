@@ -19,7 +19,7 @@ The IO Intelligence provider gives you access to a wide range of AI models, incl
 
 To use the IO Intelligence provider, you will need to add it to your `~/.roo/config.json` file.
 
-1.  **Get your API key**: You can get an API key from the [IO Intelligence website](https://www.io-intelligence.com/).
+1.  **Get your API key**: You can get an API key from the [IO Intelligence website](https://io.net/).
 2.  **Add the provider to your config**: Add the following to your `config.json` file:
 
 ```json
