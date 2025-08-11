@@ -126,6 +126,8 @@ Small changes that make a big difference in your daily workflow:
 * **Task Resumption Message**: Improved LLM instructions by removing misleading message about resuming tasks (thanks KJ7LNW!) ([#5851](https://github.com/RooCodeInc/Roo-Code/pull/5851))
 * **AGENTS.md Support**: Added symlink support for AGENTS.md file loading ([#6326](https://github.com/RooCodeInc/Roo-Code/pull/6326))
 * **Marketplace Updates**: Auto-refresh marketplace data when organization settings change ([#6446](https://github.com/RooCodeInc/Roo-Code/pull/6446))
+* **`codebase_search` Tool**: Clarified that the `path` parameter is optional and the tool searches the entire workspace by default
+* **Token Usage Reporting**: Fixed an issue where token usage and cost were underreported, providing more accurate cost tracking
 
 ### Bug Fixes
 
@@ -171,6 +173,9 @@ Critical fixes that improve stability and compatibility:
 * **Claude Code Output Tokens**: Fixed truncated responses by increasing default max output tokens from 8k to 16k (thanks bpeterson1991!) ([#6312](https://github.com/RooCodeInc/Roo-Code/pull/6312))
 * **Execute Command Kill Button**: Fixed the kill button functionality for the execute_command tool ([#6457](https://github.com/RooCodeInc/Roo-Code/pull/6457))
 * **Token Counting**: Fixed accuracy issues by extracting text from messages using VSCode LM API (thanks NaccOll!) ([#6424](https://github.com/RooCodeInc/Roo-Code/pull/6424))
+* **Tool Repetition Detector**: Fixed a bug where setting the "Errors and Repetition Limit" to 1 would incorrectly block the first tool call
+* **`max_tokens` Calculation**: Fixed an error for models with very large context windows where requests would fail due to incorrect calculation of maximum output tokens
+* **AWS Bedrock Connection**: Fixed a connection issue when using AWS Bedrock with LiteLLM
 
 ### Provider Updates
 
@@ -195,6 +200,8 @@ Critical fixes that improve stability and compatibility:
 * **Horizon Beta Stealth Model via OpenRouter**: Optimized support for OpenRouter's new stealth model Horizon Beta with 32k max tokens for better response times. Thanks to OpenRouter for providing this free, improved version of Horizon Alpha!
 * **Type Definitions**: Updated @roo-code/types to v1.41.0 for latest type compatibility
 * **Databricks**: Added support for /invocations endpoints pattern (thanks adambrand!) ([#6317](https://github.com/RooCodeInc/Roo-Code/pull/6317))
+* **Codex Mini Model Support**: Added support for the `codex-mini-latest` model in the OpenAI Native provider
+* **IO Intelligence Provider**: Added IO Intelligence as a new provider, giving users access to a wide range of AI models
 
 ### Misc. Improvements
 
