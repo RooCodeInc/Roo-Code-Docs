@@ -134,7 +134,6 @@ const sidebars: SidebarsConfig = {
             'advanced-usage/available-tools/read-file',
             'advanced-usage/available-tools/search-files',
             'advanced-usage/available-tools/search-and-replace',
-            'advanced-usage/available-tools/submit-user-message',
             'advanced-usage/available-tools/switch-mode',
             'advanced-usage/available-tools/update-todo-list',
             'advanced-usage/available-tools/use-mcp-tool',
