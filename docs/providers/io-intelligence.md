@@ -42,4 +42,4 @@ The IO Intelligence provider supports the following models:
 *   `qwen-2-72b`
 *   `mistral-large`
 
-You can specify which model to use in your API configuration profiles or by using the `@` symbol in the chat interface (e.g., `@io-intelligence/llama-3-70b`).
+You can specify which model to use in your API configuration profiles.
