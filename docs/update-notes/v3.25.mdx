@@ -96,6 +96,9 @@ This feature provides peace of mind when using expensive models or running long 
 
 Small changes that make a big difference in your daily workflow:
 
+* **Sonnet 1M Context Support**: Enable 1M token context window for Claude 3.5 Sonnet when using AWS Bedrock, allowing you to process much larger documents and have longer conversations
+* **Internationalization**: The Account button now displays in your selected language instead of always showing in English
+* **Agent File Flexibility**: Roo Code now recognizes both AGENT.md and AGENTS.md files for agent rules, with AGENTS.md checked first for compatibility
 * **Chat Input Focus**: The chat input now automatically focuses when creating a new chat via the + button, allowing you to start typing immediately
 * **Gemini 2.5 Pro Thinking Budget Flexibility**: The minimum thinking budget is reduced from 1024 to 128 tokens, perfect for tasks that need quick, focused responses without extensive reasoning. You'll need to manually adjust the thinking budget to 128 in your settings to take advantage of this feature.
 * **Multi-Folder Workspace Support**: Code indexing now works correctly across all folders in multi-folder workspaces
@@ -176,6 +179,7 @@ Critical fixes that improve stability and compatibility:
 * **Tool Repetition Detector**: Fixed a bug where setting the "Errors and Repetition Limit" to 1 would incorrectly block the first tool call
 * **`max_tokens` Calculation**: Fixed an error for models with very large context windows where requests would fail due to incorrect calculation of maximum output tokens
 * **AWS Bedrock Connection**: Fixed a connection issue when using AWS Bedrock with LiteLLM
+* **Search Tool Reliability**: Fixed the search_files tool failing when encountering permission-denied files - it now continues working and returns results from accessible files
 
 ### Provider Updates
 
@@ -202,6 +206,7 @@ Critical fixes that improve stability and compatibility:
 * **Databricks**: Added support for /invocations endpoints pattern (thanks adambrand!) ([#6317](https://github.com/RooCodeInc/Roo-Code/pull/6317))
 * **Codex Mini Model Support**: Added support for the `codex-mini-latest` model in the OpenAI Native provider
 * **IO Intelligence Provider**: Added IO Intelligence as a new provider, giving users access to a wide range of AI models
+* **OpenAI**: Removed the deprecated GPT-4.5 Preview model from available options as it was removed from the OpenAI API
 
 ### Misc. Improvements
 
