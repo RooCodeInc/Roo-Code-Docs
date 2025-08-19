@@ -1,7 +1,8 @@
 ---
-description: Roo Code 3.25 introduces custom slash commands, Gemini web tools, image support, message queueing, Cerebras AI provider, cost limits, and many quality-of-life improvements.
+description: Roo Code 3.25 introduces Sonic stealth model with 262K context, custom slash commands, Gemini web tools, image support, message queueing, Cerebras AI provider, cost limits, and many quality-of-life improvements.
 keywords:
   - roo code 3.25
+  - sonic model
   - custom slash commands
   - gemini tools
   - image support
@@ -13,7 +14,7 @@ image: /img/social-share.jpg
 
 # Roo Code 3.25 Release Notes
 
-This release brings powerful new capabilities to Roo Code, including custom slash commands for workflow automation, enhanced Gemini models with web access, comprehensive image support, seamless message queueing for uninterrupted conversations, the new Cerebras AI provider, and auto-approved cost limits for budget control.
+This release brings powerful new capabilities to Roo Code, including the Sonic stealth model with 262,144-token context and 72-hour free access, custom slash commands for workflow automation, enhanced Gemini models with web access, comprehensive image support, seamless message queueing for uninterrupted conversations, the new Cerebras AI provider, and auto-approved cost limits for budget control.
 
 ### Custom Slash Commands
 
@@ -194,9 +195,15 @@ Critical fixes that improve stability and compatibility:
 * **Native Ollama API**: Fixed Ollama models to use native API instead of OpenAI compatibility layer for improved performance and reliability
 * **Terminal Reuse**: Fixed terminal reuse logic to properly handle terminal lifecycle management
 * **LM Studio Models**: Fixed duplicate model entries by implementing case-insensitive deduplication, ensuring models appear only once in the provider configuration
+* **Reasoning Usage**: Fixed enableReasoningEffort setting not being respected when determining reasoning usage, avoiding unintended reasoning costs
 
 ### Provider Updates
 
+* **Sonic Model Integration**: Added support for the Sonic stealth model through Roo Code Cloud provider:
+  - 262,144-token context window for processing large documents and codebases
+  - Free 72-hour access period for evaluation
+  - Thinking token controls for managing reasoning budget
+  - Max output tokens increased to 16,384 for longer responses
 * **GPT-5 Model Support**: Added support for OpenAI's latest GPT-5 model family:
   - `gpt-5-2025-08-07`: The full GPT-5 model, now set as the default for OpenAI Native provider
   - `gpt-5-mini-2025-08-07`: A smaller, faster variant for quick responses
@@ -243,3 +250,7 @@ Critical fixes that improve stability and compatibility:
 * **Navigator Global Error**: Resolved errors by updating mammoth and bluebird dependencies ([#6363](https://github.com/RooCodeInc/Roo-Code/pull/6363))
 * **Nightly Build Fixes**: Resolved marketplace freezing issues with separate changelog ([#6449](https://github.com/RooCodeInc/Roo-Code/pull/6449))
 * **Cloud Provider Profile Sync**: Added support for syncing provider profiles from the cloud, enabling automatic synchronization across devices and team collaboration
+
+### Documentation Updates
+
+* **ask_followup_question Tool**: Simplified the prompt guidance for clearer authoring, making it faster to create effective follow-up questions
