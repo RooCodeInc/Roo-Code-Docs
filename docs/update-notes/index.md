@@ -19,6 +19,7 @@ This section contains notes about recent updates to Roo Code, listed by version 
 
 ## Version 3.25
 
+*   [3.25.20](/update-notes/v3.25.20) (2025-08-20)
 *   [3.25.19](/update-notes/v3.25.19) (2025-08-19)
 *   [3.25.18](/update-notes/v3.25.18) (2025-08-19)
 *   [3.25.17](/update-notes/v3.25.17) (2025-08-18)
