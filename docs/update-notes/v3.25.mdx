@@ -97,33 +97,33 @@ This feature provides peace of mind when using expensive models or running long 
 
 Small changes that make a big difference in your daily workflow:
 
-* **Sonnet 1M Context Support**: Enable 1M token context window for Claude 3.5 Sonnet and Claude Sonnet 4 when using AWS Bedrock, allowing you to process much larger documents and have longer conversations
-* **Internationalization**: The Account button now displays in your selected language instead of always showing in English
-* **Agent File Flexibility**: Roo Code now recognizes both AGENT.md and AGENTS.md files for agent rules, with AGENTS.md checked first for compatibility
-* **SEO Improvements**: Enhanced website discoverability with proper metadata and social media preview cards
-* **Sitemap Generation**: Implemented TypeScript-based sitemap generation for better search engine indexing
-* **Chat Input Focus**: The chat input now automatically focuses when creating a new chat via the + button, allowing you to start typing immediately
-* **Gemini 2.5 Pro Thinking Budget Flexibility**: The minimum thinking budget is reduced from 1024 to 128 tokens, perfect for tasks that need quick, focused responses without extensive reasoning. You'll need to manually adjust the thinking budget to 128 in your settings to take advantage of this feature.
-* **Multi-Folder Workspace Support**: Code indexing now works correctly across all folders in multi-folder workspaces
-* **Checkpoint Timing**: Checkpoints now save before file changes are made, allowing easy undo of unwanted modifications
-* **Redesigned Task Header**: Cleaner, more intuitive interface with improved visual hierarchy
-* **Consistent Checkpoint Terminology**: Removed "Initial Checkpoint" terminology for better consistency
-* **Responsive Mode Dropdowns**: Mode selection dropdowns now resize properly with the window
-* **Performance Boost**: Significantly improved performance when processing long AI responses
-* **Cleaner Command Approval UI**: Simplified interface shows only unique command patterns
-* **Smart Todo List Reminder**: Todo list reminder now respects configuration settings
-* **Cleaner Task History**: Improved task history display showing more content (3 lines), up to 5 tasks in preview, and simplified footer
+* **Sonnet 1M Context Support**: Enable 1M token context window for Claude 3.5 Sonnet and Claude Sonnet 4 when using AWS Bedrock, allowing you to process much larger documents and have longer conversations ([#7032](https://github.com/RooCodeInc/Roo-Code/pull/7032))
+* **Internationalization**: The Account button now displays in your selected language instead of always showing in English (thanks zhangtony239!) ([#6978](https://github.com/RooCodeInc/Roo-Code/pull/6978))
+* **Agent File Flexibility**: Roo Code now recognizes both AGENT.md and AGENTS.md files for agent rules, with AGENTS.md checked first for compatibility (thanks Brendan-Z!) ([#6913](https://github.com/RooCodeInc/Roo-Code/pull/6913))
+* **SEO Improvements**: Enhanced website discoverability with proper metadata and social media preview cards (thanks elianiva, abumalick!) ([#7096](https://github.com/RooCodeInc/Roo-Code/pull/7096))
+* **Sitemap Generation**: Implemented TypeScript-based sitemap generation for better search engine indexing (thanks abumalick!) ([#6206](https://github.com/RooCodeInc/Roo-Code/pull/6206))
+* **Chat Input Focus**: The chat input now automatically focuses when creating a new chat via the + button, allowing you to start typing immediately ([#6689](https://github.com/RooCodeInc/Roo-Code/pull/6689))
+* **Gemini 2.5 Pro Thinking Budget Flexibility**: The minimum thinking budget is reduced from 1024 to 128 tokens, perfect for tasks that need quick, focused responses without extensive reasoning. You'll need to manually adjust the thinking budget to 128 in your settings to take advantage of this feature. ([#6588](https://github.com/RooCodeInc/Roo-Code/pull/6588))
+* **Multi-Folder Workspace Support**: Code indexing now works correctly across all folders in multi-folder workspaces (thanks NaccOll!) ([#6204](https://github.com/RooCodeInc/Roo-Code/pull/6204))
+* **Checkpoint Timing**: Checkpoints now save before file changes are made, allowing easy undo of unwanted modifications (thanks NaccOll!) ([#6359](https://github.com/RooCodeInc/Roo-Code/pull/6359))
+* **Redesigned Task Header**: Cleaner, more intuitive interface with improved visual hierarchy (thanks brunobergher!) ([#6561](https://github.com/RooCodeInc/Roo-Code/pull/6561))
+* **Consistent Checkpoint Terminology**: Removed "Initial Checkpoint" terminology for better consistency ([#6643](https://github.com/RooCodeInc/Roo-Code/pull/6643))
+* **Responsive Mode Dropdowns**: Mode selection dropdowns now resize properly with the window (thanks AyazKaan!) ([#6422](https://github.com/RooCodeInc/Roo-Code/pull/6422))
+* **Performance Boost**: Significantly improved performance when processing long AI responses (thanks qdaxb!) ([#5341](https://github.com/RooCodeInc/Roo-Code/pull/5341))
+* **Cleaner Command Approval UI**: Simplified interface shows only unique command patterns ([#6623](https://github.com/RooCodeInc/Roo-Code/pull/6623))
+* **Smart Todo List Reminder**: Todo list reminder now respects configuration settings (thanks NaccOll!) ([#6411](https://github.com/RooCodeInc/Roo-Code/pull/6411))
+* **Cleaner Task History**: Improved task history display showing more content (3 lines), up to 5 tasks in preview, and simplified footer ([#6687](https://github.com/RooCodeInc/Roo-Code/pull/6687))
 * **Markdown Table Rendering**: Tables now display with proper formatting instead of raw markdown for better readability ([#6252](https://github.com/RooCodeInc/Roo-Code/pull/6252))
   <img src="/img/v3.25.0/v3.25.0-2.png" alt="Markdown table rendering in Roo Code" width="600" />
 * **Mode Selector Popover Redesign**: Improved layout with search functionality when you have many modes installed ([#6140](https://github.com/RooCodeInc/Roo-Code/pull/6140))
   <img src="/img/v3.25.0/v3.25.0.png" alt="Mode Selector Popover with Search" width="600" />
 * **API Selector Popover Redesign**: Updated to match the new mode selector design with improved layout ([#6148](https://github.com/RooCodeInc/Roo-Code/pull/6148))
   <img src="/img/v3.25.0/v3.25.0-1.png" alt="API Configuration Selector Redesign" width="600" />
-* **Auto-approve UI**: Cleaner and more streamlined interface with improved localization
+* **Auto-approve UI**: Cleaner and more streamlined interface with improved localization ([#6538](https://github.com/RooCodeInc/Roo-Code/pull/6538))
 * **Sticky Task Modes**: Tasks remember their last-used mode and restore it automatically ([#6177](https://github.com/RooCodeInc/Roo-Code/pull/6177))
 * **ESC Key Support**: Close popovers with ESC for better keyboard navigation ([#6175](https://github.com/RooCodeInc/Roo-Code/pull/6175))
 * **Improved Command Highlighting**: Only valid commands are highlighted in the input field ([#6336](https://github.com/RooCodeInc/Roo-Code/pull/6336))
-* **Command Validation**: Better handling of background execution (`&`) and subshell patterns like `(cmd1; cmd2)`
+* **Command Validation**: Better handling of background execution (`&`) and subshell patterns like `(cmd1; cmd2)` ([#6486](https://github.com/RooCodeInc/Roo-Code/pull/6486))
 * **Subshell Validation**: Improved handling and validation of complex shell commands with subshells, preventing potential errors when using command substitution patterns ([#6379](https://github.com/RooCodeInc/Roo-Code/pull/6379))
 * **Slash Command Icon Hover State**: Fixed the hover state for the slash command icon to provide better visual feedback during interactions ([#6388](https://github.com/RooCodeInc/Roo-Code/pull/6388))
 * **Cleaner Welcome View**: Gemini checkboxes are now hidden on the welcome screen for a cleaner interface ([#6415](https://github.com/RooCodeInc/Roo-Code/pull/6415))
@@ -132,45 +132,45 @@ Small changes that make a big difference in your daily workflow:
 * **Task Resumption Message**: Improved LLM instructions by removing misleading message about resuming tasks (thanks KJ7LNW!) ([#5851](https://github.com/RooCodeInc/Roo-Code/pull/5851))
 * **AGENTS.md Support**: Added symlink support for AGENTS.md file loading ([#6326](https://github.com/RooCodeInc/Roo-Code/pull/6326))
 * **Marketplace Updates**: Auto-refresh marketplace data when organization settings change ([#6446](https://github.com/RooCodeInc/Roo-Code/pull/6446))
-* **`codebase_search` Tool**: Clarified that the `path` parameter is optional and the tool searches the entire workspace by default
-* **Token Usage Reporting**: Fixed an issue where token usage and cost were underreported, providing more accurate cost tracking
-* **Enhanced Task History**: Made "enhance with task history" default to true for better context retention in conversations
-* **Improved Scrollbar**: Fixed scrollbar jumping in long conversations by removing the 500-message limit
+* **`codebase_search` Tool**: Clarified that the `path` parameter is optional and the tool searches the entire workspace by default ([#6877](https://github.com/RooCodeInc/Roo-Code/pull/6877))
+* **Token Usage Reporting**: Fixed an issue where token usage and cost were underreported, providing more accurate cost tracking (thanks chrarnoldus!) ([#6122](https://github.com/RooCodeInc/Roo-Code/pull/6122))
+* **Enhanced Task History**: Made "enhance with task history" default to true for better context retention in conversations (thanks liwilliam2021!) ([#7140](https://github.com/RooCodeInc/Roo-Code/pull/7140))
+* **Improved Scrollbar**: Fixed scrollbar jumping in long conversations by removing the 500-message limit ([#7064](https://github.com/RooCodeInc/Roo-Code/pull/7064))
 
 ### Bug Fixes
 
 Critical fixes that improve stability and compatibility:
 
-* **Scrollbar Jumping**: Fixed the frustrating scrollbar jumping issue in long conversations over 500 messages
-* **Multi-Folder Workspaces**: Fixed workspace path handling and "file not found" errors in multi-folder VS Code workspaces
-* **Task Execution Stability**: Improved stability during long-running tasks, helping with the "grey screen" issue
-* **Provider Settings Save Button**: The save button now properly enables when changing provider dropdowns and checkboxes
-* **XML Entity Decoding**: Fixed apply_diff tool failures when processing files with special characters like "&"
-* **Settings Display**: Fixed Max Requests and Max Cost values not displaying in the settings UI
-* **Context Condensing Indicator**: Fixed the condensing indicator incorrectly persisting when switching tasks
-* **Token Calculation**: Fixed rounding errors that prevented certain models like GLM-4.5 from working properly by ensuring max output tokens are correctly rounded up
-* **XML Parsing**: Fixed errors when using the apply_diff tool with complex XML files containing special characters by implementing proper CDATA sections
-* **MCP Error Messages**: Fixed an issue where MCP server errors displayed raw translation keys instead of proper error messages
-* **Memory Leak Fix**: Resolved a critical memory leak in long conversations that was causing excessive memory usage and grey screens. Virtual scrolling now limits viewport rendering and optimizes caching for stable performance regardless of conversation length.
-* **Disabled MCP Servers**: Fixed issue where disabled MCP servers were still starting processes and consuming resources. Disabled servers now truly stay disabled with clear status indicators and immediate cleanup when MCP is globally disabled.
-* **MCP Server Refresh**: Settings changes no longer trigger unnecessary MCP server refreshes
-* **Codebase Search**: The tool now correctly searches the entire workspace when using "." as the path
-* **Swift File Support**: Fixed VS Code crashes when indexing projects containing Swift files
-* **Context Management**: Model max tokens now intelligently capped at 20% of context window to prevent excessive condensing
-* **OpenAI Configuration**: Extra whitespace in base URLs no longer breaks model detection
-* **URL Fetching**: Better error recovery when fetching content from URLs
-* **Qdrant Recovery**: Code indexing automatically recovers when Qdrant becomes available after startup errors
-* **Chat Scrolling**: Eliminated scroll jitter during message streaming
-* **Mode Name Validation**: Prevents empty mode names from causing YAML parsing errors
-* **Text Highlight Alignment**: Fixed misalignment in chat input area highlights
-* **MCP Server Setting**: Properly respects the "Enable MCP Server Creation" setting
-* **VB.NET Indexing**: Files are now properly indexed in large monorepos using fallback chunking
-* **Message Sending**: Restored functionality when clicking the save button
-* **Search/Replace Tolerance**: More forgiving of AI-generated diffs with extra `>` characters
-* **Qdrant Deletion**: Gracefully handles deletion errors to prevent indexing interruption
-* **LM Studio Context Length**: Models now correctly display their actual context length instead of "1"
-* **Claude Code Errors**: ENOENT errors now show helpful installation guidance
-* **Claude Code Error Handling**: Fixed "spawn claude ENOENT" error when using Claude Code provider, now provides better error handling and installation guidance (thanks JamieJ1!)
+* **Scrollbar Jumping**: Fixed the frustrating scrollbar jumping issue in long conversations over 500 messages (thanks shlgug, adambrand!) ([#7064](https://github.com/RooCodeInc/Roo-Code/pull/7064))
+* **Multi-Folder Workspaces**: Fixed workspace path handling and "file not found" errors in multi-folder VS Code workspaces (thanks NaccOll!) ([#6903](https://github.com/RooCodeInc/Roo-Code/pull/6903), [#6902](https://github.com/RooCodeInc/Roo-Code/pull/6902))
+* **Task Execution Stability**: Improved stability during long-running tasks, helping with the "grey screen" issue (thanks catrielmuller, MuriloFP!) ([#7035](https://github.com/RooCodeInc/Roo-Code/pull/7035))
+* **Provider Settings Save Button**: The save button now properly enables when changing provider dropdowns and checkboxes ([#7113](https://github.com/RooCodeInc/Roo-Code/pull/7113))
+* **XML Entity Decoding**: Fixed apply_diff tool failures when processing files with special characters like "&" (thanks indiesewell!) ([#7108](https://github.com/RooCodeInc/Roo-Code/pull/7108))
+* **Settings Display**: Fixed Max Requests and Max Cost values not displaying in the settings UI (thanks chrarnoldus, possible055!) ([#6925](https://github.com/RooCodeInc/Roo-Code/pull/6925))
+* **Context Condensing Indicator**: Fixed the condensing indicator incorrectly persisting when switching tasks (thanks f14XuanLv!) ([#6922](https://github.com/RooCodeInc/Roo-Code/pull/6922))
+* **Token Calculation**: Fixed rounding errors that prevented certain models like GLM-4.5 from working properly by ensuring max output tokens are correctly rounded up (thanks markp018!) ([#6808](https://github.com/RooCodeInc/Roo-Code/pull/6808))
+* **XML Parsing**: Fixed errors when using the apply_diff tool with complex XML files containing special characters by implementing proper CDATA sections ([#6811](https://github.com/RooCodeInc/Roo-Code/pull/6811))
+* **MCP Error Messages**: Fixed an issue where MCP server errors displayed raw translation keys instead of proper error messages ([#6821](https://github.com/RooCodeInc/Roo-Code/pull/6821))
+* **Memory Leak Fix**: Resolved a critical memory leak in long conversations that was causing excessive memory usage and grey screens. Virtual scrolling now limits viewport rendering and optimizes caching for stable performance regardless of conversation length. (thanks xyOz-dev!) ([#6697](https://github.com/RooCodeInc/Roo-Code/pull/6697))
+* **Disabled MCP Servers**: Fixed issue where disabled MCP servers were still starting processes and consuming resources. Disabled servers now truly stay disabled with clear status indicators and immediate cleanup when MCP is globally disabled. ([#6084](https://github.com/RooCodeInc/Roo-Code/pull/6084))
+* **MCP Server Refresh**: Settings changes no longer trigger unnecessary MCP server refreshes ([#6779](https://github.com/RooCodeInc/Roo-Code/pull/6779))
+* **Codebase Search**: The tool now correctly searches the entire workspace when using "." as the path ([#6517](https://github.com/RooCodeInc/Roo-Code/pull/6517))
+* **Swift File Support**: Fixed VS Code crashes when indexing projects containing Swift files (thanks niteshbalusu11, sealad886!) ([#6724](https://github.com/RooCodeInc/Roo-Code/pull/6724))
+* **Context Management**: Model max tokens now intelligently capped at 20% of context window to prevent excessive condensing ([#6761](https://github.com/RooCodeInc/Roo-Code/pull/6761))
+* **OpenAI Configuration**: Extra whitespace in base URLs no longer breaks model detection (thanks vauhochzett!) ([#6560](https://github.com/RooCodeInc/Roo-Code/pull/6560))
+* **URL Fetching**: Better error recovery when fetching content from URLs (thanks QuinsZouls!) ([#6635](https://github.com/RooCodeInc/Roo-Code/pull/6635))
+* **Qdrant Recovery**: Code indexing automatically recovers when Qdrant becomes available after startup errors ([#6661](https://github.com/RooCodeInc/Roo-Code/pull/6661))
+* **Chat Scrolling**: Eliminated scroll jitter during message streaming ([#6780](https://github.com/RooCodeInc/Roo-Code/pull/6780))
+* **Mode Name Validation**: Prevents empty mode names from causing YAML parsing errors (thanks kfxmvp!) ([#5767](https://github.com/RooCodeInc/Roo-Code/pull/5767))
+* **Text Highlight Alignment**: Fixed misalignment in chat input area highlights (thanks NaccOll!) ([#6648](https://github.com/RooCodeInc/Roo-Code/pull/6648))
+* **MCP Server Setting**: Properly respects the "Enable MCP Server Creation" setting (thanks characharm!) ([#6613](https://github.com/RooCodeInc/Roo-Code/pull/6613))
+* **VB.NET Indexing**: Files are now properly indexed in large monorepos using fallback chunking (thanks JensvanZutphen!) ([#6552](https://github.com/RooCodeInc/Roo-Code/pull/6552))
+* **Message Sending**: Restored functionality when clicking the save button ([#6487](https://github.com/RooCodeInc/Roo-Code/pull/6487))
+* **Search/Replace Tolerance**: More forgiving of AI-generated diffs with extra `>` characters ([#6537](https://github.com/RooCodeInc/Roo-Code/pull/6537))
+* **Qdrant Deletion**: Gracefully handles deletion errors to prevent indexing interruption ([#6296](https://github.com/RooCodeInc/Roo-Code/pull/6296))
+* **LM Studio Context Length**: Models now correctly display their actual context length instead of "1" (thanks pwilkin, Angular-Angel!) ([#6183](https://github.com/RooCodeInc/Roo-Code/pull/6183))
+* **Claude Code Errors**: ENOENT errors now show helpful installation guidance (thanks JamieJ1!) ([#5867](https://github.com/RooCodeInc/Roo-Code/pull/5867))
+* **Claude Code Error Handling**: Fixed "spawn claude ENOENT" error when using Claude Code provider, now provides better error handling and installation guidance (thanks JamieJ1!) ([#6565](https://github.com/RooCodeInc/Roo-Code/pull/6565))
 * **Multi-file Edit Fix**: Fixed issue where Git diff views interfered with file operations (thanks hassoncs, szermatt!) ([#6350](https://github.com/RooCodeInc/Roo-Code/pull/6350))
 * **Non-QWERTY Keyboard Support**: Fixed keyboard shortcuts for Dvorak, AZERTY, and other layouts (thanks shlgug!) ([#6162](https://github.com/RooCodeInc/Roo-Code/pull/6162))
 * **Mode Export/Import**: Fixed custom mode export to handle slug changes correctly ([#6186](https://github.com/RooCodeInc/Roo-Code/pull/6186))
@@ -188,57 +188,57 @@ Critical fixes that improve stability and compatibility:
 * **Claude Code Output Tokens**: Fixed truncated responses by increasing default max output tokens from 8k to 16k (thanks bpeterson1991!) ([#6312](https://github.com/RooCodeInc/Roo-Code/pull/6312))
 * **Execute Command Kill Button**: Fixed the kill button functionality for the execute_command tool ([#6457](https://github.com/RooCodeInc/Roo-Code/pull/6457))
 * **Token Counting**: Fixed accuracy issues by extracting text from messages using VSCode LM API (thanks NaccOll!) ([#6424](https://github.com/RooCodeInc/Roo-Code/pull/6424))
-* **Tool Repetition Detector**: Fixed a bug where setting the "Errors and Repetition Limit" to 1 would incorrectly block the first tool call
-* **`max_tokens` Calculation**: Fixed an error for models with very large context windows where requests would fail due to incorrect calculation of maximum output tokens
-* **AWS Bedrock Connection**: Fixed a connection issue when using AWS Bedrock with LiteLLM
-* **Search Tool Reliability**: Fixed the search_files tool failing when encountering permission-denied files - it now continues working and returns results from accessible files
-* **Native Ollama API**: Fixed Ollama models to use native API instead of OpenAI compatibility layer for improved performance and reliability
-* **Terminal Reuse**: Fixed terminal reuse logic to properly handle terminal lifecycle management
-* **LM Studio Models**: Fixed duplicate model entries by implementing case-insensitive deduplication, ensuring models appear only once in the provider configuration
-* **Reasoning Usage**: Fixed enableReasoningEffort setting not being respected when determining reasoning usage, avoiding unintended reasoning costs
+* **Tool Repetition Detector**: Fixed a bug where setting the "Errors and Repetition Limit" to 1 would incorrectly block the first tool call (thanks NaccOll!) ([#6836](https://github.com/RooCodeInc/Roo-Code/pull/6836))
+* **`max_tokens` Calculation**: Fixed an error for models with very large context windows where requests would fail due to incorrect calculation of maximum output tokens (thanks markp018!) ([#6808](https://github.com/RooCodeInc/Roo-Code/pull/6808))
+* **AWS Bedrock Connection**: Fixed a connection issue when using AWS Bedrock with LiteLLM ([#6778](https://github.com/RooCodeInc/Roo-Code/pull/6778))
+* **Search Tool Reliability**: Fixed the search_files tool failing when encountering permission-denied files - it now continues working and returns results from accessible files (thanks R-omk!) ([#6757](https://github.com/RooCodeInc/Roo-Code/pull/6757))
+* **Native Ollama API**: Fixed Ollama models to use native API instead of OpenAI compatibility layer for improved performance and reliability ([#7137](https://github.com/RooCodeInc/Roo-Code/pull/7137))
+* **Terminal Reuse**: Fixed terminal reuse logic to properly handle terminal lifecycle management ([#7157](https://github.com/RooCodeInc/Roo-Code/pull/7157))
+* **LM Studio Models**: Fixed duplicate model entries by implementing case-insensitive deduplication, ensuring models appear only once in the provider configuration (thanks fbuechler!) ([#7185](https://github.com/RooCodeInc/Roo-Code/pull/7185))
+* **Reasoning Usage**: Fixed enableReasoningEffort setting not being respected when determining reasoning usage, avoiding unintended reasoning costs (thanks ikbencasdoei!) ([#7049](https://github.com/RooCodeInc/Roo-Code/pull/7049))
 * **Welcome Screen**: Fixed the "Let's go" button not working for Roo Code Cloud provider ([#7239](https://github.com/RooCodeInc/Roo-Code/pull/7239))
 
 ### Provider Updates
 
-* **Sonic Model Integration**: Added support for the Sonic stealth model through Roo Code Cloud provider:
+* **Sonic Model Integration**: Added support for the Sonic stealth model through Roo Code Cloud provider ([#7207](https://github.com/RooCodeInc/Roo-Code/pull/7207), [#7212](https://github.com/RooCodeInc/Roo-Code/pull/7212), [#7218](https://github.com/RooCodeInc/Roo-Code/pull/7218)):
   - 262,144-token context window for processing large documents and codebases
   - Free 72-hour access period for evaluation
   - Thinking token controls for managing reasoning budget
   - Max output tokens increased to 16,384 for longer responses
-* **GPT-5 Model Support**: Added support for OpenAI's latest GPT-5 model family:
+* **GPT-5 Model Support**: Added support for OpenAI's latest GPT-5 model family ([#6819](https://github.com/RooCodeInc/Roo-Code/pull/6819)):
   - `gpt-5-2025-08-07`: The full GPT-5 model, now set as the default for OpenAI Native provider
   - `gpt-5-mini-2025-08-07`: A smaller, faster variant for quick responses
   - `gpt-5-nano-2025-08-07`: The most compact version for resource-constrained scenarios
-  - `gpt-5-chat-latest`: Optimized for conversational AI and non-reasoning tasks
-* **GPT-5 Verbosity Controls**: New settings to control model output detail levels (low, medium, high), allowing you to fine-tune response length and detail based on your needs
-* **Fireworks AI Models**: Added GLM-4.5 series models (355B and 106B parameters with 128K context) and OpenAI gpt-oss models (20b for edge deployments, 120b for production use) to expand model selection options
-* **Claude Opus 4.1 Support**: Added support for the new Claude Opus 4.1 model across Anthropic, Claude Code, Bedrock, Vertex AI, and LiteLLM providers with 8192 max tokens, reasoning budget support, and prompt caching
-* **Z AI Provider**: Z AI (formerly Zhipu AI) is now available with GLM-4.5 series models, offering dual regional support for both international and mainland China users
-* **Fireworks AI Provider**: New provider offering hosted versions of popular open-source models like Kimi and Qwen
-* **Groq GPT-OSS Models**: Added GPT-OSS-120b and GPT-OSS-20b models with 131K context windows and support for tool use, browser search, code execution, and JSON object mode
-* **Cerebras GPT-OSS-120b**: Added OpenAI's GPT-OSS-120b model - free to use with 64K context and ~2800 tokens/sec
-* **Cerebras Provider**: Added support for Cerebras as a new AI provider with Qwen 3 Coder models, offering both free and paid tier options with automatic thinking token filtering
+  - `gpt-5-chat-latest`: Optimized for conversational AI and non-reasoning tasks ([#7058](https://github.com/RooCodeInc/Roo-Code/pull/7058))
+* **GPT-5 Verbosity Controls**: New settings to control model output detail levels (low, medium, high), allowing you to fine-tune response length and detail based on your needs ([#6819](https://github.com/RooCodeInc/Roo-Code/pull/6819))
+* **Fireworks AI Models**: Added GLM-4.5 series models (355B and 106B parameters with 128K context) and OpenAI gpt-oss models (20b for edge deployments, 120b for production use) to expand model selection options (thanks alexfarlander!) ([#6784](https://github.com/RooCodeInc/Roo-Code/pull/6784))
+* **Claude Opus 4.1 Support**: Added support for the new Claude Opus 4.1 model across Anthropic, Claude Code, Bedrock, Vertex AI, and LiteLLM providers with 8192 max tokens, reasoning budget support, and prompt caching ([#6728](https://github.com/RooCodeInc/Roo-Code/pull/6728))
+* **Z AI Provider**: Z AI (formerly Zhipu AI) is now available with GLM-4.5 series models, offering dual regional support for both international and mainland China users (thanks jues!) ([#6657](https://github.com/RooCodeInc/Roo-Code/pull/6657))
+* **Fireworks AI Provider**: New provider offering hosted versions of popular open-source models like Kimi and Qwen (thanks ershang-fireworks!) ([#6652](https://github.com/RooCodeInc/Roo-Code/pull/6652))
+* **Groq GPT-OSS Models**: Added GPT-OSS-120b and GPT-OSS-20b models with 131K context windows and support for tool use, browser search, code execution, and JSON object mode ([#6732](https://github.com/RooCodeInc/Roo-Code/pull/6732))
+* **Cerebras GPT-OSS-120b**: Added OpenAI's GPT-OSS-120b model - free to use with 64K context and ~2800 tokens/sec ([#6734](https://github.com/RooCodeInc/Roo-Code/pull/6734))
+* **Cerebras Provider**: Added support for Cerebras as a new AI provider with Qwen 3 Coder models, offering both free and paid tier options with automatic thinking token filtering (thanks kevint-cerebras!) ([#6392](https://github.com/RooCodeInc/Roo-Code/pull/6392), [#6562](https://github.com/RooCodeInc/Roo-Code/pull/6562))
 * **Prompt Caching for LiteLLM**: Reduce API costs and improve response times with caching support for Claude 3.5 Sonnet and compatible models (thanks MuriloFP, steve-gore-snapdocs!) ([#6074](https://github.com/RooCodeInc/Roo-Code/pull/6074))
 * **Chutes AI - GLM-4.5-Air Model**: Added support for the GLM-4.5-Air model to the Chutes AI provider with 151K token context window for complex reasoning tasks and large codebase analysis - completely free to use (thanks matbgn!) ([#6377](https://github.com/RooCodeInc/Roo-Code/pull/6377))
 * **Doubao Provider**: Added support for ByteDance's AI model provider with full integration including API handling (thanks AntiMoron!) ([#6345](https://github.com/RooCodeInc/Roo-Code/pull/6345))
 * **SambaNova Provider**: Integrated SambaNova as a new LLM provider offering high-speed inference and broader model selection (thanks snova-jorgep!) ([#6188](https://github.com/RooCodeInc/Roo-Code/pull/6188))
 * **Chutes AI**: Added zai-org/GLM-4.5-FP8 model support ([#6441](https://github.com/RooCodeInc/Roo-Code/pull/6441))
 * **OpenRouter**: Set horizon-alpha model max tokens to 32k ([#6470](https://github.com/RooCodeInc/Roo-Code/pull/6470))
-* **Horizon Beta Stealth Model via OpenRouter**: Optimized support for OpenRouter's new stealth model Horizon Beta with 32k max tokens for better response times. Thanks to OpenRouter for providing this free, improved version of Horizon Alpha!
-* **Type Definitions**: Updated @roo-code/types to v1.41.0 for latest type compatibility
+* **Horizon Beta Stealth Model via OpenRouter**: Optimized support for OpenRouter's new stealth model Horizon Beta with 32k max tokens for better response times. Thanks to OpenRouter for providing this free, improved version of Horizon Alpha! ([#6577](https://github.com/RooCodeInc/Roo-Code/pull/6577))
+* **Type Definitions**: Updated @roo-code/types to v1.41.0 for latest type compatibility ([#6568](https://github.com/RooCodeInc/Roo-Code/pull/6568))
 * **Databricks**: Added support for /invocations endpoints pattern (thanks adambrand!) ([#6317](https://github.com/RooCodeInc/Roo-Code/pull/6317))
-* **Codex Mini Model Support**: Added support for the `codex-mini-latest` model in the OpenAI Native provider
-* **IO Intelligence Provider**: Added IO Intelligence as a new provider, giving users access to a wide range of AI models
-* **OpenAI**: Removed the deprecated GPT-4.5 Preview model from available options as it was removed from the OpenAI API
-* **Task Metadata**: Improved compatibility with Roo Code Cloud services
+* **Codex Mini Model Support**: Added support for the `codex-mini-latest` model in the OpenAI Native provider (thanks KJ7LNW!) ([#6931](https://github.com/RooCodeInc/Roo-Code/pull/6931))
+* **IO Intelligence Provider**: Added IO Intelligence as a new provider, giving users access to a wide range of AI models ([#6875](https://github.com/RooCodeInc/Roo-Code/pull/6875))
+* **OpenAI**: Removed the deprecated GPT-4.5 Preview model from available options as it was removed from the OpenAI API (thanks PeterDaveHello!) ([#6948](https://github.com/RooCodeInc/Roo-Code/pull/6948))
+* **Task Metadata**: Improved compatibility with Roo Code Cloud services ([#7092](https://github.com/RooCodeInc/Roo-Code/pull/7092))
 
 ### Misc. Improvements
 
-* **Cloud Integration**: Reverted to using the npm package version of @roo-code/cloud for improved build stability and maintenance
-* **Slash Command Interpolation**: Skip interpolation for non-existent commands
-* **Linter Coverage**: Applied to locale README files
-* **Cloud Service Events**: Migrated from callbacks to event-based architecture
-* **Website Updates**: Phase 1 improvements
+* **Cloud Integration**: Reverted to using the npm package version of @roo-code/cloud for improved build stability and maintenance ([#6795](https://github.com/RooCodeInc/Roo-Code/pull/6795))
+* **Slash Command Interpolation**: Skip interpolation for non-existent commands ([#6475](https://github.com/RooCodeInc/Roo-Code/pull/6475))
+* **Linter Coverage**: Applied to locale README files (thanks liwilliam2021!) ([#6477](https://github.com/RooCodeInc/Roo-Code/pull/6477))
+* **Cloud Service Events**: Migrated from callbacks to event-based architecture ([#6519](https://github.com/RooCodeInc/Roo-Code/pull/6519))
+* **Website Updates**: Phase 1 improvements (thanks thill2323!) ([#6085](https://github.com/RooCodeInc/Roo-Code/pull/6085))
 * **Background Editing (Experimental)**: Work uninterrupted while Roo edits files in the background—no more losing focus from automatic diff views ([#6214](https://github.com/RooCodeInc/Roo-Code/pull/6214)). Files change silently while you keep coding, with diagnostics and error checking still active. See [Background Editing](/features/experimental/background-editing) for details.
 * **Security Update**: Updated form-data dependency to address security vulnerability ([#6332](https://github.com/RooCodeInc/Roo-Code/pull/6332))
 * **Contributor Updates**: Refreshed contributor acknowledgments across all localizations ([#6302](https://github.com/RooCodeInc/Roo-Code/pull/6302))
@@ -250,8 +250,8 @@ Critical fixes that improve stability and compatibility:
 * **Mode Configuration**: Updated PR reviewer rules and mode configuration ([#6391](https://github.com/RooCodeInc/Roo-Code/pull/6391), [#6428](https://github.com/RooCodeInc/Roo-Code/pull/6428))
 * **Navigator Global Error**: Resolved errors by updating mammoth and bluebird dependencies ([#6363](https://github.com/RooCodeInc/Roo-Code/pull/6363))
 * **Nightly Build Fixes**: Resolved marketplace freezing issues with separate changelog ([#6449](https://github.com/RooCodeInc/Roo-Code/pull/6449))
-* **Cloud Provider Profile Sync**: Added support for syncing provider profiles from the cloud, enabling automatic synchronization across devices and team collaboration
+* **Cloud Provider Profile Sync**: Added support for syncing provider profiles from the cloud, enabling automatic synchronization across devices and team collaboration ([#6540](https://github.com/RooCodeInc/Roo-Code/pull/6540))
 
 ### Documentation Updates
 
-* **ask_followup_question Tool**: Simplified the prompt guidance for clearer authoring, making it faster to create effective follow-up questions
+* **ask_followup_question Tool**: Simplified the prompt guidance for clearer authoring, making it faster to create effective follow-up questions ([#7191](https://github.com/RooCodeInc/Roo-Code/pull/7191))
