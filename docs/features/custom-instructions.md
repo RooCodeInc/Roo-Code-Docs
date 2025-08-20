@@ -191,8 +191,8 @@ Workspace-wide instructions apply to all modes within the current project and ca
 
 *   **Preferred Method: Directory-Based (`.roo/rules/`)**
     *   Create a directory named `.roo/rules/` in your workspace root.
-    *   Place instruction files (e.g., `.md`, `.txt`) inside. Roo Code reads files recursively, appending their content to the system prompt in **alphabetical order** based on filename.
-    *   This method takes precedence if the directory exists and contains files.
+    *   Place instruction files (e.g., `.md`, `.txt`) inside. Roo Code reads files recursively (including subdirectories), appending their content to the system prompt in **alphabetical order** based on filename.
+    *   When this directory exists and contains files, its contents are loaded along with any global rules directories.
 *   **Fallback Method: File-Based (`.roorules`)**
     *   If `.roo/rules/` doesn't exist or is empty, Roo Code looks for a single `.roorules` file in the workspace root.
     *   If found, its content is loaded.
@@ -216,7 +216,7 @@ Mode-specific instructions can be set in two independent ways that can be used s
 2.  **Using Rule Files/Directories:** Provide mode-specific instructions via files:
     *   **Preferred Method: Directory-Based (`.roo/rules-{modeSlug}/`)**
         *   Create a directory named `.roo/rules-{modeSlug}/` (e.g., `.roo/rules-docs-writer/`) in your workspace root.
-        *   Place instruction files inside (recursive loading). Files are read and appended to the system prompt in **alphabetical order** by filename.
+        *   Place instruction files inside (recursive loading, including subdirectories). Files are read and appended to the system prompt in **alphabetical order** by filename.
         *   This method takes precedence over the fallback file method for the specific mode if the directory exists and contains files.
     *   **Fallback Method: File-Based (`.roorules-{modeSlug}`)**
         *   If `.roo/rules-{modeSlug}/` doesn't exist or is empty, Roo Code looks for a single `.roorules-{modeSlug}` file (e.g., `.roorules-code`) in the workspace root.
@@ -236,37 +236,66 @@ USER'S CUSTOM INSTRUCTIONS
 
 The following additional instructions are provided by the user, and should be followed to the best of your ability without interfering with the TOOL USE guidelines.
 
-[Language Preference (if set)]
+Language Preference:
+[Language preference if set]
 
-[Global Instructions (from Prompts Tab)]
+Global Instructions:
+[Global Instructions from Prompts Tab]
 
-[Mode-specific Instructions (from Prompts Tab for the current mode)]
+Mode-specific Instructions:
+[Mode-specific Instructions from Prompts Tab for the current mode]
 
-Global Rules (from ~/.roo/):
-[Contents of files in ~/.roo/rules-{modeSlug}/ (if directory exists and is not empty)]
-[Contents of files in ~/.roo/rules/ (if directory exists and is not empty)]
+Rules:
 
-Mode-Specific Instructions (from Files/Directories):
-[Contents of files in .roo/rules-{modeSlug}/ (if directory exists and is not empty)]
-[Contents of .roorules-{modeSlug} file (if .roo/rules-{modeSlug}/ does not exist or is empty, and file exists)]
+# Rules from rules-{modeSlug} directories:
+[Contents of ALL files from ~/.roo/rules-{modeSlug}/ AND .roo/rules-{modeSlug}/ if they exist]
 
-Workspace-Wide Instructions (from Files/Directories):
-[Contents of files in .roo/rules/ (if directory exists and is not empty)]
-[Contents of .roorules file (if .roo/rules/ does not exist or is empty, and file exists)]
+# Rules from .roorules-{modeSlug}:
+[Contents of .roorules-{modeSlug} file if no mode-specific directories have files]
+
+# Rules from .rooignore:
+[.rooignore-related instructions if applicable]
+
+# Agent Rules Standard (AGENTS.md):
+[Contents of AGENTS.md or AGENT.md from workspace root if present and enabled]
+
+# Rules from rules directories:
+[Contents of ALL files from ~/.roo/rules/ AND .roo/rules/ if they exist]
+
+# Rules from .roorules:
+[Contents of .roorules file if no general rules directories have files]
 
 ====
 ```
 
-*Note: Global rules load first, followed by workspace rules that can override them. Mode-specific rules appear before general rules within each level, and directory-based rules take precedence over file-based fallbacks.*
+*Note: The system loads rules from ALL applicable directories (both global `~/.roo/` and workspace `.roo/`), not just the first one with files. Mode-specific rules appear before general rules. Directory-based rules take precedence over file-based fallbacks only when determining which method to use, but all applicable directories are read.*
 
 ---
 
 ## Rules about .rules files
 
 * **File Location:** The preferred method uses directories within `.roo/` (`.roo/rules/` and `.roo/rules-{modeSlug}/`). The fallback method uses single files (`.roorules` and `.roorules-{modeSlug}`) located directly in the workspace root.
+* **Recursive Reading:** Rules directories are read recursively, including all files in subdirectories
+* **File Filtering:** System automatically excludes cache and temporary files (`.DS_Store`, `*.bak`, `*.cache`, `*.log`, `*.tmp`, `Thumbs.db`, etc.)
 * **Empty Files:** Empty or missing rule files are silently skipped
-* **Source Headers:** Each rule file's contents are included with a header indicating its source
+* **Source Headers:** Directory-based rules are included without headers, while file-based rules include `# Rules from {filename}:` headers
 * **Rule Interaction:** Mode-specific rules complement global rules rather than replacing them
+* **Symbolic Links:** Fully supported for both files and directories, with a maximum resolution depth of 5 to prevent infinite loops
+
+---
+
+## AGENTS.md Support
+
+Roo Code also supports loading rules from an `AGENTS.md` (or `AGENT.md` as fallback) file in your workspace root:
+
+* **Purpose:** Provides agent-specific rules and guidelines for AI behavior
+* **Location:** Must be in the workspace root directory
+* **Loading:** Automatically loaded by default (can be disabled via `settings.useAgentRules`)
+* **Priority:** Loaded after mode-specific rules but before general workspace rules
+* **Header:** Added to system prompt with header `# Agent Rules Standard (AGENTS.md):`
+* **Symbolic Links:** Supports symbolic links to AGENTS.md files in other locations
+
+This feature allows teams to maintain standardized AI agent behavior rules that can be version-controlled alongside the project code.
 
 ---
 
