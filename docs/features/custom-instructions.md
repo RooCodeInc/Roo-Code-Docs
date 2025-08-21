@@ -193,6 +193,7 @@ Workspace-wide instructions apply to all modes within the current project and ca
     *   Create a directory named `.roo/rules/` in your workspace root.
     *   Place instruction files (e.g., `.md`, `.txt`) inside. Roo Code reads files recursively (including subdirectories), appending their content to the system prompt in **alphabetical order** based on filename.
     *   When this directory exists and contains files, its contents are loaded along with any global rules directories.
+    *   Note: If the `.roo/rules/` directory exists but is empty, Roo Code will fall back to using the `.roorules` file instead.
 *   **Fallback Method: File-Based (`.roorules`)**
     *   If `.roo/rules/` doesn't exist or is empty, Roo Code looks for a single `.roorules` file in the workspace root.
     *   If found, its content is loaded.
@@ -290,7 +291,7 @@ Roo Code also supports loading rules from an `AGENTS.md` (or `AGENT.md` as fallb
 
 * **Purpose:** Provides agent-specific rules and guidelines for AI behavior
 * **Location:** Must be in the workspace root directory
-* **Loading:** Automatically loaded by default (can be disabled via `settings.useAgentRules`)
+* **Loading:** Automatically loaded by default. To disable AGENTS.md loading, set `"roo-cline.useAgentRules": false` in your VSCode settings
 * **Priority:** Loaded after mode-specific rules but before general workspace rules
 * **Header:** Added to system prompt with header `# Agent Rules Standard (AGENTS.md):`
 * **Symbolic Links:** Supports symbolic links to AGENTS.md files in other locations
