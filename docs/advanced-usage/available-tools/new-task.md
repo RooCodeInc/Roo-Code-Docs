@@ -25,6 +25,7 @@ The tool accepts these parameters:
 
 - `mode` (required): The slug of the mode to start the new task in (e.g., "code", "ask", "architect")
 - `message` (required): The initial user message or instructions for this new task
+- `todos` (optional): Initial todo list in markdown checklist format
 
 ---
 
@@ -98,6 +99,20 @@ When the `new_task` tool is invoked, it follows this process:
 
 ---
 
+## Configuration
+
+Streamline hierarchical task planning with the optional todo list parameter for subtasks:
+
+- **Pass Todo Lists**: Include predefined todo lists when creating subtasks
+- **Maintain Context**: Pass along context to the subtask in the form of a todo list
+- **Optional Enforcement**: The "New Task Require Todos" setting in VS Code can enforce todo lists for all new subtasks if desired
+
+<img src="/img/v3.25.21/v3.25.21.png" alt="Subtask todo lists configuration in VS Code settings" width="600" />
+
+This feature works out of the box, and you can optionally configure VS Code settings to require todos for all new tasks.
+
+---
+
 ## Examples When Used
 
 - When a front-end developer needs to architect a new feature, implement the code, and document it, they can create separate tasks for each phase with results flowing from one phase to the next.
@@ -130,5 +145,20 @@ Breaking down a complex feature into architectural planning and implementation:
 <new_task>
 <mode>architect</mode>
 <message>Design the database schema and system architecture for our new e-commerce platform.</message>
+</new_task>
+```
+
+Creating a task with an initial todo list:
+```
+<new_task>
+<mode>code</mode>
+<message>Build a REST API for user management</message>
+<todos>
+[ ] Set up Express server
+[ ] Create user model
+[ ] Implement CRUD endpoints
+[ ] Add authentication middleware
+[ ] Write API tests
+</todos>
 </new_task>
 ```

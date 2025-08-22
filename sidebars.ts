@@ -161,6 +161,7 @@ const sidebars: SidebarsConfig = {
         'providers/cerebras',
         'providers/deepseek',
         'providers/doubao',
+        'providers/featherless',
         'providers/fireworks',
         'providers/chutes',
         'providers/gemini',
@@ -213,6 +214,9 @@ const sidebars: SidebarsConfig = {
           label: '3.25',
           items: [
             { type: 'doc', id: 'update-notes/v3.25', label: '3.25 Combined' },
+            { type: 'doc', id: 'update-notes/v3.25.23', label: '3.25.23' },
+            { type: 'doc', id: 'update-notes/v3.25.22', label: '3.25.22' },
+            { type: 'doc', id: 'update-notes/v3.25.21', label: '3.25.21' },
             { type: 'doc', id: 'update-notes/v3.25.20', label: '3.25.20' },
             { type: 'doc', id: 'update-notes/v3.25.19', label: '3.25.19' },
             { type: 'doc', id: 'update-notes/v3.25.18', label: '3.25.18' },

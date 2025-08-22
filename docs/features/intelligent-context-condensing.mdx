@@ -119,6 +119,33 @@ This customization ensures that the context condensing process retains the infor
 
 ---
 
+## Automatic Error Recovery
+
+When Roo Code encounters context window limit errors, it now automatically recovers to keep your work flowing:
+
+### How Error Recovery Works
+
+1. **Error Detection**: Roo Code detects context window errors from multiple providers (OpenAI, Anthropic, Cerebras, and others)
+2. **Automatic Truncation**: The system automatically reduces the context by 25%
+3. **Retry Mechanism**: After truncation, Roo Code retries your request (up to 3 attempts)
+4. **Seamless Continuation**: Your work continues without manual intervention
+
+This automatic recovery ensures that:
+- You don't lose work due to context limit errors
+- Long conversations can continue smoothly
+- The system intelligently manages context without requiring manual restarts
+
+### When Recovery Triggers
+
+The automatic recovery activates when:
+- The API returns a context window exceeded error
+- The conversation approaches the maximum token limit
+- Multiple providers report similar context-related errors
+
+This feature works alongside Intelligent Context Condensing to provide multiple layers of context management, ensuring your conversations can continue even in challenging scenarios.
+
+---
+
 ## Technical Implementation
 
 ### Token Counting
@@ -134,4 +161,10 @@ Roo Code uses a sophisticated token counting system that:
 - By default, 30% of the context window is reserved (20% for model output and 10% as a safety buffer), leaving 70% available for conversation history.
 - This reservation can be overridden by model-specific settings
 - The system automatically calculates available space while maintaining this reservation
+
+### Error Handling Strategy
+- **Multi-Provider Support**: Recognizes context errors from OpenAI, Anthropic, Cerebras, and other providers
+- **Progressive Reduction**: Reduces context by 25% on each retry attempt
+- **Retry Limits**: Maximum of 3 automatic retry attempts before requiring manual intervention
+- **State Preservation**: Maintains conversation state during recovery attempts
 

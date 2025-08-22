@@ -1,8 +1,8 @@
 <workflow_instructions>
   <mode_overview>
     Automates creating release notes for new Roo Code versions. Fetches pull requests
-    from GitHub, analyzes changes, and generates notes based on doc standards.
-    Also handles Discord formatting, version-only requests, and auto-detection of missing versions.
+    from GitHub, analyzes changes, generates user-focused notes, and handles Discord
+    formatting. Supports version-only requests and auto-detection of missing versions.
   </mode_overview>
 
   <entry_patterns>
@@ -14,6 +14,10 @@
       <trigger>Discord release notes for X.Y.Z</trigger>
       <action>Generate Discord format from existing files</action>
     </pattern>
+    <pattern type="discord_combined">
+      <trigger>Combined Discord announcement for X.Y.Z, X.Y.Z, and X.Y.Z</trigger>
+      <action>Generate combined Discord format from multiple release files</action>
+    </pattern>
     <pattern type="version_only">
       <trigger>^v?[\d.]+$</trigger>
       <action>Extract PR list and ask how to proceed</action>
@@ -23,6 +27,23 @@
       <action>Auto-detect missing versions from changelog</action>
     </pattern>
   </entry_patterns>
+
+  <critical_date_format>
+    <format>ISO 8601: YYYY-MM-DD</format>
+    <specification>
+      - YYYY = 4-digit year (e.g., 2025)
+      - MM = 2-digit MONTH (01-12) - NOT the day!
+      - DD = 2-digit day (01-31)
+    </specification>
+    <examples>
+      <correct>2025-07-18 (July 18, 2025)</correct>
+      <correct>2025-01-13 (January 13, 2025)</correct>
+      <incorrect>2025-18-07 (Invalid - would mean 18th month)</incorrect>
+    </examples>
+    <implementation>
+      When PR list provided directly: Use new Date().toISOString().split('T')[0]
+    </implementation>
+  </critical_date_format>
 
   <main_workflow>
     <phase name="initialization">
@@ -59,21 +80,20 @@
       <step number="2" optional="true">
         <action>Handle user-provided PR list</action>
         <when>User provides PR numbers directly</when>
-        <critical>
-          MUST execute date validation:
-          - Use new Date().toISOString().split('T')[0] for current date
-          - Validate format YYYY-MM-DD where MM is month (01-12)
-          - Common error: Confusing MM-DD order
-        </critical>
+        <critical>Validate date format (MM is month, not day)</critical>
       </step>
       
       <step number="3">
         <action>Fetch PRs from GitHub</action>
         <skip_if>User provided PR list</skip_if>
-        <tools>
-          - gh api for release dates
-          - gh pr list for merged PRs in date range
-        </tools>
+        <commands>
+          <get_tag_date><![CDATA[
+gh api repos/RooCodeInc/Roo-Code/git/refs/tags/vX.Y.Z --jq '.object.sha' | xargs -I {} gh api repos/RooCodeInc/Roo-Code/git/commits/{} --jq '.committer.date'
+          ]]></get_tag_date>
+          <search_prs><![CDATA[
+gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:YYYY-MM-DD..YYYY-MM-DD" --json number,title,author,mergedAt --limit 1000
+          ]]></search_prs>
+        </commands>
       </step>
     </phase>
 
@@ -89,46 +109,68 @@
       <subtask_pattern>
         <for_each>PR in list</for_each>
         <action>Create investigation subtask</action>
-        <message>
-          Investigate PR #[number] for release notes v[version].
-          1. Get PR details (gh pr view)
-          2. Extract linked issues
-          3. Get issue details
-          4. Categorize change
-          5. Identify documentation needs (new features, behavior changes, deprecations)
-          6. Append to temp_pr_analysis.md using insert_content line 0
-          
-          Include documentation flags:
-          - docs-new: Completely new feature
-          - docs-update: Existing docs need updating
-          - docs-example: New examples needed
-          - docs-migration: Breaking changes
-          
-          CRITICAL: Never create/overwrite files, only append.
-        </message>
+        <message><![CDATA[
+Investigate PR #[number] for release notes v[version].
+1. Get PR details (gh pr view)
+2. Extract linked issues
+3. Get issue details
+4. Categorize change
+5. Identify documentation needs (new features, behavior changes, deprecations)
+6. Append to temp_pr_analysis.md using insert_content line 0
+
+Include documentation flags:
+- docs-new: Completely new feature
+- docs-update: Existing docs need updating
+- docs-example: New examples needed
+- docs-migration: Breaking changes
+
+CRITICAL: Never create/overwrite files, only append.
+        ]]></message>
       </subtask_pattern>
+      
+      <output_format><![CDATA[
+## PR #[number]: [Title]
+
+**Author**: [username]
+**Linked Issues**: #[issue] (reporter: [username])
+**Category**: [Category]
+**User Impact**: [Benefit description]
+**Contributors**: [list]
+**Documentation Needs**: [none|docs-new|docs-update|docs-example|docs-migration]
+**Documentation Notes**: [If applicable, what needs documenting]
+
+---
+      ]]></output_format>
     </phase>
 
     <phase name="compilation">
       <step number="1">
         <action>Read and organize PR findings</action>
         <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
-        <note>QOL Improvements must come before Bug Fixes</note>
+        <critical>QOL Improvements MUST come before Bug Fixes</critical>
       </step>
       
       <step number="2">
         <action>Confirm feature highlighting with user</action>
-        <details>See user_confirmation_workflow for detailed process</details>
+        <tool>ask_followup_question</tool>
+        <template><![CDATA[
+I've analyzed all PRs for v[VERSION]. Here are the changes I found:
+
+**Major Features:**
+[List major features with brief descriptions]
+
+**Bug Fixes:** [COUNT] fixes
+**QOL Improvements:** [COUNT] improvements
+**Other Changes:** [COUNT] items
+
+Which features should I highlight with expanded sections in the release notes?
+        ]]></template>
         <critical>Must get explicit confirmation before writing notes</critical>
       </step>
       
       <step number="3">
         <action>Create release notes file</action>
         <format>docs/update-notes/vX.Y.Z.mdx</format>
-        <includes>
-          - Proper documentation links for features
-          - See documentation_handling for link patterns
-        </includes>
       </step>
       
       <step number="4">
@@ -153,39 +195,46 @@
         <tool>new_task with mode="documentation-writer"</tool>
       </step>
     </phase>
-
-    <phase name="review" optional="true">
-      <step number="1">
-        <action>Cross-reference with changelog if exists</action>
-        <details>Compare generated notes with changelog entries</details>
-      </step>
-      
-      <step number="2">
-        <action>User review loop</action>
-        <loop_until>User approves or cancels</loop_until>
-        <options>
-          - Create PR
-          - Make changes
-          - Show files
-        </options>
-      </step>
-    </phase>
   </main_workflow>
 
   <special_workflows>
     <workflow name="discord_only">
       <description>Generate Discord format from existing release files</description>
+      <transformations>
+        - Remove PR links and numbers
+        - Convert /path to https://docs.roocode.com/path
+        - Add footer link with markdown format
+        - Handle compression if requested
+        - Wrap entire output in markdown code block
+      </transformations>
+      <formatting_rules>
+        <rule>Title format: # 🚀 Roo Code X.Y.Z Release Notes</rule>
+        <rule>Include summary in intro sentence listing key features</rule>
+        <rule>Use "Feature Highlights" instead of "Major Features"</rule>
+        <rule>Never use the word "powerful"</rule>
+        <rule>No version numbers in body text (only header/footer)</rule>
+        <rule>No "Happy coding!" or similar closings</rule>
+        <rule>Footer: 📚 **Full Release Notes** [vX.Y.Z](link)</rule>
+      </formatting_rules>
+      <output>Formatted text wrapped in ```markdown code block (no files created)</output>
+    </workflow>
+
+    <workflow name="discord_combined">
+      <description>Generate combined Discord format from multiple release files</description>
       <steps>
-        <step>Parse version numbers from request</step>
-        <step>Verify files exist</step>
-        <step>Apply Discord transformations:
-          - Remove PR links
-          - Convert internal links to full URLs
-          - Add footer link
-          - Handle compression if requested
-        </step>
-        <step>Output formatted text (no files created)</step>
+        <step>Read all specified release note files</step>
+        <step>Merge and deduplicate features across versions</step>
+        <step>Create unified summary sentence</step>
+        <step>Apply Discord formatting rules</step>
       </steps>
+      <formatting_rules>
+        <rule>Title format: # 🚀 Roo Code X.Y.Z-X.Y.Z Release Updates</rule>
+        <rule>Intro sentence summarizes all key features from all versions</rule>
+        <rule>Combine similar sections across versions</rule>
+        <rule>Footer with links to each version: [vX.Y.Z](link) | [vX.Y.Z](link)</rule>
+        <rule>Wrap entire output in ```markdown code block</rule>
+      </formatting_rules>
+      <output>Combined formatted text (no files created)</output>
     </workflow>
 
     <workflow name="version_only">
@@ -193,12 +242,7 @@
       <steps>
         <step>Spawn PR extraction subtask</step>
         <step>Subtask writes PR list to temp_pr_list.md</step>
-        <step>Ask user how to proceed:
-          - Create full release notes
-          - Show PR list
-          - Select specific PRs
-          - Cancel
-        </step>
+        <step>Ask user how to proceed</step>
       </steps>
     </workflow>
 
@@ -206,10 +250,9 @@
       <description>Auto-detect missing versions</description>
       <steps>
         <step>Find most recent release notes</step>
-        <step>Read changelog (or GitHub releases)</step>
+        <step>Read changelog or GitHub releases</step>
         <step>Identify missing versions</step>
         <step>Ask which to process</step>
-        <step>Process selected versions sequentially</step>
       </steps>
     </workflow>
   </special_workflows>
@@ -226,6 +269,9 @@
     </rule>
     <rule priority="HIGH">
       Focus on user benefits, not technical implementation
+    </rule>
+    <rule priority="HIGH">
+      QOL Improvements section MUST come before Bug Fixes
     </rule>
   </critical_rules>
 </workflow_instructions>

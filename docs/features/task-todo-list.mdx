@@ -73,26 +73,54 @@ Todo lists appear in multiple places:
 
 2. **Interactive Tool Block**: An interface within the chat via the `UpdateTodoListToolBlock` component that allows you to:
    - View all todo items with their current status
-   - Edit item descriptions when Roo presents updates for approval
-   - Stage changes using the "Edit" button (applied only when Roo next updates the list)
+   - Click the "Edit" button to enter edit mode where you can:
+     - Modify task descriptions directly
+     - Change task status using dropdown selectors
+     - Delete tasks with the × button
+     - Add new tasks with the "+ Add Todo" button
+   - Stage changes that are applied when Roo next updates the list
    - View the progression as Roo manages the todo workflow
 
    <img src="/img/task-todo-list/task-todo-list-2.png" alt="Interactive todo list tool block in chat" width="600" />
 
 3. **Environment Details**: Todo lists appear as a "REMINDERS" table in the environment_details section, giving the AI persistent access to current todo state. Note: If the `todoListEnabled` setting is disabled, the reminders section will not appear in environment details.
 
+### Expanded Todo View
+
+When you click on the collapsed todo summary in the task header, a floating panel appears with enhanced functionality:
+- **Backdrop overlay**: Click outside the panel to close it
+- **Full todo list display**: Shows all todos with their current status indicators
+- **Auto-scroll**: Automatically scrolls to the current in-progress task
+- **Smooth animations**: Collapse and expand transitions for better user experience
+- **Persistent state**: Maintains your scroll position when reopening
+
 ### Understanding Task Status
 
 Roo Code automatically manages status progression based on task progress. Each todo item has one of three states:
 
-**Pending**: Shows an empty checkbox, indicating the task hasn't been started yet
-![Pending todo item with empty checkbox](../../static/img/task-todo-list/task-todo-list-4.png)
+**Pending**: Shows an empty circle with a border, indicating the task hasn't been started yet
+![Pending todo item with empty circle](../../static/img/task-todo-list/task-todo-list-4.png)
 
-**In Progress**: Displays a yellow dot indicator, showing the task is currently being worked on
-![In progress todo item with yellow dot indicator](../../static/img/task-todo-list/task-todo-list-5.png)
+**In Progress**: Displays a filled yellow circle, showing the task is currently being worked on
+![In progress todo item with yellow circle](../../static/img/task-todo-list/task-todo-list-5.png)
 
-**Completed**: Features a green checkmark, confirming the task is fully finished
-![Completed todo item with green checkmark](../../static/img/task-todo-list/task-todo-list-6.png)
+**Completed**: Features a filled green circle, confirming the task is fully finished
+![Completed todo item with green circle](../../static/img/task-todo-list/task-todo-list-6.png)
+
+### Editing Todo Lists During Approval
+
+When Roo presents a todo list update for approval, you have full control through the Edit mode:
+
+1. **Click "Edit"** to enter edit mode
+2. **Make your changes**:
+   - Edit task descriptions inline
+   - Change status using the dropdown menu (Pending/In Progress/Completed)
+   - Remove tasks with the × button
+   - Add new tasks with the "+ Add Todo" button at the bottom
+3. **Save or Cancel** your changes
+4. **Approve or Reject** the overall update
+
+Note: Your edits are staged and only applied when Roo processes the next todo list update. This maintains Roo's control over the workflow while giving you input on task details.
 
 ---
 
