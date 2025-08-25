@@ -1,5 +1,5 @@
 ---
-description: Configure xAI's Grok models in Roo Code. Access Grok-3, Grok-2, and vision models with large context windows and reasoning capabilities.
+description: Configure xAI's Grok models in Roo Code. Access Grok-4, Grok-3, Grok-2, and vision models with large context windows, reasoning capabilities, and prompt caching.
 keywords:
   - xAI
   - Grok
@@ -8,8 +8,10 @@ keywords:
   - reasoning AI
   - vision models
   - large context
+  - Grok-4
   - Grok-3
   - Grok-2
+  - prompt caching
 image: /img/social-share.jpg
 sidebar_label: xAI (Grok)
 ---
@@ -35,25 +37,19 @@ xAI is the company behind Grok, a large language model known for its conversatio
 
 Roo Code supports the following xAI Grok models:
 
-### Grok-3 Models
-* `grok-3-beta` (Default) - xAI's Grok-3 beta model with 131K context window
-* `grok-3-fast-beta` - xAI's Grok-3 fast beta model with 131K context window
-* `grok-3-mini-beta` - xAI's Grok-3 mini beta model with 131K context window
-* `grok-3-mini-fast-beta` - xAI's Grok-3 mini fast beta model with 131K context window
-
-### Grok-2 Models
-* `grok-2-latest` - xAI's Grok-2 model - latest version with 131K context window
-* `grok-2` - xAI's Grok-2 model with 131K context window
-* `grok-2-1212` - xAI's Grok-2 model (version 1212) with 131K context window
-
-### Grok Vision Models
-* `grok-2-vision-latest` - xAI's Grok-2 Vision model - latest version with image support and 32K context window
-* `grok-2-vision` - xAI's Grok-2 Vision model with image support and 32K context window
+### Current Models
+* `grok-4` (Default) - xAI's Grok-4 model with 256K context window, image support, and prompt caching
+* `grok-code-fast-1` - xAI's Grok Code Fast model with 262K context window, optimized for coding tasks
+* `grok-3` - xAI's Grok-3 model with 128K context window and prompt caching
+* `grok-3-fast` - xAI's Grok-3 fast model with 128K context window and prompt caching
+* `grok-3-mini` - xAI's Grok-3 mini model with 128K context window, reasoning support, and prompt caching
+* `grok-3-mini-fast` - xAI's Grok-3 mini fast model with 128K context window, reasoning support, and prompt caching
+* `grok-2-1212` - xAI's Grok-2 model (version 1212) with 128K context window
 * `grok-2-vision-1212` - xAI's Grok-2 Vision model (version 1212) with image support and 32K context window
-* `grok-vision-beta` - xAI's Grok Vision Beta model with image support and 8K context window
 
-### Legacy Models
-* `grok-beta` - xAI's Grok Beta model (legacy) with 131K context window
+:::info Grok Code Fast - Free Access in Roo Code
+`grok-code-fast-1` is available for **free** through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. When using the xAI provider directly in Roo Code, standard pricing will apply once established. This model was previously known as "roo/sonic" and has been renamed. For free access within Roo Code, use the Roo Code Cloud provider instead of the xAI provider.
+:::
 
 ---
 
@@ -73,10 +69,10 @@ Grok 3 Mini models feature specialized reasoning capabilities, allowing them to 
 ### Reasoning-Enabled Models
 
 Reasoning is only supported by:
-* `grok-3-mini-beta`
-* `grok-3-mini-fast-beta`
+* `grok-3-mini` - Supports reasoning effort control
+* `grok-3-mini-fast` - Supports reasoning effort control
 
-The Grok 3 models `grok-3-beta` and `grok-3-fast-beta` do not support reasoning.
+The standard Grok 3 models (`grok-3` and `grok-3-fast`) and Grok 4 do not support reasoning effort parameters.
 
 ### Controlling Reasoning Effort
 
@@ -95,9 +91,14 @@ Choose `low` for simple queries that should complete quickly, and `high` for har
 
 ---
 
-## Tips and Notes
+## Prompt Caching
 
-* **Context Window:** Most Grok models feature large context windows (up to 131K tokens), allowing you to include substantial amounts of code and context in your prompts.
-* **Vision Capabilities:** Select vision-enabled models (`grok-2-vision-latest`, `grok-2-vision`, etc.) when you need to process or analyze images.
-* **Pricing:** Pricing varies by model, with input costs ranging from $0.3 to $5.0 per million tokens and output costs from $0.5 to $25.0 per million tokens. Refer to the xAI documentation for the most current pricing information.
-* **Performance Tradeoffs:** "Fast" variants typically offer quicker response times but may have higher costs, while "mini" variants are more economical but may have reduced capabilities.
+Prompt caching is available for select Grok models including `grok-4`, `grok-3`, `grok-3-fast`, `grok-3-mini`, and `grok-3-mini-fast`. This feature can reduce costs and improve response times.
+
+---
+
+## Pricing
+
+Pricing varies by model. Refer to the [xAI documentation](https://console.x.ai/) for current pricing information.
+
+**Note:** `grok-code-fast-1` is available for free through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. Standard pricing will apply when using the xAI provider directly in Roo Code.
