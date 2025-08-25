@@ -1,4 +1,4 @@
-import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import type { SidebarsConfig } from '@docusaurus/plugin-content-docs';
 import tutorialVideos from './docs/tutorial-videos.json';
 
 // Helper function to truncate long titles
@@ -181,6 +181,7 @@ const sidebars: SidebarsConfig = {
         'providers/roo-code-cloud',
         'providers/sambanova',
         'providers/unbound',
+        'providers/vercel-ai-gateway',
         'providers/vertex',
         'providers/vscode-lm',
         'providers/xai',
@@ -296,7 +297,7 @@ const sidebars: SidebarsConfig = {
             { type: 'doc', id: 'update-notes/v3.21.5', label: '3.21.5' },
             { type: 'doc', id: 'update-notes/v3.21.4', label: '3.21.4' },
             { type: 'doc', id: 'update-notes/v3.21.3', label: '3.21.3' },
-                        { type: 'doc', id: 'update-notes/v3.21.2', label: '3.21.2' },
+            { type: 'doc', id: 'update-notes/v3.21.2', label: '3.21.2' },
             { type: 'doc', id: 'update-notes/v3.21.1', label: '3.21.1' },
             { type: 'doc', id: 'update-notes/v3.21.0', label: '3.21.0' },
           ],
@@ -610,7 +611,7 @@ const sidebars: SidebarsConfig = {
             { type: 'doc', id: 'update-notes/v2.2.44', label: '2.2.44' },
             { type: 'doc', id: 'update-notes/v2.2.45', label: '2.2.45' },
             { type: 'doc', id: 'update-notes/v2.2.46', label: '2.2.46' },
-        ],
+          ],
         },
         {
           type: 'category',
