@@ -8,6 +8,7 @@ keywords:
   - reasoning AI
   - vision models
   - large context
+  - Grok Code Fast
   - Grok-4
   - Grok-3
   - Grok-2
@@ -38,8 +39,8 @@ xAI is the company behind Grok, a large language model known for its conversatio
 Roo Code supports the following xAI Grok models:
 
 ### Current Models
-* `grok-4` (Default) - xAI's Grok-4 model with 256K context window, image support, and prompt caching
-* `grok-code-fast-1` - xAI's Grok Code Fast model with 262K context window, optimized for coding tasks
+* `grok-code-fast-1` (Default) - xAI's Grok Code Fast model with 262K context window, optimized for coding tasks
+* `grok-4` - xAI's Grok-4 model with 256K context window, image support, and prompt caching
 * `grok-3` - xAI's Grok-3 model with 128K context window and prompt caching
 * `grok-3-fast` - xAI's Grok-3 fast model with 128K context window and prompt caching
 * `grok-3-mini` - xAI's Grok-3 mini model with 128K context window, reasoning support, and prompt caching
