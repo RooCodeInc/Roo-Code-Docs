@@ -40,13 +40,15 @@ The /init command helps LLMs understand your project's unique patterns and conve
 
 ## Qwen Code CLI API Support
 
-We've integrated Qwen Code CLI API with OAuth authentication ([#7380](https://github.com/RooCodeInc/Roo-Code/pull/7380)):
+We've integrated with the Qwen Code CLI tool, allowing Roo Code to leverage its free access tier for Alibaba's Qwen3 Coder models ([#7380](https://github.com/RooCodeInc/Roo-Code/pull/7380)):
 
-- **OAuth Authentication**: Secure authentication flow for accessing Qwen's code generation models
-- **Full API Integration**: Complete support for Qwen's advanced code generation capabilities
-- **CLI Accessibility**: Use Qwen models directly through the command-line interface
+- **Free Inference**: Piggybacks off the Qwen Code CLI's generous free tier (2,000 requests/day and 60 requests/minute with no token limits) via OAuth, available during a promotional period.
+- **1M Context Windows**: Handle entire codebases in a single conversation.
+- **Seamless Setup**: Works automatically if you've already authenticated the Qwen Code CLI tool.
 
-This integration brings Qwen's code generation models to Roo Code users.
+This integration provides free access to the Qwen3 Coder models by using the local authentication from the Qwen Code CLI.
+
+> **📚 Documentation**: See [Qwen Code CLI Provider](/providers/qwen-code) for setup and configuration.
 
 ## Provider Updates
 

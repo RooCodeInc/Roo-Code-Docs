@@ -177,6 +177,7 @@ const sidebars: SidebarsConfig = {
         'providers/openai',
         'providers/openai-compatible',
         'providers/openrouter',
+        'providers/qwen-code',
         'providers/requesty',
         'providers/roo-code-cloud',
         'providers/sambanova',
