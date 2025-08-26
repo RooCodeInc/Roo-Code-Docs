@@ -40,7 +40,7 @@ Roo Code supports the following xAI Grok models:
 
 ### Current Models
 * `grok-code-fast-1` (Default) - xAI's Grok Code Fast model with 262K context window, optimized for coding tasks
-* `grok-4` - xAI's Grok-4 model with 256K context window, image support, and prompt caching
+* `grok-4` - xAI's Grok-4 model with 262K context window, image support, and prompt caching
 * `grok-3` - xAI's Grok-3 model with 128K context window and prompt caching
 * `grok-3-fast` - xAI's Grok-3 fast model with 128K context window and prompt caching
 * `grok-3-mini` - xAI's Grok-3 mini model with 128K context window, reasoning support, and prompt caching
@@ -94,7 +94,7 @@ Choose `low` for simple queries that should complete quickly, and `high` for har
 
 ## Prompt Caching
 
-Prompt caching is available for select Grok models including `grok-4`, `grok-3`, `grok-3-fast`, `grok-3-mini`, and `grok-3-mini-fast`. This feature can reduce costs and improve response times.
+Prompt caching is available for select Grok models including `grok-code-fast-1`, `grok-4`, `grok-3`, `grok-3-fast`, `grok-3-mini`, and `grok-3-mini-fast`. This feature can reduce costs and improve response times.
 
 ---
 
