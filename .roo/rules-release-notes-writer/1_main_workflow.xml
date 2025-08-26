@@ -109,6 +109,7 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:YYYY-MM-DD
       <subtask_pattern>
         <for_each>PR in list</for_each>
         <action>Create investigation subtask</action>
+        <mode>release-notes-writer</mode>
         <message><![CDATA[
 Investigate PR #[number] for release notes v[version].
 1. Get PR details (gh pr view)
@@ -240,10 +241,15 @@ Which features should I highlight with expanded sections in the release notes?
     <workflow name="version_only">
       <description>Extract PR list when user provides just a version</description>
       <steps>
-        <step>Spawn PR extraction subtask</step>
+        <step>Spawn PR extraction subtask using new_task with mode="release-notes-writer"</step>
         <step>Subtask writes PR list to temp_pr_list.md</step>
         <step>Ask user how to proceed</step>
       </steps>
+      <implementation>
+        <tool>new_task</tool>
+        <mode>release-notes-writer</mode>
+        <message>Extract PR list for version [VERSION] and write to temp_pr_list.md</message>
+      </implementation>
     </workflow>
 
     <workflow name="latest">
