@@ -70,7 +70,8 @@ The filename becomes the command name. For example:
 When creating commands through the UI, command names are automatically processed:
 - Converted to lowercase
 - Spaces replaced with dashes
-- Special characters removed
+- Special characters removed (except dashes)
+- Multiple consecutive dashes replaced with single dash
 - Leading/trailing dashes removed
 
 Example: "My Cool Command!" becomes `my-cool-command`
@@ -125,23 +126,20 @@ Please perform a thorough security review of the selected code:
 
 ---
 
-## Command Management UI
+## Command Management
 
-Roo Code provides a dedicated UI for managing custom commands.
-
-<img src="/img/slash-commands/slash-commands-4.png" alt="Accessing the command manager from Roo Code panel" width="600" />
-
-*Click the commands icon in the Roo Code panel to open the command manager*
+Roo Code provides multiple ways to manage custom commands.
 
 **Creating a New Command:**
 
-1. Type your command name in the input field (e.g., "Sample command name")
-2. Click the `+` button to create the command
+1. Type `/` in the chat to open the slash command menu
+2. Type your command name in the input field (e.g., "Sample command name")
+3. Click the `+` button to create the command
 
 <img src="/img/slash-commands/slash-commands-1.png" alt="Custom Commands Management Interface" width="400" />
 
-
-3. A new file will be created and opened automatically (e.g., `sample-command-name.md`)
+4. A new file will be created and opened automatically (e.g., `sample-command-name.md`)
+5. The file will contain template content to help you get started
 
 <img src="/img/slash-commands/slash-commands-2.png" alt="Creating a new command by typing name and clicking plus button" width="600" />
 
@@ -150,16 +148,15 @@ Roo Code provides a dedicated UI for managing custom commands.
 
 ## Using Slash Commands
 
-Type `/` in the chat to see a unified menu containing both types of commands. The menu shows both custom workflow commands and mode-switching commands in the same interface.
+Type `/` in the chat to see a unified menu containing all available commands. The menu shows custom workflow commands, mode-switching commands, and built-in commands in the same interface.
 
 <img src="/img/slash-commands/slash-commands-3.png" alt="Newly created command file opened in editor" width="600" />
 
-
-1. **Unified Menu**: Both custom commands and mode-switching commands appear together
+1. **Unified Menu**: All command types appear together
 2. **Autocomplete**: Start typing to filter commands (e.g., `/sam` shows `sample-command-name`)
-3. **Fuzzy Search**: Find commands even with partial matches
+3. **Basic Filtering**: Find commands with text matching
 4. **Description Preview**: See command descriptions in the menu
-5. **Visual Indicators**: Mode commands are distinguished from custom commands with special icons
+5. **Command Priority**: Project commands override global commands with the same name
 
 ---
 
@@ -368,22 +365,62 @@ Analyze the current test coverage and:
 
 ---
 
+## Built-in Commands
+
+Roo Code includes powerful built-in commands that provide specialized functionality:
+
+### The `init` Command
+
+The `/init` command is a comprehensive AI assistant setup tool that analyzes your codebase and creates tailored configuration files. This powerful command:
+
+**Performs Multi-Phase Analysis:**
+- **Discovery Phase**: Scans your project structure and identifies key technologies
+- **Project Identification**: Determines project type, frameworks, and dependencies
+- **Architecture Mapping**: Analyzes code organization and patterns
+- **Build/Test Detection**: Identifies build tools, test frameworks, and scripts
+- **Code Style Extraction**: Captures coding conventions and patterns
+
+**Creates AI Assistant Configuration:**
+- Generates mode-specific `AGENTS.md` files in `.roo/rules-*` directories
+- Creates detailed rules for different AI assistant modes (Code, Architect, Debug, etc.)
+- Produces concise, high-signal documentation following the "non-obvious-only" principle
+- Supports multiple AI assistant formats (Claude, Cursor, Copilot)
+
+**Manages Project Setup:**
+- Creates comprehensive todo lists for project initialization
+- Identifies security and performance considerations
+- Documents project-specific conventions and patterns
+- Enforces quality criteria for generated documentation
+
+**Usage:**
+Simply type `/init` in the chat to analyze your codebase and set up AI assistant configuration files tailored to your project.
+
+:::tip
+The `init` command is especially useful when starting work on a new project or when you want to establish consistent AI assistant behavior across your team.
+:::
+
 ## Troubleshooting
 
 **Commands Not Appearing:**
 - **Check file location**: Ensure custom command files are in `.roo/commands/` or `~/.roo/commands/`
 - **Verify file extension**: Custom commands must be `.md` files
+- **Reload window**: Sometimes VS Code needs to be reloaded to detect new command files
 
 **Command Not Found:**
-When a slash command isn't found, the LLM will see:
-```
-Command 'command-name' not found. Available commands can be found in .roo/commands/ or ~/.roo/commands/
-```
+When a slash command isn't found, the LLM will see an error message indicating where commands should be located. This helps guide you to create the command in the right place.
+
+**Command Template Content:**
+New commands created through the UI receive template content to help you get started. This template includes basic structure and examples that you can customize.
 
 **Command Conflicts:**
-- Custom project commands override global custom commands with the same name
-- Use unique names to avoid conflicts
+- Project commands (`.roo/commands/`) override global commands (`~/.roo/commands/`) with the same name
+- Built-in commands cannot be overridden
 - When creating duplicate names through the UI, numbers are appended (e.g., `new-command-1`, `new-command-2`)
+
+**File System Errors:**
+- **Permission Issues**: Ensure you have write permissions to the `.roo/commands/` directory
+- **Directory Creation**: The system will attempt to create the commands directory if it doesn't exist
+- **Symbolic Links**: Command directories support symbolic links for sharing commands across projects
 
 :::info About Mode Commands
 The slash menu includes mode-switching commands (like `/code`, `/ask`) that fundamentally change the AI's operational mode - they don't just inject text but switch the entire AI context. Custom modes you create also appear as slash commands (e.g., a mode with slug `reviewer` becomes `/reviewer`). These mode commands cannot be overridden by custom workflow commands. Learn more in [Using Modes](/basic-usage/using-modes) and [Custom Modes](/features/custom-modes).
