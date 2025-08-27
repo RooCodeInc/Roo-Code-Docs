@@ -108,9 +108,20 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:YYYY-MM-DD
       
       <subtask_pattern>
         <for_each>PR in list</for_each>
-        <action>Create investigation subtask</action>
-        <mode>release-notes-writer</mode>
-        <message><![CDATA[
+        <action>Create investigation subtask using new_task tool</action>
+        <implementation>
+          <tool>new_task</tool>
+          <mode>release-notes-writer</mode>
+          <description>
+            For each PR in the fetched or provided list, create a separate subtask
+            using the new_task tool. Each subtask investigates one PR independently.
+          </description>
+          <iteration_approach>
+            Process PRs sequentially or in batches, creating a new_task for each PR number.
+            Wait for all subtasks to complete before proceeding to compilation phase.
+          </iteration_approach>
+        </implementation>
+        <message_template><![CDATA[
 Investigate PR #[number] for release notes v[version].
 1. Get PR details (gh pr view)
 2. Extract linked issues
@@ -126,7 +137,15 @@ Include documentation flags:
 - docs-migration: Breaking changes
 
 CRITICAL: Never create/overwrite files, only append.
-        ]]></message>
+        ]]></message_template>
+        <todos_template><![CDATA[
+[ ] Fetch PR #[number] details using gh pr view
+[ ] Extract linked issues from PR body
+[ ] Get issue details for each linked issue
+[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
+[ ] Identify documentation needs
+[ ] Write analysis to temp_pr_analysis.md
+        ]]></todos_template>
       </subtask_pattern>
       
       <output_format><![CDATA[
@@ -142,6 +161,48 @@ CRITICAL: Never create/overwrite files, only append.
 
 ---
       ]]></output_format>
+      
+      <subtask_creation_example>
+        <description>Example of creating subtasks for a PR list</description>
+        <scenario>Given PRs: #1234, #1235, #1236 for version 3.20.1</scenario>
+        <implementation><![CDATA[
+<!-- For each PR, create a subtask like this: -->
+<new_task>
+<mode>release-notes-writer</mode>
+<message>Investigate PR #1234 for release notes v3.20.1.
+1. Get PR details (gh pr view)
+2. Extract linked issues
+3. Get issue details
+4. Categorize change
+5. Identify documentation needs (new features, behavior changes, deprecations)
+6. Append to temp_pr_analysis.md using insert_content line 0
+
+Include documentation flags:
+- docs-new: Completely new feature
+- docs-update: Existing docs need updating
+- docs-example: New examples needed
+- docs-migration: Breaking changes
+
+CRITICAL: Never create/overwrite files, only append.</message>
+<todos>
+[ ] Fetch PR #1234 details using gh pr view
+[ ] Extract linked issues from PR body
+[ ] Get issue details for each linked issue
+[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
+[ ] Identify documentation needs
+[ ] Write analysis to temp_pr_analysis.md
+</todos>
+</new_task>
+
+<!-- Repeat for PR #1235, #1236, etc. -->
+        ]]></implementation>
+        <critical_notes>
+          - Parent task must create temp_pr_analysis.md BEFORE creating any subtasks
+          - Each subtask gets its own new_task invocation
+          - Subtasks run in the same release-notes-writer mode
+          - Parent waits for all subtasks to complete before compilation
+        </critical_notes>
+      </subtask_creation_example>
     </phase>
 
     <phase name="compilation">
