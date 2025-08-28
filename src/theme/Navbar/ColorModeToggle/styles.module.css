@@ -14,22 +14,22 @@
 }
 
 .themeToggle:hover {
-  background-color: var(--accent, hsl(0 0% 96.1%));
-  color: var(--accent-foreground, hsl(0 0% 9%));
+  background-color: hsl(var(--accent, 0 0% 96.1%));
+  color: hsl(var(--accent-foreground, 0 0% 9%));
 }
 
 [data-theme='dark'] .themeToggle:hover {
-  background-color: var(--accent, hsl(0 0% 14.9%));
-  color: var(--accent-foreground, hsl(0 0% 98%));
+  background-color: hsl(var(--accent, 0 0% 14.9%));
+  color: hsl(var(--accent-foreground, 0 0% 98%));
 }
 
 .themeToggle:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 1px var(--ring, hsl(0 0% 3.9%));
+  box-shadow: 0 0 0 1px hsl(var(--ring, 0 0% 3.9%));
 }
 
 [data-theme='dark'] .themeToggle:focus-visible {
-  box-shadow: 0 0 0 1px var(--ring, hsl(0 0% 83.1%));
+  box-shadow: 0 0 0 1px hsl(var(--ring, 0 0% 83.1%));
 }
 
 .icon {
