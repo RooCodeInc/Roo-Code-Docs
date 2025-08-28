@@ -70,6 +70,7 @@ const sidebars: SidebarsConfig = {
         'features/custom-modes',
         'features/fast-edits',
         'features/enhance-prompt',
+        'features/image-generation',
         'features/settings-management',
         'features/intelligent-context-condensing',
         'features/keyboard-shortcuts',
@@ -216,6 +217,7 @@ const sidebars: SidebarsConfig = {
           label: '3.26',
           items: [
             { type: 'doc', id: 'update-notes/v3.26', label: '3.26 Combined' },
+            { type: 'doc', id: 'update-notes/v3.26.2', label: '3.26.2' },
             { type: 'doc', id: 'update-notes/v3.26.1', label: '3.26.1' },
             { type: 'doc', id: 'update-notes/v3.26.0', label: '3.26.0' },
           ],
