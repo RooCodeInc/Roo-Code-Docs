@@ -41,7 +41,8 @@
       <incorrect>2025-18-07 (Invalid - would mean 18th month)</incorrect>
     </examples>
     <implementation>
-      When PR list provided directly: Use new Date().toISOString().split('T')[0]
+      When PR list provided directly: Use new Date().toISOString().split('T')[0] (UTC)
+      Note: toISOString returns UTC; do not convert to local time to avoid off-by-one day differences.
     </implementation>
   </critical_date_format>
 
@@ -87,6 +88,9 @@
         <action>Fetch PRs from GitHub</action>
         <skip_if>User provided PR list</skip_if>
         <commands>
+          <get_release_published_date><![CDATA[
+gh release view vX.Y.Z --repo RooCodeInc/Roo-Code --json publishedAt | jq -r '.publishedAt'
+          ]]></get_release_published_date>
           <get_tag_date><![CDATA[
 gh api repos/RooCodeInc/Roo-Code/git/refs/tags/vX.Y.Z --jq '.object.sha' | xargs -I {} gh api repos/RooCodeInc/Roo-Code/git/commits/{} --jq '.committer.date'
           ]]></get_tag_date>
@@ -99,10 +103,11 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:YYYY-MM-DD
 
     <phase name="pr_processing">
       <initialization priority="CRITICAL">
-        <action>Create temp_pr_analysis.md</action>
+        <action>Create .roo/tmp/release-notes/temp_pr_analysis.md</action>
         <details>
-          Parent task MUST create this file before ANY subtasks.
+          Parent task MUST create this file (and .roo/tmp/release-notes/temp_pr_inclusion.json, .roo/tmp/release-notes/temp_pr_list.md if needed) before ANY subtasks.
           Subtasks will ONLY append using insert_content.
+          Temp files live under .roo/tmp/release-notes/
         </details>
       </initialization>
       
@@ -128,7 +133,7 @@ Investigate PR #[number] for release notes v[version].
 3. Get issue details
 4. Categorize change
 5. Identify documentation needs (new features, behavior changes, deprecations)
-6. Append to temp_pr_analysis.md using insert_content line 0
+6. Append to .roo/tmp/release-notes/temp_pr_analysis.md using insert_content line 0
 
 Include documentation flags:
 - docs-new: Completely new feature
@@ -144,7 +149,7 @@ CRITICAL: Never create/overwrite files, only append.
 [ ] Get issue details for each linked issue
 [ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
 [ ] Identify documentation needs
-[ ] Write analysis to temp_pr_analysis.md
+[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis.md
         ]]></todos_template>
       </subtask_pattern>
       
@@ -175,7 +180,7 @@ CRITICAL: Never create/overwrite files, only append.
 3. Get issue details
 4. Categorize change
 5. Identify documentation needs (new features, behavior changes, deprecations)
-6. Append to temp_pr_analysis.md using insert_content line 0
+6. Append to .roo/tmp/release-notes/temp_pr_analysis.md using insert_content line 0
 
 Include documentation flags:
 - docs-new: Completely new feature
@@ -190,7 +195,7 @@ CRITICAL: Never create/overwrite files, only append.</message>
 [ ] Get issue details for each linked issue
 [ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
 [ ] Identify documentation needs
-[ ] Write analysis to temp_pr_analysis.md
+[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis.md
 </todos>
 </new_task>
 
@@ -204,10 +209,161 @@ CRITICAL: Never create/overwrite files, only append.</message>
         </critical_notes>
       </subtask_creation_example>
     </phase>
+    
+    <phase name="changelog_alignment">
+      <description>Align the working PR set with the repository changelog for the selected version(s)</description>
+      <step number="1">
+        <action>Fetch changelog content for v[VERSION] (Release body first, then CHANGELOG.md at tag, then PR scan as last resort)</action>
+        <commands>
+          <strategy priority="1"><![CDATA[
+gh release view vX.Y.Z --repo RooCodeInc/Roo-Code --json body | jq -r '.body'
+          ]]></strategy>
+          <strategy priority="2"><![CDATA[
+# Fallback to CHANGELOG at the tag commit
+gh api repos/RooCodeInc/Roo-Code/contents/CHANGELOG.md?ref=vX.Y.Z --jq '.content' | base64 -d
+          ]]></strategy>
+          <strategy priority="3"><![CDATA[
+# Fallback to main branch CHANGELOG if tag content unavailable
+gh api repos/RooCodeInc/Roo-Code/contents/CHANGELOG.md --jq '.content' | base64 -d
+          ]]></strategy>
+          <strategy priority="4"><![CDATA[
+# Last resort: scan merged PRs in the version window for ones that modified CHANGELOG.md
+# Requires YYYY-MM-DD..YYYY-MM-DD boundaries computed earlier
+gh pr list --repo RooCodeInc/Roo-Code --state merged --search "merged:YYYY-MM-DD..YYYY-MM-DD" --json number --limit 1000 \
+| jq '.[].number' \
+| xargs -I {} gh pr view {} --json files \
+| jq -r 'select(.files[].path=="CHANGELOG.md") | .number'
+          ]]></strategy>
+        </commands>
+        <dependency_note>Use the first non-empty result as changelog_source. Prefer the Release body; only fall back to file or PR scan if empty or unavailable.</dependency_note>
+        <critical>Do not attempt to locate a "changelog PR" when a Release body or CHANGELOG.md content is available.</critical>
+      </step>
+
+      <step number="2">
+        <action>Extract version section lines from changelog_source</action>
+        <details>
+          If using Release body: treat the entire body as the v[VERSION] section.
+          If using CHANGELOG.md: isolate the v[VERSION] section by heading match:
+          - Headings commonly appear as "## vX.Y.Z", "## X.Y.Z", or "## [X.Y.Z]".
+        </details>
+        <parsing>
+          <regex>Detect PR references as: /#(\d{1,7})/g</regex>
+          <heuristics>
+            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
+            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
+          </heuristics>
+        </parsing>
+      </step>
+      
+      <step number="2a">
+        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list and spawn analysis subtasks</action>
+        <details>
+          - Identify referenced PR numbers from step 2 that are missing from .roo/tmp/release-notes/temp_pr_analysis.md
+          - For each missing PR, fetch details and create a new investigation subtask (same pattern as pr_processing) to append analysis to temp_pr_analysis.md
+          - Mark these as out_of_range if their mergedAt is outside the computed date window
+          - Wait for all spawned subtasks to complete before proceeding
+        </details>
+        <commands>
+          <fetch><![CDATA[
+# For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis.md:
+gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
+          ]]></fetch>
+          <spawn_subtask><![CDATA[
+<new_task>
+<mode>release-notes-writer</mode>
+<message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis.md.</message>
+<todos>
+[ ] Fetch PR #[NUMBER] details using gh pr view
+[ ] Extract linked issues from PR body
+[ ] Get issue details for each linked issue
+[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
+[ ] Identify documentation needs
+[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis.md
+</todos>
+</new_task>
+          ]]></spawn_subtask>
+      </step>
+      
+      <step number="2b">
+        <action>Detect out-of-range referenced PRs</action>
+        <output>
+          <metric name="out_of_range_count">Number of referenced PRs with mergedAt outside the YYYY-MM-DD..YYYY-MM-DD window</metric>
+        </output>
+      </step>
+      
+      <step number="3">
+        <action>Partition PRs using changelog</action>
+        <result>
+          <in_changelog>PRs explicitly referenced or confidently matched to changelog lines</in_changelog>
+          <excluded>PRs not referenced or ambiguous</excluded>
+        </result>
+        <analysis>
+          Provide a brief summary:
+          - Included: [IN_COUNT] PRs
+          - Excluded: [EX_COUNT] PRs
+          Possible reasons for exclusion:
+          - Not mentioned in changelog
+          - Combined under a meta PR
+          - Documentation-only or infra work
+          - Outside computed date window
+          - Title did not match any changelog line
+        </analysis>
+      </step>
+
+      <step number="4">
+        <action>Ask for inclusion policy</action>
+        <tool>ask_followup_question</tool>
+        <template><![CDATA[
+<ask_followup_question>
+<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
+<follow_up>
+<suggest>Only include the PRs referenced in the changelog</suggest>
+<suggest>Include all PRs from the date range</suggest>
+<suggest>Review each excluded PR one by one so I can choose</suggest>
+</follow_up>
+</ask_followup_question>
+        ]]></template>
+        <critical>Do not proceed until one of the provided options is selected.</critical>
+      </step>
+
+      <step number="5" optional="true">
+        <when>User selects per-PR review</when>
+        <action>Iteratively review excluded PRs</action>
+        <loop>
+          For each PR in the excluded set:
+          - Show title, author, brief labels, and a 1–2 sentence user-impact summary
+          - Ask: include this PR?
+          - Options: "Yes, include this PR" or "No, skip this PR"
+          - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
+        </loop>
+        <template><![CDATA[
+<ask_followup_question>
+<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
+<follow_up>
+<suggest>Yes, include this PR</suggest>
+<suggest>No, skip this PR</suggest>
+</follow_up>
+</ask_followup_question>
+        ]]></template>
+        <completion>After the loop, proceed with the finalized PR set.</completion>
+      </step>
+      
+      <handoff>Proceed to feature selection using the finalized PR set. Persist included/excluded lists to .roo/tmp/release-notes/temp_pr_inclusion.json for downstream filtering.</handoff>
+    </phase>
 
     <phase name="compilation">
       <step number="1">
-        <action>Read and organize PR findings</action>
+        <action>Read and organize PR findings (filtered to finalized inclusion set)</action>
+        <inputs>
+          <file>.roo/tmp/release-notes/temp_pr_analysis.md</file>
+          <file optional="true">.roo/tmp/release-notes/temp_pr_inclusion.json</file>
+        </inputs>
+        <precondition>
+          If .roo/tmp/release-notes/temp_pr_inclusion.json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
+        </precondition>
+        <filtering>
+          Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion.json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
+        </filtering>
         <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
         <critical>QOL Improvements MUST come before Bug Fixes</critical>
       </step>
@@ -227,12 +383,19 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 Which features should I highlight with expanded sections in the release notes?
         ]]></template>
-        <critical>Must get explicit confirmation before writing notes</critical>
+        <gating>
+          <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
+          <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
+        </gating>
+        <critical>Must get explicit confirmation before writing notes; see user_interactions.feature_selection.gating_rules</critical>
       </step>
       
       <step number="3">
         <action>Create release notes file</action>
-        <format>docs/update-notes/vX.Y.Z.mdx</format>
+        <format>
+          For patch versions (X.Y.Z): docs/update-notes/vX.Y.Z.mdx
+          For minor/major summaries (X.Y): docs/update-notes/vX.Y.mdx
+        </format>
       </step>
       
       <step number="4">
@@ -256,6 +419,10 @@ Which features should I highlight with expanded sections in the release notes?
         <when>If any documentation flags were identified</when>
         <tool>new_task with mode="documentation-writer"</tool>
       </step>
+      <step number="7">
+        <action>Cleanup temporary files</action>
+        <details>Delete .roo/tmp/release-notes/* (temp_pr_analysis.md, temp_pr_list.md, temp_pr_inclusion.json) after notes are finalized.</details>
+      </step>
     </phase>
   </main_workflow>
 
@@ -265,6 +432,7 @@ Which features should I highlight with expanded sections in the release notes?
       <transformations>
         - Remove PR links and numbers
         - Convert /path to https://docs.roocode.com/path
+        - Convert "* " list bullets to "• " bullets
         - Add footer link with markdown format
         - Handle compression if requested
         - Wrap entire output in markdown code block
@@ -302,14 +470,15 @@ Which features should I highlight with expanded sections in the release notes?
     <workflow name="version_only">
       <description>Extract PR list when user provides just a version</description>
       <steps>
+        <step>Ensure parent created .roo/tmp/release-notes/temp_pr_list.md (empty)</step>
         <step>Spawn PR extraction subtask using new_task with mode="release-notes-writer"</step>
-        <step>Subtask writes PR list to temp_pr_list.md</step>
+        <step>Subtask appends PR list to .roo/tmp/release-notes/temp_pr_list.md using insert_content line 0</step>
         <step>Ask user how to proceed</step>
       </steps>
       <implementation>
         <tool>new_task</tool>
         <mode>release-notes-writer</mode>
-        <message>Extract PR list for version [VERSION] and write to temp_pr_list.md</message>
+        <message>Extract PR list for version [VERSION] and append to .roo/tmp/release-notes/temp_pr_list.md using insert_content line 0</message>
       </implementation>
     </workflow>
 
@@ -317,10 +486,25 @@ Which features should I highlight with expanded sections in the release notes?
       <description>Auto-detect missing versions</description>
       <steps>
         <step>Find most recent release notes</step>
-        <step>Read changelog or GitHub releases</step>
-        <step>Identify missing versions</step>
+        <step>List existing docs files in docs/update-notes (vX.Y or vX.Y.Z)</step>
+        <step>List tags or releases from GitHub</step>
+        <step>Compute missing versions (tags minus existing docs)</step>
         <step>Ask which to process</step>
       </steps>
+      <commands>
+        <existing_notes><![CDATA[
+ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//' | sort -V
+        ]]></existing_notes>
+        <tags><![CDATA[
+gh api -X GET /repos/RooCodeInc/Roo-Code/tags --paginate --jq '.[].name' | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?$' | sort -V
+        ]]></tags>
+        <releases><![CDATA[
+# Alternative:
+gh release list --repo RooCodeInc/Roo-Code --limit 200 | awk '{print $1}' | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?$' | sort -V
+        ]]></releases>
+        <note>Present the set difference (tags/releases not present in docs) as candidates.</note>
+      </commands>
+      <handoff>After the user selects versions to process, immediately execute the changelog_alignment phase for each selected version before entering the compilation phase.</handoff>
     </workflow>
   </special_workflows>
 

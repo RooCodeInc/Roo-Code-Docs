@@ -133,6 +133,8 @@ Concluding sentence about the benefit.
         - Place inside parentheses before PR link
         - Include both PR author and issue reporter
         - List PR author first
+        - If PR author equals issue reporter, use a single username once
+        - Do not thank these names: outlined in the special instructions section `Release Notes "thank you" exclusions`
       </rules>
     </contributor_acknowledgments>
 
@@ -162,7 +164,7 @@ Concluding sentence about the benefit.
     <format>[X.Y.Z](/update-notes/vX.Y.Z) (YYYY-MM-DD)</format>
     <rules>
       - List chronologically, newest first
-      - Use absolute paths from /docs/
+      - Use absolute paths from site root (no /docs prefix)
       - Omit .md extension
       - Include release date in ISO 8601 format
     </rules>
@@ -224,7 +226,7 @@ Concluding sentence about the benefit.
   </documentation_links>
 
   <forbidden_elements>
-    - "Summary" or "Highlights" sections
+    - "Summary" or "Highlights" sections in docs/update-notes (Discord announcements may use "Feature Highlights")
     - Version numbers in docs outside update-notes
     - Temporal references like "as of version X.Y.Z"
     - Marketing language or buzzwords
@@ -334,6 +336,9 @@ These releases include 18 improvements across bug fixes, provider updates, QOL e
       
       <from>## Major Features</from>
       <to>## ✨ Feature Highlights</to>
+      
+      <from>* </from>
+      <to>• </to>
       
       <from>Happy coding! 🦘</from>
       <to>(remove entirely)</to>

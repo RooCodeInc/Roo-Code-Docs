@@ -84,12 +84,15 @@ PRs: [#7474](https://github.com/RooCodeInc/Roo-Code/pull/7474), [#7492](https://
 
 ### Provider Updates
 
+* **Qwen3 235B Thinking Model**: Added support for Qwen3-235B-A22B-Thinking-2507 model with an impressive 262K context window, enabling processing of extremely long documents and large codebases in a single request through the Chutes provider (thanks mohammad154, apple-techie!) ([#7578](https://github.com/RooCodeInc/Roo-Code/pull/7578))
 * **Ollama Turbo Mode**: Added API key support for Turbo mode, enabling faster model execution with datacenter-grade hardware (thanks LivioGama!) ([#7425](https://github.com/RooCodeInc/Roo-Code/pull/7425))
 * **DeepSeek V3.1 on Fireworks**: Added support for DeepSeek V3.1 model in the Fireworks AI provider (thanks dmarkey!) ([#7375](https://github.com/RooCodeInc/Roo-Code/pull/7375))
 * **Provider Visibility**: Static providers with no models are now hidden from the provider list for a cleaner interface ([#7392](https://github.com/RooCodeInc/Roo-Code/pull/7392))
 
 ### QOL Improvements
 
+* **MCP Resource Auto-Approval**: MCP resource access requests are now automatically approved when auto-approve is enabled, eliminating manual approval steps and enabling smoother automation workflows (thanks m-ibm!) ([#7606](https://github.com/RooCodeInc/Roo-Code/pull/7606))
+* **Message Queue Performance**: Improved message queueing reliability and performance by moving the queue management to the extension host, making the interface more stable ([#7604](https://github.com/RooCodeInc/Roo-Code/pull/7604))
 * **Memory Optimization**: Optimized memory usage for image handling in webview, achieving ~75% reduction in memory consumption ([#7556](https://github.com/RooCodeInc/Roo-Code/pull/7556))
 * **Auto-Approve Toggle UI**: The auto-approve toggle now stays at the bottom when expanded, reducing mouse movements (thanks elianiva, kyle-apex!) ([#7318](https://github.com/RooCodeInc/Roo-Code/pull/7318))
 * **OpenRouter Cache Pricing**: Cache read and write prices are now displayed for OpenRouter models (thanks chrarnoldus!) ([#7176](https://github.com/RooCodeInc/Roo-Code/pull/7176))
@@ -105,6 +108,8 @@ PRs: [#7474](https://github.com/RooCodeInc/Roo-Code/pull/7474), [#7492](https://
 
 ### Bug Fixes
 
+* **Configurable Embedding Batch Size**: Fixed an issue where users with API providers having stricter batch limits couldn't use code indexing. You can now configure the embedding batch size (1-2048, default: 400) to match your provider's limits (thanks BenLampson!) ([#7464](https://github.com/RooCodeInc/Roo-Code/pull/7464))
+* **OpenAI-Native Cache Reporting**: Fixed cache usage statistics and cost calculations when using the OpenAI-Native provider with cached content ([#7602](https://github.com/RooCodeInc/Roo-Code/pull/7602))
 * **Special Tokens Handling**: Fixed issue where special tokens would break task processing (thanks pwilkin!) ([#7540](https://github.com/RooCodeInc/Roo-Code/pull/7540))
 * **Security - Symlink Handling**: Fixed security vulnerability where symlinks could bypass rooignore patterns ([#7405](https://github.com/RooCodeInc/Roo-Code/pull/7405))
 * **Security - Default Commands**: Removed potentially unsafe commands (`npm test`, `npm install`, `tsc`) from default allowed list (thanks thelicato, SGudbrandsson!) ([#7404](https://github.com/RooCodeInc/Roo-Code/pull/7404))
