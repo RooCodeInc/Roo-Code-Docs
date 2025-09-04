@@ -21,6 +21,8 @@ When you connect to Roo Code Cloud, you gain access to:
 - **Online task history** - Access your complete conversation history across devices and sessions
 - **Sharing and collaboration features** - Share tasks publicly and collaborate with team members
 - **Task, token, and cost-based usage metrics** - Monitor your AI assistant usage and optimize costs
+- **Roomote Control** - Control and monitor VS Code tasks remotely from your browser (Pro feature)
+- **Pro Subscription** - Unlock premium features with flexible monthly billing
 
 ## Core Features
 
@@ -37,6 +39,20 @@ Share individual tasks with colleagues, collaborators, or the community through 
 - Creating tutorials and documentation
 - Code reviews and collaboration
 
+### 🎮 Roomote Control (Pro)
+Control your VS Code development environment remotely with [Roomote Control](/roo-code-cloud/roomote-control):
+- Monitor tasks running in your IDE in real-time
+- Start, stop, and manage tasks from any browser
+- Stream live progress updates
+- Switch between multiple workspaces seamlessly
+
+### 💳 Pro Subscription
+Upgrade to Pro for enhanced capabilities with our [flexible billing](/roo-code-cloud/billing-subscriptions):
+- $20/month for personal accounts
+- Unlock Roomote Control and premium features
+- Priority support and enhanced limits
+- Cancel anytime, no commitment
+
 ### 📊 Usage Analytics
 Track your AI assistant usage with detailed metrics including:
 - Task counts and completion rates
@@ -50,12 +66,15 @@ Access a comprehensive web interface at [app.roocode.com](https://app.roocode.co
 - Create and manage share links
 - Monitor usage statistics
 - Configure account settings
+- Control remote workspaces (Pro)
 
 ## Getting Started
 
 1. **[Connect Your Account](/roo-code-cloud/login)** - Link your Roo Code extension to the cloud with simple authentication
 2. **[Explore the Dashboard](/roo-code-cloud/dashboard)** - Access your web-based control center
 3. **[Share Your First Task](/roo-code-cloud/task-sharing)** - Collaborate by sharing tasks with others
+4. **[Upgrade to Pro](/roo-code-cloud/billing-subscriptions)** - Unlock premium features like Roomote Control
+5. **[Enable Roomote Control](/roo-code-cloud/roomote-control)** - Control VS Code tasks from anywhere
 
 ## Privacy & Security
 

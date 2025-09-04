@@ -11,15 +11,15 @@ image: /img/social-share.jpg
 
 import Codicon from '@site/src/components/Codicon';
 
-# Login
+# Login/Signup
 
 Connect your Roo Code extension to Roo Code Cloud to sync your prompts, access online task history, and enable sharing and collaboration features.
 
 ## Getting Started
 
-To connect to Roo Code Cloud, click the **account icon** <Codicon name="account" /> in the top right corner of the Roo Code plugin.
+To connect to Roo Code Cloud, click the **cloud icon** <Codicon name="cloud" /> in the top right corner of the Roo Code plugin.
 
-<img src="/img/login/login.png" alt="Roo Code Cloud initial connection screen" width="600" />
+<img src="/img/login/login-10.png" alt="Roo Code Cloud initial connection screen" width="600" />
 
 Click the **Connect** button to begin the authentication process. You'll be redirected to the Roo Code Cloud website.
 
@@ -27,7 +27,7 @@ Click the **Connect** button to begin the authentication process. You'll be redi
 
 You'll see the sign-in page with multiple authentication options:
 
-<img src="/img/login/login-1.png" alt="Roo Code Cloud sign in page" width="600" />
+<img src="/img/login/login-6.png" alt="Roo Code Cloud sign in page" width="600" />
 
 Choose your preferred login method:
 - **GitHub** - Sign in with your existing GitHub account
@@ -36,26 +36,61 @@ Choose your preferred login method:
 
 ## Creating a New Account
 
-If you don't have an account yet, click the **Sign up** link at the bottom of the sign-in page.
+If you don't have an account yet, you have two options to create one:
 
-<img src="/img/login/login-2.png" alt="Roo Code Cloud signup form" width="600" />
+### Option 1: Sign Up with GitHub or Google
 
-Complete the signup form with:
-- **First name** (optional)
-- **Last name** (optional) 
-- **Email address** (required)
-- **Password** (required)
-- Accept the Terms of Service and Privacy Policy
+The quickest way to create an account is using your existing GitHub or Google account:
 
-After completing the form, you'll see a confirmation popup:
+1. From the sign-in page, click either the **GitHub** or **Google** button
+2. You'll be redirected to authenticate with your chosen provider
+3. After successful authentication, you'll see the Terms of Service and Privacy Policy agreement form:
 
-<img src="/img/login/login-3.png" alt="Account creation confirmation popup" width="600" />
+<img src="/img/login/login-8.png" alt="Terms of Service agreement form after OAuth authentication" width="600" />
+
+4. Review the Terms of Service and Privacy Policy
+5. Check the agreement box to accept the terms
+6. Click **Continue** to complete your account creation
+7. After account creation:
+   - **If connecting from VS Code**: You'll see a confirmation popup (proceed to IDE Selection section below)
+   - **If signing up directly at app.roocode.com**: You'll be redirected to your dashboard:
+   
+<img src="/img/login/login-9.png" alt="Roo Code Cloud dashboard after direct signup" width="600" />
+
+### Option 2: Sign Up with Email
+
+Alternatively, create an account using your email address:
+
+1. Click the **Sign up** link at the bottom of the sign-in page
+
+<img src="/img/login/login-7.png" alt="Roo Code Cloud signup form" width="600" />
+
+2. Complete the signup form with:
+   - **First name** (optional)
+   - **Last name** (optional)
+   - **Email address** (required)
+   - **Password** (required)
+   
+3. Review the Terms of Service and Privacy Policy
+
+4. Check the agreement box to accept the terms
+
+5. Click the signup button to create your account
+
+6. After account creation:
+   - **If connecting from VS Code**: You'll see this confirmation popup:
+   
+   <img src="/img/login/login-3.png" alt="Account creation confirmation popup" width="600" />
+   
+   - **If signing up directly at app.roocode.com**: You'll be redirected to your dashboard:
+   
+   <img src="/img/login/login-9.png" alt="Roo Code Cloud dashboard after direct signup" width="600" />
 
 ## IDE Selection
 
 The authentication page includes a selector for other VS Code-compatible IDEs:
 
-<img src="/img/login/login-4.png" alt="IDE selector for VS Code forks" width="600" />
+<img src="/img/login/login-11.png" alt="IDE selector for VS Code forks" width="600" />
 
 This allows you to connect Roo Code Cloud to various VS Code forks and compatible editors.
 
@@ -63,11 +98,14 @@ This allows you to connect Roo Code Cloud to various VS Code forks and compatibl
 
 Once authenticated, you'll be redirected back to your IDE where you'll see your connected account:
 
-<img src="/img/login/login-5.png" alt="Successfully connected Roo Code Cloud account" width="600" />
+<img src="/img/login/login-12.png" alt="Successfully connected Roo Code Cloud account" width="600" />
 
-From this screen you can:
-- **Visit Roo Code Cloud** - Click to open the web dashboard
-- **Log out** - Disconnect your account from this IDE
-- **Done** - Close the account panel and return to normal Roo Code usage
+This screen displays:
+- Your profile avatar and full name
+- Your connected account email address
+- **[Roomote Control](/roo-code-cloud/roomote-control)** toggle - Enable following and interacting with tasks in this workspace with Roo Code Cloud
+- **Visit Roo Code Cloud** button - Opens the [web dashboard](/roo-code-cloud/dashboard) in your browser
+- **Log out** button - Disconnects your account from this IDE
+- **Done** button (top right) - Closes the Cloud panel and returns to normal Roo Code usage
 
 Your Roo Code extension is now connected to Roo Code Cloud and ready to sync your data and enable collaboration features.

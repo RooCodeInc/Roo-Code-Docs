@@ -1,0 +1,85 @@
+---
+description: Control and monitor Roo Code tasks running in VS Code directly from your browser with Roomote Control's real-time bidirectional connection.
+keywords:
+  - roomote control
+  - remote control
+  - remote tasks
+  - real-time monitoring
+  - workspace connection
+  - task control
+image: /img/social-share.jpg
+---
+
+import Codicon from '@site/src/components/Codicon';
+
+# Roomote Control
+
+Roomote Control (also known as Remote Control) enables real-time monitoring and control of Roo Code tasks running in your VS Code extension directly from the Roo Code Cloud web interface.
+
+## What is Roomote Control?
+
+Roomote Control creates a bidirectional connection between your local VS Code extension and Roo Code Cloud, allowing you to:
+
+- **Follow along in real-time** with task activity from your IDE
+- **Monitor tasks** running in your IDE with live updates
+- **Control tasks remotely** ([Pro feature](/roo-code-cloud/billing-subscriptions#pro-plan-20month) - start, stop, interact)
+- **View live progress** with streaming updates
+
+## Key Features
+
+### Real-time Workspace Connection
+
+- Automatically detects open VS Code workspaces
+- Shows connection status with green <Codicon name="wifi" /> indicator
+- Displays workspace path and project name
+- Maintains persistent connection during tasks
+
+### Task Monitoring
+
+- Live streaming of task messages and progress
+- Visual indicators for task status (running, idle, interactive)
+
+### Remote Task Control
+
+- **Chat Interface** - Interact with the chatbox just as though you were in your IDE (includes message queuing, attaching images, changing modes, switching providers, and all standard chat features)
+- **Start New Tasks** - Launch tasks in any connected workspace
+- **Stop Running Tasks** - Safely terminate active tasks
+- **Task Switching** - Navigate between tasks including resuming tasks that have been stopped or closed
+
+:::note Pro Feature Required for Remote Control
+While basic monitoring is available to all users, remote control capabilities (starting, stopping, and interacting with tasks remotely) require a [Pro subscription ($20/month)](/roo-code-cloud/billing-subscriptions#pro-plan-20month).
+:::
+
+## Getting Started
+
+### Step 1: Connect Your Account
+
+First, you need to connect your Roo Code extension to Roo Code Cloud. Follow the [login instructions](/roo-code-cloud/login#getting-started) to connect your account.
+
+### Step 2: Enable Roomote Control
+
+You can enable Roomote Control in two ways:
+
+**Option 1: From the Web Dashboard**
+1. Navigate to [app.roocode.com](https://app.roocode.com)
+2. Toggle the **Roomote Control** switch on the top right of the home page
+
+**Option 2: From the Roo Code Plugin**
+1. Click the **cloud icon** <Codicon name="cloud" /> in the top right corner of Roo Code
+2. Toggle the **Roomote Control** switch in the Cloud panel
+
+### Step 3: Start a Remote Task
+
+Once your account is connected and Roomote Control is enabled:
+1. Your VS Code workspace(s) automatically appear in the web interface
+2. Click **New Task** on any connected workspace card
+3. Enter your task description
+4. Click **Start** to begin the task
+5. Watch real-time progress in your browser
+
+
+## Limitations
+
+- Requires active VS Code with Roo Code extension
+- Internet connection required for real-time sync
+- One task active per workspace at a time
