@@ -13,7 +13,7 @@ import Codicon from '@site/src/components/Codicon';
 
 # Dashboard
 
-The Roo Code Cloud dashboard provides a central location to manage your account, view task history, and access sharing and collaboration features.
+The Roo Code Cloud dashboard provides a central location to manage your account, view task history, monitor usage analytics, and control remote workspaces.
 
 ## Accessing the Dashboard
 
@@ -33,24 +33,57 @@ Navigate directly to the Roo Code Cloud web application:
 
 This allows you to access your dashboard from any web browser, even when not using the Roo Code extension.
 
-## Dashboard Features
+## Dashboard Pages
 
-The dashboard provides access to:
+### Home Page
 
-- **Task History** - View and manage your online task history
-- **Account Settings** - Manage your profile and preferences
-- **Sharing & Collaboration** - Access shared tasks and collaboration features
-- **Usage Metrics** - Monitor your task, token, and cost-based usage
-- **[Billing & Subscriptions](/roo-code-cloud/billing-subscriptions)** - Manage your Pro subscription and payment methods
-- **[Roomote Control](/roo-code-cloud/roomote-control)** - Control VS Code tasks remotely (Pro feature)
+The Home page combines Roomote Control and Tasks History in a single view.
 
-Your dashboard syncs with your Roo Code extension to provide a comprehensive view of your coding assistant activity and collaboration workflows.
+<img src="/img/dashboard/dashboard.png" alt="Roo Code Cloud Home page showing Roomote Control and Tasks sections" width="800" />
 
-## Pro Features
+#### Roomote Control Section
+The [Roomote Control](/roo-code-cloud/roomote-control) section at the top allows you to:
+- **Toggle Roomote Control** - Enable/disable remote control from the top right
+- **View Connected Workspaces** - Shows your active VS Code workspace(s) with connection status
+- **Monitor Active Tasks** - See currently running tasks with real-time updates
+- **Start New Tasks** - Use the "New Task" button to launch tasks remotely (Pro feature)
 
-Upgrade to Pro ($20/month) to unlock:
-- **Roomote Control** - Monitor and control tasks in VS Code from your browser
-- **Enhanced Usage Limits** - Increased capacity for tasks and tokens
-- **Priority Support** - Get help faster when you need it
+#### Tasks Section
+The Tasks section below displays your task history with:
+- **Task description** - The prompt or request
+- **Timestamp** - When the task was created
+- **User** - Who created the task
+- **Mode** - Which AI mode was used (ask, code, architect, etc.)
+- **Status** - Complete, in progress, or failed
+- **Token count** - Total tokens consumed
+- **Cost** - Estimated cost for the task
 
-Access billing at [app.roocode.com/billing](https://app.roocode.com/billing) or click **Billing** from your dashboard.
+### Usage Analytics Page
+
+Access detailed usage metrics by clicking the **Usage** tab in the navigation bar or navigate directly to [app.roocode.com/usage](https://app.roocode.com/usage).
+
+<img src="/img/dashboard/dashboard-1.png" alt="Usage Analytics page showing token usage graph and statistics" width="800" />
+
+The Usage Analytics page provides:
+- **Interactive Graph** - Visual representation of token usage over time
+- **Time Range Selection** - View data for 24 hours, 7 days, 30 days, or 90 days
+- **Metrics Tabs** - Switch between Tokens, Tasks, and Cost views
+- **Summary Statistics**:
+  - Total users
+  - Activity count (e.g., "2/10" activities)
+  - Total tokens consumed
+  - Total estimated cost
+
+### Billing Page
+
+Manage your subscription by clicking the **Billing** tab or navigate directly to [app.roocode.com/billing](https://app.roocode.com/billing).
+
+<img src="/img/dashboard/dashboard-2.png" alt="Billing page showing Upgrade to Pro option" width="800" />
+
+The Billing page displays:
+- **Upgrade to Pro** section with Premium badge
+- Description of Pro benefits
+- **$20/month** pricing with "cancel anytime" option
+- **Upgrade Now** button to start your subscription
+
+See the [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions) documentation for complete details.
