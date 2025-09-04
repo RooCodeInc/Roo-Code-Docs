@@ -36,6 +36,7 @@ The following experimental features are currently available:
 - [Power Steering](/features/experimental/power-steering) - Enhanced consistency in AI responses
 - [Background Editing](/features/experimental/background-editing) - Work uninterrupted while Roo edits files in the background
 - [Image Generation](/features/image-generation) - Generate images from text prompts and save them to your workspace
+- [Run Slash Command](/advanced-usage/available-tools/run-slash-command) - Execute predefined slash commands for templated instructions and workflow automation
 
 ---
 

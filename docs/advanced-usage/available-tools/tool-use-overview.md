@@ -31,9 +31,11 @@ Tools are organized into logical groups based on their functionality:
 | **Search Group** | Pattern and semantic searching | [search_files](/advanced-usage/available-tools/search-files), [codebase_search](/advanced-usage/available-tools/codebase-search) | Finding code patterns and functionality |
 | **Edit Group** | File system modifications | [apply_diff](/advanced-usage/available-tools/apply-diff), [insert_content](/advanced-usage/available-tools/insert-content), [search_and_replace](/advanced-usage/available-tools/search-and-replace), [write_to_file](/advanced-usage/available-tools/write-to-file) | Code changes and file manipulation |
 | **Browser Group** | Web automation | [browser_action](/advanced-usage/available-tools/browser-action) | Web testing and interaction |
-| **Command Group** | System command execution | [execute_command](/advanced-usage/available-tools/execute-command) | Running scripts, building projects |
+| **Command Group** | System command execution | [execute_command](/advanced-usage/available-tools/execute-command), [run_slash_command](/advanced-usage/available-tools/run-slash-command)* | Running scripts, building projects, executing command templates |
 | **MCP Group** | External tool integration | [use_mcp_tool](/advanced-usage/available-tools/use-mcp-tool), [access_mcp_resource](/advanced-usage/available-tools/access-mcp-resource) | Specialized functionality through external servers |
 | **Workflow Group** | Mode and task management | [switch_mode](/advanced-usage/available-tools/switch-mode), [new_task](/advanced-usage/available-tools/new-task), [ask_followup_question](/advanced-usage/available-tools/ask-followup-question), [attempt_completion](/advanced-usage/available-tools/attempt-completion) | Context switching and task organization |
+
+*_Experimental feature - requires explicit enablement in settings_
 
 ### Always Available Tools
 
@@ -78,6 +80,7 @@ These tools help Roo interact with web applications:
 These tools help Roo execute commands:
 
 - [execute_command](/advanced-usage/available-tools/execute-command) - Runs system commands and programs
+- [run_slash_command](/advanced-usage/available-tools/run-slash-command) - Executes predefined slash commands for templated instructions *(Experimental - requires enablement)*
 
 ### MCP Tools
 These tools help Roo connect with external services:

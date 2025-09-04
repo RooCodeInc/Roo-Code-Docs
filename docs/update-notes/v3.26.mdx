@@ -43,6 +43,18 @@ The /init command helps LLMs understand your project's unique patterns and conve
 
 > 📚 Documentation: See [Slash Commands - The init command](/features/slash-commands#the-init-command) for details.
 
+### New run_slash_command Tool
+
+We've added a powerful new tool that allows the AI to execute slash commands as part of its workflow ([#7473](https://github.com/RooCodeInc/Roo-Code/pull/7473)):
+
+- **Automated Command Execution**: The AI can now run commands like `/init`, `/review`, and other slash commands automatically
+- **Seamless Integration**: Existing slash commands work directly within AI workflows without manual intervention
+- **Enhanced Automation**: Combine multiple slash commands to create complex automated sequences
+
+This opens up new possibilities for task automation, letting the AI leverage the full power of Roo Code's slash command ecosystem programmatically.
+
+> **📚 Documentation**: See the [run_slash_command tool documentation](/advanced-usage/available-tools/run-slash-command) for usage examples and integration patterns.
+
 ### Qwen Code CLI API Support
 
 We've integrated with the Qwen Code CLI tool, allowing Roo Code to leverage its free access tier for Alibaba's Qwen3 Coder models ([#7380](https://github.com/RooCodeInc/Roo-Code/pull/7380)):
@@ -84,6 +96,7 @@ PRs: [#7474](https://github.com/RooCodeInc/Roo-Code/pull/7474), [#7492](https://
 
 ### Provider Updates
 
+* **Kimi K2 Turbo Model**: Added support for the high-speed Kimi K2 Turbo model with 60-100 tokens/sec processing and a 131K token context window (thanks wangxiaolong100!) ([#7593](https://github.com/RooCodeInc/Roo-Code/pull/7593))
 * **Qwen3 235B Thinking Model**: Added support for Qwen3-235B-A22B-Thinking-2507 model with an impressive 262K context window, enabling processing of extremely long documents and large codebases in a single request through the Chutes provider (thanks mohammad154, apple-techie!) ([#7578](https://github.com/RooCodeInc/Roo-Code/pull/7578))
 * **Ollama Turbo Mode**: Added API key support for Turbo mode, enabling faster model execution with datacenter-grade hardware (thanks LivioGama!) ([#7425](https://github.com/RooCodeInc/Roo-Code/pull/7425))
 * **DeepSeek V3.1 on Fireworks**: Added support for DeepSeek V3.1 model in the Fireworks AI provider (thanks dmarkey!) ([#7375](https://github.com/RooCodeInc/Roo-Code/pull/7375))
@@ -91,6 +104,7 @@ PRs: [#7474](https://github.com/RooCodeInc/Roo-Code/pull/7474), [#7492](https://
 
 ### QOL Improvements
 
+* **Settings Scroll Position**: Settings tabs now remember their individual scroll positions when switching between them (thanks DC-Dancao!) ([#7587](https://github.com/RooCodeInc/Roo-Code/pull/7587))
 * **MCP Resource Auto-Approval**: MCP resource access requests are now automatically approved when auto-approve is enabled, eliminating manual approval steps and enabling smoother automation workflows (thanks m-ibm!) ([#7606](https://github.com/RooCodeInc/Roo-Code/pull/7606))
 * **Message Queue Performance**: Improved message queueing reliability and performance by moving the queue management to the extension host, making the interface more stable ([#7604](https://github.com/RooCodeInc/Roo-Code/pull/7604))
 * **Memory Optimization**: Optimized memory usage for image handling in webview, achieving ~75% reduction in memory consumption ([#7556](https://github.com/RooCodeInc/Roo-Code/pull/7556))
@@ -108,6 +122,7 @@ PRs: [#7474](https://github.com/RooCodeInc/Roo-Code/pull/7474), [#7492](https://
 
 ### Bug Fixes
 
+* **Tool Approval Fix**: Fixed an error that occurred when using insert_content and search_and_replace tools on write-protected files - these tools now handle file protection correctly ([#7649](https://github.com/RooCodeInc/Roo-Code/pull/7649))
 * **Configurable Embedding Batch Size**: Fixed an issue where users with API providers having stricter batch limits couldn't use code indexing. You can now configure the embedding batch size (1-2048, default: 400) to match your provider's limits (thanks BenLampson!) ([#7464](https://github.com/RooCodeInc/Roo-Code/pull/7464))
 * **OpenAI-Native Cache Reporting**: Fixed cache usage statistics and cost calculations when using the OpenAI-Native provider with cached content ([#7602](https://github.com/RooCodeInc/Roo-Code/pull/7602))
 * **Special Tokens Handling**: Fixed issue where special tokens would break task processing (thanks pwilkin!) ([#7540](https://github.com/RooCodeInc/Roo-Code/pull/7540))

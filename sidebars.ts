@@ -107,6 +107,7 @@ const sidebars: SidebarsConfig = {
             'features/experimental/power-steering',
             'features/experimental/background-editing',
             'features/image-generation',
+            'advanced-usage/available-tools/run-slash-command',
           ],
         },
         'features/more-features',
@@ -133,6 +134,7 @@ const sidebars: SidebarsConfig = {
             'advanced-usage/available-tools/list-files',
             'advanced-usage/available-tools/new-task',
             'advanced-usage/available-tools/read-file',
+            'advanced-usage/available-tools/run-slash-command',
             'advanced-usage/available-tools/search-files',
             'advanced-usage/available-tools/search-and-replace',
             'advanced-usage/available-tools/switch-mode',
@@ -217,6 +219,7 @@ const sidebars: SidebarsConfig = {
           label: '3.26',
           items: [
             { type: 'doc', id: 'update-notes/v3.26', label: '3.26 Combined' },
+            { type: 'doc', id: 'update-notes/v3.26.6', label: '3.26.6' },
             { type: 'doc', id: 'update-notes/v3.26.5', label: '3.26.5' },
             { type: 'doc', id: 'update-notes/v3.26.4', label: '3.26.4' },
             { type: 'doc', id: 'update-notes/v3.26.3', label: '3.26.3' },

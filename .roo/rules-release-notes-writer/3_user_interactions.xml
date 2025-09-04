@@ -147,24 +147,6 @@ Would you like to create a PR or make any final adjustments?</question>
     </point>
   </confirmation_points>
 
-  <version_only_interaction>
-    <trigger>User provides only version number</trigger>
-    <workflow>
-      <step>Extract PR list via subtask</step>
-      <step>Present options to user</step>
-    </workflow>
-    <template><![CDATA[
-<ask_followup_question>
-<question>I've extracted [COUNT] PRs for version [VERSION]. How would you like to proceed?</question>
-<follow_up>
-<suggest>Create full release notes with all PRs</suggest>
-<suggest>Show me the PR list first</suggest>
-<suggest>Let me specify which PRs to include</suggest>
-<suggest>Cancel - I just needed the PR list</suggest>
-</follow_up>
-</ask_followup_question>
-    ]]></template>
-  </version_only_interaction>
 
   <latest_version_interaction>
     <trigger>User says "latest"</trigger>
