@@ -164,6 +164,7 @@ const sidebars: SidebarsConfig = {
         'providers/claude-code',
         'providers/bedrock',
         'providers/cerebras',
+        'providers/deepinfra',
         'providers/deepseek',
         'providers/doubao',
         'providers/featherless',
