@@ -14,7 +14,7 @@ image: /img/social-share.jpg
 
 # What is Roo Code Cloud?
 
-Roo Code Cloud is a web-based platform that extends your Roo Code extension with cloud-powered features. By connecting your local VS Code extension to the cloud, you unlock task sharing, collaboration capabilities, usage analytics, and remote control options that enhance your AI-assisted development workflow.
+Roo Code Cloud is a web-based platform that extends your Roo Code extension with cloud-powered features. By connecting your local VS Code extension to the cloud, you unlock task sharing, usage analytics, and remote control options that enhance your AI-assisted development workflow.
 
 ## Features
 
