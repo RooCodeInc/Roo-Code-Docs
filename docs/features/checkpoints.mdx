@@ -61,7 +61,7 @@ Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
 
 ## How Checkpoints Work
 
-Roo Code captures snapshots of your project's state using a shadow Git repository, separate from your main version control system. These snapshots, called checkpoints, are automatically created **before** file modifications occur, ensuring you can always undo unwanted changes. Checkpoints are recorded throughout your AI-assisted workflow—when tasks begin, before files change, and before commands run.
+Roo Code captures snapshots of your project's state using a shadow Git repository, separate from your main version control system. These snapshots, called checkpoints, are automatically created **before** file modifications occur, ensuring you can always undo unwanted changes. Checkpoints are recorded when tasks begin and before file modifications. They are not automatically created before command execution.
 
 Checkpoints are stored as Git commits in the shadow repository, capturing:
 
@@ -82,7 +82,7 @@ Checkpoints appear directly in your chat history:
 - **Task checkpoint** marks your starting project state
    <img src="/img/checkpoints/checkpoints-1.png" alt="Task checkpoint indicator in chat" width="500" />
 
-- **Regular checkpoints** are created before file modifications or command execution, allowing easy undo of any changes
+- **Regular checkpoints** are created before file modifications, allowing easy undo of any changes
    <img src="/img/checkpoints/checkpoints-2.png" alt="Regular checkpoint indicator in chat" width="500" />
 
 Each checkpoint provides two primary functions:
@@ -100,7 +100,7 @@ To compare your current workspace with a previous checkpoint:
    - Added lines are highlighted in green
    - Removed lines are highlighted in red
    - Modified files are listed with detailed changes
-   - Renamed and moved files are tracked with their path changes
+   - Renames may not always be detected; diffs reflect per-file changes between commits
    - New or deleted files are clearly marked
 
 <img src="/img/checkpoints/checkpoints-3.png" alt="View differences option for checkpoints" width="800" />
@@ -164,7 +164,7 @@ Checkpoints are task-scoped, meaning they are specific to a single task.
 Checkpoint comparison uses Git's underlying diff capabilities to produce structured file differences:
 - Modified files show line-by-line changes
 - Binary files are properly detected and handled
-- Renamed and moved files are tracked correctly
+- Rename detection may be limited; diffs focus on file content changes between checkpoints
 - File creation and deletion are clearly identified
 
 ### File Exclusion and Ignore Patterns
@@ -190,6 +190,10 @@ The checkpoint system respects `.gitignore` patterns in your workspace:
 - Excluded files won't appear in checkpoint diffs
 - Standard Git ignore rules apply when staging file changes
 
+#### Git LFS Patterns
+
+Patterns defined in your workspace's `.gitattributes` for Git LFS are read and added to checkpoint exclusions. This helps avoid tracking large LFS-managed assets in the shadow repository.
+
 #### .rooignore Behavior
 
 The `.rooignore` file (which controls AI access to files) is separate from checkpoint tracking:
@@ -200,15 +204,11 @@ This separation is intentional, as `.rooignore` limits which files the AI can ac
 
 #### Nested Git Repositories
 
-The checkpoint system includes special handling for nested Git repositories:
-- Temporarily renames nested `.git` directories to `.git_disabled` during operations
-- Restores them after operations complete
-- Allows proper tracking of files in nested repositories
-- Ensures nested repositories remain functional and unaffected
+If nested Git repositories are detected in your workspace, checkpoints are disabled. Remove or relocate nested repositories to enable checkpoints.
 
 ### Concurrency Control
 
-Operations are queued to prevent concurrent Git operations that might corrupt repository state. This ensures that rapid checkpoint operations complete safely even when requested in quick succession.
+The extension prevents duplicate checkpointing within a single streaming operation. There is no dedicated Git operation queue.
 
 ---
 
