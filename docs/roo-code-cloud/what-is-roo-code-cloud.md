@@ -31,7 +31,7 @@ Share individual tasks with colleagues or the community through secure, expiring
 Monitor and control VS Code tasks directly from your browser. Free users can monitor tasks in real-time, while Pro subscribers gain full remote control including the ability to start, stop, and interact with tasks remotely.
 
 ### [Billing & Pro Features](/roo-code-cloud/billing-subscriptions)
-Upgrade to Pro for $20/month to unlock full Roomote Control capabilities, priority support, and enhanced features. Cancel anytime with no commitment.
+Try Pro free for 14 days, then $20/month to unlock full Roomote Control capabilities, priority support, and enhanced features. Cancel anytime with no commitment.
 
 ## Getting Started
 
