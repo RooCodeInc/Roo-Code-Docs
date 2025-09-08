@@ -53,7 +53,7 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     ollama pull qwen2.5-coder:32b
     ```
 
-3. **Configure the Model:** by default, Ollama uses a context window size of 2048 tokens, which is too small for Roo Code requests. You need to have at least 12k to get decent results, ideally - 32k. To configure a model, you actually need to set its parameters and save a copy of it.
+3. **Configure the Model:** Configure your model’s context window in Ollama and save a copy. Roo automatically reads the model’s reported context window from Ollama and passes it as `num_ctx`; no Roo-side context size setting is required for the Ollama provider.
 
    Load the model (we will use `qwen2.5-coder:32b` as an example):
    
@@ -77,9 +77,10 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     *   Open the Roo Code sidebar (<KangarooIcon /> icon).
     *   Click the settings gear icon (<Codicon name="gear" />).
     *   Select "ollama" as the API Provider.
-    *   Enter the Model name from the previous step (e.g., `your_model_name`).
-    *   (Optional) You can configure the base URL if you're running Ollama on a different machine. The default is `http://localhost:11434`.
-    *   (Optional) Configure Model context size in Advanced settings, so Roo Code knows how to manage its sliding window.
+    *   Enter the model tag or saved name from the previous step (e.g., `your_model_name`).
+    *   (Optional) Configure the base URL if you're running Ollama on a different machine. The default is `http://localhost:11434`.
+    *   (Optional) Enter an API Key if your Ollama server requires authentication.
+    *   (Advanced) Roo uses Ollama's native API by default for the "ollama" provider. An OpenAI-compatible `/v1` handler also exists but isn't required for typical setups.
 
 ---
 
@@ -90,3 +91,59 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
 *   **Offline Use:** Once you've downloaded a model, you can use Roo Code offline with that model.
 *   **Token Tracking:** Roo Code tracks token usage for models run via Ollama, helping you monitor consumption.
 *   **Ollama Documentation:** Refer to the [Ollama documentation](https://ollama.com/docs) for more information on installing, configuring, and using Ollama.
+
+---
+
+## Troubleshooting
+
+### Out of Memory (OOM) on First Request
+
+**Symptoms**
+- First request from Roo fails with an out-of-memory error
+- GPU/CPU memory usage spikes when the model first loads
+- Works after you manually start the model in Ollama
+
+**Cause**
+If no model instance is running, Ollama spins one up on demand. During that cold start it may allocate a larger context window than expected. The larger context window increases memory usage and can exceed available VRAM or RAM. This is an Ollama startup behavior, not a Roo Code bug.
+
+**Fixes**
+1. **Preload the model**
+   ```bash
+   ollama run &lt;model-name&gt;
+   ```
+   Keep it running, then issue the request from Roo.
+
+2. **Pin the context window (`num_ctx`)**
+   - Option A — interactive session, then save:
+     ```bash
+     # inside `ollama run &lt;base-model&gt;`
+     /set parameter num_ctx 32768
+     /save &lt;your_model_name&gt;
+     ```
+   - Option B — Modelfile:
+     ```text
+     PARAMETER num_ctx 32768
+     ```
+     Then re-create the model:
+     ```bash
+     ollama create &lt;your_model_name&gt; -f Modelfile
+     ```
+
+3. **Ensure the model's context window is pinned**
+   Save your Ollama model with an appropriate `num_ctx` (e.g., via `/set` + `/save`, or a Modelfile). Roo reads this automatically and passes it as `num_ctx`; there is no Roo-side context size setting for the Ollama provider.
+
+4. **Use smaller variants**
+   If GPU memory is limited, use a smaller quant (e.g., q4 instead of q5) or a smaller parameter size (e.g., 7B/13B instead of 32B).
+
+5. **Restart after an OOM**
+   ```bash
+   ollama ps
+   ollama stop &lt;model-name&gt;
+   ```
+
+**Quick checklist**
+- Model is running before Roo request
+- `num_ctx` pinned (Modelfile or `/set` + `/save`)
+- Model saved with appropriate `num_ctx` (Roo uses this automatically)
+- Model fits available VRAM/RAM
+- No leftover Ollama processes
