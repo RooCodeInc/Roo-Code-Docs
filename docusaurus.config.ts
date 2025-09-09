@@ -76,6 +76,16 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         docsRouteBasePath: "/",
+        searchContextByPaths: [
+          { label: "Getting Started", path: "getting-started" },
+          { label: "Basic Usage", path: "basic-usage" },
+          { label: "Features", path: "features" },
+          { label: "Advanced Usage", path: "advanced-usage" },
+          { label: "Providers", path: "providers" },
+          { label: "Roo Code Cloud", path: "roo-code-cloud" },
+          { label: "Release Notes", path: "update-notes" }
+        ],
+        useAllContextsWithNoSearchContext: true,
       },
     ],
   ],
