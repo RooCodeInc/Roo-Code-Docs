@@ -31,7 +31,7 @@ Share individual tasks with colleagues or the community through secure, expiring
 Monitor tasks from any device with real-time updates and cloud task history. Free for all users.
 
 ### [Roomote Control](/roo-code-cloud/roomote-control)
-Remotely control VS Code tasks from your browser (Pro). Start, stop, and interact with tasks remotely. For monitoring, see [Task Sync](/roo-code-cloud/task-sync).
+Remotely control tasks from your browser (Pro). Start/stop and interact with tasks. Advanced settings and most customizations remain in your IDE; the browser UI focuses on core actions. For monitoring only, see [Task Sync](/roo-code-cloud/task-sync).
 
 ### [Billing & Pro Features](/roo-code-cloud/billing-subscriptions)
 Try Pro free for 14 days, then $20/month to unlock full Roomote Control capabilities, priority support, and enhanced features. Cancel anytime with no commitment.

@@ -35,10 +35,31 @@
         <step>Check existing documentation for image reference patterns</step>
         <step>Follow the established convention</step>
       </discovery_steps>
+
+      <policy>
+        <when_to_use>
+          <item>Clarify a decision point or non-obvious UI state</item>
+          <item>Demonstrate outcome/results that text alone cannot convey</item>
+        </when_to_use>
+        <avoid>
+          <item>Narrating obvious UI (“This page shows…”, “It includes…”) without decisions or implications</item>
+          <item>Listing every field/tab in a screen</item>
+        </avoid>
+        <limits>
+          <maxPerSection>1</maxPerSection>
+          <maxPerPage>3</maxPerPage>
+        </limits>
+        <alt_text>
+          <rule>Describe the action or outcome, not the chrome. Example: "Toggle Roomote Control to enable remote tasks".</rule>
+        </alt_text>
+        <width_default>800</width_default>
+        <format>Use HTML img tags per project rules. See Image Tag Format in .roorules.</format>
+      </policy>
+
       <example>
         <![CDATA[
-<!-- First discover the actual image path structure, then use it -->
-<img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
+ <!-- First discover the actual image path structure, then use it -->
+ <img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
         ]]>
       </example>
     </rule>

@@ -82,6 +82,43 @@
       </enforcement>
     </gate>
 
+    <gate name="value_filter_gate" type="CRITICAL">
+      <description>Enforces value-first writing and bans obvious-UI narration.</description>
+      <requirements>
+        <requirement>Include a brief "Why it matters" section or opener (1–3 sentences) that frames value/outcomes.</requirement>
+        <requirement>Document decision points/trade-offs where the user must choose (e.g., Pro vs free, security implications).</requirement>
+        <requirement>Remove or condense any enumeration of on-screen elements unless each item carries a decision, consequence, or non-obvious behavior.</requirement>
+        <requirement>Apply screenshot limits (≤1 per section, ≤3 per page) and ensure alt text describes action/outcome.</requirement>
+      </requirements>
+      <evidence>
+        <item>Checklist confirming presence of "Why it matters" and decisions</item>
+        <item>Notes on removed UI narration and reasons</item>
+        <item>Screenshot count and alt-text review</item>
+      </evidence>
+      <enforcement>
+        If requirements are not met:
+        - Block the edit and return a summary of violations with specific locations.
+        - Require revision to pass this gate before proceeding.
+      </enforcement>
+    </gate>
+
+    <gate name="obvious_ui_narration_blocker" type="CRITICAL">
+      <description>Blocks screen narration that restates visible UI without adding decisions or implications.</description>
+      <blocked_phrases examples="non-exhaustive">
+        <phrase>This page shows</phrase>
+        <phrase>It includes</phrase>
+        <phrase>The page displays</phrase>
+        <phrase>List of</phrase>
+      </blocked_phrases>
+      <exceptions>
+        <exception>Allowed only when each listed item includes why it matters, a decision, or an implication.</exception>
+      </exceptions>
+      <enforcement>
+        If narration-only content is detected:
+        - Remove or compress into a single contextual sentence tied to a decision or outcome.
+      </enforcement>
+    </gate>
+
     <gate name="consistency_gate" type="BLOCKING">
       <description>Ensures documentation remains consistent</description>
       <requirements>
@@ -106,9 +143,10 @@
         <step order="2" mandatory="true">Complete content discovery with multiple search terms</step>
         <step order="3" mandatory="true">Read and analyze ALL discovered content</step>
         <step order="4" mandatory="true">Create validation report with findings</step>
-        <step order="5" mandatory="true">Get user approval via ask_followup_question</step>
-        <step order="6" conditional="true">Proceed with approved approach only</step>
-        <step order="7" mandatory="true">Verify all changes maintain consistency</step>
+        <step order="5" mandatory="true">Pass the Value Filter Gate and Obvious-UI Narration Blocker with documented evidence</step>
+        <step order="6" mandatory="true">Get user approval via ask_followup_question</step>
+        <step order="7" conditional="true">Proceed with approved approach only</step>
+        <step order="8" mandatory="true">Verify all changes maintain consistency</step>
       </steps>
       <skip_consequence>
         Skipping ANY mandatory step results in:
