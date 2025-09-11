@@ -19,6 +19,8 @@ image: /img/social-share.jpg
 
 ### Version 3.28
 
+*   [3.28](/update-notes/v3.28) (Combined)
+*   [3.28.1](/update-notes/v3.28.1) (2025-09-11)
 *   [3.28.0](/update-notes/v3.28.0) (2025-09-10)
 
 ---

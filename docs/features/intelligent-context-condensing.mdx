@@ -41,10 +41,12 @@ As your conversation with Roo Code grows, it might approach the context window l
 1.  **Summarizing:** Using an AI model, it condenses earlier parts of the conversation.
 2.  **Retaining Essentials:** The goal is to reduce the overall token count while keeping the key information from the summarized messages.
 3.  **Maintaining Flow:** This allows the AI to have a more coherent understanding of the entire conversation, even very long ones.
+4.  **Preserving First Message:** The first message containing slash commands or initial context is always preserved during condensing, ensuring critical initial instructions aren't lost.
 
 **Important Considerations:**
 *   **Summarization Impact:** While original messages are preserved if you use [Checkpoints](/features/checkpoints) to rewind, the summarized version is what's used in ongoing LLM calls to keep the context manageable.
 *   **Cost:** The AI call to perform the summarization incurs a cost. This cost is included in the context condensing metrics displayed in the UI.
+*   **First Message Protection:** The initial message with slash commands or setup instructions will never be condensed.
 
 ---
 

@@ -222,6 +222,8 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: '3.28',
           items: [
+            { type: 'doc', id: 'update-notes/v3.28', label: '3.28 Combined' },
+            { type: 'doc', id: 'update-notes/v3.28.1', label: '3.28.1' },
             { type: 'doc', id: 'update-notes/v3.28.0', label: '3.28.0' },
           ],
         },
