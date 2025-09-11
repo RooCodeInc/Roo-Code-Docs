@@ -27,8 +27,11 @@ Access your central control hub at [app.roocode.com](https://app.roocode.com/) t
 ### [Task Sharing](/roo-code-cloud/task-sharing)
 Share individual tasks with colleagues or the community through secure, expiring links. Control what you share and when, with links that automatically expire after 30 days for enhanced security.
 
+### [Task Sync](/roo-code-cloud/task-sync)
+Monitor tasks from any device with real-time updates and cloud task history. Free for all users.
+
 ### [Roomote Control](/roo-code-cloud/roomote-control)
-Monitor and control VS Code tasks directly from your browser. Free users can monitor tasks in real-time, while Pro subscribers gain full remote control including the ability to start, stop, and interact with tasks remotely.
+Remotely control VS Code tasks from your browser (Pro). Start, stop, and interact with tasks remotely. For monitoring, see [Task Sync](/roo-code-cloud/task-sync).
 
 ### [Billing & Pro Features](/roo-code-cloud/billing-subscriptions)
 Try Pro free for 14 days, then $20/month to unlock full Roomote Control capabilities, priority support, and enhanced features. Cancel anytime with no commitment.
@@ -38,5 +41,5 @@ Try Pro free for 14 days, then $20/month to unlock full Roomote Control capabili
 1. [Connect your account](/roo-code-cloud/login) to link Roo Code with the cloud
 2. [Explore the dashboard](/roo-code-cloud/dashboard) to see your task history and analytics
 3. [Share a task](/roo-code-cloud/task-sharing) to collaborate with others
-4. [Enable Roomote Control](/roo-code-cloud/roomote-control) to monitor or control tasks remotely
+4. Use [Task Sync](/roo-code-cloud/task-sync) to monitor tasks from any device; enable [Roomote Control](/roo-code-cloud/roomote-control) for remote control
 5. [Consider Pro](/roo-code-cloud/billing-subscriptions) if you need full remote control features

@@ -50,6 +50,7 @@ const sidebars: SidebarsConfig = {
         'roo-code-cloud/login',
         'roo-code-cloud/dashboard',
         'roo-code-cloud/task-sharing',
+        'roo-code-cloud/task-sync',
         'roo-code-cloud/billing-subscriptions',
         'roo-code-cloud/roomote-control',
       ],
