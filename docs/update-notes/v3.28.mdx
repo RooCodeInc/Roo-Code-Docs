@@ -46,11 +46,21 @@ Task Sync enables monitoring your local development environment from any device.
 * **Preserve First Message**: The first message containing slash commands or initial context is now preserved during conversation condensing instead of being replaced with a summary ([#7910](https://github.com/RooCodeInc/Roo-Code/pull/7910))
 * **Checkpoint Initialization Notifications**: You'll now receive clear notifications when checkpoint initialization fails, particularly with nested Git repositories ([#7766](https://github.com/RooCodeInc/Roo-Code/pull/7766))
 
+* Smaller and more subtle auto-approve UI (thanks brunobergher!) ([#7894](https://github.com/RooCodeInc/Roo-Code/pull/7894))
+* Disable Roomote Control on logout for better security ([#7976](https://github.com/RooCodeInc/Roo-Code/pull/7976))
+* Add padding to the cloudview for better visual spacing ([#7954](https://github.com/RooCodeInc/Roo-Code/pull/7954))
+
 ## Bug Fixes
 
 * **Groq Context Window**: Fixed incorrect display of cached tokens in context window ([#7839](https://github.com/RooCodeInc/Roo-Code/pull/7839))
 * **Chat Message Operations**: Resolved duplication issues when editing messages and "Couldn't find timestamp" errors when deleting ([#7793](https://github.com/RooCodeInc/Roo-Code/pull/7793))
 * **UI Overlap**: Fixed CodeBlock button z-index to prevent overlap with popovers and configuration panels (thanks A0nameless0man!) ([#7783](https://github.com/RooCodeInc/Roo-Code/pull/7783))
+* Fix message queue re-queue loop in Task.ask() that could degrade performance ([#7823](https://github.com/RooCodeInc/Roo-Code/pull/7823))
+* Restrict @-mention parsing to line-start or whitespace boundaries to prevent false triggers ([#7876](https://github.com/RooCodeInc/Roo-Code/pull/7876))
+* Make nested git repository warning persistent with path info for better visibility ([#7885](https://github.com/RooCodeInc/Roo-Code/pull/7885))
+* Include API key in Ollama /api/tags requests to support authenticated instances (thanks ItsOnlyBinary!) ([#7903](https://github.com/RooCodeInc/Roo-Code/pull/7903))
+* Preserve original first message context during conversation condensing for more coherent long chats ([#7939](https://github.com/RooCodeInc/Roo-Code/pull/7939))
+
 * **Temperature Parameter**: Restored temperature parameter to fix crashes in TabbyApi and ExLlamaV2 backends (thanks drknyt!) ([#7594](https://github.com/RooCodeInc/Roo-Code/pull/7594))
 * **Ollama Model Info**: Fixed max context window display for Ollama models (thanks ItsOnlyBinary!) ([#7679](https://github.com/RooCodeInc/Roo-Code/pull/7679))
 * **Image Preview Caching**: This ensures the chat always displays the newly generated image instead of a cached version ([#7860](https://github.com/RooCodeInc/Roo-Code/pull/7860))
@@ -60,6 +70,7 @@ Task Sync enables monitoring your local development environment from any device.
 * **Vertex AI Models**: Added support for 6 new models including DeepSeek-V3, GPT-OSS, and Qwen models, plus the us-south1 region (thanks ssweens!) ([#7727](https://github.com/RooCodeInc/Roo-Code/pull/7727))
 * **DeepSeek Pricing**: Updated to new unified rates effective September 5, 2025 - $0.56/M input tokens, $1.68/M output tokens (thanks NaccOll!) ([#7687](https://github.com/RooCodeInc/Roo-Code/pull/7687))
 
+* **Chutes Provider**: Add Qwen3 Next 80B A3B models ([#7948](https://github.com/RooCodeInc/Roo-Code/pull/7948))
 ## Misc Improvements
 
 * **Cloud Task Button**: Added a new button for opening tasks in Roo Code Cloud with QR codes and shareable URLs ([#7572](https://github.com/RooCodeInc/Roo-Code/pull/7572))
