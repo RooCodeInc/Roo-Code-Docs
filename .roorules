@@ -11,7 +11,7 @@ This ensures links work correctly in the built documentation while maintaining c
 When making structural or formatting changes beyond simple .md or .mdx files, always check the Context7 MCP, the `context7CompatibleLibraryID` will be `/facebook/docusaurus`
 
 ## Release Notes "thank you" exclusions
-Do not thank daniel-lxs, cte, hannesrudolph, jr, roomote, app/roomote, dleffel or mrubens in release notes
+Do not thank daniel-lxs, cte, hannesrudolph, jr, roomote, app/roomote, dleffel, brunobergher or mrubens in release notes
 
 
 ## Misc

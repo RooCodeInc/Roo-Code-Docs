@@ -38,37 +38,22 @@ Auto-approve settings speed up your workflow by eliminating repetitive confirmat
 
 ## Quick Start Guide
 
-1. Click the Auto-Approve Toolbar above the chat input
-2. Select which actions Roo can perform without asking permission
-3. Use the master toggle (leftmost checkbox) to quickly enable/disable all permissions
+1. Open the Auto-Approve dropdown next to the chat input
+2. Toggle "Enabled" at the bottom-right of the dropdown to activate or pause auto-approval
+3. Use the All/None chips to bulk-select or clear permissions, or select individual tiles; you can keep Enabled On with "None" selected
+4. (Optional) Click the gear icon to open Settings for deeper per-permission controls
 
 ---
 
-## Auto-Approve Toolbar
+## Auto-Approve Dropdown
 
-<img src="/img/auto-approving-actions/auto-approving-actions.png" alt="Auto-approve toolbar collapsed state" width="600" />
+<img src="/img/auto-approving-actions/auto-approving-actions-20.png" alt="Auto-Approve dropdown with All/None chips and global Enabled toggle (bottom-right)" width="600" />
 
-*Prompt box and Auto-Approve Toolbar showing enabled permissions*
+The dropdown shows a grid of permission tiles. Controls:
+- Enabled (bottom-right): master pause/resume for auto-approval
+- All / None (bottom-left): bulk select or clear permissions without changing Enabled
+- Permission tiles: choose which actions can run without prompts; some tiles may be disabled depending on model or mode
 
-Click the toolbar to expand it and configure individual permissions:
-
-<img src="/img/auto-approving-actions/auto-approving-actions-1.png" alt="Auto-approve toolbar expanded state" width="600" />
-
-*Prompt text box and Expanded toolbar with all options*
-
-### API Request Limit
-
-The toolbar includes an input field to set the maximum number of API requests Roo can make automatically:
-
-- **Purpose**: Prevents runaway API usage and unexpected costs
-- **Default**: No limit (empty field)
-- **Recommended**: Set a reasonable limit based on your task complexity (e.g., 50-100 for most tasks)
-- **How it works**: Once the limit is exceeded, Roo will pause and show a dialog allowing you to reset the counter and continue
-
-This safety feature is particularly useful when:
-- Working with expensive API models
-- Testing new workflows
-- Letting Roo work autonomously for extended periods
 
 ### Available Permissions
 
@@ -87,30 +72,19 @@ This safety feature is particularly useful when:
 
 ---
 
-## Master Toggle for Quick Control
+## Global Enabled Switch
 
-The leftmost checkbox works as a master toggle:
+<img src="/img/auto-approving-actions/auto-approving-actions-21.png" alt="Auto-Approve dropdown; Enabled at bottom-right and All/None chips at bottom-left" width="600" />
 
-<img src="/img/auto-approving-actions/auto-approving-actions-14.png" alt="Master toggle in Auto-approve toolbar" width="600" />
+How it works:
+- Enabled On — Auto-approval runs for the permissions you’ve selected
+- Enabled Off — Pauses all auto-approvals; your per-permission selections persist
+- All / None — Bulk adjust selections while Enabled remains unchanged
 
-*Master toggle (checkbox) controls all auto-approve permissions at once*
-
-**How it works:**
-- **Checked**: Activates all configured auto-approve permissions
-- **Unchecked**: Temporarily disables all auto-approvals without changing individual settings
-- **Important**: Individual permission settings are preserved when toggling
-- **Note**: The master toggle is temporarily disabled while the auto-approve menu is expanded
-
-This means you can:
-1. Configure your preferred permissions once
-2. Use the master toggle to quickly enable/disable them all
-3. Your configuration remains intact for next time
-
-Use the master toggle when:
-- Working in sensitive code (turn off)
-- Doing rapid development (turn on)
+When to toggle:
+- Sensitive or production work → Off
+- Rapid iteration and refactors → On
 - Switching between exploration and editing tasks
-- Temporarily pausing automation without losing settings
 
 ---
 
@@ -122,11 +96,10 @@ The settings panel provides detailed control with important security context:
 
 To access these settings:
 
-1. Click <Codicon name="gear" /> in the top-right corner
+1. Click <Codicon name="gear" /> in the top-right of the dropdown
 2. Navigate to Auto-Approve Settings
 
-<img src="/img/auto-approving-actions/auto-approving-actions-19.png" alt="Settings panel auto-approve options" width="550" />
-*Complete settings panel view*
+The settings panel mirrors the same permissions with additional context and safeguards.
 
 ### Read Operations
 

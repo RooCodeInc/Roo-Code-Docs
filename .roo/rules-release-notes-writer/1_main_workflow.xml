@@ -108,11 +108,12 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
         <details>
           Parent task MUST create this file (and .roo/tmp/release-notes/temp_pr_inclusion_v[version].json, .roo/tmp/release-notes/temp_pr_list_v[VERSION].md if needed) before ANY subtasks.
           Subtasks will ONLY append using insert_content.
+          Parent task MUST NOT append to temp_pr_analysis_v[version].md; this file is reserved exclusively for subtask outputs. The parent may only create/initialize the empty file(s).
           Temp files live under .roo/tmp/release-notes/
         </details>
       </initialization>
       
-      <subtask_pattern>
+      <subtask_pattern priority="CRITICAL">
         <for_each>PR in list</for_each>
         <action>Create investigation subtask using new_task tool</action>
         <implementation>
@@ -128,22 +129,23 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
           </iteration_approach>
         </implementation>
         <message_template><![CDATA[
-Investigate PR #[number] for release notes v[version].
-1. Get PR details: gh pr view [number] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url
-2. Extract linked issues from PR body
-3. Get issue details if linked
-4. Categorize change (Feature/QOL/Bug Fix/Provider Update)
-5. Identify documentation needs (new features, behavior changes, deprecations)
-6. Append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md using insert_content line 0
-
-Include documentation flags:
-- docs-new: Completely new feature
-- docs-update: Existing docs need updating
-- docs-example: New examples needed
-- docs-migration: Breaking changes
-
-CRITICAL: Never create/overwrite files, only append.
-]]></message_template>
+  Investigate PR #[number] for release notes v[version].
+  1. Get PR details: gh pr view [number] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url
+  2. Extract linked issues from PR body
+  3. Get issue details if linked
+  4. Categorize change (Feature/QOL/Bug Fix/Provider Update)
+  5. Identify documentation needs (new features, behavior changes, deprecations)
+  6. Append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md using insert_content line 0
+  
+  Include documentation flags:
+  - docs-new: Completely new feature
+  - docs-update: Existing docs need updating
+  - docs-example: New examples needed
+  - docs-migration: Breaking changes
+  
+  CRITICAL: Never create/overwrite files, only append.
+  MANDATORY: Insert the marker line '<!-- generated-by-subtask: true -->' immediately before the '---' separator in each PR entry.
+  ]]></message_template>
         <todos_template><![CDATA[
 [ ] Fetch PR #[number] details using gh pr view --repo RooCodeInc/Roo-Code
 [ ] Extract linked issues from PR body
@@ -164,6 +166,7 @@ CRITICAL: Never create/overwrite files, only append.
 **Contributors**: [list]
 **Documentation Needs**: [none|docs-new|docs-update|docs-example|docs-migration]
 **Documentation Notes**: [If applicable, what needs documenting]
+<!-- generated-by-subtask: true -->
 
 ---
       ]]></output_format>
@@ -328,7 +331,8 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           <file optional="true">.roo/tmp/release-notes/temp_pr_inclusion_v[version].json</file>
         </inputs>
         <precondition>
-          If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
+          - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
+          - Subtask provenance required: All PR analysis entries MUST contain the marker '<!-- generated-by-subtask: true -->'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
         </precondition>
         <filtering>
           Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
@@ -500,6 +504,9 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
     </rule>
     <rule priority="CRITICAL">
       Parent task creates temp files, subtasks only append
+    </rule>
+    <rule priority="CRITICAL">
+      For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
     </rule>
     <rule priority="CRITICAL">
       Use the simplified PR extraction command for consistent results

@@ -50,6 +50,12 @@ Task Sync enables monitoring your local development environment from any device.
 * Disable Roomote Control on logout for better security ([#7976](https://github.com/RooCodeInc/Roo-Code/pull/7976))
 * Add padding to the cloudview for better visual spacing ([#7954](https://github.com/RooCodeInc/Roo-Code/pull/7954))
 
+* Temporarily pause auto-approve with a global “Enabled” switch so you can pause without losing your per-toggle selections; the UI clearly distinguishes global vs. per-toggle states ([#8024](https://github.com/RooCodeInc/Roo-Code/pull/8024))
+* Slash commands management moved to Settings > Slash Commands with a gear shortcut from the chat popover; the popover is now selection-only for quick use ([#7988](https://github.com/RooCodeInc/Roo-Code/pull/7988))
+* Keyboard shortcut to quickly “Add to Context” (macOS: Cmd+Y; Windows/Linux: Ctrl+Y) ([#7908](https://github.com/RooCodeInc/Roo-Code/pull/7908))
+* Add Image button moved inside the text area (top-right) and Enhance Prompt positioned above Send to reduce pointer travel and clarify layout ([#7989](https://github.com/RooCodeInc/Roo-Code/pull/7989))
+* Composer action buttons now appear only when there’s text input, reducing visual clutter and accidental clicks ([#7987](https://github.com/RooCodeInc/Roo-Code/pull/7987))
+* New Task button icon switched from “+” to a compose/pencil icon to better match its purpose and align with codicon standards ([#7942](https://github.com/RooCodeInc/Roo-Code/pull/7942))
 ## Bug Fixes
 
 * **Groq Context Window**: Fixed incorrect display of cached tokens in context window ([#7839](https://github.com/RooCodeInc/Roo-Code/pull/7839))
@@ -65,12 +71,20 @@ Task Sync enables monitoring your local development environment from any device.
 * **Ollama Model Info**: Fixed max context window display for Ollama models (thanks ItsOnlyBinary!) ([#7679](https://github.com/RooCodeInc/Roo-Code/pull/7679))
 * **Image Preview Caching**: This ensures the chat always displays the newly generated image instead of a cached version ([#7860](https://github.com/RooCodeInc/Roo-Code/pull/7860))
 
+* Restore square brackets in Gemini-generated code so arrays/indexers render correctly (e.g., `string[] items = new string[5];`) (thanks AtkinsDynamicObjects!) ([#7577](https://github.com/RooCodeInc/Roo-Code/pull/7577))
+* Filter out Claude Code built-in tools (ExitPlanMode, BashOutput, KillBash) to avoid erroneous tool calls and distracting warnings (thanks juliettefournier-econ!) ([#7818](https://github.com/RooCodeInc/Roo-Code/pull/7818))
+* Fix an issue where the context menu could be obscured while editing messages; the menu stays visible and usable across screen sizes (thanks NaccOll, mini2s!) ([#7951](https://github.com/RooCodeInc/Roo-Code/pull/7951))
+* Surface a clear, actionable error instead of cryptic ByteString conversion failures during code indexing when API keys contain invalid/special characters (thanks PavelA85!) ([#8008](https://github.com/RooCodeInc/Roo-Code/pull/8008))
+* Correct C# tree-sitter query so C# files are parsed and indexed properly, improving semantic search, navigation, and context quality (thanks mubeen-zulfiqar, vadash, Source-GuyCoder!) ([#7813](https://github.com/RooCodeInc/Roo-Code/pull/7813))
+
+
 ## Provider Updates
 
 * **Vertex AI Models**: Added support for 6 new models including DeepSeek-V3, GPT-OSS, and Qwen models, plus the us-south1 region (thanks ssweens!) ([#7727](https://github.com/RooCodeInc/Roo-Code/pull/7727))
 * **DeepSeek Pricing**: Updated to new unified rates effective September 5, 2025 - $0.56/M input tokens, $1.68/M output tokens (thanks NaccOll!) ([#7687](https://github.com/RooCodeInc/Roo-Code/pull/7687))
 
 * **Chutes Provider**: Add Qwen3 Next 80B A3B models ([#7948](https://github.com/RooCodeInc/Roo-Code/pull/7948))
+* **Z.ai Coding Plans**: Region-aware options (International/China) with automatic base URL selection and sensible defaults to simplify setup (thanks chrarnoldus!) ([#8003](https://github.com/RooCodeInc/Roo-Code/pull/8003))
 ## Misc Improvements
 
 * **Cloud Task Button**: Added a new button for opening tasks in Roo Code Cloud with QR codes and shareable URLs ([#7572](https://github.com/RooCodeInc/Roo-Code/pull/7572))
@@ -82,3 +96,4 @@ Task Sync enables monitoring your local development environment from any device.
 * Updated dependency nock to v14.0.10 ([#6465](https://github.com/RooCodeInc/Roo-Code/pull/6465))
 * Updated dependency eslint-config-prettier to v10.1.8 ([#6464](https://github.com/RooCodeInc/Roo-Code/pull/6464))
 * Updated dependency eslint-plugin-turbo to v2.5.6 ([#7764](https://github.com/RooCodeInc/Roo-Code/pull/7764))
+* Updated dependency axios to v1.12.0 for improved reliability and security of HTTP requests ([#7963](https://github.com/RooCodeInc/Roo-Code/pull/7963))

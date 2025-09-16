@@ -282,6 +282,15 @@ Use natural language descriptions:
 - Ensure the key has necessary permissions
 - For Ollama, verify the service is running
 
+### API Key Format Errors (“ByteString conversion”)
+
+- Symptom: Error mentions "ByteString conversion" during indexing or when saving settings
+- Likely cause: Your embedding provider API key contains invalid/special characters or hidden whitespace
+- Fix:
+  - Regenerate a fresh API key from your provider dashboard
+  - Paste the key again, ensuring no leading/trailing spaces or hidden characters
+  - Roo will display a clear validation message if the key is invalid
+
 ### Model Issues
 
 **"Model Not Found"**

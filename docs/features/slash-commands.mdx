@@ -35,7 +35,7 @@ Create custom slash commands to automate repetitive tasks and extend Roo Code's 
 <br />
 
 :::tip Quick Start
-Type `/` in the chat to see all available commands, or create your own by adding a markdown file to `.roo/commands/` or `~/.roo/commands/`!
+Type `/` in chat to select a command. To create or manage commands, open Settings > Slash Commands. You can still store commands in `.roo/commands/` (project) or `~/.roo/commands/` (global).
 :::
 
 ---
@@ -44,7 +44,7 @@ Type `/` in the chat to see all available commands, or create your own by adding
 
 Slash commands let you create reusable prompts and workflows that can be triggered instantly. Turn complex multi-step processes into single commands, standardize team practices, and automate repetitive tasks with simple markdown files.
 
-<img src="/img/slash-commands/slash-commands.png" alt="Slash commands menu showing available commands" width="400" />
+<img src="/img/slash-commands/slash-commands-5.png" alt="Slash commands menu showing available commands" width="500" />
 
 **Key Benefits:**
 - **Workflow Automation**: Turn complex multi-step processes into single commands
@@ -67,7 +67,7 @@ The filename becomes the command name. For example:
 - `deploy-check.md` → `/deploy-check`
 
 :::info Command Name Processing
-When creating commands through the UI, command names are automatically processed:
+When creating commands in Settings > Slash Commands, command names are automatically processed:
 - Converted to lowercase
 - Spaces replaced with dashes
 - Special characters removed (except dashes)
@@ -128,35 +128,26 @@ Please perform a thorough security review of the selected code:
 
 ## Command Management
 
-Roo Code provides multiple ways to manage custom commands.
+Create and maintain commands from Settings.
 
-**Creating a New Command:**
+1. Click the gear icon in Roo Code and open Settings
+2. Go to the Slash Commands tab
+3. Click "New Command", name it, and choose location (Project or Global)
+4. The command file opens with starter template content
 
-1. Type `/` in the chat to open the slash command menu
-2. Type your command name in the input field (e.g., "Sample command name")
-3. Click the `+` button to create the command
-
-<img src="/img/slash-commands/slash-commands-1.png" alt="Custom Commands Management Interface" width="400" />
-
-4. A new file will be created and opened automatically (e.g., `sample-command-name.md`)
-5. The file will contain template content to help you get started
-
-<img src="/img/slash-commands/slash-commands-2.png" alt="Creating a new command by typing name and clicking plus button" width="600" />
-
+<img src="/img/slash-commands/slash-commands-6.png" alt="Settings > Slash Commands tab for creating and managing commands" width="600" />
 
 ---
 
 ## Using Slash Commands
 
-Type `/` in the chat to see a unified menu containing all available commands. The menu shows custom workflow commands, mode-switching commands, and built-in commands in the same interface.
+Type `/` in the chat to open the selection-only command menu. Use the gear icon to open Settings > Slash Commands for creating and editing commands.
+<img src="/img/slash-commands/slash-commands-5.png" alt="Slash command popover with gear icon that opens Settings > Slash Commands" width="600" />
 
-<img src="/img/slash-commands/slash-commands-3.png" alt="Newly created command file opened in editor" width="600" />
-
-1. **Unified Menu**: All command types appear together
-2. **Autocomplete**: Start typing to filter commands (e.g., `/sam` shows `sample-command-name`)
-3. **Basic Filtering**: Find commands with text matching
-4. **Description Preview**: See command descriptions in the menu
-5. **Command Priority**: Project commands override global commands with the same name
+1. Selection-only: Pick from existing commands; creation and editing live in Settings
+2. Autocomplete: Start typing to filter commands (e.g., `/sam` shows `sample-command-name`)
+3. Description Preview: See command descriptions in the menu
+4. Command Priority: Project commands override global commands with the same name
 
 ---
 

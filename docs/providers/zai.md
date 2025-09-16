@@ -61,10 +61,17 @@ The specific model availability may vary by region. The appropriate models will 
 1. **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2. **Select Provider:** Choose "Z AI" from the "API Provider" dropdown.
 3. **Select Region:** Choose your region:
-   - "International" for global access
+   - "International" (default) for global access
    - "China" for mainland China access
 4. **Enter API Key:** Paste your Z AI API key into the "Z AI API Key" field.
 5. **Select Model:** Choose your desired model from the "Model" dropdown. Available models depend on your selected region.
+
+### Defaults & Behavior
+- **Automatic Base URL:** Selected region determines the API endpoint automatically:
+  - International → `https://api.z.ai/api/paas/v4`
+  - China → `https://open.bigmodel.cn/api/paas/v4`
+- **Dynamic Models:** Changing the region automatically updates the model catalog and target endpoint.
+- **No Manual Base URL Needed:** You typically do not need to configure a custom base URL.
 
 ---
 
@@ -73,6 +80,7 @@ The specific model availability may vary by region. The appropriate models will 
 * **Region Selection:** The region setting determines both the API endpoint and available models:
   - International: Uses `https://api.z.ai/api/paas/v4`
   - China: Uses `https://open.bigmodel.cn/api/paas/v4`
+* **Automatic Base URL:** Base URL is selected from your region; manual override is not required in typical setups.
 * **OpenAI Compatibility:** Z AI uses an OpenAI-compatible API, providing streaming responses and usage reporting.
 * **Model Selection:** Models are automatically filtered based on your selected region to ensure compatibility.
 * **API Key Required:** A valid API key is required for all requests. Ensure you've obtained one from the appropriate regional platform.
