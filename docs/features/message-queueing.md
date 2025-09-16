@@ -23,7 +23,7 @@ No more waiting! Type your follow-up thoughts, corrections, or additional reques
 
 ## Overview
 
-Message queueing lets you type and send messages while Roo is still working. Just type your message and hit Enter - it gets queued and will be processed as soon as Roo is ready for your next input, right before it would typically ask for an approval. This feature is particularly useful for quick corrections or additions to your request.
+Message queueing lets you type and send messages while Roo is still working. Just type your message and hit Enter - it gets queued and will be processed as soon as Roo is ready for your next input. When a queued message is processed, Roo implicitly approves whatever would normally require your confirmation (tool calls, file writes, running commands)—even if auto-approval is disabled. This is useful for quick corrections or additions when you want to keep work moving without manual prompts.
 
 ---
 
@@ -34,7 +34,7 @@ While Roo is working:
 1. **Type your message** as normal
 2. **Press Enter** or click Send
 3. **Message gets queued** and appears with "Queued Messages:" label
-4. **Roo processes the queued message** as soon as it's ready for your next input, right before it would typically ask for an approval
+4. **Roo processes the queued message** as soon as it's ready for your next input and implicitly approves the next pending action (e.g., a tool call, file write, or command)—even if auto-approval is disabled
 
 <img src="/img/message-queueing/message-queueing.png" alt="Message queueing interface showing active processing and three queued messages" width="800" />
 
@@ -46,8 +46,10 @@ While Roo is working:
 
 The input field stays active so you can type anytime - just hit Enter to queue your message.
 
-:::warning Interacting with Queued Messages
-Editing or deleting a queued message requires clicking on it before it's processed. If you have auto-approval enabled, the time to do this may be very short or non-existent, as the queued message and the next action can be processed almost instantly. For workflows where you anticipate needing to edit queued messages, consider temporarily disabling auto-approval.
+:::warning Queued Messages Implicitly Approve
+Queued messages act as approval for the next action. When a queued message is processed, Roo proceeds with whatever would normally require confirmation (tool calls, file writes, running commands)—even if auto-approval is disabled.
+Editing or deleting a queued message requires clicking it before it's processed. In fast workflows this window can be extremely short; if you need a manual review step, avoid queueing until you're ready to approve.
+Note: This behavior is distinct from [Auto-Approving Actions](/features/auto-approving-actions) and is not controlled by its settings.
 :::
 
 
@@ -60,6 +62,12 @@ A: There is no hard limit on the number of messages you can queue. The queue siz
 
 **Q: Can I reorder queued messages?**
 A: No, messages are always processed in the order they were sent (FIFO).
+
+**Q: Do queued messages require approval?**
+A: No. When processed, a queued message implicitly approves the next pending action (tool calls, file writes, running commands), even if auto-approval is disabled. If you need a manual review step, do not queue the message; wait for the approval prompt and confirm manually.
+
+**Q: Why are my queued messages triggering auto-approval?**
+A: This isn’t the Auto-Approving Actions setting. Queueing a message tells Roo to proceed without pausing for confirmations, so the queued message implicitly approves the next action. To avoid this, don’t queue when you need a manual review—wait for the approval prompt and confirm manually. See [Auto-Approving Actions](/features/auto-approving-actions) for settings-based approvals.
 
 **Q: What happens if Roo encounters an error?**
 A: Queued messages remain in the queue. You can choose to cancel them or let processing continue.
