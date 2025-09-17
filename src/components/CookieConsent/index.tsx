@@ -34,8 +34,6 @@ export function CookieConsent() {
     }
     : {};
 
-    console.log("cookieDomain", cookieDomain);
-
   return (
     <div role="banner" aria-label="Cookie consent banner" aria-live="polite">
       <ReactCookieConsent
