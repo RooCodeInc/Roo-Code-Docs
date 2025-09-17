@@ -166,21 +166,23 @@ Note: The automatic slug change handling during import ensures that rule file pa
 
 You can create and configure custom modes in several ways:
 
+To configure modes, open the Roo Code panel, click the Mode menu under the chatbox, then click the <Codicon name="settings-gear" />. From there, use "Edit Global Modes" to open settings/custom_modes.yaml, or "Edit Project Modes (.roomodes)" to open your workspace-level configuration.
+
 ### 1. Ask Roo! (Recommended)
 
 You can quickly create a basic custom mode by asking Roo Code to do it for you. For example:
 ```
 Create a new mode called "Documentation Writer". It should only be able to read files and write Markdown files.
 ```
-Roo Code will guide you through the process, prompting for necessary information for the properties described in the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table. Roo will create the mode using the preferred YAML format. For fine-tuning or making specific adjustments later, you can use the Prompts tab or manual configuration.
+Roo Code will guide you through the process, prompting for necessary information for the properties described in the [What's Included in a Custom Mode?](#whats-included-in-a-custom-mode) table. Roo will create the mode using the preferred YAML format. For fine-tuning or making specific adjustments later, you can use the Modes page or manual configuration.
 
-### 2. Using the Prompts Tab
+### 2. Using the Modes Page
 
-1.  **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon in the Roo Code top menu bar.
+1.  **Open the Modes page:** Open the Roo Code panel, click the Mode menu under the chatbox, then click the <Codicon name="settings-gear" />.
 2.  **Create New Mode:** Click the <Codicon name="add" /> button to the right of the Modes heading.
 3.  **Fill in Fields:**
 
-<img src="/img/custom-modes/custom-modes-4.png" alt="Custom mode creation interface in the Prompts tab" width="600" />
+<img src="/img/custom-modes/custom-modes-4.png" alt="Custom mode creation interface on the Modes page" width="600" />
 
     *The custom mode creation interface showing fields for name, slug, description, save location, role definition, available tools, custom instructions.*
 
@@ -192,8 +194,8 @@ Roo Code will guide you through the process, prompting for necessary information
 
 You can directly edit the configuration files to create or modify custom modes. This method offers the most control over all properties. Roo Code now supports both YAML (preferred) and JSON formats.
 
-*   **Global Modes:** Edit the `custom_modes.yaml` (preferred) or `custom_modes.json` file. Access it via **Prompts Tab** > <Codicon name="settings-gear" /> (Settings Menu icon next to "Global Prompts") > "Edit Global Modes".
-*   **Project Modes:** Edit the `.roomodes` file (which can be YAML or JSON) in your project root. Access it via **Prompts Tab** > <Codicon name="settings-gear" /> (Settings Menu icon next to "Project Prompts") > "Edit Project Modes".
+*   **Global Modes:** Edit the `custom_modes.yaml` (preferred) or `custom_modes.json` file. From the Modes page, click "Edit Global Modes" to open `settings/custom_modes.yaml`.
+*   **Project Modes:** Edit the `.roomodes` file (which can be YAML or JSON) in your project root. From the Modes page, click "Edit Project Modes (.roomodes)" to open or create the workspace file.
 
 These files define an array/list of custom modes.
 
@@ -392,7 +394,7 @@ When editing YAML manually, keep these points in mind:
 *   **Project Modes (`.roomodes`):**
     *   **No automatic startup migration:** Unlike global modes, project-specific `.roomodes` files are not automatically converted from JSON to YAML when Roo Code starts. Manual conversion is required for existing JSON `.roomodes` files.
     *   **Format Detection:** Roo Code can read `.roomodes` files in either YAML or JSON format. Roo Code automatically detects the format of `.roomodes` files by attempting to parse them as YAML first.
-    *   **Conversion on UI Edit:** If you edit a project-specific mode through the Roo Code UI (e.g., via the Prompts Tab), and the existing `.roomodes` file is in JSON format, Roo Code will save the changes in YAML format. This effectively converts the file to YAML. The original JSON content will be overwritten with YAML.
+    *   **Conversion on UI Edit:** If you edit a project-specific mode through the Roo Code UI (e.g., via the Modes page), and the existing `.roomodes` file is in JSON format, Roo Code will save the changes in YAML format. This effectively converts the file to YAML. The original JSON content will be overwritten with YAML.
     *   **Manual Conversion:** If you want to convert an existing `.roomodes` JSON file to YAML without making UI edits, you'll need to do this manually. You can:
         1.  Open your existing JSON `.roomodes` file.
         2.  Convert its content to YAML (you can ask Roo to help with this, or use an online converter).
@@ -492,10 +494,9 @@ You can override Roo Code's built-in modes (like `💻 Code`, `🪲 Debug`, `❓
 
 To customize a default mode across all your projects:
 
-1. **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon.
-2. **Access Settings Menu:** Click the <Codicon name="settings-gear" /> icon next to "Global Prompts".
-3. **Edit Global Modes:** Select "Edit Global Modes" to edit `custom_modes.yaml` (or `custom_modes.json`).
-4. **Add Your Override:**
+1. **Open the Modes page:** Open the Roo Code panel, click the Mode menu under the chatbox, then click the <Codicon name="settings-gear" />.
+2. **Edit Global Modes:** Click "Edit Global Modes" to open `settings/custom_modes.yaml` (or `custom_modes.json`).
+3. **Add Your Override:**
 
 **YAML Example:**
 ```yaml
@@ -534,10 +535,9 @@ This example replaces the default `💻 Code` mode with a version restricted to 
 
 To override a default mode for just one project:
 
-1. **Open Prompts Tab:** Click the <Codicon name="notebook" /> icon.
-2. **Access Settings Menu:** Click the <Codicon name="settings-gear" /> icon next to "Project Prompts".
-3. **Edit Project Modes:** Select "Edit Project Modes" to edit the `.roomodes` file (YAML or JSON).
-4. **Add Your Override:**
+1. **Open the Modes page:** Open the Roo Code panel, click the Mode menu under the chatbox, then click the <Codicon name="settings-gear" />.
+2. **Edit Project Modes (.roomodes):** Click "Edit Project Modes (.roomodes)" to open or create the workspace file.
+3. **Add Your Override:**
 
 **YAML Example:**
 ```yaml
