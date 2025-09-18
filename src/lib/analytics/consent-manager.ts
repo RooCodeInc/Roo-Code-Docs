@@ -1,4 +1,5 @@
-import { CONSENT_COOKIE_NAME } from '../../constants';
+import { CONSENT_COOKIE_NAME } from '@roo-code/types';
+import { getCookieConsentValue } from 'react-cookie-consent';
 
 // Custom event names for consent tracking
 export const CONSENT_GRANTED_EVENT = 'cookieConsentGranted';
@@ -31,20 +32,12 @@ export function dispatchConsentEvent(granted: boolean): void {
 }
 
 /**
- * Checks if the user has already provided consent
- * @returns boolean indicating if consent cookie exists and is set to 'true'
+ * Check if user has given consent for analytics cookies
+ * Uses react-cookie-consent's built-in function
  */
 export function hasConsent(): boolean {
   if (typeof window === 'undefined') return false;
-  
-  const cookies = document.cookie.split(';');
-  for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split('=');
-    if (name === CONSENT_COOKIE_NAME) {
-      return value === 'true';
-    }
-  }
-  return false;
+  return getCookieConsentValue(CONSENT_COOKIE_NAME) === 'true';
 }
 
 /**

@@ -46,18 +46,6 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined' && window.posthog) {
       window.posthog.opt_out_capturing();
       window.posthog.stop_session_recording();
-      if (document) {
-        const cookies = document.cookie.split(';');
-        cookies.forEach(cookie => {
-          const eqPos = cookie.indexOf('=');
-          const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
-          if (name.startsWith('ph_') || name.startsWith('posthog')) {
-            // Delete PostHog related cookies
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.roocode.com`;
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-          }
-        });
-      }
     }
   };
 

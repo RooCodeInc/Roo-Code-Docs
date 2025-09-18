@@ -29,6 +29,3 @@ export const CONTACT_EMAIL = 'mailto:support@roocode.com';
 export const CAREERS_URL = 'https://careers.roocode.com';
 export const WEBSITE_PRIVACY_URL = 'https://roocode.com/privacy';
 export const EXTENSION_PRIVACY_URL = `${GITHUB_MAIN_REPO_URL}/blob/main/PRIVACY.md`;
-
-// Cookies
-export const CONSENT_COOKIE_NAME = "roo-code-cookie-consent";
