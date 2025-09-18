@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { hasConsent, onConsentChange } from '../../lib/analytics/consent-manager';
+
+// PostHog interface - define the methods we use
+interface PostHogInstance {
+  opt_in_capturing(): void;
+  opt_out_capturing(): void;
+  startSessionRecording(): void;
+  stopSessionRecording(): void;
+}
 
 declare global {
   interface Window {
-    posthog?: any;
+    posthog?: PostHogInstance;
   }
 }
 
 export function PostHogProvider({ children }: { children: React.ReactNode }) {
-  const [isPostHogEnabled, setIsPostHogEnabled] = useState(false);
-
   useEffect(() => {
     // Check initial consent status
     const consentGiven = hasConsent();
-    setIsPostHogEnabled(consentGiven);
 
     if (consentGiven) {
       enablePostHog();
@@ -23,7 +28,6 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
 
     // Listen for consent changes
     const cleanup = onConsentChange((granted) => {
-      setIsPostHogEnabled(granted);
       if (granted) {
         enablePostHog();
       } else {
