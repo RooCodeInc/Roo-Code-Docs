@@ -38,14 +38,14 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined' && window.posthog) {
       // Re-initialize PostHog if it was previously disabled
       window.posthog.opt_in_capturing();
-      window.posthog.start_session_recording();
+      window.posthog.startSessionRecording();
     }
   };
 
   const disablePostHog = () => {
     if (typeof window !== 'undefined' && window.posthog) {
       window.posthog.opt_out_capturing();
-      window.posthog.stop_session_recording();
+      window.posthog.stopSessionRecording();
     }
   };
 
