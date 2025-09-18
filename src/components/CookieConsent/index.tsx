@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactCookieConsent from 'react-cookie-consent';
 import { getDomain } from 'tldts';
-import { CONSENT_COOKIE_NAME } from '../../constants';
+import { CONSENT_COOKIE_NAME } from '@roo-code/types';
 import { dispatchConsentEvent } from '../../lib/analytics/consent-manager';
 import styles from './styles.module.css';
 
