@@ -74,6 +74,8 @@ Task Sync enables monitoring your local development environment from any device.
 * **Redesigned Message Feed**: Enjoy a cleaner, more readable chat interface with improved visual hierarchy that helps you focus on what matters ([#7985](https://github.com/RooCodeInc/Roo-Code/pull/7985))
 * **Responsive Auto-Approve**: The auto-approve dropdown now adapts to different window sizes with smart 1-2 column layouts, and tooltips show all enabled actions without truncation ([#8032](https://github.com/RooCodeInc/Roo-Code/pull/8032))
 * **Network Resilience**: Telemetry data now automatically retries on network failures, ensuring analytics and diagnostics aren't lost during connectivity issues ([#7597](https://github.com/RooCodeInc/Roo-Code/pull/7597))
+* **Code blocks wrap by default**: Code blocks now wrap text by default, improving readability when viewing long commands and code snippets ([#8194](https://github.com/RooCodeInc/Roo-Code/pull/8194))
+
 ## Bug Fixes
 
 * **Groq Context Window**: Fixed incorrect display of cached tokens in context window ([#7839](https://github.com/RooCodeInc/Roo-Code/pull/7839))
@@ -95,6 +97,9 @@ Task Sync enables monitoring your local development environment from any device.
 * Surface a clear, actionable error instead of cryptic ByteString conversion failures during code indexing when API keys contain invalid/special characters (thanks PavelA85!) ([#8008](https://github.com/RooCodeInc/Roo-Code/pull/8008))
 * Correct C# tree-sitter query so C# files are parsed and indexed properly, improving semantic search, navigation, and context quality (thanks mubeen-zulfiqar, vadash, Source-GuyCoder!) ([#7813](https://github.com/RooCodeInc/Roo-Code/pull/7813))
 * **Keyboard Shortcut**: Fixed the command+y shortcut in Nightly builds, restoring quick content addition to context ([#8070](https://github.com/RooCodeInc/Roo-Code/pull/8070))
+* **Todo list compatibility**: Todo lists now display correctly when AI models return checklists with dash prefixes (`- [ ] Task`), improving compatibility with various models (thanks NaccOll!) ([#8055](https://github.com/RooCodeInc/Roo-Code/pull/8055))
+* **Vertex AI pricing accuracy**: Fixed local cost calculation for Gemini models via Vertex AI to properly apply tiered pricing and cache discounts, ensuring displayed costs match actual Google Cloud billing (thanks ikumi3!) ([#8018](https://github.com/RooCodeInc/Roo-Code/pull/8018))
+* **Conversation history preservation**: Fixed duplicate/overlaid tasks and lost conversation history when canceling during model responses, especially during reasoning phases ([#8171](https://github.com/RooCodeInc/Roo-Code/pull/8171))
 
 
 ## Provider Updates
@@ -104,6 +109,8 @@ Task Sync enables monitoring your local development environment from any device.
 
 * **Chutes Provider**: Add Qwen3 Next 80B A3B models ([#7948](https://github.com/RooCodeInc/Roo-Code/pull/7948))
 * **Z.ai Coding Plans**: Region-aware options (International/China) with automatic base URL selection and sensible defaults to simplify setup (thanks chrarnoldus!) ([#8003](https://github.com/RooCodeInc/Roo-Code/pull/8003))
+* **SambaNova models**: Added DeepSeek-V3.1 and GPT-OSS 120B to the SambaNova provider (thanks snova-jorgep!) ([#8186](https://github.com/RooCodeInc/Roo-Code/pull/8186))
+
 ## Misc Improvements
 
 * **Cloud Task Button**: Added a new button for opening tasks in Roo Code Cloud with QR codes and shareable URLs ([#7572](https://github.com/RooCodeInc/Roo-Code/pull/7572))
@@ -116,3 +123,5 @@ Task Sync enables monitoring your local development environment from any device.
 * Updated dependency eslint-config-prettier to v10.1.8 ([#6464](https://github.com/RooCodeInc/Roo-Code/pull/6464))
 * Updated dependency eslint-plugin-turbo to v2.5.6 ([#7764](https://github.com/RooCodeInc/Roo-Code/pull/7764))
 * Updated dependency axios to v1.12.0 for improved reliability and security of HTTP requests ([#7963](https://github.com/RooCodeInc/Roo-Code/pull/7963))
+* **Code Supernova announcement**: Added announcement for the new Code Supernova model with improved authentication flow and landing page redirection ([#8197](https://github.com/RooCodeInc/Roo-Code/pull/8197))
+* **Privacy policy update**: Updated privacy policy to include provisions for optional marketing emails with clear opt-out options (thanks jdilla1277!) ([#8180](https://github.com/RooCodeInc/Roo-Code/pull/8180))
