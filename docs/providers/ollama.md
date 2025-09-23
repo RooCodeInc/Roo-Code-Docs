@@ -53,8 +53,14 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     ollama pull qwen2.5-coder:32b
     ```
 
-3. **Configure the Model:** Configure your model’s context window in Ollama and save a copy. Roo automatically reads the model’s reported context window from Ollama and passes it as `num_ctx`; no Roo-side context size setting is required for the Ollama provider.
+3. **Configure the Model:** Configure your model's context window in Ollama and save a copy.
 
+   :::info Default Context Behavior
+   **Roo Code automatically defers to the Modelfile's `num_ctx` setting by default.** When you use a model with Ollama, Roo Code reads the model's configured context window and uses it automatically. You don't need to configure context size in Roo Code settings - it respects what's defined in your Ollama model.
+   :::
+
+   **Option A: Interactive Configuration**
+   
    Load the model (we will use `qwen2.5-coder:32b` as an example):
    
     ```bash
@@ -72,6 +78,37 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     ```bash
     /save your_model_name
     ```
+
+   **Option B: Using a Modelfile (Recommended)**
+
+   Create a `Modelfile` with your desired configuration:
+
+   ```dockerfile
+   # Example Modelfile for reduced context
+   FROM qwen2.5-coder:32b
+   
+   # Set context window to 32K tokens (reduced from default)
+   PARAMETER num_ctx 32768
+   
+   # Optional: Adjust temperature for more consistent output
+   PARAMETER temperature 0.7
+   
+   # Optional: Set repeat penalty
+   PARAMETER repeat_penalty 1.1
+   ```
+
+   Then create your custom model:
+
+   ```bash
+   ollama create qwen-32k -f Modelfile
+   ```
+
+   :::tip Override Context Window
+   If you need to override the model's default context window:
+   - **Permanently:** Save a new model version with your desired `num_ctx` using either method above
+   - **Roo Code behavior:** Roo automatically uses whatever `num_ctx` is configured in your Ollama model
+   - **Memory considerations:** Reducing `num_ctx` helps prevent out-of-memory errors on limited hardware
+   :::
 
 4.  **Configure Roo Code:**
     *   Open the Roo Code sidebar (<KangarooIcon /> icon).
@@ -120,17 +157,22 @@ If no model instance is running, Ollama spins one up on demand. During that cold
      /set parameter num_ctx 32768
      /save &lt;your_model_name&gt;
      ```
-   - Option B — Modelfile:
-     ```text
+   - Option B — Modelfile (recommended for reproducibility):
+     ```dockerfile
+     FROM &lt;base-model&gt;
      PARAMETER num_ctx 32768
+     # Adjust based on your available memory:
+     # 16384 for ~8GB VRAM
+     # 32768 for ~16GB VRAM
+     # 65536 for ~24GB+ VRAM
      ```
-     Then re-create the model:
+     Then create the model:
      ```bash
      ollama create &lt;your_model_name&gt; -f Modelfile
      ```
 
 3. **Ensure the model's context window is pinned**
-   Save your Ollama model with an appropriate `num_ctx` (e.g., via `/set` + `/save`, or a Modelfile). Roo reads this automatically and passes it as `num_ctx`; there is no Roo-side context size setting for the Ollama provider.
+   Save your Ollama model with an appropriate `num_ctx` (via `/set` + `/save`, or preferably a Modelfile). **Roo Code automatically detects and uses the model's configured `num_ctx`** - there is no manual context size setting in Roo Code for the Ollama provider.
 
 4. **Use smaller variants**
    If GPU memory is limited, use a smaller quant (e.g., q4 instead of q5) or a smaller parameter size (e.g., 7B/13B instead of 32B).

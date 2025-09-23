@@ -43,6 +43,17 @@ The GPT-5 models are OpenAI's most advanced, offering superior coding capabiliti
 * **`gpt-5-mini-2025-08-07`** - Faster, cost-efficient for well-defined tasks
 * **`gpt-5-nano-2025-08-07`** - Fastest, most cost-efficient option
 
+### GPT-5-Codex
+OpenAI's specialized coding model with advanced capabilities:
+
+**Key Features:**
+* **400K Token Context Window** - Process entire codebases and lengthy documentation
+* **Image Support** - Analyze screenshots, diagrams, and visual documentation
+* **Prompt Caching** - Reduced costs for repeated context through automatic caching
+* **Adaptive Reasoning** - Dynamically adjusts reasoning depth based on task complexity
+
+**Ideal for:** Large-scale code analysis, multimodal tasks requiring visual understanding, complex refactoring projects, and extensive codebase operations.
+
 ### GPT-4.1 Family
 Advanced multimodal models with balanced capabilities:
 
@@ -136,5 +147,6 @@ GPT-5 models maintain conversation context efficiently through response IDs, red
 
 ## Tips and Notes
 
-*   **Pricing:** Refer to the [OpenAI Pricing](https://openai.com/pricing) page for details on model costs.
+*   **Pricing:** Refer to the [OpenAI Pricing](https://openai.com/pricing) page for current model costs and discounts, including prompt caching.
 *   **Azure OpenAI Service:** If you'd like to use the Azure OpenAI service, please see our section on [OpenAI-compatible](/providers/openai-compatible) providers.
+*   **Context Optimization:** For GPT-5-Codex, leverage prompt caching by maintaining consistent context across requests to reduce costs significantly.

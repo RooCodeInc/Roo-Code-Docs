@@ -52,14 +52,27 @@ Task Sync enables monitoring your local development environment from any device.
 
 > **Documentation**: See [Task Sync](/roo-code-cloud/task-sync), [Roomote Control Guide](/roo-code-cloud/roomote-control), and [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions).
 
+## GPT-5-Codex lands in OpenAI Native
+
+- **Work with repository-scale context**: Keep multi-file specs and long reviews in a single thread thanks to a 400k token window.
+- **Reuse prompts faster and include visuals**: Prompt caching and image support help you iterate on UI fixes without re-uploading context.
+- **Let the model adapt its effort**: GPT-5-Codex automatically balances quick responses for simple questions with deeper reasoning on complex builds.
+
+This gives teams a higher-capacity OpenAI option without extra configuration.[#8260](https://github.com/RooCodeInc/Roo-Code/pull/8260):
+
+> **Documentation**: See [OpenAI Provider Guide](/providers/openai) for capabilities and setup guidance.
+
 ## QOL Improvements
 
+* **Auto-approve keyboard shortcut**: Toggle approvals with Cmd/Ctrl+Alt+A from anywhere in the editor so you can stay in the flow while reviewing changes (via [#8214](https://github.com/RooCodeInc/Roo-Code/pull/8214))
 * **Click-to-Edit Chat Messages**: Click directly on any message text to edit it, with ESC to cancel and improved padding consistency ([#7790](https://github.com/RooCodeInc/Roo-Code/pull/7790))
 * **Enhanced Reasoning Display**: The AI's thinking process now shows a persistent timer and displays reasoning content in clean italic text ([#7752](https://github.com/RooCodeInc/Roo-Code/pull/7752))
+* **Easier-to-scan reasoning transcripts**: Added clear line breaks before reasoning headers inside the UI so long thoughts are easier to skim (via [#7868](https://github.com/RooCodeInc/Roo-Code/pull/7868))
 * **Manual Auth URL Input**: Users in containerized environments can now paste authentication redirect URLs manually when automatic redirection fails ([#7805](https://github.com/RooCodeInc/Roo-Code/pull/7805))
 * **Active Mode Centering**: The mode selector dropdown now automatically centers the active mode when opened ([#7883](https://github.com/RooCodeInc/Roo-Code/pull/7883))
 * **Preserve First Message**: The first message containing slash commands or initial context is now preserved during conversation condensing instead of being replaced with a summary ([#7910](https://github.com/RooCodeInc/Roo-Code/pull/7910))
 * **Checkpoint Initialization Notifications**: You'll now receive clear notifications when checkpoint initialization fails, particularly with nested Git repositories ([#7766](https://github.com/RooCodeInc/Roo-Code/pull/7766))
+* **Translation coverage auditing**: The translation checker now validates package.nls locales by default to catch missing strings before release (via [#8255](https://github.com/RooCodeInc/Roo-Code/pull/8255))
 
 * Smaller and more subtle auto-approve UI (thanks brunobergher!) ([#7894](https://github.com/RooCodeInc/Roo-Code/pull/7894))
 * Disable Roomote Control on logout for better security ([#7976](https://github.com/RooCodeInc/Roo-Code/pull/7976))
@@ -74,10 +87,13 @@ Task Sync enables monitoring your local development environment from any device.
 * **Redesigned Message Feed**: Enjoy a cleaner, more readable chat interface with improved visual hierarchy that helps you focus on what matters ([#7985](https://github.com/RooCodeInc/Roo-Code/pull/7985))
 * **Responsive Auto-Approve**: The auto-approve dropdown now adapts to different window sizes with smart 1-2 column layouts, and tooltips show all enabled actions without truncation ([#8032](https://github.com/RooCodeInc/Roo-Code/pull/8032))
 * **Network Resilience**: Telemetry data now automatically retries on network failures, ensuring analytics and diagnostics aren't lost during connectivity issues ([#7597](https://github.com/RooCodeInc/Roo-Code/pull/7597))
-* **Code blocks wrap by default**: Code blocks now wrap text by default, improving readability when viewing long commands and code snippets ([#8194](https://github.com/RooCodeInc/Roo-Code/pull/8194))
+* **Code blocks wrap by default**: Code blocks now wrap text by default, and the snippet toolbar no longer includes language or wrap toggles, keeping snippets readable across locales (via [#8194](https://github.com/RooCodeInc/Roo-Code/pull/8194); [#8208](https://github.com/RooCodeInc/Roo-Code/pull/8208))
 
 ## Bug Fixes
 
+* **Roo provider stays signed in**: Roo provider tokens refresh automatically and the local evals app binds to port 3446 for predictable scripts (via [#8224](https://github.com/RooCodeInc/Roo-Code/pull/8224))
+* **Checkpoint text stays on one line**: Prevented multi-line wrapping in languages such as Chinese, Korean, Japanese, and Russian so the checkpoint UI stays compact (via [#8207](https://github.com/RooCodeInc/Roo-Code/pull/8207); reported in [#8206](https://github.com/RooCodeInc/Roo-Code/issues/8206))
+* **Ollama respects Modelfile num_ctx**: Roo now defers to your Modelfile’s context window to avoid GPU OOMs while still allowing explicit overrides when needed (via [#7798](https://github.com/RooCodeInc/Roo-Code/pull/7798); reported in [#7797](https://github.com/RooCodeInc/Roo-Code/issues/7797))
 * **Groq Context Window**: Fixed incorrect display of cached tokens in context window ([#7839](https://github.com/RooCodeInc/Roo-Code/pull/7839))
 * **Chat Message Operations**: Resolved duplication issues when editing messages and "Couldn't find timestamp" errors when deleting ([#7793](https://github.com/RooCodeInc/Roo-Code/pull/7793))
 * **UI Overlap**: Fixed CodeBlock button z-index to prevent overlap with popovers and configuration panels (thanks A0nameless0man!) ([#7783](https://github.com/RooCodeInc/Roo-Code/pull/7783))
