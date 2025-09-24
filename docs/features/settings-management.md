@@ -143,3 +143,16 @@ Clicking the **Reset** button completely clears all Roo Code configuration data 
 *   **Result:** Roo Code returns to its initial state, as if freshly installed, with default settings and no user configurations.
 
 Use this option only if you are certain you want to remove all Roo Code data or if instructed during troubleshooting. Consider exporting your settings first if you might want to restore them later.
+
+---
+
+## Related UI Setting: Collapse thinking messages by default
+
+- Location: Settings → UI
+- Default: Enabled (thinking messages are collapsed by default)
+- Behavior:
+  - Enabled (default): Thinking blocks remain collapsed until you expand them.
+  - Disabled: Thinking blocks are expanded by default.
+- Notes:
+  - Applies across conversations globally.
+  - Text is localized; labels may differ by language.

@@ -27,6 +27,7 @@ Roo Code offers keyboard commands to enhance your workflow. This page focuses on
 | `roo-cline.focusInput` | Focus the Roo input box | None (configurable) |
 | Add to Context | Add selected code to Roo's context | macOS: Cmd+Y; Windows/Linux: Ctrl+Y |
 | Arrow Up/Down | Navigate through prompt history | Built-in |
+| Toggle all thinking blocks | Collapse/expand all thinking messages in the current thread | macOS: Cmd+Shift+Alt+T; Windows/Linux: Ctrl+Shift+Alt+T |
 
 ### Key Benefits of Keyboard Commands
 
