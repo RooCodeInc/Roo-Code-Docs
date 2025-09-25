@@ -64,6 +64,8 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 ## QOL Improvements
 
+* **Cloud Account Management**: Added account switcher and "Create Team Account" option for logged-in users, making it easier to manage multiple accounts ([#8291](https://github.com/RooCodeInc/Roo-Code/pull/8291))
+* **Social Media Sharing**: Improved OpenGraph images for better preview cards when sharing Roo Code links on Slack, Twitter, and Facebook ([#8285](https://github.com/RooCodeInc/Roo-Code/pull/8285))
 * **Auto-approve keyboard shortcut**: Toggle approvals with Cmd/Ctrl+Alt+A from anywhere in the editor so you can stay in the flow while reviewing changes (via [#8214](https://github.com/RooCodeInc/Roo-Code/pull/8214))
 * **Click-to-Edit Chat Messages**: Click directly on any message text to edit it, with ESC to cancel and improved padding consistency ([#7790](https://github.com/RooCodeInc/Roo-Code/pull/7790))
 * **Enhanced Reasoning Display**: The AI's thinking process now shows a persistent timer and displays reasoning content in clean italic text ([#7752](https://github.com/RooCodeInc/Roo-Code/pull/7752))
@@ -91,6 +93,8 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 ## Bug Fixes
 
+* **Fixed "No tool used" Errors**: Resolved the situation where LLMs would sometimes not make tool calls in their repsonse which improves Roo's overall flow. ([#8292](https://github.com/RooCodeInc/Roo-Code/pull/8292))
+* **Context Condensing**: Fixed an issue where the initial task request was being lost during context condensing, causing Roo to try to re-answer the original task ask when resuming after condensing([#8298](https://github.com/RooCodeInc/Roo-Code/pull/8298))
 * **Roo provider stays signed in**: Roo provider tokens refresh automatically and the local evals app binds to port 3446 for predictable scripts (via [#8224](https://github.com/RooCodeInc/Roo-Code/pull/8224))
 * **Checkpoint text stays on one line**: Prevented multi-line wrapping in languages such as Chinese, Korean, Japanese, and Russian so the checkpoint UI stays compact (via [#8207](https://github.com/RooCodeInc/Roo-Code/pull/8207); reported in [#8206](https://github.com/RooCodeInc/Roo-Code/issues/8206))
 * **Ollama respects Modelfile num_ctx**: Roo now defers to your Modelfile’s context window to avoid GPU OOMs while still allowing explicit overrides when needed (via [#7798](https://github.com/RooCodeInc/Roo-Code/pull/7798); reported in [#7797](https://github.com/RooCodeInc/Roo-Code/issues/7797))
@@ -120,6 +124,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 ## Provider Updates
 
+* **New Free Models**: Added two more free models to the Roo provider - xai/grok-4-fast and deepseek/deepseek-chat-v3.1 ([#8304](https://github.com/RooCodeInc/Roo-Code/pull/8304))
 * **Vertex AI Models**: Added support for 6 new models including DeepSeek-V3, GPT-OSS, and Qwen models, plus the us-south1 region (thanks ssweens!) ([#7727](https://github.com/RooCodeInc/Roo-Code/pull/7727))
 * **DeepSeek Pricing**: Updated to new unified rates effective September 5, 2025 - $0.56/M input tokens, $1.68/M output tokens (thanks NaccOll!) ([#7687](https://github.com/RooCodeInc/Roo-Code/pull/7687))
 
@@ -129,6 +134,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 ## Misc Improvements
 
+* **Infrastructure**: Set port 3446 for web-evals service in production mode ([#8288](https://github.com/RooCodeInc/Roo-Code/pull/8288))
 * **Cloud Task Button**: Added a new button for opening tasks in Roo Code Cloud with QR codes and shareable URLs ([#7572](https://github.com/RooCodeInc/Roo-Code/pull/7572))
 * **Telemetry Default**: Posthog telemetry is now enabled by default with easy opt-out options in settings ([#7909](https://github.com/RooCodeInc/Roo-Code/pull/7909))
 * **Roo Code Cloud Announcement**: Updated in-app announcements about Roo Code Cloud features, localized in 18 languages ([#7914](https://github.com/RooCodeInc/Roo-Code/pull/7914))
