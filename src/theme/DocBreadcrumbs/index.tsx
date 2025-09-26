@@ -71,7 +71,7 @@ export default function DocBreadcrumbs(): ReactNode {
           <span className={styles.teamsPromoHeadline}>Ship Faster with Roo Code Teams.</span>
           <a
             className={styles.teamsPromoLink}
-            href="https://roocode.com/l/teams"
+            href="https://roocode.com/l/teams?utm_source=docs&utm_medium=banner&utm_campaign=teams_promo"
             target="_blank"
             rel="noopener noreferrer">
             Get early access now.
