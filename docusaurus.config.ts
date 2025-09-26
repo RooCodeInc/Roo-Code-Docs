@@ -17,7 +17,8 @@ import {
   CAREERS_URL,
   WEBSITE_PRIVACY_URL,
   EXTENSION_PRIVACY_URL,
-  GITHUB_REPO_URL
+  GITHUB_REPO_URL,
+  TEAMS_PROMO_URL
 } from './src/constants';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -292,6 +293,13 @@ const config: Config = {
       {property: 'og:type', content: 'website'},
       {property: 'og:locale', content: 'en_US'},
     ],
+    announcementBar: {
+      id: 'teams-early-access-2025-09-2',
+      content: `Ship Faster with Roo Code Teams. <a href="${TEAMS_PROMO_URL}" target="_blank" rel="noopener noreferrer">Get early access now.</a>`,
+      backgroundColor: 'var(--roo-announcement-bar-bg)',
+      textColor: '#ffffff',
+      isCloseable: true,
+    },
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: false,

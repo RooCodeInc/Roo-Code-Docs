@@ -6,6 +6,7 @@
 
 /* Light mode color system */
 :root {
+  --roo-announcement-bar-bg: #375497;
   --background: 0 0% 100%;
   --foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
@@ -2332,4 +2333,22 @@ html {
 /* Ensure consistent spacing for all tutorial video links */
 .menu__list-item:has(> a[href^="https://www.youtube.com/watch"]) {
   margin-bottom: 0 !important;
+}
+/* Announcement bar close "X" color override: ensure the close icon is white on all themes */
+.theme-announcement-bar [aria-label="Close"] {
+  color: #ffffff !important; /* Icon inherits currentColor */
+  opacity: 1 !important;
+}
+
+.theme-announcement-bar [aria-label="Close"] svg,
+.theme-announcement-bar [aria-label="Close"] path,
+.theme-announcement-bar [aria-label="Close"] g {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.theme-announcement-bar [aria-label="Close"]:hover {
+  color: #ffffff !important;
+  opacity: 1 !important;
 }
