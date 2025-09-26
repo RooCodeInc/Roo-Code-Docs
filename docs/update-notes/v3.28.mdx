@@ -91,6 +91,12 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Network Resilience**: Telemetry data now automatically retries on network failures, ensuring analytics and diagnostics aren't lost during connectivity issues ([#7597](https://github.com/RooCodeInc/Roo-Code/pull/7597))
 * **Code blocks wrap by default**: Code blocks now wrap text by default, and the snippet toolbar no longer includes language or wrap toggles, keeping snippets readable across locales (via [#8194](https://github.com/RooCodeInc/Roo-Code/pull/8194); [#8208](https://github.com/RooCodeInc/Roo-Code/pull/8208))
 
+* **Reset logs you out of Roo Code Cloud**: Reset now also logs you out of Roo Code Cloud for a truly clean slate; the reset still completes even if logout fails. ([#8312](https://github.com/RooCodeInc/Roo-Code/pull/8312))
+* **Measure engagement with upsell messages**: Telemetry for DismissibleUpsell tracks dismiss vs click (upsellId only) to tune messaging and reduce noise; no user-facing behavior change. ([#8309](https://github.com/RooCodeInc/Roo-Code/pull/8309))
+* **Welcome screen Roo provider experiment**: Surfaces the Roo provider on the welcome screen (localized, with click telemetry) to speed up setup. ([#8317](https://github.com/RooCodeInc/Roo-Code/pull/8317))
+* **Cleaner prompts (no “thinking” tags)**: Removes <thinking> tags for cleaner output, fewer tokens, and better model compatibility; preserves the plain‑language rule to confirm tool success. ([#8319](https://github.com/RooCodeInc/Roo-Code/pull/8319))
+* **Simpler Requesty model refresh**: Removes an unnecessary warning when refreshing the Requesty models list so you can fetch new policies without leaving the screen. ([#7710](https://github.com/RooCodeInc/Roo-Code/pull/7710))
+
 ## Bug Fixes
 
 * **Fixed "No tool used" Errors**: Resolved the situation where LLMs would sometimes not make tool calls in their response which improves Roo's overall flow. ([#8292](https://github.com/RooCodeInc/Roo-Code/pull/8292))
@@ -122,6 +128,8 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Conversation history preservation**: Fixed duplicate/overlaid tasks and lost conversation history when canceling during model responses, especially during reasoning phases ([#8171](https://github.com/RooCodeInc/Roo-Code/pull/8171))
 
 
+* **Tool‑use guidance clarity**: Clarifies the retry suggestion so the model selects the correct file‑reading step during apply‑diff retries, reducing failed file edits. ([#8315](https://github.com/RooCodeInc/Roo-Code/pull/8315))
+
 ## Provider Updates
 
 * **New Free Models**: Added two more free models to the Roo provider - xai/grok-4-fast and deepseek/deepseek-chat-v3.1 ([#8304](https://github.com/RooCodeInc/Roo-Code/pull/8304))
@@ -132,8 +140,12 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Z.ai Coding Plans**: Region-aware options (International/China) with automatic base URL selection and sensible defaults to simplify setup (thanks chrarnoldus!) ([#8003](https://github.com/RooCodeInc/Roo-Code/pull/8003))
 * **SambaNova models**: Added DeepSeek-V3.1 and GPT-OSS 120B to the SambaNova provider (thanks snova-jorgep!) ([#8186](https://github.com/RooCodeInc/Roo-Code/pull/8186))
 
+* **Supernova 1M context**: Upgrades the default Supernova to roo/code-supernova-1-million (1,000,000‑token context). Existing settings auto‑migrate; expect fewer truncations on long tasks. ([#8330](https://github.com/RooCodeInc/Roo-Code/pull/8330))
+
 ## Misc Improvements
 
+* **Website improvements**: New pricing page, clearer homepage messaging, and tighter navigation/visuals (including mobile). No changes to the extension UX. ([#8303](https://github.com/RooCodeInc/Roo-Code/pull/8303), [#8326](https://github.com/RooCodeInc/Roo-Code/pull/8326))
+* **Internal cleanup**: Removes the deprecated pr-reviewer mode. No changes to the extension UX. ([#8222](https://github.com/RooCodeInc/Roo-Code/pull/8222))
 * **Infrastructure**: Set port 3446 for web-evals service in production mode ([#8288](https://github.com/RooCodeInc/Roo-Code/pull/8288))
 * **Cloud Task Button**: Added a new button for opening tasks in Roo Code Cloud with QR codes and shareable URLs ([#7572](https://github.com/RooCodeInc/Roo-Code/pull/7572))
 * **Telemetry Default**: Posthog telemetry is now enabled by default with easy opt-out options in settings ([#7909](https://github.com/RooCodeInc/Roo-Code/pull/7909))
