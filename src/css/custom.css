@@ -2333,3 +2333,12 @@ html {
 .menu__list-item:has(> a[href^="https://www.youtube.com/watch"]) {
   margin-bottom: 0 !important;
 }
+
+/* ============================================
+   FIX: SEARCH INPUT TINY BUBBLE ON MOBILE
+   ============================================ */
+
+/* Override Docusaurus default that makes search input 2rem when not focused */
+.navbar__search-input:not(:focus) {
+  min-width: 80px !important;
+}
