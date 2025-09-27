@@ -1,9 +1,5 @@
 .teamsBanner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000; /* Above navbar which typically has z-index: 999 */
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,16 +57,6 @@
   outline-offset: 2px;
 }
 
-/* Add padding to body when banner is visible */
-:global(body.teams-banner-visible) {
-  padding-top: 52px; /* Height of the banner */
-}
-
-/* Adjust navbar position when banner is visible */
-:global(body.teams-banner-visible) :global(.navbar) {
-  top: 52px !important; /* Push navbar below banner */
-}
-
 @media (max-width: 768px) {
   .teamsBanner {
     padding: 1rem;
@@ -87,14 +73,5 @@
     right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
-  }
-
-  /* Adjust padding for mobile */
-  :global(body.teams-banner-visible) {
-    padding-top: 72px; /* Slightly more height on mobile */
-  }
-
-  :global(body.teams-banner-visible) :global(.navbar) {
-    top: 72px !important;
   }
 }

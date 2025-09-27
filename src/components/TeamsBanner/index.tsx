@@ -12,20 +12,6 @@ export function TeamsBanner(): React.ReactElement | null {
     }
   }, []);
 
-  useEffect(() => {
-    // Add or remove body class based on visibility
-    if (isVisible) {
-      document.body.classList.add('teams-banner-visible');
-    } else {
-      document.body.classList.remove('teams-banner-visible');
-    }
-
-    // Cleanup on unmount
-    return () => {
-      document.body.classList.remove('teams-banner-visible');
-    };
-  }, [isVisible]);
-
   const handleDismiss = () => {
     setIsVisible(false);
     localStorage.setItem('teamsBannerDismissed', 'true');
