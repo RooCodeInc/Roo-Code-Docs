@@ -60,24 +60,9 @@ export default function DocBreadcrumbs(): ReactNode {
     return null;
   }
 
-  const lastBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
-  const showTeamsBanner = lastBreadcrumb?.label === 'Welcome';
-
   return (
     <>
       <DocBreadcrumbsStructuredData breadcrumbs={breadcrumbs} />
-      {showTeamsBanner && (
-        <div className={styles.teamsPromo} role="complementary" aria-label="Roo Code Teams announcement">
-          <span className={styles.teamsPromoHeadline}>Ship Faster with Roo Code Teams.</span>
-          <a
-            className={styles.teamsPromoLink}
-            href="https://app.roocode.com/l/teams?utm_source=docs&utm_medium=banner&utm_campaign=teams_promo"
-            target="_blank"
-            rel="noopener noreferrer">
-            Get early access now.
-          </a>
-        </div>
-      )}
       <nav
         className={clsx(
           ThemeClassNames.docs.docBreadcrumbs,
