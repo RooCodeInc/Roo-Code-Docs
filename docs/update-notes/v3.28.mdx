@@ -101,6 +101,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 ## Bug Fixes
 
 * **AWS Bedrock Claude Sonnet 4.5**: Corrected model identifier for Claude Sonnet 4.5 on AWS Bedrock (thanks sunhyung!) ([#8371](https://github.com/RooCodeInc/Roo-Code/pull/8371))
+* **OpenRouter Claude Sonnet 4.5**: Corrected model ID format to align with naming and prevent selection/API mismatches ([#8373](https://github.com/RooCodeInc/Roo-Code/pull/8373))
 * **GPT-5 LiteLLM Compatibility**: Fixed GPT-5 models failing with LiteLLM provider by using correct `max_completion_tokens` parameter (thanks lx1054331851!) ([#6980](https://github.com/RooCodeInc/Roo-Code/pull/6980))
 * **Fixed "No tool used" Errors**: Resolved the situation where LLMs would sometimes not make tool calls in their response which improves Roo's overall flow. ([#8292](https://github.com/RooCodeInc/Roo-Code/pull/8292))
 * **Context Condensing**: Fixed an issue where the initial task request was being lost during context condensing, causing Roo to try to re-answer the original task ask when resuming after condensing ([#8298](https://github.com/RooCodeInc/Roo-Code/pull/8298))
