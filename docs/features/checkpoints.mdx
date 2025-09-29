@@ -202,9 +202,11 @@ The `.rooignore` file (which controls AI access to files) is separate from check
 
 This separation is intentional, as `.rooignore` limits which files the AI can access, not which files should be tracked for version history.
 
-#### Nested Git Repositories
+#### Git Repositories Below the Workspace Root
 
-If nested Git repositories are detected in your workspace, checkpoints are disabled. You'll receive a clear notification when checkpoint initialization fails due to nested repositories. Remove or relocate nested repositories to enable checkpoints.
+Checkpoints cannot be enabled if Git repositories exist below the workspace root. If this is detected, checkpoints will be disabled, and you'll receive a clear notification that checkpoint initialization has failed due to this condition. To enable checkpoints, remove or relocate these repositories, or open one of them as your workspace root.
+
+This occurs because the checkpoint service makes use of Git's "worktree" feature, and sets the main worktree directory to the workspace root. In this configuration, any Git repositories in subdirectories will conflict with the main worktree.
 
 ### Concurrency Control
 
