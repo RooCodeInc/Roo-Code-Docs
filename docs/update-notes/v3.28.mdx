@@ -97,6 +97,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Welcome screen Roo provider experiment**: Surfaces the Roo provider on the welcome screen (localized, with click telemetry) to speed up setup. ([#8317](https://github.com/RooCodeInc/Roo-Code/pull/8317))
 * **Cleaner prompts (no “thinking” tags)**: Removes `<thinking>` tags for cleaner output, fewer tokens, and better model compatibility; preserves the plain‑language rule to confirm tool success. ([#8319](https://github.com/RooCodeInc/Roo-Code/pull/8319))
 * **Simpler Requesty model refresh**: Removes an unnecessary warning when refreshing the Requesty models list so you can fetch new policies without leaving the screen. ([#7710](https://github.com/RooCodeInc/Roo-Code/pull/7710))
+* **Bedrock 1M Context Checkbox**: Adds checkbox to enable 1M context window support for Claude Sonnet 4 and 4.5 on Bedrock, providing more flexibility for large-scale projects ([#8384](https://github.com/RooCodeInc/Roo-Code/pull/8384))
 
 ## Bug Fixes
 
@@ -133,6 +134,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 
 * **Tool‑use guidance clarity**: Clarifies the retry suggestion so the model selects the correct file‑reading step during apply‑diff retries, reducing failed file edits. ([#8315](https://github.com/RooCodeInc/Roo-Code/pull/8315))
+* **Anthropic Sonnet 4.5 Model ID**: Corrects the model ID to the official `claude-sonnet-4-5`, resolving API errors when using Claude Sonnet 4.5 ([#8384](https://github.com/RooCodeInc/Roo-Code/pull/8384))
 
 ## Provider Updates
 
