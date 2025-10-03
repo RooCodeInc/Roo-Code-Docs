@@ -98,6 +98,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Cleaner prompts (no “thinking” tags)**: Removes `<thinking>` tags for cleaner output, fewer tokens, and better model compatibility; preserves the plain‑language rule to confirm tool success. ([#8319](https://github.com/RooCodeInc/Roo-Code/pull/8319))
 * **Simpler Requesty model refresh**: Removes an unnecessary warning when refreshing the Requesty models list so you can fetch new policies without leaving the screen. ([#7710](https://github.com/RooCodeInc/Roo-Code/pull/7710))
 * **Bedrock 1M Context Checkbox**: Adds checkbox to enable 1M context window support for Claude Sonnet 4 and 4.5 on Bedrock, providing more flexibility for large-scale projects ([#8384](https://github.com/RooCodeInc/Roo-Code/pull/8384))
+* Include reasoning messages in cloud task histories so you can review complete thinking after runs ([#8401](https://github.com/RooCodeInc/Roo-Code/pull/8401))
 
 ## Bug Fixes
 
@@ -138,6 +139,10 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 * **AWS Bedrock**: Removed `topP` parameter to avoid conflicts with extended thinking, improving reliability for streaming and non‑streaming responses (thanks ronyblum!) ([#8388](https://github.com/RooCodeInc/Roo-Code/pull/8388))
 * **Vertex AI**: Fixed Sonnet 4.5 model configuration to prevent 404s and align with the correct default model ID (thanks nickcatal!) ([#8391](https://github.com/RooCodeInc/Roo-Code/pull/8391))
+* "Reset and Continue" now truly resets cost tracking; subsequent requests only count new message costs ([#6890](https://github.com/RooCodeInc/Roo-Code/pull/6890))
+* Prompts settings: Save button activates on first change and preserves empty strings ([#8267](https://github.com/RooCodeInc/Roo-Code/pull/8267))
+* Settings: Remove overeager "unsaved changes" dialog when nothing changed ([#8410](https://github.com/RooCodeInc/Roo-Code/pull/8410))
+* Show the Send button when only images are attached ([#8423](https://github.com/RooCodeInc/Roo-Code/pull/8423))
 
 ## Provider Updates
 
@@ -152,6 +157,10 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 
 * **Supernova 1M context**: Upgrades the default Supernova to roo/code-supernova-1-million (1,000,000‑token context). Existing settings auto‑migrate; expect fewer truncations on long tasks. ([#8330](https://github.com/RooCodeInc/Roo-Code/pull/8330))
 * **Z.ai GLM‑4.6**: Adds GLM‑4.6 model support with a 200k (204,800) context window and availability across both international and mainland API lines (thanks dmarkey!) ([#8408](https://github.com/RooCodeInc/Roo-Code/pull/8408))
+* **Chutes**: Add DeepSeek‑V3.1‑Terminus, DeepSeek‑V3.1‑turbo, DeepSeek‑V3.2‑Exp, GLM‑4.6‑FP8, and Qwen3‑VL‑235B‑A22B‑Thinking to the provider picker ([#8467](https://github.com/RooCodeInc/Roo-Code/pull/8467))
+* **Gemini**: Remove unsupported free “2.5 Flash Image Preview”; paid path unaffected ([#8359](https://github.com/RooCodeInc/Roo-Code/pull/8359))
+* **Roo Code Cloud**: Deprecate “Grok 4 Fast”; show warning if selected and hide when not selected ([#8481](https://github.com/RooCodeInc/Roo-Code/pull/8481))
+* **Bedrock**: Claude Sonnet 4 1M‑context handling and compatibility improvements ([#8421](https://github.com/RooCodeInc/Roo-Code/pull/8421))
 
 ## Misc Improvements
 
