@@ -104,6 +104,8 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * Add the parent task ID in telemetry to improve traceability ([#8532](https://github.com/RooCodeInc/Roo-Code/pull/8532))
 * Clarify the zh‑TW “Run command” label to match the tooltip and reduce confusion (thanks PeterDaveHello!) ([#8631](https://github.com/RooCodeInc/Roo-Code/pull/8631))
 
+* Image generation model selection update: defaults to Gemini 2.5 Flash Image; adds OpenAI GPT‑5 Image and GPT‑5 Image Mini; clearer settings dropdown (thanks chrarnoldus!) ([#8698](https://github.com/RooCodeInc/Roo-Code/pull/8698))
+
 ## Bug Fixes
 
 * **AWS Bedrock Claude Sonnet 4.5**: Corrected model identifier for Claude Sonnet 4.5 on AWS Bedrock (thanks sunhyung!) ([#8371](https://github.com/RooCodeInc/Roo-Code/pull/8371))
@@ -148,6 +150,9 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * Settings: Remove overeager "unsaved changes" dialog when nothing changed ([#8410](https://github.com/RooCodeInc/Roo-Code/pull/8410))
 * Show the Send button when only images are attached ([#8423](https://github.com/RooCodeInc/Roo-Code/pull/8423))
 
+* Fix grey screens caused by long context task sessions ([#8696](https://github.com/RooCodeInc/Roo-Code/pull/8696))
+* Editor targeting fix: avoids editing read‑only git diff views; edits the actual file (thanks hassoncs!) ([#8676](https://github.com/RooCodeInc/Roo-Code/pull/8676))
+
 ## Provider Updates
 
 * **Claude 4.5 Sonnet**: Added support for Anthropic's latest Claude 4.5 Sonnet model across all providers (Anthropic, AWS Bedrock, Claude Code, Google Vertex AI, and OpenRouter) with 1M context window support ([#8368](https://github.com/RooCodeInc/Roo-Code/pull/8368))
@@ -167,6 +172,9 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Gemini**: Remove unsupported free “2.5 Flash Image Preview”; paid path unaffected ([#8359](https://github.com/RooCodeInc/Roo-Code/pull/8359))
 * **Roo Code Cloud**: Deprecate “Grok 4 Fast”; show warning if selected and hide when not selected ([#8481](https://github.com/RooCodeInc/Roo-Code/pull/8481))
 * **Bedrock**: Claude Sonnet 4 1M‑context handling and compatibility improvements ([#8421](https://github.com/RooCodeInc/Roo-Code/pull/8421))
+
+* Bedrock: add versioned user agent for per‑version metrics and error tracking; no action needed (thanks ajjuaire!) ([#8663](https://github.com/RooCodeInc/Roo-Code/pull/8663))
+* Z AI: only two coding endpoints (International/China) are supported; defaults to International; legacy non‑coding endpoints unsupported ([#8693](https://github.com/RooCodeInc/Roo-Code/pull/8693))
 
 ## Misc Improvements
 
