@@ -57,10 +57,10 @@
       </policy>
 
       <example>
-        <![CDATA[
+        
  <!-- First discover the actual image path structure, then use it -->
  <img src="/img/installing/installing-2.png" alt="VS Code's Install from VSIX dialog" width="600" />
-        ]]>
+        
       </example>
     </rule>
   </media>
@@ -85,7 +85,7 @@
         <step>Follow the established pattern</step>
       </discovery_steps>
       <example>
-        <![CDATA[
+        
 ---
 description: A concise summary of the page content.
 keywords:
@@ -95,7 +95,7 @@ keywords:
   - search
 image: /img/social-share.jpg
 ---
-        ]]>
+        
       </example>
     </rule>
   </frontmatter>
@@ -135,7 +135,7 @@ image: /img/social-share.jpg
         - File paths discovered
       </validation_requirement>
       <example>
-        <![CDATA[
+        
 <!-- MANDATORY: Search with multiple variations -->
 <codebase_search>
 <query>authentication setup configuration</query>
@@ -153,7 +153,7 @@ image: /img/social-share.jpg
 <query>user access credentials permissions</query>
 <path>docs</path>
 </codebase_search>
-        ]]>
+        
       </example>
     </step>
 
@@ -337,7 +337,7 @@ image: /img/social-share.jpg
       <scenario>When the impact on other documents is unclear</scenario>
     </scenarios>
     <example>
-      <![CDATA[
+      
 <ask_followup_question>
 <question>I found existing content about this topic in three different locations. How would you like me to proceed?</question>
 <follow_up>
@@ -347,7 +347,39 @@ image: /img/social-share.jpg
 <suggest>Show me the existing locations first so I can decide</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]>
+      
     </example>
   </ask_before_proceeding>
+  <headings>
+    <overview>Control sidebar ToC noise and standardize heading usage.</overview>
+    <rules>
+      <rule>H1 comes from the page title; do not include H1 in body content.</rule>
+      <rule>Use H2 for primary sections (aim for 3–6 per page).</rule>
+      <rule>Use H3 only for ToC-worthy anchors users may want to jump to (target 0–2; hard cap 4 per page).</rule>
+      <rule>Prefer H4 for in-body sub-chunking so minor topics don’t pollute the ToC.</rule>
+      <rule>Disallow H5/H6 entirely.</rule>
+      <rule>No orphan headings: any H2/H3/H4 must be followed by at least two sentences or a list.</rule>
+      <rule>Any H3 under ~75 words or a single short paragraph must be demoted to H4 under its H2.</rule>
+      <rule>Convert chains of small H3s into one H2 with a numbered list; optional H4 callouts for sub-points.</rule>
+    </rules>
+    <toc_noise_standard>Total H3 ≤ 4 (typical ≤ 2). Demote non‑essential H3s to H4.</toc_noise_standard>
+    <example name="demote_h3_to_h4">
+      <before>
+## Working with Checkpoints
+### Viewing Differences
+### Restoring Checkpoints
+### Limitations and Considerations
+      </before>
+      <after>
+## Working with Checkpoints
+#### Viewing differences: when it helps
+#### Restore a checkpoint: trade-offs
+#### Limits and gotchas
+      </after>
+    </example>
+  </headings>
+
+  <media_adjustments>
+    <caption_requirement>Each screenshot must have a one‑line “why this view matters” caption in addition to outcome‑focused alt text. Use screenshots only for complex states or decision points; keep limits ≤1 per section and ≤3 per page.</caption_requirement>
+  </media_adjustments>
 </docusaurus_conventions>

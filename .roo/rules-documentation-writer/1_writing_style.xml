@@ -248,4 +248,64 @@
       </steps>
     </phase>
   </content_change_workflow>
+  <heading_and_toc_policy>
+    <overview>Minimize right-sidebar ToC noise. Reserve H3 for jump-worthy anchors and prefer H4 for in-body sub-chunking.</overview>
+    <rules>
+      <rule>H1 is implicit (page title). Do not write H1 in the body.</rule>
+      <rule>H2 = primary sections; aim for 3–6 per page.</rule>
+      <rule>H3 = ToC-worthy anchors only. Target 0–2 per page; hard cap 4.</rule>
+      <rule>H4 = break up long H2 sections without adding ToC items. Prefer H4 over H3 for minor subtopics.</rule>
+      <rule>Disallow H5/H6 entirely.</rule>
+      <rule>No orphan headings: any H2/H3/H4 must be followed by ≥2 sentences or a list.</rule>
+      <rule>Any H3 under ~75 words or a single short paragraph must be demoted to H4 .</rule>
+      <rule>Convert chains of small H3s into a single H2 with a numbered list; use H4 callouts if needed.</rule>
+      <rule>If an H4 exceeds ~200–250 words or needs substructure, split it into its own page (new H2 there) rather than promoting inside the same page.</rule>
+    </rules>
+    <budgets>
+      <page_h2>3–6</page_h2>
+      <total_h3>typical ≤ 2, max 4</total_h3>
+    </budgets>
+    <author_workflow>
+      <step>Outline H2 skeleton first.</step>
+      <step>Mark jump-worthy items as H3 only if sidebar navigation helps.</step>
+      <step>Everything else becomes H4 under the H2.</step>
+      <step>Preview ToC; demote noisy H3s to H4s before publishing.</step>
+    </author_workflow>
+    <example name="checkpoints_restructure">
+      <description>Demote unnecessary H3s under “Working with Checkpoints”.</description>
+      <before>
+## Working with Checkpoints
+### Viewing Differences
+### Restoring Checkpoints
+### Limitations and Considerations
+      </before>
+      <after>
+## Working with Checkpoints
+#### Viewing differences: when it helps
+#### Restore a checkpoint: trade-off
+#### Limits and gotchas
+      </after>
+    </example>
+  </heading_and_toc_policy>
+
+  <explanatory_baseline>
+    <requirement when="applicable">Include sections: “Why it matters”, “What you can’t do (and why)”, and “Troubleshooting”.</requirement>
+    <troubleshooting_pattern>
+      <item>symptom</item>
+      <item>cause</item>
+      <item>fix</item>
+      <item>prevention</item>
+    </troubleshooting_pattern>
+  </explanatory_baseline>
+
+  <tone_guidelines>
+    <rules>
+      <rule>Colloquial, informal, light. Use contractions and “you” voice.</rule>
+      <rule>Bold, honest, human—avoid mechanical or professoral tone.</rule>
+    </rules>
+  </tone_guidelines>
+
+  <screenshot_caption_policy>
+    <requirement>Every screenshot must include a one-line “why this view matters” caption in addition to outcome-focused alt text.</requirement>
+  </screenshot_caption_policy>
 </writing_style_guide>

@@ -133,6 +133,54 @@
         - Get approval before proceeding
       </enforcement>
     </gate>
+    <gate name="toc_noise_gate" type="BLOCKING">
+      <description>Prevents noisy sidebars and redundant anchors.</description>
+      <requirements>
+        <requirement>Total H3 ≤ 4 (typical ≤ 2)</requirement>
+        <requirement>Demote non-essential H3s to H4 under the parent H2</requirement>
+        <requirement>No orphan headings (H2/H3/H4 must be followed by ≥2 sentences or a list)</requirement>
+      </requirements>
+      <enforcement>
+        If limits are exceeded or headings are orphaned:
+        - Demote H3s to H4 under the parent H2 before proceeding.
+      </enforcement>
+    </gate>
+
+    <gate name="heading_depth_gate" type="CRITICAL">
+      <description>Restricts heading depth.</description>
+      <requirements>
+        <requirement>Allow only H2–H4</requirement>
+        <requirement>Reject H5/H6</requirement>
+      </requirements>
+      <enforcement>
+        Any H5/H6 usage blocks the edit until replaced or removed.
+      </enforcement>
+    </gate>
+
+    <gate name="thin_subsection_blocker" type="BLOCKING">
+      <description>Prevents shallow ToC items.</description>
+      <requirements>
+        <requirement>Any H3 under ~75 words or a single short paragraph must be demoted to H4 under its H2</requirement>
+      </requirements>
+    </gate>
+
+    <gate name="explanatory_content_gate" type="BLOCKING">
+      <description>Requires explanatory sections when applicable.</description>
+      <requirements>
+        <requirement>Include “Why it matters”</requirement>
+        <requirement>Include “What you can’t do (and why)” when applicable</requirement>
+        <requirement>Include “Troubleshooting” using symptom → cause → fix → prevention when applicable</requirement>
+      </requirements>
+    </gate>
+
+    <gate name="screenshot_selectivity_gate" type="BLOCKING">
+      <description>Enforces complex-state-only screenshots and caption/alt-text quality.</description>
+      <requirements>
+        <requirement>Use screenshots only for complex states or decision points</requirement>
+        <requirement>Provide outcome-focused alt text and a one-line “why this view matters” caption</requirement>
+        <requirement>Respect limits: ≤1 per section, ≤3 per page</requirement>
+      </requirements>
+    </gate>
   </validation_gates>
 
   <mandatory_workflows>
@@ -182,7 +230,7 @@
   <user_communication_requirements>
     <requirement type="validation_reporting">
       <description>MUST report validation findings before making changes</description>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've completed the mandatory validation process. Here are my findings:
 
@@ -207,7 +255,7 @@ Should I proceed with this approach?</question>
 <suggest>Consolidate the scattered content instead</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </requirement>
   </user_communication_requirements>
 
