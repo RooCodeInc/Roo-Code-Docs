@@ -14,71 +14,61 @@ image: /img/social-share.jpg
 
 # Roo Code Docs
 
-Roo Code is an AI-powered autonomous coding agent that lives in your editor. It helps you code faster and smarter, whether you're starting a new project, maintaining existing code, or learning new technologies.
+Roo Code unleashes the full power of large language models inside VS Code. No dumbed-down assistants, no hand-holding, no limits. Just raw AI capability applied to your codebase. It costs more to run than the alternatives because it uses frontier models with actual file system access, terminal control, and multi-step workflows. If you want the best AI coding experience available, this is it.
 
----
+## What Can Roo Code Do For YOU?
 
-## What Can Roo Code Do?
+- Generate Code from natural language descriptions and specs
+- Adapt with Modes: Code, Architect, Ask, Debug, and Custom Modes
+- Refactor & Debug existing code
+- Write & Update documentation
+- Answer Questions about your codebase
+- Automate repetitive tasks
+- Utilize MCP Servers
 
-- **Generate Code** from natural language descriptions
-- **Refactor & Debug** existing code
-- **Write & Update** documentation
-- **Answer Questions** about your codebase
-- **Automate** repetitive tasks
-- **Create** new files and projects
-
----
-
-## Quick Start
+## Getting Started
 
 1. [Install Roo Code](/getting-started/installing)
 2. [Connect Your AI Provider](/getting-started/connecting-api-provider)
 3. [Try Your First Task](/getting-started/your-first-task)
 
----
+## Tutorial & Feature Videos
 
-## Key Features
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '.5rem', margin: '0rem' }}>
+  <a href="https://www.youtube.com/watch?v=Mcq3r1EPZ-4" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <img src="https://img.youtube.com/vi/Mcq3r1EPZ-4/maxresdefault.jpg" alt="Installing Roo Code" style={{ width: '100%', height: 'auto', borderRadius: '8px', display: 'block' }} />
+    <div style={{ marginTop: '0.0rem', textAlign: 'center', fontWeight: 600, fontSize: '1rem' }}>Installing Roo Code</div>
+  </a>
+  <a href="https://www.youtube.com/watch?v=ZBML8h5cCgo" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <img src="https://img.youtube.com/vi/ZBML8h5cCgo/maxresdefault.jpg" alt="Configuring Profiles" style={{ width: '100%', height: 'auto', borderRadius: '8px', display: 'block' }} />
+    <div style={{ marginTop: '0.0rem', textAlign: 'center', fontWeight: 600, fontSize: '1rem' }}>Configuring Profiles</div>
+  </a>
+  <a href="https://www.youtube.com/watch?v=r1bpod1VWhg" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <img src="https://img.youtube.com/vi/r1bpod1VWhg/maxresdefault.jpg" alt="Codebase Indexing" style={{ width: '100%', height: 'auto', borderRadius: '8px', display: 'block' }} />
+    <div style={{ marginTop: '0.0rem', textAlign: 'center', fontWeight: 600, fontSize: '1rem' }}>Codebase Indexing</div>
+  </a>
+  <a href="https://www.youtube.com/watch?v=qgqceCuhlRA" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <img src="https://img.youtube.com/vi/qgqceCuhlRA/maxresdefault.jpg" alt="Custom Modes" style={{ width: '100%', height: 'auto', borderRadius: '8px', display: 'block' }} />
+    <div style={{ marginTop: '0.0rem', textAlign: 'center', fontWeight: 600, fontSize: '1rem' }}>Custom Modes</div>
+  </a>
+  <a href="https://www.youtube.com/watch?v=Ho30nyY332E" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <img src="https://img.youtube.com/vi/Ho30nyY332E/maxresdefault.jpg" alt="Checkpoints" style={{ width: '100%', height: 'auto', borderRadius: '8px', display: 'block' }} />
+    <div style={{ marginTop: '0.0rem', textAlign: 'center', fontWeight: 600, fontSize: '1rem' }}>Checkpoints</div>
+  </a>
+  <a href="https://www.youtube.com/watch?v=6h5vB9PpoPk" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+    <img src="https://img.youtube.com/vi/6h5vB9PpoPk/maxresdefault.jpg" alt="Todo Lists" style={{ width: '100%', height: 'auto', borderRadius: '8px', display: 'block' }} />
+    <div style={{ marginTop: '0.0rem', textAlign: 'center', fontWeight: 600, fontSize: '1rem' }}>Todo Lists</div>
+  </a>
+</div>
 
-### Multiple Modes
-Roo Code adapts to your needs with specialized [modes](/basic-usage/using-modes):
-- **Code Mode:** For general-purpose coding tasks
-- **Architect Mode:** For planning and technical leadership
-- **Ask Mode:** For answering questions and providing information
-- **Debug Mode:** For systematic problem diagnosis
-- **Orchestrator Mode:** For managing complex tasks and delegating work
-- **[Custom Modes](/features/custom-modes):** Create unlimited specialized personas for security auditing, performance optimization, documentation, or any other task
+<p style={{ textAlign: 'center', marginTop: '1rem' }}>
+  <a href="/tutorial-videos">More quick tutorial and feature videos...</a>
+</p>
 
-### Smart Tools
-Roo Code comes with powerful [tools](/basic-usage/how-tools-work) that can:
-- Read and write files in your project
-- Execute commands in your VS Code terminal
-- Control a web browser
-- Use external tools via [MCP (Model Context Protocol)](/features/mcp/overview)
+## Additional Resources
 
-MCP extends Roo Code's capabilities by allowing you to add unlimited custom tools. Integrate with external APIs, connect to databases, or create specialized development tools - MCP provides the framework to expand Roo Code's functionality to meet your specific needs.
-
-### Customization
-Make Roo Code work your way with:
-- [Custom Instructions](/features/custom-instructions) for personalized behavior
-- [Custom Modes](/features/custom-modes) for specialized tasks
-- [Local Models](/advanced-usage/local-models) for offline use
-- [Auto-Approval Settings](/features/auto-approving-actions) for faster workflows
-
----
-
-## Resources
-
-### Documentation
-- [Basic Usage Guide](/basic-usage/the-chat-interface)
-- [Advanced Features](/features/auto-approving-actions)
-- [Frequently Asked Questions](/faq)
-
-### Community & Socials
-- **Discord:** [Join our Discord server](https://discord.gg/roocode) for real-time help and discussions.
-- **Reddit:** [Visit our subreddit](https://www.reddit.com/r/RooCode) to share experiences and tips.
-- **GitHub:** Report [issues](https://github.com/RooCodeInc/Roo-Code/issues) or request [features](https://github.com/RooCodeInc/Roo-Code/discussions/categories/feature-requests?discussions_q=is%3Aopen+category%3A%22Feature+Requests%22+sort%3Atop).
-- **X (Twitter):** [Follow @roo_code](https://x.com/roo_code).
-- **Bluesky:** [Follow roocode.bsky.social](https://bsky.app/profile/roocode.bsky.social).
-- **LinkedIn:** [Follow Roo Code](https://www.linkedin.com/company/roo-code).
-
-Ready to get started? Click the **Next** button below to begin your journey with Roo Code!
+- [YouTube Channel](https://youtube.com/@roocodeyt?feature=shared): Watch tutorials and see features in action.
+- [Discord Server](https://discord.gg/roocode): Join the community for real-time help and discussion.
+- [Reddit Community](https://www.reddit.com/r/RooCode): Share your experiences and see what others are building.
+- [GitHub Issues](https://github.com/RooCodeInc/Roo-Code/issues): Report bugs and track development.
+- [Feature Requests](https://github.com/RooCodeInc/Roo-Code/discussions/categories/feature-requests?discussions_q=is%3Aopen+category%3A%22Feature+Requests%22+sort%3Atop): Have an idea? Share it with the developers.
