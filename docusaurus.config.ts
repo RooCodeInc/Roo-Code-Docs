@@ -38,7 +38,11 @@ const config: Config = {
   projectName: 'Roo-Code-Docs',
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -76,6 +80,7 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         docsRouteBasePath: "/",
+        indexBlog: false,
         searchContextByPaths: [
           { label: "Getting Started", path: "getting-started" },
           { label: "Basic Usage", path: "basic-usage" },
