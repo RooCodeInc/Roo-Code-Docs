@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 // Change this key whenever you change the banner
 // to announce something new
-const BANNER_DISMISSED_KEY = 'reviewer-banner-dismissed';
+const BANNER_DISMISSED_KEY = 'reviewer-banner-dismisseda';
 
 export function AnnouncementBanner() {
   const [isVisible, setIsVisible] = useState(false);

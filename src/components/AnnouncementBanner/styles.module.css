@@ -39,7 +39,7 @@
 .dismissButton {
   position: absolute;
   right: 1rem;
-  top: 50%;
+  top: 1.5rem;
   transform: translateY(-50%);
   background: transparent;
   border: none;
