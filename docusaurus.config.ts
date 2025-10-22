@@ -297,8 +297,8 @@ const config: Config = {
     metadata: [
       {name: 'keywords', content: 'Roo Code, AI coding assistant, VS Code extension, autonomous coding agent, AI pair programmer, code generation, documentation'},
       {name: 'twitter:card', content: 'summary_large_image'},
-      {name: 'twitter:site', content: '@roo_code'},
-      {name: 'twitter:creator', content: '@roo_code'},
+      {name: 'twitter:site', content: '@roocode'},
+      {name: 'twitter:creator', content: '@roocode'},
       {property: 'og:type', content: 'website'},
       {property: 'og:locale', content: 'en_US'},
     ],
