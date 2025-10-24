@@ -28,7 +28,6 @@
   --ring: 0 0% 3.9%;
   --radius: 0.5rem;
 
-
   --chart-1: 0 100% 50%;
   --chart-2: 29 100% 50%;
   --chart-3: 51 100% 50%;
@@ -2030,7 +2029,7 @@ html {
 
 /* Breadcrumbs styling */
 .theme-doc-breadcrumbs {
-  margin-bottom: 20rem;
+  margin-bottom: 2rem;
   margin-left: 1.25rem;
   font-size: 0.875rem;
 }
