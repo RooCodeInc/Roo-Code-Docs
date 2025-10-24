@@ -37,7 +37,7 @@ You can see the [pricing for different plans here](https://roocode.com/pricing).
 
 ## Getting Started
 
-1. [Connect your account](/roo-code-cloud/login) to link Roo Code with the cloud.
+1. [Connect your account](/roo-code-cloud/connect) to link Roo Code with the cloud.
 2. Open [app.roocode.com](https://app.roocode.com/) and confirm your tasks appear.
 3. Turn on [Task Sync](/roo-code-cloud/task-sync) so activity syncs to the cloud.
 4. [Share a task](/roo-code-cloud/task-sharing) when you're ready for feedback or handoff.
