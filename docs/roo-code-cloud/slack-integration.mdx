@@ -1,0 +1,74 @@
+---
+description: Start and manage Roo Code Cloud tasks directly from Slack using app mentions or DMs. Team-only, org-scoped, with live progress tracking in-thread.
+keywords:
+  - slack integration
+  - slack bot
+  - cloud tasks
+  - app mentions
+  - direct messages
+  - team collaboration
+  - remote tasks
+image: /img/social-share.jpg
+---
+
+# Slack Integration
+
+:::warning Not Yet Available
+This feature is not yet available. Check back soon for updates.
+:::
+
+Start and manage Roo Code Cloud tasks from Slack using app mentions (@roomote) or direct messages, then track progress with live updates—all without leaving your conversation.
+
+## What is Slack Integration
+
+Slack Integration connects your organization's Slack workspace to Roo Code Cloud, letting you start Cloud tasks by mentioning the app or sending it a direct message.
+
+#### Key capabilities
+
+- **Start Cloud jobs** — Mention @roomote in channels/threads or DM the app
+- **Configure inline** — Pick mode, model, and workspace without leaving Slack
+- **Live progress** — TODO lists update in-place; get start links, completion summaries, and status
+- **Image support** — Attach images (under 10MB each) for visual context
+- **Cancel anytime** — Stop tasks with a button in the thread
+
+#### Team-only
+
+Requires an active organization plan. Personal accounts can't start Cloud tasks from Slack.
+
+## Getting started
+
+#### Step 1: Install the Slack app (org admin)
+
+Your organization admin installs the Roo Code Slack app through your organization settings.
+
+#### Step 2: Connect your Slack account
+
+First-time users see a "Connect Account" button after mentioning the app. Click it to link your Slack user to your Roo account. Once linked, the configuration UI appears automatically.
+
+#### Step 3: Mention the app or DM it
+
+- **In channels/threads:** Type `@roomote` followed by your request
+- **In DMs:** Send a regular message (no mention needed)
+
+Generic channel messages without an explicit mention are ignored to prevent accidental triggers.
+
+## Configuration options
+
+#### Mode
+
+Switches the agent's behavior (defaults from org config). Available modes depend on your organization's setup.
+
+#### Model
+
+Shown when using OpenRouter. Select from available models.
+
+#### Workspace
+
+Choose a specific repository or "All Repositories" for workspace-wide context. Your last choice is remembered.
+
+## Limitations
+
+- **Team plans only** — Personal accounts can't start Cloud tasks from Slack
+- **Mention required in channels** — Generic channel messages without @roomote are ignored
+- **Images only** — Non-image files aren't processed; images must be under 10MB
+- **Active subscription** — Requires funded Cloud credits

@@ -20,106 +20,52 @@ Roomote Control lets you remotely control tasks running in your local VS Code in
 
 Roomote Control creates a bidirectional connection between your local VS Code extension and Roo Code Cloud so you can:
 
-- **Control tasks remotely** — start, stop, interact, and use the full chat interface
-- Included with **Roo Code Cloud Pro**. See [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions#pro-plan-20month).
+- Control tasks remotely — start, stop, and interact using the browser chat
+- Requires an active entitlement (Pro or qualifying org plan). See [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions).
 
 ## Key Features
 
-### Real-time Workspace Connection
+- Chat interface — Similar to IDE chat for core interactions; some settings and customizations aren't available in the browser
+- Start New Tasks — Launch tasks in any connected workspace
+- Stop Running Tasks — Safely terminate active tasks
+- Task Switching — Navigate between tasks including resuming tasks that have been stopped or closed
+- Single active task per workspace is enforced
 
-- Shows your connected workspaces and live status
-
-
-### Remote Task Control
-
-- **Chat interface** — Similar to IDE chat for core interactions; some settings and customizations aren't available in the browser
-- **Start New Tasks** - Launch tasks in any connected workspace
-- **Stop Running Tasks** - Safely terminate active tasks
-- **Task Switching** - Navigate between tasks including resuming tasks that have been stopped or closed
-
-:::note Pro Feature Required for Remote Control
-While basic monitoring is available to all users, remote control capabilities (starting, stopping, and interacting with tasks remotely) require a [Pro subscription (free 14-day trial, then $20/month)](/roo-code-cloud/billing-subscriptions#pro-plan-20month).
+:::note Requirements
+- Task Sync must be enabled; turning Task Sync OFF also turns Remote Control OFF.
+- Remote Control setting must be ON (Web: Settings › User › Roomote Control; IDE: Cloud panel <Codicon name="cloud" />).
+- Pro or Team entitlement required; your organization’s policy must allow Roomote Control.
+- Your IDE must be running and connected to the internet.
+- Only one task can be active per workspace at a time.
 :::
 
 ## Getting Started
 
 #### Step 1: Connect Your Account
 
-First, you need to connect your Roo Code extension to Roo Code Cloud. Follow the [login instructions](/roo-code-cloud/login#getting-started) to connect your account.
+Connect your Roo Code extension to Roo Code Cloud. Follow [Login](/roo-code-cloud/login#getting-started).
 
-#### Step 2: Enable Roomote Control
+#### Step 2: Enable Task Sync, then Roomote Control
 
-You can enable Roomote Control in two ways:
-
-**Option 1: From the Web Dashboard**
-1. Navigate to [app.roocode.com](https://app.roocode.com)
-2. Toggle the **Roomote Control** switch on the top right of the home page
-
-**Option 2: From the Roo Code Plugin**
-1. Click the **cloud icon** <Codicon name="cloud" /> in the top right corner of Roo Code
-2. Toggle the **Roomote Control** switch in the Cloud panel
+- In the IDE: Click the cloud icon <Codicon name="cloud" /> and toggle Task Sync first, then Roomote Control in the Cloud panel.
+- In the web app: Go to Settings › User and toggle Task Sync and Roomote Control. You may also see inline “Enable …” banners on Home/Task pages.
 
 #### Step 3: Start a Remote Task
 
-Once your account is connected and Roomote Control is enabled:
-1. Your VS Code workspace(s) automatically appear in the web interface
-2. Click **New Task** on any connected workspace card
-3. Enter your task description
-4. Click **Start** to begin the task
-5. Watch real-time progress in your browser
+When connected and enabled:
+1. Your VS Code workspace(s) appear in the web app.
+2. Click New Task on a connected workspace card.
+3. Enter a task description and click Start.
+4. Watch progress and interact in real time.
+If “New Task” is disabled, upgrade/enable in Settings › User › Roomote Control.
 
 ## Notifications
 
+Enable Push Notifications in the web app under Settings.
 
-Receive push notifications about task updates and completions without keeping the app open.
+## Permissions & Security
 
-#### Requirements
-- Signed in to your Roomote account on the device.
-- Supported browser with Notifications, Service Workers, and Push:
-  - iPhone/iPad (iOS 16.4+): Safari installed to Home Screen is required.
-  - Android: Chrome, Edge, Firefox (install optional).
-  - Desktop: Chrome, Edge, Firefox, Safari 16+ on macOS (Ventura+)
-- Allow notifications when prompted by the browser/OS.
-
-#### Turn it on
-Toggle location: Settings › User.
-
-<img src="/img/roomote-control/roomote-control.png" alt="Enable Push Notifications in Settings › User" width="500" />
-
-- iPhone/iPad (Safari)
-  1. Open https://app.roocode.com.
-  2. Share › Add to Home Screen › Add.
-  3. Launch Roo Code from the Home Screen icon.
-  4. In the app: Settings › User › Push Notifications — turn On; allow the permission prompt.
-- Android (Chrome)
-  1. Open https://app.roocode.com.
-  2. Optional: Menu › Add to Home screen / Install app.
-  3. Settings › User › Push Notifications — turn On; allow the permission prompt.
-- Desktop
-  1. Open https://app.roocode.com and sign in.
-  2. Settings › User › Push Notifications — turn On; allow the permission prompt.
-
-#### Manage per device
-- Location: Settings › User.
-- The Push Notifications switch controls only the current browser/device.
-- To stop notifications on a device, toggle Off there or use OS/browser notification settings for Roo Code.
-
-#### What to expect
-- A permission prompt the first time you enable notifications.
-- Alerts for task updates and completions.
-- Clicking a notification opens Roo Code, usually to the relevant task.
-
-#### Troubleshooting
-- No permission prompt: Use a supported browser, disable private/incognito mode, and ensure site notifications aren't blocked.
-- iPhone not receiving: Make sure Roo Code is installed to Home Screen, opened from the icon, and Push Notifications is On.
-- Duplicate notifications: You've enabled them on multiple devices. Turn them Off on devices you don't want.
-- Nothing arrives: Check system notification settings for Roo Code, confirm you're signed in, and that Push Notifications is On.
-
-#### Limits
-- iOS requires installing to Home Screen (iOS 16.4+).
-- Private/incognito modes and some corporate policies can block notifications or background updates.
-- An internet connection is required to receive notifications.
-- Enabling on one device does not enable on others; manage each device separately.
+- Only the user who created a task can interact with it from the browser (send messages, approve/deny).
 
 ## Limitations
 

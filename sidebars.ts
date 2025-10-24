@@ -45,21 +45,22 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Roo Code Cloud',
+      collapsed: false,
       items: [
         'roo-code-cloud/what-is-roo-code-cloud',
         'roo-code-cloud/login',
-        'roo-code-cloud/dashboard',
+        'roo-code-cloud/billing-subscriptions',
+        'roo-code-cloud/analytics',
         'roo-code-cloud/task-sharing',
         'roo-code-cloud/task-sync',
-        'roo-code-cloud/billing-subscriptions',
         'roo-code-cloud/roomote-control',
+        'roo-code-cloud/cloud-agents',
+        'roo-code-cloud/slack-integration',
       ],
     },
     {
       type: 'category',
       label: 'Features',
-      collapsed: false,
-      collapsible: false,
       items: [
         'features/api-configuration-profiles',
         'features/auto-approving-actions',

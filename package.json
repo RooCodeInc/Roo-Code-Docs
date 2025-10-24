@@ -26,6 +26,7 @@
     "@roo-code/types": "^1.79.0",
     "@vscode/codicons": "^0.0.36",
     "clsx": "^2.0.0",
+    "lucide-react": "^0.546.0",
     "posthog-docusaurus": "^2.0.4",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",

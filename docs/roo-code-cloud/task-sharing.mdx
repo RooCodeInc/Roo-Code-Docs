@@ -1,5 +1,5 @@
 ---
-description: Learn how to share your Roo Code tasks and collaborate with others using shareable links. Share from the extension or dashboard.
+description: Learn how to share your Roo Code tasks and collaborate with others using shareable links. Share from the extension or web UI.
 keywords:
   - task sharing
   - collaboration
@@ -13,80 +13,69 @@ import Codicon from '@site/src/components/Codicon';
 
 # Task Sharing
 
-Share your Roo Code tasks and collaborate with others by making tasks publicly accessible through shareable links.
+Share Roo Code tasks with secure links: share with your organization (members only) or publicly (anyone with the link). Links are created by Roo Code Cloud and copied to your clipboard.
 
 :::note Login Required
 You must be logged in to Roo Code Cloud to share tasks. If you haven't connected your account yet, follow the [login instructions](/roo-code-cloud/login) first.
 :::
 
+:::note Organization Policy
+If your organization disables task sharing, the Share button is disabled and shows a tooltip indicating sharing is disabled. On the web dashboard, the Share action may also be unavailable if you don’t have permission to share that task.
+:::
+
 ## Sharing from within Roo Code
 
-### Step 1: Access the Share Option
+1. Open the Share menu
+   - In an active task, click the Share icon in the task header (right side).
+   <img src="/img/task-sharing/task-sharing-10.png" alt="Share icon in the active task header" width="600" />
 
-In any active task view, locate the **link icon** <Codicon name="link" /> on the right side of the task header.
+2. Choose who can access
+   - Pick one:
+     - Share with Organization — Only members of your organization can access
+     - Share Publicly — Anyone with the link can access
+   - Default: If not specified, the extension uses Organization visibility by default.
+   <img src="/img/task-sharing/task-sharing-11.png" alt="Share options showing Organization and Public visibility choices" width="400" />
 
-<img src="/img/task-sharing/task-sharing-6.png" alt="Link icon in active task view" width="600" />
+3. Create the link
+   - Roo generates the link and copies it to your clipboard. A brief success message appears in the UI.
+   <img src="/img/task-sharing/task-sharing-12.png" alt="Share link created and copied confirmation" width="400" />
 
-### Step 2: Choose Share Publicly
+## Sharing from Web UI
 
-Click the link icon to open the sharing options, then select **Share Publicly**.
+1. Open the web app
+   - Go to https://app.roocode.com and open the task you want to share.
 
-<img src="/img/task-sharing/task-sharing-7.png" alt="Share Publicly option" width="400" />
+2. Open the Share dialog
+   - Click the Share button to open sharing options.
 
-This option allows anyone with the link to access your task.
-
-### Step 3: Link Created
-
-The system will generate a public link and automatically copy it to your clipboard.
-
-<img src="/img/task-sharing/task-sharing-8.png" alt="Public link copied confirmation" width="400" />
-
-You can now share this link with team members, collaborators, or anyone who needs access to view your task and its conversation history.
-
-## Sharing from Dashboard
-
-### Step 1: Access Task in Dashboard
-
-Navigate to your [Roo Code Cloud dashboard](/roo-code-cloud/dashboard) and click on the task you want to share to open the detailed task modal.
-
-<img src="/img/task-sharing/task-sharing-9.png" alt="Dashboard task modal with Share button" />
-
-### Step 2: Open Share Modal
-
-Within the detailed task modal, click the **Share** button to open the sharing options.
-
-<img src="/img/task-sharing/task-sharing-4.png" alt="Share Task modal" width="600" />
-
-Create a public link; links expire in 30 days.
-
-### Step 3: Create and Manage Share Links
-
-Click **Create Share Link** to generate a new public link. Once created, you'll see the confirmation screen:
-
-<img src="/img/task-sharing/task-sharing-5.png" alt="Share link created confirmation" width="600" />
-
-From this screen you can:
-- Copy link
-- Create another link
-- View previous links
-- Delete links
-
-The dashboard sharing method provides more advanced link management capabilities, including the ability to create multiple links per task and track previously generated links.
+3. Create and manage links
+   - Choose Organization or Public, then click Create Share Link.
+   - Expiration:
+     - Personal accounts: links expire after 30 days.
+     - Organizations: expiry is set by your org (1–365 days; default 30).
+   - From this screen you can:
+     - Copy link
+     - Create another link
+     - See recent links (last 3 shown, with a “+N more” summary)
+     - Delete links (org admins can delete any org link; members can delete links they created)
 
 ## Privacy & Security
 
-### Controlled Sharing
-- Tasks remain **private by default** - nothing is shared unless you explicitly create a share link
-- You decide what to share and when
-- Full control over your shared content with the ability to revoke access anytime
+#### Controlled sharing
+- Tasks are private by default—nothing is shared until you create a link.
+- You choose Organization vs Public visibility per link.
+- You can revoke access anytime by deleting the link.
 
-### Expiring Links
-- All share links **automatically expire after 30 days** for enhanced security
-- Expired links cannot be accessed, ensuring your shared content doesn't remain public indefinitely
-- You can manually delete links at any time before expiration
+#### Expiring links
+- Personal accounts: links expire after 30 days.
+- Organizations: expiry is set by your org admin (1–365 days; default 30).
 
-### Data Control
-- Delete share links whenever needed from the dashboard
-- View all active share links for your tasks
-- Monitor who has access to your shared content
-- Maintain complete ownership of your task data
+#### Data control
+- Delete share links anytime from the dashboard.
+- View recent links in the dialog (last 3 with a “+N more” summary).
+
+## What you can’t do (and why)
+
+- Track who viewed a link — viewer auditing isn’t supported.
+- Change personal account expiry — personal links always expire after 30 days.
+- Access org-only links without org membership — org links require sign-in to the same organization.

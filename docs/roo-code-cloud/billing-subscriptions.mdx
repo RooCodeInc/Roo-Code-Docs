@@ -1,9 +1,10 @@
 ---
-description: Manage your Roo Code Cloud Pro subscription to unlock premium features including Roomote Control for remote task management.
+description: "Manage Roo Code Cloud plans (Individual Pro and Teams): trials, billing, cancellations, and credits. Pricing and trial length are shown in-app to prevent drift."
 keywords:
   - billing
-  - subscription
+  - subscriptions
   - pro plan
+  - team plan
   - payment
   - stripe
   - pricing
@@ -11,79 +12,110 @@ image: /img/social-share.jpg
 ---
 
 import Codicon from '@site/src/components/Codicon';
+import PlanBox from '@site/src/components/PlanBox';
 
-# Billing & Subscriptions
+# Subscriptions & Billing
 
-Roo Code Cloud offers a Pro subscription with a free 14-day trial, then $20/month, unlocking premium features including Roomote Control.
-
-## Subscription Plan
-
-### Pro Plan ($20/month)
-Free 14-day trial, then $20/month. Cancel anytime.
-
-- **Roomote Control**
-  - **Chat Interface** - Interact with the chatbox just as though you were in your IDE (includes message queuing, attaching images, changing modes, switching providers, and all standard chat features)
-  - **Start New Tasks** - Launch tasks in any connected workspace
-  - **Stop Running Tasks** - Safely terminate active tasks
-  - **Task Switching** - Navigate between tasks including resuming tasks that have been stopped or closed
-- Priority support
-- Monthly auto-renewal
+Roo Code Cloud offers three subscriptions: Free, Pro and Teams.
 
 
-## Getting Started with Pro
 
-### Step 1: Access Upgrade
+<PlanBox
+  title="Free Forever Plan"
+  subtitle="Included with every account"
+  id="free-plan"
+  icon="Sparkles"
+  price="$0/mo"
+  checklist
+>
+  <ul>
+    <li><a href="/roo-code-cloud/task-sync">Task Sync / Monitoring</a></li>
+    <li><a href="/roo-code-cloud/analytics">Analytics</a></li>
+    <li><a href="/roo-code-cloud/task-sharing">Task Sharing</a></li>
+  </ul>
+</PlanBox>
 
-<img src="/img/billing-subscriptions/billing-subscriptions-1.png" alt="Upgrade page showing Start Trial for Pro" width="800" />
 
-Open the Upgrade page (for non-subscribers):
-- Go to [app.roocode.com/billing](https://app.roocode.com/billing)
-- Or click **Upgrade** from your dashboard
+<PlanBox
+  title="Pro Plan"
+  subtitle="14 day free trial"
+  id="pro-plan"
+  icon="Star"
+  price="$20/mo"
+  checklist
+>
+  <ul>
+    <li><a href="/roo-code-cloud/roomote-control">Roomote Control</a></li>
+    <li>Priority support</li>
+    <li>Access to <a href="/roo-code-cloud/cloud-agents">Cloud Agents</a> ($5/hour for Cloud tasks)</li>
+  </ul>
+</PlanBox>
 
 
-### Step 2: Subscribe to Pro
+<PlanBox
+  title="Team Plan"
+  subtitle="14 day free trial"
+  id="teams-plan"
+  icon="Users"
+  price="$99/mo"
+  checklist
+>
+  <ul>
+    <li>$99/mo flat rate for unlimited team members (each member gets everything in Pro)</li>
+    <li>Admin‑managed billing and organization settings</li>
+    <li>Team‑wide <a href="/roo-code-cloud/analytics">Analytics</a> and <a href="/roo-code-cloud/cloud-agents">Cloud Agents</a></li>
+    <li><a href="/roo-code-cloud/slack-integration">Slack Integration</a> for Cloud tasks (Coming soon)</li>
+    <li>
+      <a href="/basic-usage/mcp-marketplace">MCP Marketplace</a> curation for your teams
+      <ul>
+        <li>Hide all marketplace MCPs or selectively hide specific ones</li>
+        <li>Add your own MCPs to the marketplace</li>
+      </ul>
+    </li>
+    <li>
+      Centralized teams <a href="/basic-usage/api-configuration-profiles">API Provider</a> controls
+      <ul>
+        <li>Enable/disable providers</li>
+        <li>Limit to specific models</li>
+        <li>Create named <a href="/basic-usage/api-configuration-profiles">provider configurations</a></li>
+      </ul>
+    </li>
+  </ul>
+</PlanBox>
 
-Click **Start Trial** to open Stripe checkout, complete payment, and begin your 14‑day trial (then $20/month).
+## Getting Started
 
-### Step 3: Confirmation
-
-After checkout:
-- Your plan shows as **Active**
-- Roomote Control is enabled immediately
-- You'll receive a confirmation email
-Manage your plan any time from the Billing page.
-
-<img src="/img/billing-subscriptions/billing-subscriptions-2.png" alt="Billing page with active Pro plan and Manage Subscriptions" width="800" />
+1. Open Billing: [app.roocode.com/billing](https://app.roocode.com/billing)
+2. Choose Pro or Team and select Start trial.
+3. Complete checkout in Stripe; you’ll return to the app.
+4. Verify your plan shows Active. [Roomote Control](/roo-code-cloud/roomote-control) unlocks immediately for eligible plans.
+5. Team only: if prompted, create an organization, then invite teammates from Billing or the navbar.
 
 ## Managing Your Subscription
 
-### Subscription Portal
+- Select Manage Subscription to open Stripe’s portal for payment methods, invoices, and billing details.
+- To cancel:
+  1) Open your Billing page
+  2) Click Manage Subscription
+  3) Choose Cancel plan in the Stripe portal and confirm
+- During a trial, cancel before it ends to avoid the first charge. After billing, features remain active until the end of your current period. You can resubscribe anytime.
 
-Click **Manage Subscription** to open Stripe's portal for payment methods, invoices, and billing details.
+## Cloud Agents & Credits
 
-
-### Cancellation
-
-To cancel your Pro subscription:
-
-1. Go to your billing page
-2. Click **Manage Subscription**
-3. Select **Cancel Plan** in the Stripe portal
-4. Confirm cancellation
-
-:::note
-During the 14-day trial, cancel before the trial ends to avoid the first charge. After you are billed, Pro features remain active until the end of your current billing period. You can resubscribe at any time.
-:::
+- Requires an active Pro or Team plan to create and run Cloud Agents.
+- Cloud Agents run in Roo Code Cloud and consume credits by runtime hour.
+- Model inference uses your own provider keys (no model markups).
+- Track usage and costs in [Analytics](/roo-code-cloud/analytics).
+- Learn more: [Cloud Agents](/roo-code-cloud/cloud-agents)
 
 ## Payment & Security
 
-### Payment Processing
-- Payments are securely processed through **Stripe**
+#### Payment Processing
+- Payments are securely processed through Stripe
 - We never store your credit card information
-- PCI-compliant payment handling
-- Supports all major credit cards
+- PCI‑compliant payment handling
 
-### Billing Cycle
+#### Billing Cycle
 - Monthly billing on the same date each month
 - Automatic renewal unless canceled
 - Immediate access upon payment
