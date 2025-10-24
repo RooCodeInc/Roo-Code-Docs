@@ -17,7 +17,7 @@ image: /img/social-share.jpg
 
 Roo Code Cloud is the web platform companion to the Roo Code VS Code extension. It extends the extension's functionality (task syncing and sharing, usage analytics, remote control (Roomote Control)) and allows you to run tasks in the cloud, completely independent from the extension, via Cloud Agents.
 
-Some of the functionality is free, some o it is paid. All of it follows our philosophy of being model-agnostic and letting you bring your provider key to stay in control of inferent models and costs.
+Some of the functionality is free, some of it is paid. All of it follows our philosophy of being model-agnostic and letting you bring your provider key to stay in control of inference models and costs.
 
 You can see the [pricing for different plans here](https://roocode.com/pricing).
 
