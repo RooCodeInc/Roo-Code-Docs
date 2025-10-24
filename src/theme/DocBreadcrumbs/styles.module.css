@@ -13,4 +13,5 @@
 .breadcrumbsWrapper .breadcrumbs {
   margin: 0;
   flex: 1;
+  cursor: default;
 }

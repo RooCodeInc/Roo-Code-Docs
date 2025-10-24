@@ -13,67 +13,46 @@ image: /img/social-share.jpg
 
 # Cloud Agents
 
-Roo Code Cloud Agents run Roo Code in the cloud so work continues when your IDE isn’t open. You can start tasks from the web, monitor progress on any device, and share links safely—while keeping model choice and pricing with your own API keys.
+Roo Code Cloud Agents can run entire tasks on their own in the cloud, often automatically, so you're not limited to typing instructions in your IDE. 
 
 ## What Roo Code Cloud Agents are
 
-Hosted, headless Roo instances that:
-- Run tasks in cloud containers independent of your local IDE
+Hosted, headless Roo-backed agents who:
+- Run tasks in cloud containers independent of your local IDE (you don't even need to use the Roo Code VS Code extension in order to use Cloud agents)
+- Have focused, optimized prompts for specific needs
 - Stream task history in the [web app](https://app.roocode.com)
-- Support shareable links for review and handoff; see [Task Sharing](/roo-code-cloud/task-sharing)
-- Respect organization and user settings (Task Sync, Roomote Control, sharing)
+- Fit into your broader workflow, outside of the editor
 
-## How billing works
-
-- Requires an active Pro or Team plan to create and run Cloud Agents; manage plans in [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions).
-- Cloud runtime is billed in credits per agent‑hour.
-- Model inference is billed by your provider (bring your own API keys). No model markups.
-- Track usage and credits in [Analytics](/roo-code-cloud/analytics); switch the metric to credits.
-
-## Getting started
-
-1. Sign in and connect your account: [Login/Signup](/roo-code-cloud/login).
-2. Ensure your organization allows Task Sync and Roomote Control if you need remote actions; see [Roomote Control](/roo-code-cloud/roomote-control).
-3. Purchase credits by clicking the $ balance at the top of the web app.
-4. Create or start a Cloud Agent and watch progress in real time in the [web app](https://app.roocode.com).
-
-## Agents
+## Agents Types
 
 Cloud Agents come in different types optimized for specific workflows. Each uses your chosen model and API key, running in the cloud so work continues without your IDE.
 
-<details>
-<summary><strong>Generalist</strong></summary>
-
-:::warning Not Yet Available
-This agent type is not yet available. Check back soon for updates.
-:::
-
-Runs versatile, on‑demand cloud coding tasks using your chosen model; streams progress and tracks costs.
-
-**What you can do**:
-- Launch manual tasks from the app with a natural‑language brief
-- Tackle broad work: refactors, feature scaffolding, code analysis, documentation, and more
-- Choose provider and model per agent; add custom guidance for desired style/constraints
-- Monitor progress live in the app's streaming view and review outputs afterward
-
-**Automation**: Manual-only. No webhook triggers; jobs start when you click Run or submit a task from the app.
-</details>
-
-<details>
-<summary><strong>PR Rooviewer</strong></summary>
-
+### **PR Rooviewer**
+  
 Automatically reviews GitHub pull requests using your model, posts feedback, and tracks costs—triggered by webhooks or run on demand.
 
-**What you can do**:
-- Automatic reviews when PRs open, become ready for review, or receive new commits
-- Manual reviews from the app on any open PR in your scope
-- Scope by repository and author; control whether to review draft PRs
-- Add custom guidance for model-specific instructions
-- Track progress via "Follow Along" links
+### Coming soon
 
-**Automation**: Agent responds to GitHub webhook events (PR opened, ready for review, new commits). Eligibility depends on repo selection, author filter, and draft settings.
+We have more agents in the works, such as:
+- PR Fixer
+- String Translator
+- Security Auditr
+- Generalist
 
-</details>
+## How billing works
+
+- Cloud Agents require an active paid plan.
+- Cloud runtime is billed in credits per agent‑hour (we charge you while the agents are working, that's it)
+- Model inference is billed by your provider (bring your own API keys). We don't mark inference costs up and are provider-agnostic
+- You can track usage and credits in [Analytics](/roo-code-cloud/analytics); switch the metric to credits.
+
+## Getting started
+
+1. [Sign up](http://app.roocode.com/sign-up) for a Roo Code Cloud account
+2. Upgrade to a paid plan.
+3. You'll get free credits to get started
+4. [Create your first ](https://app.roocode.com/cloud-agents/create).
+
 
 ## FAQ
 
@@ -81,7 +60,7 @@ Automatically reviews GitHub pull requests using your model, posts feedback, and
   - Yes. Each agent incurs its own runtime credit usage while running.
 
 - Do I need to use a specific model?
-  - No. Use your preferred provider and models with your own API keys; inference is billed by that provider.
+  - No. We recommend a few models we've tested and found to work well, but you're free to use absolutely any model your provider offers.
 
 - Where do I see costs?
   - Track runtime credits and usage in [Analytics](/roo-code-cloud/analytics); see [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions) for plans and credits.

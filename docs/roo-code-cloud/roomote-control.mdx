@@ -20,8 +20,14 @@ Roomote Control lets you remotely control tasks running in your local VS Code in
 
 Roomote Control creates a bidirectional connection between your local VS Code extension and Roo Code Cloud so you can:
 
-- Control tasks remotely — start, stop, and interact using the browser chat
-- Requires an active entitlement (Pro or qualifying org plan). See [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions).
+- Keep working on long-running tasks after you step away from your computer
+- Start tasks remotely, including from your phone
+- Answer questions and ensure Roo doesn't get stuck
+- Receive push notifications about task progress and questions from Roo
+- Get the most from Roo without having any code leave your computer
+
+Roomote Control is available in our [paid plans](https://rocode.com/pricing).
+
 
 ## Key Features
 
@@ -32,21 +38,26 @@ Roomote Control creates a bidirectional connection between your local VS Code ex
 - Single active task per workspace is enforced
 
 :::note Requirements
-- Task Sync must be enabled; turning Task Sync OFF also turns Remote Control OFF.
-- Remote Control setting must be ON (Web: Settings › User › Roomote Control; IDE: Cloud panel <Codicon name="cloud" />).
-- Pro or Team entitlement required; your organization’s policy must allow Roomote Control.
+- A paid plan
+- Task Sync must be enabled
+- Remote Control must be enabled
 - Your IDE must be running and connected to the internet.
-- Only one task can be active per workspace at a time.
+- Only one task can be active per workspace at a time – but you can have as many workspaces open as you want (or your computer can handle)
 :::
 
 ## Getting Started
 
 #### Step 1: Connect Your Account
 
-Connect your Roo Code extension to Roo Code Cloud. Follow [Login](/roo-code-cloud/login#quickstart).
+Connect your Roo Code extension to Roo Code Cloud. Follow [Connect the Extension to Cloud](/roo-code-cloud/connect#quickstart).
 
-#### Step 2: Enable Task Sync, then Roomote Control
+#### Step 2: Upgrade to a paid plan
 
+Go to [Upgrade](https://app.roocode.com/billing), choose your plan and follow the instructions.
+
+#### Step 3: Ensure Task Sync and Roomote Control are enabled
+
+You should have thm on by default, but if not:
 - In the IDE: Click the cloud icon <Codicon name="cloud" /> and toggle Task Sync first, then Roomote Control in the Cloud panel.
 - In the web app: Go to Settings › User and toggle Task Sync and Roomote Control. You may also see inline “Enable …” banners on Home/Task pages.
 
@@ -61,14 +72,8 @@ If “New Task” is disabled, upgrade/enable in Settings › User › Roomote C
 
 ## Notifications
 
-Enable Push Notifications in the web app under Settings.
+You can enable Push Notifications in the web app under Settings to be notified of progress on your tasks.
 
 ## Permissions & Security
 
 - Only the user who created a task can interact with it from the browser (send messages, approve/deny).
-
-## Limitations
-
-- Requires active VS Code with Roo Code extension
-- Internet connection required for real-time sync
-- One task active per workspace at a time

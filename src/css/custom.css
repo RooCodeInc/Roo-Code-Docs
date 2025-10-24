@@ -28,6 +28,7 @@
   --ring: 0 0% 3.9%;
   --radius: 0.5rem;
 
+
   --chart-1: 0 100% 50%;
   --chart-2: 29 100% 50%;
   --chart-3: 51 100% 50%;
@@ -51,6 +52,8 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-background-color: hsl(var(--background));
   --ifm-font-color-base: hsl(var(--foreground));
+
+  font-size: 14px;
 }
 
 /* Dark mode - force pure black background */
@@ -1465,7 +1468,7 @@ body {
 .table-of-contents__link:hover,
 .table-of-contents__link--active,
 .navbar__link:hover,
-.breadcrumbs__link:hover,
+a.breadcrumbs__link:hover,
 .footer__link-item:hover {
   color: hsl(var(--foreground)) !important; /* 100% on hover/active */
 }
@@ -1698,30 +1701,22 @@ main[class*="docMainContainer"] {
   margin: 2rem 0;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid hsl(var(--border) / 0.5);
-  border-radius: calc(var(--radius) + 4px);
   overflow: hidden;
   background: hsl(var(--background) / 0.3);
-  backdrop-filter: blur(16px);
 }
 
 .theme-doc-markdown th {
   background: hsl(var(--background) / 0.6);
   padding: 0.75rem 1rem;
   text-align: left;
-  font-weight: 600;
+  font-weight: 700;
   color: hsl(var(--foreground));
-  border-bottom: 1px solid hsl(var(--border) / 0.5);
 }
 
 .theme-doc-markdown td {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid hsl(var(--border) / 0.3);
   color: hsl(var(--foreground) / 0.9); /* Match body text brightness */
-}
-
-.theme-doc-markdown tr:last-child td {
-  border-bottom: none;
 }
 
 /* Heading anchor links */
@@ -2035,7 +2030,8 @@ html {
 
 /* Breadcrumbs styling */
 .theme-doc-breadcrumbs {
-  margin-bottom: 1rem;
+  margin-bottom: 20rem;
+  margin-left: 1.25rem;
   font-size: 0.875rem;
 }
 
@@ -2046,9 +2042,10 @@ html {
 .breadcrumbs__link {
   color: hsl(var(--muted-foreground));
   transition: color 200ms;
+  cursor: default;
 }
 
-.breadcrumbs__link:hover {
+a.breadcrumbs__link:hover {
   color: hsl(var(--foreground));
   text-decoration: none;
 }

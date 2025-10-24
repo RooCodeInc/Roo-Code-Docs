@@ -48,14 +48,13 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'roo-code-cloud/what-is-roo-code-cloud',
-        'roo-code-cloud/login',
-        'roo-code-cloud/billing-subscriptions',
+        'roo-code-cloud/connect',
         'roo-code-cloud/analytics',
         'roo-code-cloud/task-sharing',
         'roo-code-cloud/task-sync',
         'roo-code-cloud/roomote-control',
         'roo-code-cloud/cloud-agents',
-        'roo-code-cloud/slack-integration',
+        'roo-code-cloud/billing-subscriptions',
       ],
     },
     {
