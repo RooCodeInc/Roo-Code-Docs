@@ -156,9 +156,12 @@ Finding all usages of a specific function:
 ```
 
 Searching for a specific import pattern across the entire project:
-```
+```xml
 <search_files>
-
+<path>.</path>
+<regex>import\s+.*\s+from\s+['"]@components/</regex>
+</search_files>
+```
 ## Respecting .gitignore
 
 By default, `search_files` respects `.gitignore` patterns in your workspace, including nested `.gitignore` files. This prevents searches in excluded directories like `node_modules/`, `dist/`, or other ignored paths.
@@ -197,7 +200,3 @@ This searches **everything**, including `node_modules/`, build artifacts, and ot
 - Investigating ignored configuration files
 
 ---
-<path>.</path>
-<regex>import\s+.*\s+from\s+['"]@components/</regex>
-</search_files>
-```
