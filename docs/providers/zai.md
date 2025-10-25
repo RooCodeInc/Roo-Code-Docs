@@ -45,10 +45,18 @@ Z AI (Zhipu AI) provides advanced language models with the GLM-4.5 series. The p
 Z AI provides different model catalogs based on your selected region:
 
 ### International Models
+* **GLM-4.6** - Context: 200K tokens
+* **GLM-4.5-X** - Enhanced reasoning and analysis capabilities
+* **GLM-4.5-AirX** - Balanced performance and efficiency
+* **GLM-4.5-Flash** - Optimized for speed with lower latency
 * GLM-4.5 series models
 * GLM-4.5-Air models
 
 ### China Mainland Models
+* **GLM-4.6** - Context: 200K tokens
+* **GLM-4.5-X** - Enhanced reasoning and analysis capabilities
+* **GLM-4.5-AirX** - Balanced performance and efficiency
+* **GLM-4.5-Flash** - Optimized for speed with lower latency
 * GLM-4.5 series models
 * GLM-4.5-Air models
 

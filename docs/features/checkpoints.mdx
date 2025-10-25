@@ -53,9 +53,20 @@ Checkpoints let you:
 Access checkpoint settings in Roo Code settings under the "Checkpoints" section:
 
 1. Open Settings by clicking the gear icon <Codicon name="gear" /> → Checkpoints
-2. Check or uncheck the "Enable automatic checkpoints" checkbox
+2. Configure checkpoint behavior:
+   - Check or uncheck the "Enable automatic checkpoints" checkbox
+   - Adjust the "Checkpoint initialization timeout" (10-60 seconds, default: 30s)
 
    <img src="/img/checkpoints/checkpoints.png" alt="Checkpoint settings in Roo Code configuration" width="500" />
+
+#### Checkpoint Initialization Timeout
+
+Controls how long the system waits for checkpoint initialization to complete before showing a warning. If your project has many files or is on slower storage, increasing this timeout can prevent premature warnings.
+
+- **Range**: 10-60 seconds
+- **Default**: 30 seconds
+- **When to increase**: Large projects, slow disk I/O, or network-mounted directories
+- **Location**: Settings → Checkpoints → "Checkpoint initialization timeout"
 
 ---
 
@@ -85,13 +96,13 @@ Checkpoints appear directly in your chat history:
 - **Regular checkpoints** are created before file modifications, allowing easy undo of any changes
    <img src="/img/checkpoints/checkpoints-2.png" alt="Regular checkpoint indicator in chat" width="500" />
 
-Each checkpoint provides two primary functions:
+Each checkpoint provides two primary functions that are always available in both the chat history and checkpoint menu:
 
 ### Viewing Differences
 
 To compare your current workspace with a previous checkpoint:
 
-1. Locate the checkpoint in your chat history
+1. Locate the checkpoint in your chat history or open the checkpoint menu
 2. Click the checkpoint's `View Differences` button
 
    <img src="/img/checkpoints/checkpoints-6.png" alt="View Differences button interface" width="100" />
@@ -107,10 +118,12 @@ To compare your current workspace with a previous checkpoint:
 
 ### Restoring Checkpoints
 
+Restore options are always visible in checkpoint buttons and dialogs, regardless of whether changes are detected. This ensures you can always revert to any checkpoint state.
+
 To restore a project to a previous checkpoint state:
 
-1. Locate the checkpoint in your chat history
-2. Click the checkpoint's `Restore Checkpoint` button
+1. Locate the checkpoint in your chat history or checkpoint menu
+2. Click the checkpoint's `Restore Checkpoint` button (always visible)
    <img src="/img/checkpoints/checkpoints-7.png" alt="Restore checkpoint button interface" width="100" />
 3. Choose one of these restoration options:
    

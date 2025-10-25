@@ -74,6 +74,9 @@ This tool reads the content of a specified file and returns it with line numbers
 - Can read specific portions of files by specifying line ranges
 - Extracts readable text from PDF and DOCX files
 - **Image support**: Displays images in multiple formats (PNG, JPG, JPEG, GIF, WebP, SVG, BMP, ICO, TIFF)
+- **Intelligent reading**: Token-budget aware reading that auto-truncates to fit remaining budget instead of failing
+- **Large file preview**: Returns a 100KB preview for very large files to enable quick inspection
+- **Graceful error recovery**: Recovers from stream errors and guides you to use line_range for targeted reads
 - Automatically truncates large text files when no line range is specified, showing the beginning of the file
 - Provides method summaries with line ranges for truncated large code files
 - Efficiently streams only requested line ranges for better performance
@@ -113,12 +116,13 @@ When the `maxConcurrentFileReads` setting is greater than 1, the `read_file` too
 
 ## Limitations
 
-- May not handle extremely large files efficiently without using line range parameters
+- **Large files**: For extremely large files, the tool provides a preview and guides you to use line_range for targeted reading
 - For binary files (except PDF, DOCX, and supported image formats), may return content that isn't human-readable
 - **Multi-file mode**: Requires `maxConcurrentFileReads` > 1 in settings
 - **Image files**: Returns base64-encoded data URLs which may be large for high-resolution images
   - Default max single image size: 20MB
   - Default max total image size: 20MB
+- **Token budget**: Automatically truncates content to fit remaining token budget to prevent context overruns
 
 ---
 
@@ -148,7 +152,14 @@ The tool uses a clear decision hierarchy to determine how to read a file:
    - The implementation efficiently streams only the requested lines, making it suitable for processing large files
    - This takes precedence over all other options
 
-2. **Second Priority: Automatic Truncation for Large Text Files**
+2. **Second Priority: Token Budget Management**
+   - The tool respects the remaining token budget to prevent context overruns
+   - If a file would exceed the remaining budget, it automatically truncates to fit
+   - For very large files (exceeding practical limits), returns a 100KB preview for quick inspection
+   - Provides guidance to use `line_range` for targeted reading of specific sections
+   - Recovers gracefully from stream errors and suggests alternative approaches
+
+3. **Third Priority: Automatic Truncation for Large Text Files**
    - This applies only when **all** of the following conditions are met:
      - Neither `start_line` nor `end_line` is specified.
      - The file is identified as a text-based file (not binary like PDF/DOCX).
@@ -159,7 +170,7 @@ The tool uses a clear decision hierarchy to determine how to read a file:
      - For code files, it may also append a summary of source code definitions found within the truncated portion.
    - **Special Case - Definitions Only Mode**: When `maxReadFileLine` is set to `0`, the tool returns only source code definitions without any file content.
 
-3. **Default Behavior: Read Entire File**
+4. **Default Behavior: Read Entire File**
     - If neither an explicit range is given nor automatic truncation applies (e.g., the file is within the line limit, or it's a supported binary type), the tool reads the entire content.
     - For supported formats like PDF and DOCX, it attempts to extract the full text content.
     - For image formats, it returns a base64-encoded data URL that can be displayed in the chat interface.
@@ -291,6 +302,44 @@ If the file is excluded by rules in a `.rooignore` file:
 <read_file>
 <path>.env</path>
 </read_file>
+### Intelligent Reading with Token Budget Management
+
+When reading large files, the tool automatically manages token budgets to prevent context overruns:
+
+**Scenario:** Reading a very large file without specifying a line range.
+
+**Input:**
+```xml
+<read_file>
+<path>logs/massive-debug.log</path>
+</read_file>
+```
+
+**Simulated Output (for a file exceeding token budget):**
+```
+[First 100KB of file content shown as preview...]
+
+[File exceeds remaining token budget. Showing 100KB preview. Use line_range to read specific sections.]
+```
+
+This intelligent behavior ensures that:
+- Small files read completely with zero overhead
+- Large files auto-truncate to fit remaining token budget
+- Very large files provide a quick preview
+- You receive guidance to use `line_range` for targeted reads
+- Stream errors are recovered gracefully
+
+**Example with line_range for targeted reading:**
+```xml
+<read_file>
+<path>logs/massive-debug.log</path>
+<start_line>1000</start_line>
+<end_line>1100</end_line>
+</read_file>
+```
+
+---
+
 ```
 
 **Simulated Output (Error):**
