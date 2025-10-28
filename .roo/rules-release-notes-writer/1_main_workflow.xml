@@ -91,7 +91,7 @@
       <step number="3">
         <action>Fetch PRs from GitHub using simplified approach</action>
         <skip_if>User provided PR list</skip_if>
-        <command><![CDATA[
+        <command>
 # Replace X.Y.Z with the actual version number
 TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
 END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
@@ -99,7 +99,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></command>
+        </command>
         <output_description>
           Returns JSON array of PR objects sorted by merge date, including all metadata needed for PR processing
         </output_description>
@@ -132,7 +132,7 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
             Wait for all subtasks to complete before proceeding to compilation phase.
           </iteration_approach>
         </implementation>
-        <message_template><![CDATA[
+        <message_template>
   Investigate PR #[number] for release notes v[version].
   1. Get PR details: gh pr view [number] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url
   2. Extract linked issues from PR body
@@ -149,18 +149,18 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   
   CRITICAL: Never create/overwrite files, only append.
   MANDATORY: Insert the marker line '<!-- generated-by-subtask: true -->' immediately before the '---' separator in each PR entry.
-  ]]></message_template>
-        <todos_template><![CDATA[
+  </message_template>
+        <todos_template>
 [ ] Fetch PR #[number] details using gh pr view --repo RooCodeInc/Roo-Code
 [ ] Extract linked issues from PR body
 [ ] Get issue details for each linked issue
 [ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
 [ ] Identify documentation needs
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-        ]]></todos_template>
+        </todos_template>
       </subtask_pattern>
       
-      <output_format><![CDATA[
+      <output_format>
 ## PR #[number]: [Title]
 
 **Author**: [username]
@@ -173,12 +173,12 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
 <!-- generated-by-subtask: true -->
 
 ---
-      ]]></output_format>
+      </output_format>
       
       <subtask_creation_example>
         <description>Example of creating subtasks for a PR list</description>
         <scenario>Given PRs: #1234, #1235, #1236 for version 3.20.1</scenario>
-        <implementation><![CDATA[
+        <implementation>
 <!-- For each PR, create a subtask like this: -->
 <new_task>
 <mode>release-notes-writer</mode>
@@ -195,7 +195,7 @@ Append analysis to .roo/tmp/release-notes/temp_pr_analysis_v3.20.1.md using inse
 [ ] Write to temp_pr_analysis_v3.20.1.md
 </todos>
 </new_task>
-        ]]></implementation>
+        </implementation>
         <critical_notes>
           - Parent creates temp files first
           - Each PR gets its own subtask
@@ -208,22 +208,22 @@ Append analysis to .roo/tmp/release-notes/temp_pr_analysis_v3.20.1.md using inse
       <description>Align the working PR set with the repository changelog for the selected version(s)</description>
       <step number="1">
         <action>Fetch changelog content for v[VERSION]</action>
-        <command><![CDATA[
+        <command>
 # Get the release body which contains the changelog
 gh release view vX.Y.Z --repo RooCodeInc/Roo-Code --json body | jq -r '.body'
-        ]]></command>
+        </command>
         <note>The release body contains the curated list of changes for this version</note>
       </step>
 
       <step number="1a">
         <action>Extract hero image URL candidates from release body and changelog; persist</action>
         <commands>
-          <save_body_to_file><![CDATA[
+          <save_body_to_file>
 # Save release body to a temp file for reuse
 mkdir -p .roo/tmp/release-notes
 gh release view vX.Y.Z --repo RooCodeInc/Roo-Code --json body --jq '.body' > .roo/tmp/release-notes/changelog_vX.Y.Z.md
-          ]]></save_body_to_file>
-          <fetch_changelog><![CDATA[
+          </save_body_to_file>
+          <fetch_changelog>
 # Fetch CHANGELOG.md at tag vX.Y.Z; fallback to main, then extract vX.Y.Z section
 TMP_DIR=".roo/tmp/release-notes"
 CHANGELOG_TAG_FILE="$TMP_DIR/CHANGELOG_vX.Y.Z.md"
@@ -254,8 +254,8 @@ if [ -s "$CHANGELOG_TAG_FILE" ]; then
 else
   : > "$SECTION_FILE"
 fi
-          ]]></fetch_changelog>
-          <extract_candidates><![CDATA[
+          </fetch_changelog>
+          <extract_candidates>
 # Build candidate list from both the release body and extracted changelog section (absolute and relative paths)
 CANDIDATES_FILE=".roo/tmp/release-notes/image_candidates_vX.Y.Z.txt"
 : > "$CANDIDATES_FILE"
@@ -266,7 +266,7 @@ grep -Eo '!\[[^]]*\]\(([^)]+)\)' .roo/tmp/release-notes/changelog_vX.Y.Z.md 2>/d
 
       <step number="1b">
         <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
+<command>
 VERSION="X.Y.Z"
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
@@ -277,7 +277,7 @@ if [ -s "$OUT" ]; then
 else
   echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
 fi
-]]></command>
+</command>
         <notes>
           - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
           - Prefer PNG when multiple candidates are present
@@ -309,11 +309,11 @@ fi
           - Wait for all spawned subtasks to complete before proceeding
         </details>
         <commands>
-          <fetch><![CDATA[
+          <fetch>
 # For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
 gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
+          </fetch>
+          <spawn_subtask>
 <new_task>
 <mode>release-notes-writer</mode>
 <message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
@@ -326,7 +326,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
 </todos>
 </new_task>
-          ]]></spawn_subtask>
+          </spawn_subtask>
       </step>
       
       <step number="2b">
@@ -358,7 +358,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="4">
         <action>Ask for inclusion policy</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
 <follow_up>
@@ -367,7 +367,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <critical>Do not proceed until one of the provided options is selected.</critical>
       </step>
 
@@ -381,7 +381,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           - Options: "Yes, include this PR" or "No, skip this PR"
           - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
         </loop>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
 <follow_up>
@@ -389,7 +389,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <completion>After the loop, proceed with the finalized PR set.</completion>
       </step>
       
@@ -417,7 +417,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="2">
         <action>Confirm feature highlighting with user</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 **Major Features:**
@@ -428,7 +428,7 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 **Other Changes:** [COUNT] items
 
 Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
+        </template>
         <gating>
           <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
           <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
@@ -458,9 +458,9 @@ Which features should I highlight with expanded sections in the release notes?
             - Follow .roorules Image Tag Format and use width="600"
             - If the persisted path is "/img/social-share.jpg", skip inline insertion
           </behavior>
-          <html_snippet><![CDATA[
+          <html_snippet>
 <img src="[FRONTMATTER_IMAGE_PATH]" alt="Roo Code v[VERSION] Release" width="600" />
-          ]]></html_snippet>
+          </html_snippet>
         </inline_hero_image>
       </step>
       
@@ -543,12 +543,12 @@ Which features should I highlight with expanded sections in the release notes?
         <step>Ask which to process</step>
       </steps>
       <commands>
-        <get_existing_docs><![CDATA[
+        <get_existing_docs>
 # Get existing documentation files
 ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
+        </get_existing_docs>
         
-        <get_releases_with_details><![CDATA[
+        <get_releases_with_details>
 # Get recent releases with full details in JSON array
 echo "["; first=1; \
 for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
@@ -557,7 +557,7 @@ for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagNam
   first=0
 done; \
 echo "]"
-        ]]></get_releases_with_details>
+        </get_releases_with_details>
       </commands>
       <process>
         Compare the release list with existing docs to identify missing versions.
@@ -573,7 +573,7 @@ echo "]"
       This is simple, reliable, and captures all changes in a single command.
     </overview>
     
-    <the_command><![CDATA[
+    <the_command>
 # Replace X.Y.Z with the actual version number
 TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
 END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
@@ -581,7 +581,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
+        </the_command>
     
     <what_it_does>
       1. Gets the release timestamp for your version
@@ -621,7 +621,7 @@ grep -Eo 'https?://[^ )]+' .roo/tmp/release-notes/changelog_vX.Y.Z.md 2>/dev/nul
 
       <step number="1b">
         <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
+<command>
 VERSION="X.Y.Z"
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
@@ -632,7 +632,7 @@ if [ -s "$OUT" ]; then
 else
   echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
 fi
-]]></command>
+</command>
         <notes>
           - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
           - Prefer PNG when multiple candidates are present
@@ -664,11 +664,11 @@ fi
           - Wait for all spawned subtasks to complete before proceeding
         </details>
         <commands>
-          <fetch><![CDATA[
+          <fetch>
 # For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
 gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
+          </fetch>
+          <spawn_subtask>
 <new_task>
 <mode>release-notes-writer</mode>
 <message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
@@ -681,7 +681,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
 </todos>
 </new_task>
-          ]]></spawn_subtask>
+          </spawn_subtask>
       </step>
       
       <step number="2b">
@@ -713,7 +713,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="4">
         <action>Ask for inclusion policy</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
 <follow_up>
@@ -722,7 +722,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <critical>Do not proceed until one of the provided options is selected.</critical>
       </step>
 
@@ -736,7 +736,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           - Options: "Yes, include this PR" or "No, skip this PR"
           - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
         </loop>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
 <follow_up>
@@ -744,7 +744,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <completion>After the loop, proceed with the finalized PR set.</completion>
       </step>
       
@@ -772,7 +772,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="2">
         <action>Confirm feature highlighting with user</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 **Major Features:**
@@ -783,7 +783,7 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 **Other Changes:** [COUNT] items
 
 Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
+        </template>
         <gating>
           <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
           <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
@@ -885,12 +885,12 @@ Which features should I highlight with expanded sections in the release notes?
         <step>Ask which to process</step>
       </steps>
       <commands>
-        <get_existing_docs><![CDATA[
+        <get_existing_docs>
 # Get existing documentation files
 ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
+        </get_existing_docs>
         
-        <get_releases_with_details><![CDATA[
+        <get_releases_with_details>
 # Get recent releases with full details in JSON array
 echo "["; first=1; \
 for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
@@ -899,7 +899,7 @@ for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagNam
   first=0
 done; \
 echo "]"
-        ]]></get_releases_with_details>
+        </get_releases_with_details>
       </commands>
       <process>
         Compare the release list with existing docs to identify missing versions.
@@ -915,7 +915,7 @@ echo "]"
       This is simple, reliable, and captures all changes in a single command.
     </overview>
     
-    <the_command><![CDATA[
+    <the_command>
 # Replace X.Y.Z with the actual version number
 TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
 END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
@@ -923,7 +923,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
+        </the_command>
     
     <what_it_does>
       1. Gets the release timestamp for your version
@@ -965,7 +965,7 @@ grep -Eo '!\[[^]]*\]\(([^)]+)\)' .roo/tmp/release-notes/CHANGELOG_section_vX.Y.Z
 
       <step number="1b">
         <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
+<command>
 VERSION="X.Y.Z"
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
@@ -976,7 +976,7 @@ if [ -s "$OUT" ]; then
 else
   echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
 fi
-]]></command>
+</command>
         <notes>
           - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
           - Prefer PNG when multiple candidates are present
@@ -1008,11 +1008,11 @@ fi
           - Wait for all spawned subtasks to complete before proceeding
         </details>
         <commands>
-          <fetch><![CDATA[
+          <fetch>
 # For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
 gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
+          </fetch>
+          <spawn_subtask>
 <new_task>
 <mode>release-notes-writer</mode>
 <message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
@@ -1025,7 +1025,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
 </todos>
 </new_task>
-          ]]></spawn_subtask>
+          </spawn_subtask>
       </step>
       
       <step number="2b">
@@ -1057,7 +1057,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="4">
         <action>Ask for inclusion policy</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
 <follow_up>
@@ -1066,7 +1066,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <critical>Do not proceed until one of the provided options is selected.</critical>
       </step>
 
@@ -1080,7 +1080,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           - Options: "Yes, include this PR" or "No, skip this PR"
           - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
         </loop>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
 <follow_up>
@@ -1088,7 +1088,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <completion>After the loop, proceed with the finalized PR set.</completion>
       </step>
       
@@ -1116,7 +1116,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="2">
         <action>Confirm feature highlighting with user</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 **Major Features:**
@@ -1127,7 +1127,7 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 **Other Changes:** [COUNT] items
 
 Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
+        </template>
         <gating>
           <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
           <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
@@ -1229,12 +1229,12 @@ Which features should I highlight with expanded sections in the release notes?
         <step>Ask which to process</step>
       </steps>
       <commands>
-        <get_existing_docs><![CDATA[
+        <get_existing_docs>
 # Get existing documentation files
 ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
+        </get_existing_docs>
         
-        <get_releases_with_details><![CDATA[
+        <get_releases_with_details>
 # Get recent releases with full details in JSON array
 echo "["; first=1; \
 for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
@@ -1243,7 +1243,7 @@ for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagNam
   first=0
 done; \
 echo "]"
-        ]]></get_releases_with_details>
+        </get_releases_with_details>
       </commands>
       <process>
         Compare the release list with existing docs to identify missing versions.
@@ -1259,7 +1259,7 @@ echo "]"
       This is simple, reliable, and captures all changes in a single command.
     </overview>
     
-    <the_command><![CDATA[
+    <the_command>
 # Replace X.Y.Z with the actual version number
 TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
 END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
@@ -1267,7 +1267,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
+        </the_command>
     
     <what_it_does>
       1. Gets the release timestamp for your version
@@ -1307,7 +1307,7 @@ grep -Eo 'https?://[^ )]+' .roo/tmp/release-notes/CHANGELOG_section_vX.Y.Z.md 2>
 
       <step number="1b">
         <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
+<command>
 VERSION="X.Y.Z"
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
@@ -1318,7 +1318,7 @@ if [ -s "$OUT" ]; then
 else
   echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
 fi
-]]></command>
+</command>
         <notes>
           - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
           - Prefer PNG when multiple candidates are present
@@ -1350,11 +1350,11 @@ fi
           - Wait for all spawned subtasks to complete before proceeding
         </details>
         <commands>
-          <fetch><![CDATA[
+          <fetch>
 # For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
 gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
+          </fetch>
+          <spawn_subtask>
 <new_task>
 <mode>release-notes-writer</mode>
 <message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
@@ -1367,7 +1367,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
 </todos>
 </new_task>
-          ]]></spawn_subtask>
+          </spawn_subtask>
       </step>
       
       <step number="2b">
@@ -1399,7 +1399,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="4">
         <action>Ask for inclusion policy</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
 <follow_up>
@@ -1408,7 +1408,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <critical>Do not proceed until one of the provided options is selected.</critical>
       </step>
 
@@ -1422,7 +1422,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           - Options: "Yes, include this PR" or "No, skip this PR"
           - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
         </loop>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
 <follow_up>
@@ -1430,7 +1430,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <completion>After the loop, proceed with the finalized PR set.</completion>
       </step>
       
@@ -1458,7 +1458,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="2">
         <action>Confirm feature highlighting with user</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 **Major Features:**
@@ -1469,7 +1469,7 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 **Other Changes:** [COUNT] items
 
 Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
+        </template>
         <gating>
           <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
           <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
@@ -1571,12 +1571,12 @@ Which features should I highlight with expanded sections in the release notes?
         <step>Ask which to process</step>
       </steps>
       <commands>
-        <get_existing_docs><![CDATA[
+        <get_existing_docs>
 # Get existing documentation files
 ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
+        </get_existing_docs>
         
-        <get_releases_with_details><![CDATA[
+        <get_releases_with_details>
 # Get recent releases with full details in JSON array
 echo "["; first=1; \
 for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
@@ -1585,7 +1585,7 @@ for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagNam
   first=0
 done; \
 echo "]"
-        ]]></get_releases_with_details>
+        </get_releases_with_details>
       </commands>
       <process>
         Compare the release list with existing docs to identify missing versions.
@@ -1601,7 +1601,7 @@ echo "]"
       This is simple, reliable, and captures all changes in a single command.
     </overview>
     
-    <the_command><![CDATA[
+    <the_command>
 # Replace X.Y.Z with the actual version number
 TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
 END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
@@ -1609,7 +1609,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
+        </the_command>
     
     <what_it_does>
       1. Gets the release timestamp for your version
@@ -1649,7 +1649,7 @@ grep -Eo '(/[^ )]+|[A-Za-z0-9_./-]+)\.(png|jpe?g|gif|webp)' .roo/tmp/release-not
 if [ -s "$CANDIDATES_FILE" ]; then
   sort -u "$CANDIDATES_FILE" > "$CANDIDATES_FILE.tmp" && mv "$CANDIDATES_FILE.tmp" "$CANDIDATES_FILE"
 fi
-          ]]></extract_candidates>
+          </extract_candidates>
         </commands>
         <output>
           <file>.roo/tmp/release-notes/image_candidates_v[version].txt</file>
@@ -1659,7 +1659,7 @@ fi
 
       <step number="1b">
         <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
+<command>
 VERSION="X.Y.Z"
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
@@ -1670,7 +1670,7 @@ if [ -s "$OUT" ]; then
 else
   echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
 fi
-]]></command>
+</command>
         <notes>
           - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
           - Prefer PNG when multiple candidates are present
@@ -1702,11 +1702,11 @@ fi
           - Wait for all spawned subtasks to complete before proceeding
         </details>
         <commands>
-          <fetch><![CDATA[
+          <fetch>
 # For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
 gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
+          </fetch>
+          <spawn_subtask>
 <new_task>
 <mode>release-notes-writer</mode>
 <message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
@@ -1719,7 +1719,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
 </todos>
 </new_task>
-          ]]></spawn_subtask>
+          </spawn_subtask>
       </step>
       
       <step number="2b">
@@ -1751,7 +1751,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="4">
         <action>Ask for inclusion policy</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
 <follow_up>
@@ -1760,7 +1760,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <critical>Do not proceed until one of the provided options is selected.</critical>
       </step>
 
@@ -1774,7 +1774,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           - Options: "Yes, include this PR" or "No, skip this PR"
           - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
         </loop>
-        <template><![CDATA[
+        <template>
 <ask_followup_question>
 <question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
 <follow_up>
@@ -1782,7 +1782,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-        ]]></template>
+        </template>
         <completion>After the loop, proceed with the finalized PR set.</completion>
       </step>
       
@@ -1810,7 +1810,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="2">
         <action>Confirm feature highlighting with user</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 **Major Features:**
@@ -1821,7 +1821,7 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 **Other Changes:** [COUNT] items
 
 Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
+        </template>
         <gating>
           <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
           <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
@@ -1923,12 +1923,12 @@ Which features should I highlight with expanded sections in the release notes?
         <step>Ask which to process</step>
       </steps>
       <commands>
-        <get_existing_docs><![CDATA[
+        <get_existing_docs>
 # Get existing documentation files
 ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
+        </get_existing_docs>
         
-        <get_releases_with_details><![CDATA[
+        <get_releases_with_details>
 # Get recent releases with full details in JSON array
 echo "["; first=1; \
 for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
@@ -1937,7 +1937,7 @@ for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagNam
   first=0
 done; \
 echo "]"
-        ]]></get_releases_with_details>
+        </get_releases_with_details>
       </commands>
       <process>
         Compare the release list with existing docs to identify missing versions.
@@ -1957,7 +1957,7 @@ echo "]"
       This is simple, reliable, and captures all changes in a single command.
     </overview>
     
-    <the_command><![CDATA[
+    <the_command>
 # Replace X.Y.Z with the actual version number
 TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
 END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
@@ -1965,7 +1965,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
+        </the_command>
     
     <what_it_does>
       1. Gets the release timestamp for your version

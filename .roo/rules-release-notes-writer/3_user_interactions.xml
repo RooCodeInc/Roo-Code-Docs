@@ -8,7 +8,7 @@
     <point name="feature_selection">
       <when>After PR analysis, before writing release notes</when>
       <purpose>Verify which features to highlight</purpose>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
@@ -27,13 +27,13 @@ Which features should I highlight with expanded sections in the release notes?</
 <suggest>Let me specify which features to expand</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
       <gating_rules>
         <rule priority="CRITICAL">Do not proceed unless the response clearly matches one of the provided options.</rule>
         <rule priority="HIGH">If the user types a freeform response, re-ask using ask_followup_question with options reformulated from their input; require selection of one provided option.</rule>
         <rule>Repeat this gating loop until a provided option is explicitly selected.</rule>
       </gating_rules>
-      <fallback_prompt><![CDATA[
+      <fallback_prompt>
 <ask_followup_question>
 <question>To proceed I need an explicit selection. Based on your input, which option should I follow?</question>
 <follow_up>
@@ -43,37 +43,41 @@ Which features should I highlight with expanded sections in the release notes?</
 <suggest>Let me specify which features to expand</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></fallback_prompt>
+      </fallback_prompt>
     </point>
 
     <point name="changelog_alignment">
       <when>After fetching PRs and before feature selection</when>
       <purpose>Partition PRs by presence in the changelog and select inclusion policy</purpose>
       <summary>
-        Present counts and reasons for exclusion, then offer three paths:
-        - Only changelog PRs
+        Present counts partitioned as:
+        - Linked (explicit or confidently auto‑matched)
+        - Ambiguous (needs review)
+        - Unlinked
+        Then offer three paths:
+        - Only linked PRs
+        - Linked + review ambiguous
         - All PRs
-        - Review excluded PRs one by one
       </summary>
-      <template_inclusion_policy><![CDATA[
+      <template_inclusion_policy>
 <ask_followup_question>
-<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
+<question>Changelog alignment v[VERSION]: [IN_COUNT] linked, [AMBIG_COUNT] ambiguous, [EX_COUNT] unlinked. Choose how to proceed.</question>
 <follow_up>
-<suggest>Only include the PRs referenced in the changelog</suggest>
+<suggest>Proceed with linked PRs only; skip ambiguous and unlinked</suggest>
+<suggest>Include linked PRs and review the [AMBIG_COUNT] ambiguous items</suggest>
 <suggest>Include all PRs from the date range</suggest>
-<suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template_inclusion_policy>
-      <template_per_pr_review><![CDATA[
+      </template_inclusion_policy>
+      <template_per_pr_review>
 <ask_followup_question>
-<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [USER IMPACT / WHY IT MATTERS].</question>
+<question>Review ambiguous item: include PR #[NUMBER] - [TITLE]? Short analysis: [USER IMPACT / WHY IT MATTERS].</question>
 <follow_up>
 <suggest>Yes, include this PR</suggest>
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template_per_pr_review>
+      </template_per_pr_review>
       <gating_rules>
         <rule priority="CRITICAL">Do not proceed until an explicit option is selected.</rule>
         <rule priority="HIGH">For freeform answers, re-ask with options that reflect the user's intent; require selection.</rule>
@@ -84,7 +88,7 @@ Which features should I highlight with expanded sections in the release notes?</
       <when>After creating patch notes, before updating combined notes</when>
       <purpose>Ensure patch notes are final before propagating</purpose>
       <critical>NEVER update combined notes until explicit confirmation</critical>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've created the release notes for v[VERSION]. The file includes:
 
@@ -100,13 +104,13 @@ Would you like to review before I update the combined v[X.Y] notes?</question>
 <suggest>Change the emphasis on certain features</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </point>
 
     <point name="documentation_needs">
       <when>After identifying documentation flags</when>
       <purpose>Confirm documentation update requirements</purpose>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've identified [COUNT] items that need documentation updates:
 
@@ -120,13 +124,13 @@ Should I create a documentation update task after completing the release notes?<
 <suggest>Let me review the specific items first</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </point>
 
     <point name="final_review">
       <when>After all updates complete</when>
       <purpose>Final confirmation before PR creation</purpose>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've completed all updates for v[VERSION]:
 
@@ -143,7 +147,7 @@ Would you like to create a PR or make any final adjustments?</question>
 <suggest>Create documentation update task first</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </point>
   </confirmation_points>
 
@@ -154,7 +158,7 @@ Would you like to create a PR or make any final adjustments?</question>
       <step>Detect missing versions from changelog</step>
       <step>Present found versions</step>
     </workflow>
-    <template><![CDATA[
+    <template>
 <ask_followup_question>
 <question>I found [COUNT] versions in the changelog that don't have release notes:
 [List versions]
@@ -167,7 +171,7 @@ Which would you like to process?</question>
 <suggest>Show changelog entries first</suggest>
 </follow_up>
 </ask_followup_question>
-    ]]></template>
+    </template>
   </latest_version_interaction>
 
   <adjustment_handling>
@@ -211,7 +215,7 @@ Which would you like to process?</question>
         <item>Verify actual count of changes</item>
         <item>Maintain markdown code block and hyphen bullets</item>
       </validation>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>The Discord post is long. Compress remaining sections into a single "More Changes" paragraph?</question>
 <follow_up>
@@ -219,7 +223,7 @@ Which would you like to process?</question>
 <suggest>No, keep full details</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </compression_workflow>
   </discord_format_interaction>
 
@@ -256,7 +260,7 @@ Which would you like to process?</question>
       <item>Footer links as hyphen bullets to each version's docs page</item>
       <item>Wrap entire output in ```markdown code block</item>
     </formatting_checklist>
-    <template><![CDATA[
+    <template>
 <ask_followup_question>
 <question>If the combined post is long, should I compress minor sections into a single "More Changes" paragraph?</question>
 <follow_up>
@@ -264,7 +268,7 @@ Which would you like to process?</question>
 <suggest>No, keep full details</suggest>
 </follow_up>
 </ask_followup_question>
-    ]]></template>
+    </template>
   </discord_combined_interaction>
 
   <best_practices>

@@ -19,7 +19,7 @@
 
     <required_elements>
       <element name="frontmatter">
-        <format><![CDATA[
+        <format>
 ---
 description: A concise summary of the release.
 keywords:
@@ -28,7 +28,7 @@ keywords:
   - bug fixes
 image: /img/social-share.jpg
 ---
-        ]]></format>
+        </format>
       </element>
       
       <element name="title">
@@ -52,9 +52,9 @@ image: /img/social-share.jpg
           - Use an HTML image tag per site rules with width="600"
           - Set src from .roo/tmp/release-notes/frontmatter_image_v[version].txt and alt to "Roo Code v[VERSION] Release"
         </rules>
-        <template><![CDATA[
+        <template>
 <img src="/img/vX.Y.Z/vX.Y.Z.png" alt="Roo Code vX.Y.Z Release" width="600" />
-        ]]></template>
+        </template>
       </element>
     </required_elements>
   </file_structure>
@@ -70,7 +70,7 @@ image: /img/social-share.jpg
       <category name="major_features">
         <criteria>New functionality changing user experience</criteria>
         <format>Own ## heading with expanded description</format>
-        <template><![CDATA[
+        <template>
 ## [Feature Name]
 
 We've [improvement description] (thanks [contributors]!) ([#PR](link)):
@@ -81,7 +81,7 @@ We've [improvement description] (thanks [contributors]!) ([#PR](link)):
 [Concluding sentence about impact]
 
 > **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage instructions.
-        ]]></template>
+        </template>
       </category>
       
       <category name="qol_improvements">
@@ -113,7 +113,7 @@ We've [improvement description] (thanks [contributors]!) ([#PR](link)):
   <content_formatting>
     <expanded_sections>
       <description>Major features with details</description>
-      <format><![CDATA[
+      <format>
 ## Feature Name
 
 Description of what the feature does (thanks contributor!) ([#PR](link)):
@@ -124,17 +124,17 @@ Description of what the feature does (thanks contributor!) ([#PR](link)):
 Concluding sentence about the benefit.
 
 > **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage.
-      ]]></format>
+      </format>
     </expanded_sections>
 
     <grouped_sections>
       <description>Smaller fixes and improvements</description>
-      <format><![CDATA[
+      <format>
 ## Section Name
 
 * **Item Name**: Single-line description (thanks contributor!) ([#PR](link))
 * **Another Item**: Another description ([#PR](link))
-      ]]></format>
+      </format>
     </grouped_sections>
 
     <contributor_acknowledgments>
@@ -217,12 +217,12 @@ Concluding sentence about the benefit.
   <documentation_links>
     <patterns>
       <inline>[Feature Name](/path/to/feature)</inline>
-      <see_also><![CDATA[
+      <see_also>
 > **📚 Documentation**: See [Feature Guide](/path) for detailed usage instructions.
-      ]]></see_also>
-      <migration><![CDATA[
+      </see_also>
+      <migration>
 > **🔄 Migration Guide**: If upgrading from v[OLD], see our [migration guide](/migration/vX-to-vY).
-      ]]></migration>
+      </migration>
     </patterns>
     <auto_linking>
       - Modes: /features/modes/[mode-slug]
@@ -289,12 +289,12 @@ Concluding sentence about the benefit.
       </element>
 
       <element name="footer_blurb">
-        <format_single><![CDATA[
+        <format_single>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_single>
-        <format_combined><![CDATA[
+        </format_single>
+        <format_combined>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_combined>
+        </format_combined>
         <rules>
           - Use markdown inline links with the version as the anchor text
           - For multiple versions, join links with " | "
@@ -362,12 +362,12 @@ See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | 
       </element>
 
       <element name="footer_blurb">
-        <format_single><![CDATA[
+        <format_single>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_single>
-        <format_combined><![CDATA[
+        </format_single>
+        <format_combined>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_combined>
+        </format_combined>
       </element>
     </structure>
 
