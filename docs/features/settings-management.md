@@ -146,7 +146,37 @@ Use this option only if you are certain you want to remove all Roo Code data or 
 
 ---
 
-## Related UI Setting: Collapse thinking messages by default
+## UI Setting
+
+#### System Prompt Context Toggles
+
+Control what contextual information appears in the system prompt:
+
+- **Include Current Time** (Settings → General)
+  - When enabled, adds the current timestamp to the system prompt
+  - When disabled, omits time information from the prompt
+  - Default: Enabled
+
+- **Include Current Cost** (Settings → General)
+  - When enabled, adds the current task cost to the system prompt
+  - When disabled, omits cost information from the prompt
+  - Default: Enabled
+
+**Example Impact:**
+
+With both enabled, the system prompt includes:
+```
+# Current Time
+Current time in ISO 8601 UTC format: 2025-10-28T23:06:08.458Z
+User time zone: America/Edmonton, UTC-6:00
+
+# Current Cost
+$0.14
+```
+
+With both disabled, these sections are omitted, reducing token usage when you don't need this context.
+
+#### Collapse thinking messages by default
 
 - Location: Settings → UI
 - Default: Enabled (thinking messages are collapsed by default)

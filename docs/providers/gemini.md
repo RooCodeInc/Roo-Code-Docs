@@ -35,6 +35,14 @@ Roo Code supports Google's Gemini family of models through the Google AI Gemini 
 
 Roo Code supports the following Gemini models:
 
+### Model Aliases (Recommended)
+
+For stability and automatic updates, use these aliases that point to the latest stable versions:
+
+* `gemini-flash-latest` - Always uses the newest stable Flash model
+* `gemini-pro-latest` - Always uses the newest stable Pro model
+
+
 ### Standard Models
 * `gemini-2.5-flash-preview-05-20`
 * `gemini-2.5-flash-preview-04-17`
@@ -50,6 +58,16 @@ Roo Code supports the following Gemini models:
 * `gemini-1.5-pro-002`
 * `gemini-1.5-pro-exp-0827`
 * `gemini-exp-1206`
+
+### Preview Models
+
+Preview models include Google's latest experimental features but may change without notice:
+
+* Models with `-preview-` in the name (e.g., `gemini-2.5-flash-preview-05-20`)
+* Models with `-exp-` suffix (e.g., `gemini-2.0-flash-exp`)
+* Models prefixed with `gemini-exp-` (e.g., `gemini-exp-1206`)
+
+Preview models are ideal for testing cutting-edge capabilities but may have breaking changes. Use stable aliases for production work.
 
 ### Thinking Models
 These models require reasoning budget to be enabled in Roo Code settings:
