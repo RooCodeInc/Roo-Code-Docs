@@ -294,9 +294,25 @@ fi
         <parsing>
           <regex>Detect PR references as: /#(\d{1,7})/g</regex>
           <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
+  Purpose: Count changelog bullets without explicit PR numbers as "referenced" when they confidently map to a PR.
+  Matching algorithm:
+  - Normalize both bullet text and PR titles:
+    - lowercase; remove punctuation; strip prefixes like "fix:", "feat:", "add:", "improve:", "chore:", "refactor:"
+    - remove parentheticals such as "(thanks @user!)", "(PR by @user)", "(#1234 ...)"
+    - collapse whitespace
+  - Tokenize and compute token-overlap score = |intersection(tokens)| / |union(tokens)|
+  - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
+  - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
+  Confidence thresholds:
+  - score ≥ 0.65 (after boosts) → linked (confident). Treat as changelog-referenced.
+  - 0.45 ≤ score &lt; 0.65 OR multiple candidates within 0.05 → ambiguous (needs review)
+  - score &lt; 0.45 → unlinked
+  Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score ≥ 0.50 (confidence="author-boost")
+  Implementation notes:
+  - Match only against PRs fetched for the version's date window
+  - Persist mapping bullet_text → { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
+</heuristics>
         </parsing>
       </step>
       
@@ -649,9 +665,25 @@ fi
         <parsing>
           <regex>Detect PR references as: /#(\d{1,7})/g</regex>
           <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
+  Purpose: Count changelog bullets without explicit PR numbers as "referenced" when they confidently map to a PR.
+  Matching algorithm:
+  - Normalize both bullet text and PR titles:
+    - lowercase; remove punctuation; strip prefixes like "fix:", "feat:", "add:", "improve:", "chore:", "refactor:"
+    - remove parentheticals such as "(thanks @user!)", "(PR by @user)", "(#1234 ...)"
+    - collapse whitespace
+  - Tokenize and compute token-overlap score = |intersection(tokens)| / |union(tokens)|
+  - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
+  - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
+  Confidence thresholds:
+  - score ≥ 0.65 (after boosts) → linked (confident). Treat as changelog-referenced.
+  - 0.45 ≤ score &lt; 0.65 OR multiple candidates within 0.05 → ambiguous (needs review)
+  - score &lt; 0.45 → unlinked
+  Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score ≥ 0.50 (confidence="author-boost")
+  Implementation notes:
+  - Match only against PRs fetched for the version's date window
+  - Persist mapping bullet_text → { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
+</heuristics>
         </parsing>
       </step>
       
@@ -993,9 +1025,25 @@ fi
         <parsing>
           <regex>Detect PR references as: /#(\d{1,7})/g</regex>
           <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
+  Purpose: Count changelog bullets without explicit PR numbers as "referenced" when they confidently map to a PR.
+  Matching algorithm:
+  - Normalize both bullet text and PR titles:
+    - lowercase; remove punctuation; strip prefixes like "fix:", "feat:", "add:", "improve:", "chore:", "refactor:"
+    - remove parentheticals such as "(thanks @user!)", "(PR by @user)", "(#1234 ...)"
+    - collapse whitespace
+  - Tokenize and compute token-overlap score = |intersection(tokens)| / |union(tokens)|
+  - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
+  - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
+  Confidence thresholds:
+  - score ≥ 0.65 (after boosts) → linked (confident). Treat as changelog-referenced.
+  - 0.45 ≤ score &lt; 0.65 OR multiple candidates within 0.05 → ambiguous (needs review)
+  - score &lt; 0.45 → unlinked
+  Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score ≥ 0.50 (confidence="author-boost")
+  Implementation notes:
+  - Match only against PRs fetched for the version's date window
+  - Persist mapping bullet_text → { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
+</heuristics>
         </parsing>
       </step>
       
@@ -1335,9 +1383,25 @@ fi
         <parsing>
           <regex>Detect PR references as: /#(\d{1,7})/g</regex>
           <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
+  Purpose: Count changelog bullets without explicit PR numbers as "referenced" when they confidently map to a PR.
+  Matching algorithm:
+  - Normalize both bullet text and PR titles:
+    - lowercase; remove punctuation; strip prefixes like "fix:", "feat:", "add:", "improve:", "chore:", "refactor:"
+    - remove parentheticals such as "(thanks @user!)", "(PR by @user)", "(#1234 ...)"
+    - collapse whitespace
+  - Tokenize and compute token-overlap score = |intersection(tokens)| / |union(tokens)|
+  - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
+  - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
+  Confidence thresholds:
+  - score ≥ 0.65 (after boosts) → linked (confident). Treat as changelog-referenced.
+  - 0.45 ≤ score &lt; 0.65 OR multiple candidates within 0.05 → ambiguous (needs review)
+  - score &lt; 0.45 → unlinked
+  Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score ≥ 0.50 (confidence="author-boost")
+  Implementation notes:
+  - Match only against PRs fetched for the version's date window
+  - Persist mapping bullet_text → { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
+</heuristics>
         </parsing>
       </step>
       
@@ -1687,9 +1751,25 @@ fi
         <parsing>
           <regex>Detect PR references as: /#(\d{1,7})/g</regex>
           <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
+  Purpose: Count changelog bullets without explicit PR numbers as "referenced" when they confidently map to a PR.
+  Matching algorithm:
+  - Normalize both bullet text and PR titles:
+    - lowercase; remove punctuation; strip prefixes like "fix:", "feat:", "add:", "improve:", "chore:", "refactor:"
+    - remove parentheticals such as "(thanks @user!)", "(PR by @user)", "(#1234 ...)"
+    - collapse whitespace
+  - Tokenize and compute token-overlap score = |intersection(tokens)| / |union(tokens)|
+  - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
+  - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
+  Confidence thresholds:
+  - score ≥ 0.65 (after boosts) → linked (confident). Treat as changelog-referenced.
+  - 0.45 ≤ score &lt; 0.65 OR multiple candidates within 0.05 → ambiguous (needs review)
+  - score &lt; 0.45 → unlinked
+  Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score ≥ 0.50 (confidence="author-boost")
+  Implementation notes:
+  - Match only against PRs fetched for the version's date window
+  - Persist mapping bullet_text → { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
+</heuristics>
         </parsing>
       </step>
       
