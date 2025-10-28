@@ -25,7 +25,7 @@ Roo Code offers keyboard commands to enhance your workflow. This page focuses on
 |---------|-------------|-----------------|
 | `roo-cline.acceptInput` | Submit text or accept the primary suggestion | None (configurable) |
 | `roo-cline.focusInput` | Focus the Roo input box | None (configurable) |
-| Add to Context | Add selected code to Roo's context | macOS: Cmd+Y; Windows/Linux: Ctrl+Y |
+| Add to Context | Add selected code to Roo's context | macOS: Cmd+K Cmd+A; Windows/Linux: Ctrl+K Ctrl+A |
 | Arrow Up/Down | Navigate through prompt history | Built-in |
 
 ### Key Benefits of Keyboard Commands
@@ -104,9 +104,13 @@ Choose a key combination that doesn't conflict with existing VS Code shortcuts:
 
 ## Add to Context Shortcut
 
-- Default: macOS Cmd+Y; Windows/Linux Ctrl+Y
+- Default: macOS: Cmd+K Cmd+A; Windows/Linux: Ctrl+K Ctrl+A
 - Requires: when condition `editorTextFocus && editorHasSelection`
-- Focus does not change automatically. To continue typing immediately, use “Roo: Focus Input” (`roo-cline.focusInput`) or click into the Roo panel.
+- Focus does not change automatically. To continue typing immediately, use "Roo: Focus Input" (`roo-cline.focusInput`) or click into the Roo panel.
+
+:::note Redo Shortcut Restored
+The standard Redo shortcut (macOS: Cmd+Y; Windows/Linux: Ctrl+Y) remains unchanged and is available for its usual function in VS Code.
+:::
 
 ### Practical Use Cases
 

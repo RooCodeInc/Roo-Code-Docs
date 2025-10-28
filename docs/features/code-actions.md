@@ -62,7 +62,7 @@ The **Add to Context** action is listed first in the Code Actions menu so you ca
 
 This helps Roo understand the exact context of your code within the project, allowing it to provide more relevant and accurate assistance.
 
-Tip: Use macOS Cmd+' or Windows/Linux Ctrl+' to add the selection to context quickly. See [Keyboard Shortcuts](/features/keyboard-shortcuts).
+Tip: Use macOS Cmd+K Cmd+A or Windows/Linux Ctrl+K Ctrl+A to add the selection to context quickly. See [Keyboard Shortcuts](/features/keyboard-shortcuts).
 
 **Example Chat Input:**
 
