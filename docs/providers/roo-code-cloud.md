@@ -38,7 +38,7 @@ The "roo/sonic" model is being renamed to **"grok-code-fast-1"** (officially "Gr
 1. **Connect to Roo Code Cloud:**
    - Click the account icon (<Codicon name="account" />) in Roo Code panel
    - Sign in with GitHub, Google, or email
-   - See [Login Guide](/roo-code-cloud/login) if needed
+   - See [Connect Guide](/roo-code-cloud/connect) if needed
 
 2. **Select Provider:**
    - Open Roo Code Settings (<Codicon name="gear" />)
