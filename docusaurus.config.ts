@@ -255,10 +255,6 @@ const config: Config = {
             from: ['/features/tools/read-file'],
           },
           {
-            to: '/advanced-usage/available-tools/search-and-replace',
-            from: ['/features/tools/search-and-replace'],
-          },
-          {
             to: '/advanced-usage/available-tools/search-files',
             from: ['/features/tools/search-files'],
           },

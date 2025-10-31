@@ -56,7 +56,7 @@ This tool reads the target file, identifies the specified insertion point based 
 
 ## Limitations
 
-- **Insert Only**: Cannot replace or delete existing content. Use `apply_diff` or `search_and_replace` for modifications.
+- **Insert Only**: Cannot replace or delete existing content. Use `apply_diff` for modifications.
 - **Requires Existing File**: The target file specified by `path` must exist.
 - **Review Overhead**: The mandatory diff view approval adds an interactive step.
 

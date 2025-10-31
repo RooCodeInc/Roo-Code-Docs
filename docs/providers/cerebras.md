@@ -31,18 +31,6 @@ Cerebras AI specializes in extremely fast inference speeds (up to 2600 tokens/se
 
 ---
 
-## Supported Models
-
-Roo Code supports the following Cerebras models:
-
-* `qwen-3-coder-480b-free` (Default)
-* `qwen-3-coder-480b`
-* `qwen-3-235b-a22b-instruct-2507`
-* `llama-3.3-70b`
-* `qwen-3-32b`
-* `qwen-3-235b-a22b-thinking-2507`
-
----
 
 ## Configuration in Roo Code
 
