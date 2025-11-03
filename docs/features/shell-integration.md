@@ -69,14 +69,15 @@ Roo Code provides settings to fine-tune how it interacts with terminals. To acce
 ### Basic Settings
 
 #### Terminal Output Limit
-<img src="/img/shell-integration/shell-integration.png" alt="Terminal output limit slider set to 500" width="600" />
+<img src="/img/shell-integration/shell-integration-13.png" alt="Terminal output limit slider set to 500" width="600" />
 Truncates by lines. Roo keeps the beginning and end and drops the middle with an "[...N lines omitted...]" marker to stay under the limit. Mechanism: keeps approximately 20% of the head and 80% of the tail of the allowed line budget and inserts an omission marker, preserving a blank line before the tail for readability. Use when commands print many lines (e.g., long logs) and you mostly care about headers and final results. Avoid when important details are in the middle. Default: 500 lines.
 
 #### Terminal Character Limit
+<img src="/img/shell-integration/shell-integration-15.png" alt="Terminal character limit setting" width="600" />
 Hard cap on total output size (characters). Roo keeps the beginning and end and omits the middle with an "[...N characters omitted...]" marker. Mechanism: takes precedence over the line limit; keeps ~20% of the head and ~80% of the tail of the character budget, overriding the line limit to prevent memory issues from very long lines. Use when commands print extremely long lines or massive blobs. Avoid when you need the exact full content.
 
 #### Compress progress bar output
-<img src="/img/shell-integration/shell-integration-10.png" alt="Compress progress bar output checkbox" width="600" />
+<img src="/img/shell-integration/shell-integration-14.png" alt="Compress progress bar output checkbox" width="600" />
 ON: Collapses progress bars/spinners by processing carriage returns (\r) and backspaces (\b) so only the final state is kept, then applies run-length encoding to collapse repeated lines. OFF: Keeps every update exactly as printed. Use when you don’t need intermediate spinner states (recommended ON). Disable only if you’re debugging step-by-step progress behavior.
 
 ### Advanced Settings
@@ -94,18 +95,9 @@ Changes to advanced terminal settings only take effect after restarting your ter
 Always restart all open terminals after changing any of these settings.
 :::
 
-#### Inherit environment variables
-<img src="/img/shell-integration/shell-integration-11.png" alt="Inherit environment variables checkbox" width="600" />
-VS Code terminal only. Controls whether VS Code integrated terminals inherit environment variables from the parent VS Code process. Mirrors the VS Code setting [`terminal.integrated.inheritEnv`](https://code.visualstudio.com/docs/editor/integrated-terminal#_inherit-environment-variables). Note: Inline Terminal (“Use Inline Terminal (recommended)” ON) runs as a background process and always uses the extension’s Node process environment; this setting doesn’t affect it. Keep enabled (VS Code default) if you rely on PATH/proxy/auth variables provided by VS Code. Disable only for clean, reproducible integrated terminal sessions or when debugging environment conflicts.
-
-### Runtime Environment
-On macOS (and possibly other operating systems) the environment provided to VSCode, and consequently Roo Code, can differ depending on how VSCode is launched.  
-If launched from the command line `vscode` command, VSCode and Roo Code will inherit the environment from the shell that launched it, and all will (usually) be well.
-If launched from the Finder, Dock, or Spotlight, environment exported from `.zshrc`, or `.zprofile` will likely be missing.  If you have environment variables set in one of those files, and find they are missing when running VSCode, move them to .zshenv, and log out and back in again, so the window manager will pick up the new environment settings.
-
-#### Use Inline Terminal (recommended)
 <a id="disable-terminal-shell-integration"></a>
-<img src="/img/shell-integration/shell-integration-9.png" alt="Use Inline Terminal (recommended) switch" width="600" />
+#### Use Inline Terminal (recommended)
+<img src="/img/shell-integration/shell-integration-16.png" alt="Use Inline Terminal (recommended) switch" width="600" />
 Controls how Roo Code executes terminal commands.
 
 - ON (Use Inline Terminal): Runs commands with the Inline Terminal (in chat), bypassing shell profiles and VS Code shell integration for reliability and faster starts. Mechanism: uses a background “execa” provider and streams output directly (no VS Code OSC 633/133 markers).
@@ -115,34 +107,48 @@ Controls how Roo Code executes terminal commands.
 
 - OFF (Use VS Code terminal): Uses the VS Code integrated terminal and your shell profile; may require shell integration and is more likely to hit “Shell Integration Unavailable” issues. Use this only when you specifically need terminal UI features or interactive profile behavior.
 
+:::info Runtime Environment
+On macOS (and possibly other operating systems) the environment provided to VSCode, and consequently Roo Code, can differ depending on how VSCode is launched.
+
+If launched from the command line `vscode` command, VSCode and Roo Code will inherit the environment from the shell that launched it, and all will (usually) be well.
+
+If launched from the Finder, Dock, or Spotlight, environment exported from `.zshrc`, or `.zprofile` will likely be missing.
+
+If you have environment variables set in one of those files, and find they are missing when running VSCode, move them to .zshenv, and log out and back in again, so the window manager will pick up the new environment settings.
+:::
+
 The following advanced settings apply only when this is OFF (i.e., when using the VS Code terminal):
 
+#### Inherit environment variables
+<img src="/img/shell-integration/shell-integration-17.png" alt="Inherit environment variables checkbox" width="600" />
+VS Code terminal only. Controls whether VS Code integrated terminals inherit environment variables from the parent VS Code process. Mirrors the VS Code setting [`terminal.integrated.inheritEnv`](https://code.visualstudio.com/docs/editor/integrated-terminal#_inherit-environment-variables). Note: Inline Terminal (“Use Inline Terminal (recommended)” ON) runs as a background process and always uses the extension’s Node process environment; this setting doesn’t affect it. Keep enabled (VS Code default) if you rely on PATH/proxy/auth variables provided by VS Code. Disable only for clean, reproducible integrated terminal sessions or when debugging environment conflicts.
+
 ##### Terminal shell integration timeout
-<img src="/img/shell-integration/shell-integration-1.png" alt="Terminal shell integration timeout slider set to 15s" width="600" />
+<img src="/img/shell-integration/shell-integration-18.png" alt="Terminal shell integration timeout slider set to 15s" width="600" />
 How long Roo waits for VS Code shell integration to initialize and for the integration stream to start. If not ready within the timeout, a “no shell integration” event is emitted and execution will fall back to the Inline Terminal when retried. Use when your shell/profile has long startup times or you see “Shell Integration Unavailable” errors. Avoid increasing if you’re using the Inline Terminal (not applicable there). Default: 15s. Applies only when using the VS Code terminal.
 
 ##### Terminal command delay
-<img src="/img/shell-integration/shell-integration-2.png" alt="Terminal command delay slider set to 0ms" width="600" />
+<img src="/img/shell-integration/shell-integration-19.png" alt="Terminal command delay slider set to 0ms" width="600" />
 Adds a small delay after each command to help VS Code terminals flush all output. Mechanism: sets `PROMPT_COMMAND='sleep N'` for bash/zsh and appends `start-sleep -milliseconds N` for PowerShell. Use when you see truncated/missing tail output or prompt races. Avoid when output captures look correct. Set to 0 to disable. Default: 0ms.
 
 ##### Enable PowerShell counter workaround
-<img src="/img/shell-integration/shell-integration-3.png" alt="Enable PowerShell counter workaround checkbox" width="600" />
+<img src="/img/shell-integration/shell-integration-20.png" alt="Enable PowerShell counter workaround checkbox" width="600" />
 ON: Appends `; "(Roo/PS Workaround: N)" > $null` to each command to force a reliable post-execution signal and avoid missing or duplicated output on some setups. Use when using Windows PowerShell and output is incomplete or repeats, or when running the same command twice in a row fails. OFF: Runs PowerShell commands unchanged.
 
 ##### Clear ZSH EOL mark
-<img src="/img/shell-integration/shell-integration-4.png" alt="Clear ZSH EOL mark checkbox" width="600" />
+<img src="/img/shell-integration/shell-integration-21.png" alt="Clear ZSH EOL mark checkbox" width="600" />
 ON: Omits Zsh’s end-of-line mark (%) so output is parsed correctly. Mechanism: sets `PROMPT_EOL_MARK=""`. Use when captured output ends with a stray % or parsing looks off. OFF: Leaves the default EOL mark (may confuse parsing on some setups).
 
 ##### Enable Oh My Zsh integration
-<img src="/img/shell-integration/shell-integration-5.png" alt="Enable Oh My Zsh integration checkbox" width="600" />
+<img src="/img/shell-integration/shell-integration-22.png" alt="Enable Oh My Zsh integration checkbox" width="600" />
 For users of the popular Oh My Zsh framework for Zsh. Enable this if you use Oh My Zsh and experience general issues with terminal command execution or output rendering that aren't solved by other settings. This helps Roo Code align with Oh My Zsh's specific shell integration mechanisms by setting `ITERM_SHELL_INTEGRATION_INSTALLED=Yes`. Restarting the IDE might be necessary.
 
 ##### Enable Powerlevel10k integration
-<img src="/img/shell-integration/shell-integration-6.png" alt="Enable Powerlevel10k integration checkbox" width="600" />
+<img src="/img/shell-integration/shell-integration-23.png" alt="Enable Powerlevel10k integration checkbox" width="600" />
 For users of the Powerlevel10k theme for Zsh. Enable this if your Powerlevel10k prompt (which can be quite complex) seems to interfere with Roo Code's ability to correctly detect command boundaries, parse output, or track the current working directory. This sets `POWERLEVEL9K_TERM_SHELL_INTEGRATION=true`.
 
 ##### Enable ZDOTDIR handling
-<img src="/img/shell-integration/shell-integration-7.png" alt="Enable ZDOTDIR handling checkbox" width="600" />
+<img src="/img/shell-integration/shell-integration-24.png" alt="Enable ZDOTDIR handling checkbox" width="600" />
 ON: Uses a temporary ZDOTDIR so VS Code shell integration works with zsh while preserving your config. Mechanism: creates a temp dir with a `.zshrc` that sources VS Code’s shell integration script, then re-sources your original zsh files and resets ZDOTDIR; the temp dir is cleaned up after initialization. Use when zsh shell integration fails or conflicts with your dotfiles. OFF: Uses your normal ZDOTDIR.
 
 ---
