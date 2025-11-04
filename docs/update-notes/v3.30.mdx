@@ -32,6 +32,8 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 * Cancel during streaming no longer causes flicker; you can resume in place, input stays enabled, and the spinner stops deterministically ([#8986](https://github.com/RooCodeInc/Roo-Code/pull/8986))
 * Remove newline-only reasoning blocks from OpenAI-compatible responses for cleaner output and logs ([#8990](https://github.com/RooCodeInc/Roo-Code/pull/8990))
 * "Disable Terminal Shell Integration" now links to the correct documentation section ([#8997](https://github.com/RooCodeInc/Roo-Code/pull/8997))
+* Correct OpenRouter Mistral embedding dimension to 1536 to prevent vector size errors; existing Qdrant collections are recreated with the correct size for consistent similarity search ([#9028](https://github.com/RooCodeInc/Roo-Code/pull/9028))
+* Revert the recent cancel/resume change that caused UI flicker and unreliable resumption, restoring the previous stable behavior ([#9032](https://github.com/RooCodeInc/Roo-Code/pull/9032))
 
 ## Misc Improvements
 
