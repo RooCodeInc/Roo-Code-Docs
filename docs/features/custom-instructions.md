@@ -20,7 +20,7 @@ You can provide custom instructions using global rules (applied across all proje
 *   **Linux/macOS:** `~/.roo/rules/` and `~/.roo/rules-{modeSlug}/`
 *   **Windows:** `%USERPROFILE%\.roo\rules\` and `%USERPROFILE%\.roo\rules-{modeSlug}\`
 
-**Workspace Rules:** Apply only to the current project, can override global rules.
+**Workspace Rules:** Apply only to the current project and take precedence over global rules when they conflict.
 *   **Preferred Method: Directory (`.roo/rules/`)**
     ```
     .
@@ -54,7 +54,7 @@ You can provide custom instructions using global rules (applied across all proje
     └── ... (other project files)
     ```
 
-Rules are loaded in order: Global rules first, then workspace rules (which can override global rules). See [Global Rules Directory](#global-rules-directory) for details.
+Rules are loaded in order: Global rules first, then workspace rules. If there's a conflict, workspace rules take precedence. See [Global Rules Directory](#global-rules-directory) for details.
 :::
 
 ---
@@ -92,7 +92,7 @@ The Global Rules Directory feature provides reusable rules and custom instructio
 
 **With Global Rules**: Create rules once and use them everywhere:
 - Set up your preferred coding standards globally
-- Override specific rules per project when needed
+- Customize specific rules per project when needed
 - Maintain consistency across all your work
 - Easy to update rules for all projects at once
 
@@ -176,8 +176,8 @@ The global rules directory location is fixed and cannot be customized:
 Rules are loaded in this order:
 
 1. **Global Rules** (from `~/.roo/`)
-2. **Project Rules** (from `project/.roo/`) - can override global rules
-3. **Legacy Files** (`.roorules`, `.clinerules` - for backward compatibility)
+2. **Project Rules** (from `project/.roo/`) - take precedence over global rules when they conflict
+3. [Generic only] **Legacy Files** (workspace root `.roorules`, `.clinerules`) - used only if no generic rules directory content was loaded
 
 Within each level, mode-specific rules are loaded before general rules.
 
@@ -279,7 +279,10 @@ Rules:
 * **Recursive Reading:** Rules directories are read recursively, including all files in subdirectories
 * **File Filtering:** System automatically excludes cache and temporary files (`.DS_Store`, `*.bak`, `*.cache`, `*.log`, `*.tmp`, `Thumbs.db`, etc.)
 * **Empty Files:** Empty or missing rule files are silently skipped
-* **Source Headers:** Directory-based rules are included without headers, while file-based rules include `# Rules from {filename}:` headers
+* **Source Headers:** Directory-based rules include per-file headers `# Rules from {absolute path}:`, while file-based rules include `# Rules from {filename}:` headers
+* **Aggregation:** Both global and workspace rules directories are aggregated for mode-specific and generic rules (not either-or)
+* **Sorting:** Files are sorted by basename only, case-insensitive
+* **Header Paths:** Header paths are absolute and follow symlinks
 * **Rule Interaction:** Mode-specific rules complement global rules rather than replacing them
 * **Symbolic Links:** Fully supported for both files and directories, with a maximum resolution depth of 5 to prevent infinite loops
 
@@ -292,9 +295,12 @@ Roo Code also supports loading rules from an `AGENTS.md` (or `AGENT.md` as fallb
 * **Purpose:** Provides agent-specific rules and guidelines for AI behavior
 * **Location:** Must be in the workspace root directory
 * **Loading:** Automatically loaded by default. To disable AGENTS.md loading, set `"roo-cline.useAgentRules": false` in your VSCode settings
-* **Priority:** Loaded after mode-specific rules but before general workspace rules
-* **Header:** Added to system prompt with header `# Agent Rules Standard (AGENTS.md):`
-* **Symbolic Links:** Supports symbolic links to AGENTS.md files in other locations
+* **Setting:** `roo-cline.useAgentRules` (default: true)
+* **Preference:** If both exist, `AGENTS.md` is preferred over `AGENT.md`
+* **Priority:** Loaded after mode-specific rules and `.rooignore`, before generic rules from both `~/.roo/rules` and `.roo/rules`
+* **Header:** Added to system prompt with header `# Agent Rules Standard (AGENTS.md):` or `(AGENT.md):` accordingly
+* **Empty Files:** Empty or whitespace-only `AGENTS.md` is ignored
+* **Symbolic Links:** Symbolic links to files or directories are resolved before reading
 
 This feature allows teams to maintain standardized AI agent behavior rules that can be version-controlled alongside the project code.
 
@@ -317,7 +323,7 @@ For team environments, consider these approaches:
 
 **Organization Standards**: Use global rules (`~/.roo/rules/`) to establish organization-wide coding standards that apply to all projects. Team members can set up identical global rules for consistency across all work.
 
-**Hybrid Approach**: Combine global rules for organization standards with project-specific workspace rules for project-specific requirements. Workspace rules can override global rules when needed.
+**Hybrid Approach**: Combine global rules for organization standards with project-specific workspace rules for project-specific requirements. When rules conflict, workspace rules take precedence.
 
 The directory-based approach offers better organization than single `.roorules` files and supports both global and project-level customization.
 :::
