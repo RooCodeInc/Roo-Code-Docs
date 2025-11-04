@@ -40,7 +40,7 @@ Roo Code provides settings to fine-tune how it interacts with terminals. To acce
 1. Click the <Codicon name="gear" /> icon in the top-right corner of the Roo Code sidebar.
 2. In the settings pane that opens, select the "Terminal" group from the left-hand menu.
 
-#### Basic Settings
+### Basic Settings
 
 #### Terminal Output Limit
 <img src="/img/shell-integration/shell-integration-13.png" alt="Terminal output limit slider set to 500" width="600" />
@@ -54,7 +54,7 @@ Hard cap on total output size (characters). Roo keeps the beginning and end and 
 <img src="/img/shell-integration/shell-integration-14.png" alt="Compress progress bar output checkbox" width="600" />
 ON: Collapses progress bars/spinners by processing carriage returns (\r) and backspaces (\b) so only the final state is kept, then applies run-length encoding to collapse repeated lines. OFF: Keeps every update exactly as printed. Use when you don’t need intermediate spinner states (recommended ON). Disable only if you’re debugging step-by-step progress behavior.
 
-#### Advanced Settings
+### Advanced Settings
 
 Unless noted, these settings apply only when "Use Inline Terminal (recommended)" is OFF (i.e., using the VS Code terminal).
 
