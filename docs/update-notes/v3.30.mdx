@@ -1,5 +1,5 @@
 ---
-description: Adds OpenRouter embeddings, improves reasoning handling, and delivers stability and UI fixes.
+description: Adds OpenRouter embeddings, Bedrock Global Inference, provider defaults/limits updates, and stability/UI fixes.
 keywords:
   - roo code 3.30
   - new features
@@ -9,7 +9,7 @@ image: /img/v3.30.0/v3.30.0.png
 
 # Roo Code 3.30 Release Notes (2025-11-03)
 
-This release adds OpenRouter embeddings, enhances reasoning handling, and delivers stability and UI improvements.
+This release adds OpenRouter embeddings and Bedrock Global Inference, updates provider defaults and limits, and delivers stability and UI improvements.
 
 <img src="/img/v3.30.0/v3.30.0.png" alt="Roo Code v3.30 Release" width="600" />
 
@@ -24,6 +24,8 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 ## QOL Improvements
 
 * Terminal settings cleanup with Inline as the default terminal and clearer options; shell integration default is disabled to reduce environment conflicts ([#8342](https://github.com/RooCodeInc/Roo-Code/pull/8342))
+* File path tooltips show full paths on hover across reads/edits, directory listings, and search, reducing confusion in narrow layouts (thanks da2ce7!) ([#9030](https://github.com/RooCodeInc/Roo-Code/pull/9030))
+* Optional pre-push full test run via RUN_TESTS_ON_PUSH=true in .env.local; default behavior keeps pushes fast (tests skipped) ([#9055](https://github.com/RooCodeInc/Roo-Code/pull/9055))
 
 ## Bug Fixes
 
@@ -34,6 +36,12 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 * "Disable Terminal Shell Integration" now links to the correct documentation section ([#8997](https://github.com/RooCodeInc/Roo-Code/pull/8997))
 * Correct OpenRouter Mistral embedding dimension to 1536 to prevent vector size errors; existing Qdrant collections are recreated with the correct size for consistent similarity search ([#9028](https://github.com/RooCodeInc/Roo-Code/pull/9028))
 * Revert the recent cancel/resume change that caused UI flicker and unreliable resumption, restoring the previous stable behavior ([#9032](https://github.com/RooCodeInc/Roo-Code/pull/9032))
+* Eliminate UI flicker during task cancellation; the task view remains stable ([#9037](https://github.com/RooCodeInc/Roo-Code/pull/9037))
+* Keep pinned models fixed at the top of long lists for faster access (thanks XiaoYingYo!) ([#8813](https://github.com/RooCodeInc/Roo-Code/pull/8813))
+* Ensure Checkpoints commit to Roo’s shadow repository even when GIT_DIR is set in Dev Containers (thanks nonsleepr!) ([#8811](https://github.com/RooCodeInc/Roo-Code/pull/8811))
+* Restore correct 32K maxTokens for Claude Opus 4.1 to avoid premature truncation (thanks kaveh-deriv!) ([#9046](https://github.com/RooCodeInc/Roo-Code/pull/9046))
+* Fix dynamic provider model validation so provider switches use a valid default model without TypeErrors (thanks NotADev137!) ([#9054](https://github.com/RooCodeInc/Roo-Code/pull/9054))
+* Include full user agent details in AWS Bedrock requests for better auditing and troubleshooting (thanks ajjuaire!) ([#9043](https://github.com/RooCodeInc/Roo-Code/pull/9043))
 
 ## Misc Improvements
 
@@ -46,3 +54,6 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 * GLM 4.6: capture reasoning content in base OpenAI‑compatible provider during streaming ([#8976](https://github.com/RooCodeInc/Roo-Code/pull/8976))
 * Fireworks: add GLM‑4.6 to the model dropdown for stronger coding performance and longer context (thanks mmealman!) ([#8754](https://github.com/RooCodeInc/Roo-Code/pull/8754))
 * Fireworks: add MiniMax M2 with 204.8K context and 4K output tokens; correct pricing metadata (thanks dmarkey!) ([#8962](https://github.com/RooCodeInc/Roo-Code/pull/8962))
+* Set Claude Sonnet 4.5 as the default where available across Anthropic, Bedrock, OpenRouter, Claude Code, and Unbound ([#8922](https://github.com/RooCodeInc/Roo-Code/pull/8922))
+* Cerebras zai‑glm‑4.6: 40,960 max output tokens and a 131,072‑token context window; faster responses (~1,000 tok/s) (thanks sebastiand-cerebras!) ([#9024](https://github.com/RooCodeInc/Roo-Code/pull/9024))
+* OpenRouter: add Qwen3‑Embedding‑0.6B (1024‑dim) and 4B (2560‑dim) for code indexing (thanks dmarkey!) ([#9060](https://github.com/RooCodeInc/Roo-Code/pull/9060))
