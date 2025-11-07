@@ -25,6 +25,9 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 
 * Terminal settings cleanup with Inline as the default terminal and clearer options; shell integration default is disabled to reduce environment conflicts ([#8342](https://github.com/RooCodeInc/Roo-Code/pull/8342))
 * File path tooltips show full paths on hover across reads/edits, directory listings, and search, reducing confusion in narrow layouts (thanks da2ce7!) ([#9030](https://github.com/RooCodeInc/Roo-Code/pull/9030))
+* Home screen visuals refined for clarity and space usage ([#9057](https://github.com/RooCodeInc/Roo-Code/pull/9057))
+* Chat diff appearance is clearer and easier to scan ([#8932](https://github.com/RooCodeInc/Roo-Code/pull/8932))
+* Settings copy clarifies that an Error & Repetition Limit of 0 disables the mechanism ([#8965](https://github.com/RooCodeInc/Roo-Code/pull/8965))
 
 ## Bug Fixes
 
@@ -41,6 +44,9 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 * Restore correct 32K maxTokens for Claude Opus 4.1 to avoid premature truncation (thanks kaveh-deriv!) ([#9046](https://github.com/RooCodeInc/Roo-Code/pull/9046))
 * Fix dynamic provider model validation so provider switches use a valid default model without TypeErrors (thanks NotADev137!) ([#9054](https://github.com/RooCodeInc/Roo-Code/pull/9054))
 * Include full user agent details in AWS Bedrock requests for better auditing and troubleshooting (thanks ajjuaire!) ([#9043](https://github.com/RooCodeInc/Roo-Code/pull/9043))
+* Auto‑retry on empty assistant response to prevent task cancellations (reporter: Akillatech) ([#9083](https://github.com/RooCodeInc/Roo-Code/pull/9083))
+* Use “system” role for non‑streaming OpenAI‑compatible requests to prevent provider errors (reporter: whitfin) ([#8216](https://github.com/RooCodeInc/Roo-Code/pull/8216))
+* Prevent notification sound when messages are queued to auto‑continue ([#8540](https://github.com/RooCodeInc/Roo-Code/pull/8540))
 
 ## Misc Improvements
 
@@ -57,3 +63,5 @@ OpenRouter currently supports 7 embedding models, including the top‑ranking Qw
 * Set Claude Sonnet 4.5 as the default where available across Anthropic, Bedrock, OpenRouter, Claude Code, and Unbound ([#8922](https://github.com/RooCodeInc/Roo-Code/pull/8922))
 * Cerebras zai‑glm‑4.6: 40,960 max output tokens and a 131,072‑token context window; faster responses (~1,000 tok/s) (thanks sebastiand-cerebras!) ([#9024](https://github.com/RooCodeInc/Roo-Code/pull/9024))
 * OpenRouter: add Qwen3‑Embedding‑0.6B (1024‑dim) and 4B (2560‑dim) for code indexing (thanks dmarkey!) ([#9060](https://github.com/RooCodeInc/Roo-Code/pull/9060))
+* Moonshot: add kimi‑k2‑thinking (262k context) ([#9079](https://github.com/RooCodeInc/Roo-Code/pull/9079))
+* MiniMax: add MiniMax‑M2‑Stable and enable prompt caching for MiniMax models ([#9072](https://github.com/RooCodeInc/Roo-Code/pull/9072))
