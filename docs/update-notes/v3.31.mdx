@@ -41,11 +41,14 @@ The task header and to-do list now work together so you can see progress at a gl
 - **API Profiles apply immediately when provider/model unchanged** ([#9210](https://github.com/RooCodeInc/Roo-Code/pull/9210)): Updates headers, baseUrl, service tier, and reasoning budgets without requiring a model change.
 - **Auto‑approval honors MCP server state** ([#9199](https://github.com/RooCodeInc/Roo-Code/pull/9199)): Restores expected tool auto‑approval behavior (thanks bozoweed!).
 - **Issue Fixer reliability via REST + ProjectsV2** ([#9207](https://github.com/RooCodeInc/Roo-Code/pull/9207)): Resolves sync errors and restores dependable triage.
+- **OpenAI (native) encrypted reasoning handling** ([#9231](https://github.com/RooCodeInc/Roo-Code/pull/9231)): Includes encrypted reasoning only when a reasoning effort is set and enforces medium‑only verbosity for gpt‑5‑chat‑latest to prevent invalid parameter errors (thanks politsin!).
+- **Roo Anthropic input token normalization** ([#9224](https://github.com/RooCodeInc/Roo-Code/pull/9224)): Prevents double‑counting cached tokens so usage metrics, cost estimates, and context calculations are accurate across providers.
 
 ## Misc Improvements
 
 - **Roo Code Cloud error logging** ([#9098](https://github.com/RooCodeInc/Roo-Code/pull/9098)): Captures richer context for failed requests (status codes, response bodies, and request details), making it easier to understand and resolve provider and configuration issues.
 - **IPC: send messages to the current task** ([#9149](https://github.com/RooCodeInc/Roo-Code/pull/9149)): Programmatically post text and images into an active task for automations and richer context.
+- **Context management terminology** ([#9206](https://github.com/RooCodeInc/Roo-Code/pull/9206)): Rename “sliding window” to “context management” and unify handling under a single entry point for clearer behavior and documentation alignment.
 
 ## Provider Updates
 
