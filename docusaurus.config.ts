@@ -106,7 +106,7 @@ const config: Config = {
         "posthog-docusaurus",
         {
           apiKey: process.env.POSTHOG_API_KEY,
-          appUrl: "https://us.i.posthog.com",
+          appUrl: "https://ph.roocode.com",
           enableInDevelopment: true,
         },
       ],
