@@ -7,14 +7,12 @@ keywords:
   - native tool protocol
   - openai compatible
   - bug fixes
-image: /img/v3.33.0/v3.33.0.png
+image: /img/social-share.jpg
 ---
 
 # Roo Code 3.33 Release Notes (2025-11-18)
 
 Roo Code 3.33 introduces support for Gemini 3 Pro Preview and native tool calling for OpenAI-compatible providers, along with improved Gemini defaults and numerous native tool protocol fixes.
-
-<img src="/img/v3.33.0/v3.33.0.png" alt="Roo Code v3.33 Release" width="600" />
 
 ## Major Features
 
@@ -37,6 +35,9 @@ Roo Code now supports Google’s Gemini 3 Pro Preview model through direct Gemin
 - **Improved Modes view toolbar** ([#9077](https://github.com/RooCodeInc/Roo-Code/pull/9077)): Moves Import/Export into the Modes view toolbar and cleans up the Mode edit view.
 - **Cloud agent CTA points to setup page** ([#9338](https://github.com/RooCodeInc/Roo-Code/pull/9338)): Updates the cloud agent call-to-action to link directly to the setup page.
 - **Roo Code Cloud provider pricing page** ([#9195](https://github.com/RooCodeInc/Roo-Code/pull/9195)): Adds a pricing page and related Cloud provider tweaks.
+- **Gemini native tool calling (experimental, Google Gemini provider only)** ([#9343](https://github.com/RooCodeInc/Roo-Code/pull/9343)): Adds an experimental native tool option (off by default) for the Google Gemini provider so Gemini-based workflows can use tools without XML translation and behave more like other native-tool providers.
+- **Roo Code Cloud credit balance in the extension** ([#9386](https://github.com/RooCodeInc/Roo-Code/pull/9386)): Shows your Roo Code Cloud RCC credit balance directly in the Roo provider settings so you can track usage and avoid unexpected interruptions.
+- **Explicit 0 pricing for free models** ([#9419](https://github.com/RooCodeInc/Roo-Code/pull/9419)): Displays explicit 0 input/output token prices for free models in the pricing UI so it is always clear which options are free.
 
 ## Bug Fixes
 
@@ -56,3 +57,12 @@ Roo Code now supports Google’s Gemini 3 Pro Preview model through direct Gemin
 - **VS Code theme-colored outline button borders** ([#9336](https://github.com/RooCodeInc/Roo-Code/pull/9336)): Aligns outline button borders with the current VS Code theme.
 - **Use shields.io badges instead of badgen.net** ([#9318](https://github.com/RooCodeInc/Roo-Code/pull/9318)): Replaces broken badge URLs with shields.io.
 - **Cap git status file sampling in evals** ([#9322](https://github.com/RooCodeInc/Roo-Code/pull/9322)): Adds a maximum for git status files in eval settings.
+- **Preserve images in native tool call results** ([#9401](https://github.com/RooCodeInc/Roo-Code/pull/9401)): Ensures images attached to messages are preserved and passed through native tool calls so follow-up reasoning can still use visual context instead of losing it as plain text only.
+- **Faster router model metadata loading** ([#9410](https://github.com/RooCodeInc/Roo-Code/pull/9410)): Reduces redundant getModel() calls and adds a disk-backed metadata cache so router-based providers start faster and are more reliable when loading model info.
+
+## Documentation Updates
+
+- **Gemini native tools** ([#9343](https://github.com/RooCodeInc/Roo-Code/pull/9343)): Update [Gemini Provider](/providers/gemini) and [How tools work](/basic-usage/how-tools-work) with details and examples for Gemini native tool calling (experimental, Google Gemini provider only, off by default).
+- **Roo Code Cloud credit balance** ([#9386](https://github.com/RooCodeInc/Roo-Code/pull/9386)): Update [Roo Code Cloud billing & subscriptions](/roo-code-cloud/billing-subscriptions) and [Roo Code Cloud provider](/providers/roo-code-cloud) docs to show the in-extension RCC credit balance indicator and explain what it represents.
+- **Images in native tools** ([#9401](https://github.com/RooCodeInc/Roo-Code/pull/9401)): Clarify in [How tools work](/basic-usage/how-tools-work) that native tool calls preserve both text and image content, and that attached images can still be used by the model after tools run.
+- **Free model pricing display** ([#9419](https://github.com/RooCodeInc/Roo-Code/pull/9419)): Refresh screenshots and wording in [Rate limits and pricing](/advanced-usage/rate-limits-costs) or related pricing documentation to show free models with explicit 0 input/output token prices.
