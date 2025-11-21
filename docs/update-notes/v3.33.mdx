@@ -24,10 +24,14 @@ Roo Code now supports Google’s Gemini 3 Pro Preview model through direct Gemin
 - **Strong eval performance**: Achieves a 100% score on internal Roo Code evals and 76.2% on SWE-bench Verified, giving more consistent solutions on real-world coding tasks.
 - **Reliable tool usage**: Executes complex multi-step tool workflows without getting stuck or losing track, especially in long, tool-heavy tasks.
 - **Better out-of-the-box defaults**: Uses `gemini-2.5-pro` by default where supported, sets a more natural temperature of 1, cleans up the Gemini model list, and includes reasoning / “thought” tokens in cost reporting so usage numbers better match provider billing.
+- **Image Preview Support**: Added support for image previews with Google Gemini 3 Pro image generation models ([#9440](https://github.com/RooCodeInc/Roo-Code/pull/9440)).
 
 ## QOL Improvements
 
 - **Native Tool Calling for OpenAI-compatible Providers** ([#9369](https://github.com/RooCodeInc/Roo-Code/pull/9369)): Enables native tool use with a wider range of models and providers that support the OpenAI format, offering more robust tool interactions in both streaming and non-streaming modes.
+- **Minimax Provider Support** ([#9455](https://github.com/RooCodeInc/Roo-Code/pull/9455)): Added support for Minimax as an Anthropic-compatible provider.
+- **Reasoning History** ([#9451](https://github.com/RooCodeInc/Roo-Code/pull/9451)): Reasoning is now stored in conversation history for all providers.
+- **Improved Read File Tool** ([#9422](https://github.com/RooCodeInc/Roo-Code/pull/9422)): Enhanced the `read_file` tool description with clearer examples.
 
 - **Git status in environment details** ([#9310](https://github.com/RooCodeInc/Roo-Code/pull/9310)): Shows git status information in environment details so agents have more context about untracked, modified, and staged files.
 - **Tool protocol selector in advanced settings** ([#9324](https://github.com/RooCodeInc/Roo-Code/pull/9324)): Lets you choose which tool protocol to use (such as XML vs native) without editing config files.
@@ -59,3 +63,9 @@ Roo Code now supports Google’s Gemini 3 Pro Preview model through direct Gemin
 - **Cap git status file sampling in evals** ([#9322](https://github.com/RooCodeInc/Roo-Code/pull/9322)): Adds a maximum for git status files in eval settings.
 - **Preserve images in native tool call results** ([#9401](https://github.com/RooCodeInc/Roo-Code/pull/9401)): Ensures images attached to messages are preserved and passed through native tool calls so follow-up reasoning can still use visual context instead of losing it as plain text only.
 - **Faster router model metadata loading** ([#9410](https://github.com/RooCodeInc/Roo-Code/pull/9410)): Reduces redundant getModel() calls and adds a disk-backed metadata cache so router-based providers start faster and are more reliable when loading model info.
+- **Environment Details Duplication** ([#9442](https://github.com/RooCodeInc/Roo-Code/pull/9442)): Fixed an issue where `environment_details` were duplicated when resuming cancelled tasks.
+- **Preserve Reasoning Flag** ([#9453](https://github.com/RooCodeInc/Roo-Code/pull/9453)): Fixed the `preserveReasoning` flag to correctly control API reasoning inclusion.
+- **OpenAI Parallel Tool Calls** ([#9433](https://github.com/RooCodeInc/Roo-Code/pull/9433)): Prevented OpenAI Native parallel tool calls when using native tool calling to avoid errors.
+- **Search and Replace Parsing** ([#9456](https://github.com/RooCodeInc/Roo-Code/pull/9456)): Improved symbol parsing in the search and replace functionality.
+- **Skipped Tool Results** ([#9457](https://github.com/RooCodeInc/Roo-Code/pull/9457)): Fixed an issue where `tool_result` blocks were not sent for skipped tools in the native protocol.
+- **Markdown Formatting** ([#9458](https://github.com/RooCodeInc/Roo-Code/pull/9458)): Improved markdown formatting and added reasoning support.
