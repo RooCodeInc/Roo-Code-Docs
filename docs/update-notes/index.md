@@ -21,6 +21,7 @@ image: /img/social-share.jpg
 
 *   [3.34](/update-notes/v3.34) (Combined)
 *   [3.34.4](/update-notes/v3.34.4) (2025-11-25)
+*   [3.34.3](/update-notes/v3.34.3) (2025-11-25)
 *   [3.34.2](/update-notes/v3.34.2) (2025-11-24)
 *   [3.34.1](/update-notes/v3.34.1) (2025-11-23)
 *   [3.34.0](/update-notes/v3.34.0) (2025-11-21)
