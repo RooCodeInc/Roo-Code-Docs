@@ -14,7 +14,7 @@ image: /img/v3.34.0/v3.34.0.png
 
 # Roo Code 3.34 Release Notes (2025-11-21)
 
-Roo Code 3.34 combines Browser Use 2.0, the Baseten provider, OpenAI-compatible improvements, and refined onboarding and native tool descriptions with patches that add Roo Code Cloud eval support, clearer image generation prompts, todo list cleanup, cloud sync fixes, and Claude Opus 4.5 across Roo Code Cloud, OpenRouter, Anthropic, and Vertex plus new provider reliability and model updates.
+Roo Code 3.34 combines Browser Use 2.0, the Baseten provider, OpenAI-compatible improvements, and refined onboarding and native tool descriptions with patches that add Roo Code Cloud eval support, clearer image generation prompts, todo list cleanup, cloud sync fixes, Claude Opus 4.5 across Roo Code Cloud, OpenRouter, Anthropic, and Vertex, plus new provider reliability and model updates, free Black Forest Labs image generation on Roo Code Cloud, and native MCP tool reliability fixes.
 
 <img src="/img/v3.34.0/v3.34.0.png" alt="Roo Code v3.34 Release" width="600" />
 
@@ -47,6 +47,8 @@ Browser Use now supports a more capable "2.0" experience ([#8941](https://github
 - **Cloud message deduplication**: Fixed cloud message syncing so duplicate copies of the same reasoning or assistant message are no longer re-synced, keeping task histories cleaner and less confusing ([#9518](https://github.com/RooCodeInc/Roo-Code/pull/9518), [#9522](https://github.com/RooCodeInc/Roo-Code/pull/9522)).
 - **Gemini 3 reasoning_details support**: Fixes 400 INVALID_ARGUMENT errors when using Gemini 3 models via OpenRouter by fully supporting the newer `reasoning_details` format, so multi-turn and tool-calling conversations now work reliably without dropping reasoning context ([#9506](https://github.com/RooCodeInc/Roo-Code/pull/9506))).
 - **Skip unsupported Gemini content blocks safely**: Gemini conversations on Vertex AI now skip unsupported metadata blocks (such as certain reasoning or document types) with a warning instead of failing the entire thread, keeping long-running chats stable ([#9537](https://github.com/RooCodeInc/Roo-Code/pull/9537))).
+- **Native MCP tool names preserved in history**: Native mode now keeps the real dynamic MCP tool names (such as `mcp_serverName_toolName`) in the API history instead of teaching the model a fake `use_mcp_tool` name, so follow-up calls pick the right tools and tool suggestions stay consistent ([#9559](https://github.com/RooCodeInc/Roo-Code/pull/9559)).
+- **Native tools condensing keeps tool_use context**: When condensing long conversations that use native tools, required `tool_use` and `tool_result` blocks are preserved in the summary message, preventing 400 errors and avoiding lost context during follow-up turns ([#9582](https://github.com/RooCodeInc/Roo-Code/pull/9582)).
 
 ## Provider Updates
 
@@ -56,3 +58,5 @@ Browser Use now supports a more capable "2.0" experience ([#8941](https://github
 - **Roo Code Cloud image generation provider**: Roo Code Cloud is now available as an image generation provider, so you can generate images directly through Roo Code Cloud instead of relying only on third-party image APIs ([#9528](https://github.com/RooCodeInc/Roo-Code/pull/9528))).
 - **Cerebras model list clean-up**: The Cerebras provider model list now only shows currently supported models, reducing errors from deprecated Cerebras/Qwen variants and keeping the model picker aligned with what the API actually serves ([#9527](https://github.com/RooCodeInc/Roo-Code/pull/9527))).
 - **Reliable LiteLLM model refresh after credential changes**: Clicking **Refresh Models** after changing your LiteLLM API key or base URL now immediately reloads the model list using the new credentials, so you do not need to clear caches or restart VS Code, while background refreshes still benefit from caching for speed ([#9536](https://github.com/RooCodeInc/Roo-Code/pull/9536))).
+- **Black Forest Labs image generation on Roo Code Cloud**: Use the free `bfl/flux-2-pro:free` model on Roo Code Cloud for high-quality image generation without unexpected charges, powered by the `images_api` image generation method for compatible models ([#9587](https://github.com/RooCodeInc/Roo-Code/pull/9587)).
+- **Black Forest Labs models on OpenRouter**: Adds Black Forest Labs FLUX.2 Flex and FLUX.2 Pro image generation models via OpenRouter, giving you additional high-quality options when you prefer to use your OpenRouter account for image generation ([#9589](https://github.com/RooCodeInc/Roo-Code/pull/9589)).
