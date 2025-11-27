@@ -20,6 +20,7 @@ image: /img/social-share.jpg
 ### Version 3.34
 
 *   [3.34](/update-notes/v3.34) (Combined)
+*   [3.34.8](/update-notes/v3.34.8) (2025-11-27)
 *   [3.34.7](/update-notes/v3.34.7) (2025-11-27)
 *   [3.34.6](/update-notes/v3.34.6) (2025-11-26)
 *   [3.34.5](/update-notes/v3.34.5) (2025-11-25)

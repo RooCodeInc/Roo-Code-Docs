@@ -14,7 +14,7 @@ image: /img/v3.34.0/v3.34.0.png
 
 # Roo Code 3.34 Release Notes (2025-11-21)
 
-Roo Code 3.34 combines Browser Use 2.0, the Baseten provider, OpenAI-compatible improvements, and refined onboarding and native tool descriptions with patches that add Roo Code Cloud eval support, clearer image generation prompts, todo list cleanup, cloud sync fixes, Claude Opus 4.5 across Roo Code Cloud, OpenRouter, Anthropic, and Vertex, AWS Bedrock embeddings for code indexing, improved native tool workflows for Mistral and OpenAI-compatible providers, smoother Anthropic tool streaming on OpenRouter, better Bedrock global inference selection, plus new provider reliability and model updates, free Black Forest Labs image generation on Roo Code Cloud, native MCP tool reliability fixes, native tool calling for Anthropic, Z.AI, and Moonshot providers, improved cloud sign-in experience, and multiple bug fixes.
+Roo Code 3.34 combines Browser Use 2.0, the Baseten provider, OpenAI-compatible improvements, and refined onboarding and native tool descriptions with patches that add Roo Code Cloud eval support, clearer image generation prompts, todo list cleanup, cloud sync fixes, Claude Opus 4.5 across Roo Code Cloud, OpenRouter, Anthropic, and Vertex, AWS Bedrock embeddings for code indexing, improved native tool workflows for Mistral and OpenAI-compatible providers, smoother Anthropic tool streaming on OpenRouter, better Bedrock global inference selection, plus new provider reliability and model updates, free Black Forest Labs image generation on Roo Code Cloud, native MCP tool reliability fixes, native tool calling for Anthropic, Z.AI, and Moonshot providers, improved cloud sign-in experience, a race condition fix for the new_task tool on native protocol, and multiple bug fixes.
 
 <img src="/img/v3.34.0/v3.34.0.png" alt="Roo Code v3.34 Release" width="600" />
 
@@ -64,6 +64,7 @@ Browser Use now supports a more capable "2.0" experience ([#8941](https://github
 - **write_to_file Directory Creation**: Fixes ENOENT errors when creating files in non-existent subdirectories (thanks ivanenev!) ([#9640](https://github.com/RooCodeInc/Roo-Code/pull/9640)).
 - **OpenRouter Tool Calls**: Fixes tool calls handling when using OpenRouter provider ([#9642](https://github.com/RooCodeInc/Roo-Code/pull/9642)).
 - **Claude Code Configuration**: Fixes configuration conflicts by correctly disabling native tools and temperature support options that are managed by the Claude Code CLI ([#9643](https://github.com/RooCodeInc/Roo-Code/pull/9643)).
+- **Race Condition in new_task Tool**: Fixes a timing issue where subtasks completing quickly (within 500ms) could break conversation history when using the `new_task` tool with native protocol APIs ([#9655](https://github.com/RooCodeInc/Roo-Code/pull/9655)).
 
 ## Provider Updates
 
