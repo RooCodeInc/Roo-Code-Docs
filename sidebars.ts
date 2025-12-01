@@ -161,6 +161,7 @@ const sidebars: SidebarsConfig = {
       label: 'Model Providers',
       items: [
         'providers/anthropic',
+        'providers/baseten',
         'providers/claude-code',
         'providers/bedrock',
         'providers/cerebras',
