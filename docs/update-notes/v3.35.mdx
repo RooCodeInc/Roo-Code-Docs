@@ -57,3 +57,10 @@ Native tool calling support has been expanded to 15+ providers:
 * **apply_patch Tool**: New native tool for file editing using simplified diff format with fuzzy matching and file rename support ([#9663](https://github.com/RooCodeInc/Roo-Code/pull/9663))
 * **search_and_replace Tool**: Batch text replacements with partial matching and error recovery ([#9549](https://github.com/RooCodeInc/Roo-Code/pull/9549))
 * **Better IPC Error Logging**: Error logs now display detailed structured data instead of unhelpful `[object Object]` messages, making debugging extension issues easier ([#9727](https://github.com/RooCodeInc/Roo-Code/pull/9727))
+
+## Provider Updates
+
+* **Model Default Temperatures**: Models can now specify their own default temperature settings. Temperature precedence is: user's custom setting → model's default → system default ([#9734](https://github.com/RooCodeInc/Roo-Code/pull/9734))
+* **Roo Provider Native Tools**: Models with the `default-native-tools` tag automatically use native tool calling by default ([#9735](https://github.com/RooCodeInc/Roo-Code/pull/9735))
+* **LiteLLM Native Tool Support**: All LiteLLM models now assume native tool support by default, improving tool compatibility ([#9736](https://github.com/RooCodeInc/Roo-Code/pull/9736))
+* **App Version Tracking**: The Roo provider now sends app version information with API requests for improved request tracking ([#9730](https://github.com/RooCodeInc/Roo-Code/pull/9730))
