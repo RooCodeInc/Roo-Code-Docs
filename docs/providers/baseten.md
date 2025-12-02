@@ -36,24 +36,11 @@ Baseten provides on-demand frontier model APIs designed for production applicati
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports all current models under Baseten Model APIs, including:
+Roo Code supports all models available through Baseten's Model APIs.
 
-| Model | Provider | Context | Input/Output per 1M tokens |
-|-------|----------|---------|---------------------------|
-| `moonshotai/Kimi-K2-Thinking` | Moonshot AI | 262K | $0.60 / $2.50 |
-| `zai-org/GLM-4.6` | Z AI | 200K | $0.60 / $2.20 |
-| `moonshotai/Kimi-K2-Instruct-0905` | Moonshot AI | 262K | $0.60 / $2.50 |
-| `openai/gpt-oss-120b` | OpenAI | 128K | $0.10 / $0.50 |
-| `Qwen/Qwen3-Coder-480B-A35B-Instruct` | Alibaba Cloud | 262K | $0.38 / $1.53 |
-| `Qwen/Qwen3-235B-A22B-Instruct-2507` | Alibaba Cloud | 262K | $0.22 / $0.80 |
-| `deepseek-ai/DeepSeek-R1` | DeepSeek | 163K | $2.55 / $5.95 |
-| `deepseek-ai/DeepSeek-R1-0528` | DeepSeek | 163K | $2.55 / $5.95 |
-| `deepseek-ai/DeepSeek-V3.1` | DeepSeek | 163K | $0.50 / $1.50 |
-| `deepseek-ai/DeepSeek-V3-0324` | DeepSeek | 163K | $0.77 / $0.77 |
-
-For the most up-to-date pricing, visit the [Baseten Model APIs page](https://www.baseten.co/products/model-apis/).
+For the complete, up-to-date model list and pricing, see [Baseten's Model APIs page](https://www.baseten.co/products/model-apis/).
 
 ---
 
@@ -73,50 +60,6 @@ To use the `moonshotai/Kimi-K2-Thinking` model, you must enable native tool call
 
 ---
 
-## Production-First Architecture
-
-Baseten's Model APIs are built for production environments with several key advantages:
-
-### Enterprise-Grade Reliability
-
-- **Four nines of uptime** (99.99%) through active-active redundancy
-- **Cloud-agnostic, multi-cluster autoscaling** for consistent availability
-- **SOC 2 Type II certified** and **HIPAA compliant** for security requirements
-
-### Optimized Performance
-
-- **Pre-optimized models** shipped with the Baseten Inference Stack
-- **Latest-generation GPUs** with multi-cloud infrastructure
-- **Ultra-fast inference** optimized from the bottom up for production workloads
-
-### Cost Efficiency
-
-- **5-10x less expensive** than closed alternatives
-- **Optimized multi-cloud infrastructure** for efficient resource utilization
-- **Transparent pricing** with no hidden costs or rate limit surprises
-
-### Developer Experience
-
-- **OpenAI compatible API** - migrate by swapping a single URL
-- **Drop-in replacement** for closed models with comprehensive observability and analytics
-- **Seamless scaling** from Model APIs to dedicated deployments
-
----
-
-## Special Features
-
-### Function Calling & Tool Use
-
-All Baseten models support structured outputs, function calling, and tool use as part of the Baseten Inference Stack, making them ideal for agentic applications and coding workflows.
-
----
-
 ## Tips and Notes
 
-- **Static Model List:** Roo Code uses a curated list of Baseten models. The default model is `zai-org/GLM-4.6`.
-
-- **Multi-Cloud Capacity Management (MCM):** Baseten's multi-cloud infrastructure ensures high availability and low latency globally.
-
-- **Support:** Baseten provides dedicated support for production deployments and can work with you on dedicated resources as you scale.
-
-- **Pricing:** Current pricing is highly competitive and transparent. Prices typically range from $0.10-$6.00 per million tokens, making Baseten significantly more cost-effective than many closed-model alternatives while providing access to state-of-the-art open-source models.
+- **Pricing:** See the [Baseten Model APIs page](https://www.baseten.co/products/model-apis/) for current pricing information.
