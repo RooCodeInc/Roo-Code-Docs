@@ -40,11 +40,6 @@ Roo Code supports all Grok models available through xAI's API.
 
 For the complete, up-to-date model list and capabilities, see [xAI's documentation](https://docs.x.ai/docs).
 
-**Recommended for Roo Code:**
-- **`grok-code-fast-1`** - Best for coding and reasoning tasks with 262K context window and prompt caching (default)
-- **Grok 3 Mini models** - Better for configurable reasoning effort control
-- **Vision models** - Best when you need image analysis support
-
 :::info Grok Code Fast - Free Access in Roo Code
 `grok-code-fast-1` is available for **free** through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. When using the xAI provider directly in Roo Code, standard pricing will apply once established. This model was previously known as "roo/sonic" and has been renamed. For free access within Roo Code, use the Roo Code Cloud provider instead of the xAI provider.
 :::

@@ -40,16 +40,6 @@ Roo Code supports all models available through Google Cloud Vertex AI, including
 
 For the complete, up-to-date model list and IDs, see [Vertex AI's models documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models).
 
-**Recommended for Roo Code:**
-- **Claude Sonnet models** - Best balance for most coding tasks (default: `claude-sonnet-4-5@20250929`)
-- **Gemini Pro models** - Better for complex reasoning with large context windows
-- **Gemini Flash models** - Faster and more cost-effective for quick iterations
-- **Reasoning models** - Best for multi-step planning (requires enabling reasoning budget in settings)
-
-**Important notes:**
-- Gemini models with reasoning/thinking tokens require enabling the reasoning budget feature in Roo Code settings for full effectiveness.
-- Model availability varies by GCP region. Request access before use through the Vertex AI console.
-
 ---
 
 ## Configuration in Roo Code

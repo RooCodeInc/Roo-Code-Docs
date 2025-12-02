@@ -36,8 +36,6 @@ Roo Code automatically fetches all models configured in your Unbound application
 
 Configure your allowed models in the [Unbound Applications dashboard](https://gateway.getunbound.ai/ai-gateway-applications), then Roo Code will display them in the model dropdown.
 
-**Key advantage:** Enterprise-grade security and compliance features for AI model access.
-
 ---
 
 ## Configuration in Roo Code

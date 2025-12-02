@@ -36,13 +36,9 @@ Roo Code integrates with the Hugging Face router to provide access to a curated 
 
 ## Available Models
 
-Roo Code automatically fetches models from the curated 'roocode' collection on Hugging Face, optimized for code assistance.
+Roo Code automatically fetches all available models from the curated 'roocode' collection on Hugging Face.
 
-For the complete collection, see [Hugging Face's roocode collection](https://huggingface.co/collections/roocode).
-
-**Default:** `meta-llama/Llama-3.3-70B-Instruct` if no model is selected.
-
-**Pro tip:** Both the model and provider dropdowns are searchable for quick selection.
+For the complete, up-to-date model collection, see [Hugging Face's roocode collection](https://huggingface.co/collections/roocode).
 
 ---
 

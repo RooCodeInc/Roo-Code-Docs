@@ -55,13 +55,6 @@ For the complete, up-to-date model list with IDs and capabilities, see [AWS Bedr
 
 **Important:** Use the *model ID* (e.g., `anthropic.claude-sonnet-4-5-20250929-v1:0`) when configuring Roo Code, not the model name.
 
-**Recommended for Roo Code:**
-- **Claude Sonnet models** - Best balance for most coding tasks (default: `anthropic.claude-sonnet-4-5-20250929-v1:0`)
-- **Amazon Nova models** - Better for AWS-integrated workflows
-- **Meta Llama models** - Good for open-source requirements
-
-**Note:** Model availability varies by AWS region. Request access to specific models through the Bedrock console before use.
-
 ---
 
 ## Configuration in Roo Code

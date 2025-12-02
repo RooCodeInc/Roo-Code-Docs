@@ -34,8 +34,6 @@ Roo Code automatically fetches all available models from the Groq API.
 
 For the complete, up-to-date model list and capabilities, see [Groq's models documentation](https://console.groq.com/docs/models).
 
-**Key advantage:** Groq's custom LPUs deliver significantly faster inference speeds compared to traditional GPUs, resulting in quicker response times for all supported models.
-
 ---
 
 ## Configuration in Roo Code

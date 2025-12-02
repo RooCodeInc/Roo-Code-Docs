@@ -40,12 +40,6 @@ Roo Code supports all models available through OpenAI's API.
 
 For the complete, up-to-date model list and capabilities, see [OpenAI's models documentation](https://platform.openai.com/docs/models).
 
-**Recommended for Roo Code:**
-- **GPT-5 models** - Best for coding and agentic tasks (default: `gpt-5.1`)
-- **GPT-5-Codex** - Specialized for code generation with 400K context window and prompt caching
-- **o-series models** - Better for complex reasoning and problem-solving tasks
-- **Mini/Nano variants** - Faster and more cost-effective for well-defined tasks
-
 ---
 
 ## Configuration in Roo Code

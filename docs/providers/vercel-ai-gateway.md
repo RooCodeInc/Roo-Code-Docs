@@ -43,8 +43,6 @@ For the complete, up-to-date model catalog with capabilities, see [Vercel's AI G
 
 **Default:** `anthropic/claude-sonnet-4` if no model is selected.
 
-**Key features:** Budgets, usage monitoring, load balancing, fallbacks, and prompt caching support for select models.
-
 ---
 
 ## Configuration in Roo Code

@@ -36,16 +36,6 @@ Roo Code supports all Doubao models available through ByteDance's Volcano Engine
 
 For the complete, up-to-date model list, see [Volcano Engine's AI model service](https://www.volcengine.com/).
 
-**Model features:**
-- 128K context window
-- Image input support
-- Prompt caching with 80% discount on cached reads
-
-**Recommended:**
-- General purpose: Standard models for everyday tasks
-- Thinking models: Better for enhanced reasoning
-- Flash models: Faster for speed-optimized workflows
-
 ---
 
 ## Configuration in Roo Code

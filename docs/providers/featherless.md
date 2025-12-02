@@ -38,15 +38,6 @@ Roo Code automatically fetches all available models from Featherless AI's API.
 
 For the complete, up-to-date model list, see [Featherless AI](https://featherless.ai).
 
-**All models are currently FREE** with no usage costs.
-
-**Recommended for Roo Code:**
-- **DeepSeek R1 models** - Best for complex reasoning with `<think>` tag support (default)
-- **Qwen3 Coder** - Better for specialized code generation tasks
-- **Kimi K2** - Good for balanced instruction-following
-
-**Note:** Most models have ~32K context window and 4K max output. No image support or prompt caching available.
-
 ---
 
 ## Configuration in Roo Code
@@ -55,17 +46,3 @@ For the complete, up-to-date model list, see [Featherless AI](https://featherles
 2. **Select Provider:** Choose "Featherless AI" from the "API Provider" dropdown.
 3. **Enter API Key:** Paste your Featherless API key into the "Featherless API Key" field.
 4. **Select Model:** Choose your desired model from the "Model" dropdown.
-
----
-
-## Tips and Notes
-
-* **Free Tier:** All models are currently free with no usage costs, making Featherless ideal for experimentation and development.
-* **Model Selection:** Choose models based on your needs:
-  - **DeepSeek R1 models:** Best for complex reasoning and problem-solving tasks
-  - **DeepSeek V3:** General-purpose model for various tasks
-  - **Qwen3 Coder:** Optimized for code generation and programming tasks
-  - **Kimi K2:** Balanced instruction-following model
-  - **GPT-OSS:** Large general-purpose model
-* **OpenAI Compatibility:** Featherless uses an OpenAI-compatible API format for easy integration.
-* **Limitations:** No image support or prompt caching available on any model.

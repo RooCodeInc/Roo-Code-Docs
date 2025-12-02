@@ -31,14 +31,7 @@ Roo Code supports running models locally using Ollama. This provides privacy, of
     ollama serve
     ```
 
-2.  **Download a Model:**  Browse [Ollama's model library](https://ollama.com/library) for all available models.
-
-    **Recommended for coding with Roo Code:**
-    *   `qwen2.5-coder:32b` - Best balance of quality and resource usage
-    *   `codellama:13b-code` or `codellama:34b-code` - Strong coding-specific alternatives
-    *   `deepseek-coder:6.7b-base` - Good for resource-limited machines
-
-    To download a model, run:
+2.  **Download a Model:**  Browse [Ollama's model library](https://ollama.com/library) for all available models. To download a model, run:
 
     ```bash
     ollama pull <model_name>

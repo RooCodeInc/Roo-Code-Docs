@@ -51,26 +51,13 @@ The "roo/sonic" model is being renamed to **"grok-code-fast-1"** (officially "Gr
 
 ## Available Models
 
-**Both models are 100% FREE** through Roo Code Cloud during the promotional period. No usage costs, no hidden fees.
+**Both models are 100% FREE** through Roo Code Cloud during the promotional period.
 
-### grok-code-fast-1 (formerly roo/sonic)
-- Context: 262K tokens | Output: 16K tokens
-- No image support
-- Best for: High-speed coding tasks and deployments
-- **FREE** through Roo Code Cloud
+- **grok-code-fast-1** (formerly roo/sonic)
+- **roo/code-supernova** (includes image support)
 
-### roo/code-supernova
-- Context: 200K tokens | Output: 16K tokens
-- ✅ Image support for multimodal tasks
-- ✅ Prompt caching
-- Best for: Versatile agentic coding with visual understanding
-- **FREE** through Roo Code Cloud
-
-:::tip Model Selection - Both FREE!
-- **grok-code-fast-1**: Maximum context window (262K), faster for pure text coding
-- **roo/code-supernova**: Image support for screenshots/diagrams, prompt caching for cost efficiency
-
-**Important:** Within Roo Code, free access is only through Roo Code Cloud provider. Using the [xAI provider](/providers/xai) for `grok-code-fast-1` will incur standard charges once pricing is established.
+:::info
+Within Roo Code, free access is only through Roo Code Cloud provider. Using the [xAI provider](/providers/xai) for `grok-code-fast-1` will incur standard charges once pricing is established.
 :::
 
 ---

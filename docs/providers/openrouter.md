@@ -35,8 +35,6 @@ Roo Code automatically fetches all available models from OpenRouter's API (100+ 
 
 For the complete, up-to-date model list with pricing and capabilities, see [OpenRouter's models page](https://openrouter.ai/models).
 
-**Key advantage:** Access multiple AI providers through a single API without managing separate keys for each.
-
 ---
 
 ## Configuration in Roo Code

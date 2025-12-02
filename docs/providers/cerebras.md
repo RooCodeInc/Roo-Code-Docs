@@ -45,12 +45,7 @@ Cerebras AI specializes in extremely fast inference speeds (up to 2600 tokens/se
 
 Roo Code automatically fetches all available models from Cerebras AI's API.
 
-For the complete, up-to-date model list and pricing, see [Cerebras Cloud](https://cloud.cerebras. ai?utm_source=roocode).
-
-**Key advantages:**
-- Ultra-fast inference (up to 2600 tokens/second)
-- Free tier available with rate limits
-- Context windows: 64K-128K tokens
+For the complete, up-to-date model list and pricing, see [Cerebras Cloud](https://cloud.cerebras.ai?utm_source=roocode).
 
 ---
 

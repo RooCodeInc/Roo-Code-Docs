@@ -34,8 +34,6 @@ Roo Code automatically fetches all available models from Requesty's API (150+ mo
 
 For the complete, up-to-date model list with pricing, see [Requesty's model list](https://app.requesty.ai/router/list).
 
-**Key advantage:** Single API key for 150+ models across all major providers, with unified billing and cost tracking.
-
 ---
 
 ## Configuration in Roo Code

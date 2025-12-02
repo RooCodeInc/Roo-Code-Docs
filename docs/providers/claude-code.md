@@ -42,21 +42,6 @@ If this environment variable is set on your system, the `claude` tool may use it
 
 ---
 
-## Key Features
-- **Direct CLI Access**: Uses Anthropic's official Claude CLI tool for model interactions.
-- **Advanced Reasoning**: Full support for Claude's thinking mode and reasoning capabilities.
-- **Cost Transparency**: Shows exact usage costs as reported by the CLI.
-- **Flexible Configuration**: Works with your existing Claude CLI setup.
-
----
-
-## Why Use This Provider
-
-- **No API Keys**: Uses your existing Claude CLI authentication.
-- **Cost Benefits**: Leverage CLI subscription rates and transparent cost reporting.
-- **Latest Features**: Access new Claude capabilities as they're released in the CLI.
-- **Advanced Reasoning**: Full support for Claude's thinking modes.
-
 ## How it Works
 
 The Claude Code provider works by:
@@ -99,12 +84,6 @@ export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32768  # Set to 32k tokens
 The Claude Code provider supports all Claude models available through the official CLI.
 
 Model availability depends on your Claude CLI subscription and plan. See [Anthropic's CLI documentation](https://docs.anthropic.com/en/docs/claude-code/setup) for details.
-
-**Recommended:**
-- **Sonnet models** - Best balance for most coding tasks (latest recommended)
-- **Opus models** - Better for complex reasoning
-- **Haiku models** - Faster responses when speed matters
-
 
 ---
 

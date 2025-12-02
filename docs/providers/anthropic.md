@@ -38,11 +38,6 @@ Roo Code supports all Claude models available through Anthropic's API.
 
 For the complete, up-to-date model list and capabilities, see [Anthropic's model documentation](https://docs.anthropic.com/en/docs/about-claude/models).
 
-**Recommended for Roo Code:**
-- **Sonnet models** - Best balance of performance and cost for most coding tasks (default)
-- **Opus models** - Better for complex reasoning and large-scale refactoring
-- **Haiku models** - Faster and more cost-effective for simpler tasks
-
 ---
 
 ## Configuration in Roo Code

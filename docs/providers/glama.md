@@ -36,12 +36,6 @@ Roo Code automatically fetches all available models from Glama's unified API.
 
 For the complete, up-to-date model list, see [Glama's models page](https://glama.ai/models).
 
-**Recommended for Roo Code:**
-- **Claude models** - Best performance for most tasks (e.g., `anthropic/claude-3-5-sonnet`)
-- **OpenAI models** - Good for specific reasoning tasks (e.g., `openai/o3-mini-high`)
-
-**Key features:** Prompt caching support, unified billing across providers, cost tracking.
-
 ---
 
 ## Configuration in Roo Code
@@ -56,4 +50,3 @@ For the complete, up-to-date model list, see [Glama's models page](https://glama
 ## Tips and Notes
 
 * **Pricing:** Glama operates on a pay-per-use basis.  Pricing varies depending on the model you choose.
-* **Prompt Caching:** Glama supports prompt caching, which can significantly reduce costs and improve performance for repeated prompts.

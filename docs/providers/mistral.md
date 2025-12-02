@@ -37,14 +37,6 @@ Roo Code supports all models available through Mistral AI's API.
 
 For the complete, up-to-date model list and capabilities, see [Mistral's model documentation](https://docs.mistral.ai/getting-started/models/models_overview/).
 
-**Recommended for Roo Code:**
-- **Codestral** - Best for code generation and interaction tasks (specialized coding model)
-- **Mistral Large** - Better for complex reasoning and analysis
-- **Pixtral** - Best when you need vision/image support
-- **Ministral models** - Faster and more cost-effective for simpler tasks
-
-**Note:** Mistral models have different default temperatures (0.3-0.7). Roo Code defaults to 0.0, so consider [adjusting temperature](/features/model-temperature) for more varied outputs.
-
 ---
 
 ## Configuration in Roo Code

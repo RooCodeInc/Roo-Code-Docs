@@ -37,8 +37,6 @@ Both Qwen3 Coder models feature massive 1M context windows and 65K max output to
 - **qwen3-coder-plus** - High-performance coding model (default)
 - **qwen3-coder-flash** - Speed-optimized variant
 
-**Currently free** with 2,000 requests/day and 60 requests/minute during promotional period.
-
 ---
 
 ## Configuration

@@ -33,8 +33,6 @@ Roo Code automatically fetches all available models from Chutes AI's API.
 
 For the complete, up-to-date model list, see [Chutes AI's platform](https://chutes.ai/) or your account dashboard.
 
-**Key advantage:** Free API access to multiple LLMs for experimentation and development.
-
 ---
 
 ## Configuration in Roo Code

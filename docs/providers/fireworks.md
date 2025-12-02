@@ -44,12 +44,6 @@ Roo Code supports all models available through Fireworks AI's platform.
 
 For the complete, up-to-date model list and specifications, see [Fireworks AI's models page](https://fireworks.ai/models).
 
-**Recommended for Roo Code:**
-- **Kimi K2** - Best for general-purpose coding with agentic capabilities (default)
-- **Qwen3 Coder** - Better for specialized code generation and debugging
-- **DeepSeek R1** - Best for complex reasoning and function calling tasks
-- **Qwen3 235B** - Most cost-effective for general development work
-
 ---
 
 ## Configuration in Roo Code
@@ -57,31 +51,10 @@ For the complete, up-to-date model list and specifications, see [Fireworks AI's 
 1. **Open Roo Code Settings:** Click the gear icon (<Codicon name="gear" />) in the Roo Code panel.
 2. **Select Provider:** Choose "Fireworks AI" from the "API Provider" dropdown.
 3. **Enter API Key:** Paste your Fireworks AI API key into the "Fireworks AI API Key" field.
-4. **Model Selection:** The default model (Kimi K2) is automatically selected. You can change it from the model dropdown if needed.
-
----
-
-## Model Selection Guide
-
-Choose models based on your needs:
-
-| Model | Best For | Context | Price |
-|-------|----------|---------|-------|
-| **Kimi K2** | General tasks, balanced performance | 128K | Mid-range |
-| **Qwen3 235B** | Cost-effective general use | 256K | Budget-friendly |
-| **Qwen3 Coder** | Code generation and debugging | 256K | Mid-range |
-| **DeepSeek R1** | Complex reasoning, function calling | 160K | Premium |
-| **DeepSeek V3** | Strong general performance | 128K | Balanced |
+4. **Select Model:** Choose your desired model from the "Model" dropdown.
 
 ---
 
 ## Tips and Notes
 
-* **Cost-Effective:** Fireworks AI offers significantly lower pricing than proprietary models while maintaining competitive performance.
-* **Large Context Windows:** Most models support 128K-256K tokens, suitable for processing large documents and maintaining extended conversations.
-* **OpenAI Compatibility:** The provider uses an OpenAI-compatible API format with streaming support and usage tracking.
-* **Rate Limits:** Fireworks AI has usage-based rate limits. Monitor your usage in the dashboard and consider upgrading your plan if needed.
-* **Text-Only:** All models are text-only without image support or prompt caching capabilities.
-* **Default Temperature:** Uses 0.5 temperature by default for balanced creativity and consistency.
-* **API Keys:** Stored locally on your machine for security.
-* **Pricing:** See the [Fireworks AI pricing page](https://fireworks.ai/pricing) for current rates. Prices shown are per million tokens.
+* **Pricing:** See the [Fireworks AI pricing page](https://fireworks.ai/pricing) for current rates.

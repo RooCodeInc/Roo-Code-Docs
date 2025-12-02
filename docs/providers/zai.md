@@ -42,19 +42,11 @@ Z AI (Zhipu AI) provides advanced language models with the GLM-4.5 series. The p
 
 ## Available Models
 
-Z AI's model catalog varies by region. Roo Code automatically fetches appropriate models based on your selected region.
+Roo Code automatically fetches all available models from Z AI's API based on your selected region.
 
-For the complete model list and specifications:
+For the complete, up-to-date model list and specifications, see the official provider documentation:
 - **International:** [Z AI model documentation](https://z.ai/model-api)
 - **China Mainland:** [BigModel documentation](https://open.bigmodel.cn/)
-
-**Available models include:**
-- **GLM-4.6** - Latest model with 200K context window
-- **GLM-4.5-X** - Enhanced reasoning and analysis
-- **GLM-4.5-AirX** - Balanced performance
-- **GLM-4.5-Flash** - Speed-optimized
-
-The model dropdown automatically updates based on your selected region (International or China).
 
 ---
 

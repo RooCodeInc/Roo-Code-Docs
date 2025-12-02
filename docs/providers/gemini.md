@@ -37,14 +37,6 @@ Roo Code supports all Gemini models available through Google's API and automatic
 
 For the complete, up-to-date model list and capabilities, see [Google's Gemini models documentation](https://ai.google.dev/models/gemini).
 
-**Recommended for Roo Code:**
-- **Gemini Pro models** - Best for complex coding, debugging, and analysis (Roo Code defaults to stable Pro variant)
-- **Gemini Flash models** - Faster and more cost-effective for everyday tasks
-- **Gemini 3 Pro Preview** - Better for very large workspaces with 1M-token context window
-- **Reasoning-capable models** - Best for multi-step planning (requires enabling reasoning budget in settings)
-
-**Pro tip:** Use model aliases (`gemini-flash-latest`, `gemini-pro-latest`) instead of version-specific IDs to automatically track Google's latest stable releases.
-
 ---
 
 ## Configuration in Roo Code

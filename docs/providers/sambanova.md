@@ -33,8 +33,6 @@ Roo Code automatically fetches all available models from the SambaNova API.
 
 For the complete, up-to-date model list and capabilities, see [SambaCloud's supported models documentation](https://docs.sambanova.ai/cloud/docs/get-started/supported-models).
 
-**Key advantage:** SambaNova's RDUs deliver high-speed inference for all supported models, significantly reducing response times.
-
 ---
 
 ## Configuration in Roo Code

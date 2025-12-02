@@ -36,10 +36,6 @@ Roo Code supports all models available through the DeepSeek API.
 
 For the complete, up-to-date model list, see [DeepSeek's API documentation](https://api-docs.deepseek.com/quick_start/pricing).
 
-**Recommended for Roo Code:**
-- **`deepseek-chat`** - Best for general coding tasks
-- **`deepseek-reasoner`** - Better for complex reasoning and problem-solving
-
 ---
 
 ## Configuration in Roo Code
