@@ -92,8 +92,6 @@ Once you have your API key:
 :::info Model Selection Advice
 We strongly recommend **Claude Sonnet 4.5** for the best experience—it generally "just works" out of the box. Roo Code has been extensively optimized for this model's capabilities and instruction-following behavior.
 
-**Note:** Claude 3.7 Sonnet is still available, but Claude Sonnet 4.5 is the latest and recommended model.
-
 Selecting alternative models is an advanced feature that introduces complexity. Different models vary significantly in how they follow tool instructions, parse formats, and maintain context through multi-step operations. If you do experiment with other models, choose ones specifically designed for structured reasoning and tool use.
 :::
 
