@@ -34,67 +34,21 @@ Roo Code supports accessing models through Google Cloud Platform's Vertex AI, a 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following models through Vertex AI:
+Roo Code supports all models available through Google Cloud Vertex AI, including Anthropic Claude, Google Gemini, and MAAS (Model as a Service) offerings.
 
-### Default Model
-If no model is specified, Roo Code defaults to `claude-sonnet-4-5@20250929`.
+For the complete, up-to-date model list and IDs, see [Vertex AI's models documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models).
 
-### Google Gemini Models
+**Recommended for Roo Code:**
+- **Claude Sonnet models** - Best balance for most coding tasks (default: `claude-sonnet-4-5@20250929`)
+- **Gemini Pro models** - Better for complex reasoning with large context windows
+- **Gemini Flash models** - Faster and more cost-effective for quick iterations
+- **Reasoning models** - Best for multi-step planning (requires enabling reasoning budget in settings)
 
-Vertex AI exposes multiple Gemini model families. Roo Code focuses on the main families and tracks Google's stable releases instead of requiring you to hard-code versioned model IDs.
-
-#### Recommended Gemini options
-
-- **Gemini 3 Pro Preview**
-  - Up to a 1M-token context window for very large workspaces and long-running conversations
-  - Reasoning-capable behavior for complex coding and refactoring tasks
-  - Roo Code's cost estimation supports tiered pricing (short vs long requests) to better match Vertex AI billing for this model
-- **Gemini Pro family**
-  - Stable Pro models for complex reasoning and analysis
-  - When you select a Gemini model without overriding it in a profile, Roo Code prefers a stable Pro variant by default where available
-- **Gemini Flash family**
-  - Faster, lower-cost models ideal for quick iterations and non-critical tasks
-
-#### Reasoning / thinking models
-
-Some Gemini models provide dedicated reasoning or "thinking" tokens:
-
-- Roo Code treats these as reasoning models and uses them for deeper multi-step planning when enabled.
-- The reasoning budget must be enabled in Roo Code settings to take full advantage of these models.
-- When Vertex AI reports separate reasoning or "thought" tokens, Roo Code includes them in token usage and cost estimates. Compared to older versions, you may see slightly higher but more accurate token counts.
-
-Refer to the [Google Cloud Vertex AI models documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) for up-to-date Gemini model IDs and capabilities.
-
-### Anthropic Claude Models
-*   `claude-sonnet-4-5@20250929` (Default)
-*   `claude-opus-4-1@20250805`
-*   `claude-opus-4@20250514`
-*   `claude-sonnet-4@20250514`
-*   `claude-3-7-sonnet@20250219`
-*   `claude-3-7-sonnet@20250219:thinking` - With reasoning support
-*   `claude-3-5-sonnet-v2@20241022`
-*   `claude-3-5-sonnet@20240620`
-*   `claude-3-5-haiku@20241022`
-*   `claude-3-opus@20240229`
-*   `claude-3-haiku@20240307`
-
-### Other Models
-
-#### MAAS (Model as a Service) Models
-*   `deepseek-r1-0528-maas`
-*   `deepseek-v3.1-maas`
-*   `gpt-oss-120b-maas`
-*   `gpt-oss-20b-maas`
-*   `qwen3-coder-480b-a35b-instruct-maas`
-*   `qwen3-235b-a22b-instruct-2507-maas`
-*   `llama-4-maverick-17b-128e-instruct-maas`
-
-#### Gemini Models
-*   `gemini-2.5-flash-lite-preview-06-17`
-
-Refer to the [Google Cloud documentation on Vertex AI Models](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) for the most up-to-date list of available models and their IDs.
+**Important notes:**
+- Gemini models with reasoning/thinking tokens require enabling the reasoning budget feature in Roo Code settings for full effectiveness.
+- Model availability varies by GCP region. Request access before use through the Vertex AI console.
 
 ---
 

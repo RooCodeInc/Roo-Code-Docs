@@ -31,20 +31,18 @@ DeepInfra provides cost-effective access to high-performance open-source models 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code dynamically fetches available models from DeepInfra's API. The default model is:
+Roo Code automatically fetches all available models from DeepInfra's API.
 
-* `Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo` (256K context, optimized for coding)
+For the complete, up-to-date model catalog, see [DeepInfra's models page](https://deepinfra.com/models).
 
-Common models available include:
+**Recommended for Roo Code:**
+- **Qwen Coder models** - Best for programming tasks with large context windows (default: `Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo`)
+- **Vision-capable models** - Better when you need image understanding
+- **Reasoning models** - Best for complex problem-solving tasks
 
-* **Coding Models:** Qwen Coder series, specialized for programming tasks
-* **General Models:** Llama 3.1, Mixtral, and other open-source models
-* **Vision Models:** Models with image understanding capabilities
-* **Reasoning Models:** Models with advanced reasoning support
-
-Browse the full catalog at [deepinfra.com/models](https://deepinfra.com/models).
+**Key features:** Prompt caching support, low latency with global edge locations, competitive pricing.
 
 ---
 

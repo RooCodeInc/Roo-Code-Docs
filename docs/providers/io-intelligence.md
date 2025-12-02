@@ -35,11 +35,8 @@ To use the IO Intelligence provider, you will need to add it to your `~/.roo/con
 
 ## Available Models
 
-The IO Intelligence provider supports the following models:
+The IO Intelligence provider supports multiple AI models including Llama, DeepSeek, Qwen, and Mistral.
 
-*   `llama-3-70b`
-*   `deepseek-coder-v2`
-*   `qwen-2-72b`
-*   `mistral-large`
+For the current model list and specifications, see [IO Intelligence's documentation](https://io.net/).
 
-You can specify which model to use in your API configuration profiles.
+Models can be specified in your API configuration profiles in [`~/.roo/config.json`](#configuration).

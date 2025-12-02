@@ -49,36 +49,28 @@ The "roo/sonic" model is being renamed to **"grok-code-fast-1"** (officially "Gr
 
 ---
 
-## Models
+## Available Models
+
+**Both models are 100% FREE** through Roo Code Cloud during the promotional period. No usage costs, no hidden fees.
 
 ### grok-code-fast-1 (formerly roo/sonic)
-- Official Name: Grok Code Fast
-- Context Window: 262,144 tokens
-- Max Output: 16,384 tokens
-- Image Support: No
-- Optimized for: Coding tasks, checkpoint and deployment
-- **Pricing:** Free during promotional period through Roo Code Cloud
+- Context: 262K tokens | Output: 16K tokens
+- No image support
+- Best for: High-speed coding tasks and deployments
+- **FREE** through Roo Code Cloud
 
-### roo/code-supernova - NEW & FREE
-- Context Window: 200,000 tokens
-- Max Output: 16,384 tokens
-- Image Support: **Yes** - supports image inputs for multimodal tasks
-- Prompt Caching: Yes
-- Optimized for: Versatile agentic coding tasks with multimodal capabilities
-- **Pricing:** **100% FREE** during promotional period through Roo Code Cloud
-- **No limits, no restrictions** - use as much as you need at zero cost
+### roo/code-supernova
+- Context: 200K tokens | Output: 16K tokens
+- ✅ Image support for multimodal tasks
+- ✅ Prompt caching
+- Best for: Versatile agentic coding with visual understanding
+- **FREE** through Roo Code Cloud
 
-:::tip Why Use Roo Code Cloud? It's FREE!
-Within Roo Code, both `grok-code-fast-1` and `roo/code-supernova` are **100% FREE** when accessed through Roo Code Cloud. No hidden costs, no surprises - just powerful AI models at zero cost during the promotional period.
+:::tip Model Selection - Both FREE!
+- **grok-code-fast-1**: Maximum context window (262K), faster for pure text coding
+- **roo/code-supernova**: Image support for screenshots/diagrams, prompt caching for cost efficiency
 
-**Important:** Using the [xAI provider](/providers/xai) directly in Roo Code will incur standard rates once pricing is established. Stick with Roo Code Cloud for **FREE access**.
-:::
-
-:::info Model Selection - Both FREE!
-- Choose **grok-code-fast-1** (FREE) for maximum speed and context window
-- Choose **roo/code-supernova** (FREE) when you need image support or multimodal capabilities
-
-Both models are **completely free** through Roo Code Cloud - use whichever fits your needs!
+**Important:** Within Roo Code, free access is only through Roo Code Cloud provider. Using the [xAI provider](/providers/xai) for `grok-code-fast-1` will incur standard charges once pricing is established.
 :::
 
 ---

@@ -94,18 +94,16 @@ export CLAUDE_CODE_MAX_OUTPUT_TOKENS=32768  # Set to 32k tokens
 
 ---
 
-## Supported Models
+## Available Models
 
-The Claude Code provider supports these Claude models:
+The Claude Code provider supports all Claude models available through the official CLI.
 
-- **Claude Opus 4.1** (Most capable)
-- **Claude Opus 4** 
-- **Claude Sonnet 4** (Latest, recommended)
-- **Claude 3.7 Sonnet**
-- **Claude 3.5 Sonnet**
-- **Claude 3.5 Haiku** (Fast responses)
+Model availability depends on your Claude CLI subscription and plan. See [Anthropic's CLI documentation](https://docs.anthropic.com/en/docs/claude-code/setup) for details.
 
-The specific models available depend on your Claude CLI subscription and plan.
+**Recommended:**
+- **Sonnet models** - Best balance for most coding tasks (latest recommended)
+- **Opus models** - Better for complex reasoning
+- **Haiku models** - Faster responses when speed matters
 
 
 ---

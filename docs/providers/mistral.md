@@ -31,25 +31,19 @@ Roo Code supports accessing models through the Mistral AI API, including both st
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following Mistral models:
+Roo Code supports all models available through Mistral AI's API.
 
-| Model ID               | Model Default Temperature | Function Calling | Vision / Image support |
-|------------------------|-------------------------|------------------|--------|
-| codestral-latest      | 0.3                     | ✅               | ❌      |
-| mistral-large-latest  | 0.7                     | ✅               | ❌      |
-| magistral-medium-latest | 0.5                   | ✅               | ❌      |
-| devstral-medium-latest | 0.3                    | ✅               | ❌      |
-| mistral-medium-latest | 0.5                     | ✅               | ❌      |
-| ministral-8b-latest   | 0.3                     | ✅               | ❌      |
-| ministral-3b-latest   | 0.3                     | ✅               | ❌      |
-| mistral-small-latest  | 0.3                     | ✅               | ❌      |
-| pixtral-large-latest  | 0.7                     | ✅               | ✅      |
-The default model temperature in Roo Code is 0.0, so you should consider experimenting with [temperature adjustments](/features/model-temperature)!
+For the complete, up-to-date model list and capabilities, see [Mistral's model documentation](https://docs.mistral.ai/getting-started/models/models_overview/).
 
-**Note:**  Model availability and specifications may change.
-Refer to the [Mistral AI documentation](https://docs.mistral.ai/api/) and [Mistral Model Overview](https://docs.mistral.ai/getting-started/models/models_overview/) for the latest information.
+**Recommended for Roo Code:**
+- **Codestral** - Best for code generation and interaction tasks (specialized coding model)
+- **Mistral Large** - Better for complex reasoning and analysis
+- **Pixtral** - Best when you need vision/image support
+- **Ministral models** - Faster and more cost-effective for simpler tasks
+
+**Note:** Mistral models have different default temperatures (0.3-0.7). Roo Code defaults to 0.0, so consider [adjusting temperature](/features/model-temperature) for more varied outputs.
 
 ---
 

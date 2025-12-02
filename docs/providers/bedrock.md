@@ -47,53 +47,20 @@ You have two main options for configuring AWS credentials:
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following models through Bedrock (based on source code):
+Roo Code supports all foundation models available through Amazon Bedrock.
 
-*   **Amazon:**
-    *   `amazon.nova-pro-v1:0`
-    *   `amazon.nova-pro-latency-optimized-v1:0`
-    *   `amazon.nova-lite-v1:0`
-    *   `amazon.nova-micro-v1:0`
-    *   `amazon.titan-text-lite-v1:0`
-    *   `amazon.titan-text-express-v1:0`
-    *   `amazon.titan-text-embeddings-v1:0`
-    *   `amazon.titan-text-embeddings-v2:0`
-*   **Anthropic:**
-    *   `anthropic.claude-sonnet-4-5-20250929-v1:0` (Default)
-    *   `anthropic.claude-opus-4.1-20250514-v1:0`
-    *   `anthropic.claude-opus-4-20250514-v1:0`
-    *   `anthropic.claude-sonnet-4-20250514-v1:0`
-    *   `anthropic.claude-3-7-sonnet-20250219-v1:0`
-    *   `anthropic.claude-3-5-sonnet-20241022-v2:0`
-    *   `anthropic.claude-3-5-haiku-20241022-v1:0`
-    *   `anthropic.claude-3-5-sonnet-20240620-v1:0`
-    *   `anthropic.claude-3-opus-20240229-v1:0`
-    *   `anthropic.claude-3-sonnet-20240229-v1:0`
-    *   `anthropic.claude-3-haiku-20240307-v1:0`
-    *   `anthropic.claude-2-1-v1:0`
-    *   `anthropic.claude-2-0-v1:0`
-    *   `anthropic.claude-instant-v1:0`
-*   **DeepSeek:**
-    *   `deepseek.r1-v1:0`
-*   **Meta:**
-    *   `meta.llama3-3-70b-instruct-v1:0`
-    *   `meta.llama3-2-90b-instruct-v1:0`
-    *   `meta.llama3-2-11b-instruct-v1:0`
-    *   `meta.llama3-2-3b-instruct-v1:0`
-    *   `meta.llama3-2-1b-instruct-v1:0`
-    *   `meta.llama3-1-405b-instruct-v1:0`
-    *   `meta.llama3-1-70b-instruct-v1:0`
-    *   `meta.llama3-1-70b-instruct-latency-optimized-v1:0`
-    *   `meta.llama3-1-8b-instruct-v1:0`
-    *   `meta.llama3-70b-instruct-v1:0`
-    *   `meta.llama3-8b-instruct-v1:0`
-*   **OpenAI:**
-    *   `openai.gpt-oss-20b-1:0`
-    *   `openai.gpt-oss-120b-1:0`
+For the complete, up-to-date model list with IDs and capabilities, see [AWS Bedrock's supported models documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html).
 
-Refer to the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) for the most up-to-date list of available models and their IDs. Make sure to use the *model ID* when configuring Roo Code, not the model name.
+**Important:** Use the *model ID* (e.g., `anthropic.claude-sonnet-4-5-20250929-v1:0`) when configuring Roo Code, not the model name.
+
+**Recommended for Roo Code:**
+- **Claude Sonnet models** - Best balance for most coding tasks (default: `anthropic.claude-sonnet-4-5-20250929-v1:0`)
+- **Amazon Nova models** - Better for AWS-integrated workflows
+- **Meta Llama models** - Good for open-source requirements
+
+**Note:** Model availability varies by AWS region. Request access to specific models through the Bedrock console before use.
 
 ---
 

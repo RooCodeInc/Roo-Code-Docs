@@ -31,41 +31,19 @@ Roo Code supports Google's Gemini family of models through the Google AI Gemini 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the main Gemini model families and automatically tracks Google's latest stable releases.
+Roo Code supports all Gemini models available through Google's API and automatically tracks Google's latest stable releases.
 
-### Recommended Defaults
+For the complete, up-to-date model list and capabilities, see [Google's Gemini models documentation](https://ai.google.dev/models/gemini).
 
-- **Gemini 3 Pro Preview**
-  - 1M-token context window for very large workspaces and long-running conversations
-  - Reasoning-capable behavior for multi-step coding and refactoring tasks
-  - Tiered pricing support in Roo Code (≤200K vs >200K tokens) to better match Google's published pricing
-- **Gemini Pro family**
-  - Stable Pro models for complex coding, debugging, and analysis
-  - Roo Code defaults to a stable Pro model where your provider supports it (today this is a Gemini 2.5 Pro variant; future releases may point at newer Pro models)
-- **Gemini Flash family**
-  - Fast, lower-cost models for everyday tasks and quick iterations
-- **Experimental:** `gemini-2.5-flash-lite-preview-09-2025` - Lightweight preview variant
+**Recommended for Roo Code:**
+- **Gemini Pro models** - Best for complex coding, debugging, and analysis (Roo Code defaults to stable Pro variant)
+- **Gemini Flash models** - Faster and more cost-effective for everyday tasks
+- **Gemini 3 Pro Preview** - Better for very large workspaces with 1M-token context window
+- **Reasoning-capable models** - Best for multi-step planning (requires enabling reasoning budget in settings)
 
-### Aliases
-
-For stability and automatic updates, prefer these aliases instead of hard-coding specific versioned model IDs:
-
-- `gemini-flash-latest` – Points to the newest stable Flash model
-- `gemini-pro-latest` – Points to the newest stable Pro model
-
-Using aliases helps Roo Code follow Google's recommended stable releases without you having to update model IDs manually.
-
-### Thinking / Reasoning Models
-
-Some Gemini models are reasoning-capable and may expose separate "thinking" or reasoning tokens:
-
-- Roo Code treats these as reasoning models and can use them for deeper, multi-step planning.
-- To use reasoning models effectively, enable the **reasoning budget** feature in Roo Code settings.
-- When the Gemini API reports reasoning / "thought" token usage, Roo Code includes those tokens in its cost estimates so reported costs stay closer to your provider's billing.
-
-Refer to the [Gemini documentation](https://ai.google.dev/models/gemini) for more details on each model family and its capabilities.
+**Pro tip:** Use model aliases (`gemini-flash-latest`, `gemini-pro-latest`) instead of version-specific IDs to automatically track Google's latest stable releases.
 
 ---
 

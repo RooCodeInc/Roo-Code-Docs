@@ -38,51 +38,17 @@ Fireworks AI is a high-performance platform for running AI models, offering fast
 
 ---
 
-## Supported Models
+## Available Models
 
-Fireworks AI offers several high-performance models:
+Roo Code supports all models available through Fireworks AI's platform.
 
-### Kimi K2
-* `accounts/fireworks/models/kimi-k2-instruct-0905` (Default)
-  - 1 trillion total parameters with 32B activated params
-  - 256K context window
-  - Optimized for agentic capabilities
-  - $0.60/M input, $2.50/M output
+For the complete, up-to-date model list and specifications, see [Fireworks AI's models page](https://fireworks.ai/models).
 
-### Qwen3 Series
-* `accounts/fireworks/models/qwen3-235b-a22b-instruct-2507`
-  - 256K context window
-  - Competitive with closed-source models
-  - $0.22/M input, $0.88/M output
-
-* `accounts/fireworks/models/qwen3-coder-480b-a35b-instruct`
-  - 256K context window
-  - Specialized for coding tasks
-  - $0.45/M input, $1.80/M output
-
-### DeepSeek Series
-* `accounts/fireworks/models/deepseek-r1-0528`
-  - 160K context window
-  - Advanced reasoning with reduced hallucination
-  - Function calling support
-  - $3.00/M input, $8.00/M output
-
-* `accounts/fireworks/models/deepseek-v3`
-  - 128K context window
-  - 671B total parameters with 37B activated
-  - $0.90/M input, $0.90/M output
-
-### MiniMax
-* `accounts/fireworks/models/minimax-m2`
-
-### GLM Series
-* `accounts/fireworks/models/glm-4p5`
-* `accounts/fireworks/models/glm-4p5-air`
-* `accounts/fireworks/models/glm-4p6`
-
-### GPT-OSS Series
-* `accounts/fireworks/models/gpt-oss-20b`
-* `accounts/fireworks/models/gpt-oss-120b`
+**Recommended for Roo Code:**
+- **Kimi K2** - Best for general-purpose coding with agentic capabilities (default)
+- **Qwen3 Coder** - Better for specialized code generation and debugging
+- **DeepSeek R1** - Best for complex reasoning and function calling tasks
+- **Qwen3 235B** - Most cost-effective for general development work
 
 ---
 

@@ -34,71 +34,17 @@ Roo Code supports accessing models directly through the official OpenAI API, inc
 
 ---
 
-## Supported Models
+## Available Models
 
-### GPT-5.1 Family (Latest)
-The GPT-5.1 models are OpenAI's most advanced, offering superior coding capabilities and agentic task performance:
+Roo Code supports all models available through OpenAI's API.
 
-* **`gpt-5.1`** (default) - Best model for coding and agentic tasks
-* **`gpt-5.1-codex`** - Specialized coding variant
-* **`gpt-5.1-codex-mini`** - Fast, cost-efficient coding model
+For the complete, up-to-date model list and capabilities, see [OpenAI's models documentation](https://platform.openai.com/docs/models).
 
-### GPT-5 Family
-Earlier GPT-5 models:
-
-* **`gpt-5-2025-08-07`** - Best model for coding and agentic tasks
-* **`gpt-5-mini-2025-08-07`** - Faster, cost-efficient for well-defined tasks
-* **`gpt-5-nano-2025-08-07`** - Fastest, most cost-efficient option
-
-### GPT-5-Codex
-OpenAI's specialized coding model with advanced capabilities:
-
-**Key Features:**
-* **400K Token Context Window** - Process entire codebases and lengthy documentation
-* **Image Support** - Analyze screenshots, diagrams, and visual documentation
-* **Prompt Caching** - Reduced costs for repeated context through automatic caching
-* **Adaptive Reasoning** - Dynamically adjusts reasoning depth based on task complexity
-
-**Ideal for:** Large-scale code analysis, multimodal tasks requiring visual understanding, complex refactoring projects, and extensive codebase operations.
-
-### GPT-4.1 Family
-Advanced multimodal models with balanced capabilities:
-
-* `gpt-4.1` - Advanced multimodal model
-* `gpt-4.1-mini` - Balanced performance
-* `gpt-4.1-nano` - Lightweight option
-
-### o3 Reasoning Models
-Models with configurable reasoning effort for complex problem-solving:
-
-* `o3`, `o3-high`, `o3-low` - Different reasoning effort presets
-* `o3-mini` (medium reasoning effort)
-* `o3-mini-high` (high reasoning effort)
-* `o3-mini-low` (low reasoning effort)
-
-### o4 Models
-Latest mini reasoning models:
-
-* `o4-mini`, `o4-mini-high`, `o4-mini-low`
-
-### o1 Family
-Original reasoning models:
-
-* `o1` - Original reasoning model
-* `o1-preview` - Preview version
-* `o1-mini` - Smaller variant
-
-### GPT-4o Family
-Optimized GPT-4 models:
-
-* `gpt-4.5-preview`
-* `gpt-4o` - Optimized GPT-4
-* `gpt-4o-mini` - Smaller optimized variant
-
-### Codex Models
-* `codex-mini-latest` - Cloud-based software engineering agent powered by codex-1, a version of o3 optimized for coding tasks
-
-Refer to the [OpenAI Models documentation](https://platform.openai.com/docs/models) for the most up-to-date list of models and capabilities.
+**Recommended for Roo Code:**
+- **GPT-5 models** - Best for coding and agentic tasks (default: `gpt-5.1`)
+- **GPT-5-Codex** - Specialized for code generation with 400K context window and prompt caching
+- **o-series models** - Better for complex reasoning and problem-solving tasks
+- **Mini/Nano variants** - Faster and more cost-effective for well-defined tasks
 
 ---
 

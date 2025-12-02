@@ -29,9 +29,13 @@ OpenRouter is an AI platform that provides access to a wide variety of language 
 
 ---
 
-## Supported Models
+## Available Models
 
-OpenRouter supports a large and growing number of models.  Roo Code automatically fetches the list of available models. Refer to the [OpenRouter Models page](https://openrouter.ai/models) for the complete and up-to-date list.
+Roo Code automatically fetches all available models from OpenRouter's API (100+ models from various providers).
+
+For the complete, up-to-date model list with pricing and capabilities, see [OpenRouter's models page](https://openrouter.ai/models).
+
+**Key advantage:** Access multiple AI providers through a single API without managing separate keys for each.
 
 ---
 

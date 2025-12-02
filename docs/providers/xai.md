@@ -34,22 +34,16 @@ xAI is the company behind Grok, a large language model known for its conversatio
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following xAI Grok models:
+Roo Code supports all Grok models available through xAI's API.
 
-### Current Models
-* `grok-code-fast-1` (Default) - xAI's Grok Code Fast model with 262K context window and prompt caching, optimized for reasoning and coding tasks
-* `grok-code-fast-1:2m` - Extended 2M context window variant
-* `grok-4.1-fast` - Latest Grok 4.1 fast model with advanced capabilities
-* `grok-4.1-fast:2m` - Grok 4.1 fast with 2M context window
-* `grok-4` - xAI's Grok-4 model with 262K context window, image support, and prompt caching
-* `grok-3` - xAI's Grok-3 model with 128K context window and prompt caching
-* `grok-3-fast` - xAI's Grok-3 fast model with 128K context window and prompt caching
-* `grok-3-mini` - xAI's Grok-3 mini model with 128K context window, reasoning support, and prompt caching
-* `grok-3-mini-fast` - xAI's Grok-3 mini fast model with 128K context window, reasoning support, and prompt caching
-* `grok-2-1212` - xAI's Grok-2 model (version 1212) with 128K context window
-* `grok-2-vision-1212` - xAI's Grok-2 Vision model (version 1212) with image support and 32K context window
+For the complete, up-to-date model list and capabilities, see [xAI's documentation](https://docs.x.ai/docs).
+
+**Recommended for Roo Code:**
+- **`grok-code-fast-1`** - Best for coding and reasoning tasks with 262K context window and prompt caching (default)
+- **Grok 3 Mini models** - Better for configurable reasoning effort control
+- **Vision models** - Best when you need image analysis support
 
 :::info Grok Code Fast - Free Access in Roo Code
 `grok-code-fast-1` is available for **free** through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. When using the xAI provider directly in Roo Code, standard pricing will apply once established. This model was previously known as "roo/sonic" and has been renamed. For free access within Roo Code, use the Roo Code Cloud provider instead of the xAI provider.

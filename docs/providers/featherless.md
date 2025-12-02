@@ -32,26 +32,20 @@ Featherless AI provides access to high-performance open-source models including 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following Featherless models:
+Roo Code automatically fetches all available models from Featherless AI's API.
 
-* `deepseek-ai/DeepSeek-R1-0528` (Default) - DeepSeek R1 reasoning model with `<think>` tag support
-* `deepseek-ai/DeepSeek-V3-0324` - DeepSeek V3 model
-* `moonshotai/Kimi-K2-Instruct` - Kimi K2 instruction-following model
-* `openai/gpt-oss-120b` - GPT-OSS 120B parameter model
-* `Qwen/Qwen3-Coder-480B-A35B-Instruct` - Qwen3 specialized coding model
+For the complete, up-to-date model list, see [Featherless AI](https://featherless.ai).
 
-### Model Capabilities
+**All models are currently FREE** with no usage costs.
 
-All models support:
-- **Context Window:** ~32,678 tokens
-- **Max Output:** 4,096 tokens
-- **Pricing:** Free (no cost for input/output tokens)
+**Recommended for Roo Code:**
+- **DeepSeek R1 models** - Best for complex reasoning with `<think>` tag support (default)
+- **Qwen3 Coder** - Better for specialized code generation tasks
+- **Kimi K2** - Good for balanced instruction-following
 
-:::info
-**DeepSeek R1 Models:** The DeepSeek R1 models (like `DeepSeek-R1-0528`) include special reasoning capabilities with `<think>` tag support for step-by-step problem solving. These models automatically separate reasoning from regular output.
-:::
+**Note:** Most models have ~32K context window and 4K max output. No image support or prompt caching available.
 
 ---
 
