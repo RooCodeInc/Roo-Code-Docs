@@ -46,6 +46,7 @@ Roo Code supports the main Gemini model families and automatically tracks Google
   - Roo Code defaults to a stable Pro model where your provider supports it (today this is a Gemini 2.5 Pro variant; future releases may point at newer Pro models)
 - **Gemini Flash family**
   - Fast, lower-cost models for everyday tasks and quick iterations
+- **Experimental:** `gemini-2.5-flash-lite-preview-09-2025` - Lightweight preview variant
 
 ### Aliases
 

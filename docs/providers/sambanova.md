@@ -32,8 +32,10 @@ To use SambaNova with Roo Code, you'll need an API key from the [SambaCloud](htt
 Roo Code will attempt to fetch the list of available models from the SambaNova API. Common models available via SambaCloud include:
 
 *   `DeepSeek-R1`
+*   `DeepSeek-V3.1`
 *   `DeepSeek-V3-0324`
 *   `DeepSeek-R1-Distill-Llama-70B`
+*   `gpt-oss-120b`
 *   `Meta-Llama-3.3-70B-Instruct`
 *   `Meta-Llama-3.1-8B-Instruct`
 *   `Llama-4-Maverick-17B-128E-Instruct`

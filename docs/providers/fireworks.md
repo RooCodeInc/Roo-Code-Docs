@@ -43,9 +43,9 @@ Fireworks AI is a high-performance platform for running AI models, offering fast
 Fireworks AI offers several high-performance models:
 
 ### Kimi K2
-* `accounts/fireworks/models/kimi-k2-instruct` (Default)
+* `accounts/fireworks/models/kimi-k2-instruct-0905` (Default)
   - 1 trillion total parameters with 32B activated params
-  - 128K context window
+  - 256K context window
   - Optimized for agentic capabilities
   - $0.60/M input, $2.50/M output
 
@@ -71,6 +71,18 @@ Fireworks AI offers several high-performance models:
   - 128K context window
   - 671B total parameters with 37B activated
   - $0.90/M input, $0.90/M output
+
+### MiniMax
+* `accounts/fireworks/models/minimax-m2`
+
+### GLM Series
+* `accounts/fireworks/models/glm-4p5`
+* `accounts/fireworks/models/glm-4p5-air`
+* `accounts/fireworks/models/glm-4p6`
+
+### GPT-OSS Series
+* `accounts/fireworks/models/gpt-oss-20b`
+* `accounts/fireworks/models/gpt-oss-120b`
 
 ---
 

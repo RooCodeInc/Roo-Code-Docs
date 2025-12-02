@@ -39,7 +39,7 @@ Roo Code supports accessing models through Google Cloud Platform's Vertex AI, a 
 Roo Code supports the following models through Vertex AI:
 
 ### Default Model
-If no model is specified, Roo Code defaults to `claude-sonnet-4@20250514`.
+If no model is specified, Roo Code defaults to `claude-sonnet-4-5@20250929`.
 
 ### Google Gemini Models
 
@@ -68,9 +68,10 @@ Some Gemini models provide dedicated reasoning or "thinking" tokens:
 Refer to the [Google Cloud Vertex AI models documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) for up-to-date Gemini model IDs and capabilities.
 
 ### Anthropic Claude Models
+*   `claude-sonnet-4-5@20250929` (Default)
 *   `claude-opus-4-1@20250805`
 *   `claude-opus-4@20250514`
-*   `claude-sonnet-4@20250514` (Default)
+*   `claude-sonnet-4@20250514`
 *   `claude-3-7-sonnet@20250219`
 *   `claude-3-7-sonnet@20250219:thinking` - With reasoning support
 *   `claude-3-5-sonnet-v2@20241022`
@@ -80,7 +81,18 @@ Refer to the [Google Cloud Vertex AI models documentation](https://cloud.google.
 *   `claude-3-haiku@20240307`
 
 ### Other Models
-*   `llama-4-maverick-17b-128e-instruct-maas` - Meta Llama 4 model with 128K context window
+
+#### MAAS (Model as a Service) Models
+*   `deepseek-r1-0528-maas`
+*   `deepseek-v3.1-maas`
+*   `gpt-oss-120b-maas`
+*   `gpt-oss-20b-maas`
+*   `qwen3-coder-480b-a35b-instruct-maas`
+*   `qwen3-235b-a22b-instruct-2507-maas`
+*   `llama-4-maverick-17b-128e-instruct-maas`
+
+#### Gemini Models
+*   `gemini-2.5-flash-lite-preview-06-17`
 
 Refer to the [Google Cloud documentation on Vertex AI Models](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) for the most up-to-date list of available models and their IDs.
 

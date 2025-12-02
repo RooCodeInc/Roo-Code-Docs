@@ -39,6 +39,9 @@ Roo Code supports the following Mistral models:
 |------------------------|-------------------------|------------------|--------|
 | codestral-latest      | 0.3                     | ✅               | ❌      |
 | mistral-large-latest  | 0.7                     | ✅               | ❌      |
+| magistral-medium-latest | 0.5                   | ✅               | ❌      |
+| devstral-medium-latest | 0.3                    | ✅               | ❌      |
+| mistral-medium-latest | 0.5                     | ✅               | ❌      |
 | ministral-8b-latest   | 0.3                     | ✅               | ❌      |
 | ministral-3b-latest   | 0.3                     | ✅               | ❌      |
 | mistral-small-latest  | 0.3                     | ✅               | ❌      |

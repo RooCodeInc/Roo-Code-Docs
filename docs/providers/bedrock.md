@@ -61,6 +61,7 @@ Roo Code supports the following models through Bedrock (based on source code):
     *   `amazon.titan-text-embeddings-v1:0`
     *   `amazon.titan-text-embeddings-v2:0`
 *   **Anthropic:**
+    *   `anthropic.claude-sonnet-4-5-20250929-v1:0` (Default)
     *   `anthropic.claude-opus-4.1-20250514-v1:0`
     *   `anthropic.claude-opus-4-20250514-v1:0`
     *   `anthropic.claude-sonnet-4-20250514-v1:0`
@@ -88,6 +89,9 @@ Roo Code supports the following models through Bedrock (based on source code):
     *   `meta.llama3-1-8b-instruct-v1:0`
     *   `meta.llama3-70b-instruct-v1:0`
     *   `meta.llama3-8b-instruct-v1:0`
+*   **OpenAI:**
+    *   `openai.gpt-oss-20b-1:0`
+    *   `openai.gpt-oss-120b-1:0`
 
 Refer to the [Amazon Bedrock documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) for the most up-to-date list of available models and their IDs. Make sure to use the *model ID* when configuring Roo Code, not the model name.
 

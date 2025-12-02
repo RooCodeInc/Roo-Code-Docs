@@ -40,6 +40,9 @@ Roo Code supports the following xAI Grok models:
 
 ### Current Models
 * `grok-code-fast-1` (Default) - xAI's Grok Code Fast model with 262K context window and prompt caching, optimized for reasoning and coding tasks
+* `grok-code-fast-1:2m` - Extended 2M context window variant
+* `grok-4.1-fast` - Latest Grok 4.1 fast model with advanced capabilities
+* `grok-4.1-fast:2m` - Grok 4.1 fast with 2M context window
 * `grok-4` - xAI's Grok-4 model with 262K context window, image support, and prompt caching
 * `grok-3` - xAI's Grok-3 model with 128K context window and prompt caching
 * `grok-3-fast` - xAI's Grok-3 fast model with 128K context window and prompt caching
@@ -69,11 +72,12 @@ Grok 3 Mini models feature specialized reasoning capabilities, allowing them to 
 
 ### Reasoning-Enabled Models
 
-Reasoning is only supported by:
+Several Grok models have reasoning capabilities. However, only the Grok 3 Mini models support configurable reasoning effort control:
+
 * `grok-3-mini` - Supports reasoning effort control
 * `grok-3-mini-fast` - Supports reasoning effort control
 
-The standard Grok 3 models (`grok-3` and `grok-3-fast`) and Grok 4 do not support reasoning effort parameters.
+Other models (`grok-code-fast-1`, `grok-4.1-fast`, `grok-4`, `grok-3`, `grok-3-fast`) are reasoning-capable but don't expose the `reasoning_effort` parameter.
 
 ### Controlling Reasoning Effort
 
