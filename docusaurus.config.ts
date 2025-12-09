@@ -301,8 +301,8 @@ const config: Config = {
     navbar: {
       logo: {
         alt: 'Roo Code Logo',
-        src: 'img/roo-code-logo-white.png',
-        srcDark: 'img/roo-code-logo-dark.png',
+        src: 'img/roo-code-logo-dark.svg',
+        srcDark: 'img/roo-code-logo-white.svg',
       },
       items: [
         {
@@ -315,8 +315,8 @@ const config: Config = {
       style: 'dark',
       logo: {
         alt: 'Roo Code Logo',
-        src: 'img/roo-code-logo-white.png',
-        srcDark: 'img/roo-code-logo-dark.png',
+        src: 'img/roo-code-logo-dark.svg',
+        srcDark: 'img/roo-code-logo-white.svg',
         width: 120,
         height: 24,
       },

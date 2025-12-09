@@ -26,7 +26,7 @@
   --border: 0 0% 89.8%;
   --input: 0 0% 89.8%;
   --ring: 0 0% 3.9%;
-  --radius: 1.5rem;
+  --radius: 0.5rem;
 
   --chart-1: 0 100% 50%;
   --chart-2: 29 100% 50%;
@@ -51,6 +51,8 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-background-color: hsl(var(--background));
   --ifm-font-color-base: hsl(var(--foreground));
+
+  --block-shadow: 0 4px 10px rgba(0,0,0,0.075);
 }
 
 /* Dark mode - force pure black background */
@@ -450,7 +452,8 @@ pre {
 
 /* Logo height */
 .navbar__logo {
-  height: 32px; /* h-8 */
+  height: 26px;
+  margin-top: 8px;
   width: auto;
 }
 
@@ -1617,17 +1620,17 @@ main[class*="docMainContainer"] {
 /* Code blocks with roocode.com styling */
 .theme-code-block {
   margin: 2rem 0; /* More spacing */
-  border-radius: calc(var(--radius) + 4px) !important;
+  border-radius: calc(var(--radius)) !important;
   overflow: hidden;
+  box-shadow: var(--block-shadow) !important;
 }
 
 /* Code block container */
 .prism-code {
-  background: hsl(var(--background) / 0.6) !important;
   border: 1px solid hsl(var(--border) / 0.3) !important;
-  font-size: 0.875rem !important; /* Consistent with roocode.com */
+  font-size: 1rem !important;
   line-height: 1.7 !important;
-  padding: 1.5rem !important;
+  padding: 1rem !important;
 }
 
 /* Inline code styling */
@@ -1691,11 +1694,19 @@ main[class*="docMainContainer"] {
   margin: 2rem 0;
   border-collapse: separate;
   border-spacing: 0;
-  border: 1px solid hsl(var(--border) / 0.5);
-  border-radius: calc(var(--radius) + 4px);
+  border-radius: calc(var(--radius)/2);
+  box-shadow: var(--block-shadow);
   overflow: hidden;
   background: hsl(var(--background) / 0.3);
-  backdrop-filter: blur(16px);
+}
+
+.theme-doc-markdown table tr {
+  border: none;
+}
+
+.theme-doc-markdown th,
+.theme-doc-markdown td {
+  vertical-align: top;
 }
 
 .theme-doc-markdown th {
@@ -1704,11 +1715,13 @@ main[class*="docMainContainer"] {
   text-align: left;
   font-weight: 600;
   color: hsl(var(--foreground));
-  border-bottom: 1px solid hsl(var(--border) / 0.5);
+  border: none;
+  border-bottom: 2px solid hsl(var(--border) / 0.5);
 }
 
 .theme-doc-markdown td {
   padding: 0.75rem 1rem;
+  border: none;
   border-bottom: 1px solid hsl(var(--border) / 0.3);
   color: hsl(var(--foreground) / 0.9); /* Match body text brightness */
 }
@@ -1820,14 +1833,25 @@ main[class*="docMainContainer"] {
   font-weight: 500;
 }
 
-/* Images with roocode.com styling */
 .theme-doc-markdown img {
   max-width: 100%;
   height: auto;
-  border-radius: calc(var(--radius) + 4px);
-  border: 1px solid hsl(var(--border) / 0.3);
-  margin: 2rem 0;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  border-radius: var(--radius);
+  outline: 1px solid hsl(var(--border));
+  margin: 1rem 0;
+  overflow: hidden;
+  box-shadow: var(--block-shadow);
+  transition: transform 0.1s;
+}
+
+.theme-doc-markdown img:hover {
+  outline-width: 3px;
+  transform: scale(1.025);
+}
+
+.theme-doc-markdown li img {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
 }
 
 /* Image captions */
@@ -2100,7 +2124,7 @@ html {
 }
 
 .footer__logo-container img {
-  height: 24px !important; /* Smaller than navbar logo */
+  height: 20px !important; /* Smaller than navbar logo */
   width: auto !important;
 }
 
@@ -2124,6 +2148,7 @@ html {
 
 .footer__social-icons svg {
   display: inline-block !important;
+  height: 20px;
   visibility: visible !important;
 }
 

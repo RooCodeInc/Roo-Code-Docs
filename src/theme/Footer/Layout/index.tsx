@@ -20,7 +20,7 @@ export default function FooterLayout({
           <div className="footer__brand">
             {logo && <div className="footer__logo-container">{logo}</div>}
             <div className="footer__tagline">
-              Empowering developers to build better software faster with AI-powered tools and insights.
+              Your AI Software Engineering Team. Interactive in the IDE, autonomous in the cloud.
             </div>
             <div className="footer__social-icons">
               <SocialIcons />
