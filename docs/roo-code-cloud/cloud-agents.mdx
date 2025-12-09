@@ -1,0 +1,104 @@
+---
+description: Comprehensive guide to Roo Code Cloud's autonomous agents - specialized AI workers that plan, code, review, and fix software independently.
+keywords:
+  - Cloud Agents
+  - Autonomous Agents
+  - PR Reviewer
+  - PR Fixer
+  - Coder Agent
+  - Planner Agent
+  - Explainer Agent
+  - AI orchestration
+image: /img/social-share.jpg
+---
+
+# Cloud Agents
+
+Cloud Agents are specialized, autonomous AI workers that run in the cloud. Unlike the standard Roo Code extension that runs locally in your editor, Cloud Agents are designed to perform specific roles independently, 24/7, without requiring your local machine to be active.
+
+<img src="/img/cloud-agents/overview.png" alt="Cloud Agents Overview" width="800" />
+
+## Available Agents
+
+### 🏗️ Planner Agent
+**Role:** Architect & Strategist  
+**Mode:** Architect  
+**Availability:** ✅ Available
+
+The Planner agent maps out implementation plans and navigates complex technical decisions. It's designed to take a high-level idea or a Product Requirement Document (PRD) and break it down into a thorough, step-by-step implementation plan.
+
+- **Best for:** New feature planning, system architecture design, complex refactoring strategies.
+- **Onboarding Tip:** "Enter an idea (or paste a PRD) and get a thorough implementation plan."
+- **Recommended Models:** High-reasoning models like `anthropic/claude-opus-4.5` or `openai/gpt-5.1`.
+
+### 👨‍💻 Coder Agent
+**Role:** Software Engineer  
+**Mode:** Code  
+**Availability:** ✅ Available
+
+The Coder agent writes code, creates pull requests, and implements features. It is the workhorse of the platform, capable of handling end-to-end coding tasks.
+
+- **Best for:** Building features, fixing bugs, refactoring components, writing tests.
+- **Onboarding Tip:** "Build a feature, fix an issue, refactor a component."
+- **Capabilities:** Can create draft PRs or push directly depending on settings.
+
+### 🔍 PR Reviewer Agent
+**Role:** Code Reviewer  
+**Mode:** Code  
+**Availability:** ✅ Available
+
+The PR Reviewer agent automatically provides comprehensive code reviews with actionable comments. It can monitor your repositories and review incoming Pull Requests.
+
+- **Best for:** Automated code quality checks, catching bugs early, enforcing coding standards.
+- **Onboarding Tip:** "Give it a PR, get thorough and actionable comments back."
+- **Settings:**
+    - `authorReviewMode`: Choose to review 'all', 'specific', or 'none' (no automatic triggers).
+    - `approvePr`: Can optionally approve PRs if no issues are found.
+    - `reviewDraftPrs`: Option to review draft PRs.
+
+### 🛠️ PR Fixer Agent
+**Role:** Bug Fixer  
+**Mode:** Code  
+**Availability:** ✅ Available
+
+The PR Fixer agent is specialized in resolving issues identified in Pull Requests. It listens for feedback and autonomously implements fixes.
+
+- **Best for:** Resolving PR comments, fixing CI/CD failures, addressing review feedback.
+- **Onboarding Tip:** "Give it a PR with comments and get it solved."
+- **Trigger:** Often triggered via `@roomote` mentions in PR comments.
+
+### 🧠 Explainer Agent
+**Role:** Technical Educator  
+**Mode:** Ask  
+**Availability:** ✅ Available
+
+The Explainer agent explains code, concepts, and technical documentation. It helps you understand complex parts of a codebase without needing to read every line.
+
+- **Best for:** Onboarding to a new codebase, understanding legacy code, debugging conceptual issues.
+- **Onboarding Tip:** "Understand the source of a bug or how a part of the code works."
+
+## Upcoming Agents
+
+We are constantly expanding our agent fleet. Here are agents currently in development or preview:
+
+| Agent | Role | Status | Description |
+| :--- | :--- | :--- | :--- |
+| **Improver** | Rule Optimizer | 🚧 Preview | Analyzes agent feedback and PR reviews to maintain and improve rules files. |
+| **Documentation Writer** | Tech Writer | ⏳ Coming Soon | Understands your code and writes actionable user-facing documentation. |
+| **Security Auditor** | Security Expert | ⏳ Coming Soon | Conducts security audits and identifies vulnerabilities. |
+| **Translator** | Localization | ⏳ Coming Soon | Translates strings with accuracy and following your brand voice. |
+
+## How Cloud Agents Work
+
+1. **Triggering**: Agents can be triggered manually via the [Web Interface](/roo-code-cloud/web-interface), or automatically via [GitHub Integrations](/roo-code-cloud/github-integration) (e.g., new PR opened) and [Slack Integrations](/roo-code-cloud/slack-integration) (e.g., `@Roomote` mention).
+2. **Execution**: The agent spins up a secure, isolated cloud environment to perform its task. It clones your repository, analyzes the context, and executes the required actions.
+3. **Completion**: Once the task is done, the agent reports back—creating a PR, posting a comment, or sending a Slack message.
+4. **Handoff**: You can intervene at any time using [Roomote Control](/roo-code-cloud/roomote-control) to take manual control of the session.
+
+## Credits & Usage
+
+Cloud Agents consume **Cloud Credits**. Usage is measured based on the model used and the duration of the task.
+- **Free Tier:** Includes access to free models for standard tasks.
+- **Pro Tier:** Unlocks concurrent agent execution and priority queueing.
+
+[Learn more about Cloud Credits](/roo-code-cloud/credits)

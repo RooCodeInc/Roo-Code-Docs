@@ -1,0 +1,74 @@
+---
+description: Use Roo Code Cloud agents directly from Slack to plan features, explain code, and trigger tasks.
+keywords:
+  - Slack Integration
+  - ChatOps
+  - "@Roomote"
+  - Slack bot
+  - AI planning
+  - collaborative coding
+image: /img/social-share.jpg
+---
+
+# Slack Integration
+
+The Roo Code Slack integration brings your AI development team directly into your chat workspace. You can summon agents to explain code, plan new features, or execute coding tasks without leaving Slack.
+
+<img src="/img/slack-integration/overview.png" alt="Slack Integration Overview" width="800" />
+
+## Setting Up
+
+1. **Install the Slack App**: Go to [app.roocode.com/integrations](https://app.roocode.com/integrations) and click "Connect Slack".
+2. **Authorize**: Grant the necessary permissions for the Roo Code bot to read messages and post replies in your workspace.
+3. **Invite to Channels**: Add the `@Roomote` bot to the channels where you want to use it.
+
+## Interactions
+
+To interact with Roo Code agents, simply mention `@Roomote` in any channel where the bot is present.
+
+### 1. Planning Features (Planner Agent)
+Start a thread to discuss and plan a new feature with your team and the AI.
+
+> **User:** `@Roomote We need to add a 'Forgot Password' flow to the user service. Can you plan this out?`
+>
+> **@Roomote:** 👀 *Thinking...*
+>
+> **@Roomote:** **(Planner Agent)** Here is a proposed implementation plan for the Forgot Password flow:
+> 1. Create `PasswordResetToken` model...
+> 2. Add API endpoint `/api/auth/forgot-password`...
+> ...
+
+### 2. Explaining Code (Explainer Agent)
+Ask questions about your codebase to get immediate answers.
+
+> **User:** `@Roomote explain how the authentication middleware handles JWT tokens in the backend repo`
+>
+> **@Roomote:** **(Explainer Agent)** The authentication middleware in `backend/src/middleware/auth.ts` works as follows:
+> 1. Extracts the token from the `Authorization` header.
+> 2. Verifies the signature using `JWT_SECRET`.
+> 3. Attaches the decoded user payload to `req.user`.
+
+### 3. Executing Tasks (Coder Agent)
+Trigger coding tasks directly from chat.
+
+> **User:** `@Roomote create a new API endpoint for user profile updates based on the plan we just discussed`
+>
+> **@Roomote:** **(Coder Agent)** I'll get started on that. I've created a new task to implement the user profile update endpoint. You can follow the progress [here](https://app.roocode.com/tasks/123).
+
+## Workflow
+
+1. **Invoke**: Mention `@Roomote` with your request.
+2. **Acknowledge**: The bot reacts with 👀 to confirm it's processing.
+3. **Clarify**: If needed, the bot will ask follow-up questions to identify the correct:
+    - **Agent Type**: (e.g., Planner vs. Coder)
+    - **Repository**: Which codebase to apply the changes to.
+4. **Execute**: The selected agent runs in the cloud.
+5. **Report**: The bot posts the result back to the thread.
+
+## Use Cases
+
+- **Team Knowledge Sharing**: Ask for an explanation in a public channel so the whole team benefits from the answer.
+- **Brainstorming**: Use the Planner agent to flesh out ideas during a slack huddle.
+- **Quick Fixes**: Trigger simple tasks without context switching to your IDE.
+
+[Connect Slack Now](https://app.roocode.com/integrations)

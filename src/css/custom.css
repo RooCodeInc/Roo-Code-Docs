@@ -1529,7 +1529,7 @@ main[class*="docMainContainer"] {
 }
 
 .theme-doc-markdown h1 {
-  font-size: 1.575rem;
+  font-size: 2.25rem;
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.2;
@@ -1537,24 +1537,12 @@ main[class*="docMainContainer"] {
   margin-bottom: 1.5rem;
 }
 
-@media (min-width: 640px) {
-  .theme-doc-markdown h1 {
-    font-size: 2.1rem;
-  }
-}
-
 .theme-doc-markdown h2 {
-  font-size: 1.875rem;
+  font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.025em;
   margin-top: 1.5rem; /* Reduced from 2rem */
   margin-bottom: 1rem;
-}
-
-@media (min-width: 640px) {
-  .theme-doc-markdown h2 {
-    font-size: 2.25rem;
-  }
 }
 
 .theme-doc-markdown h3 {
@@ -1580,12 +1568,6 @@ main[class*="docMainContainer"] {
   color: hsl(var(--foreground) / 0.9); /* 90% brightness like roocode.com */
   margin-bottom: 1rem;
   font-weight: 400; /* Ensure normal weight */
-}
-
-@media (min-width: 640px) {
-  .theme-doc-markdown p {
-    font-size: 1.125rem;
-  }
 }
 
 /* Link styles */
@@ -1858,7 +1840,7 @@ main[class*="docMainContainer"] {
 
 /* Optional: decorative HR */
 .theme-doc-markdown hr::after {
-  content: '◆';
+  content: '';
   position: absolute;
   top: 50%;
   left: 50%;

@@ -1,0 +1,74 @@
+---
+description: Real-world recipes and workflows for getting the most out of Roo Code Cloud autonomous agents.
+keywords:
+  - agent workflows
+  - automation recipes
+  - refactoring
+  - testing
+  - documentation
+  - bug triage
+image: /img/social-share.jpg
+---
+
+# Autonomous Agent Workflows
+
+This guide provides "recipes" for common high-value workflows using Roo Code Cloud agents.
+
+## 🌙 The Overnight Refactor
+
+Use the **Coder Agent** to handle time-consuming refactoring tasks while you sleep.
+
+**Goal**: Convert a legacy JavaScript module to TypeScript.
+
+1. **Preparation**: Create a new branch `refactor/legacy-module`.
+2. **Trigger**: In Slack or the Web Interface, summon the Coder Agent.
+3. **Prompt**:
+   > "Checkout branch `refactor/legacy-module`. Convert the files in `src/legacy/` to TypeScript. Fix any type errors. Ensure all existing tests pass. Do not change the runtime logic."
+4. **Result**: By morning, you have a PR waiting for review with the heavy lifting done.
+
+## 🛡️ The PR Guardian
+
+Configure the **PR Reviewer** and **PR Fixer** to act as a first line of defense.
+
+**Goal**: Ensure no code style violations or simple bugs reach human review.
+
+1. **Setup**: Enable **PR Reviewer** for your repository in the Dashboard.
+2. **Workflow**:
+   - Developer opens a PR.
+   - **PR Reviewer** scans it and finds a missing error handler.
+   - It posts a comment: *"Line 52: Potential unhandled promise rejection here."*
+   - Developer (or the PR Reviewer itself, if configured) triggers the **PR Fixer** via `@roomote fix this`.
+   - **PR Fixer** pushes the correction.
+3. **Benefit**: Human reviewers focus on architecture and logic, not nitpicks.
+
+## 🐛 Automated Bug Triage
+
+Use the **Explainer Agent** (or a specialized Triage workflow) to diagnose issues.
+
+**Goal**: Quickly understand a new bug report.
+
+1. **Trigger**: A new issue comes in: *"Login fails with 500 error when username has emoji"*.
+2. **Action**: Ask the agent in Slack:
+   > "Check the `login` function in `auth.controller.ts`. Trace how it handles special characters in usernames. specific to emoji inputs."
+3. **Result**: The agent provides a trace explaining exactly where the regex validation is failing, saving you 30 minutes of investigation.
+
+## 📚 Documentation Sync
+
+Keep your docs up to date with code changes.
+
+**Goal**: Update API documentation after a breaking change.
+
+1. **Trigger**: After merging a PR that changes an API endpoint.
+2. **Prompt**:
+   > "I just updated the `/users` endpoint to require a `tenantId`. Update the Swagger/OpenAPI spec in `docs/api.yaml` and the markdown guide in `docs/guides/users.md` to reflect this change."
+3. **Result**: A documentation-only PR is created, ensuring your docs never rot.
+
+## 🧪 Test Generation
+
+Increase coverage without the tedium.
+
+**Goal**: Add unit tests to a legacy component.
+
+1. **Prompt**:
+   > "Analyze `src/utils/complex-calc.ts`. It currently has 0% coverage. Write a comprehensive test suite in Jest covering all edge cases, including negative numbers and null inputs."
+2. **Result**: A new test file `src/utils/complex-calc.test.ts` is created with passing tests.

@@ -1,0 +1,68 @@
+---
+description: Integrate Roo Code Cloud agents with GitHub to automate pull request reviews and fixes.
+keywords:
+  - GitHub Integration
+  - PR Reviewer
+  - PR Fixer
+  - automated code review
+  - automated bug fixing
+  - GitHub App
+image: /img/social-share.jpg
+---
+
+# GitHub Integration
+
+Roo Code Cloud integrates directly with GitHub to bring autonomous agents into your pull request workflow. By installing the Roo Code GitHub App, you can enable agents to automatically review code and fix issues without leaving GitHub.
+
+<img src="/img/github-integration/overview.png" alt="GitHub Integration Overview" width="800" />
+
+## Setting Up
+
+1. **Install the GitHub App**: Go to [app.roocode.com/integrations](https://app.roocode.com/integrations) and click "Connect GitHub".
+2. **Select Repositories**: Choose which repositories Roo Code agents should have access to. You can select all repositories or specific ones.
+3. **Configure Permissions**: Grant the necessary permissions for reading code and posting comments/commits.
+
+## Features
+
+### 🔍 Automated PR Reviews (PR Reviewer)
+
+The **PR Reviewer** agent monitors your repository for new pull requests. When a PR is opened, it automatically:
+1. **Analyzes the code changes**: Understands the context and intent of the PR.
+2. **Checks for issues**: Looks for bugs, security vulnerabilities, and code style violations.
+3. **Posts comments**: Adds detailed, actionable review comments directly on the PR lines.
+
+**Configuration Options:**
+- **Trigger**: New PR opened or updated.
+- **Scope**: Can be set to review all PRs or only those from specific authors.
+- **Draft PRs**: Choose whether to review draft PRs or wait for "Ready for Review" status.
+
+### 🛠️ On-Demand Fixes (PR Fixer)
+
+The **PR Fixer** agent listens for your commands within PR comments. If a reviewer (human or AI) points out an issue, you can ask the agent to fix it.
+
+**How to use:**
+1. **Comment on a PR**: In a PR comment, mention `@roomote` followed by your request.
+   - Example: `@roomote please fix this null pointer exception`
+   - Example: `@roomote refactor this function to be more readable`
+2. **Agent Action**: The agent acknowledges the request (👀 reaction), analyzes the code, and pushes a commit with the fix.
+
+### Workflow Examples
+
+#### 1. The "Set It and Forget It" Review
+- Developer opens a PR.
+- **PR Reviewer** automatically scans the changes.
+- It finds a potential performance issue and comments on line 42.
+- Developer sees the comment and decides to fix it manually or asks `@roomote` to handle it.
+
+#### 2. Interactive Fixing
+- Human reviewer comments: "This logic seems flawed, it handles edge case X incorrectly."
+- Developer replies to the comment: `@roomote you're right, please handle edge case X as suggested.`
+- **PR Fixer** reads the thread, understands the context, and pushes a fix commit to the branch.
+
+## Security & Permissions
+
+- **Least Privilege**: Agents only access the repositories you explicitly select.
+- **Authentication**: Uses secure GitHub App authentication.
+- **Audit Logs**: All agent actions (comments, commits) are logged and visible in your [Roo Code Cloud Dashboard](/roo-code-cloud/dashboard).
+
+[Connect GitHub Now](https://app.roocode.com/integrations)

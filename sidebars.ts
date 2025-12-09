@@ -47,19 +47,36 @@ const sidebars: SidebarsConfig = {
       label: 'Roo Code Cloud',
       items: [
         'roo-code-cloud/what-is-roo-code-cloud',
-        'roo-code-cloud/login',
-        'roo-code-cloud/dashboard',
-        'roo-code-cloud/task-sharing',
-        'roo-code-cloud/task-sync',
-        'roo-code-cloud/billing-subscriptions',
-        'roo-code-cloud/roomote-control',
+        'roo-code-cloud/cloud-agents',
+        'roo-code-cloud/github-integration',
+        'roo-code-cloud/slack-integration',
+        'roo-code-cloud/agent-workflows',
+        'roo-code-cloud/cloud-first-development',
+        {
+          type: 'category',
+          label: 'Platform Features',
+          items: [
+            'roo-code-cloud/dashboard',
+            'roo-code-cloud/roomote-control',
+            'roo-code-cloud/analytics',
+            'roo-code-cloud/task-sharing',
+            'roo-code-cloud/task-sync',
+          ]
+        },
+        {
+          type: 'category',
+          label: 'Account & Billing',
+          items: [
+            'roo-code-cloud/login',
+            'roo-code-cloud/credits',
+            'roo-code-cloud/billing-subscriptions',
+          ]
+        },
       ],
     },
     {
       type: 'category',
       label: 'Features',
-      collapsed: false,
-      collapsible: false,
       items: [
         'features/api-configuration-profiles',
         'features/auto-approving-actions',

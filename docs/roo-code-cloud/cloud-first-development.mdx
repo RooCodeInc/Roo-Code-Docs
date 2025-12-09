@@ -1,0 +1,70 @@
+---
+description: Best practices for adopting a cloud-first development workflow with autonomous agents. Learn when to use cloud agents vs. local extension.
+keywords:
+  - cloud first development
+  - hybrid workflow
+  - autonomous development
+  - agent permissions
+  - best practices
+  - workflow optimization
+image: /img/social-share.jpg
+---
+
+# Cloud-First Development
+
+Transitioning to a cloud-first development model changes how you interact with your code. Instead of typing every line yourself, you orchestrate agents to do the heavy lifting. This guide helps you navigate this shift.
+
+## Local vs. Cloud: Choosing the Right Tool
+
+| Feature | 💻 Local Extension | ☁️ Cloud Agents |
+| :--- | :--- | :--- |
+| **Primary Use** | Real-time pair programming, complex debugging, exploring new codebases manually. | Asynchronous tasks, background refactoring, PR reviews, implementing planned features. |
+| **Context** | Has full access to your open tabs, local server, and uncommitted changes. | Works from the repository state (git). Requires code to be pushed to see it. |
+| **Latency** | Instant feedback loop. | Asynchronous; best for "fire and forget" tasks. |
+| **Ideal for** | "I'm stuck on this line" or "Help me write this function now." | "Build this entire feature while I attend a meeting" or "Review this PR." |
+
+## Hybrid Workflows
+
+The most powerful way to use Roo Code is to combine local and cloud workflows.
+
+### 1. The Handoff
+Start locally, then offload to the cloud.
+- **Scenario**: You're debugging a tricky issue locally. You identify the root cause but the fix requires updating 5 different files.
+- **Action**: Commit your work-in-progress branch. Switch to Slack or the Web Interface and tell the **Coder Agent**: *"Finish the refactor on branch `fix/auth-bug` following the pattern I started."*
+- **Benefit**: You get back to other work while the agent does the tedious implementation.
+
+### 2. The Review Loop
+Let the cloud handle the first pass.
+- **Scenario**: You've just finished a feature locally.
+- **Action**: Push your PR. The **PR Reviewer** agent instantly scans it and posts comments.
+- **Benefit**: You catch linting errors, typos, and obvious bugs *before* a human teammate wastes time reviewing it.
+
+### 3. Parallel Development
+Multiply your output.
+- **Scenario**: You have a roadmap with 3 independent tasks.
+- **Action**:
+    1. Task A: You work on it locally.
+    2. Task B: You assign to a **Coder Agent** via Slack.
+    3. Task C: You ask a **Planner Agent** to spec out.
+- **Benefit**: You make progress on three fronts simultaneously.
+
+## Best Practices for Autonomous Development
+
+### 📝 Clear Instructions are Key
+Cloud agents don't have your mental context. Be explicit in your prompts.
+- **Bad**: "Fix the bug."
+- **Good**: "Fix the null pointer exception in `UserProfile.tsx` that happens when `user.address` is undefined. Ensure you add a test case for this scenario."
+
+### 🔒 Managing Permissions
+- **Least Privilege**: Only give agents access to the repositories they need.
+- **Branch Protection**: Use GitHub branch protection rules. Require PR reviews (even from agents!) before merging to `main`.
+- **Secret Management**: Never put secrets in chat. Use your cloud provider's secure environment variable storage if agents need API keys.
+
+### 👁️ Monitoring and Intervention
+- **Trust but Verify**: Always review the code an agent produces before merging.
+- **Roomote Control**: If an agent gets stuck or starts going down the wrong path, use [Roomote Control](/roo-code-cloud/roomote-control) to intervene immediately without killing the session.
+
+## The Mental Shift
+Cloud-first development requires thinking like a **Manager** rather than just an **Individual Contributor**.
+- Instead of "How do I write this loop?", ask "What is the best architecture for this module?"
+- Focus on **Specifying** and **Reviewing** rather than just **Typing**.

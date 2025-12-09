@@ -1,12 +1,12 @@
 ---
-description: Remotely control Roo Code tasks running in VS Code from your browser. Monitoring is provided by Task Sync.
+description: Manual control for your cloud agents. Take over sessions, intervene in tasks, and manage handoffs between autonomous and manual modes.
 keywords:
   - roomote control
   - remote control
-  - remote tasks
-  - real-time monitoring
-  - workspace connection
-  - task control
+  - manual override
+  - human in the loop
+  - agent handoff
+  - monitoring
 image: /img/social-share.jpg
 ---
 
@@ -14,63 +14,45 @@ import Codicon from '@site/src/components/Codicon';
 
 # Roomote Control
 
-Roomote Control lets you remotely control tasks running in your local VS Code instance from the Roo Code Cloud web interface.
+Roomote Control acts as the **manual override** for your autonomous cloud workforce. While Cloud Agents are designed to work independently, there are times when human intervention is necessary-to unblock a stuck agent, clarify a requirement, or take over a complex refactor.
 
-## What is Roomote Control?
+<img src="/img/roomote-control/overview.png" alt="Roomote Control Interface" width="800" />
 
-Roomote Control creates a bidirectional connection between your local VS Code extension and Roo Code Cloud so you can:
+## When to Use Roomote Control
 
-- **Control tasks remotely** — start, stop, interact, and use the full chat interface
-- Included with **Roo Code Cloud Pro**. See [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions#pro-plan-20month).
+Roomote Control is designed for "Human-in-the-Loop" scenarios:
+
+1.  **Intervention**: An agent is spinning in circles or misinterpreting a prompt. Instead of cancelling the task, you can jump in, provide guidance, and let it continue.
+2.  **Handoff**: You started a task on your commute via phone, and now you're at your desk. Seamlessly pick up the session where the agent left off.
+3.  **Review**: An agent has requested feedback before proceeding with a destructive action (like deleting files). You can approve or deny the action remotely.
 
 ## Key Features
 
-### Real-time Workspace Connection
+-   **Full Terminal Access**: View and interact with the agent's terminal output.
+-   **Chat Interface**: Send new instructions or clarifications to the running agent.
+-   **Action Approval**: Approve or deny tool use requests (e.g., file writes, command execution).
+-   **Stop/Resume**: Pause an agent to inspect its state, then resume execution.
 
-- Shows your connected workspaces and live status
+## How it Works
 
+Roomote Control creates a real-time, bidirectional stream between your browser and the cloud container (or your local VS Code instance, if you are using the local extension).
 
-### Remote Task Control
-
-- **Chat interface** — Similar to IDE chat for core interactions; some settings and customizations aren't available in the browser
-- **Start New Tasks** - Launch tasks in any connected workspace
-- **Stop Running Tasks** - Safely terminate active tasks
-- **Task Switching** - Navigate between tasks including resuming tasks that have been stopped or closed
-
-:::note Pro Feature Required for Remote Control
-While basic monitoring is available to all users, remote control capabilities (starting, stopping, and interacting with tasks remotely) require a [Pro subscription (free 14-day trial, then $20/month)](/roo-code-cloud/billing-subscriptions#pro-plan-20month).
+:::note Pro Feature
+Roomote Control is a premium feature included in **Roo Code Cloud Pro**. See [Billing & Subscriptions](/roo-code-cloud/billing-subscriptions) for details.
 :::
 
-## Getting Started
+## Connecting to a Session
 
-### Step 1: Connect Your Account
+1.  **Navigate to Dashboard**: Go to [app.roocode.com](https://app.roocode.com).
+2.  **View Active Agents**: You will see a list of currently running agents under "Active Sessions".
+3.  **Take Control**: Click on any session to open the Roomote Control interface.
+4.  **Interact**: Type in the chat box to send commands, or use the "Stop" button to halt execution.
 
-First, you need to connect your Roo Code extension to Roo Code Cloud. Follow the [login instructions](/roo-code-cloud/login#getting-started) to connect your account.
+## Local vs. Cloud Control
 
-### Step 2: Enable Roomote Control
+Roomote Control works for both:
 
-You can enable Roomote Control in two ways:
+*   **Cloud Agents**: Agents running entirely in Roo Code Cloud infrastructure.
+*   **Local Extension**: Tasks running in your VS Code on your physical machine (requires your computer to be on and VS Code to be open).
 
-**Option 1: From the Web Dashboard**
-1. Navigate to [app.roocode.com](https://app.roocode.com)
-2. Toggle the **Roomote Control** switch on the top right of the home page
-
-**Option 2: From the Roo Code Plugin**
-1. Click the **cloud icon** <Codicon name="cloud" /> in the top right corner of Roo Code
-2. Toggle the **Roomote Control** switch in the Cloud panel
-
-### Step 3: Start a Remote Task
-
-Once your account is connected and Roomote Control is enabled:
-1. Your VS Code workspace(s) automatically appear in the web interface
-2. Click **New Task** on any connected workspace card
-3. Enter your task description
-4. Click **Start** to begin the task
-5. Watch real-time progress in your browser
-
-
-## Limitations
-
-- Requires active VS Code with Roo Code extension
-- Internet connection required for real-time sync
-- One task active per workspace at a time
+This unified interface means you have a single "Mission Control" for all your AI development, regardless of where the code is actually running.

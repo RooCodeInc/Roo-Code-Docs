@@ -1,0 +1,73 @@
+---
+description: Understand how Cloud Credits work in Roo Code Cloud. Manage your balance, set up auto top-up, and pay only for what you use.
+keywords:
+  - cloud credits
+  - pay as you go
+  - usage based pricing
+  - billing
+  - auto top-up
+  - tokens
+image: /img/social-share.jpg
+---
+
+# Cloud Credits
+
+Roo Code Cloud uses a flexible credit system to power on-demand resources. **Cloud Credits** are the unified currency used to pay for:
+- **Model Inference**: Usage of premium models (outside of free promotional tiers).
+- **Agent Execution**: Runtime hours for autonomous cloud agents.
+- **Storage**: Long-term retention of task history and artifacts.
+
+<img src="/img/credits/overview.png" alt="Cloud Credits Dashboard" width="800" />
+
+## How Credits Work
+
+1. **Purchase**: You buy credits in packs (e.g., $10 for 1000 credits).
+2. **Consume**: As you use cloud resources, credits are deducted from your balance in real-time.
+3. **Refill**: You can manually top up or enable auto-refill to never run out.
+
+### Consumption Rates
+
+*Note: Rates are subject to change. Check the [Dashboard](https://app.roocode.com/billing) for live pricing.*
+
+| Resource | Cost (Approx) |
+| :--- | :--- |
+| **Premium Models** | Market rate per 1M tokens (varies by model) |
+| **Cloud Agents** | ~10 credits / hour of active execution |
+| **Storage** | Free for first 1GB, then 1 credit / GB / month |
+
+:::tip Promotional Period
+Currently, many models and agent types are available for **FREE** during our promotional period. You will see a credit cost of `0` in your logs.
+:::
+
+## Managing Your Balance
+
+### Auto Top-Up (Recommended)
+Ensure your agents never stop mid-task by enabling Auto Top-Up.
+
+1. Go to **Billing & Credits** in your [Dashboard](https://app.roocode.com/billing).
+2. Toggle **Auto Top-Up** to ON.
+3. Set your **Threshold** (e.g., "When balance falls below 500 credits").
+4. Set your **Refill Amount** (e.g., "Add 2000 credits").
+
+### Low Balance Alerts
+You will receive email notifications when your balance drops below:
+- 20% of your average daily usage
+- A fixed threshold you define
+
+## Advantages of Credits
+
+- **Pay for Value**: You only pay when agents are actually working for you.
+- **No Wasted Capacity**: Unlike fixed subscriptions with seat limits, credits scale perfectly with your workload.
+- **Unified Billing**: One bill for all models (Anthropic, OpenAI, Google) and all agent types.
+- **Team Sharing**: Credits are pooled at the Team level, so anyone in your organization can use them.
+
+## FAQ
+
+**Do credits expire?**
+Purchased credits never expire. Promotional or "gift" credits may have an expiration date specified at the time of issuance.
+
+**Can I transfer credits?**
+Credits can be shared within a Team organization but cannot be transferred between different personal accounts.
+
+**What happens if I run out of credits mid-task?**
+The task will pause and wait for a top-up. We provide a grace buffer to allow current operations to finish cleanly, but subsequent actions will be blocked until the balance is positive.
