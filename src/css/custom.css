@@ -390,6 +390,7 @@ pre {
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   padding: 0 !important;
+  box-shadow: none;
 }
 
 /* Remove backdrop-filter on mobile to fix menu stacking context issues */
@@ -554,7 +555,11 @@ pre {
 /* Clean sidebar like roocode.com */
 .theme-doc-sidebar-container {
   backdrop-filter: blur(20px);
-  border-right: 1px solid hsl(var(--border));
+  border-right: 1px solid hsl(var(--border));  
+}
+
+.theme-doc-sidebar-menu {
+  margin: 14px;
 }
 
 /* Clean TOC */
@@ -1477,16 +1482,15 @@ body {
   font-weight: 400 !important; /* Normal weight */
 }
 
-/* Keep navigation and secondary text slightly dimmer */
 .menu__link,
 .table-of-contents__link,
 .navbar__link,
 .breadcrumbs__link,
 .footer__link-item {
-  color: hsl(var(--foreground) / 0.7) !important; /* 70% for secondary text */
+  color: hsl(var(--foreground) / 0.7) !important; 
+  transition: all 0.25s;
 }
 
-/* Active/hover states should be full brightness */
 .menu__link:hover,
 .menu__link--active,
 .table-of-contents__link:hover,
@@ -1494,17 +1498,17 @@ body {
 .navbar__link:hover,
 .breadcrumbs__link:hover,
 .footer__link-item:hover {
-  color: hsl(var(--foreground)) !important; /* 100% on hover/active */
-
+  color: hsl(var(--foreground)) !important;
+  background: none !important;
 }
 
 .menu__list-item--collapsed .menu__link--sublist::after,
 .menu__list-item--collapsed .menu__caret::before,
 .menu__link:after,
 .menu__link--active:after {
-  height: 1.4em;
-  width: 1.4em;
-  background: var(--ifm-menu-link-sublist-icon) 50% / 1.4rem 1.4rem;
+  height: 1.2em;
+  width: 1.2em;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.2rem 1.2rem;
   transition: transform 0.25s;
 }
 
@@ -1767,7 +1771,12 @@ main[class*="docMainContainer"] {
   padding: 0.375rem 0.75rem; /* Reduced vertical padding */
   border-radius: calc(var(--radius));
   transition: all 200ms ease;
-  font-size: 0.875rem; /* Ensure consistent font size */
+  font-size: var(--text-regular-size); /* Ensure consistent font size */
+}
+
+.menu__link:hover,
+.menu__list-item-collapsible:hover {
+  background: none !important;
 }
 
 /* Nested menu items */
@@ -1776,7 +1785,7 @@ main[class*="docMainContainer"] {
   margin-left: 0.75rem; /* Indentation for nested items */
   margin-top: 0.25rem;
   margin-bottom: 1.5rem;
-  padding-left: 0.75em;
+  padding-left: 0.5em;
 }
 
 /* Category headers */
@@ -1799,9 +1808,13 @@ main[class*="docMainContainer"] {
   background: hsl(var(--background) / 0.5);
 }
 
-.menu__link--active {
-  background: hsl(var(--background) / 0.7);
-  font-weight: 500;
+.menu__link--active,
+.menu__link--active:not(.menu__link--sublist) {
+  background: none;
+}
+
+.menu__list_item .menu__link--active {
+  background: red !important;
 }
 
 /* TOC styling */
@@ -2077,7 +2090,7 @@ html {
 
 .breadcrumbs__item {
   color: hsl(var(--muted-foreground));
-
+  cursor: default;
 }
 
 .breadcrumbs__link {
