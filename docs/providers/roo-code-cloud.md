@@ -18,6 +18,8 @@ image: /img/social-share.jpg
 
 Roo Code Cloud removes the complexity of setting up AI providers. Forget about API keys, credit cards, and complex configuration. Just sign in and start coding with premium models for **FREE**.
 
+[Learn more about the provider here.](/roo-code-provider/overview)
+
 ## Why Choose Roo Code Cloud?
 
 - **Zero Configuration**: No API keys to manage. Just sign in with GitHub, Google, or email.

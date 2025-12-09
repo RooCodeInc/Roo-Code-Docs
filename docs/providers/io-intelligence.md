@@ -9,6 +9,7 @@ keywords:
   - qwen
   - mistral
 image: /img/social-share.jpg
+sidebar_label: IO Intelligence
 ---
 
 # IO Intelligence Provider

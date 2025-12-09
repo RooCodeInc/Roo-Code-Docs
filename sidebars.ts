@@ -1,5 +1,6 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 import tutorialVideos from './docs/tutorial-videos.json';
+import modelProviders from './docs/providers/index.json';
 
 // Helper function to truncate long titles
 function truncateTitle(title: string, maxLength: number = 40): string {
@@ -176,44 +177,21 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Model Providers',
       items: [
-        'providers/anthropic',
-        'providers/claude-code',
-        'providers/bedrock',
-        'providers/cerebras',
-        'providers/deepinfra',
-        'providers/deepseek',
-        'providers/doubao',
-        'providers/featherless',
-        'providers/fireworks',
-        'providers/chutes',
-        'providers/gemini',
-        'providers/glama',
-        'providers/groq',
-        'providers/huggingface',
-        'providers/human-relay',
-        'providers/io-intelligence',
-        'providers/lmstudio',
-        'providers/litellm',
-        'providers/mistral',
-        'providers/ollama',
-        'providers/openai',
-        'providers/openai-compatible',
-        'providers/openrouter',
-        'providers/qwen-code',
-        'providers/requesty',
-        'providers/roo-code-cloud',
-        'providers/sambanova',
-        'providers/unbound',
-        'providers/vercel-ai-gateway',
-        'providers/vertex',
-        'providers/vscode-lm',
-        'providers/xai',
-        'providers/zai',
+        {
+          type: 'doc',
+          id: 'providers/index',
+          label: 'About Model Providers'
+        },
+        ...modelProviders.providers.map(provider => ({
+          type: 'doc' as const,
+          id: provider.id,
+          label: provider.title
+        }))
       ]
     },
     {
       type: 'category',
-      label: 'Release Notes',
+      label: 'Extension Release Notes',
       items: [
         'update-notes/index',
         {

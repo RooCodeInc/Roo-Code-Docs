@@ -45,7 +45,7 @@
   --header-bottom-margin: 1rem;
   --header-bottom-spacing: 0.75em;
   --header-top-spacing: 1.75em;
-  --h1-size: 2rem;
+  --h1-size: 2.25rem;
   --h2-size: 1.65rem;
   --h3-size: 1.4rem;
   --h4-size: 1.25rem;
@@ -349,9 +349,9 @@ div[style*="min-height:100vh"] {
 .video-title {
   font-weight: 500;
   color: var(--ifm-heading-color);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  display: box;
+  line-clamp: 2;
+  box-orient: vertical;
   overflow: hidden;
   line-height: 1.4;
   max-height: 2.8em; /* 2 lines * 1.4 line-height */
@@ -1208,8 +1208,8 @@ body {
 .navbar__search-input {
   background: none;
   background-color: hsl(var(--background) / 0.5) !important;
-  border: 1px solid hsl(var(--border) / 0.5) !important;
-  border-radius: calc(var(--radius) + 4px) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: calc(var(--radius) * 2) !important;
   color: hsl(var(--foreground)) !important;
   font-size: 0.875rem !important;
   padding: 0.5rem 1rem !important;
@@ -1597,12 +1597,13 @@ main[class*="docMainContainer"] {
 .theme-doc-markdown a:not(.hash-link) {
   color: #60a5fa; /* Blue accent */
   transition: color 200ms;
-  text-decoration: underline;
+  text-decoration: none;
   text-underline-offset: 2px;
 }
 
 .theme-doc-markdown a:not(.hash-link):hover {
   color: #93bbfc; /* Lighter blue on hover */
+  text-decoration: underline;
 }
 
 /* List spacing */
@@ -1690,13 +1691,17 @@ main[class*="docMainContainer"] {
   backdrop-filter: blur(16px) !important;
 }
 
-.theme-admonition-heading {
-  margin-bottom: 0.75rem !important;
+.theme-admonition > div {
+  margin-bottom: 1em !important;
+  font-size: 1.1em;
   font-weight: 600 !important;
+  text-transform: none;
 }
 
-.theme-admonition-icon {
-  margin-right: 0.5rem !important;
+.theme-admonition svg {
+  margin-right: 0.1em !important;
+  height: 1em !important;
+  width: 1em !important;
 }
 
 /* Tables with roocode.com styling */
@@ -1725,6 +1730,7 @@ main[class*="docMainContainer"] {
   padding: 0.75rem 1rem;
   text-align: left;
   font-weight: 600;
+  letter-spacing: var(--header-letter-spacing);
   color: hsl(var(--foreground));
   border: none;
   border-bottom: 2px solid hsl(var(--border) / 0.5);
@@ -1853,7 +1859,14 @@ main[class*="docMainContainer"] {
   font-weight: 500;
 }
 
-.theme-doc-markdown img {
+.theme-doc-markdown img.icon {
+  display: inline-block;
+  height: 1rem;
+  margin: 0;
+  width: 1rem;
+}
+
+.theme-doc-markdown img:not(.icon) {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius);
@@ -1864,7 +1877,7 @@ main[class*="docMainContainer"] {
   transition: transform 0.1s;
 }
 
-.theme-doc-markdown img:hover {
+.theme-doc-markdown img:not(.icon):hover {
   outline-width: 3px;
   transform: scale(1.025);
 }

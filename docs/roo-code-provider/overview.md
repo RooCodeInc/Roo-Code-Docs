@@ -11,9 +11,9 @@ image: /img/social-share.jpg
 # Roo Code Cloud Provider Overview
 
 
-This is our very own model provider, optimized to work seamlessly with Roo Code Cloud.
+To make it as smooth as possible to use Roo Code, which depends on a provider service for LLM inference, we've built the Roo Code Cloud Provider.
 
-You don't have to use it to use Roo Code, but it's the easiest way to do it, since it only needs your Roo Code Cloud account and offers a selection of models we tested and approved to work with Roo Code.:
+You don't have to use our provider to use Roo Code (you can choose from dozens), but it's the easiest way to do it, since it only needs your Roo Code Cloud account and offers a selection of models we tested and approved to work with Roo Code.:
 - State of the art models from the top frontier labs (including Anthropic, OpenAI, Google, xAi, etc)
 - Tested open weight models from upcoming labs (Moonshot AI, MiniMax, GLM, etc)
 

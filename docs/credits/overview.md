@@ -8,7 +8,7 @@ keywords:
 image: /img/social-share.jpg
 ---
 
-# Credits Overview
+# Roo Code Credits Overview
 
 Roo Code is composed of a few products:
 - **Roo Code VS Code** (the extension) is 100% free
