@@ -26,7 +26,7 @@
   --border: 0 0% 89.8%;
   --input: 0 0% 89.8%;
   --ring: 0 0% 3.9%;
-  --radius: 0.5rem;
+  --radius: 1.5rem;
 
   --chart-1: 0 100% 50%;
   --chart-2: 29 100% 50%;
@@ -526,9 +526,8 @@ pre {
 
 /* Clean sidebar like roocode.com */
 .theme-doc-sidebar-container {
-  background: hsl(var(--background) / 0.7) !important;
   backdrop-filter: blur(20px);
-  border-right: 1px solid hsl(var(--border) / 0.1) !important;
+  border-right: 1px solid hsl(var(--border));
 }
 
 /* Clean TOC */
@@ -1446,6 +1445,7 @@ body {
 .theme-doc-markdown td,
 .theme-doc-markdown dd,
 .theme-doc-markdown .admonition-content {
+
   color: hsl(var(--foreground) / 0.9) !important; /* 90% brightness */
   font-weight: 400 !important; /* Normal weight */
 }
@@ -1468,6 +1468,17 @@ body {
 .breadcrumbs__link:hover,
 .footer__link-item:hover {
   color: hsl(var(--foreground)) !important; /* 100% on hover/active */
+
+}
+
+.menu__list-item--collapsed .menu__link--sublist::after,
+.menu__list-item--collapsed .menu__caret::before,
+.menu__link:after,
+.menu__link--active:after {
+  height: 1.4em;
+  width: 1.4em;
+  background: var(--ifm-menu-link-sublist-icon) 50% / 1.4rem 1.4rem;
+  transition: transform 0.25s;
 }
 
 /* Ensure headings are at full brightness */
@@ -1734,16 +1745,18 @@ main[class*="docMainContainer"] {
 
 .menu__link {
   padding: 0.375rem 0.75rem; /* Reduced vertical padding */
-  border-radius: calc(var(--radius) - 2px);
+  border-radius: calc(var(--radius));
   transition: all 200ms ease;
   font-size: 0.875rem; /* Ensure consistent font size */
 }
 
 /* Nested menu items */
 .menu__list .menu__list {
+  border-left: 1px solid hsl(var(--border));
   margin-left: 0.75rem; /* Indentation for nested items */
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding-left: 0.75em;
 }
 
 /* Category headers */
@@ -1774,9 +1787,7 @@ main[class*="docMainContainer"] {
 /* TOC styling */
 .table-of-contents {
   padding: 0.5rem 0.75rem; /* Match left sidebar spacing */
-  background: hsl(var(--background) / 0.3);
-  border-radius: calc(var(--radius));
-  border: 1px solid hsl(var(--border) / 0.3);
+  border-left: 1px solid hsl(var(--border));
   backdrop-filter: blur(16px);
 }
 
