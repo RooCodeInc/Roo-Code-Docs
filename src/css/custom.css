@@ -6,7 +6,7 @@
 
 /* Light mode color system */
 :root {
-  --background: 0 0% 100%;
+  --background: 0 0% 97%;
   --foreground: 0 0% 3.9%;
   --card: 0 0% 100%;
   --card-foreground: 0 0% 3.9%;
@@ -18,7 +18,7 @@
   --secondary-foreground: 0 0% 9%;
   --muted: 0 0% 96.1%;
   --muted-foreground: 0 0% 45.1%;
-  --accent: 0 0% 96.1%;
+  --accent: 139, 92, 246;
   --accent-foreground: 0 0% 9%;
   --ring: 0 0% 3.9%;
   --destructive: 0 84.2% 60.2%;
@@ -79,7 +79,7 @@
 [data-theme='dark'] {
   --background: 0 0% 0%;
   --foreground: 0 0% 98%;
-  --card: 0 0% 4%;
+  --card: 0 0% 10%;
   --card-foreground: 0 0% 98%;
   --popover: 0 0% 4%;
   --popover-foreground: 0 0% 98%;
@@ -89,12 +89,12 @@
   --secondary-foreground: 0 0% 98%;
   --muted: 0 0% 8%;
   --muted-foreground: 0 0% 70%; /* Brighter for better readability */
-  --accent: 0 0% 14.9%;
+  --accent: 139, 92, 246;
   --accent-foreground: 0 0% 98%;
   --ring: 0 0% 83.1%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 14.9%;
+  --border: 0 0% 15%;
   --input: 0 0% 14.9%;
   --ring: 0 0% 83.1%;
   
@@ -118,12 +118,11 @@
 /* Force black background in dark mode */
 [data-theme='dark'] html,
 [data-theme='dark'] body {
-  background-color: #000000 !important;
+  background-color: hsl(var(--background)) !important;
 }
 
 /* Ensure main content area is also black */
 .main-wrapper {
-  background-color: #000000 !important;
   position: relative;
   z-index: 1;
 }
@@ -376,7 +375,7 @@ pre {
 
 /* Enhanced container system */
 :root {
-  --ifm-container-width: 1400px; /* Increased from 1200px for wider content */
+  --ifm-container-width: 1400px;
 }
 
 /* Exact navbar styling from roocode.com */
@@ -386,7 +385,7 @@ pre {
   z-index: 50 !important;
   height: 64px !important; /* 4rem */
   border-bottom: 1px solid hsl(var(--border)) !important;
-  background-color: hsl(var(--background) / 0.8) !important; /* 80% opacity like roocode.com */
+  background-color: hsl(var(--background)) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;
   padding: 0 !important;
@@ -404,11 +403,7 @@ pre {
   .navbar-sidebar {
     background-color: hsl(var(--background)) !important;
   }
-  
-  .navbar-sidebar__backdrop {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-  }
-  
+    
   .navbar-sidebar__brand,
   .navbar-sidebar__items {
     background-color: hsl(var(--background)) !important;
@@ -444,12 +439,6 @@ pre {
 .navbar__brand {
   background: transparent !important;
   background-color: transparent !important;
-}
-
-/* Ensure proper dark mode border color */
-[data-theme='dark'] .navbar {
-  border-bottom-color: hsl(0 0% 14.9%) !important;
-  background-color: rgba(0, 0, 0, 0.8) !important; /* 80% black opacity */
 }
 
 /* Match roocode.com's container system */
@@ -555,7 +544,7 @@ pre {
 /* Clean sidebar like roocode.com */
 .theme-doc-sidebar-container {
   backdrop-filter: blur(20px);
-  border-right: 1px solid hsl(var(--border));  
+  border-right: 1px solid hsl(var(--border)) !important;   
 }
 
 .theme-doc-sidebar-menu {
@@ -1595,14 +1584,15 @@ main[class*="docMainContainer"] {
 
 /* Link styles */
 .theme-doc-markdown a:not(.hash-link) {
-  color: #60a5fa; /* Blue accent */
+  color: rgba(var(--accent));
   transition: color 200ms;
+  font-weight: 500;
   text-decoration: none;
   text-underline-offset: 2px;
 }
 
 .theme-doc-markdown a:not(.hash-link):hover {
-  color: #93bbfc; /* Lighter blue on hover */
+  color: rgba(var(--accent), 0.8);
   text-decoration: underline;
 }
 
@@ -1684,16 +1674,16 @@ main[class*="docMainContainer"] {
 /* Admonitions (alerts) with roocode.com style */
 .theme-admonition {
   margin: var(--figure-margin) 0 !important;
-  padding: 1.5rem !important;
+  padding: 1rem 1rem 0 !important;
   border-radius: calc(var(--radius) + 4px) !important;
   border: 1px solid hsl(var(--border) / 0.5) !important;
-  background: hsl(var(--background) / 0.6) !important;
+  background: hsl(var(--card)) !important;
   backdrop-filter: blur(16px) !important;
 }
 
 .theme-admonition > div {
   margin-bottom: 1em !important;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 600 !important;
   text-transform: none;
 }
@@ -1883,8 +1873,8 @@ main[class*="docMainContainer"] {
 }
 
 .theme-doc-markdown li img {
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  margin-bottom: calc(var(--block-spacing) / 2) !important;
+  margin-top: calc(var(--block-spacing) / 4) !important;
 }
 
 /* Image captions */

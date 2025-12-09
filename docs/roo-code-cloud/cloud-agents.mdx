@@ -14,27 +14,55 @@ image: /img/social-share.jpg
 
 # Cloud Agents
 
-Cloud Agents are specialized, autonomous AI workers that run in the cloud. Unlike the standard Roo Code extension that runs locally in your editor, Cloud Agents are designed to perform specific roles independently, 24/7, without requiring your local machine to be active.
+Cloud Agents are specialized, autonomous AI workers that run in the cloud.
 
-<img src="/img/cloud-agents/overview.png" alt="Cloud Agents Overview" width="800" />
+It upends the way most people think about software development: instead of a highly specialized activity that can only happen in a specialized IDE, it encapsulates the relevant aspects of each part of the process into agents that can run on their own (but will take your guidance if you choose).
 
-## Available Agents
+In other words: instead of doing all of your learning, investigating, coding, testing and shipping from your IDE, you can delegate work to focused agents which operate as a team. And it's your choice how much you lean into it.
 
-### 🏗️ Planner Agent
-**Role:** Architect & Strategist  
-**Mode:** Architect  
-**Availability:** ✅ Available
+Sounds like wishful thinking? Read on and we'll show you how to use them.
 
-The Planner agent maps out implementation plans and navigates complex technical decisions. It's designed to take a high-level idea or a Product Requirement Document (PRD) and break it down into a thorough, step-by-step implementation plan.
+---
+
+## The Cloud Agent Development Lifecycle
+
+We at Roo have been developing Roo Code mostly with Cloud Agents for several months and learned that the following practices lead to the best results:
+
+- **When in doubt, start in the Cloud**: unless it's a very small change, it's usually easier to fire off several tasks to Cloud Agents (especially as you start or finish your day) and check in as they become ready. The Agents excellent at getting things 50-80% done, doing most of the heavy lifting. You can then iterate from there (be it with Cloud Agents or locally).
+- **Embrace pull requests as the main unit of work**: to ensure Cloud Agents don't break things, they work on isolated branches and deliver work via PRs. They can be created, iterated upon, reviewed and fixed without you ever checking out code locally.
+- **Let go of individual PRs**: be ready to throw stuff away once in a while, since LLMs aren't flawless. Quantity has a quality all of its own, so being generative pays off.
+- **Invest in preview environments**: if your project allows for it (eg it's a web app), set up a preview environment (like [Vercel's Deployments](https://vercel.com/docs/git)) so you can check in on PRs without running them locally.
+- **AI Coding isn't just for codes**: while only people with Engineer in the title may open IDEs in your company, everyone has questions and ideas for your product. Give access to cloud agents to everyone in our team (you don't pay per seat) and encourage people to get answers to their questions directly from them. We've seen customer support, product, design and marketing people understand code behavior and make small (and not-so-small) changes without having to open an IDE.
+- **Develop collective learning in public**: if your team works on Slack, call agent in public channels, so eveyrone can see their answers and the result of their work. It organically gets people on the same page.
+
+
+## The Cloud Agent Team
+
+Now what (who?) are these Agents? The current line up available to your is below.
+
+Keep in mind we let you rename them as you please – we really believe in making them part of your team.
+
+### The Explainer
+**Role:** Technical Educator  
+**Mode:** Ask  
+
+The Explainer agent explains code, concepts, and technical documentation. It helps you understand complex parts of a codebase without needing to read every line.
+
+- **Best for:** Onboarding to a new codebase, understanding legacy code, debugging conceptual issues.
+- **Onboarding Tip:** "Understand the source of a bug or how a part of the code works."
+
+
+### The Planner
+**Role:** Implementation Planning and Architecture
+
+The Planner agent maps out implementation plans and navigates complex technical decisions. It's designed to take a high-level idea or a Product Requirement Document (PRD) and break it down into a thorough, step-by-step implementation plan which can the be given to coding agent (or a human!).
 
 - **Best for:** New feature planning, system architecture design, complex refactoring strategies.
 - **Onboarding Tip:** "Enter an idea (or paste a PRD) and get a thorough implementation plan."
 - **Recommended Models:** High-reasoning models like `anthropic/claude-opus-4.5` or `openai/gpt-5.1`.
 
-### 👨‍💻 Coder Agent
-**Role:** Software Engineer  
-**Mode:** Code  
-**Availability:** ✅ Available
+### The Coder
+**Role:** Coding across all languages 
 
 The Coder agent writes code, creates pull requests, and implements features. It is the workhorse of the platform, capable of handling end-to-end coding tasks.
 
@@ -42,10 +70,8 @@ The Coder agent writes code, creates pull requests, and implements features. It 
 - **Onboarding Tip:** "Build a feature, fix an issue, refactor a component."
 - **Capabilities:** Can create draft PRs or push directly depending on settings.
 
-### 🔍 PR Reviewer Agent
+### The PR Reviewer
 **Role:** Code Reviewer  
-**Mode:** Code  
-**Availability:** ✅ Available
 
 The PR Reviewer agent automatically provides comprehensive code reviews with actionable comments. It can monitor your repositories and review incoming Pull Requests.
 
@@ -56,37 +82,28 @@ The PR Reviewer agent automatically provides comprehensive code reviews with act
     - `approvePr`: Can optionally approve PRs if no issues are found.
     - `reviewDraftPrs`: Option to review draft PRs.
 
-### 🛠️ PR Fixer Agent
-**Role:** Bug Fixer  
-**Mode:** Code  
-**Availability:** ✅ Available
+### The PR Fixer
+**Role:** PR Feedback Fixer  
 
 The PR Fixer agent is specialized in resolving issues identified in Pull Requests. It listens for feedback and autonomously implements fixes.
 
 - **Best for:** Resolving PR comments, fixing CI/CD failures, addressing review feedback.
 - **Onboarding Tip:** "Give it a PR with comments and get it solved."
 - **Trigger:** Often triggered via `@roomote` mentions in PR comments.
-
-### 🧠 Explainer Agent
-**Role:** Technical Educator  
-**Mode:** Ask  
-**Availability:** ✅ Available
-
-The Explainer agent explains code, concepts, and technical documentation. It helps you understand complex parts of a codebase without needing to read every line.
-
-- **Best for:** Onboarding to a new codebase, understanding legacy code, debugging conceptual issues.
-- **Onboarding Tip:** "Understand the source of a bug or how a part of the code works."
+---
 
 ## Upcoming Agents
 
-We are constantly expanding our agent fleet. Here are agents currently in development or preview:
+While this cast of characters can get most jobs done, user feedback informs the development of new agents. Currently in development:
 
-| Agent | Role | Status | Description |
+| Agent | Role | Description |
 | :--- | :--- | :--- | :--- |
-| **Improver** | Rule Optimizer | 🚧 Preview | Analyzes agent feedback and PR reviews to maintain and improve rules files. |
-| **Documentation Writer** | Tech Writer | ⏳ Coming Soon | Understands your code and writes actionable user-facing documentation. |
-| **Security Auditor** | Security Expert | ⏳ Coming Soon | Conducts security audits and identifies vulnerabilities. |
-| **Translator** | Localization | ⏳ Coming Soon | Translates strings with accuracy and following your brand voice. |
+| **Improver** | Rule Optimizer | Analyzes agent feedback and PR reviews to maintain and improve rules files. |
+| **Documentation Writer** | Tech Writer | Understands your code and writes actionable user-facing documentation. |
+| **Security Auditor** | Security Expert | Conducts security audits and identifies vulnerabilities. |
+| **Translator** | Localization | Translates strings with accuracy and following your brand voice. |
+
+Contact support if you're interested in trying them out in Beta or if you have other suggestions.
 
 ## How Cloud Agents Work
 

@@ -13,50 +13,25 @@ image: /img/social-share.jpg
 
 # Roo Code Cloud Overview
 
-Roo Code Cloud transforms AI development with autonomous agents that work independently in the cloud. Instead of just assisting you in your editor, these agents can plan, code, review, and fix issues autonomously, accessible directly from **GitHub PRs**, **Slack messages**, or the **web browser**.
+Roo Code Cloud transforms AI development with autonomous [Cloud Agents](/roo-code-cloud/cloud-agents) that work independently in the cloud. Instead of just assisting you in your editor, these agents can plan, code, review, and fix issues autonomously, accessible directly from **GitHub PRs**, **Slack messages**, or the **web browser**.
 
-It also augments the Roo Code VS Code extension capabilities.
+It also augments the Roo Code VS Code extension capabilities by adding:
+- [Task Sync](/roo-code-cloud/task-sync) to access your entire task history in one place
+- [Task sharing](/roo-code-cloud/task-share) to access specific tasks with friends or co-workers
+- [Roomote Control](/roo-code-cloud/roomote-control) to start/stop and control tasks in the Extension while away from your computer
+- [Token usage analytics](/roo-code-cloud/analytics) to understans where your tokens and dollars are going
+
+And, in the Team plan, adds team-oriented features:
+- Team-wide analytics
+- Centralized provider setings and other configuration
+- Shared access to the same Cloud Agent team
+
+---
 
 ## Getting Started
 
-You can start:
-- By directly **[signing up for a Roo Code account](https://app.roocode.com/sign-up)** and setting up your agent team
-- Or by **[connecting from the VS Code extension](/roo-code-cloud/login)** to your account
+To use it, you'll need an account. You can:
+- **[Directly sign up for a Roo Code account](https://app.roocode.com/sign-up)** and set up your agent team
+- Or  **[sign up for a Roo Code account from the VS Code extension](/roo-code-cloud/login)** to your account
 
 If you chose the Roo Code Cloud Provider when signing up, you already have an account and only need to sign in.
-
-## Core Capabilities
-
-### Autonomous Cloud Agents
-Cloud Agents are specialized AI workers that run 24/7 in the cloud, freeing you from your local machine.
-- **Code without opening VS Code**: Agents work independently in the cloud.
-- **Platform-native integration**: Trigger and control tasks directly from GitHub and Slack.
-- **Multi-task orchestration**: Run multiple agents simultaneously for planning, coding, reviewing and more.
-
-[Learn more about Cloud Agents](/roo-code-cloud/cloud-agents) 
-
-### Seamless LLM Access
-Access free and premium AI models, vetted to work with Roo Code, without dealing with API keys or subscriptions.
-- **Zero-cost inference**: Use powerful models from Anthropic, OpenAI, Google and other labs.
-- **No API keys needed**: Just connect your account and start coding.
-
-[Learn more about Free Models](/providers/roo-code-cloud)
-
-### Platform Integrations
-Bring AI directly to where your team collaborates.
-- **GitHub**: Automated PR reviews and fixes. Agents monitor your repositories and act on feedback. [Read the Guide](/roo-code-cloud/github-integration)
-- **Slack**: Chat with agents to plan features, explain code, or trigger tasks from any channel. [Read the Guide](/roo-code-cloud/slack-integration)
-
-More integrations coming soon.
-
-### Roomote Control
-Control Roo Code in your IDE from anywhere.
-- **Task sync**: See all of your local tasks from a single place.
-- **Roomote Control**: Start/stop tasks, answer questions, course-correct, all from the web.
-- **Continue from anywhere**: Pick up tasks on your mobile device or a different computer.
-
-[Learn more about Roomote Control](/roo-code-cloud/roomote-control)
-
-### Unified Analytics
-- **Cross-provider tracking**: Monitor token usage and cost for all tasks across all models and workspaces.
-- **Team insights**: Understand how your organization leverages AI.
