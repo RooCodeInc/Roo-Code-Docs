@@ -138,7 +138,7 @@ export default function CopyPageContent(): JSX.Element {
 
   return (
     <button
-      className={styles.copyButton}
+      className={`${styles.copyButton} copy-button`}
       onClick={copyToClipboard}
       title={copied ? 'Copied!' : 'Copy page content'}
       aria-label={copied ? 'Page content copied to clipboard' : 'Copy page content to clipboard'}
@@ -151,7 +151,6 @@ export default function CopyPageContent(): JSX.Element {
       ) : (
         <>
           <FaCopy className={styles.icon} />
-          <span>Copy Page</span>
         </>
       )}
     </button>

@@ -2050,14 +2050,23 @@ html {
   }
 }
 
-/* Breadcrumbs styling */
-.theme-doc-breadcrumbs {
+.copy-button {
+  margin-top: -1rem !important;
+}
+
+.breadcrumbs {
   margin-bottom: 1rem;
+  margin-left: 1.5rem;
   font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 100%
 }
 
 .breadcrumbs__item {
   color: hsl(var(--muted-foreground));
+
 }
 
 .breadcrumbs__link {
