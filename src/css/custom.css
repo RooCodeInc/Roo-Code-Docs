@@ -38,25 +38,18 @@
 
   --list-inset: 24px;
   --block-spacing-small: 8px;
-  --block-spacing: 20px;
+  --block-spacing: 2rem;
   --text-regular-size: 14px;
-  --h1-size: var(--title-5-size);
-  --h1-line-height: var(--title-5-line-height);
-  --h1-letter-spacing: var(--title-5-letter-spacing);
-  --h2-size: var(--title-3-size);
-  --h2-line-height: var(--title-3-line-height);
-  --h2-letter-spacing: var(--title-3-letter-spacing);
-  --h2-bottom-margin: 12px;
-  --h3-size: 20px;
-  --h3-line-height: 1.6;
-  --h3-letter-spacing: 0;
-  --h3-bottom-margin: 6px;
-  --h4-size: var(--title-1-size);
-  --h4-line-height: var(--title-1-line-height);
-  --h4-letter-spacing: var(--title-1-letter-spacing);
-  --h4-bottom-margin: 10px;
+  --header-line-height: 1.25em;
+  --header-letter-spacing: -0.02em;
+  --header-bottom-margin: 1rem;
+  --header-bottom-spacing: 0.75em;
+  --header-top-spacing: 1.75em;
+  --h1-size: 2rem;
+  --h2-size: 1.65rem;
+  --h3-size: 1.4rem;
+  --h4-size: 1.25rem;
   --figure-margin: 20px;
-  --block-spacing: 16px;
   --p-size: var(--text-regular-size);
   --p-line-height: var(--text-regular-line-height);
   --p-letter-spacing: var(--text-regular-letter-spacing);
@@ -1511,22 +1504,6 @@ body {
   transition: transform 0.25s;
 }
 
-/* Ensure headings are at full brightness */
-.theme-doc-markdown h1,
-.theme-doc-markdown h2,
-.theme-doc-markdown h3,
-.theme-doc-markdown h4,
-.theme-doc-markdown h5,
-.theme-doc-markdown h6 {
-  color: hsl(var(--foreground)) !important; /* 100% brightness */
-  font-weight: 700; /* Bold for h1-h3 */
-}
-
-.theme-doc-markdown h4,
-.theme-doc-markdown h5,
-.theme-doc-markdown h6 {
-  font-weight: 600; /* Slightly less bold for smaller headings */
-}
 
 /* Content spacing and layout */
 .theme-doc-markdown {
@@ -1562,44 +1539,40 @@ main[class*="docMainContainer"] {
 /* Heading styles */
 .theme-doc-markdown h1,
 .theme-doc-markdown h2,
-.theme-doc-markdown h3 {
-  color: hsl(var(--foreground)) !important;
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  background-clip: unset !important;
+.theme-doc-markdown h3,
+.theme-doc-markdown h4,
+.theme-doc-markdown h5,
+.theme-doc-markdown h6 {
+  background: none;
+  background-clip: unset;
+  color: hsl(var(--foreground));
+  letter-spacing: var(--header-letter-spacing);
+  line-height: var(--header-line-height);
+  margin-bottom: var(--header-bottom-spacing);
+  margin-top: var(--header-top-spacing);
 }
 
 .theme-doc-markdown h1 {
-  font-size: 2.5rem;
+  font-size: var(--h1-size);
   font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
   margin-top: 0;
-  margin-bottom: 1.5rem;
 }
 
 .theme-doc-markdown h2 {
-  font-size: 1.5rem;
+  font-size: var(--h2-size);
   font-weight: 600;
-  letter-spacing: -0.025em;
-  margin-top: 1.5rem; 
-  margin-bottom: 1rem;
 }
 
 .theme-doc-markdown h3 {
-  font-size: 1.25rem;
+  font-size: var(--h3-size);
   font-weight: 600;
-  margin-top: 1.25rem;
-  margin-bottom: 0.75rem;
 }
 
 .theme-doc-markdown h4,
 .theme-doc-markdown h5,
 .theme-doc-markdown h6 {
-  font-size: 1.25rem;
+  font-size: var(--h4-size);
   font-weight: 500;
-  margin-top: 1.25rem;
-  margin-bottom: 0.5rem;
 }
 
 /* Paragraph spacing - match roocode.com */
@@ -1627,15 +1600,17 @@ main[class*="docMainContainer"] {
 /* List spacing */
 .theme-doc-markdown ul,
 .theme-doc-markdown ol {
-  margin-bottom: 1.5rem;
-  padding-left: 1.5rem;
+  margin-bottom: calc(var(--block-spacing));
+  padding-left: var(--list-inset);
 }
 
 .theme-doc-markdown li {
-  margin-bottom: 0.5rem;
-  line-height: 1.625;
+  margin-bottom: calc(var(--block-spacing) / 4);
+  font-size: var(--text-regular-size);
+  line-height: var(--text-regular-line-height);
   color: hsl(var(--foreground) / 0.9); /* Match paragraph brightness */
   font-weight: 400;
+  
 }
 
 /* Nested list spacing */
@@ -1647,7 +1622,7 @@ main[class*="docMainContainer"] {
 
 /* Code blocks with roocode.com styling */
 .theme-code-block {
-  margin: 2rem 0; /* More spacing */
+  margin: var(--figure-margin) 0;
   border-radius: calc(var(--radius)) !important;
   overflow: hidden;
   box-shadow: var(--block-shadow) !important;
@@ -1687,7 +1662,7 @@ main[class*="docMainContainer"] {
   background: hsl(var(--background) / 0.5);
   backdrop-filter: blur(16px);
   padding: 1rem 1.5rem;
-  margin: 2rem 0;
+  margin: var(--figure-margin) 0;
   border-radius: 0 calc(var(--radius)) calc(var(--radius)) 0;
 }
 
@@ -1699,7 +1674,7 @@ main[class*="docMainContainer"] {
 
 /* Admonitions (alerts) with roocode.com style */
 .theme-admonition {
-  margin: 2rem 0 !important;
+  margin: var(--figure-margin) 0 !important;
   padding: 1.5rem !important;
   border-radius: calc(var(--radius) + 4px) !important;
   border: 1px solid hsl(var(--border) / 0.5) !important;
@@ -1719,7 +1694,7 @@ main[class*="docMainContainer"] {
 /* Tables with roocode.com styling */
 .theme-doc-markdown table {
   width: 100%;
-  margin: 2rem 0;
+  margin: var(--figure-margin) 0;
   border-collapse: separate;
   border-spacing: 0;
   border-radius: calc(var(--radius)/2);
@@ -1866,7 +1841,7 @@ main[class*="docMainContainer"] {
   height: auto;
   border-radius: var(--radius);
   outline: 1px solid hsl(var(--border));
-  margin: 1rem 0;
+  margin: var(--block-spacing) 0;
   overflow: hidden;
   box-shadow: var(--block-shadow);
   transition: transform 0.1s;
@@ -1896,8 +1871,8 @@ main[class*="docMainContainer"] {
 .theme-doc-markdown hr {
   border: none;
   height: 1px;
-  background: hsl(var(--border) / 0.5);
-  margin: 3rem 0; /* Reduced from 3rem */
+  background: hsl(var(--border) / 0.75);
+  margin: var(--block-spacing) 0;
   position: relative;
 }
 
