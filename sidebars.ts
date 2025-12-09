@@ -168,21 +168,9 @@ const sidebars: SidebarsConfig = {
       id: 'credits/overview'
     },
     {
-      type: 'category',
+      type: 'doc',
       label: 'Tutorial Videos',
-      items: [
-        {
-          type: 'doc',
-          id: 'tutorial-videos',
-          label: 'All Videos',
-        },
-        ...tutorialVideos.videos.map((video) => ({
-          type: 'link' as const,
-          label: truncateTitle(video.title),
-          href: `https://www.youtube.com/watch?v=${video.id}`,
-          description: video.title.length > 40 ? video.title : undefined,
-        })),
-      ],
+      id: 'tutorial-videos'
     },
     {
       type: 'category',

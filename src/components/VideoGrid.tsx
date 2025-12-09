@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import videos from '@site/docs/tutorial-videos.json';
 
 interface Video {
@@ -7,10 +7,71 @@ interface Video {
 }
 
 export default function VideoGrid(): JSX.Element {
+  const videoRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  const scrollToVideo = (videoId: string) => {
+    const element = videoRefs.current[videoId];
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
-    <div className="video-grid">
-      {videos.videos.map((video: Video) => (
-        <div key={video.id} className="video-item">
+    <div>
+      {/* Table of Contents */}
+      <div className="video-toc" style={{
+        marginBottom: '2rem',
+        padding: '1.5rem',
+        backgroundColor: 'var(--ifm-background-surface-color)',
+        borderRadius: '8px',
+        border: '1px solid var(--ifm-color-emphasis-200)',
+      }}>
+        <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>Videos</h3>
+        <ol style={{
+          listStylePosition: 'inside',
+          paddingLeft: 0,
+          marginBottom: 0,
+        }}>
+          {videos.videos.map((video: Video) => (
+            <li key={`toc-${video.id}`} style={{
+              marginBottom: '0.5rem',
+              cursor: 'pointer',
+              color: 'var(--ifm-color-primary)',
+            }}>
+              <a
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToVideo(video.id);
+                }}
+                style={{
+                  cursor: 'pointer',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.textDecoration = 'underline';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.textDecoration = 'none';
+                }}
+              >
+                {video.title}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* Video Grid */}
+      <div className="video-grid">
+        {videos.videos.map((video: Video) => (
+          <div
+            key={video.id}
+            className="video-item"
+            ref={(el) => {
+              videoRefs.current[video.id] = el;
+            }}
+          >
           <div
             className="video-container"
             onClick={(e) => {
@@ -59,6 +120,7 @@ export default function VideoGrid(): JSX.Element {
           </div>
         </div>
       ))}
+      </div>
     </div>
   );
 }

@@ -328,6 +328,10 @@ div[style*="min-height:100vh"] {
   backdrop-filter: blur(16px);
 }
 
+.video-container img {
+  margin: 0 !important;
+}
+
 .video-container iframe {
   position: absolute;
   top: 0;
