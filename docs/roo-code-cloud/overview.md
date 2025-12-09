@@ -11,7 +11,7 @@ keywords:
 image: /img/social-share.jpg
 ---
 
-# Roo Code Cloud
+# Roo Code Cloud Overview
 
 Roo Code Cloud transforms AI development with autonomous agents that work independently in the cloud. Instead of just assisting you in your editor, these agents can plan, code, review, and fix issues autonomously, accessible directly from **GitHub PRs**, **Slack messages**, or the **web browser**.
 

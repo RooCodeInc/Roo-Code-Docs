@@ -129,7 +129,7 @@ const sidebars: SidebarsConfig = {
       type: 'category',
       label: 'Roo Code Cloud',
       items: [
-        'roo-code-cloud/what-is-roo-code-cloud',
+        'roo-code-cloud/overview',
         'roo-code-cloud/cloud-agents',
         'roo-code-cloud/github-integration',
         'roo-code-cloud/slack-integration',
@@ -158,11 +158,14 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
-      type: 'category',
+      type: 'doc',
       label: 'Roo Code Cloud Provider',
-      items: [
-        'provider/overview',
-      ]
+      id: 'roo-code-provider/overview'
+    },
+    {
+      type: 'doc',
+      label: 'Roo Code Credits',
+      id: 'credits/overview'
     },
     {
       type: 'category',

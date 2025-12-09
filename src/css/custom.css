@@ -34,6 +34,33 @@
   --chart-4: 83 100% 50%;
   --chart-5: 115 100% 50%;
 
+  /* Typography*/
+
+  --list-inset: 24px;
+  --block-spacing-small: 8px;
+  --block-spacing: 20px;
+  --text-regular-size: 14px;
+  --h1-size: var(--title-5-size);
+  --h1-line-height: var(--title-5-line-height);
+  --h1-letter-spacing: var(--title-5-letter-spacing);
+  --h2-size: var(--title-3-size);
+  --h2-line-height: var(--title-3-line-height);
+  --h2-letter-spacing: var(--title-3-letter-spacing);
+  --h2-bottom-margin: 12px;
+  --h3-size: 20px;
+  --h3-line-height: 1.6;
+  --h3-letter-spacing: 0;
+  --h3-bottom-margin: 6px;
+  --h4-size: var(--title-1-size);
+  --h4-line-height: var(--title-1-line-height);
+  --h4-letter-spacing: var(--title-1-letter-spacing);
+  --h4-bottom-margin: 10px;
+  --figure-margin: 20px;
+  --block-spacing: 16px;
+  --p-size: var(--text-regular-size);
+  --p-line-height: var(--text-regular-line-height);
+  --p-letter-spacing: var(--text-regular-letter-spacing);
+
   /* GitHub install button colors */
   --primary-hover: 0 0% 9% / 0.9;
   --ifm-color-gray-400: #9ca3af;
@@ -1543,26 +1570,26 @@ main[class*="docMainContainer"] {
 }
 
 .theme-doc-markdown h1 {
-  font-size: 2.25rem;
-  font-weight: 700;
+  font-size: 2.5rem;
+  font-weight: 600;
   letter-spacing: -0.025em;
   line-height: 1.2;
-  margin-top: 0; /* Remove top margin for H1 */
+  margin-top: 0;
   margin-bottom: 1.5rem;
 }
 
 .theme-doc-markdown h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
   letter-spacing: -0.025em;
-  margin-top: 1.5rem; /* Reduced from 2rem */
+  margin-top: 1.5rem; 
   margin-bottom: 1rem;
 }
 
 .theme-doc-markdown h3 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-top: 1.25rem; /* Reduced from 1.5rem */
+  margin-top: 1.25rem;
   margin-bottom: 0.75rem;
 }
 
@@ -1577,8 +1604,9 @@ main[class*="docMainContainer"] {
 
 /* Paragraph spacing - match roocode.com */
 .theme-doc-markdown p {
-  font-size: 1rem;
-  line-height: 1.625;
+  font-size: var(--p-size);
+  line-height: var(--p-line-height);
+  letter-spacing: var(--p-letter-spacing);
   color: hsl(var(--foreground) / 0.9); /* 90% brightness like roocode.com */
   margin-bottom: 1rem;
   font-weight: 400; /* Ensure normal weight */
@@ -1869,7 +1897,7 @@ main[class*="docMainContainer"] {
   border: none;
   height: 1px;
   background: hsl(var(--border) / 0.5);
-  margin: 1.5rem 0; /* Reduced from 3rem */
+  margin: 3rem 0; /* Reduced from 3rem */
   position: relative;
 }
 
@@ -2048,6 +2076,10 @@ html {
   .theme-doc-markdown h2 {
     font-size: 1.5rem;
   }
+}
+
+.theme-doc-footer {
+  padding: 0 2rem;
 }
 
 .copy-button {
