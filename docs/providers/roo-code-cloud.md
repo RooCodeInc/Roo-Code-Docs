@@ -46,7 +46,7 @@ We curate the best models for coding and offer them directly to you.
 
 ## How to Connect
 
-1. **Sign In**: Click the account icon (<Codicon name="account" />) in the Roo Code extension sidebar and sign in.
+1. **Sign In**: Click the account icon (<Codicon name="account" />) in the Roo Code extension sidebar and sign in. See [Connect Guide](/roo-code-cloud/connect) if needed.
 2. **Select Provider**:
    - Open Settings (<Codicon name="gear" />).
    - In the **API Provider** dropdown, select **Roo Code Cloud**.
@@ -58,6 +58,10 @@ Roo Code Cloud operates on a [Credit System](/roo-code-cloud/credits).
 - **Promotional Period**: Currently, all standard usage for the models listed above is **100% FREE**.
 - **Future Pricing**: We will introduce a transparent credit-based system for usage beyond the free tier. You will always be notified before any charges apply.
 
+:::info
+Within Roo Code, free access is only through Roo Code Cloud provider. Using the [xAI provider](/providers/xai) for `grok-code-fast-1` will incur standard charges once pricing is established.
+:::
+
 ## Comparison with Other Providers
 
 | Feature | Roo Code Cloud | Direct Providers (OpenAI/Anthropic/xAI) |
@@ -67,4 +71,14 @@ Roo Code Cloud operates on a [Credit System](/roo-code-cloud/credits).
 | **Configuration** | Automatic | Manual |
 | **Model Selection** | Curated Best-in-Class | All Available Models |
 
-[Get Started Now](/roo-code-cloud/login)
+## Troubleshooting
+
+**"Authentication required"**: Connect to Roo Code Cloud via the account icon.
+
+**"No session token"**: Sign out and back in to refresh your session.
+
+**Connection issues**: Check internet connection and restart VS Code if needed.
+
+---
+
+[Get Started Now](/roo-code-cloud/connect)

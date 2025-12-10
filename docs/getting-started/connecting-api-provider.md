@@ -15,7 +15,7 @@ import KangarooIcon from '@site/src/components/KangarooIcon';
 
 # Connecting Your First AI Provider
 
-Roo Code requires an API key from an AI model provider to function. We recommend these options for accessing the powerful **Claude 3.7 Sonnet** model:
+Roo Code requires an API key from an AI model provider to function. We recommend these options for accessing the powerful **Claude Sonnet 4.5** model:
 
 - **OpenRouter (Recommended):** Provides access to multiple AI models through a single API key. Ideal for getting started quickly with minimal setup. [View pricing](https://openrouter.ai/models?order=pricing-low-to-high).
 - **Anthropic:** Direct access to Claude models. Requires API access approval and may have [rate limits depending on your tier](https://docs.anthropic.com/en/api/rate-limits#requirements-to-advance-tier). See [Anthropic's pricing page](https://www.anthropic.com/pricing#anthropic-api) for details.
@@ -86,11 +86,11 @@ Once you have your API key:
 2. In the welcome screen, select your API provider from the dropdown
 3. Paste your API key into the appropriate field
 4. Select your model:
-   - For **OpenRouter**: select `anthropic/claude-3.7-sonnet` ([model details](https://openrouter.ai/anthropic/claude-3.7-sonnet))
-   - For **Anthropic**: select `claude-3-7-sonnet-20250219` ([model details](https://www.anthropic.com/pricing#anthropic-api))
+   - For **OpenRouter**: select `anthropic/claude-sonnet-4-5` ([model details](https://openrouter.ai/anthropic/claude-sonnet-4-5))
+   - For **Anthropic**: select `claude-sonnet-4-5` ([model details](https://www.anthropic.com/pricing#anthropic-api))
 
 :::info Model Selection Advice
-We strongly recommend **Claude 3.7 Sonnet** for the best experience—it generally "just works" out of the box. Roo Code has been extensively optimized for this model's capabilities and instruction-following behavior.
+We strongly recommend **Claude Sonnet 4.5** for the best experience—it generally "just works" out of the box. Roo Code has been extensively optimized for this model's capabilities and instruction-following behavior.
 
 Selecting alternative models is an advanced feature that introduces complexity. Different models vary significantly in how they follow tool instructions, parse formats, and maintain context through multi-step operations. If you do experiment with other models, choose ones specifically designed for structured reasoning and tool use.
 :::

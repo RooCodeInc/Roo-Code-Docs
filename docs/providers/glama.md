@@ -30,15 +30,11 @@ Glama provides access to a variety of language models through a unified API, inc
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code will automatically try to fetch a list of available models from the Glama API.  Some models that are commonly available through Glama include:
+Roo Code automatically fetches all available models from Glama's unified API.
 
-*  **Anthropic Claude models:**  (e.g., `anthropic/claude-3-5-sonnet`)  These are generally recommended for best performance with Roo Code.
-*  **OpenAI models:** (e.g., `openai/o3-mini-high`)
-*  **Other providers and open-source models**
-    
-Refer to the [Glama documentation](https://glama.ai/models) for the most up-to-date list of supported models.
+For the complete, up-to-date model list, see [Glama's models page](https://glama.ai/models).
 
 ---
 
@@ -54,4 +50,3 @@ Refer to the [Glama documentation](https://glama.ai/models) for the most up-to-d
 ## Tips and Notes
 
 * **Pricing:** Glama operates on a pay-per-use basis.  Pricing varies depending on the model you choose.
-* **Prompt Caching:** Glama supports prompt caching, which can significantly reduce costs and improve performance for repeated prompts.

@@ -31,18 +31,6 @@ Cerebras AI specializes in extremely fast inference speeds (up to 2600 tokens/se
 
 ---
 
-## Supported Models
-
-Roo Code supports the following Cerebras models:
-
-* `qwen-3-coder-480b-free` (Default)
-* `qwen-3-coder-480b`
-* `qwen-3-235b-a22b-instruct-2507`
-* `llama-3.3-70b`
-* `qwen-3-32b`
-* `qwen-3-235b-a22b-thinking-2507`
-
----
 
 ## Configuration in Roo Code
 
@@ -53,9 +41,15 @@ Roo Code supports the following Cerebras models:
 
 ---
 
+## Available Models
+
+Roo Code automatically fetches all available models from Cerebras AI's API.
+
+For the complete, up-to-date model list and pricing, see [Cerebras Cloud](https://cloud.cerebras.ai?utm_source=roocode).
+
+---
+
 ## Tips and Notes
 
 * **Performance:** Cerebras specializes in extremely fast inference speeds, making it ideal for real-time coding assistance.
-* **Free Tier:** The `qwen-3-coder-480b-free` model provides access to high-performance inference at no cost with rate limits.
-* **Context Windows:** Models support context windows ranging from 64K to 128K tokens.
-* **Pricing:** Refer to the [Cerebras Cloud](https://cloud.cerebras.ai?utm_source=roocode) dashboard for the latest pricing information.
+* **Pricing:** Check the [Cerebras Cloud](https://cloud.cerebras.ai?utm_source=roocode) dashboard for current pricing and free tier details.

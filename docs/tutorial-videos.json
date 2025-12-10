@@ -17,7 +17,7 @@
       "title": "Auto Approve Feature"
     },
     {
-      "id": "qgqceCuhlRA",
+      "id": "iiAv1eKOaxk",
       "title": "Custom Modes"
     },
     {
@@ -43,6 +43,14 @@
     {
       "id": "IOpmeUGLpg0",
       "title": "Slash Commands"
+    },
+    {
+      "id": "cAjzTs0194c",
+      "title": "Browser Use"
+    },
+    {
+      "id": "_Op3VfLPEu8",
+      "title": "Code Actions"
     }
   ]
 }

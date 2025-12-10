@@ -25,13 +25,7 @@ Roo Code supports running models locally using LM Studio.  LM Studio provides a 
 ## Setting Up LM Studio
 
 1.  **Download and Install LM Studio:** Download LM Studio from the [LM Studio website](https://lmstudio.ai/).
-2.  **Download a Model:**  Use the LM Studio interface to search for and download a model.  Some recommended models include:
-    *   CodeLlama models (e.g., `codellama:7b-code`, `codellama:13b-code`, `codellama:34b-code`)
-    *   Mistral models (e.g., `mistralai/Mistral-7B-Instruct-v0.1`)
-    *   DeepSeek Coder models (e.g., `deepseek-coder:6.7b-base`)
-    * Any other model that is supported by Roo, or for which you can set the context window.
-
-    Look for models in the GGUF format.  LM Studio provides a search interface to find and download models.
+2.  **Download a Model:**  Use the LM Studio interface to search for and download a model in GGUF format. Browse all available models in the LM Studio search interface or at [Hugging Face](https://huggingface.co/models?library=gguf).
 3.  **Start the Local Server:**
     *   Open LM Studio.
     *   Click the **"Local Server"** tab (the icon looks like `<->`).

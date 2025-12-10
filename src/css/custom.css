@@ -73,6 +73,7 @@
   --ifm-font-color-base: hsl(var(--foreground));
 
   --block-shadow: 0 4px 10px rgba(0,0,0,0.075);
+  font-size: 14px;
 }
 
 /* Dark mode - force pure black background */
@@ -1485,7 +1486,7 @@ body {
 .table-of-contents__link:hover,
 .table-of-contents__link--active,
 .navbar__link:hover,
-.breadcrumbs__link:hover,
+a.breadcrumbs__link:hover,
 .footer__link-item:hover {
   color: hsl(var(--foreground)) !important;
   background: none !important;
@@ -1743,10 +1744,6 @@ main[class*="docMainContainer"] {
   border: none;
   border-bottom: 1px solid hsl(var(--border) / 0.3);
   color: hsl(var(--foreground) / 0.9); /* Match body text brightness */
-}
-
-.theme-doc-markdown tr:last-child td {
-  border-bottom: none;
 }
 
 /* Heading anchor links */
@@ -2093,7 +2090,9 @@ html {
   margin-top: -1rem !important;
 }
 
-.breadcrumbs {
+/* Breadcrumbs styling */
+.breadcrumbs,
+.theme-doc-breadcrumbs {
   margin-bottom: 1rem;
   margin-left: 1.5rem;
   font-size: 0.875rem;
@@ -2111,9 +2110,10 @@ html {
 .breadcrumbs__link {
   color: hsl(var(--muted-foreground));
   transition: color 200ms;
+  cursor: default;
 }
 
-.breadcrumbs__link:hover {
+a.breadcrumbs__link:hover {
   color: hsl(var(--foreground));
   text-decoration: none;
 }
@@ -2398,4 +2398,13 @@ html {
 /* Ensure consistent spacing for all tutorial video links */
 .menu__list-item:has(> a[href^="https://www.youtube.com/watch"]) {
   margin-bottom: 0 !important;
+}
+
+/* ============================================
+   FIX: SEARCH INPUT TINY BUBBLE ON MOBILE
+   ============================================ */
+
+/* Override Docusaurus default that makes search input 2rem when not focused */
+.navbar__search-input:not(:focus) {
+  min-width: 80px !important;
 }

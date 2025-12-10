@@ -28,9 +28,11 @@ Roo Code supports accessing models through the [Requesty](https://www.requesty.a
 
 ---
 
-## Supported Models
+## Available Models
 
-Requesty provides access to a wide range of models.  Roo Code will automatically fetch the latest list of available models. You can see the full list of available models on the [Model List](https://app.requesty.ai/router/list) page.
+Roo Code automatically fetches all available models from Requesty's API (150+ models from multiple providers).
+
+For the complete, up-to-date model list with pricing, see [Requesty's model list](https://app.requesty.ai/router/list).
 
 ---
 

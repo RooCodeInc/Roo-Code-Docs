@@ -35,20 +35,13 @@ An API key is required for authentication.
 
 ---
 
-## Supported Models
+## Available Models
 
-The Vercel AI Gateway supports a large and growing number of models. Roo Code automatically fetches the list of available models from the `https://ai-gateway.vercel.sh/v1/models` endpoint. Only language models are shown.
+Roo Code automatically fetches all available models from Vercel AI Gateway's API (hundreds of models from various providers).
 
-The default model is `anthropic/claude-sonnet-4` if no model is selected.
+For the complete, up-to-date model catalog with capabilities, see [Vercel's AI Gateway models page](https://vercel.com/ai-gateway/models).
 
-Refer to the [Vercel AI Gateway Models page](https://vercel.com/ai-gateway/models) for the complete and up-to-date list.
-
-### Model Capabilities
-
-- **Vision Support**: Many models support image inputs.
-- **Tool/Computer Use**: Select models support function calling and computer use.
-
-Check the model description in the dropdown for specific capabilities.
+**Default:** `anthropic/claude-sonnet-4` if no model is selected.
 
 ---
 

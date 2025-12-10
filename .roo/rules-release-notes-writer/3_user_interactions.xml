@@ -8,7 +8,7 @@
     <point name="feature_selection">
       <when>After PR analysis, before writing release notes</when>
       <purpose>Verify which features to highlight</purpose>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
@@ -27,13 +27,13 @@ Which features should I highlight with expanded sections in the release notes?</
 <suggest>Let me specify which features to expand</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
       <gating_rules>
         <rule priority="CRITICAL">Do not proceed unless the response clearly matches one of the provided options.</rule>
         <rule priority="HIGH">If the user types a freeform response, re-ask using ask_followup_question with options reformulated from their input; require selection of one provided option.</rule>
         <rule>Repeat this gating loop until a provided option is explicitly selected.</rule>
       </gating_rules>
-      <fallback_prompt><![CDATA[
+      <fallback_prompt>
 <ask_followup_question>
 <question>To proceed I need an explicit selection. Based on your input, which option should I follow?</question>
 <follow_up>
@@ -43,37 +43,41 @@ Which features should I highlight with expanded sections in the release notes?</
 <suggest>Let me specify which features to expand</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></fallback_prompt>
+      </fallback_prompt>
     </point>
 
     <point name="changelog_alignment">
       <when>After fetching PRs and before feature selection</when>
       <purpose>Partition PRs by presence in the changelog and select inclusion policy</purpose>
       <summary>
-        Present counts and reasons for exclusion, then offer three paths:
-        - Only changelog PRs
+        Present counts partitioned as:
+        - Linked (explicit or confidently auto‑matched)
+        - Ambiguous (needs review)
+        - Unlinked
+        Then offer three paths:
+        - Only linked PRs
+        - Linked + review ambiguous
         - All PRs
-        - Review excluded PRs one by one
       </summary>
-      <template_inclusion_policy><![CDATA[
+      <template_inclusion_policy>
 <ask_followup_question>
-<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
+<question>Changelog alignment v[VERSION]: [IN_COUNT] linked, [AMBIG_COUNT] ambiguous, [EX_COUNT] unlinked. Choose how to proceed.</question>
 <follow_up>
-<suggest>Only include the PRs referenced in the changelog</suggest>
+<suggest>Proceed with linked PRs only; skip ambiguous and unlinked</suggest>
+<suggest>Include linked PRs and review the [AMBIG_COUNT] ambiguous items</suggest>
 <suggest>Include all PRs from the date range</suggest>
-<suggest>Review each excluded PR one by one so I can choose</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template_inclusion_policy>
-      <template_per_pr_review><![CDATA[
+      </template_inclusion_policy>
+      <template_per_pr_review>
 <ask_followup_question>
-<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [USER IMPACT / WHY IT MATTERS].</question>
+<question>Review ambiguous item: include PR #[NUMBER] - [TITLE]? Short analysis: [USER IMPACT / WHY IT MATTERS].</question>
 <follow_up>
 <suggest>Yes, include this PR</suggest>
 <suggest>No, skip this PR</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template_per_pr_review>
+      </template_per_pr_review>
       <gating_rules>
         <rule priority="CRITICAL">Do not proceed until an explicit option is selected.</rule>
         <rule priority="HIGH">For freeform answers, re-ask with options that reflect the user's intent; require selection.</rule>
@@ -84,7 +88,7 @@ Which features should I highlight with expanded sections in the release notes?</
       <when>After creating patch notes, before updating combined notes</when>
       <purpose>Ensure patch notes are final before propagating</purpose>
       <critical>NEVER update combined notes until explicit confirmation</critical>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've created the release notes for v[VERSION]. The file includes:
 
@@ -100,13 +104,13 @@ Would you like to review before I update the combined v[X.Y] notes?</question>
 <suggest>Change the emphasis on certain features</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </point>
 
     <point name="documentation_needs">
       <when>After identifying documentation flags</when>
       <purpose>Confirm documentation update requirements</purpose>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've identified [COUNT] items that need documentation updates:
 
@@ -120,13 +124,13 @@ Should I create a documentation update task after completing the release notes?<
 <suggest>Let me review the specific items first</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </point>
 
     <point name="final_review">
       <when>After all updates complete</when>
       <purpose>Final confirmation before PR creation</purpose>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>I've completed all updates for v[VERSION]:
 
@@ -143,7 +147,7 @@ Would you like to create a PR or make any final adjustments?</question>
 <suggest>Create documentation update task first</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </point>
   </confirmation_points>
 
@@ -154,7 +158,7 @@ Would you like to create a PR or make any final adjustments?</question>
       <step>Detect missing versions from changelog</step>
       <step>Present found versions</step>
     </workflow>
-    <template><![CDATA[
+    <template>
 <ask_followup_question>
 <question>I found [COUNT] versions in the changelog that don't have release notes:
 [List versions]
@@ -167,7 +171,7 @@ Which would you like to process?</question>
 <suggest>Show changelog entries first</suggest>
 </follow_up>
 </ask_followup_question>
-    ]]></template>
+    </template>
   </latest_version_interaction>
 
   <adjustment_handling>
@@ -189,29 +193,29 @@ Which would you like to process?</question>
   <discord_format_interaction>
     <trigger>Discord release notes for X.Y.Z</trigger>
     <behavior>
-      <rule>Immediately generate Discord and Reddit posts using social_formatting rules (no prompt).</rule>
-      <rule>Only ask if the user requests "compress"/"condense", or if content exceeds 2000 chars.</rule>
+      <rule>Immediately generate Discord and Reddit posts (no prompt).</rule>
+      <rule>Preserve original section headings and structure from source docs exactly.</rule>
+      <rule>Only ask if the user requests "compress"/"condense".</rule>
     </behavior>
     <formatting_checklist>
-      <item>Title uses ":rocket:" and "Release Updates" (single or X.Y.Z-X.Y.Z for combined)</item>
-      <item>Include "@everyone" tagline line with short hero summary under the title</item>
-      <item>Section order: Fixed: GPT-5-Codex errors and others!, Context condensing fix, More free models on Roo Code Cloud, More Changes</item>
+      <item>Title: "# Roo Code X.Y.Z Release Updates" (no emoji)</item>
+      <item>Include "@everyone" tagline derived from source intro sentence</item>
+      <item>Preserve section headings EXACTLY as they appear in source docs</item>
+      <item>Preserve section order EXACTLY as in source docs</item>
+      <item>Copy all bullet points exactly as they appear (only change * to -)</item>
       <item>Use hyphen bullets "- " only; no emojis in section headers</item>
-      <item>Hero sentence for GPT-5-Codex copied EXACTLY from docs (preserve PR link); other sections remove PR links</item>
-      <item>Footer blurb: See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) (single) or [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) (combined)</item>
+      <item>Remove all PR links from content</item>
+      <item>Remove inline hero images</item>
+      <item>Footer: See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)</item>
       <item>Wrap entire output in ```markdown code block</item>
     </formatting_checklist>
     <compression_workflow>
-      <trigger>User says "compress", "condense", or content exceeds 2000 chars</trigger>
+      <trigger>User explicitly says "compress" or "condense"</trigger>
       <steps>
-        <step>Preserve the "Fixed: GPT-5-Codex..." section intact</step>
-        <step>Summarize remaining content into a single "More Changes" paragraph with total count and contributor thanks</step>
+        <step>Preserve major feature section headings</step>
+        <step>Summarize smaller sections into a "More Changes" paragraph</step>
       </steps>
-      <validation>
-        <item>Verify actual count of changes</item>
-        <item>Maintain markdown code block and hyphen bullets</item>
-      </validation>
-      <template><![CDATA[
+      <template>
 <ask_followup_question>
 <question>The Discord post is long. Compress remaining sections into a single "More Changes" paragraph?</question>
 <follow_up>
@@ -219,23 +223,27 @@ Which would you like to process?</question>
 <suggest>No, keep full details</suggest>
 </follow_up>
 </ask_followup_question>
-      ]]></template>
+      </template>
     </compression_workflow>
   </discord_format_interaction>
 
   <reddit_format_interaction>
     <trigger>Reddit release notes for X.Y.Z</trigger>
     <behavior>
-      <rule>Immediately generate Reddit and Discord posts using social_formatting rules (no prompt).</rule>
+      <rule>Immediately generate Reddit and Discord posts (no prompt).</rule>
+      <rule>Preserve original section headings and structure from source docs exactly.</rule>
     </behavior>
     <formatting_checklist>
-      <item>Title (plain text): "Roo Code X.Y.Z-X.Y.Z Release Updates | FREE models | GPT‑5‑Codex tool‑usage fix | More fixes!"</item>
+      <item>Title (plain text): "Roo Code X.Y.Z Release Updates | [key feature 1] | [key feature 2]" (derived from source)</item>
       <item>Intro italic note present</item>
-      <item>Section order: More free models on Roo Code Cloud, Fixed: GPT-5-Codex errors and others!, Context condensing fix, More Changes</item>
+      <item>Preserve section headings EXACTLY as they appear in source docs</item>
+      <item>Preserve section order EXACTLY as in source docs</item>
+      <item>Copy all bullet points exactly as they appear (only change * to -)</item>
       <item>Use hyphen bullets "- " only; no emojis, no @everyone</item>
+      <item>Remove all PR links everywhere</item>
+      <item>Remove inline hero images</item>
+      <item>Footer: See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)</item>
       <item>Wrap entire output in ```markdown code block</item>
-      <item>Remove PR links everywhere</item>
-      <item>Footer blurb: See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) (single) or [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) (combined)</item>
     </formatting_checklist>
   </reddit_format_interaction>
 
@@ -244,27 +252,33 @@ Which would you like to process?</question>
     <workflow>
       <step>Identify all versions to combine</step>
       <step>Read release notes for each version</step>
-      <step>Merge and format according to Discord rules</step>
+      <step>Preserve all section headings exactly as they appear in source docs</step>
+      <step>Merge content from multiple versions under their original headings</step>
       <step>Present formatted output in markdown code block</step>
     </workflow>
     <formatting_checklist>
-      <item>Title uses ":rocket:" and version range (X.Y.Z-X.Y.Z) with "Release Updates"</item>
-      <item>Include "@everyone" tagline line with short hero summary</item>
-      <item>Section order: Fixed: GPT-5-Codex errors and others!, Context condensing fix, More free models on Roo Code Cloud, More Changes</item>
+      <item>Title: "# Roo Code X.Y.Z-X.Y.Z Release Updates" (no emoji, version range)</item>
+      <item>Include "@everyone" tagline derived from source intro sentences</item>
+      <item>Preserve all section headings EXACTLY as they appear in source docs</item>
+      <item>Merge content from same-named sections across versions</item>
       <item>Use hyphen bullets "- " only; no emojis in section headers</item>
-      <item>Hero sentence copied EXACTLY with PR link preserved</item>
-      <item>Footer links as hyphen bullets to each version's docs page</item>
+      <item>Remove all PR links from content</item>
+      <item>Remove inline hero images</item>
+      <item>Footer: See full release notes [vX.Y.Z](link) | [vX.Y.Z](link)</item>
       <item>Wrap entire output in ```markdown code block</item>
     </formatting_checklist>
-    <template><![CDATA[
+    <compression_workflow>
+      <trigger>User explicitly says "compress" or "condense"</trigger>
+      <template>
 <ask_followup_question>
-<question>If the combined post is long, should I compress minor sections into a single "More Changes" paragraph?</question>
+<question>The combined post is long. Compress smaller sections into a single "More Changes" paragraph?</question>
 <follow_up>
-<suggest>Yes, compress if needed</suggest>
+<suggest>Yes, compress smaller sections</suggest>
 <suggest>No, keep full details</suggest>
 </follow_up>
 </ask_followup_question>
-    ]]></template>
+      </template>
+    </compression_workflow>
   </discord_combined_interaction>
 
   <best_practices>

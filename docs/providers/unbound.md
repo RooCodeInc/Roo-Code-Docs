@@ -30,9 +30,11 @@ Roo Code supports accessing models through [Unbound](https://getunbound.ai/), a 
 
 ---
 
-## Supported Models
+## Available Models
 
-Unbound allows you configure a list of supported models in your application, and Roo Code will automatically fetch the list of available models from the Unbound API.
+Roo Code automatically fetches all models configured in your Unbound application.
+
+Configure your allowed models in the [Unbound Applications dashboard](https://gateway.getunbound.ai/ai-gateway-applications), then Roo Code will display them in the model dropdown.
 
 ---
 

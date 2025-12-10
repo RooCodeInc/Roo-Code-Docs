@@ -31,20 +31,11 @@ DeepInfra provides cost-effective access to high-performance open-source models 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code dynamically fetches available models from DeepInfra's API. The default model is:
+Roo Code automatically fetches all available models from DeepInfra's API.
 
-* `Qwen/Qwen3-Coder-480B-A35B-Instruct-Turbo` (256K context, optimized for coding)
-
-Common models available include:
-
-* **Coding Models:** Qwen Coder series, specialized for programming tasks
-* **General Models:** Llama 3.1, Mixtral, and other open-source models
-* **Vision Models:** Models with image understanding capabilities
-* **Reasoning Models:** Models with advanced reasoning support
-
-Browse the full catalog at [deepinfra.com/models](https://deepinfra.com/models).
+For the complete, up-to-date model catalog, see [DeepInfra's models page](https://deepinfra.com/models).
 
 ---
 
@@ -54,37 +45,3 @@ Browse the full catalog at [deepinfra.com/models](https://deepinfra.com/models).
 2. **Select Provider:** Choose "DeepInfra" from the "API Provider" dropdown.
 3. **Enter API Key:** Paste your DeepInfra API key into the "DeepInfra API Key" field.
 4. **Select Model:** Choose your desired model from the "Model" dropdown.
-   - Models will auto-populate after entering a valid API key
-   - Click "Refresh Models" to update the list
-
----
-
-## Advanced Features
-
-### Prompt Caching
-
-DeepInfra supports prompt caching for eligible models, which:
-- Reduces costs for repeated contexts
-- Improves response times for similar queries
-- Automatically manages cache based on task IDs
-
-### Vision Support
-
-Models with vision capabilities can:
-- Process images alongside text
-- Understand visual content for coding tasks
-- Analyze screenshots and diagrams
-
-### Custom Base URL
-
-For enterprise deployments, you can configure a custom base URL in the advanced settings.
-
----
-
-## Tips and Notes
-
-* **Performance:** DeepInfra offers low latency with automatic load balancing across global locations.
-* **Cost Efficiency:** Competitive pricing with prompt caching to reduce costs for repeated contexts.
-* **Model Variety:** Access to the latest open-source models including specialized coding models.
-* **Context Windows:** Models support context windows up to 256K tokens for large codebases.
-* **Pricing:** Pay-per-use model with no minimums. Check [deepinfra.com](https://deepinfra.com/) for current pricing.

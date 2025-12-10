@@ -28,16 +28,11 @@ To use Groq with Roo Code, you'll need an API key from the [GroqCloud Console](h
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code will attempt to fetch the list of available models from the Groq API. Common models available via Groq include:
+Roo Code automatically fetches all available models from the Groq API.
 
-*   `llama3-8b-8192`
-*   `llama3-70b-8192`
-*   `mixtral-8x7b-32768`
-*   `gemma-7b-it`
-
-Refer to the [Groq Documentation](https://console.groq.com/docs/models) for the most up-to-date list of supported models and their capabilities.
+For the complete, up-to-date model list and capabilities, see [Groq's models documentation](https://console.groq.com/docs/models).
 
 ---
 

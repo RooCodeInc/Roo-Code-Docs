@@ -32,26 +32,11 @@ Featherless AI provides access to high-performance open-source models including 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following Featherless models:
+Roo Code automatically fetches all available models from Featherless AI's API.
 
-* `deepseek-ai/DeepSeek-R1-0528` (Default) - DeepSeek R1 reasoning model with `<think>` tag support
-* `deepseek-ai/DeepSeek-V3-0324` - DeepSeek V3 model
-* `moonshotai/Kimi-K2-Instruct` - Kimi K2 instruction-following model
-* `openai/gpt-oss-120b` - GPT-OSS 120B parameter model
-* `Qwen/Qwen3-Coder-480B-A35B-Instruct` - Qwen3 specialized coding model
-
-### Model Capabilities
-
-All models support:
-- **Context Window:** ~32,678 tokens
-- **Max Output:** 4,096 tokens
-- **Pricing:** Free (no cost for input/output tokens)
-
-:::info
-**DeepSeek R1 Models:** The DeepSeek R1 models (like `DeepSeek-R1-0528`) include special reasoning capabilities with `<think>` tag support for step-by-step problem solving. These models automatically separate reasoning from regular output.
-:::
+For the complete, up-to-date model list, see [Featherless AI](https://featherless.ai).
 
 ---
 
@@ -61,17 +46,3 @@ All models support:
 2. **Select Provider:** Choose "Featherless AI" from the "API Provider" dropdown.
 3. **Enter API Key:** Paste your Featherless API key into the "Featherless API Key" field.
 4. **Select Model:** Choose your desired model from the "Model" dropdown.
-
----
-
-## Tips and Notes
-
-* **Free Tier:** All models are currently free with no usage costs, making Featherless ideal for experimentation and development.
-* **Model Selection:** Choose models based on your needs:
-  - **DeepSeek R1 models:** Best for complex reasoning and problem-solving tasks
-  - **DeepSeek V3:** General-purpose model for various tasks
-  - **Qwen3 Coder:** Optimized for code generation and programming tasks
-  - **Kimi K2:** Balanced instruction-following model
-  - **GPT-OSS:** Large general-purpose model
-* **OpenAI Compatibility:** Featherless uses an OpenAI-compatible API format for easy integration.
-* **Limitations:** No image support or prompt caching available on any model.

@@ -33,6 +33,8 @@ Most AI providers charge based on the number of tokens used. Pricing varies depe
 
 Roo Code automatically calculates the estimated cost of each API request based on the configured model's pricing. This cost is displayed in the chat history, next to the token usage.
 
+For reasoning-capable models (for example, Gemini 3 Pro Preview and other models that expose separate "thinking" or reasoning tokens), Roo Code now includes both normal tokens **and** reasoning / "thought" tokens in its estimates when the provider reports them. This can make the displayed token usage and cost slightly higher than in older versions, but it better matches how providers actually bill you.
+
 **Note:**
 
 *   The cost calculation is an *estimate*. The actual cost may vary slightly depending on the provider's billing practices.

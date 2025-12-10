@@ -72,3 +72,7 @@ You can configure the Multi-File Read feature by clicking the <Codicon name="gea
 1.  **Concurrent File Reads Limit**:
     *   **Setting**: `Concurrent file reads limit`
     *   **Description**: This setting determines the maximum number of files that Roo can read in a single request. The default is 5, with a range of 1-100 files. Higher values can speed up tasks involving many small files but may use more memory. Setting the value to 1 effectively disables concurrent reads, reverting to single-file reads.
+
+:::note
+The per‑request file limit is configured in the UI (default 5, up to 100). The backend [`read_file`](/advanced-usage/available-tools/read-file) tool doesn’t hard‑enforce a cap; actual behavior may also depend on the selected model/tool.
+:::

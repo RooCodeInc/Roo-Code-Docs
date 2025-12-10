@@ -1,5 +1,5 @@
 ---
-description: Learn how to share your Roo Code tasks and collaborate with others using shareable links. Share from the extension or dashboard.
+description: Learn how to share your Roo Code tasks and collaborate with others using shareable links. Share from the extension or web UI.
 keywords:
   - task sharing
   - collaboration
@@ -13,48 +13,65 @@ import Codicon from '@site/src/components/Codicon';
 
 # Task Sharing
 
-Share your Roo Code tasks and collaborate with others by making tasks publicly accessible through shareable links.
+This allows you to share Roo Code tasks (in the extension or from Cloud Agents) with secure links with whoever you choose. This allows you to help others understand how you're using Roo, debug a problem or help your teammates learn.
 
-:::note Login Required
-You must be logged in to Roo Code Cloud to share tasks. If you haven't connected your account yet, follow the [login instructions](/roo-code-cloud/login) first.
+You can choose whether to share with your organization (Team plan only) or publicly (anyone with the link).
+
+:::note Organization Policy
+If your organization disables task sharing, the Share button is disabled and shows a tooltip indicating sharing is disabled. On the web dashboard, the Share action may also be unavailable if you don’t have permission to share that task.
 :::
 
 ---
 
-## Sharing from within Roo Code
+## Sharing from the Roo Code Extension
 
-1. In any active task view, locate the **link icon** <Codicon name="link" /> on the right side of the task header.
-   <img src="/img/task-sharing/task-sharing-6.png" alt="Link icon in active task view" width="480" />
+1. Open the Share menu
+   - In an active task, click the Share icon <Codicon name="link" /> in the task header (right side).
+   <img src="/img/task-sharing/task-sharing-10.png" alt="Share icon in the active task header" width="600" />
 
-2. Click the link icon to open the sharing options, then select **Share Publicly**.
-   <img src="/img/task-sharing/task-sharing-7.png" alt="Share Publicly option" width="400" />
-   This option allows anyone with the link to access your task.
+2. Choose who can access
+   - Pick one:
+     - **Share with Organization** — Only members of your organization can access
+     - **Share Publicly** — Anyone with the link can access
+   - Default: If not specified, the extension uses Organization visibility by default.
+   <img src="/img/task-sharing/task-sharing-11.png" alt="Share options showing Organization and Public visibility choices" width="400" />
 
-3. A public link will be generated and copied to your clipboard
-    <img src="/img/task-sharing/task-sharing-8.png" alt="Public link copied confirmation" width="400" />
-    You can now share this link with team members, collaborators, or anyone who needs access to view your task and its conversation history.
+3. Create the link
+   - Roo generates the link and copies it to your clipboard. A brief success message appears in the UI.
+   <img src="/img/task-sharing/task-sharing-12.png" alt="Share link created and copied confirmation" width="400" />
 
 ## Sharing from Roo Code Cloud
 
-1. Navigate to your Roo Code Cloud account and click on the task you want to share to open the detailed task modal.
-    <img src="/img/task-sharing/task-sharing-9.png" alt="Dashboard task modal with Share button" />
+1. Go to [Roo Code Cloud](https://app.roocode.com) and open the task you want to share.
 
-2. Within the detailed task modal, click the **Share** button to open the sharing options.
-    <img src="/img/task-sharing/task-sharing-4.png" alt="Share Task modal" width="400" />
-    Create a public link; links expire in 30 days.
+2. Click the **Share** button to open sharing options.
 
-3. Click **Create Share Link** to generate a new public link. Once created, you'll see the confirmation screen:
-    <img src="/img/task-sharing/task-sharing-5.png" alt="Share link created confirmation" width="400" />
-    From this screen you can:
-    - Copy link
-    - Create another link
-    - View previous links
-    - Delete links
-
-The web app sharing method provides more advanced link management capabilities, including the ability to create multiple links per task and track previously generated links.
+3. Create and manage links
+   - Choose Organization or Public, then click **Create Share Link**.
+   - Expiration:
+     - Personal accounts: links expire after 30 days.
+     - Organizations: expiry is set by your org (1–365 days; default 30).
+   - From this screen you can:
+     - Copy link
+     - Create another link
+     - See recent links (last 3 shown, with a "+N more" summary)
+     - Delete links (org admins can delete any org link; members can delete links they created)
 
 ## Privacy & Security
 
-- Tasks remain **private by default** - nothing is shared unless you explicitly create a share link
-- All share links **automatically expire after 30 days** for enhanced security (unless configured otherwise by an admin in a Team account)
-- Expired links cannot be accessed, ensuring your shared content doesn't remain public indefinitely
+#### Controlled sharing
+- Tasks are **private by default** — nothing is shared until you create a link.
+- You choose Organization vs Public visibility per link.
+- You can revoke access anytime by deleting the link.
+
+#### Expiring links
+- Personal accounts: links expire after 30 days.
+- Organizations: expiry is set by your org admin (1–365 days; default 30).
+
+#### Data control
+- Delete share links anytime from the dashboard.
+- View recent links in the dialog.
+
+## Caveats
+- There's no link tracking at the moment.
+- Personal account links always expire after 30 days.

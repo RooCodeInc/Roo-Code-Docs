@@ -30,19 +30,11 @@ Doubao is ByteDance's Chinese AI service, offering competitive language models f
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following Doubao models:
+Roo Code supports all Doubao models available through ByteDance's Volcano Engine API.
 
-* `doubao-seed-1-6-250615` (Default) - General purpose
-* `doubao-seed-1-6-thinking-250715` - Enhanced reasoning
-* `doubao-seed-1-6-flash-250715` - Speed optimized
-
-All models support:
-- 128,000 token context window
-- 32,768 max output tokens
-- Image inputs
-- Prompt caching with 80% discount on cached reads
+For the complete, up-to-date model list, see [Volcano Engine's AI model service](https://www.volcengine.com/).
 
 ---
 

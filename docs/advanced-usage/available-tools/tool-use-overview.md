@@ -29,7 +29,7 @@ Tools are organized into logical groups based on their functionality:
 |----------|---------|-------|------------|
 | **Read Group** | File system reading and exploration | [read_file](/advanced-usage/available-tools/read-file), [list_files](/advanced-usage/available-tools/list-files), [list_code_definition_names](/advanced-usage/available-tools/list-code-definition-names) | Code exploration and analysis |
 | **Search Group** | Pattern and semantic searching | [search_files](/advanced-usage/available-tools/search-files), [codebase_search](/advanced-usage/available-tools/codebase-search) | Finding code patterns and functionality |
-| **Edit Group** | File system modifications | [apply_diff](/advanced-usage/available-tools/apply-diff), [insert_content](/advanced-usage/available-tools/insert-content), [search_and_replace](/advanced-usage/available-tools/search-and-replace), [write_to_file](/advanced-usage/available-tools/write-to-file) | Code changes and file manipulation |
+| **Edit Group** | File system modifications | [apply_diff](/advanced-usage/available-tools/apply-diff), [insert_content](/advanced-usage/available-tools/insert-content), [write_to_file](/advanced-usage/available-tools/write-to-file) | Code changes and file manipulation |
 | **Browser Group** | Web automation | [browser_action](/advanced-usage/available-tools/browser-action) | Web testing and interaction |
 | **Command Group** | System command execution | [execute_command](/advanced-usage/available-tools/execute-command), [run_slash_command](/advanced-usage/available-tools/run-slash-command)* | Running scripts, building projects, executing command templates |
 | **MCP Group** | External tool integration | [use_mcp_tool](/advanced-usage/available-tools/use-mcp-tool), [access_mcp_resource](/advanced-usage/available-tools/access-mcp-resource) | Specialized functionality through external servers |
@@ -68,7 +68,6 @@ These tools help Roo make changes to your code:
 
 - [apply_diff](/advanced-usage/available-tools/apply-diff) - Makes precise, surgical changes to your code
 - [insert_content](/advanced-usage/available-tools/insert-content) - Adds new lines of content without modifying existing lines
-- [search_and_replace](/advanced-usage/available-tools/search-and-replace) - Finds and replaces text or regex patterns within a file
 - [write_to_file](/advanced-usage/available-tools/write-to-file) - Creates new files or completely rewrites existing ones
 
 ### Browser Tools

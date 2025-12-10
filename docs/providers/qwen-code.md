@@ -29,11 +29,12 @@ Access Alibaba's Qwen3 Coder models through OAuth authentication with automatic 
 
 ---
 
-## Supported Models
+## Available Models
 
-Both models offer 1M context windows and 65K max output tokens (currently free):
+Both Qwen3 Coder models feature massive 1M context windows and 65K max output tokens.
 
-- **qwen3-coder-plus** (Default) - High-performance coding model
+**Available models:**
+- **qwen3-coder-plus** - High-performance coding model (default)
 - **qwen3-coder-flash** - Speed-optimized variant
 
 ---

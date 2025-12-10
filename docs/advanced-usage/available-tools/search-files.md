@@ -26,6 +26,7 @@ The tool accepts these parameters:
 - `path` (required): The path of the directory to search in, relative to the current workspace directory. The search is confined to the workspace.
 - `regex` (required): The regular expression pattern to search for (uses Rust regex syntax)
 - `file_pattern` (optional): Glob pattern to filter files (e.g., '*.ts' for TypeScript files)
+- `respect_gitignore` (optional): Whether to respect `.gitignore` patterns (default: `true`). Set to `false` to search all files including those in `.gitignore`.
 
 ---
 
@@ -47,6 +48,7 @@ This tool searches across files in a specified directory using regular expressio
 ## Key Features
 
 - Searches across multiple files in a single operation using high-performance Ripgrep
+- **Respects .gitignore**: Automatically excludes files and directories listed in `.gitignore` (including nested `.gitignore` files)
 - Shows context around each match (1 line before and after)
 - Filters files by type using glob patterns (e.g., only TypeScript files)
 - Provides line numbers for easy reference
@@ -66,6 +68,7 @@ This tool searches across files in a specified directory using regular expressio
 - Default context size is fixed (1 line before and after)
 - May display varying context sizes when matches are close together due to result grouping
 - For security, searches are strictly limited to the current workspace and cannot access parent directories or other locations on the file system.
+- **Respects .gitignore by default**: Files listed in `.gitignore` are excluded from searches unless explicitly overridden with `respect_gitignore: false`
 
 ---
 
@@ -153,9 +156,47 @@ Finding all usages of a specific function:
 ```
 
 Searching for a specific import pattern across the entire project:
-```
+```xml
 <search_files>
 <path>.</path>
 <regex>import\s+.*\s+from\s+['"]@components/</regex>
 </search_files>
 ```
+## Respecting .gitignore
+
+By default, `search_files` respects `.gitignore` patterns in your workspace, including nested `.gitignore` files. This prevents searches in excluded directories like `node_modules/`, `dist/`, or other ignored paths.
+
+### Default Behavior (Respecting .gitignore)
+
+**Input:**
+```xml
+<search_files>
+<path>.</path>
+<regex>TODO</regex>
+</search_files>
+```
+
+This search will **exclude** files and directories listed in `.gitignore`, ensuring focused results on tracked code.
+
+### Overriding .gitignore (Search All Files)
+
+To search **all files** including those in `.gitignore`, explicitly set `respect_gitignore` to `false`:
+
+**Input:**
+```xml
+<search_files>
+<path>.</path>
+<regex>TODO</regex>
+<respect_gitignore>false</respect_gitignore>
+</search_files>
+```
+
+This searches **everything**, including `node_modules/`, build artifacts, and other ignored paths.
+
+**When to override:**
+- Debugging issues in dependencies or build output
+- Searching through generated code
+- Comprehensive audits that need to check all files
+- Investigating ignored configuration files
+
+---

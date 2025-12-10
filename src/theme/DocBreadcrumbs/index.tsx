@@ -60,8 +60,6 @@ export default function DocBreadcrumbs(): ReactNode {
     return null;
   }
 
-  const lastBreadcrumb = breadcrumbs[breadcrumbs.length - 1];
-
   return (
     <>
       <DocBreadcrumbsStructuredData breadcrumbs={breadcrumbs} />

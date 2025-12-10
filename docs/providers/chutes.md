@@ -27,11 +27,11 @@ To use Chutes AI with Roo Code, obtain an API key from the [Chutes AI platform](
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code will attempt to fetch the list of available models from the Chutes AI API. The specific models available will depend on Chutes AI's current offerings.
+Roo Code automatically fetches all available models from Chutes AI's API.
 
-Always refer to the official Chutes AI documentation or your dashboard for the most up-to-date list of supported models.
+For the complete, up-to-date model list, see [Chutes AI's platform](https://chutes.ai/) or your account dashboard.
 
 ---
 

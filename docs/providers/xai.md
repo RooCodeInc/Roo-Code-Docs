@@ -34,19 +34,11 @@ xAI is the company behind Grok, a large language model known for its conversatio
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following xAI Grok models:
+Roo Code supports all Grok models available through xAI's API.
 
-### Current Models
-* `grok-code-fast-1` (Default) - xAI's Grok Code Fast model with 262K context window and prompt caching, optimized for reasoning and coding tasks
-* `grok-4` - xAI's Grok-4 model with 262K context window, image support, and prompt caching
-* `grok-3` - xAI's Grok-3 model with 128K context window and prompt caching
-* `grok-3-fast` - xAI's Grok-3 fast model with 128K context window and prompt caching
-* `grok-3-mini` - xAI's Grok-3 mini model with 128K context window, reasoning support, and prompt caching
-* `grok-3-mini-fast` - xAI's Grok-3 mini fast model with 128K context window, reasoning support, and prompt caching
-* `grok-2-1212` - xAI's Grok-2 model (version 1212) with 128K context window
-* `grok-2-vision-1212` - xAI's Grok-2 Vision model (version 1212) with image support and 32K context window
+For the complete, up-to-date model list and capabilities, see [xAI's documentation](https://docs.x.ai/docs).
 
 :::info Grok Code Fast - Free Access in Roo Code
 `grok-code-fast-1` is available for **free** through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. When using the xAI provider directly in Roo Code, standard pricing will apply once established. This model was previously known as "roo/sonic" and has been renamed. For free access within Roo Code, use the Roo Code Cloud provider instead of the xAI provider.
@@ -69,11 +61,12 @@ Grok 3 Mini models feature specialized reasoning capabilities, allowing them to 
 
 ### Reasoning-Enabled Models
 
-Reasoning is only supported by:
+Several Grok models have reasoning capabilities. However, only the Grok 3 Mini models support configurable reasoning effort control:
+
 * `grok-3-mini` - Supports reasoning effort control
 * `grok-3-mini-fast` - Supports reasoning effort control
 
-The standard Grok 3 models (`grok-3` and `grok-3-fast`) and Grok 4 do not support reasoning effort parameters.
+Other models (`grok-code-fast-1`, `grok-4.1-fast`, `grok-4`, `grok-3`, `grok-3-fast`) are reasoning-capable but don't expose the `reasoning_effort` parameter.
 
 ### Controlling Reasoning Effort
 

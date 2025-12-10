@@ -34,57 +34,11 @@ Roo Code supports accessing models through Google Cloud Platform's Vertex AI, a 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following models through Vertex AI:
+Roo Code supports all models available through Google Cloud Vertex AI, including Anthropic Claude, Google Gemini, and MAAS (Model as a Service) offerings.
 
-### Default Model
-If no model is specified, Roo Code defaults to `claude-sonnet-4@20250514`.
-
-### Google Gemini Models
-
-#### Standard Models
-*   `gemini-2.5-flash` - Production version with prompt caching support
-*   `gemini-2.5-flash-preview-05-20` - Preview with 1M context window
-*   `gemini-2.5-flash-preview-04-17` - Preview without caching
-*   `gemini-2.5-flash-lite-preview-06-17` - Lite version with lower pricing
-*   `gemini-2.5-pro` - Production version with reasoning support
-*   `gemini-2.5-pro-preview-03-25` - Pro preview version
-*   `gemini-2.5-pro-preview-05-06` - Pro preview version
-*   `gemini-2.5-pro-preview-06-05` - Pro preview with reasoning support
-*   `gemini-2.5-pro-exp-03-25` - Experimental version (free)
-*   `gemini-2.0-flash-001` - 2.0 Flash model
-*   `gemini-2.0-flash-lite-001` - 2.0 Flash lite version
-*   `gemini-2.0-flash-thinking-exp-01-21` - Thinking/reasoning model
-*   `gemini-2.0-pro-exp-02-05` - 2.0 Pro experimental
-*   `gemini-1.5-flash-002` - 1.5 Flash model
-*   `gemini-1.5-pro-002` - 1.5 Pro model
-
-#### Thinking/Reasoning Models
-These models support enhanced reasoning capabilities with the `:thinking` suffix:
-*   `gemini-2.5-flash-preview-05-20:thinking`
-*   `gemini-2.5-flash-preview-04-17:thinking`
-
-:::info
-**Thinking Models:** Models with `:thinking` suffix enable step-by-step reasoning. The suffix is stripped before sending to the API but enables reasoning features in Roo Code. You'll need to enable the reasoning budget in settings to use these models effectively.
-:::
-
-### Anthropic Claude Models
-*   `claude-opus-4-1@20250805`
-*   `claude-opus-4@20250514`
-*   `claude-sonnet-4@20250514` (Default)
-*   `claude-3-7-sonnet@20250219`
-*   `claude-3-7-sonnet@20250219:thinking` - With reasoning support
-*   `claude-3-5-sonnet-v2@20241022`
-*   `claude-3-5-sonnet@20240620`
-*   `claude-3-5-haiku@20241022`
-*   `claude-3-opus@20240229`
-*   `claude-3-haiku@20240307`
-
-### Other Models
-*   `llama-4-maverick-17b-128e-instruct-maas` - Meta Llama 4 model with 128K context window
-
-Refer to the [Google Cloud documentation on Vertex AI Models](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models) for the most up-to-date list of available models and their IDs.
+For the complete, up-to-date model list and IDs, see [Vertex AI's models documentation](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/models).
 
 ---
 

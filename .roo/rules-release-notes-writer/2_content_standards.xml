@@ -19,7 +19,7 @@
 
     <required_elements>
       <element name="frontmatter">
-        <format><![CDATA[
+        <format>
 ---
 description: A concise summary of the release.
 keywords:
@@ -28,7 +28,7 @@ keywords:
   - bug fixes
 image: /img/social-share.jpg
 ---
-        ]]></format>
+        </format>
       </element>
       
       <element name="title">
@@ -52,9 +52,9 @@ image: /img/social-share.jpg
           - Use an HTML image tag per site rules with width="600"
           - Set src from .roo/tmp/release-notes/frontmatter_image_v[version].txt and alt to "Roo Code v[VERSION] Release"
         </rules>
-        <template><![CDATA[
+        <template>
 <img src="/img/vX.Y.Z/vX.Y.Z.png" alt="Roo Code vX.Y.Z Release" width="600" />
-        ]]></template>
+        </template>
       </element>
     </required_elements>
   </file_structure>
@@ -70,7 +70,7 @@ image: /img/social-share.jpg
       <category name="major_features">
         <criteria>New functionality changing user experience</criteria>
         <format>Own ## heading with expanded description</format>
-        <template><![CDATA[
+        <template>
 ## [Feature Name]
 
 We've [improvement description] (thanks [contributors]!) ([#PR](link)):
@@ -81,7 +81,7 @@ We've [improvement description] (thanks [contributors]!) ([#PR](link)):
 [Concluding sentence about impact]
 
 > **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage instructions.
-        ]]></template>
+        </template>
       </category>
       
       <category name="qol_improvements">
@@ -113,7 +113,7 @@ We've [improvement description] (thanks [contributors]!) ([#PR](link)):
   <content_formatting>
     <expanded_sections>
       <description>Major features with details</description>
-      <format><![CDATA[
+      <format>
 ## Feature Name
 
 Description of what the feature does (thanks contributor!) ([#PR](link)):
@@ -124,17 +124,17 @@ Description of what the feature does (thanks contributor!) ([#PR](link)):
 Concluding sentence about the benefit.
 
 > **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage.
-      ]]></format>
+      </format>
     </expanded_sections>
 
     <grouped_sections>
       <description>Smaller fixes and improvements</description>
-      <format><![CDATA[
+      <format>
 ## Section Name
 
 * **Item Name**: Single-line description (thanks contributor!) ([#PR](link))
 * **Another Item**: Another description ([#PR](link))
-      ]]></format>
+      </format>
     </grouped_sections>
 
     <contributor_acknowledgments>
@@ -217,12 +217,12 @@ Concluding sentence about the benefit.
   <documentation_links>
     <patterns>
       <inline>[Feature Name](/path/to/feature)</inline>
-      <see_also><![CDATA[
+      <see_also>
 > **📚 Documentation**: See [Feature Guide](/path) for detailed usage instructions.
-      ]]></see_also>
-      <migration><![CDATA[
+      </see_also>
+      <migration>
 > **🔄 Migration Guide**: If upgrading from v[OLD], see our [migration guide](/migration/vX-to-vY).
-      ]]></migration>
+      </migration>
     </patterns>
     <auto_linking>
       - Modes: /features/modes/[mode-slug]
@@ -247,8 +247,14 @@ Concluding sentence about the benefit.
 
   <discord_formatting>
     <overview>
-      Special formatting rules for Discord announcements that reflect our latest house style and the final transformation flow.
+      Discord announcements preserve the original structure and headings from source release notes.
+      Only minimal transformations are applied for platform compatibility.
     </overview>
+
+    <core_principle priority="critical">
+      Preserve original headings and section structure from the source release notes files exactly.
+      Do NOT rename, merge, or reorganize sections. The Discord version should mirror the docs version.
+    </core_principle>
 
     <structure>
       <element name="wrapper">
@@ -257,44 +263,40 @@ Concluding sentence about the benefit.
       </element>
 
       <element name="title">
-        <format># :rocket: Roo Code X.Y.Z Release Updates</format>
-        <format_combined># :rocket: Roo Code X.Y.Z-X.Y.Z Release Updates</format_combined>
+        <format># Roo Code X.Y.Z Release Updates</format>
+        <format_combined># Roo Code X.Y.Z-X.Y.Z Release Updates</format_combined>
         <rules>
-          - Use :rocket: shortcode (not the emoji)
-          - Use "Release Updates" (not "Release Notes") for both single and combined versions
+          - No emoji in title
+          - Use "Release Updates" for both single and combined versions
           - For combined announcements, use "X.Y.Z-X.Y.Z" range formatting
         </rules>
       </element>
 
       <element name="tagline">
-        <format>@everyone [short hero summary]</format>
+        <format>@everyone [short hero summary derived from source intro sentence]</format>
         <rules>
           - Discord only (omit from Reddit)
-          - Keep to a single concise line (e.g., "GPT‑5‑Codex tool‑usage fix, more FREE models on Roo Code Cloud and more!")
+          - Derive from the source file's intro/summary sentence
         </rules>
       </element>
 
       <element name="sections">
-        <order>
-          1. ## Fixed: GPT-5-Codex errors and others!
-          2. ## Context condensing fix
-          3. ## More free models on Roo Code Cloud
-          4. ## More Changes
-        </order>
         <rules>
+          - Copy all section headings EXACTLY as they appear in source docs
+          - Preserve the original section order from source docs
+          - Copy all bullet points and sub-bullets exactly as they appear
           - No emojis in section headers
-          - In "Fixed: GPT-5-Codex...", copy the leading sentence EXACTLY from docs (include the PR link if present)
-          - Under that hero sentence, include the three bullets verbatim; render bullets as "- " hyphens
+          - Use hyphen bullets ("- ") instead of asterisk bullets ("* ")
         </rules>
       </element>
 
       <element name="footer_blurb">
-        <format_single><![CDATA[
+        <format_single>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_single>
-        <format_combined><![CDATA[
+        </format_single>
+        <format_combined>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_combined>
+        </format_combined>
         <rules>
           - Use markdown inline links with the version as the anchor text
           - For multiple versions, join links with " | "
@@ -303,41 +305,71 @@ See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | 
     </structure>
 
     <content_rules>
+      <rule priority="critical">Preserve original section headings exactly as in source docs</rule>
+      <rule priority="critical">Preserve original bullet points and structure exactly</rule>
       <rule priority="critical">No version numbers in body text (only header/footer)</rule>
       <rule priority="critical">Never use marketing language</rule>
-      <rule priority="high">Retain PR link ONLY in the hero GPT‑5‑Codex section; remove PR links/numbers elsewhere</rule>
+      <rule priority="high">Remove PR links/numbers from all content</rule>
       <rule priority="high">Convert any relative docs links to absolute https://docs.roocode.com paths</rule>
       <rule priority="high">Use hyphen bullets ("- ") everywhere</rule>
-      <rule priority="medium">If long or on request, summarize remaining items into a single "More Changes" paragraph with contributor thanks and total change count</rule>
+      <rule priority="high">Remove inline hero images from output</rule>
     </content_rules>
 
     <transformations>
-      <from>* </from>
-      <to>- </to>
+      <transformation name="bullets">
+        <from>* </from>
+        <to>- </to>
+      </transformation>
 
-      <from>([#PR](link))</from>
-      <to>(remove everywhere except retain in the hero GPT‑5‑Codex section)</to>
+      <transformation name="pr_links">
+        <from>([#PR](link))</from>
+        <to>(remove from all content)</to>
+      </transformation>
 
-      <from>/path/to/page</from>
-      <to>https://docs.roocode.com/path/to/page</to>
+      <transformation name="docs_links">
+        <from>/path/to/page</from>
+        <to>https://docs.roocode.com/path/to/page</to>
+      </transformation>
+
+      <transformation name="images">
+        <from>&lt;img src="..." /&gt;</from>
+        <to>(remove entirely)</to>
+      </transformation>
     </transformations>
+
+    <compression_only_on_request>
+      <trigger>User explicitly requests "compress", "condense", or content exceeds 2000 chars</trigger>
+      <behavior>
+        Only when triggered, summarize smaller sections into a "More Changes" paragraph.
+        Still preserve major feature section headings even when compressing.
+      </behavior>
+    </compression_only_on_request>
   </discord_formatting>
 
   <reddit_formatting>
     <overview>
-      Formatting for Reddit announcements, paired with Discord output by default.
+      Reddit announcements preserve the original structure and headings from source release notes.
+      Only minimal transformations are applied for platform compatibility.
     </overview>
+
+    <core_principle priority="critical">
+      Preserve original headings and section structure from the source release notes files exactly.
+      Do NOT rename, merge, or reorganize sections. The Reddit version should mirror the docs version.
+    </core_principle>
 
     <structure>
       <element name="wrapper">
         <format>```markdown ... ```</format>
         <description>Wrap the entire announcement in a markdown code block</description>
       </element>
+
       <element name="title">
-        <format>Roo Code X.Y.Z-X.Y.Z Release Updates | FREE models | GPT‑5‑Codex tool‑usage fix | More fixes!</format>
+        <format>Roo Code X.Y.Z Release Updates | [key feature 1] | [key feature 2] | [key feature 3]</format>
+        <format_combined>Roo Code X.Y.Z-X.Y.Z Release Updates | [key feature 1] | [key feature 2] | [key feature 3]</format_combined>
         <rules>
           - Plain text line (no leading "#")
-          - Include the three-part summary fragments as shown
+          - Derive key features from source intro sentence (not hardcoded examples)
+          - Use pipe separators between key features
         </rules>
       </element>
 
@@ -346,37 +378,66 @@ See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | 
       </element>
 
       <element name="sections">
-        <order>
-          1. ## More free models on Roo Code Cloud
-          2. ## Fixed: GPT-5-Codex errors and others!
-          3. ## Context condensing fix
-          4. ## More Changes
-        </order>
         <rules>
-          - Wrap entire output in a markdown code block
+          - Copy all section headings EXACTLY as they appear in source docs
+          - Preserve the original section order from source docs
+          - Copy all bullet points and sub-bullets exactly as they appear
           - No @everyone line
           - No emojis in section headers
           - Use hyphen bullets ("- ")
-          - Remove PR links everywhere (including hero)
+          - Remove PR links everywhere
         </rules>
       </element>
 
       <element name="footer_blurb">
-        <format_single><![CDATA[
+        <format_single>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_single>
-        <format_combined><![CDATA[
+        </format_single>
+        <format_combined>
 See full release notes [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z) | [vX.Y.Z](https://docs.roocode.com/update-notes/vX.Y.Z)
-        ]]></format_combined>
+        </format_combined>
       </element>
     </structure>
 
     <content_rules>
+      <rule priority="critical">Preserve original section headings exactly as in source docs</rule>
+      <rule priority="critical">Preserve original bullet points and structure exactly</rule>
       <rule priority="critical">No version numbers in body text</rule>
       <rule priority="high">Remove all PR numbers and links</rule>
       <rule priority="high">Use absolute docs links</rule>
       <rule priority="high">Use hyphen bullets ("- ")</rule>
+      <rule priority="high">Remove inline hero images from output</rule>
     </content_rules>
+
+    <transformations>
+      <transformation name="bullets">
+        <from>* </from>
+        <to>- </to>
+      </transformation>
+
+      <transformation name="pr_links">
+        <from>([#PR](link))</from>
+        <to>(remove from all content)</to>
+      </transformation>
+
+      <transformation name="docs_links">
+        <from>/path/to/page</from>
+        <to>https://docs.roocode.com/path/to/page</to>
+      </transformation>
+
+      <transformation name="images">
+        <from>&lt;img src="..." /&gt;</from>
+        <to>(remove entirely)</to>
+      </transformation>
+    </transformations>
+
+    <compression_only_on_request>
+      <trigger>User explicitly requests "compress" or "condense"</trigger>
+      <behavior>
+        Only when triggered, summarize smaller sections into a "More Changes" paragraph.
+        Still preserve major feature section headings even when compressing.
+      </behavior>
+    </compression_only_on_request>
   </reddit_formatting>
 
   <cross_posting>

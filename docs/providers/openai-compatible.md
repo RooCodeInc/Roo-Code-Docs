@@ -49,21 +49,67 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
 
 ---
 
-## Supported Models (for OpenAI Native Endpoint)
+## Native Tool Calling (OpenAI-Native Endpoint)
 
-While this provider type allows connecting to various endpoints, if you are connecting directly to the official OpenAI API (or an endpoint mirroring it exactly), Roo Code recognizes the following model IDs based on the `openAiNativeModels` definition in its source code:
+When you connect this provider directly to the official OpenAI API (or an endpoint that mirrors it exactly), Roo Code can use OpenAI's **native tool-calling** protocol instead of the XML-based tool format.
 
-*   `o3-mini`
-*   `o3-mini-high`
-*   `o3-mini-low`
-*   `o1`
-*   `o1-preview`
-*   `o1-mini`
-*   `gpt-4.5-preview`
-*   `gpt-4o`
-*   `gpt-4o-mini`
+At a high level:
 
-**Note:** If you are using a different OpenAI-compatible provider (like Together AI, Anyscale, etc.), the available model IDs will vary. Always refer to your specific provider's documentation for their supported model names.
+- **Tool definitions** are sent to the model using OpenAI's native tools schema.
+- **Tool calls** stream back as dedicated tool events, including the tool name, arguments, and metadata.
+- **Tool arguments** are streamed incrementally, which reduces latency between the model deciding to use a tool and Roo Code executing it.
+
+### When native tools are used
+
+Roo Code uses native tool calling when **all** of the following are true:
+
+1. The selected provider is configured for the OpenAI-native protocol (OpenAI or an OpenAI-compatible endpoint that fully supports native tools).
+2. The active profile's tool protocol is set to allow native tools (or left at its default, which prefers native tools when supported).
+3. The selected model supports native tool calling.
+
+If any of these conditions aren't met, Roo Code falls back to its XML-based tool protocol instead.
+
+### Example: simple native tool flow
+
+Here's a simplified example of how a file-reading tool might be exposed when using an OpenAI-native endpoint:
+
+```json
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "read_file",
+        "description": "Read a file from the workspace with line numbers.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string", "description": "Relative file path" },
+            "start_line": { "type": "integer", "nullable": true },
+            "end_line": { "type": "integer", "nullable": true }
+          },
+          "required": ["path"]
+        }
+      }
+    }
+  ]
+}
+```
+
+When the model decides to use `read_file`, Roo Code surfaces **streamed tool events** in the task timeline:
+
+- A native *tool call* event with the tool name and arguments as they're being generated
+- The corresponding *tool result* event showing the file contents and any truncation or line-range information
+
+This gives you lower-latency feedback on which tools are being used and with what arguments.
+
+### Settings and limitations
+
+- **Tool protocol selector:** In advanced settings, you can choose which tool protocol Roo Code should prefer (XML vs native). If you disable native tools here, Roo Code will always use XML even if the provider supports native tools.
+- **Model support:** Not all OpenAI-native or compatible models support tools. If a model doesn't support tools, Roo Code will not attempt to send tool definitions for it.
+- **Provider quirks:** Some OpenAI-compatible providers only partially implement the native tools API. If Roo Code detects protocol errors, it may fall back to XML tools automatically.
+
+For a deeper overview of how tools work in Roo Code in general, see the [Tool Use Overview](/advanced-usage/available-tools/tool-use-overview).
 
 ---
 

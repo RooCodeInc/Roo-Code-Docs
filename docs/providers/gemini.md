@@ -31,38 +31,11 @@ Roo Code supports Google's Gemini family of models through the Google AI Gemini 
 
 ---
 
-## Supported Models
+## Available Models
 
-Roo Code supports the following Gemini models:
+Roo Code supports all Gemini models available through Google's API and automatically tracks Google's latest stable releases.
 
-### Standard Models
-* `gemini-2.5-flash-preview-05-20`
-* `gemini-2.5-flash-preview-04-17`
-* `gemini-2.5-flash-lite-preview-06-17`
-* `gemini-2.5-pro-exp-03-25`
-* `gemini-2.0-flash-001`
-* `gemini-2.0-flash-lite-preview-02-05`
-* `gemini-2.0-pro-exp-02-05`
-* `gemini-2.0-flash-exp`
-* `gemini-1.5-flash-002`
-* `gemini-1.5-flash-exp-0827`
-* `gemini-1.5-flash-8b-exp-0827`
-* `gemini-1.5-pro-002`
-* `gemini-1.5-pro-exp-0827`
-* `gemini-exp-1206`
-
-### Thinking Models
-These models require reasoning budget to be enabled in Roo Code settings:
-* `gemini-2.5-flash-preview-05-20:thinking`
-* `gemini-2.5-flash-preview-04-17:thinking`
-* `gemini-2.0-flash-thinking-exp-01-21`
-* `gemini-2.0-flash-thinking-exp-1219`
-
-:::info
-**Thinking Models:** Models with `:thinking` suffix or "thinking" in their name are hybrid reasoning models that provide step-by-step reasoning capabilities. To use these models, you must enable the reasoning budget feature in Roo Code settings.
-:::
-
-Refer to the [Gemini documentation](https://ai.google.dev/models/gemini) for more details on each model.
+For the complete, up-to-date model list and capabilities, see [Google's Gemini models documentation](https://ai.google.dev/models/gemini).
 
 ---
 
@@ -72,6 +45,8 @@ Refer to the [Gemini documentation](https://ai.google.dev/models/gemini) for mor
 2.  **Select Provider:** Choose "Google Gemini" from the "API Provider" dropdown.
 3.  **Enter API Key:** Paste your Gemini API key into the "Gemini API Key" field.
 4.  **Select Model:** Choose your desired Gemini model from the "Model" dropdown.
+
+By default, Roo Code selects a stable Pro model (currently a Gemini 2.5 Pro variant) with a temperature of **1.0** where your provider supports it. This keeps suggestions more expressive and natural while still staying on task. If you need highly deterministic output (for example, for code generation in CI), you can lower the temperature toward `0.0`.
 
 ---
 

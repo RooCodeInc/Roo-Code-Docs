@@ -26,10 +26,10 @@
       <trigger>latest</trigger>
       <action>Auto-detect missing versions from changelog</action>
     </pattern>
-  <pattern type="reddit_only">
-    <trigger>Reddit release notes for X.Y.Z</trigger>
-    <action>Generate Reddit format from existing files</action>
-  </pattern>
+    <pattern type="reddit_only">
+      <trigger>Reddit release notes for X.Y.Z</trigger>
+      <action>Generate Reddit format from existing files</action>
+    </pattern>
   </entry_patterns>
 
   <critical_date_format>
@@ -132,7 +132,7 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
             Wait for all subtasks to complete before proceeding to compilation phase.
           </iteration_approach>
         </implementation>
-        <message_template><![CDATA[
+        <message_template>
   Investigate PR #[number] for release notes v[version].
   1. Get PR details: gh pr view [number] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url
   2. Extract linked issues from PR body
@@ -148,19 +148,19 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   - docs-migration: Breaking changes
   
   CRITICAL: Never create/overwrite files, only append.
-  MANDATORY: Insert the marker line '<!-- generated-by-subtask: true -->' immediately before the '---' separator in each PR entry.
-  ]]></message_template>
-        <todos_template><![CDATA[
+  MANDATORY: Insert the marker line '&lt;!-- generated-by-subtask: true --&gt;' immediately before the '---' separator in each PR entry.
+  </message_template>
+        <todos_template>
 [ ] Fetch PR #[number] details using gh pr view --repo RooCodeInc/Roo-Code
 [ ] Extract linked issues from PR body
 [ ] Get issue details for each linked issue
 [ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
 [ ] Identify documentation needs
 [ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-        ]]></todos_template>
+        </todos_template>
       </subtask_pattern>
       
-      <output_format><![CDATA[
+      <output_format>
 ## PR #[number]: [Title]
 
 **Author**: [username]
@@ -170,10 +170,10 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
 **Contributors**: [list]
 **Documentation Needs**: [none|docs-new|docs-update|docs-example|docs-migration]
 **Documentation Notes**: [If applicable, what needs documenting]
-<!-- generated-by-subtask: true -->
+&lt;!-- generated-by-subtask: true --&gt;
 
 ---
-      ]]></output_format>
+      </output_format>
       
       <subtask_creation_example>
         <description>Example of creating subtasks for a PR list</description>
@@ -224,20 +224,24 @@ mkdir -p .roo/tmp/release-notes
 gh release view vX.Y.Z --repo RooCodeInc/Roo-Code --json body --jq '.body' > .roo/tmp/release-notes/changelog_vX.Y.Z.md
           ]]></save_body_to_file>
           <fetch_changelog><![CDATA[
-# Fetch CHANGELOG.md at tag vX.Y.Z; fallback to main, then extract vX.Y.Z section
+# Fetch CHANGELOG.md from main branch FIRST for hero image discovery.
+# Hero images are often added retroactively after release, so the current main
+# branch has the most up-to-date images. Only fall back to the release tag if main fails.
 TMP_DIR=".roo/tmp/release-notes"
 CHANGELOG_TAG_FILE="$TMP_DIR/CHANGELOG_vX.Y.Z.md"
 SECTION_FILE="$TMP_DIR/CHANGELOG_section_vX.Y.Z.md"
-# Try tag first
-if gh api "repos/RooCodeInc/Roo-Code/contents/CHANGELOG.md?ref=vX.Y.Z" --jq '.content' >/tmp/chlog64.txt 2>/dev/null; then
+# Try main first (has retroactively-added hero images)
+if gh api "repos/RooCodeInc/Roo-Code/contents/CHANGELOG.md" --jq '.content' >/tmp/chlog64.txt 2>/dev/null; then
   base64 -D </tmp/chlog64.txt > "$CHANGELOG_TAG_FILE" || true
-# Fallback to main
-elif gh api "repos/RooCodeInc/Roo-Code/contents/CHANGELOG.md" --jq '.content' >/tmp/chlog64.txt 2>/dev/null; then
+# Fallback to tag if main fails
+elif gh api "repos/RooCodeInc/Roo-Code/contents/CHANGELOG.md?ref=vX.Y.Z" --jq '.content' >/tmp/chlog64.txt 2>/dev/null; then
   base64 -D </tmp/chlog64.txt > "$CHANGELOG_TAG_FILE" || true
 else
   : > "$CHANGELOG_TAG_FILE"
 fi
 # Extract the vX.Y.Z section if present
+# CRITICAL: If the version header is not found, create an EMPTY section file.
+# Do NOT fall back to the entire changelog—that would pull images from other versions.
 if [ -s "$CHANGELOG_TAG_FILE" ]; then
   START_LINE=$(grep -nE '^[#]{2,3}[[:space:]]*\[?v?X\.Y\.Z\]?' "$CHANGELOG_TAG_FILE" | head -n1 | cut -d: -f1 || true)
   if [ -n "${START_LINE:-}" ]; then
@@ -249,38 +253,80 @@ if [ -s "$CHANGELOG_TAG_FILE" ]; then
       tail -n +"$START_LINE" "$CHANGELOG_TAG_FILE" > "$SECTION_FILE"
     fi
   else
-    cp "$CHANGELOG_TAG_FILE" "$SECTION_FILE"
+    # Version header not found—create empty section to avoid pulling images from other versions
+    : > "$SECTION_FILE"
   fi
 else
   : > "$SECTION_FILE"
 fi
           ]]></fetch_changelog>
           <extract_candidates><![CDATA[
-# Build candidate list from both the release body and extracted changelog section (absolute and relative paths)
+# Build candidate list ONLY from the extracted changelog section for the target version.
+# Do NOT extract from the full release body—it often contains the entire changelog,
+# which would pull images from unrelated versions.
 CANDIDATES_FILE=".roo/tmp/release-notes/image_candidates_vX.Y.Z.txt"
+SECTION_FILE=".roo/tmp/release-notes/CHANGELOG_section_vX.Y.Z.md"
 : > "$CANDIDATES_FILE"
 
-# From release body markdown images (absolute or relative)
-grep -Eo '!\[[^]]*\]\(([^)]+)\)' .roo/tmp/release-notes/changelog_vX.Y.Z.md 2>/dev/null \
-  | sed -E 's/.*\(([^)]+)\).*/\1/' | grep -Ei '\.(png|jpe?g|gif|webp)
+# From CHANGELOG section markdown images (absolute or relative)
+grep -Eo '!\[[^]]*\]\(([^)]+)\)' "$SECTION_FILE" 2>/dev/null \
+  | sed -E 's/.*\(([^)]+)\).*/\1/' | grep -Ei '\.(png|jpe?g|gif|webp)' >> "$CANDIDATES_FILE" || true
+
+# From CHANGELOG section bare URLs (absolute or relative)
+grep -Eo 'https?://[^ )]+' "$SECTION_FILE" 2>/dev/null | grep -Ei '\.(png|jpe?g|gif|webp)' >> "$CANDIDATES_FILE" || true
+grep -Eo '(/[^ )]+|[A-Za-z0-9_./-]+)\.(png|jpe?g|gif|webp)' "$SECTION_FILE" 2>/dev/null >> "$CANDIDATES_FILE" || true
+
+# Deduplicate
+if [ -s "$CANDIDATES_FILE" ]; then
+  sort -u "$CANDIDATES_FILE" > "$CANDIDATES_FILE.tmp" && mv "$CANDIDATES_FILE.tmp" "$CANDIDATES_FILE"
+fi
+          ]]></extract_candidates>
+        </commands>
+        <output>
+          <file>.roo/tmp/release-notes/image_candidates_v[version].txt</file>
+          <content>One URL or relative path per line; may be empty if no images present</content>
+        </output>
+      </step>
 
       <step number="1b">
-        <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
+        <action>Resolve hero image from discovered candidates, falling back to social-share when none exist</action>
+        <command><![CDATA[
 VERSION="X.Y.Z"
+CANDIDATES_FILE=".roo/tmp/release-notes/image_candidates_v$VERSION.txt"
+FRONTMATTER_FILE=".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
+
+# If no candidates were discovered, skip download entirely and use social-share
+if [ ! -s "$CANDIDATES_FILE" ]; then
+  mkdir -p "$(dirname "$FRONTMATTER_FILE")"
+  echo "/img/social-share.jpg" > "$FRONTMATTER_FILE"
+  exit 0
+fi
+
+# Try the first candidate URL/path as the hero image source
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
-RAW_URL="https://raw.githubusercontent.com/RooCodeInc/Roo-Code/main/releases/$VERSION-release.png"
-curl -L "$RAW_URL" -o "$OUT" || true
-if [ -s "$OUT" ]; then
-  echo "/img/v$VERSION/v$VERSION.png" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
+SRC="$(head -n1 "$CANDIDATES_FILE")"
+
+# If SRC is a relative docs path, prefix it with the raw GitHub base for Roo-Code
+if echo "$SRC" | grep -qE '^(https?://)'; then
+  URL="$SRC"
 else
-  echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
+  # Treat as repository-relative path; adjust as needed if release assets move
+  URL="https://raw.githubusercontent.com/RooCodeInc/Roo-Code/main/$SRC"
 fi
-]]></command>
+
+curl -L "$URL" -o "$OUT" || true
+if [ -s "$OUT" ]; then
+  echo "/img/v$VERSION/v$VERSION.png" > "$FRONTMATTER_FILE"
+else
+  echo "/img/social-share.jpg" > "$FRONTMATTER_FILE"
+fi
+        ]]></command>
         <notes>
-          - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
-          - Prefer PNG when multiple candidates are present
+          - Skip hero image download entirely when no candidates were discovered; default to /img/social-share.jpg
+          - When candidates exist, attempt to download the first one and persist it as /img/v$VERSION/v$VERSION.png
+          - If download fails or the file is empty, fall back to /img/social-share.jpg
+          - Prefer PNG when multiple candidates are present (candidates list should already be filtered/ordered)
         </notes>
       </step>
 
@@ -294,8 +340,24 @@ fi
         <parsing>
           <regex>Detect PR references as: /#(\d{1,7})/g</regex>
           <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
+  Purpose: Count changelog bullets without explicit PR numbers as "referenced" when they confidently map to a PR.
+  Matching algorithm:
+  - Normalize both bullet text and PR titles:
+    - lowercase; remove punctuation; strip prefixes like "fix:", "feat:", "add:", "improve:", "chore:", "refactor:"
+    - remove parentheticals such as "(thanks @user!)", "(PR by @user)", "(#1234 ...)"
+    - collapse whitespace
+  - Tokenize and compute token-overlap score = |intersection(tokens)| / |union(tokens)|
+  - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
+  - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
+  Confidence thresholds:
+  - score &gt;= 0.65 (after boosts) -&gt; linked (confident). Treat as changelog-referenced.
+  - 0.45 &lt;= score &lt; 0.65 OR multiple candidates within 0.05 -&gt; ambiguous (needs review)
+  - score &lt; 0.45 -&gt; unlinked
+  Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score &gt;= 0.50 (confidence="author-boost")
+  Implementation notes:
+  - Match only against PRs fetched for the version's date window
+  - Persist mapping bullet_text -> { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
           </heuristics>
         </parsing>
       </step>
@@ -327,6 +389,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
 </todos>
 </new_task>
           ]]></spawn_subtask>
+        </commands>
       </step>
       
       <step number="2b">
@@ -376,10 +439,10 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
         <action>Iteratively review excluded PRs</action>
         <loop>
           For each PR in the excluded set:
-          - Show title, author, brief labels, and a 1–2 sentence user-impact summary
+          - Show title, author, brief labels, and a 1-2 sentence user-impact summary
           - Ask: include this PR?
           - Options: "Yes, include this PR" or "No, skip this PR"
-          - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
+          - Build the final inclusion set as (in_changelog U user_selected_inclusions)
         </loop>
         <template><![CDATA[
 <ask_followup_question>
@@ -405,7 +468,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
         </inputs>
         <precondition>
           - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
-          - Subtask provenance required: All PR analysis entries MUST contain the marker '<!-- generated-by-subtask: true -->'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
+          - Subtask provenance required: All PR analysis entries MUST contain the marker '&lt;!-- generated-by-subtask: true --&gt;'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
         </precondition>
         <filtering>
           Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
@@ -417,7 +480,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
       <step number="2">
         <action>Confirm feature highlighting with user</action>
         <tool>ask_followup_question</tool>
-        <template><![CDATA[
+        <template>
 I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 
 **Major Features:**
@@ -428,7 +491,7 @@ I've analyzed all PRs for v[VERSION]. Here are the changes I found:
 **Other Changes:** [COUNT] items
 
 Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
+        </template>
         <gating>
           <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
           <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
@@ -494,1460 +557,105 @@ Which features should I highlight with expanded sections in the release notes?
 
   <special_workflows>
     <workflow name="discord_only">
-      <description>Generate Discord format from existing release files</description>
+      <description>Generate Discord format from existing release files, preserving original structure</description>
+      <core_principle priority="critical">
+        Preserve original headings and section structure from source docs exactly.
+        Do NOT rename, merge, or reorganize sections.
+      </core_principle>
       <transformations>
-        - Remove PR links and numbers
+        - Remove PR links and numbers from all content
         - Convert /path to https://docs.roocode.com/path
-        - Convert "* " list bullets to "• " bullets
+        - Convert "* " list bullets to "- " bullets
+        - Remove inline hero images
         - Add footer link with markdown format
-        - Handle compression if requested
         - Wrap entire output in markdown code block
       </transformations>
       <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z Release Notes</rule>
-        <rule>Include summary in intro sentence listing key features</rule>
-        <rule>Use "Feature Highlights" instead of "Major Features"</rule>
-        <rule>Never use the word "powerful"</rule>
+        <rule>Title format: # Roo Code X.Y.Z Release Updates (no emoji)</rule>
+        <rule>Preserve all section headings EXACTLY as in source docs</rule>
+        <rule>Preserve section order EXACTLY as in source docs</rule>
+        <rule>Copy all bullet points exactly (only change * to -)</rule>
         <rule>No version numbers in body text (only header/footer)</rule>
         <rule>No "Happy coding!" or similar closings</rule>
-        <rule>Footer: 📚 **Full Release Notes** [vX.Y.Z](link)</rule>
+        <rule>Footer: See full release notes [vX.Y.Z](link)</rule>
       </formatting_rules>
       <output>Formatted text wrapped in ```markdown code block (no files created)</output>
     </workflow>
 
     <workflow name="discord_combined">
-      <description>Generate combined Discord format from multiple release files</description>
+      <description>Generate combined Discord format from multiple release files, preserving original structure</description>
+      <core_principle priority="critical">
+        Preserve original headings and section structure from source docs exactly.
+        Merge content from same-named sections across versions.
+      </core_principle>
       <steps>
         <step>Read all specified release note files</step>
-        <step>Merge and deduplicate features across versions</step>
-        <step>Create unified summary sentence</step>
-        <step>Apply Discord formatting rules</step>
+        <step>Preserve all section headings exactly as they appear</step>
+        <step>Merge content from same-named sections across versions</step>
+        <step>Apply minimal Discord transformations</step>
       </steps>
       <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z-X.Y.Z Release Updates</rule>
-        <rule>Intro sentence summarizes all key features from all versions</rule>
-        <rule>Combine similar sections across versions</rule>
+        <rule>Title format: # Roo Code X.Y.Z-X.Y.Z Release Updates (no emoji)</rule>
+        <rule>Preserve all section headings EXACTLY as in source docs</rule>
         <rule>Footer with links to each version: [vX.Y.Z](link) | [vX.Y.Z](link)</rule>
         <rule>Wrap entire output in ```markdown code block</rule>
       </formatting_rules>
       <output>Combined formatted text (no files created)</output>
     </workflow>
 
-
-    <workflow name="latest">
-      <description>Auto-detect missing versions</description>
-      <steps>
-        <step>List existing docs files in docs/update-notes</step>
-        <step>Get recent releases from GitHub with full details</step>
-        <step>Identify missing versions (releases without docs)</step>
-        <step>Ask which to process</step>
-      </steps>
-      <commands>
-        <get_existing_docs><![CDATA[
-# Get existing documentation files
-ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
-        
-        <get_releases_with_details><![CDATA[
-# Get recent releases with full details in JSON array
-echo "["; first=1; \
-for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
-  if [ $first -eq 0 ]; then echo ","; fi
-  gh release view "$tag" --repo RooCodeInc/Roo-Code --json tagName,targetCommitish,publishedAt
-  first=0
-done; \
-echo "]"
-        ]]></get_releases_with_details>
-      </commands>
-      <process>
-        Compare the release list with existing docs to identify missing versions.
-        Present the missing versions with their publish dates for user selection.
-      </process>
-      <handoff>After the user selects versions to process, use the simplified PR extraction for each selected version</handoff>
-    </workflow>
-  </special_workflows>
-
-  <simplified_pr_extraction_guide>
-    <overview>
-      The PR extraction uses release timestamps to find all PRs merged between releases.
-      This is simple, reliable, and captures all changes in a single command.
-    </overview>
-    
-    <the_command><![CDATA[
-# Replace X.Y.Z with the actual version number
-TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
-END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
-START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,publishedAt --jq '[.[]|{tag:.tagName,at:.publishedAt}]|sort_by(.at)|(map(.tag)|index("'"$TAG"'")) as $i | .[($i-1)].at'); \
-gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
-  --json number,title,author,url,mergedAt \
-  --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
-    
-    <what_it_does>
-      1. Gets the release timestamp for your version
-      2. Finds the previous release's timestamp
-      3. Fetches ALL PRs merged between those timestamps
-      4. Returns them sorted by merge date with full metadata
-    </what_it_does>
-  </simplified_pr_extraction_guide>
-
-  <critical_rules>
-    <rule priority="CRITICAL">
-      Date format is YYYY-MM-DD (ISO 8601) where MM is month (01-12)
-    </rule>
-    <rule priority="CRITICAL">
-      Parent task creates temp files, subtasks only append
-    </rule>
-    <rule priority="CRITICAL">
-      For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
-    </rule>
-    <rule priority="CRITICAL">
-      Use the simplified PR extraction command for consistent results
-    </rule>
-    <rule priority="HIGH">
-      Always acknowledge PR author AND issue reporter
-    </rule>
-    <rule priority="HIGH">
-      Focus on user benefits, not technical implementation
-    </rule>
-    <rule priority="HIGH">
-      QOL Improvements section MUST come before Bug Fixes
-    </rule>
-  </critical_rules>
-</workflow_instructions> >> "$CANDIDATES_FILE" || true
-
-# From release body bare URLs (absolute or relative)
-grep -Eo 'https?://[^ )]+' .roo/tmp/release-notes/changelog_vX.Y.Z.md 2>/dev/null | grep -Ei '\.(png|jpe?g|gif|webp)
-
-      <step number="1b">
-        <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
-VERSION="X.Y.Z"
-mkdir -p "static/img/v$VERSION"
-OUT="static/img/v$VERSION/v$VERSION.png"
-RAW_URL="https://raw.githubusercontent.com/RooCodeInc/Roo-Code/main/releases/$VERSION-release.png"
-curl -L "$RAW_URL" -o "$OUT" || true
-if [ -s "$OUT" ]; then
-  echo "/img/v$VERSION/v$VERSION.png" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-else
-  echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-fi
-]]></command>
-        <notes>
-          - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
-          - Prefer PNG when multiple candidates are present
-        </notes>
-      </step>
-
-      <step number="2">
-        <action>Extract version section lines from changelog_source</action>
-        <details>
-          If using Release body: treat the entire body as the v[VERSION] section.
-          If using CHANGELOG.md: isolate the v[VERSION] section by heading match:
-          - Headings commonly appear as "## vX.Y.Z", "## X.Y.Z", or "## [X.Y.Z]".
-        </details>
-        <parsing>
-          <regex>Detect PR references as: /#(\d{1,7})/g</regex>
-          <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
-        </parsing>
-      </step>
-      
-      <step number="2a">
-        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list and spawn analysis subtasks</action>
-        <details>
-          - Identify referenced PR numbers from step 2 that are missing from .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-          - For each missing PR, fetch details and create a new investigation subtask (same pattern as pr_processing) to append analysis to temp_pr_analysis_v[version].md
-          - Mark these as out_of_range if their mergedAt is outside the computed date window
-          - Wait for all spawned subtasks to complete before proceeding
-        </details>
-        <commands>
-          <fetch><![CDATA[
-# For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
-gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
-<new_task>
-<mode>release-notes-writer</mode>
-<message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
-<todos>
-[ ] Fetch PR #[NUMBER] details using gh pr view --repo RooCodeInc/Roo-Code
-[ ] Extract linked issues from PR body
-[ ] Get issue details for each linked issue
-[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
-[ ] Identify documentation needs
-[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-</todos>
-</new_task>
-          ]]></spawn_subtask>
-      </step>
-      
-      <step number="2b">
-        <action>Detect out-of-range referenced PRs</action>
-        <output>
-          <metric name="out_of_range_count">Number of referenced PRs with mergedAt outside the YYYY-MM-DD..YYYY-MM-DD window</metric>
-        </output>
-      </step>
-      
-      <step number="3">
-        <action>Partition PRs using changelog</action>
-        <result>
-          <in_changelog>PRs explicitly referenced or confidently matched to changelog lines</in_changelog>
-          <excluded>PRs not referenced or ambiguous</excluded>
-        </result>
-        <analysis>
-          Provide a brief summary:
-          - Included: [IN_COUNT] PRs
-          - Excluded: [EX_COUNT] PRs
-          Possible reasons for exclusion:
-          - Not mentioned in changelog
-          - Combined under a meta PR
-          - Documentation-only or infra work
-          - Outside computed date window
-          - Title did not match any changelog line
-        </analysis>
-      </step>
-
-      <step number="4">
-        <action>Ask for inclusion policy</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
-<follow_up>
-<suggest>Only include the PRs referenced in the changelog</suggest>
-<suggest>Include all PRs from the date range</suggest>
-<suggest>Review each excluded PR one by one so I can choose</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <critical>Do not proceed until one of the provided options is selected.</critical>
-      </step>
-
-      <step number="5" optional="true">
-        <when>User selects per-PR review</when>
-        <action>Iteratively review excluded PRs</action>
-        <loop>
-          For each PR in the excluded set:
-          - Show title, author, brief labels, and a 1–2 sentence user-impact summary
-          - Ask: include this PR?
-          - Options: "Yes, include this PR" or "No, skip this PR"
-          - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
-        </loop>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
-<follow_up>
-<suggest>Yes, include this PR</suggest>
-<suggest>No, skip this PR</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <completion>After the loop, proceed with the finalized PR set.</completion>
-      </step>
-      
-      <handoff>Proceed to feature selection using the finalized PR set. Persist included/excluded lists to .roo/tmp/release-notes/temp_pr_inclusion_v[version].json for downstream filtering.</handoff>
-    </phase>
-
-    <phase name="compilation">
-      <step number="1">
-        <action>Read and organize PR findings (filtered to finalized inclusion set)</action>
-        <inputs>
-          <file>.roo/tmp/release-notes/temp_pr_analysis_v[version].md</file>
-          <file optional="true">.roo/tmp/release-notes/temp_pr_inclusion_v[version].json</file>
-        </inputs>
-        <precondition>
-          - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
-          - Subtask provenance required: All PR analysis entries MUST contain the marker '<!-- generated-by-subtask: true -->'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
-        </precondition>
-        <filtering>
-          Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
-        </filtering>
-        <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
-        <critical>QOL Improvements MUST come before Bug Fixes</critical>
-      </step>
-      
-      <step number="2">
-        <action>Confirm feature highlighting with user</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-I've analyzed all PRs for v[VERSION]. Here are the changes I found:
-
-**Major Features:**
-[List major features with brief descriptions]
-
-**Bug Fixes:** [COUNT] fixes
-**QOL Improvements:** [COUNT] improvements
-**Other Changes:** [COUNT] items
-
-Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
-        <gating>
-          <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
-          <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
-        </gating>
-        <critical>Must get explicit confirmation before writing notes; see user_interactions.feature_selection.gating_rules</critical>
-      </step>
-      
-      <step number="3">
-        <action>Create release notes file</action>
-        <format>
-          For patch versions (X.Y.Z): docs/update-notes/vX.Y.Z.mdx
-          For minor/major summaries (X.Y): docs/update-notes/vX.Y.mdx
-        </format>
-        <frontmatter_image>
-          <source>.roo/tmp/release-notes/frontmatter_image_v[version].txt</source>
-          <behavior>
-            - If the source file exists and starts with "/img/", set frontmatter "image" to that value
-            - Otherwise set "image" to /img/social-share.jpg
-          </behavior>
-        </frontmatter_image>
-      </step>
-      
-      <step number="4">
-        <action>For patch releases: Get user confirmation</action>
-        <critical>
-          Do NOT update combined notes until user confirms patch notes are final
-        </critical>
-      </step>
-      
-      <step number="5">
-        <action>Update documentation indexes</action>
-        <files>
-          - index.md (chronological list)
-          - sidebars.ts (navigation)
-          - Combined notes for patch releases (ONLY after confirmation)
-        </files>
-      </step>
-      
-      <step number="6">
-        <action>Create documentation update task</action>
-        <when>If any documentation flags were identified</when>
-        <tool>new_task with mode="documentation-writer"</tool>
-      </step>
-      <step number="7">
-        <action>Cleanup temporary files</action>
-        <details>Delete .roo/tmp/release-notes/* (temp_pr_analysis_v[version].md, temp_pr_list_v[version].md, temp_pr_inclusion_v[version].json) after notes are finalized.</details>
-      </step>
-    </phase>
-  </main_workflow>
-
-  <special_workflows>
-    <workflow name="discord_only">
-      <description>Generate Discord format from existing release files</description>
-      <transformations>
-        - Remove PR links and numbers
-        - Convert /path to https://docs.roocode.com/path
-        - Convert "* " list bullets to "• " bullets
-        - Add footer link with markdown format
-        - Handle compression if requested
-        - Wrap entire output in markdown code block
-      </transformations>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z Release Notes</rule>
-        <rule>Include summary in intro sentence listing key features</rule>
-        <rule>Use "Feature Highlights" instead of "Major Features"</rule>
-        <rule>Never use the word "powerful"</rule>
-        <rule>No version numbers in body text (only header/footer)</rule>
-        <rule>No "Happy coding!" or similar closings</rule>
-        <rule>Footer: 📚 **Full Release Notes** [vX.Y.Z](link)</rule>
-      </formatting_rules>
-      <output>Formatted text wrapped in ```markdown code block (no files created)</output>
-    </workflow>
-
-    <workflow name="discord_combined">
-      <description>Generate combined Discord format from multiple release files</description>
-      <steps>
-        <step>Read all specified release note files</step>
-        <step>Merge and deduplicate features across versions</step>
-        <step>Create unified summary sentence</step>
-        <step>Apply Discord formatting rules</step>
-      </steps>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z-X.Y.Z Release Updates</rule>
-        <rule>Intro sentence summarizes all key features from all versions</rule>
-        <rule>Combine similar sections across versions</rule>
-        <rule>Footer with links to each version: [vX.Y.Z](link) | [vX.Y.Z](link)</rule>
-        <rule>Wrap entire output in ```markdown code block</rule>
-      </formatting_rules>
-      <output>Combined formatted text (no files created)</output>
-    </workflow>
-
-
-    <workflow name="latest">
-      <description>Auto-detect missing versions</description>
-      <steps>
-        <step>List existing docs files in docs/update-notes</step>
-        <step>Get recent releases from GitHub with full details</step>
-        <step>Identify missing versions (releases without docs)</step>
-        <step>Ask which to process</step>
-      </steps>
-      <commands>
-        <get_existing_docs><![CDATA[
-# Get existing documentation files
-ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
-        
-        <get_releases_with_details><![CDATA[
-# Get recent releases with full details in JSON array
-echo "["; first=1; \
-for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
-  if [ $first -eq 0 ]; then echo ","; fi
-  gh release view "$tag" --repo RooCodeInc/Roo-Code --json tagName,targetCommitish,publishedAt
-  first=0
-done; \
-echo "]"
-        ]]></get_releases_with_details>
-      </commands>
-      <process>
-        Compare the release list with existing docs to identify missing versions.
-        Present the missing versions with their publish dates for user selection.
-      </process>
-      <handoff>After the user selects versions to process, use the simplified PR extraction for each selected version</handoff>
-    </workflow>
-  </special_workflows>
-
-  <simplified_pr_extraction_guide>
-    <overview>
-      The PR extraction uses release timestamps to find all PRs merged between releases.
-      This is simple, reliable, and captures all changes in a single command.
-    </overview>
-    
-    <the_command><![CDATA[
-# Replace X.Y.Z with the actual version number
-TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
-END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
-START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,publishedAt --jq '[.[]|{tag:.tagName,at:.publishedAt}]|sort_by(.at)|(map(.tag)|index("'"$TAG"'")) as $i | .[($i-1)].at'); \
-gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
-  --json number,title,author,url,mergedAt \
-  --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
-    
-    <what_it_does>
-      1. Gets the release timestamp for your version
-      2. Finds the previous release's timestamp
-      3. Fetches ALL PRs merged between those timestamps
-      4. Returns them sorted by merge date with full metadata
-    </what_it_does>
-  </simplified_pr_extraction_guide>
-
-  <critical_rules>
-    <rule priority="CRITICAL">
-      Date format is YYYY-MM-DD (ISO 8601) where MM is month (01-12)
-    </rule>
-    <rule priority="CRITICAL">
-      Parent task creates temp files, subtasks only append
-    </rule>
-    <rule priority="CRITICAL">
-      For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
-    </rule>
-    <rule priority="CRITICAL">
-      Use the simplified PR extraction command for consistent results
-    </rule>
-    <rule priority="HIGH">
-      Always acknowledge PR author AND issue reporter
-    </rule>
-    <rule priority="HIGH">
-      Focus on user benefits, not technical implementation
-    </rule>
-    <rule priority="HIGH">
-      QOL Improvements section MUST come before Bug Fixes
-    </rule>
-  </critical_rules>
-</workflow_instructions> >> "$CANDIDATES_FILE" || true
-grep -Eo '(/[^ )]+|[A-Za-z0-9_./-]+)\.(png|jpe?g|gif|webp)' .roo/tmp/release-notes/changelog_vX.Y.Z.md 2>/dev/null >> "$CANDIDATES_FILE" || true
-
-# From CHANGELOG section markdown images (absolute or relative)
-grep -Eo '!\[[^]]*\]\(([^)]+)\)' .roo/tmp/release-notes/CHANGELOG_section_vX.Y.Z.md 2>/dev/null \
-  | sed -E 's/.*\(([^)]+)\).*/\1/' | grep -Ei '\.(png|jpe?g|gif|webp)
-
-      <step number="1b">
-        <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
-VERSION="X.Y.Z"
-mkdir -p "static/img/v$VERSION"
-OUT="static/img/v$VERSION/v$VERSION.png"
-RAW_URL="https://raw.githubusercontent.com/RooCodeInc/Roo-Code/main/releases/$VERSION-release.png"
-curl -L "$RAW_URL" -o "$OUT" || true
-if [ -s "$OUT" ]; then
-  echo "/img/v$VERSION/v$VERSION.png" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-else
-  echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-fi
-]]></command>
-        <notes>
-          - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
-          - Prefer PNG when multiple candidates are present
-        </notes>
-      </step>
-
-      <step number="2">
-        <action>Extract version section lines from changelog_source</action>
-        <details>
-          If using Release body: treat the entire body as the v[VERSION] section.
-          If using CHANGELOG.md: isolate the v[VERSION] section by heading match:
-          - Headings commonly appear as "## vX.Y.Z", "## X.Y.Z", or "## [X.Y.Z]".
-        </details>
-        <parsing>
-          <regex>Detect PR references as: /#(\d{1,7})/g</regex>
-          <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
-        </parsing>
-      </step>
-      
-      <step number="2a">
-        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list and spawn analysis subtasks</action>
-        <details>
-          - Identify referenced PR numbers from step 2 that are missing from .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-          - For each missing PR, fetch details and create a new investigation subtask (same pattern as pr_processing) to append analysis to temp_pr_analysis_v[version].md
-          - Mark these as out_of_range if their mergedAt is outside the computed date window
-          - Wait for all spawned subtasks to complete before proceeding
-        </details>
-        <commands>
-          <fetch><![CDATA[
-# For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
-gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
-<new_task>
-<mode>release-notes-writer</mode>
-<message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
-<todos>
-[ ] Fetch PR #[NUMBER] details using gh pr view --repo RooCodeInc/Roo-Code
-[ ] Extract linked issues from PR body
-[ ] Get issue details for each linked issue
-[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
-[ ] Identify documentation needs
-[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-</todos>
-</new_task>
-          ]]></spawn_subtask>
-      </step>
-      
-      <step number="2b">
-        <action>Detect out-of-range referenced PRs</action>
-        <output>
-          <metric name="out_of_range_count">Number of referenced PRs with mergedAt outside the YYYY-MM-DD..YYYY-MM-DD window</metric>
-        </output>
-      </step>
-      
-      <step number="3">
-        <action>Partition PRs using changelog</action>
-        <result>
-          <in_changelog>PRs explicitly referenced or confidently matched to changelog lines</in_changelog>
-          <excluded>PRs not referenced or ambiguous</excluded>
-        </result>
-        <analysis>
-          Provide a brief summary:
-          - Included: [IN_COUNT] PRs
-          - Excluded: [EX_COUNT] PRs
-          Possible reasons for exclusion:
-          - Not mentioned in changelog
-          - Combined under a meta PR
-          - Documentation-only or infra work
-          - Outside computed date window
-          - Title did not match any changelog line
-        </analysis>
-      </step>
-
-      <step number="4">
-        <action>Ask for inclusion policy</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
-<follow_up>
-<suggest>Only include the PRs referenced in the changelog</suggest>
-<suggest>Include all PRs from the date range</suggest>
-<suggest>Review each excluded PR one by one so I can choose</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <critical>Do not proceed until one of the provided options is selected.</critical>
-      </step>
-
-      <step number="5" optional="true">
-        <when>User selects per-PR review</when>
-        <action>Iteratively review excluded PRs</action>
-        <loop>
-          For each PR in the excluded set:
-          - Show title, author, brief labels, and a 1–2 sentence user-impact summary
-          - Ask: include this PR?
-          - Options: "Yes, include this PR" or "No, skip this PR"
-          - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
-        </loop>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
-<follow_up>
-<suggest>Yes, include this PR</suggest>
-<suggest>No, skip this PR</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <completion>After the loop, proceed with the finalized PR set.</completion>
-      </step>
-      
-      <handoff>Proceed to feature selection using the finalized PR set. Persist included/excluded lists to .roo/tmp/release-notes/temp_pr_inclusion_v[version].json for downstream filtering.</handoff>
-    </phase>
-
-    <phase name="compilation">
-      <step number="1">
-        <action>Read and organize PR findings (filtered to finalized inclusion set)</action>
-        <inputs>
-          <file>.roo/tmp/release-notes/temp_pr_analysis_v[version].md</file>
-          <file optional="true">.roo/tmp/release-notes/temp_pr_inclusion_v[version].json</file>
-        </inputs>
-        <precondition>
-          - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
-          - Subtask provenance required: All PR analysis entries MUST contain the marker '<!-- generated-by-subtask: true -->'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
-        </precondition>
-        <filtering>
-          Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
-        </filtering>
-        <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
-        <critical>QOL Improvements MUST come before Bug Fixes</critical>
-      </step>
-      
-      <step number="2">
-        <action>Confirm feature highlighting with user</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-I've analyzed all PRs for v[VERSION]. Here are the changes I found:
-
-**Major Features:**
-[List major features with brief descriptions]
-
-**Bug Fixes:** [COUNT] fixes
-**QOL Improvements:** [COUNT] improvements
-**Other Changes:** [COUNT] items
-
-Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
-        <gating>
-          <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
-          <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
-        </gating>
-        <critical>Must get explicit confirmation before writing notes; see user_interactions.feature_selection.gating_rules</critical>
-      </step>
-      
-      <step number="3">
-        <action>Create release notes file</action>
-        <format>
-          For patch versions (X.Y.Z): docs/update-notes/vX.Y.Z.mdx
-          For minor/major summaries (X.Y): docs/update-notes/vX.Y.mdx
-        </format>
-        <frontmatter_image>
-          <source>.roo/tmp/release-notes/frontmatter_image_v[version].txt</source>
-          <behavior>
-            - If the source file exists and starts with "/img/", set frontmatter "image" to that value
-            - Otherwise set "image" to /img/social-share.jpg
-          </behavior>
-        </frontmatter_image>
-      </step>
-      
-      <step number="4">
-        <action>For patch releases: Get user confirmation</action>
-        <critical>
-          Do NOT update combined notes until user confirms patch notes are final
-        </critical>
-      </step>
-      
-      <step number="5">
-        <action>Update documentation indexes</action>
-        <files>
-          - index.md (chronological list)
-          - sidebars.ts (navigation)
-          - Combined notes for patch releases (ONLY after confirmation)
-        </files>
-      </step>
-      
-      <step number="6">
-        <action>Create documentation update task</action>
-        <when>If any documentation flags were identified</when>
-        <tool>new_task with mode="documentation-writer"</tool>
-      </step>
-      <step number="7">
-        <action>Cleanup temporary files</action>
-        <details>Delete .roo/tmp/release-notes/* (temp_pr_analysis_v[version].md, temp_pr_list_v[version].md, temp_pr_inclusion_v[version].json) after notes are finalized.</details>
-      </step>
-    </phase>
-  </main_workflow>
-
-  <special_workflows>
-    <workflow name="discord_only">
-      <description>Generate Discord format from existing release files</description>
-      <transformations>
-        - Remove PR links and numbers
-        - Convert /path to https://docs.roocode.com/path
-        - Convert "* " list bullets to "• " bullets
-        - Add footer link with markdown format
-        - Handle compression if requested
-        - Wrap entire output in markdown code block
-      </transformations>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z Release Notes</rule>
-        <rule>Include summary in intro sentence listing key features</rule>
-        <rule>Use "Feature Highlights" instead of "Major Features"</rule>
-        <rule>Never use the word "powerful"</rule>
-        <rule>No version numbers in body text (only header/footer)</rule>
-        <rule>No "Happy coding!" or similar closings</rule>
-        <rule>Footer: 📚 **Full Release Notes** [vX.Y.Z](link)</rule>
-      </formatting_rules>
-      <output>Formatted text wrapped in ```markdown code block (no files created)</output>
-    </workflow>
-
-    <workflow name="discord_combined">
-      <description>Generate combined Discord format from multiple release files</description>
-      <steps>
-        <step>Read all specified release note files</step>
-        <step>Merge and deduplicate features across versions</step>
-        <step>Create unified summary sentence</step>
-        <step>Apply Discord formatting rules</step>
-      </steps>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z-X.Y.Z Release Updates</rule>
-        <rule>Intro sentence summarizes all key features from all versions</rule>
-        <rule>Combine similar sections across versions</rule>
-        <rule>Footer with links to each version: [vX.Y.Z](link) | [vX.Y.Z](link)</rule>
-        <rule>Wrap entire output in ```markdown code block</rule>
-      </formatting_rules>
-      <output>Combined formatted text (no files created)</output>
-    </workflow>
-
-
-    <workflow name="latest">
-      <description>Auto-detect missing versions</description>
-      <steps>
-        <step>List existing docs files in docs/update-notes</step>
-        <step>Get recent releases from GitHub with full details</step>
-        <step>Identify missing versions (releases without docs)</step>
-        <step>Ask which to process</step>
-      </steps>
-      <commands>
-        <get_existing_docs><![CDATA[
-# Get existing documentation files
-ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
-        
-        <get_releases_with_details><![CDATA[
-# Get recent releases with full details in JSON array
-echo "["; first=1; \
-for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
-  if [ $first -eq 0 ]; then echo ","; fi
-  gh release view "$tag" --repo RooCodeInc/Roo-Code --json tagName,targetCommitish,publishedAt
-  first=0
-done; \
-echo "]"
-        ]]></get_releases_with_details>
-      </commands>
-      <process>
-        Compare the release list with existing docs to identify missing versions.
-        Present the missing versions with their publish dates for user selection.
-      </process>
-      <handoff>After the user selects versions to process, use the simplified PR extraction for each selected version</handoff>
-    </workflow>
-  </special_workflows>
-
-  <simplified_pr_extraction_guide>
-    <overview>
-      The PR extraction uses release timestamps to find all PRs merged between releases.
-      This is simple, reliable, and captures all changes in a single command.
-    </overview>
-    
-    <the_command><![CDATA[
-# Replace X.Y.Z with the actual version number
-TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
-END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
-START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,publishedAt --jq '[.[]|{tag:.tagName,at:.publishedAt}]|sort_by(.at)|(map(.tag)|index("'"$TAG"'")) as $i | .[($i-1)].at'); \
-gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
-  --json number,title,author,url,mergedAt \
-  --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
-    
-    <what_it_does>
-      1. Gets the release timestamp for your version
-      2. Finds the previous release's timestamp
-      3. Fetches ALL PRs merged between those timestamps
-      4. Returns them sorted by merge date with full metadata
-    </what_it_does>
-  </simplified_pr_extraction_guide>
-
-  <critical_rules>
-    <rule priority="CRITICAL">
-      Date format is YYYY-MM-DD (ISO 8601) where MM is month (01-12)
-    </rule>
-    <rule priority="CRITICAL">
-      Parent task creates temp files, subtasks only append
-    </rule>
-    <rule priority="CRITICAL">
-      For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
-    </rule>
-    <rule priority="CRITICAL">
-      Use the simplified PR extraction command for consistent results
-    </rule>
-    <rule priority="HIGH">
-      Always acknowledge PR author AND issue reporter
-    </rule>
-    <rule priority="HIGH">
-      Focus on user benefits, not technical implementation
-    </rule>
-    <rule priority="HIGH">
-      QOL Improvements section MUST come before Bug Fixes
-    </rule>
-  </critical_rules>
-</workflow_instructions> >> "$CANDIDATES_FILE" || true
-
-# From CHANGELOG section bare URLs (absolute or relative)
-grep -Eo 'https?://[^ )]+' .roo/tmp/release-notes/CHANGELOG_section_vX.Y.Z.md 2>/dev/null | grep -Ei '\.(png|jpe?g|gif|webp)
-
-      <step number="1b">
-        <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
-VERSION="X.Y.Z"
-mkdir -p "static/img/v$VERSION"
-OUT="static/img/v$VERSION/v$VERSION.png"
-RAW_URL="https://raw.githubusercontent.com/RooCodeInc/Roo-Code/main/releases/$VERSION-release.png"
-curl -L "$RAW_URL" -o "$OUT" || true
-if [ -s "$OUT" ]; then
-  echo "/img/v$VERSION/v$VERSION.png" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-else
-  echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-fi
-]]></command>
-        <notes>
-          - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
-          - Prefer PNG when multiple candidates are present
-        </notes>
-      </step>
-
-      <step number="2">
-        <action>Extract version section lines from changelog_source</action>
-        <details>
-          If using Release body: treat the entire body as the v[VERSION] section.
-          If using CHANGELOG.md: isolate the v[VERSION] section by heading match:
-          - Headings commonly appear as "## vX.Y.Z", "## X.Y.Z", or "## [X.Y.Z]".
-        </details>
-        <parsing>
-          <regex>Detect PR references as: /#(\d{1,7})/g</regex>
-          <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
-        </parsing>
-      </step>
-      
-      <step number="2a">
-        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list and spawn analysis subtasks</action>
-        <details>
-          - Identify referenced PR numbers from step 2 that are missing from .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-          - For each missing PR, fetch details and create a new investigation subtask (same pattern as pr_processing) to append analysis to temp_pr_analysis_v[version].md
-          - Mark these as out_of_range if their mergedAt is outside the computed date window
-          - Wait for all spawned subtasks to complete before proceeding
-        </details>
-        <commands>
-          <fetch><![CDATA[
-# For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
-gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
-<new_task>
-<mode>release-notes-writer</mode>
-<message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
-<todos>
-[ ] Fetch PR #[NUMBER] details using gh pr view --repo RooCodeInc/Roo-Code
-[ ] Extract linked issues from PR body
-[ ] Get issue details for each linked issue
-[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
-[ ] Identify documentation needs
-[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-</todos>
-</new_task>
-          ]]></spawn_subtask>
-      </step>
-      
-      <step number="2b">
-        <action>Detect out-of-range referenced PRs</action>
-        <output>
-          <metric name="out_of_range_count">Number of referenced PRs with mergedAt outside the YYYY-MM-DD..YYYY-MM-DD window</metric>
-        </output>
-      </step>
-      
-      <step number="3">
-        <action>Partition PRs using changelog</action>
-        <result>
-          <in_changelog>PRs explicitly referenced or confidently matched to changelog lines</in_changelog>
-          <excluded>PRs not referenced or ambiguous</excluded>
-        </result>
-        <analysis>
-          Provide a brief summary:
-          - Included: [IN_COUNT] PRs
-          - Excluded: [EX_COUNT] PRs
-          Possible reasons for exclusion:
-          - Not mentioned in changelog
-          - Combined under a meta PR
-          - Documentation-only or infra work
-          - Outside computed date window
-          - Title did not match any changelog line
-        </analysis>
-      </step>
-
-      <step number="4">
-        <action>Ask for inclusion policy</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
-<follow_up>
-<suggest>Only include the PRs referenced in the changelog</suggest>
-<suggest>Include all PRs from the date range</suggest>
-<suggest>Review each excluded PR one by one so I can choose</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <critical>Do not proceed until one of the provided options is selected.</critical>
-      </step>
-
-      <step number="5" optional="true">
-        <when>User selects per-PR review</when>
-        <action>Iteratively review excluded PRs</action>
-        <loop>
-          For each PR in the excluded set:
-          - Show title, author, brief labels, and a 1–2 sentence user-impact summary
-          - Ask: include this PR?
-          - Options: "Yes, include this PR" or "No, skip this PR"
-          - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
-        </loop>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
-<follow_up>
-<suggest>Yes, include this PR</suggest>
-<suggest>No, skip this PR</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <completion>After the loop, proceed with the finalized PR set.</completion>
-      </step>
-      
-      <handoff>Proceed to feature selection using the finalized PR set. Persist included/excluded lists to .roo/tmp/release-notes/temp_pr_inclusion_v[version].json for downstream filtering.</handoff>
-    </phase>
-
-    <phase name="compilation">
-      <step number="1">
-        <action>Read and organize PR findings (filtered to finalized inclusion set)</action>
-        <inputs>
-          <file>.roo/tmp/release-notes/temp_pr_analysis_v[version].md</file>
-          <file optional="true">.roo/tmp/release-notes/temp_pr_inclusion_v[version].json</file>
-        </inputs>
-        <precondition>
-          - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
-          - Subtask provenance required: All PR analysis entries MUST contain the marker '<!-- generated-by-subtask: true -->'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
-        </precondition>
-        <filtering>
-          Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
-        </filtering>
-        <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
-        <critical>QOL Improvements MUST come before Bug Fixes</critical>
-      </step>
-      
-      <step number="2">
-        <action>Confirm feature highlighting with user</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-I've analyzed all PRs for v[VERSION]. Here are the changes I found:
-
-**Major Features:**
-[List major features with brief descriptions]
-
-**Bug Fixes:** [COUNT] fixes
-**QOL Improvements:** [COUNT] improvements
-**Other Changes:** [COUNT] items
-
-Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
-        <gating>
-          <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
-          <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
-        </gating>
-        <critical>Must get explicit confirmation before writing notes; see user_interactions.feature_selection.gating_rules</critical>
-      </step>
-      
-      <step number="3">
-        <action>Create release notes file</action>
-        <format>
-          For patch versions (X.Y.Z): docs/update-notes/vX.Y.Z.mdx
-          For minor/major summaries (X.Y): docs/update-notes/vX.Y.mdx
-        </format>
-        <frontmatter_image>
-          <source>.roo/tmp/release-notes/frontmatter_image_v[version].txt</source>
-          <behavior>
-            - If the source file exists and starts with "/img/", set frontmatter "image" to that value
-            - Otherwise set "image" to /img/social-share.jpg
-          </behavior>
-        </frontmatter_image>
-      </step>
-      
-      <step number="4">
-        <action>For patch releases: Get user confirmation</action>
-        <critical>
-          Do NOT update combined notes until user confirms patch notes are final
-        </critical>
-      </step>
-      
-      <step number="5">
-        <action>Update documentation indexes</action>
-        <files>
-          - index.md (chronological list)
-          - sidebars.ts (navigation)
-          - Combined notes for patch releases (ONLY after confirmation)
-        </files>
-      </step>
-      
-      <step number="6">
-        <action>Create documentation update task</action>
-        <when>If any documentation flags were identified</when>
-        <tool>new_task with mode="documentation-writer"</tool>
-      </step>
-      <step number="7">
-        <action>Cleanup temporary files</action>
-        <details>Delete .roo/tmp/release-notes/* (temp_pr_analysis_v[version].md, temp_pr_list_v[version].md, temp_pr_inclusion_v[version].json) after notes are finalized.</details>
-      </step>
-    </phase>
-  </main_workflow>
-
-  <special_workflows>
-    <workflow name="discord_only">
-      <description>Generate Discord format from existing release files</description>
-      <transformations>
-        - Remove PR links and numbers
-        - Convert /path to https://docs.roocode.com/path
-        - Convert "* " list bullets to "• " bullets
-        - Add footer link with markdown format
-        - Handle compression if requested
-        - Wrap entire output in markdown code block
-      </transformations>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z Release Notes</rule>
-        <rule>Include summary in intro sentence listing key features</rule>
-        <rule>Use "Feature Highlights" instead of "Major Features"</rule>
-        <rule>Never use the word "powerful"</rule>
-        <rule>No version numbers in body text (only header/footer)</rule>
-        <rule>No "Happy coding!" or similar closings</rule>
-        <rule>Footer: 📚 **Full Release Notes** [vX.Y.Z](link)</rule>
-      </formatting_rules>
-      <output>Formatted text wrapped in ```markdown code block (no files created)</output>
-    </workflow>
-
-    <workflow name="discord_combined">
-      <description>Generate combined Discord format from multiple release files</description>
-      <steps>
-        <step>Read all specified release note files</step>
-        <step>Merge and deduplicate features across versions</step>
-        <step>Create unified summary sentence</step>
-        <step>Apply Discord formatting rules</step>
-      </steps>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z-X.Y.Z Release Updates</rule>
-        <rule>Intro sentence summarizes all key features from all versions</rule>
-        <rule>Combine similar sections across versions</rule>
-        <rule>Footer with links to each version: [vX.Y.Z](link) | [vX.Y.Z](link)</rule>
-        <rule>Wrap entire output in ```markdown code block</rule>
-      </formatting_rules>
-      <output>Combined formatted text (no files created)</output>
-    </workflow>
-
-
-    <workflow name="latest">
-      <description>Auto-detect missing versions</description>
-      <steps>
-        <step>List existing docs files in docs/update-notes</step>
-        <step>Get recent releases from GitHub with full details</step>
-        <step>Identify missing versions (releases without docs)</step>
-        <step>Ask which to process</step>
-      </steps>
-      <commands>
-        <get_existing_docs><![CDATA[
-# Get existing documentation files
-ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
-        
-        <get_releases_with_details><![CDATA[
-# Get recent releases with full details in JSON array
-echo "["; first=1; \
-for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
-  if [ $first -eq 0 ]; then echo ","; fi
-  gh release view "$tag" --repo RooCodeInc/Roo-Code --json tagName,targetCommitish,publishedAt
-  first=0
-done; \
-echo "]"
-        ]]></get_releases_with_details>
-      </commands>
-      <process>
-        Compare the release list with existing docs to identify missing versions.
-        Present the missing versions with their publish dates for user selection.
-      </process>
-      <handoff>After the user selects versions to process, use the simplified PR extraction for each selected version</handoff>
-    </workflow>
-  </special_workflows>
-
-  <simplified_pr_extraction_guide>
-    <overview>
-      The PR extraction uses release timestamps to find all PRs merged between releases.
-      This is simple, reliable, and captures all changes in a single command.
-    </overview>
-    
-    <the_command><![CDATA[
-# Replace X.Y.Z with the actual version number
-TAG_INPUT="X.Y.Z"; TAG="v$(echo "$TAG_INPUT" | sed 's/^v//')"; \
-END=$(gh release view "$TAG" --repo RooCodeInc/Roo-Code --json publishedAt --jq '.publishedAt'); \
-START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,publishedAt --jq '[.[]|{tag:.tagName,at:.publishedAt}]|sort_by(.at)|(map(.tag)|index("'"$TAG"'")) as $i | .[($i-1)].at'); \
-gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
-  --json number,title,author,url,mergedAt \
-  --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
-    
-    <what_it_does>
-      1. Gets the release timestamp for your version
-      2. Finds the previous release's timestamp
-      3. Fetches ALL PRs merged between those timestamps
-      4. Returns them sorted by merge date with full metadata
-    </what_it_does>
-  </simplified_pr_extraction_guide>
-
-  <critical_rules>
-    <rule priority="CRITICAL">
-      Date format is YYYY-MM-DD (ISO 8601) where MM is month (01-12)
-    </rule>
-    <rule priority="CRITICAL">
-      Parent task creates temp files, subtasks only append
-    </rule>
-    <rule priority="CRITICAL">
-      For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
-    </rule>
-    <rule priority="CRITICAL">
-      Use the simplified PR extraction command for consistent results
-    </rule>
-    <rule priority="HIGH">
-      Always acknowledge PR author AND issue reporter
-    </rule>
-    <rule priority="HIGH">
-      Focus on user benefits, not technical implementation
-    </rule>
-    <rule priority="HIGH">
-      QOL Improvements section MUST come before Bug Fixes
-    </rule>
-  </critical_rules>
-</workflow_instructions> >> "$CANDIDATES_FILE" || true
-grep -Eo '(/[^ )]+|[A-Za-z0-9_./-]+)\.(png|jpe?g|gif|webp)' .roo/tmp/release-notes/CHANGELOG_section_vX.Y.Z.md 2>/dev/null >> "$CANDIDATES_FILE" || true
-
-# Deduplicate
-if [ -s "$CANDIDATES_FILE" ]; then
-  sort -u "$CANDIDATES_FILE" > "$CANDIDATES_FILE.tmp" && mv "$CANDIDATES_FILE.tmp" "$CANDIDATES_FILE"
-fi
-          ]]></extract_candidates>
-        </commands>
-        <output>
-          <file>.roo/tmp/release-notes/image_candidates_v[version].txt</file>
-          <content>One URL or relative path per line; may be empty if no images present</content>
-        </output>
-      </step>
-
-      <step number="1b">
-        <action>Download hero image via curl to static/img/v[VERSION]/v[VERSION].png and persist frontmatter image path</action>
-<command><![CDATA[
-VERSION="X.Y.Z"
-mkdir -p "static/img/v$VERSION"
-OUT="static/img/v$VERSION/v$VERSION.png"
-RAW_URL="https://raw.githubusercontent.com/RooCodeInc/Roo-Code/main/releases/$VERSION-release.png"
-curl -L "$RAW_URL" -o "$OUT" || true
-if [ -s "$OUT" ]; then
-  echo "/img/v$VERSION/v$VERSION.png" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-else
-  echo "/img/social-share.jpg" > ".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
-fi
-]]></command>
-        <notes>
-          - If curl fails or the URL is invalid, the persisted path will be /img/social-share.jpg
-          - Prefer PNG when multiple candidates are present
-        </notes>
-      </step>
-
-      <step number="2">
-        <action>Extract version section lines from changelog_source</action>
-        <details>
-          If using Release body: treat the entire body as the v[VERSION] section.
-          If using CHANGELOG.md: isolate the v[VERSION] section by heading match:
-          - Headings commonly appear as "## vX.Y.Z", "## X.Y.Z", or "## [X.Y.Z]".
-        </details>
-        <parsing>
-          <regex>Detect PR references as: /#(\d{1,7})/g</regex>
-          <heuristics>
-            - If a bullet has no explicit PR number, attempt fuzzy matching to PR titles
-            - If ambiguous, mark as "unlinked" and exclude by default pending user choice
-          </heuristics>
-        </parsing>
-      </step>
-      
-      <step number="2a">
-        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list and spawn analysis subtasks</action>
-        <details>
-          - Identify referenced PR numbers from step 2 that are missing from .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-          - For each missing PR, fetch details and create a new investigation subtask (same pattern as pr_processing) to append analysis to temp_pr_analysis_v[version].md
-          - Mark these as out_of_range if their mergedAt is outside the computed date window
-          - Wait for all spawned subtasks to complete before proceeding
-        </details>
-        <commands>
-          <fetch><![CDATA[
-# For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
-gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
-<new_task>
-<mode>release-notes-writer</mode>
-<message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md.</message>
-<todos>
-[ ] Fetch PR #[NUMBER] details using gh pr view --repo RooCodeInc/Roo-Code
-[ ] Extract linked issues from PR body
-[ ] Get issue details for each linked issue
-[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
-[ ] Identify documentation needs
-[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-</todos>
-</new_task>
-          ]]></spawn_subtask>
-      </step>
-      
-      <step number="2b">
-        <action>Detect out-of-range referenced PRs</action>
-        <output>
-          <metric name="out_of_range_count">Number of referenced PRs with mergedAt outside the YYYY-MM-DD..YYYY-MM-DD window</metric>
-        </output>
-      </step>
-      
-      <step number="3">
-        <action>Partition PRs using changelog</action>
-        <result>
-          <in_changelog>PRs explicitly referenced or confidently matched to changelog lines</in_changelog>
-          <excluded>PRs not referenced or ambiguous</excluded>
-        </result>
-        <analysis>
-          Provide a brief summary:
-          - Included: [IN_COUNT] PRs
-          - Excluded: [EX_COUNT] PRs
-          Possible reasons for exclusion:
-          - Not mentioned in changelog
-          - Combined under a meta PR
-          - Documentation-only or infra work
-          - Outside computed date window
-          - Title did not match any changelog line
-        </analysis>
-      </step>
-
-      <step number="4">
-        <action>Ask for inclusion policy</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Changelog alignment for v[VERSION]: [IN_COUNT] PRs referenced, [EX_COUNT] not referenced. How should I proceed?</question>
-<follow_up>
-<suggest>Only include the PRs referenced in the changelog</suggest>
-<suggest>Include all PRs from the date range</suggest>
-<suggest>Review each excluded PR one by one so I can choose</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <critical>Do not proceed until one of the provided options is selected.</critical>
-      </step>
-
-      <step number="5" optional="true">
-        <when>User selects per-PR review</when>
-        <action>Iteratively review excluded PRs</action>
-        <loop>
-          For each PR in the excluded set:
-          - Show title, author, brief labels, and a 1–2 sentence user-impact summary
-          - Ask: include this PR?
-          - Options: "Yes, include this PR" or "No, skip this PR"
-          - Build the final inclusion set as (in_changelog ∪ user_selected_inclusions)
-        </loop>
-        <template><![CDATA[
-<ask_followup_question>
-<question>Include PR #[NUMBER] - [TITLE]? Short analysis: [WHY IT MATTERS].</question>
-<follow_up>
-<suggest>Yes, include this PR</suggest>
-<suggest>No, skip this PR</suggest>
-</follow_up>
-</ask_followup_question>
-        ]]></template>
-        <completion>After the loop, proceed with the finalized PR set.</completion>
-      </step>
-      
-      <handoff>Proceed to feature selection using the finalized PR set. Persist included/excluded lists to .roo/tmp/release-notes/temp_pr_inclusion_v[version].json for downstream filtering.</handoff>
-    </phase>
-
-    <phase name="compilation">
-      <step number="1">
-        <action>Read and organize PR findings (filtered to finalized inclusion set)</action>
-        <inputs>
-          <file>.roo/tmp/release-notes/temp_pr_analysis_v[version].md</file>
-          <file optional="true">.roo/tmp/release-notes/temp_pr_inclusion_v[version].json</file>
-        </inputs>
-        <precondition>
-          - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
-          - Subtask provenance required: All PR analysis entries MUST contain the marker '<!-- generated-by-subtask: true -->'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
-        </precondition>
-        <filtering>
-          Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
-        </filtering>
-        <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
-        <critical>QOL Improvements MUST come before Bug Fixes</critical>
-      </step>
-      
-      <step number="2">
-        <action>Confirm feature highlighting with user</action>
-        <tool>ask_followup_question</tool>
-        <template><![CDATA[
-I've analyzed all PRs for v[VERSION]. Here are the changes I found:
-
-**Major Features:**
-[List major features with brief descriptions]
-
-**Bug Fixes:** [COUNT] fixes
-**QOL Improvements:** [COUNT] improvements
-**Other Changes:** [COUNT] items
-
-Which features should I highlight with expanded sections in the release notes?
-        ]]></template>
-        <gating>
-          <rule>Do not proceed until an explicit selection from the provided options is received.</rule>
-          <rule>On freeform responses, re-ask with reformulated options derived from the user's input until a provided option is chosen.</rule>
-        </gating>
-        <critical>Must get explicit confirmation before writing notes; see user_interactions.feature_selection.gating_rules</critical>
-      </step>
-      
-      <step number="3">
-        <action>Create release notes file</action>
-        <format>
-          For patch versions (X.Y.Z): docs/update-notes/vX.Y.Z.mdx
-          For minor/major summaries (X.Y): docs/update-notes/vX.Y.mdx
-        </format>
-        <frontmatter_image>
-          <source>.roo/tmp/release-notes/frontmatter_image_v[version].txt</source>
-          <behavior>
-            - If the source file exists and starts with "/img/", set frontmatter "image" to that value
-            - Otherwise set "image" to /img/social-share.jpg
-          </behavior>
-        </frontmatter_image>
-      </step>
-      
-      <step number="4">
-        <action>For patch releases: Get user confirmation</action>
-        <critical>
-          Do NOT update combined notes until user confirms patch notes are final
-        </critical>
-      </step>
-      
-      <step number="5">
-        <action>Update documentation indexes</action>
-        <files>
-          - index.md (chronological list)
-          - sidebars.ts (navigation)
-          - Combined notes for patch releases (ONLY after confirmation)
-        </files>
-      </step>
-      
-      <step number="6">
-        <action>Create documentation update task</action>
-        <when>If any documentation flags were identified</when>
-        <tool>new_task with mode="documentation-writer"</tool>
-      </step>
-      <step number="7">
-        <action>Cleanup temporary files</action>
-        <details>Delete .roo/tmp/release-notes/* (temp_pr_analysis_v[version].md, temp_pr_list_v[version].md, temp_pr_inclusion_v[version].json) after notes are finalized.</details>
-      </step>
-    </phase>
-  </main_workflow>
-
-  <special_workflows>
-    <workflow name="discord_only">
-      <description>Generate Discord format from existing release files and also produce Reddit variant</description>
-      <transformations>
-        - Remove PR links and numbers
-        - Convert /path to https://docs.roocode.com/path
-        - Convert "* " list bullets to "• " bullets
-        - Add footer link with markdown format
-        - Handle compression if requested
-        - Wrap entire output in markdown code block
-      </transformations>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z Release Notes</rule>
-        <rule>Include summary in intro sentence listing key features</rule>
-        <rule>Use "Feature Highlights" instead of "Major Features"</rule>
-        <rule>Never use the word "powerful"</rule>
-        <rule>No version numbers in body text (only header/footer)</rule>
-        <rule>No "Happy coding!" or similar closings</rule>
-        <rule>Footer: 📚 **Full Release Notes** [vX.Y.Z](link)</rule>
-      </formatting_rules>
-      <output>Formatted text wrapped in ```markdown code block (no files created)</output>
-    </workflow>
-
-    <workflow name="discord_combined">
-      <description>Generate combined Discord format from multiple release files</description>
-      <steps>
-        <step>Read all specified release note files</step>
-        <step>Merge and deduplicate features across versions</step>
-        <step>Create unified summary sentence</step>
-        <step>Apply Discord formatting rules</step>
-      </steps>
-      <formatting_rules>
-        <rule>Title format: # 🚀 Roo Code X.Y.Z-X.Y.Z Release Updates</rule>
-        <rule>Intro sentence summarizes all key features from all versions</rule>
-        <rule>Combine similar sections across versions</rule>
-        <rule>Footer with links to each version: [vX.Y.Z](link) | [vX.Y.Z](link)</rule>
-        <rule>Wrap entire output in ```markdown code block</rule>
-      </formatting_rules>
-      <output>Combined formatted text (no files created)</output>
-    </workflow>
-
-
-    <workflow name="latest">
-      <description>Auto-detect missing versions</description>
-      <steps>
-        <step>List existing docs files in docs/update-notes</step>
-        <step>Get recent releases from GitHub with full details</step>
-        <step>Identify missing versions (releases without docs)</step>
-        <step>Ask which to process</step>
-      </steps>
-      <commands>
-        <get_existing_docs><![CDATA[
-# Get existing documentation files
-ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
-        ]]></get_existing_docs>
-        
-        <get_releases_with_details><![CDATA[
-# Get recent releases with full details in JSON array
-echo "["; first=1; \
-for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
-  if [ $first -eq 0 ]; then echo ","; fi
-  gh release view "$tag" --repo RooCodeInc/Roo-Code --json tagName,targetCommitish,publishedAt
-  first=0
-done; \
-echo "]"
-        ]]></get_releases_with_details>
-      </commands>
-      <process>
-        Compare the release list with existing docs to identify missing versions.
-        Present the missing versions with their publish dates for user selection.
-      </process>
-      <handoff>After the user selects versions to process, use the simplified PR extraction for each selected version</handoff>
-    </workflow>
     <workflow name="reddit_only">
-      <description>Generate Reddit format from existing release files and also produce Discord variant</description>
-      <output>Formatted text (no files created)</output>
+      <description>Generate Reddit format from existing release files, preserving original structure</description>
+      <core_principle priority="critical">
+        Preserve original headings and section structure from source docs exactly.
+        Do NOT rename, merge, or reorganize sections.
+      </core_principle>
+      <transformations>
+        - Remove all PR links and numbers
+        - Convert /path to https://docs.roocode.com/path
+        - Convert "* " list bullets to "- " bullets
+        - Remove inline hero images
+        - Wrap entire output in markdown code block
+      </transformations>
+      <formatting_rules>
+        <rule>Title: Plain text with key features separated by pipes</rule>
+        <rule>Preserve all section headings EXACTLY as in source docs</rule>
+        <rule>Preserve section order EXACTLY as in source docs</rule>
+        <rule>No @everyone</rule>
+        <rule>Footer: See full release notes [vX.Y.Z](link)</rule>
+      </formatting_rules>
+      <output>Formatted text wrapped in ```markdown code block (no files created)</output>
+    </workflow>
+
+    <workflow name="latest">
+      <description>Auto-detect missing versions</description>
+      <steps>
+        <step>List existing docs files in docs/update-notes</step>
+        <step>Get recent releases from GitHub with full details</step>
+        <step>Identify missing versions (releases without docs)</step>
+        <step>Ask which to process</step>
+      </steps>
+      <commands>
+        <get_existing_docs><![CDATA[
+# Get existing documentation files
+ls docs/update-notes | grep -E '^v[0-9]+\.[0-9]+(\.[0-9]+)?\.(md|mdx)$' | sed -E 's/\.(md|mdx)$//'
+        ]]></get_existing_docs>
+        
+        <get_releases_with_details><![CDATA[
+# Get recent releases with full details in JSON array
+echo "["; first=1; \
+for tag in $(gh release list --repo RooCodeInc/Roo-Code --limit 20 --json tagName --jq '.[].tagName'); do
+  if [ $first -eq 0 ]; then echo ","; fi
+  gh release view "$tag" --repo RooCodeInc/Roo-Code --json tagName,targetCommitish,publishedAt
+  first=0
+done; \
+echo "]"
+        ]]></get_releases_with_details>
+      </commands>
+      <process>
+        Compare the release list with existing docs to identify missing versions.
+        Present the missing versions with their publish dates for user selection.
+      </process>
+      <handoff>After the user selects versions to process, use the simplified PR extraction for each selected version</handoff>
     </workflow>
   </special_workflows>
 
@@ -1965,7 +673,7 @@ START=$(gh release list --repo RooCodeInc/Roo-Code --limit 1000 --json tagName,p
 gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
   --json number,title,author,url,mergedAt \
   --jq 'map(select(.mergedAt >= "'"$START"'" and .mergedAt <= "'"$END"'")) | sort_by(.mergedAt)[] | [.number,.mergedAt,.author.login,.title,.url] | @tsv'
-        ]]></the_command>
+    ]]></the_command>
     
     <what_it_does>
       1. Gets the release timestamp for your version
@@ -1984,6 +692,10 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
     </rule>
     <rule priority="CRITICAL">
       For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
+      Even when the parent already has the PR number, title, description, or a user‑provided
+      summary list, it MUST still create and wait on the per‑PR subtask. These summaries are
+      insufficient for functional understanding of the change, discovery of linked issues, and
+      correct contributor attribution (PR authors and issue reporters).
     </rule>
     <rule priority="CRITICAL">
       Use the simplified PR extraction command for consistent results

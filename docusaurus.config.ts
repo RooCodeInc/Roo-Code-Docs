@@ -38,7 +38,16 @@ const config: Config = {
   projectName: 'Roo-Code-Docs',
 
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
+
+  // Custom fields for client-side access
+  customFields: {
+    intercomAppId: process.env.INTERCOM_APP_ID,
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -76,6 +85,7 @@ const config: Config = {
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
         docsRouteBasePath: "/",
+        indexBlog: false,
         searchContextByPaths: [
           { label: "Getting Started", path: "getting-started" },
           { label: "Basic Usage", path: "basic-usage" },
@@ -96,7 +106,7 @@ const config: Config = {
         "posthog-docusaurus",
         {
           apiKey: process.env.POSTHOG_API_KEY,
-          appUrl: "https://us.i.posthog.com",
+          appUrl: "https://ph.roocode.com",
           enableInDevelopment: true,
         },
       ],
@@ -245,10 +255,6 @@ const config: Config = {
             from: ['/features/tools/read-file'],
           },
           {
-            to: '/advanced-usage/available-tools/search-and-replace',
-            from: ['/features/tools/search-and-replace'],
-          },
-          {
             to: '/advanced-usage/available-tools/search-files',
             from: ['/features/tools/search-files'],
           },
@@ -287,8 +293,8 @@ const config: Config = {
     metadata: [
       {name: 'keywords', content: 'Roo Code, AI coding assistant, VS Code extension, autonomous coding agent, AI pair programmer, code generation, documentation'},
       {name: 'twitter:card', content: 'summary_large_image'},
-      {name: 'twitter:site', content: '@roo_code'},
-      {name: 'twitter:creator', content: '@roo_code'},
+      {name: 'twitter:site', content: '@roocode'},
+      {name: 'twitter:creator', content: '@roocode'},
       {property: 'og:type', content: 'website'},
       {property: 'og:locale', content: 'en_US'},
     ],

@@ -7,6 +7,8 @@ keywords:
   - Slack bot
   - AI planning
   - collaborative coding
+  - team collaboration
+  - remote tasks
 image: /img/social-share.jpg
 ---
 
@@ -15,6 +17,18 @@ image: /img/social-share.jpg
 The Roo Code Slack integration brings your Cloud Agent team directly into your chat workspace. You can summon agents to explain code, plan new features, or execute coding tasks without leaving Slack, and they get along quite well with humans.
 
 Summoning agents from Slack in public channels is an effective way to bring the entire team into the process, to learn by example how to best leverage Cloud Agents (and the information/outcomes they produce).
+
+#### Key capabilities
+
+- **Start Cloud jobs** — Mention @Roomote in channels/threads or DM the app
+- **Configure inline** — Pick mode, model, and workspace without leaving Slack
+- **Live progress** — TODO lists update in-place; get start links, completion summaries, and status
+- **Image support** — Attach images (under 10MB each) for visual context
+- **Cancel anytime** — Stop tasks with a button in the thread
+
+:::note Team Plans Only
+Requires an active organization plan. Personal accounts can't start Cloud tasks from Slack.
+:::
 
 ---
 
@@ -48,7 +62,6 @@ You can always send messages directly though by mentioning **@Roomote** again in
 Please note that you can't call specific agents by name. When you use **@Roomote**, you're mentioning the Roo Code Slack App, which handles the integration. That's why the app will ask you to pick an agent.
 :::
 
-
 ## Examples
 
 ### Planning Projects
@@ -67,7 +80,7 @@ Ask questions about your codebase to get immediate answers. Great for understand
 
 But wait, agents are actually smart enough to understand the context of threads. So you can, after some back-and-forth with a colleague, simply ask:
 
-> **@Roomote** why is this hapening?
+> **@Roomote** why is this happening?
 
 And it will know what to do.
 
@@ -77,8 +90,15 @@ Trigger coding tasks directly from chat.
 
 > **@Roomote** create a new API endpoint for user profile updates, including support for profile image upload
 
-> **@Roomote** fix this bug: `\<BUG_URL\>`
+> **@Roomote** fix this bug: `<BUG_URL>`
 
 > **@Roomote** build this: `[paste an implementation plan from the planner]`
 
-The possibilities are enourmous.
+The possibilities are enormous.
+
+## Limitations
+
+- **Team plans only** — Personal accounts can't start Cloud tasks from Slack
+- **Mention required in channels** — Generic channel messages without @Roomote are ignored
+- **Images only** — Non-image files aren't processed; images must be under 10MB
+- **Active subscription** — Requires funded Cloud credits

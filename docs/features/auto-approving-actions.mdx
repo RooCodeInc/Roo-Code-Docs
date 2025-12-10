@@ -70,7 +70,7 @@ Quickly toggle auto-approve on/off without using the mouse. This shortcut toggle
 The dropdown shows a grid of permission tiles. Controls:
 - Enabled (bottom-right): master pause/resume for auto-approval
 - All / None (bottom-left): bulk select or clear permissions without changing Enabled
-- Permission tiles: choose which actions can run without prompts; some tiles may be disabled depending on model or mode
+- Permission tiles: choose which actions can run without prompts; tiles disable only when Enabled is off. Some permissions take effect only if your model supports the capability.
 
 
 ### Available Permissions
@@ -98,6 +98,7 @@ How it works:
 - Enabled On — Auto-approval runs for the permissions you’ve selected
 - Enabled Off — Pauses all auto-approvals; your per-permission selections persist
 - All / None — Bulk adjust selections while Enabled remains unchanged
+- Note: Auto-approve only runs if Enabled is On and at least one permission is selected.
 
 When to toggle:
 - Sensitive or production work → Off
@@ -118,6 +119,13 @@ To access these settings:
 2. Navigate to Auto-Approve Settings
 
 The settings panel mirrors the same permissions with additional context and safeguards.
+
+#### Important behaviors
+
+- Outside‑workspace reads/writes require the corresponding outside‑workspace flags in addition to the base permission.
+- Auto‑approve for MCP tools requires both the global "Always approve MCP tools" and each tool's "Always allow". Resource access honors only the global setting.
+- Mode switching is only auto‑approved when the mode-switch permission is enabled (covers switching to another mode and creating new modes).
+- After auto‑writes, Roo waits using the global write‑delay control under Settings → Context Management → Diagnostics.
 
 ### Read Operations
 
@@ -154,11 +162,11 @@ By default, Roo can only read files within your current workspace directory. The
 
 **Description:** "Automatically create and edit files without requiring approval"
 
-**Delay slider:** "Delay after writes to allow diagnostics to detect potential problems" (Default: 1000ms / 1 second)
+**Write delay control:** Configured under Settings → Context Management → Diagnostics. See [Diagnostics Integration](/features/diagnostics-integration).
 
 **Additional options:**
 - **Include files outside workspace:** Allow Roo to modify files outside the current workspace directory
-- **Include protected files:** Allow Roo to modify files normally protected by .rooignore and .roo/ directory
+- **Include protected files:** Allow Roo to modify files protected by `.roo/` and `.rooignore` directory
 
 **Risk level:** High
 
@@ -174,20 +182,18 @@ The write operations setting includes two important security controls:
 
 1. **Workspace Boundary Protection**: By default, Roo can only modify files within your current workspace. Enable "Include files outside workspace" with extreme caution.
 
-2. **Protected Files**: Roo has built-in protection for sensitive configuration files to prevent accidental modifications. This includes:
+2. **Protected Files**: Roo blocks modification of:
    - Files in the `.roo/` directory
-   - Files listed in `.rooignore`
-   - Roo's own configuration files (package.json, tsconfig.json, etc. when they contain Roo-specific settings)
+   - The `.rooignore` file
    
-   The "Include protected files" option bypasses this protection - use only when you specifically need to modify these protected files.
-
+   The "Include protected files" option bypasses this protection - use only when you specifically need to modify these files.
 #### Write Delay & Problems Pane Integration
 
 <img src="/img/auto-approving-actions/auto-approving-actions-5.png" alt="VSCode Problems pane showing diagnostic information" width="600" />
 
 *VSCode Problems pane that Roo checks during the write delay*
 
-When you enable auto-approval for writing files, the delay timer works with VSCode's Problems pane:
+When you enable auto-approval for writing files, Roo uses the global write-delay configured under Settings → Context Management → Diagnostics. The delay timer works with VSCode's Problems pane:
 
 1. Roo makes a change to your file
 2. VSCode's diagnostic tools analyze the change
@@ -266,7 +272,7 @@ This setting requires a two-step permission process for security:
 1. **Enable this global setting** - Acts as a master switch for all MCP tool auto-approval
 2. **Enable individual tool permissions** - In the MCP Servers view, check "Always allow" for specific tools
 
-**Important:** Both permissions must be active for a tool to auto-approve. This dual-permission system ensures you maintain granular control over which MCP tools can execute without confirmation.
+**Important:** Both permissions must be active for a tool to auto-approve. This dual-permission system ensures you maintain granular control over which MCP tools can execute without confirmation. Resource retrieval (`access_mcp_resource`) honors only the global setting.
 
 **Permission Storage:** Your MCP tool permissions are saved and will be remembered next time you use Roo Code.
 
@@ -288,7 +294,7 @@ Example workflow:
 
 **Risk level:** Low
 
-Allows Roo to change between different modes (Code, Architect, etc.) without asking for permission. This primarily affects the AI's behavior rather than system access.
+Allows Roo to change between different modes (Code, Architect, etc.) without asking for permission. This primarily affects the AI's behavior rather than system access. Auto-approval also covers switching between modes and creating new modes when this permission is enabled.
 :::
 
 ### Subtasks
@@ -317,29 +323,39 @@ Enables Roo to create and complete subtasks automatically. This relates to workf
 
 **Risk level:** High
 
-This setting allows terminal command execution with controls. While risky, the whitelist feature limits what commands can run. Important security features:
+This setting allows terminal command execution with controls. Use an allowlist and a denylist together for defense-in-depth.
 
-- Whitelist specific command prefixes (recommended)
-- Never use * wildcard in production or with sensitive data
-- Consider security implications of each allowed command
-- Always verify commands that interact with external systems
+- Precedence: Deny rules take precedence when their matching prefix is equally or more specific than the allow match (longest-prefix wins).
+- High-risk commands to deny by default:
+  - Unix/macOS: rm, sudo, dd, mkfs, diskutil eraseDisk, shutdown, reboot, chmod -R, chown -R, kill -9, curl | sh, wget | sh
+  - Git/Package: git push, npm publish, yarn publish, pnpm publish
+  - Windows/PowerShell: Remove-Item, Format-Volume, Stop-Process, shutdown, Set-ExecutionPolicy
+- Production template:
+  - Deny all with "*" then allow specific safe prefixes like "git", "npm run", "echo".
+- Dangerous substitution guard: Even allowed prefixes won’t auto-approve if the command contains dangerous parameter or process substitutions (e.g., `${var@P}`, subshells inserted into here-strings, zsh process substitution `=(...)`, zsh glob qualifiers with `e:...:`).
 
-**Interface elements:**
-- Text field to enter command prefixes
-- "Add" button to add new prefixes
-- Clickable command buttons with X to remove them
+Configuration
+- UI (recommended): Settings → Auto‑Approve → Execute → use "Allowed Commands" and "Denied Commands" editors to add/remove prefixes.
+- Settings JSON (alternative):
+```json
+{
+  "roo-cline.allowedCommands": ["git", "npm run", "echo"],
+  "roo-cline.deniedCommands": ["git push", "npm publish", "rm", "sudo", "*"]
+}
+```
+With both lists defined, the longest‑prefix rule applies; if deny is equally or more specific, it wins.
 
-**Common whitelist examples:**
-- `git` - Version control operations
-- `npm run` - Run package.json scripts
-- `python -m pytest` - Run Python tests
-- `cargo test` - Run Rust tests
-- `go test` - Run Go tests
-- `docker ps` - List Docker containers
-- `ls` - List directory contents
-- `cat` - Display file contents
+Examples of safe allow prefixes:
+- `git`
+- `npm run`
+- `python -m pytest`
+- `cargo test`
+- `go test`
+- `docker ps`
+- `ls`
+- `cat`
 
-**Security tip:** Be specific with prefixes. Instead of allowing all `python` commands, limit to `python -m pytest` for test execution only.
+Security tip: Be specific with prefixes. Instead of allowing all `python` commands, limit to `python -m pytest` for test execution only.
 :::
 
 ### Follow-Up Questions
@@ -351,20 +367,16 @@ This setting allows terminal command execution with controls. While risky, the w
 
 **Description:** Automatically selects the first AI-suggested answer for a follow-up question after a configurable timeout. This speeds up your workflow by letting Roo proceed without manual intervention.
 
-**Visual countdown:** When enabled, a countdown timer appears on the first suggestion button, showing the remaining time before auto-selection. The timer is displayed as a circular progress indicator that depletes as time passes.
-
 **Timeout slider:** Use the slider to set the wait time from 1 to 300 seconds (Default: 60 seconds)
 
 **How it works:**
-- The countdown starts at your configured time (default: 60 seconds)
-- When the timer reaches zero, the first suggestion is automatically selected
-- You can pause the countdown by clicking on the timer
+- After the configured timeout, the first suggestion is automatically selected
+- Any user action (choosing a different suggestion, editing, or typing your own response) cancels auto-selection
 
-**Override options:** You can cancel the auto-selection at any time by:
+**Override options:** You can cancel auto-selection at any time by:
 - Clicking a different suggestion
 - Editing any suggestion
 - Typing your own response
-- Clicking the timer to pause it
 
 **Risk level:** Low
 

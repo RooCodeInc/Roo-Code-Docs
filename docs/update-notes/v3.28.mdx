@@ -42,7 +42,7 @@ Introducing our new cloud connectivity features that let you **monitor and contr
 - **Task History**: Your tasks are saved to the cloud for later reference
 - **Cloud Visibility**: View your VS Code tasks from any browser
 
-**[Roomote Control](/roo-code-cloud/roomote-control) ([14-Day Free Trial, then $20/month](/roo-code-cloud/billing-subscriptions#pro-plan-20month))**:
+**[Roomote Control](/roo-code-cloud/roomote-control) ([14-Day Free Trial, then $20/month](/roo-code-cloud/billing-subscriptions))**:
 - **Continue Tasks Remotely**: Keep tasks going from your phone - respond to prompts, fix errors, approve actions
 - **Full Chat Control**: Interact with the chatbox as though you were in your IDE
 - **Start/Stop Tasks**: Launch new tasks or terminate running ones from anywhere
@@ -65,6 +65,7 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 ## QOL Improvements
 
 * **Cloud Account Management**: Added account switcher and "Create Team Account" option for logged-in users, making it easier to manage multiple accounts ([#8291](https://github.com/RooCodeInc/Roo-Code/pull/8291))
+* **Chat Icon Sizing**: Chat interface icons now maintain consistent size in limited space ([#8343](https://github.com/RooCodeInc/Roo-Code/pull/8343))
 * **Social Media Sharing**: Improved OpenGraph images for better preview cards when sharing Roo Code links on Slack, Twitter, and Facebook ([#8285](https://github.com/RooCodeInc/Roo-Code/pull/8285))
 * **Auto-approve keyboard shortcut**: Toggle approvals with Cmd/Ctrl+Alt+A from anywhere in the editor so you can stay in the flow while reviewing changes (via [#8214](https://github.com/RooCodeInc/Roo-Code/pull/8214))
 * **Click-to-Edit Chat Messages**: Click directly on any message text to edit it, with ESC to cancel and improved padding consistency ([#7790](https://github.com/RooCodeInc/Roo-Code/pull/7790))
@@ -91,8 +92,25 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Network Resilience**: Telemetry data now automatically retries on network failures, ensuring analytics and diagnostics aren't lost during connectivity issues ([#7597](https://github.com/RooCodeInc/Roo-Code/pull/7597))
 * **Code blocks wrap by default**: Code blocks now wrap text by default, and the snippet toolbar no longer includes language or wrap toggles, keeping snippets readable across locales (via [#8194](https://github.com/RooCodeInc/Roo-Code/pull/8194); [#8208](https://github.com/RooCodeInc/Roo-Code/pull/8208))
 
+* **Reset logs you out of Roo Code Cloud**: Reset now also logs you out of Roo Code Cloud for a truly clean slate; the reset still completes even if logout fails. ([#8312](https://github.com/RooCodeInc/Roo-Code/pull/8312))
+* **Measure engagement with upsell messages**: Telemetry for DismissibleUpsell tracks dismiss vs click (upsellId only) to tune messaging and reduce noise; no user-facing behavior change. ([#8309](https://github.com/RooCodeInc/Roo-Code/pull/8309))
+* **Welcome screen Roo provider experiment**: Surfaces the Roo provider on the welcome screen (localized, with click telemetry) to speed up setup. ([#8317](https://github.com/RooCodeInc/Roo-Code/pull/8317))
+* **Cleaner prompts (no “thinking” tags)**: Removes `<thinking>` tags for cleaner output, fewer tokens, and better model compatibility; preserves the plain‑language rule to confirm tool success. ([#8319](https://github.com/RooCodeInc/Roo-Code/pull/8319))
+* **Simpler Requesty model refresh**: Removes an unnecessary warning when refreshing the Requesty models list so you can fetch new policies without leaving the screen. ([#7710](https://github.com/RooCodeInc/Roo-Code/pull/7710))
+* **Bedrock 1M Context Checkbox**: Adds checkbox to enable 1M context window support for Claude Sonnet 4 and 4.5 on Bedrock, providing more flexibility for large-scale projects ([#8384](https://github.com/RooCodeInc/Roo-Code/pull/8384))
+* Include reasoning messages in cloud task histories so you can review complete thinking after runs ([#8401](https://github.com/RooCodeInc/Roo-Code/pull/8401))
+
+* Identify Cloud tasks in the extension bridge to improve diagnostics, logging, and future UI behavior ([#8539](https://github.com/RooCodeInc/Roo-Code/pull/8539))
+* Add the parent task ID in telemetry to improve traceability ([#8532](https://github.com/RooCodeInc/Roo-Code/pull/8532))
+* Clarify the zh‑TW “Run command” label to match the tooltip and reduce confusion (thanks PeterDaveHello!) ([#8631](https://github.com/RooCodeInc/Roo-Code/pull/8631))
+
+* Image generation model selection update: defaults to Gemini 2.5 Flash Image; adds OpenAI GPT‑5 Image and GPT‑5 Image Mini; clearer settings dropdown (thanks chrarnoldus!) ([#8698](https://github.com/RooCodeInc/Roo-Code/pull/8698))
+
 ## Bug Fixes
 
+* **AWS Bedrock Claude Sonnet 4.5**: Corrected model identifier for Claude Sonnet 4.5 on AWS Bedrock (thanks sunhyung!) ([#8371](https://github.com/RooCodeInc/Roo-Code/pull/8371))
+* **OpenRouter Claude Sonnet 4.5**: Corrected model ID format to align with naming and prevent selection/API mismatches ([#8373](https://github.com/RooCodeInc/Roo-Code/pull/8373))
+* **GPT-5 LiteLLM Compatibility**: Fixed GPT-5 models failing with LiteLLM provider by using correct `max_completion_tokens` parameter (thanks lx1054331851!) ([#6980](https://github.com/RooCodeInc/Roo-Code/pull/6980))
 * **Fixed "No tool used" Errors**: Resolved the situation where LLMs would sometimes not make tool calls in their response which improves Roo's overall flow. ([#8292](https://github.com/RooCodeInc/Roo-Code/pull/8292))
 * **Context Condensing**: Fixed an issue where the initial task request was being lost during context condensing, causing Roo to try to re-answer the original task ask when resuming after condensing ([#8298](https://github.com/RooCodeInc/Roo-Code/pull/8298))
 * **Roo provider stays signed in**: Roo provider tokens refresh automatically and the local evals app binds to port 3446 for predictable scripts (via [#8224](https://github.com/RooCodeInc/Roo-Code/pull/8224))
@@ -122,8 +140,22 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Conversation history preservation**: Fixed duplicate/overlaid tasks and lost conversation history when canceling during model responses, especially during reasoning phases ([#8171](https://github.com/RooCodeInc/Roo-Code/pull/8171))
 
 
+* **Tool‑use guidance clarity**: Clarifies the retry suggestion so the model selects the correct file‑reading step during apply‑diff retries, reducing failed file edits. ([#8315](https://github.com/RooCodeInc/Roo-Code/pull/8315))
+* **Anthropic Sonnet 4.5 Model ID**: Corrects the model ID to the official `claude-sonnet-4-5`, resolving API errors when using Claude Sonnet 4.5 ([#8384](https://github.com/RooCodeInc/Roo-Code/pull/8384))
+
+* **AWS Bedrock**: Removed `topP` parameter to avoid conflicts with extended thinking, improving reliability for streaming and non‑streaming responses (thanks ronyblum!) ([#8388](https://github.com/RooCodeInc/Roo-Code/pull/8388))
+* **Vertex AI**: Fixed Sonnet 4.5 model configuration to prevent 404s and align with the correct default model ID (thanks nickcatal!) ([#8391](https://github.com/RooCodeInc/Roo-Code/pull/8391))
+* "Reset and Continue" now truly resets cost tracking; subsequent requests only count new message costs ([#6890](https://github.com/RooCodeInc/Roo-Code/pull/6890))
+* Prompts settings: Save button activates on first change and preserves empty strings ([#8267](https://github.com/RooCodeInc/Roo-Code/pull/8267))
+* Settings: Remove overeager "unsaved changes" dialog when nothing changed ([#8410](https://github.com/RooCodeInc/Roo-Code/pull/8410))
+* Show the Send button when only images are attached ([#8423](https://github.com/RooCodeInc/Roo-Code/pull/8423))
+
+* Fix grey screens caused by long context task sessions ([#8696](https://github.com/RooCodeInc/Roo-Code/pull/8696))
+* Editor targeting fix: avoids editing read‑only git diff views; edits the actual file (thanks hassoncs!) ([#8676](https://github.com/RooCodeInc/Roo-Code/pull/8676))
+
 ## Provider Updates
 
+* **Claude 4.5 Sonnet**: Added support for Anthropic's latest Claude 4.5 Sonnet model across all providers (Anthropic, AWS Bedrock, Claude Code, Google Vertex AI, and OpenRouter) with 1M context window support ([#8368](https://github.com/RooCodeInc/Roo-Code/pull/8368))
 * **New Free Models**: Added two more free models to the Roo provider - xai/grok-4-fast and deepseek/deepseek-chat-v3.1 ([#8304](https://github.com/RooCodeInc/Roo-Code/pull/8304))
 * **Vertex AI Models**: Added support for 6 new models including DeepSeek-V3, GPT-OSS, and Qwen models, plus the us-south1 region (thanks ssweens!) ([#7727](https://github.com/RooCodeInc/Roo-Code/pull/7727))
 * **DeepSeek Pricing**: Updated to new unified rates effective September 5, 2025 - $0.56/M input tokens, $1.68/M output tokens (thanks NaccOll!) ([#7687](https://github.com/RooCodeInc/Roo-Code/pull/7687))
@@ -132,8 +164,25 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Z.ai Coding Plans**: Region-aware options (International/China) with automatic base URL selection and sensible defaults to simplify setup (thanks chrarnoldus!) ([#8003](https://github.com/RooCodeInc/Roo-Code/pull/8003))
 * **SambaNova models**: Added DeepSeek-V3.1 and GPT-OSS 120B to the SambaNova provider (thanks snova-jorgep!) ([#8186](https://github.com/RooCodeInc/Roo-Code/pull/8186))
 
+* **Supernova 1M context**: Upgrades the default Supernova to roo/code-supernova-1-million (1,000,000‑token context). Existing settings auto‑migrate; expect fewer truncations on long tasks. ([#8330](https://github.com/RooCodeInc/Roo-Code/pull/8330))
+* **Z.ai GLM‑4.6**: Adds GLM‑4.6 model support with a 200k (204,800) context window and availability across both international and mainland API lines (thanks dmarkey!) ([#8408](https://github.com/RooCodeInc/Roo-Code/pull/8408))
+* **Chutes**: Add DeepSeek‑V3.1‑Terminus, DeepSeek‑V3.1‑turbo, DeepSeek‑V3.2‑Exp, GLM‑4.6‑FP8, and Qwen3‑VL‑235B‑A22B‑Thinking to the provider picker ([#8467](https://github.com/RooCodeInc/Roo-Code/pull/8467))
+* **Claude Code**: Added a 1M‑context variant of Claude Sonnet 4.5; select via the `[1m]` suffix to fit larger repos and logs with fewer truncations (thanks ColbySerpa!) ([#8586](https://github.com/RooCodeInc/Roo-Code/pull/8586))
+* **Claude Haiku 4.5**: Available across Anthropic, AWS Bedrock, and Vertex AI with 200k context, up to 64k output, image input, and prompt caching support ([#8673](https://github.com/RooCodeInc/Roo-Code/pull/8673))
+* **Gemini**: Remove unsupported free “2.5 Flash Image Preview”; paid path unaffected ([#8359](https://github.com/RooCodeInc/Roo-Code/pull/8359))
+* **Roo Code Cloud**: Deprecate “Grok 4 Fast”; show warning if selected and hide when not selected ([#8481](https://github.com/RooCodeInc/Roo-Code/pull/8481))
+* **Bedrock**: Claude Sonnet 4 1M‑context handling and compatibility improvements ([#8421](https://github.com/RooCodeInc/Roo-Code/pull/8421))
+
+* Bedrock: add versioned user agent for per‑version metrics and error tracking; no action needed (thanks ajjuaire!) ([#8663](https://github.com/RooCodeInc/Roo-Code/pull/8663))
+* Z AI: only two coding endpoints (International/China) are supported; defaults to International; legacy non‑coding endpoints unsupported ([#8693](https://github.com/RooCodeInc/Roo-Code/pull/8693))
+
 ## Misc Improvements
 
+* **Website improvements**: New pricing page, clearer homepage messaging, and tighter navigation/visuals (including mobile). No changes to the extension UX. ([#8303](https://github.com/RooCodeInc/Roo-Code/pull/8303), [#8326](https://github.com/RooCodeInc/Roo-Code/pull/8326))
+* **Telemetry Tracking**: Enhanced analytics to track when users change telemetry settings ([#8339](https://github.com/RooCodeInc/Roo-Code/pull/8339))
+* **Website Testimonials**: Updated website with enhanced testimonials section ([#8360](https://github.com/RooCodeInc/Roo-Code/pull/8360))
+* **Contributor Recognition**: Improved contributor badge workflow with automated cache refreshing ([#8083](https://github.com/RooCodeInc/Roo-Code/pull/8083))
+* **Internal cleanup**: Removes the deprecated pr-reviewer mode. No changes to the extension UX. ([#8222](https://github.com/RooCodeInc/Roo-Code/pull/8222))
 * **Infrastructure**: Set port 3446 for web-evals service in production mode ([#8288](https://github.com/RooCodeInc/Roo-Code/pull/8288))
 * **Cloud Task Button**: Added a new button for opening tasks in Roo Code Cloud with QR codes and shareable URLs ([#7572](https://github.com/RooCodeInc/Roo-Code/pull/7572))
 * **Telemetry Default**: Posthog telemetry is now enabled by default with easy opt-out options in settings ([#7909](https://github.com/RooCodeInc/Roo-Code/pull/7909))
