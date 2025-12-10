@@ -35,51 +35,22 @@ Now your Cloud Agents are able to work with Github.
 
 ## Calling agents
 
-By default, any PR Reviewer agents you have will continuously monitor for new PRs according to the criteria you define in [their settings](/roo-code-cloud/cloud-agents#settings).
+By default, any PR Reviewer agents you have will continuously monitor for new PRs according to the criteria you define in [their settings](/roo-code-cloud/cloud-agents#settings). So when a new PR is created, you'll see a comment like this:
 
+<img src="/img/integrations/gh-response-review.png" alt="The Rooviewer agent responding" width="400" />
 
+You can also call the PR Fixer agent to address any feedback you may have in the PR by calling **@Roomote** like this:
 
-## Features
+<img src="/img/integrations/gh-mention.png" alt="Mentioning @roomote to call the fixer" width="400" />
 
-### 🔍 Automated PR Reviews (PR Reviewer)
+You can also assign tasks to the Reviewer and Fixer from their own pages or the New Task button up top.
 
-The **PR Reviewer** agent monitors your repository for new pull requests. When a PR is opened, it automatically:
-1. **Analyzes the code changes**: Understands the context and intent of the PR.
-2. **Checks for issues**: Looks for bugs, security vulnerabilities, and code style violations.
-3. **Posts comments**: Adds detailed, actionable review comments directly on the PR lines.
+The New Task page for them lets you paste a relevant URL:
 
-**Configuration Options:**
-- **Trigger**: New PR opened or updated.
-- **Scope**: Can be set to review all PRs or only those from specific authors.
-- **Draft PRs**: Choose whether to review draft PRs or wait for "Ready for Review" status.
+<img src="/img/integrations/gh-new-task.png" alt="New task for the reviewer" width="400" />
 
-### 🛠️ On-Demand Fixes (PR Fixer)
+You can then follow the task from the web UI and see the results in the PR itself.
 
-The **PR Fixer** agent listens for your commands within PR comments. If a reviewer (human or AI) points out an issue, you can ask the agent to fix it.
-
-**How to use:**
-1. **Comment on a PR**: In a PR comment, mention `@roomote` followed by your request.
-   - Example: `@roomote please fix this null pointer exception`
-   - Example: `@roomote refactor this function to be more readable`
-2. **Agent Action**: The agent acknowledges the request (👀 reaction), analyzes the code, and pushes a commit with the fix.
-
-### Workflow Examples
-
-#### 1. The "Set It and Forget It" Review
-- Developer opens a PR.
-- **PR Reviewer** automatically scans the changes.
-- It finds a potential performance issue and comments on line 42.
-- Developer sees the comment and decides to fix it manually or asks `@roomote` to handle it.
-
-#### 2. Interactive Fixing
-- Human reviewer comments: "This logic seems flawed, it handles edge case X incorrectly."
-- Developer replies to the comment: `@roomote you're right, please handle edge case X as suggested.`
-- **PR Fixer** reads the thread, understands the context, and pushes a fix commit to the branch.
-
-## Security & Permissions
-
-- **Least Privilege**: Agents only access the repositories you explicitly select.
-- **Authentication**: Uses secure GitHub App authentication.
-- **Audit Logs**: All agent actions (comments, commits) are logged and visible in your [Roo Code Cloud Dashboard](/roo-code-cloud/dashboard).
-
-[Connect GitHub Now](https://app.roocode.com/integrations)
+:::info It's always @Roomote
+Please note that you can't call specific agents by name. When you use **@Roomote**, you're mentioning the Roo Code GitHub App, which handles the integration. The app will then smartly call the appropriate agent for the context.
+:::

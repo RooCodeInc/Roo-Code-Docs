@@ -21,7 +21,7 @@
   --accent: 139, 92, 246;
   --accent-foreground: 0 0% 9%;
   --ring: 0 0% 3.9%;
-  --destructive: 0 84.2% 60.2%;
+  --destructive: 354, 76%, 48%; 
   --destructive-foreground: 0 0% 98%;
   --border: 0 0% 89.8%;
   --input: 0 0% 89.8%;
@@ -60,7 +60,7 @@
   --ifm-color-gray-200: #e5e7eb;
 
   /* Docusaurus variables for light theme */
-  --ifm-color-primary: #60a5fa; /* Blue like roocode.com */
+  --ifm-color-primary: #60a5fa;
   --ifm-color-primary-dark: #3b82f6;
   --ifm-color-primary-darker: #2563eb;
   --ifm-color-primary-darkest: #1d4ed8;
@@ -92,7 +92,7 @@
   --accent: 139, 92, 246;
   --accent-foreground: 0 0% 98%;
   --ring: 0 0% 83.1%;
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 354, 76%, 48%;
   --destructive-foreground: 0 0% 98%;
   --border: 0 0% 15%;
   --input: 0 0% 14.9%;
@@ -1673,7 +1673,7 @@ main[class*="docMainContainer"] {
 /* Admonitions (alerts) with roocode.com style */
 .theme-admonition {
   margin: var(--figure-margin) 0 !important;
-  padding: 1rem 1rem 0 !important;
+  padding: calc(var(--block-spacing) * 0.5) calc(var(--block-spacing) * 0.5) calc(var(--block-spacing) * 0.25) !important;
   border-radius: calc(var(--radius) + 4px) !important;
   border: 1px solid hsl(var(--border) / 0.5) !important;
   background: hsl(var(--card)) !important;
@@ -1681,9 +1681,9 @@ main[class*="docMainContainer"] {
 }
 
 .theme-admonition > div {
-  margin-bottom: 1em !important;
-  font-size: 1em;
-  font-weight: 600 !important;
+  margin-bottom: 0.5em !important;
+  font-size: var(--text-regular-size);
+  font-weight: 700 !important;
   text-transform: none;
 }
 
@@ -1692,6 +1692,19 @@ main[class*="docMainContainer"] {
   height: 1em !important;
   width: 1em !important;
 }
+
+.theme-admonition-warning > div,
+.theme-admonition-warning > div svg {
+  color: hsl(var(--destructive));
+  fill: hsl(var(--destructive));
+}
+
+.theme-admonition-info > div,
+.theme-admonition-info > div svg {
+  color: rgb(var(--accent));
+  fill: rgb(var(--accent));
+}
+
 
 /* Tables with roocode.com styling */
 .theme-doc-markdown table {
