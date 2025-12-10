@@ -17,13 +17,13 @@ Roo Code Cloud transforms AI development with autonomous [Cloud Agents](/roo-cod
 
 It also augments the Roo Code VS Code extension capabilities by adding:
 - [Task Sync](/roo-code-cloud/task-sync) to access your entire task history in one place
-- [Task sharing](/roo-code-cloud/task-share) to access specific tasks with friends or co-workers
+- [Task sharing](/roo-code-cloud/task-sharing) to access specific tasks with friends or co-workers
 - [Roomote Control](/roo-code-cloud/roomote-control) to start/stop and control tasks in the Extension while away from your computer
-- [Token usage analytics](/roo-code-cloud/analytics) to understans where your tokens and dollars are going
+- [Token usage analytics](/roo-code-cloud/analytics) to understand where your tokens and dollars are going
 
 And, in the Team plan, adds team-oriented features:
 - Team-wide analytics
-- Centralized provider setings and other configuration
+- Centralized provider settings and other configuration
 - Shared access to the same Cloud Agent team
 
 ---
