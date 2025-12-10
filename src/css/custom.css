@@ -2094,7 +2094,7 @@ html {
 .breadcrumbs,
 .theme-doc-breadcrumbs {
   margin-bottom: 1rem;
-  margin-left: 1.5rem;
+  margin-left: 0.7rem;
   font-size: 0.875rem;
   display: flex;
   align-items: center;
