@@ -29,7 +29,7 @@ You can always find the current list [on our website](https://roocode.com/provid
 
 We never use your data for training and don't keep logs of the prompts themselves
 (keep in mind that if you use task sync or Cloud Agents, we have to keep
-copies of your tasks for obivous reasons).
+copies of your tasks for obvious reasons).
 
 Sometimes stealth models are offered completely for free. These are
 usually advanced models in late stages of testing, with code names and
@@ -46,7 +46,7 @@ You can always find the current pricing [on our website](https://roocode.com/pro
 ### Roo Code Cloud Agents
 
 When choosing a model to power your agent, just pick the Roo Code Cloud provider.
-There aren't really any more instrucitons needed :)
+There aren't really any more instructions needed :)
 
 ### Roo Code VS Code Extension
 
