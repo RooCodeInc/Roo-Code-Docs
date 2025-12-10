@@ -1599,7 +1599,7 @@ main[class*="docMainContainer"] {
 /* List spacing */
 .theme-doc-markdown ul,
 .theme-doc-markdown ol {
-  margin-bottom: calc(var(--block-spacing));
+  margin-bottom: calc(var(--block-spacing) * 0.5);
   padding-left: var(--list-inset);
 }
 

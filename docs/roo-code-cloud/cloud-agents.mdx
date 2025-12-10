@@ -38,15 +38,12 @@ We at Roo have been developing Roo Code mostly with Cloud Agents for several mon
 
 ## The Cloud Agent Team
 
-Now what (who?) are these Agents? The current line up available to your is below.
-
-Keep in mind we let you rename them as you please – we really believe in making them part of your team.
+The current line up available to your is below. Keep in mind we let you rename them as you please – we really believe in making them part of your team.
 
 ### The Explainer
 **Role:** Technical Educator  
-**Mode:** Ask  
 
-The Explainer agent explains code, concepts, and technical documentation. It helps you understand complex parts of a codebase without needing to read every line.
+Explains code, concepts, and technical documentation. It helps you understand complex parts of a codebase without needing to read every line.
 
 - **Best for:** Onboarding to a new codebase, understanding legacy code, debugging conceptual issues.
 - **Onboarding Tip:** "Understand the source of a bug or how a part of the code works."
@@ -90,32 +87,47 @@ The PR Fixer agent is specialized in resolving issues identified in Pull Request
 - **Best for:** Resolving PR comments, fixing CI/CD failures, addressing review feedback.
 - **Onboarding Tip:** "Give it a PR with comments and get it solved."
 - **Trigger:** Often triggered via `@roomote` mentions in PR comments.
+
+While this cast of characters can get most jobs done, user feedback informs the development of new agents. We have a few [currently in development](#upcoming-agents)
+
 ---
-
-## Upcoming Agents
-
-While this cast of characters can get most jobs done, user feedback informs the development of new agents. Currently in development:
-
-| Agent | Role | Description |
-| :--- | :--- | :--- | :--- |
-| **Improver** | Rule Optimizer | Analyzes agent feedback and PR reviews to maintain and improve rules files. |
-| **Documentation Writer** | Tech Writer | Understands your code and writes actionable user-facing documentation. |
-| **Security Auditor** | Security Expert | Conducts security audits and identifies vulnerabilities. |
-| **Translator** | Localization | Translates strings with accuracy and following your brand voice. |
-
-Contact support if you're interested in trying them out in Beta or if you have other suggestions.
 
 ## How Cloud Agents Work
 
-1. **Triggering**: Agents can be triggered manually via the [Web Interface](/roo-code-cloud/web-interface), or automatically via [GitHub Integrations](/roo-code-cloud/github-integration) (e.g., new PR opened) and [Slack Integrations](/roo-code-cloud/slack-integration) (e.g., `@Roomote` mention).
-2. **Execution**: The agent spins up a secure, isolated cloud environment to perform its task. It clones your repository, analyzes the context, and executes the required actions.
-3. **Completion**: Once the task is done, the agent reports back—creating a PR, posting a comment, or sending a Slack message.
-4. **Handoff**: You can intervene at any time using [Roomote Control](/roo-code-cloud/roomote-control) to take manual control of the session.
+### Workflow phases
 
-## Credits & Usage
+1. **Start:** Agents can be triggered manually via the Web UI, automatically via [GitHub Integrations](/roo-code-cloud/github-integration) (e.g., new PR opened), manually from Github (@-mentioning) and manually via [Slack Integrations](/roo-code-cloud/slack-integration) (e.g., `@Roomote` mention).
+2. **Execution:** The agent spins up a secure, isolated cloud environment to perform its task. It clones your repository, analyzes the context, and executes the required actions.
+3. **Completion:**: Once the task is done, the agent reports back with the results in the same place where you started.
+4. **Handoff:** You can intervene at any time by going to the task.
+5. **History:** all tasks are accessible in your Roo Code Cloud account.
+
+### Credits & Usage
 
 Cloud Agents consume **Cloud Credits**. Usage is measured based on the model used and the duration of the task.
 - **Free Tier:** Includes access to free models for standard tasks.
 - **Pro Tier:** Unlocks concurrent agent execution and priority queueing.
 
-[Learn more about Cloud Credits](/roo-code-cloud/credits)
+There's a [whole page about credits](/roo-code-cloud/credits) if you want to learn more.
+
+### Settings
+
+The specific set of configuration options for each agent type varies (and are accessible in the ⚙️ icon in the agent page), but the main ones you'll find are:
+
+- **Name:** which is how the agent is referenced in the app.
+- **Model:** the model powering inference for that agent. You can mix and match providers and models across your agent team.
+- **Repositories:** the repos the agent has access to. Keep in mind we'll only lists the one you allowed when connecting to Github. If any are missing, Update your Github connection.
+- **PR Creation Action:** for agents that make code changes, you can choose if they do it by creating a full PR, a draft PR or just pushing a branch.
+- **Additional guidance:** any specific instructions for that agent, like things for the Reviewer to pay more attention to, coding practices for the Coder to follow, etc. It's a free text box, so you can type whatever you want, but keep in mind too many instructions may reduce the quality of results, so keep it concise and focused.
+
+
+Most people will only have one agent of each type, but you may want to more tha one instance to have different configurations, especially model (main agent with good model, another agent with expensive model) or custom instructions (for specific repositories).
+
+## Upcoming Agents
+
+- **Improver:** a "meta agent" which analyzes agent feedback and PR reviews to maintain and improve [custom instructions](/features/custom-instructions#what-are-custom-instructions).
+- **Security Auditor:** conducts security audits and identifies vulnerabilities regularly, across the codebase (and not just individual PRs)
+- **Documentation Writer:** a tech writer that understands your code and writes actionable user-facing documentation.
+- **Translator:** translates strings with accuracy and following your brand voice.
+
+Contact support if you're interested in trying them out in Beta or if you have other suggestions.

@@ -33,11 +33,13 @@ You'll be prompted to connect to Slack when fist signing up for your account. Bu
 1. To interact with Roo Code agents, simply mention `@Roomote` in any channel where the bot is present to start a thread, giving it instructions. It will react with 👀 to acknowledge it.
 2. Then, the app will ask you what Agent to use with what repository. You can choose "all repositories", but the more focused you can make the agent, the higher the chances of good results.
     <img src="/img/integrations/slack-confirm.png" alt="The Slack app checking what agent and repo to use" width="280" />
+    Keep in mind not all agents appear in this list, as some don't make sense (eg the PR Reviewer)
 3. If the agent has any questions, it will get back to you with options, like this:
     <img src="/img/integrations/slack-question.png" alt="The Slack app asking for an answer" width="280" />
 4. Once done, the agent will never directly modify your code. If it was a coding task, it will push a branch or create a PR, depending on how it's configured, but it will never touch `main`/`master` or production.
 
 You can always send messages directly though by mentioning **@Roomote** again in the thread. It will keep context.
+
 
 ## Examples
 
