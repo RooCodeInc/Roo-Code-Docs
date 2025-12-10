@@ -11,7 +11,6 @@ export default function Layout(props) {
     <PostHogProvider>
       <GTMProvider>
         <IntercomProvider>
-          <AnnouncementBanner />
           <OriginalLayout {...props} />
           <CookieConsent />
         </IntercomProvider>
