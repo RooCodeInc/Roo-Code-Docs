@@ -12,15 +12,32 @@ image: /img/social-share.jpg
 
 # GitHub Integration
 
-Roo Code Cloud integrates directly with GitHub to bring autonomous agents into your pull request workflow. By installing the Roo Code GitHub App, you can enable agents to automatically review code and fix issues without leaving GitHub.
+Roo Code Cloud integrates directly with GitHub to bring your autonomous Cloud Agent team into your pull request workflow. By installing the Roo Code GitHub App, you can enable agents to automatically review code and fix issues without leaving GitHub.
 
-<img src="/img/github-integration/overview.png" alt="GitHub Integration Overview" width="800" />
+
+---
 
 ## Setting Up
 
-1. **Install the GitHub App**: Go to [app.roocode.com/integrations](https://app.roocode.com/integrations) and click "Connect GitHub".
-2. **Select Repositories**: Choose which repositories Roo Code agents should have access to. You can select all repositories or specific ones.
-3. **Configure Permissions**: Grant the necessary permissions for reading code and posting comments/commits.
+You'll be prompted to connect to Github when first creating your Cloud Agent team. If you haven't done that yet, [do it now](https://app.roocode.com/cloud-agents/setup) and make sure to create at least a PR Reviewer and PR Fixer agent.
+
+This will take you through an OAuth process with Github, where you will:
+
+1. Choose the accounts to link
+    <img src="/img/integrations/gh-auth-1.png" alt="The first step" width="400" />
+
+2. Choose what repositories to make visible to the agents
+    <img src="/img/integrations/gh-auth-2.png" alt="The second step" width="600" />
+
+    You can control individual agent access to repos [in agent settings](/roo-code-cloud/cloud-agents#settings).
+
+Now your Cloud Agents are able to work with Github.
+
+## Calling agents
+
+By default, any PR Reviewer agents you have will continuously monitor for new PRs according to the criteria you define in [their settings](/roo-code-cloud/cloud-agents#settings).
+
+
 
 ## Features
 

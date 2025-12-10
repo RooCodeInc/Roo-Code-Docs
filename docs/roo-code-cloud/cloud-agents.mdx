@@ -24,11 +24,11 @@ Sounds like wishful thinking? Read on and we'll show you how to use them.
 
 ---
 
-## The Cloud Agent Development Lifecycle
+## How to work with Cloud Agents
 
 We at Roo have been developing Roo Code mostly with Cloud Agents for several months and learned that the following practices lead to the best results:
 
-- **When in doubt, start in the Cloud**: unless it's a very small change, it's usually easier to fire off several tasks to Cloud Agents (especially as you start or finish your day) and check in as they become ready. The Agents excellent at getting things 50-80% done, doing most of the heavy lifting. You can then iterate from there (be it with Cloud Agents or locally).
+- **When in doubt, start in the Cloud**: unless it's a very small change, it's usually easier to fire off several tasks to Cloud Agents (especially as you start or finish your day) and check in as they become ready. The Agents are excellent at getting things 50-80% done (often more), doing most of the heavy lifting. You can then iterate from there (be it with Cloud Agents or locally).
 - **Embrace pull requests as the main unit of work**: to ensure Cloud Agents don't break things, they work on isolated branches and deliver work via PRs. They can be created, iterated upon, reviewed and fixed without you ever checking out code locally.
 - **Let go of individual PRs**: be ready to throw stuff away once in a while, since LLMs aren't flawless. Quantity has a quality all of its own, so being generative pays off.
 - **Invest in preview environments**: if your project allows for it (eg it's a web app), set up a preview environment (like [Vercel's Deployments](https://vercel.com/docs/git)) so you can check in on PRs without running them locally.
@@ -46,7 +46,6 @@ The current line up available to your is below. Keep in mind we let you rename t
 Explains code, concepts, and technical documentation. It helps you understand complex parts of a codebase without needing to read every line.
 
 - **Best for:** Onboarding to a new codebase, understanding legacy code, debugging conceptual issues.
-- **Onboarding Tip:** "Understand the source of a bug or how a part of the code works."
 
 
 ### The Planner
@@ -55,8 +54,6 @@ Explains code, concepts, and technical documentation. It helps you understand co
 The Planner agent maps out implementation plans and navigates complex technical decisions. It's designed to take a high-level idea or a Product Requirement Document (PRD) and break it down into a thorough, step-by-step implementation plan which can the be given to coding agent (or a human!).
 
 - **Best for:** New feature planning, system architecture design, complex refactoring strategies.
-- **Onboarding Tip:** "Enter an idea (or paste a PRD) and get a thorough implementation plan."
-- **Recommended Models:** High-reasoning models like `anthropic/claude-opus-4.5` or `openai/gpt-5.1`.
 
 ### The Coder
 **Role:** Coding across all languages 
@@ -64,8 +61,6 @@ The Planner agent maps out implementation plans and navigates complex technical 
 The Coder agent writes code, creates pull requests, and implements features. It is the workhorse of the platform, capable of handling end-to-end coding tasks.
 
 - **Best for:** Building features, fixing bugs, refactoring components, writing tests.
-- **Onboarding Tip:** "Build a feature, fix an issue, refactor a component."
-- **Capabilities:** Can create draft PRs or push directly depending on settings.
 
 ### The PR Reviewer
 **Role:** Code Reviewer  
@@ -73,11 +68,6 @@ The Coder agent writes code, creates pull requests, and implements features. It 
 The PR Reviewer agent automatically provides comprehensive code reviews with actionable comments. It can monitor your repositories and review incoming Pull Requests.
 
 - **Best for:** Automated code quality checks, catching bugs early, enforcing coding standards.
-- **Onboarding Tip:** "Give it a PR, get thorough and actionable comments back."
-- **Settings:**
-    - `authorReviewMode`: Choose to review 'all', 'specific', or 'none' (no automatic triggers).
-    - `approvePr`: Can optionally approve PRs if no issues are found.
-    - `reviewDraftPrs`: Option to review draft PRs.
 
 ### The PR Fixer
 **Role:** PR Feedback Fixer  
@@ -85,8 +75,6 @@ The PR Reviewer agent automatically provides comprehensive code reviews with act
 The PR Fixer agent is specialized in resolving issues identified in Pull Requests. It listens for feedback and autonomously implements fixes.
 
 - **Best for:** Resolving PR comments, fixing CI/CD failures, addressing review feedback.
-- **Onboarding Tip:** "Give it a PR with comments and get it solved."
-- **Trigger:** Often triggered via `@roomote` mentions in PR comments.
 
 While this cast of characters can get most jobs done, user feedback informs the development of new agents. We have a few [currently in development](#upcoming-agents)
 
@@ -94,13 +82,25 @@ While this cast of characters can get most jobs done, user feedback informs the 
 
 ## How Cloud Agents Work
 
-### Workflow phases
+### General workflow
 
-1. **Start:** Agents can be triggered manually via the Web UI, automatically via [GitHub Integrations](/roo-code-cloud/github-integration) (e.g., new PR opened), manually from Github (@-mentioning) and manually via [Slack Integrations](/roo-code-cloud/slack-integration) (e.g., `@Roomote` mention).
-2. **Execution:** The agent spins up a secure, isolated cloud environment to perform its task. It clones your repository, analyzes the context, and executes the required actions.
-3. **Completion:**: Once the task is done, the agent reports back with the results in the same place where you started.
-4. **Handoff:** You can intervene at any time by going to the task.
-5. **History:** all tasks are accessible in your Roo Code Cloud account.
+1. **Start:** Agents can be called:
+    - Manually via [the Web UI](https://app.roocode.com) (New Task button)
+      <img src="/img/cloud-agents/cloud-agent-call-web.png" alt="New task button" width="400" />
+
+    - Automatically via [GitHub](/roo-code-cloud/github-integration) (e.g., new PR opened)
+      <img src="/img/cloud-agents/cloud-agent-call-gh-auto.png" alt="PR Review comments" width="400" />
+
+    - Manually from [GitHub](/roo-code-cloud/github-integration) (`@Roomote` mention).
+      <img src="/img/cloud-agents/cloud-agent-call-gh-mention.png" alt="Github comment @mention" width="400" />
+
+    - Manually manually via [Slack Integration](/roo-code-cloud/slack-integration) (`@Roomote` mention).
+      <img src="/img/cloud-agents/cloud-agent-call-slack.png" alt="New task button" width="400" />
+
+2. **Run:** The agent spins up a secure, isolated cloud environment to perform its task. It clones your repository, analyzes the context, and executes the required actions.
+3. **Complete:**: Once the task is done, the agent reports back with the results in the same place where you started.
+4. **Control:** You can intervene at any time by going to the task.
+5. **Look back:** all tasks are accessible in your Roo Code Cloud account.
 
 ### Credits & Usage
 
