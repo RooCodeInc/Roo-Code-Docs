@@ -12,81 +12,104 @@ image: /img/weekly-updates/2025-12-10.png
 
 # Roo Code Weekly Update - December 10, 2025
 
-This week brings two significant releases, v3.36.3 and v3.36.4, with substantial improvements across the board. From new features to stability enhancements, here's what's changed.
+This week brings two significant releases: v3.36.3 and v3.36.4. These updates focus on making Roo Code more transparent, reliable, and easier to troubleshoot, while adding powerful new capabilities for browser automation and advanced AI models.
 
-## New Features
+## Understanding What's Happening: Better Transparency
 
-Browser automation capabilities have been expanded with screenshot saving functionality. The browser tool now supports capturing visual states during automation tasks through a new screenshot action.
+### Context Management You Can Actually See
 
-A new search_replace native tool provides precise, single-replacement file operations. This tool requires unique text context identification to ensure accurate modifications, complementing the existing apply_diff functionality.
+One of the most significant improvements in this release is making context management visible ([#9795](https://github.com/RooCodeInc/Roo-Code/pull/9795)). Previously, when Roo Code condensed or truncated your conversation history to fit within token limits, this happened silently in the background—leaving you wondering why responses might seem to lose track of earlier context.
 
-Error debugging is now more comprehensive with an on-demand error details modal. Users can access full error information and copy details directly from error rows in the interface.
+Now you'll see exactly what's happening:
+- **In-progress indicators** appear when context management begins, so you know Roo is optimizing your conversation
+- **Condensation summaries** show how many tokens were saved (e.g., "Reduced from 45,000 to 12,000 tokens") with an expandable summary of what was condensed
+- **Truncation notifications** tell you when older messages are removed, including which messages and why
 
-Gemini model users gain more control with minimal and medium reasoning effort levels, allowing finer-grained adjustment of model behavior.
+This transparency helps you understand when you're approaching context limits and make better decisions about when to start fresh conversations versus continuing existing ones.
 
-Real-time feedback during generation is improved with streaming tool statistics and token usage throttling, providing better visibility into AI performance.
+### Error Messages That Actually Help
 
-Versioned settings support has been added for the Roo provider, enabling smoother updates through minimum plugin version gating.
+We've made two major improvements to error handling that will save you time when things go wrong.
 
-Architect mode now organizes plans in a dedicated /plans directory that is automatically gitignored, maintaining cleaner workspaces.
+**For OpenAI users** ([#9639](https://github.com/RooCodeInc/Roo-Code/pull/9639)), error messages are now significantly more detailed. Instead of seeing generic error text, you'll get the actual error details from OpenAI's API, making it much easier to understand what went wrong—whether it's a billing issue, rate limit, or model availability problem.
 
-The user interface has been enhanced with announcement support CTAs and updated social icons for better community engagement.
+**For everyone** ([#9985](https://github.com/RooCodeInc/Roo-Code/pull/9985)), error messages now include an info icon you can click to see the complete error details in a modal dialog. This gives you clean, concise error messages by default, with the ability to dive into full technical details when you need them. Plus, there's a copy button to easily share error details when reporting issues or seeking help.
 
-## Architecture Improvements
+## New Capabilities
 
-Context management has been unified with improved UX, providing real-time feedback on file operations and context handling.
+### Browser Screenshots for Documentation and Debugging
 
-Tools have been decoupled from the system prompt for better modularity and maintainability.
+The browser automation tool can now save screenshots ([#9963](https://github.com/RooCodeInc/Roo-Code/pull/9963)). This is incredibly useful for:
+- **Documenting web UI states** during testing or development
+- **Creating visual records** of browser automation workflows
+- **Debugging visual issues** by capturing exactly what the browser sees at specific moments
+- **Building tutorials** with step-by-step screenshots automatically generated during automation
 
-ThinkingBudget components have been consolidated, and time estimates have been removed from Architect mode to maintain focus on planning.
+When Roo uses the browser tool, it can now capture and save visual states to specific file paths, making browser automation workflows more comprehensive and self-documenting.
+
+### Maximum Reasoning Power for OpenAI's o1 Models
+
+For users of OpenAI's most advanced reasoning model, gpt-5.1-codex-max, you can now access "extra-high" reasoning effort ([#9900](https://github.com/RooCodeInc/Roo-Code/pull/9900)). This gives you even more control over the model's thinking depth for complex coding tasks that benefit from extended reasoning time.
+
+### Smarter Tool Usage on OpenRouter
+
+When using models through OpenRouter, Roo Code now automatically defaults to native tool calling when the model supports it ([#9878](https://github.com/RooCodeInc/Roo-Code/pull/9878)). Native tool calling is more reliable and efficient than simulated approaches, so this change means better performance and fewer errors when working with capable models on OpenRouter—without requiring you to manually configure anything.
+
+## Performance and Reliability Improvements
+
+### Faster Token Counting
+
+We've eliminated unnecessary token counting API requests ([#9884](https://github.com/RooCodeInc/Roo-Code/pull/9884)) for Anthropic, Gemini, and MiniMax providers. Previously, Roo Code was making extra API calls just to count tokens, which added latency and cost. Now we use fast local token estimation (tiktoken heuristics) that's accurate enough for all practical purposes while being essentially instantaneous and free.
+
+The result: snappier responses and reduced API costs, especially during long conversations where token counting was happening frequently.
+
+### MCP Tool Streaming Reliability
+
+Fixed an issue where MCP tool streaming could fail prematurely ([#9993](https://github.com/RooCodeInc/Roo-Code/pull/9993)). If you're using MCP servers that stream tool results, you'll experience more reliable data handling with no premature cutoffs.
+
+### TODO List Display Order
+
+TODO lists now display in the correct execution order ([#9991](https://github.com/RooCodeInc/Roo-Code/pull/9991)). Previously, the order could get scrambled, making it harder to follow multi-step workflows. Now your tasks always appear in the logical sequence they'll be executed.
 
 ## Provider Updates
 
-DeepSeek V3.2 is now available with a 50% price reduction and enhanced capabilities including native tools support and 8K output tokens.
+### DeepSeek V3.2: Better and Cheaper
 
-The xAI models catalog has been updated with corrected context windows, image support for grok-3 and grok-3-mini, and optimized tool preferences.
+DeepSeek has updated their flagship model with significant improvements:
+- **50% price reduction** making it even more cost-effective
+- **Native tools support** for more reliable tool calling
+- **8K output tokens** allowing longer, more comprehensive responses
 
-DeepSeek V3.2 support has been added for Baseten, along with improved model definitions for better performance.
+If you're using DeepSeek for cost-effective AI assistance, this update delivers better performance at an even better price point.
 
-Bedrock now supports additional models including Kimi, MiniMax, and Qwen.
+### xAI Model Improvements
 
-OpenRouter automatically defaults to native tools when supported, improving overall reliability.
+The xAI model catalog has been updated with:
+- **Corrected context windows** ensuring you get the full capacity of each model
+- **Image support** for grok-3 and grok-3-mini, enabling multimodal use cases
+- **Optimized tool preferences** for better tool-calling behavior
 
-## Bug Fixes and Stability
+### Expanded Model Support
 
-MCP tool streaming reliability has been improved by preventing premature clearing of internal data structures.
+- **Bedrock** now supports additional models: Kimi, MiniMax, and Qwen, giving you more choices for your AWS-based workflows
+- **Baseten** added DeepSeek V3.2 support with optimized model definitions
 
-Telemetry has been refined to filter out 429 rate limit errors for cleaner metrics.
+## Architecture and Quality of Life
 
-TODO list display now shows items in correct execution order.
+### Decoupled Tool System
 
-Tool protocol selection is consistently available for OpenAI-compatible providers.
+Tools are now decoupled from the system prompt ([#9784](https://github.com/RooCodeInc/Roo-Code/pull/9784)), creating a more modular and maintainable architecture. While this is primarily an internal improvement, it sets the foundation for more flexible tool configuration and better debugging capabilities in future releases.
 
-Apply_diff is properly excluded from native tools when diff functionality is disabled.
+### Cleaner Telemetry
 
-Reasoning effort configurations now respect explicit model settings.
+Telemetry has been refined to filter out 429 rate limit errors ([#9987](https://github.com/RooCodeInc/Roo-Code/pull/9987)), providing cleaner metrics for understanding actual issues versus expected rate limiting behavior. This helps the development team focus on real problems rather than noise in the data.
 
-API timeout handling has been enhanced across providers, with improved error messages and logging.
+### Multiple Bug Fixes
 
-Provider configurations are sanitized to prevent infinite loops, and UI elements properly adapt to VSCode themes.
+Both releases include numerous stability improvements and bug fixes across providers, UI theming, API timeout handling, configuration edge cases, and more. These collectively make Roo Code more robust and reliable across diverse usage scenarios.
 
-Error suppression and tool event processing have been improved across all supported providers.
+## Looking Forward
 
-Performance has been optimized by eliminating unnecessary token counting requests.
+These releases represent our continued focus on making Roo Code not just more powerful, but more understandable and reliable. By surfacing what's happening under the hood—from context management to detailed error information—we're helping you work more effectively and troubleshoot issues faster when they arise.
 
-## Web Platform Enhancements
-
-New product pages have been added to improve the web experience.
-
-Evaluation run management includes deletion capabilities, advanced filtering by timeframe and model, bulk operations, and run notes.
-
-Multi-model evaluations can now be launched simultaneously with automatic staggering for comprehensive testing.
-
-## Video Walkthrough
-
-Coming soon: A detailed video walkthrough of these new features and improvements.
-
-<!-- Placeholder for YouTube embed -->
-<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Roo Code Weekly Update - December 10, 2025" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
-
-These releases represent significant progress in stability, feature completeness, and user experience. The improvements span from core functionality to peripheral enhancements, making Roo Code more reliable and capable for development workflows.
+The combination of better transparency, new capabilities, and performance improvements makes v3.36.3 and v3.36.4 significant updates for all Roo Code users.
