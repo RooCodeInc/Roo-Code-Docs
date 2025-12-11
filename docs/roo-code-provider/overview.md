@@ -41,6 +41,13 @@ best to check the privacy policy of the vendors themselves.
 
 You can always find the current pricing [on our website](https://roocode.com/provider) or the Roo Code Cloud app, under ["Models"](https://app.roocode.com/models).
 
+:::info Looking for free inference?
+When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute gift box icon). Those free minutes cover both the [Cloud Agent](/roo-code-cloud/cloud-agents) run time _and_ inference via the Roo Code Cloud provider (which, as we established, cost credits). Those can't be used in the extension.
+
+If you want free inference in the extension, choose a free model (or another provider which may offer it to your for free).
+:::
+
+
 ## How to use it
 
 ### Roo Code Cloud Agents

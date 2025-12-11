@@ -23,18 +23,18 @@ This page answers some common questions about Roo Code.
 
 ### What is Roo Code?
 
-Roo Code is an AI-powered autonomous coding agent that lives in your editor.
+Roo Code is an AI-powered suite of coding products designed to take full advantage of the most advanced large-language models.
 
 ### How does Roo Code work?
 
 Roo Code uses large language models (LLMs) to understand your requests and translate them into actions.  It can:
 
-*   Read and write files in your project.
-*   Execute commands in your VS Code terminal.
-*   Perform web browsing (if enabled).
-*   Use external tools via the Model Context Protocol (MCP).
+- Read and write files in your project
+- Execute shell commands
+- Perform web browsing (if enabled)
+- Use external tools via the Model Context Protocol (MCP)
 
-You interact with Roo Code through a chat interface, where you provide instructions and review/approve its proposed actions.
+You interact with Roo Code through either a chat interface (in the Extension) or through different channels (in the Cloud).
 
 ### What can Roo Code do?
 
@@ -51,7 +51,11 @@ Roo Code can help with a variety of coding tasks, including:
 
 ### Is Roo Code free to use?
 
-The Roo Code extension itself is free and open-source. However, Roo Code relies on external API providers (like [Anthropic](providers/anthropic), [OpenAI](providers/openai), [OpenRouter](providers/openrouter), [Requesty](providers/requesty), etc.) for its AI capabilities.  These providers typically charge for API usage based on the number of tokens processed.  You will need to create an account and obtain an API key from your chosen provider.  See [Setting Up Your First AI Provider](getting-started/connecting-api-provider) for details.
+The Roo Code Extension is free and [open-source](https://github.com/RooCodeInc/Roo-Code/).
+The Roo Code Cloud platform is also free, but some functionality is paid.
+
+In both cases, Roo Code relies on external LLM inference providers (like [Anthropic](providers/anthropic), [OpenAI](providers/openai), [OpenRouter](providers/openrouter), [Requesty](providers/requesty), etc.) for its AI capabilities. We also offer [our own provider](/roo-code-provider/overview) as an alternative.
+These providers typically charge for API usage based on the number of tokens processed.  You will need to create an account and obtain an API key from your chosen provider. Learn more [about providers and how to set them up](/providers/) for details.
 
 ### What are the risks of using Roo Code?
 
@@ -71,31 +75,20 @@ See the [Installation Guide](/getting-started/installing) for detailed instructi
 
 ### Which API providers are supported?
 
-Roo Code supports a wide range of API providers, including:
-*   [Anthropic (Claude)](/providers/anthropic)
-*   [OpenAI](/providers/openai)
-*   [OpenRouter](/providers/openrouter)
-*   [Google Gemini](/providers/gemini)
-*   [Glama](/providers/glama)
-*   [AWS Bedrock](/providers/bedrock)
-*   [GCP Vertex AI](/providers/vertex)
-*   [Ollama](/providers/ollama)
-*   [LM Studio](/providers/lmstudio)
-*   [DeepSeek](/providers/deepseek)
-*   [Mistral](/providers/mistral)
-*   [Unbound](/providers/unbound)
-*   [Requesty](/providers/requesty)
-*   [VS Code Language Model API](/providers/vscode-lm)
+See the [full list here](/providers/).
 
 ### How do I get an API key?
+
 Each API provider has its own process for obtaining an API key.  See the [Setting Up Your First AI Provider](/getting-started/connecting-api-provider) for links to the relevant documentation for each provider.
+
+If you use the [Roo Code Cloud Provider](/roo-code-provider/overview), you don't need an API key.
 
 ### Can I use Roo Code with local models?
 Yes, Roo Code supports running models locally using [Ollama](/providers/ollama) and [LM Studio](/providers/lmstudio).  See [Using Local Models](/advanced-usage/local-models) for instructions.
 
 ---
 
-## Usage
+## Extension Usage
 
 ### How do I start a new task?
 Open the Roo Code panel (<KangarooIcon />) and type your task in the chat box. Be clear and specific about what you want Roo Code to do. See [Typing Your Requests](/basic-usage/typing-your-requests) for best practices.

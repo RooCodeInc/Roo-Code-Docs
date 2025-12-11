@@ -12,9 +12,14 @@ keywords:
 image: /img/social-share.jpg
 ---
 
-# Update Notes
+# Extension Release Notes
 
- 
+See what's new in every release here.
+
+We release often, sometimes multiple times per day, so make sure to always be on the latest to have access to the most recent bug fixes and improvements.
+
+If you want to live on the edge and try things out before released, we have a [Nightly channel](https://marketplace.visualstudio.com/items?itemName=RooVeterinaryInc.roo-code-nightly).
+
 ---
 
 ### Version 3.36

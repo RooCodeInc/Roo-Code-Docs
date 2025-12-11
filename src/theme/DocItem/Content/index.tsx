@@ -29,7 +29,7 @@ function useSyntheticTitle(): string | null {
 export default function DocItemContent({children}: Props): ReactNode {
   const syntheticTitle = useSyntheticTitle();
   return (
-    <div className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown')}>
+    <div className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown doc-container')}>
       {syntheticTitle && (
         <header>
           <Heading as="h1">{syntheticTitle}</Heading>

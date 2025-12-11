@@ -34,6 +34,12 @@ Model pricing can be found in the [provider page](https://roocode.com/provider) 
 
 We don't include prices here just to make sure they're always up-to-date.
 
+## How do I get free credits or free minutes or free tokens?
+
+When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute <LucideIcon name="Gift" style={{ width: 14, position: "relative", top: 4}} /> icon). Those free minutes cover both the [Cloud Agent](/roo-code-cloud/cloud-agents) run time _and_ inference via the Roo Code Cloud provider (both of which normally cost credits). Those can't be used in the extension – they're there for you to try the magic of Cloud Agents.
+
+If you want free inference in the extension, choose a free model (or another provider which may offer it to your for free).
+
 ## How can I buy credits?
 
 ### Single purchase
