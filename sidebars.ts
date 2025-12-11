@@ -742,6 +742,13 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
+      type: 'category',
+      label: 'Weekly Updates',
+      items: [
+        { type: 'doc', id: 'weekly-updates/2025-12-10', label: 'December 10, 2025' },
+      ],
+    },
+    {
       type: 'doc',
       label: 'FAQ',
       id: 'faq'

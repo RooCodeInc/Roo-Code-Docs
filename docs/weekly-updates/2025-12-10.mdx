@@ -1,0 +1,92 @@
+---
+title: Weekly Update - December 10, 2025
+description: Highlights from Roo Code releases v3.36.3 and v3.36.4, including new features, bug fixes, and provider updates.
+keywords:
+  - roo code weekly update
+  - v3.36.3
+  - v3.36.4
+  - new features
+  - bug fixes
+image: /img/weekly-updates/2025-12-10.png
+---
+
+# Roo Code Weekly Update - December 10, 2025
+
+This week brings two significant releases, v3.36.3 and v3.36.4, with substantial improvements across the board. From new features to stability enhancements, here's what's changed.
+
+## New Features
+
+Browser automation capabilities have been expanded with screenshot saving functionality. The browser tool now supports capturing visual states during automation tasks through a new screenshot action.
+
+A new search_replace native tool provides precise, single-replacement file operations. This tool requires unique text context identification to ensure accurate modifications, complementing the existing apply_diff functionality.
+
+Error debugging is now more comprehensive with an on-demand error details modal. Users can access full error information and copy details directly from error rows in the interface.
+
+Gemini model users gain more control with minimal and medium reasoning effort levels, allowing finer-grained adjustment of model behavior.
+
+Real-time feedback during generation is improved with streaming tool statistics and token usage throttling, providing better visibility into AI performance.
+
+Versioned settings support has been added for the Roo provider, enabling smoother updates through minimum plugin version gating.
+
+Architect mode now organizes plans in a dedicated /plans directory that is automatically gitignored, maintaining cleaner workspaces.
+
+The user interface has been enhanced with announcement support CTAs and updated social icons for better community engagement.
+
+## Architecture Improvements
+
+Context management has been unified with improved UX, providing real-time feedback on file operations and context handling.
+
+Tools have been decoupled from the system prompt for better modularity and maintainability.
+
+ThinkingBudget components have been consolidated, and time estimates have been removed from Architect mode to maintain focus on planning.
+
+## Provider Updates
+
+DeepSeek V3.2 is now available with a 50% price reduction and enhanced capabilities including native tools support and 8K output tokens.
+
+The xAI models catalog has been updated with corrected context windows, image support for grok-3 and grok-3-mini, and optimized tool preferences.
+
+DeepSeek V3.2 support has been added for Baseten, along with improved model definitions for better performance.
+
+Bedrock now supports additional models including Kimi, MiniMax, and Qwen.
+
+OpenRouter automatically defaults to native tools when supported, improving overall reliability.
+
+## Bug Fixes and Stability
+
+MCP tool streaming reliability has been improved by preventing premature clearing of internal data structures.
+
+Telemetry has been refined to filter out 429 rate limit errors for cleaner metrics.
+
+TODO list display now shows items in correct execution order.
+
+Tool protocol selection is consistently available for OpenAI-compatible providers.
+
+Apply_diff is properly excluded from native tools when diff functionality is disabled.
+
+Reasoning effort configurations now respect explicit model settings.
+
+API timeout handling has been enhanced across providers, with improved error messages and logging.
+
+Provider configurations are sanitized to prevent infinite loops, and UI elements properly adapt to VSCode themes.
+
+Error suppression and tool event processing have been improved across all supported providers.
+
+Performance has been optimized by eliminating unnecessary token counting requests.
+
+## Web Platform Enhancements
+
+New product pages have been added to improve the web experience.
+
+Evaluation run management includes deletion capabilities, advanced filtering by timeframe and model, bulk operations, and run notes.
+
+Multi-model evaluations can now be launched simultaneously with automatic staggering for comprehensive testing.
+
+## Video Walkthrough
+
+Coming soon: A detailed video walkthrough of these new features and improvements.
+
+<!-- Placeholder for YouTube embed -->
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Roo Code Weekly Update - December 10, 2025" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+
+These releases represent significant progress in stability, feature completeness, and user experience. The improvements span from core functionality to peripheral enhancements, making Roo Code more reliable and capable for development workflows.
