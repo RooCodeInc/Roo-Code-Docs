@@ -475,6 +475,27 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
         </filtering>
         <categories>Features, QOL Improvements, Bug Fixes, Provider Updates</categories>
         <critical>QOL Improvements MUST come before Bug Fixes</critical>
+        <user_facing_rewrite>
+          <principles>
+            <principle priority="CRITICAL">Rewrite every item into a user-facing statement; do not ship raw PR titles.</principle>
+            <principle priority="HIGH">Lead with the user symptom or capability, then the fix/change, and where it appears in the UI or workflow.</principle>
+            <principle priority="HIGH">Avoid backend or protocol jargon unless it is the exact UI label the user clicks.</principle>
+          </principles>
+          <template>
+            <problem>What users saw or could not do (include the surface area: page, menu, toggle, dialog, workflow).</problem>
+            <change>What changed in one clause (fixed/added/improved).</change>
+            <benefit>Why it matters to the user now (clearer, faster, unblocked, safer).</benefit>
+            <example>
+              <before>Always show tool protocol selector for OpenAI-compatible providers</before>
+              <after>Fixes an issue where the pulldown that lets you choose how Roo communicates with the API (Native vs XML) in the Advanced section of the Providers settings would sometimes fail to appear when using the OpenAI Compatible provider.</after>
+            </example>
+          </template>
+          <checks>
+            <check>Each bullet must answer: what changed, where the user sees it, why it matters.</check>
+            <check>Replace internal terms (e.g., "protocol selector") with the on-screen wording users see.</check>
+            <check>For fixes, start with “Fixes an issue where …” or “Resolves a problem where …” instead of echoing PR titles.</check>
+          </checks>
+        </user_facing_rewrite>
       </step>
       
       <step number="2">
