@@ -14,102 +14,102 @@ image: /img/weekly-updates/2025-12-10.png
 
 This week brings two significant releases: v3.36.3 and v3.36.4. These updates focus on making Roo Code more transparent, reliable, and easier to troubleshoot, while adding powerful new capabilities for browser automation and advanced AI models.
 
-## Understanding What's Happening: Better Transparency
+## Better Transparency
 
-### Context Management You Can Actually See
+### Visible Context Management
 
-One of the most significant improvements in this release is making context management visible ([#9795](https://github.com/RooCodeInc/Roo-Code/pull/9795)). Previously, when Roo Code condensed or truncated your conversation history to fit within token limits, this happened silently in the background—leaving you wondering why responses might seem to lose track of earlier context.
+One of the most significant improvements in this release is making context management visible ([#9795](https://github.com/RooCodeInc/Roo-Code/pull/9795)). Previously, when Roo Code condensed or truncated your conversation history to fit within token limits, this happened silently in the background. This left you wondering why responses might seem to lose track of earlier context.
 
-Now you'll see exactly what's happening:
-- **In-progress indicators** appear when context management begins, so you know Roo is optimizing your conversation
+Now you get real-time feedback:
+- **In-progress indicators** appear when context management begins
 - **Condensation summaries** show how many tokens were saved (e.g., "Reduced from 45,000 to 12,000 tokens") with an expandable summary of what was condensed
 - **Truncation notifications** tell you when older messages are removed, including which messages and why
 
-This transparency helps you understand when you're approaching context limits and make better decisions about when to start fresh conversations versus continuing existing ones.
+This helps you understand when you're approaching context limits and make better decisions about when to start fresh conversations.
 
-### Error Messages That Actually Help
+### Improved Error Messages
 
 We've made two major improvements to error handling that will save you time when things go wrong.
 
-**For OpenAI users** ([#9639](https://github.com/RooCodeInc/Roo-Code/pull/9639)), error messages are now significantly more detailed. Instead of seeing generic error text, you'll get the actual error details from OpenAI's API, making it much easier to understand what went wrong—whether it's a billing issue, rate limit, or model availability problem.
+**For OpenAI users** ([#9639](https://github.com/RooCodeInc/Roo-Code/pull/9639)), error messages are now significantly more detailed. Instead of seeing generic error text, you get the actual error details from OpenAI's API. This makes it easier to understand what went wrong, whether it's a billing issue, rate limit, or model availability problem.
 
-**For everyone** ([#9985](https://github.com/RooCodeInc/Roo-Code/pull/9985)), error messages now include an info icon you can click to see the complete error details in a modal dialog. This gives you clean, concise error messages by default, with the ability to dive into full technical details when you need them. Plus, there's a copy button to easily share error details when reporting issues or seeking help.
+**For everyone** ([#9985](https://github.com/RooCodeInc/Roo-Code/pull/9985)), error messages now include an info icon you can click to see the complete error details in a modal dialog. This gives you clean, concise error messages by default, with the ability to dive into full technical details when you need them. There's also a copy button to easily share error details when reporting issues or seeking help.
 
 ## New Capabilities
 
-### Browser Screenshots for Documentation and Debugging
+### Browser Screenshots
 
-The browser automation tool can now save screenshots ([#9963](https://github.com/RooCodeInc/Roo-Code/pull/9963)). This is incredibly useful for:
+The browser automation tool can now save screenshots ([#9963](https://github.com/RooCodeInc/Roo-Code/pull/9963)). This is useful for:
 - **Documenting web UI states** during testing or development
 - **Creating visual records** of browser automation workflows
 - **Debugging visual issues** by capturing exactly what the browser sees at specific moments
 - **Building tutorials** with step-by-step screenshots automatically generated during automation
 
-When Roo uses the browser tool, it can now capture and save visual states to specific file paths, making browser automation workflows more comprehensive and self-documenting.
+When Roo uses the browser tool, it can now capture and save visual states to specific file paths.
 
-### Maximum Reasoning Power for OpenAI's o1 Models
+### Extra-High Reasoning Effort
 
-For users of OpenAI's most advanced reasoning model, gpt-5.1-codex-max, you can now access "extra-high" reasoning effort ([#9900](https://github.com/RooCodeInc/Roo-Code/pull/9900)). This gives you even more control over the model's thinking depth for complex coding tasks that benefit from extended reasoning time.
+For users of OpenAI's gpt-5.1-codex-max model, you can now access "extra-high" reasoning effort ([#9900](https://github.com/RooCodeInc/Roo-Code/pull/9900)). This gives you more control over the model's thinking depth for complex coding tasks that benefit from extended reasoning time.
 
-### Smarter Tool Usage on OpenRouter
+### Native Tools on OpenRouter
 
-When using models through OpenRouter, Roo Code now automatically defaults to native tool calling when the model supports it ([#9878](https://github.com/RooCodeInc/Roo-Code/pull/9878)). Native tool calling is more reliable and efficient than simulated approaches, so this change means better performance and fewer errors when working with capable models on OpenRouter—without requiring you to manually configure anything.
+When using models through OpenRouter, Roo Code now automatically defaults to native tool calling when the model supports it ([#9878](https://github.com/RooCodeInc/Roo-Code/pull/9878)). Native tool calling is more reliable and efficient than simulated approaches, so this change means better performance and fewer errors. No manual configuration needed.
 
-## Performance and Reliability Improvements
+## Performance and Reliability
 
 ### Faster Token Counting
 
-We've eliminated unnecessary token counting API requests ([#9884](https://github.com/RooCodeInc/Roo-Code/pull/9884)) for Anthropic, Gemini, and MiniMax providers. Previously, Roo Code was making extra API calls just to count tokens, which added latency and cost. Now we use fast local token estimation (tiktoken heuristics) that's accurate enough for all practical purposes while being essentially instantaneous and free.
+We've eliminated unnecessary token counting API requests ([#9884](https://github.com/RooCodeInc/Roo-Code/pull/9884)) for Anthropic, Gemini, and MiniMax providers. Previously, Roo Code was making extra API calls just to count tokens, which added latency and cost. Now we use fast local token estimation (tiktoken heuristics) that's accurate enough for practical purposes while being essentially instantaneous and free.
 
-The result: snappier responses and reduced API costs, especially during long conversations where token counting was happening frequently.
+The result: snappier responses and reduced API costs, especially during long conversations.
 
-### MCP Tool Streaming Reliability
+### MCP Tool Streaming
 
 Fixed an issue where MCP tool streaming could fail prematurely ([#9993](https://github.com/RooCodeInc/Roo-Code/pull/9993)). If you're using MCP servers that stream tool results, you'll experience more reliable data handling with no premature cutoffs.
 
 ### TODO List Display Order
 
-TODO lists now display in the correct execution order ([#9991](https://github.com/RooCodeInc/Roo-Code/pull/9991)). Previously, the order could get scrambled, making it harder to follow multi-step workflows. Now your tasks always appear in the logical sequence they'll be executed.
+TODO lists now display in the correct execution order ([#9991](https://github.com/RooCodeInc/Roo-Code/pull/9991)). Previously, the order could get scrambled. Now your tasks always appear in the logical sequence they'll be executed.
 
 ## Provider Updates
 
-### DeepSeek V3.2: Better and Cheaper
+### DeepSeek V3.2
 
 DeepSeek has updated their flagship model with significant improvements:
-- **50% price reduction** making it even more cost-effective
+- **50% price reduction**
 - **Native tools support** for more reliable tool calling
-- **8K output tokens** allowing longer, more comprehensive responses
+- **8K output tokens** for longer responses
 
-If you're using DeepSeek for cost-effective AI assistance, this update delivers better performance at an even better price point.
+If you're using DeepSeek for cost-effective AI assistance, this update delivers better performance at a better price.
 
-### xAI Model Improvements
+### xAI Models
 
 The xAI model catalog has been updated with:
-- **Corrected context windows** ensuring you get the full capacity of each model
-- **Image support** for grok-3 and grok-3-mini, enabling multimodal use cases
+- **Corrected context windows** so you get the full capacity of each model
+- **Image support** for grok-3 and grok-3-mini
 - **Optimized tool preferences** for better tool-calling behavior
 
 ### Expanded Model Support
 
-- **Bedrock** now supports additional models: Kimi, MiniMax, and Qwen, giving you more choices for your AWS-based workflows
+- **Bedrock** now supports additional models: Kimi, MiniMax, and Qwen
 - **Baseten** added DeepSeek V3.2 support with optimized model definitions
 
-## Architecture and Quality of Life
+## Architecture Improvements
 
 ### Decoupled Tool System
 
-Tools are now decoupled from the system prompt ([#9784](https://github.com/RooCodeInc/Roo-Code/pull/9784)), creating a more modular and maintainable architecture. While this is primarily an internal improvement, it sets the foundation for more flexible tool configuration and better debugging capabilities in future releases.
+Tools are now decoupled from the system prompt ([#9784](https://github.com/RooCodeInc/Roo-Code/pull/9784)), creating a more modular architecture. While this is primarily an internal improvement, it sets the foundation for more flexible tool configuration and better debugging in future releases.
 
 ### Cleaner Telemetry
 
-Telemetry has been refined to filter out 429 rate limit errors ([#9987](https://github.com/RooCodeInc/Roo-Code/pull/9987)), providing cleaner metrics for understanding actual issues versus expected rate limiting behavior. This helps the development team focus on real problems rather than noise in the data.
+Telemetry has been refined to filter out 429 rate limit errors ([#9987](https://github.com/RooCodeInc/Roo-Code/pull/9987)), providing cleaner metrics for understanding actual issues versus expected rate limiting behavior.
 
 ### Multiple Bug Fixes
 
-Both releases include numerous stability improvements and bug fixes across providers, UI theming, API timeout handling, configuration edge cases, and more. These collectively make Roo Code more robust and reliable across diverse usage scenarios.
+Both releases include numerous stability improvements and bug fixes across providers, UI theming, API timeout handling, and configuration edge cases.
 
 ## Looking Forward
 
-These releases represent our continued focus on making Roo Code not just more powerful, but more understandable and reliable. By surfacing what's happening under the hood—from context management to detailed error information—we're helping you work more effectively and troubleshoot issues faster when they arise.
+These releases focus on making Roo Code more transparent and reliable. By surfacing what's happening under the hood (from context management to detailed error information), we're helping you work more effectively and troubleshoot faster.
 
-The combination of better transparency, new capabilities, and performance improvements makes v3.36.3 and v3.36.4 significant updates for all Roo Code users.
+The combination of better transparency, new capabilities, and performance improvements makes v3.36.3 and v3.36.4 significant updates for all users.
