@@ -1,11 +1,12 @@
 ---
 sidebar_label: Z AI
-description: Configure Z AI models in Roo Code. Access GLM-4.5 series models with region-aware routing for international and China mainland users.
+description: Configure Z AI models in Roo Code. Access GLM-4.6 series models with region-aware routing for international and China mainland users.
 keywords:
   - z ai
   - zai
   - zhipu ai
   - glm-4.5
+  - glm-4.6
   - roo code
   - api provider
   - china ai
@@ -16,7 +17,7 @@ image: /img/social-share.jpg
 
 # Using Z AI With Roo Code
 
-Z AI (Zhipu AI) provides advanced language models with the GLM-4.5 series. The provider offers region-aware routing with separate endpoints for international users and China mainland users.
+Z AI (Zhipu AI) provides advanced language models with the GLM-4.6 series. The provider offers region-aware routing with separate endpoints for international users and China mainland users.
 
 **Website:** [https://z.ai/model-api](https://z.ai/model-api) (International) | [https://open.bigmodel.cn/](https://open.bigmodel.cn/) (China)
 
