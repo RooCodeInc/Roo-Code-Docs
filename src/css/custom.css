@@ -1598,6 +1598,14 @@ main[class*="docMainContainer"] {
   text-decoration: underline;
 }
 
+.theme-doc-markdown a > svg {
+  height: 14px;
+  position: relative;
+  top: -1px;
+  width: 14px;
+  vertical-align: middle;
+}
+
 /* List spacing */
 .theme-doc-markdown ul,
 .theme-doc-markdown ol {
@@ -1674,7 +1682,7 @@ main[class*="docMainContainer"] {
 
 /* Admonitions (alerts) with roocode.com style */
 .theme-admonition {
-  margin: var(--figure-margin) 0 !important;
+  margin: var(--block-spacing) 0 !important;
   padding: calc(var(--block-spacing) * 0.5) calc(var(--block-spacing) * 0.5) calc(var(--block-spacing) * 0.25) !important;
   border-radius: calc(var(--radius) + 4px) !important;
   border: 1px solid hsl(var(--border) / 0.5) !important;
@@ -1687,7 +1695,7 @@ main[class*="docMainContainer"] {
   font-size: var(--text-regular-size);
   font-weight: 700 !important;
   text-transform: none;
-}
+}   
 
 .theme-admonition svg {
   margin-right: 0.1em !important;
@@ -1703,8 +1711,8 @@ main[class*="docMainContainer"] {
 
 .theme-admonition-info > div,
 .theme-admonition-info > div svg {
-  color: rgb(var(--accent));
-  fill: rgb(var(--accent));
+  /* color: rgb(var(--accent));
+  fill: rgb(var(--accent)); */
 }
 
 
@@ -1885,13 +1893,25 @@ main[class*="docMainContainer"] {
 }
 
 /* Image captions */
-.theme-doc-markdown img + em {
+.theme-doc-markdown figure {
+  margin: var(--block-spacing) calc(var(--block-spacing) * 0.5);
+  width: fit-content;
+}
+
+.theme-doc-markdown figure img {
   display: block;
-  text-align: center;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.theme-doc-markdown figure figcaption,
+.theme-doc-markdown img + em {
   color: hsl(var(--muted-foreground));
-  font-size: 0.875rem;
-  margin-top: -1.5rem;
-  margin-bottom: 2rem;
+  display: block;
+  font-size: calc(var(--text-regular-size) * 0.9);
+  font-style: normal;
+  margin-top: -1rem;
+  text-align: center;
 }
 
 /* HR styling */
