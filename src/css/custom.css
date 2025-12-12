@@ -349,9 +349,9 @@ div[style*="min-height:100vh"] {
 .video-title {
   font-weight: 500;
   color: var(--ifm-heading-color);
-  display: box;
-  line-clamp: 2;
-  box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.4;
   max-height: 2.8em; /* 2 lines * 1.4 line-height */

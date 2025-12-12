@@ -54,7 +54,7 @@ We curate the best models for coding and offer them directly to you.
 
 ## Pricing & Credits
 
-Roo Code Cloud operates on a [Credit System](/roo-code-cloud/credits).
+Roo Code Cloud operates on a [Credit System](/roo-code-cloud/billing-subscriptions).
 - **Promotional Period**: Currently, all standard usage for the models listed above is **100% FREE**.
 - **Future Pricing**: We will introduce a transparent credit-based system for usage beyond the free tier. You will always be notified before any charges apply.
 
