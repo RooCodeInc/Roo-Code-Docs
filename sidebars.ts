@@ -180,6 +180,7 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: '3.36',
           items: [
+            { type: 'doc', id: 'update-notes/v3.36.5', label: '3.36.5' },
             { type: 'doc', id: 'update-notes/v3.36.4', label: '3.36.4' },
             { type: 'doc', id: 'update-notes/v3.36.3', label: '3.36.3' },
             { type: 'doc', id: 'update-notes/v3.36.2', label: '3.36.2' },
