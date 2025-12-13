@@ -1,12 +1,5 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
-import tutorialVideos from './docs/tutorial-videos.json';
 import modelProviders from './docs/providers/index.json';
-
-// Helper function to truncate long titles
-function truncateTitle(title: string, maxLength: number = 40): string {
-  if (title.length <= maxLength) return title;
-  return title.substring(0, maxLength - 3) + '...';
-}
 
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
@@ -180,6 +173,8 @@ const sidebars: SidebarsConfig = {
           type: 'category',
           label: '3.36',
           items: [
+            { type: 'doc', id: 'update-notes/v3.36', label: '3.36 Combined' },
+            { type: 'doc', id: 'update-notes/v3.36.6', label: '3.36.6' },
             { type: 'doc', id: 'update-notes/v3.36.5', label: '3.36.5' },
             { type: 'doc', id: 'update-notes/v3.36.4', label: '3.36.4' },
             { type: 'doc', id: 'update-notes/v3.36.3', label: '3.36.3' },
