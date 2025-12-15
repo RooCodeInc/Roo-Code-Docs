@@ -283,9 +283,9 @@ const config: Config = {
             to: '/providers/roo-code-cloud',
             from: ['/providers/roo'],
           },
-          // Redirect deleted billing-subscriptions page to Roo Code Cloud overview
+          // Redirect deleted billing-subscriptions page
           {
-            to: '/roo-code-cloud/overview',
+            to: '/credits/overview',
             from: ['/roo-code-cloud/billing-subscriptions'],
           },
         ],

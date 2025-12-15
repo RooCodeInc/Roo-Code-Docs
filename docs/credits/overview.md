@@ -17,6 +17,9 @@ Roo Code is composed of a few products:
 
 In order to use paid models via our provider and to run Cloud agents, you need credits.
 
+:::info Up-to-date pricing
+You can see the plans we offer and the most up-to-date pricing on our [pricing page](https://roocode.com/pricing)
+:::
 ----
 
 ## What are credits?
@@ -33,6 +36,10 @@ Our [pricing page](https://roocode.com/pricing) always has the latest on our pla
 Model pricing can be found in the [provider page](https://roocode.com/provider) of our website.
 
 We don't include prices here just to make sure they're always up-to-date.
+
+## How are credits and the monthly subscription related?
+
+The monthly subscription to the Team plan simply unlocks advanced functionality. It doesn't include any credits. And the free plan doesn't have any recurring subscription fees, you only pay for the credits you purchase.
 
 ## How do I get free credits or free minutes or free tokens?
 
