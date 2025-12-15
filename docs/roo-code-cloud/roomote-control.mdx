@@ -24,16 +24,7 @@ It creates a bidirectional connection between your local VS Code extension and R
 
 Think of it as a halfway point between autonomous [Cloud Agents](/roo-code-cloud/cloud-agents) and overseeing Roo in the extension.
 
-## Key Features
-
-- **Chat interface** — Similar to IDE chat for core interactions; some settings and customizations aren't available in the browser
-- **Start New Tasks** — Launch tasks in any connected workspace
-- **Stop Running Tasks** — Safely terminate active tasks
-- **Task Switching** — Navigate between tasks including resuming tasks that have been stopped or closed
-- Single active task per workspace is enforced
-
-:::note Requirements
-- A paid plan
+:::note Things to keep in mind
 - Task Sync must be enabled
 - Remote Control must be enabled
 - Your IDE must be running and connected to the internet
@@ -44,30 +35,21 @@ Think of it as a halfway point between autonomous [Cloud Agents](/roo-code-cloud
 
 ## Getting Started
 
-#### Step 1: Connect Your Account
+1. Connect your Roo Code extension to Roo Code Cloud. Follow [Connect the Extension to Cloud](/roo-code-cloud/connect#quickstart) or [Login/Signup](/roo-code-cloud/login).
+2. Ensure Task Sync and Roomote Control are enabled:
+    - In the IDE: Click the cloud icon <Codicon name="cloud" /> and toggle Task Sync first, then Roomote Control in the Cloud panel.
+        <img src="/img/roomote-control/roomote-control-ext.png" alt="How your settings should look" width="340" />
+    - In the web app: Go to Settings › User and toggle Task Sync and Roomote Control. You may also see inline "Enable …" banners on Home/Task pages.
 
-Connect your Roo Code extension to Roo Code Cloud. Follow [Connect the Extension to Cloud](/roo-code-cloud/connect#quickstart) or [Login/Signup](/roo-code-cloud/login).
+3. Your workspace(s) should appear in the sidebar in the web app.
 
-#### Step 2: Upgrade to a paid plan
+### Creating a task
 
-Go to [Upgrade](https://app.roocode.com/billing), choose your plan and follow the instructions.
+1. Click New Task on a connected workspace card in the web app.
+2. Enter a task description and click Start.
+3. Watch progress and interact in real time.
 
-#### Step 3: Ensure Task Sync and Roomote Control are enabled
-
-You should have them on by default, but if not:
-- In the IDE: Click the cloud icon <Codicon name="cloud" /> and toggle Task Sync first, then Roomote Control in the Cloud panel.
-    <img src="/img/roomote-control/roomote-control-ext.png" alt="How your settings should look" width="340" />
-- In the web app: Go to Settings › User and toggle Task Sync and Roomote Control. You may also see inline "Enable …" banners on Home/Task pages.
-
-#### Step 4: Start a Remote Task
-
-When connected and enabled:
-1. Your VS Code workspace(s) appear in the web app.
-2. Click New Task on a connected workspace card.
-3. Enter a task description and click Start.
-4. Watch progress and interact in real time.
-
-If "New Task" is disabled, upgrade/enable in Settings › User › Roomote Control.
+If "New Task" is disabled, enable in Settings › User › Roomote Control.
 
 ## Notifications
 
