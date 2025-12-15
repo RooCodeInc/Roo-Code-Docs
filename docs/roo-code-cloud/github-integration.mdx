@@ -18,7 +18,7 @@ Roo Code Cloud integrates directly with GitHub to bring your autonomous Cloud Ag
 
 ## Integration Touchpoints
 
-Here are the ways [Cloud Agents](/roo-code-cloud/cloud-agents) integrate with Github:
+Here are the ways [Cloud Agents](/roo-code-cloud/cloud-agents) integrate with GitHub:
 - **Code creation:** the Coder agent delivers its work via git. When you ask it to create/change something, it will make changes in its container enviornment, commit them locally, push to the remote repository and create a PR describing it all. You can change its settings to create a draft (not regular) PR, or to just push to the remote branch, without creating a PR.
 - **Code review:** the Reviewer agent delivers its work via Github PR comments. It will automatically review newly created PRs (including by the Coder!) in the repositories where it's enabled, by adding comments. It will also review subsequent commits which get pushed to that branch. You can control criteria for what PRs get reviewd in the its settings.
 - **Code fixes:** the Fixer agent delivers its work via pushes to Github branches (and comments). When you invoke it from a PR (see below) it will read through comments (made by humans or Cloud Agents) and implement proper fixes, taking any additional instructions you give it into consideration. It will do so by checking out the PR branch in its environment, commiting changes and pushing them to the branch (and leaving a comment when its done so you can know).
