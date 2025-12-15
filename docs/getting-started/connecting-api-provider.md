@@ -19,7 +19,7 @@ Roo Code needs an inference provider to access the LLM models that make it work.
 
 A great model to start is **Claude Sonnet 4.5**, which offers a lot of power at a reasonable price point. To get it going, choose a provider:
 
-- **Roo Code Cloud Provider (Recommended):** the easiest way to access multiple providers testes with Roo Code. No API needed. To get started, just choose Roo Code as a provider and follow instructions. [Learn more about it](/roo-code-provider/overview).
+- **Roo Code Cloud Provider (Recommended):** the easiest way to access multiple providers tested with Roo Code. No API needed. To get started, just choose Roo Code as a provider and follow instructions. [Learn more about it](/roo-code-provider/overview).
 
 - **OpenRouter:** Provides access to multiple AI models from different labs through a single API key. Great for flexibility and getting started reasonably fast. To get an API key, [follow these instructions <LucideIcon name="ArrowRight" />](/providers/openrouter#getting-an-api-key)
 
