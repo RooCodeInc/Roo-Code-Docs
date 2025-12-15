@@ -39,7 +39,7 @@ You can choose other models, but that introduces complexity. Different models va
 
 1. Open the Roo Code panel by clicking the Roo Code icon (<KangarooIcon />) in the VS Code Activity Bar
 2. In the welcome screen, choose your LLM provider.
-3. If you chooe the Roo Code Cloud provider, just connect your account and choose `anthropic/claude-sonner-4-5` from the dropdown. You're set.
+3. If you choose the Roo Code Cloud provider, just connect your account and choose `anthropic/claude-sonnet-4-5` from the dropdown. You're set.
 4. If you chose another provider, pase the API key you copied from it into the right field and continue
 5. Select your model (it should be called `claude-sonnet-4-5` or `anthropic/claude-sonnet-4-5`) and complete the process.
 
