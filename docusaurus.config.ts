@@ -283,6 +283,11 @@ const config: Config = {
             to: '/providers/roo-code-cloud',
             from: ['/providers/roo'],
           },
+          // Redirect deleted billing-subscriptions page to Roo Code Cloud overview
+          {
+            to: '/roo-code-cloud/overview',
+            from: ['/roo-code-cloud/billing-subscriptions'],
+          },
         ],
       },
     ],
