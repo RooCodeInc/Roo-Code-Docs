@@ -17,7 +17,7 @@ Auto-approve settings speed up your workflow by eliminating repetitive confirmat
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
   <iframe
-    src="https://www.youtube.com/embed/jW4_PPyRXCs"
+    src="https://www.youtube.com/embed/bWtIxGsl2cQ"
     style={{
       position: 'absolute',
       top: 0,
@@ -31,8 +31,6 @@ Auto-approve settings speed up your workflow by eliminating repetitive confirmat
   ></iframe>
 </div>
 <br />
-
-\* **Update:** We've added an auto-approve Question action since this video was made. [You can find it below](#follow-up-questions)!
 
 ---
 
@@ -84,9 +82,7 @@ The dropdown shows a grid of permission tiles. Controls:
 | **Use MCP servers** | Lets Roo use configured MCP services | Medium-High |
 | **Switch modes** | Changes between Roo modes automatically | Low |
 | **Create & complete subtasks** | Manages subtasks without confirmation | Low |
-| **Retry failed requests** | Automatically retries failed API requests | Low |
 | **Answer follow-up questions** | Selects default answer for follow-up questions| Low |
-| **Update todo list** | Automatically updates task progress | Low |
 
 ---
 
@@ -227,36 +223,6 @@ Allows Roo to control a headless browser without confirmation. This can include:
 Consider the security implications of allowing automated browser access.
 :::
 
-### API Requests
-
-:::info API Requests (Risk: Low)
-<img src="/img/auto-approving-actions/auto-approving-actions-17.png" alt="API requests retry setting with delay slider" width="550" />
-
-**Setting:** "Always retry failed API requests"
-
-**Description:** "Automatically retry failed API requests when server returns an error response"
-
-**Delay slider:** "Delay before retrying the request" (Default: 10 seconds)
-
-**Risk level:** Low
-
-This setting automatically retries API calls when they fail. The retry mechanism uses exponential backoff:
-- **Initial delay**: Set by the slider (default: 10 seconds)
-- **Backoff formula**: `min(baseDelay * 2^retryAttempt, 600)`
-- **Maximum delay**: 600 seconds (10 minutes)
-
-Example retry sequence with 10s base delay:
-- 1st retry: 10 seconds
-- 2nd retry: 20 seconds
-- 3rd retry: 40 seconds
-- 4th retry: 80 seconds
-- 5th retry: 160 seconds
-- 6th retry: 320 seconds
-- 7th+ retry: 600 seconds (capped)
-
-This exponential backoff helps prevent overwhelming APIs while still recovering from transient errors.
-:::
-
 ### MCP Tools
 
 :::caution MCP Tools (Risk: Medium-High)
@@ -384,35 +350,4 @@ Security tip: Be specific with prefixes. Instead of allowing all `python` comman
 - Overnight runs where you want Roo to continue working
 - Repetitive tasks where the default suggestions are usually correct
 - Testing workflows where interaction isn't critical
-:::
-
-### Update Todo List
-
-:::info Update Todo List (Risk: Low)
-
-**Setting:** "Always approve todo list updates"
-
-**Description:** "Automatically update the to-do list without requiring approval"
-
-**Risk level:** Low
-
-This setting allows Roo to automatically update task progress and todo lists during work sessions. This includes:
-- Marking tasks as completed
-- Adding new discovered tasks
-- Updating task status (pending, in progress, completed)
-- Reorganizing task priorities
-
-**Benefits:**
-- Maintains real-time task progress visibility
-- Reduces interruptions during multi-step workflows
-- Keeps project status accurately reflected
-- Helps track complex task dependencies
-
-**Use cases:**
-- Long-running development sessions
-- Multi-step refactoring projects
-- Complex debugging workflows
-- Feature implementation with many subtasks
-
-This is particularly useful when combined with the Subtasks permission, as it allows Roo to maintain a complete picture of project progress without constant approval requests.
 :::
