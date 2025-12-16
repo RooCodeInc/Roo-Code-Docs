@@ -1,1 +1,23 @@
-npm run build
+#!/bin/sh
+
+# Run build and capture output
+output=$(npm run build 2>&1)
+exit_code=$?
+
+# Display the output
+echo "$output"
+
+# Fail if build command failed
+if [ $exit_code -ne 0 ]; then
+  exit $exit_code
+fi
+
+# Fail if warnings were produced
+if echo "$output" | grep -qi "warning"; then
+  echo ""
+  echo "❌ Build produced warnings - commit blocked"
+  echo "Please fix the warnings above before committing."
+  exit 1
+fi
+
+echo "✅ Build passed with no warnings"
