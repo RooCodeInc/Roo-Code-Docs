@@ -31,7 +31,7 @@ You can see the [pricing for different plans here](https://roocode.com/pricing).
 | [Task Sharing](/roo-code-cloud/task-sharing) | Share tasks via secure, expiring links | Free |
 | [Roomote Control](/roo-code-cloud/roomote-control) | Browser-based task control while your IDE runs them | Paid |
 | [Cloud Agents](/roo-code-cloud/cloud-agents) | Run Roo in the cloud with credit-based runtime and BYO provider keys | Paid |
-| [Billing & Plans](/roo-code-cloud/billing-subscriptions) | Manage subscriptions, trials, and credit purchasing | Paid |
+| Billing & Plans | Manage subscriptions, trials, and credit purchasing | Paid |
 
 
 
@@ -41,4 +41,4 @@ You can see the [pricing for different plans here](https://roocode.com/pricing).
 2. Open [app.roocode.com](https://app.roocode.com/) and confirm your tasks appear.
 3. Turn on [Task Sync](/roo-code-cloud/task-sync) so activity syncs to the cloud.
 4. [Share a task](/roo-code-cloud/task-sharing) when you're ready for feedback or handoff.
-5. Optional: enable [Roomote Control](/roo-code-cloud/roomote-control) (Pro/Team) for remote control, or start a [Cloud Agent](/roo-code-cloud/cloud-agents). Manage plans in [Billing & Plans](/roo-code-cloud/billing-subscriptions).
+5. Optional: enable [Roomote Control](/roo-code-cloud/roomote-control) (Pro/Team) for remote control, or start a [Cloud Agent](/roo-code-cloud/cloud-agents). Manage plans in [pricing](https://roocode.com/pricing).

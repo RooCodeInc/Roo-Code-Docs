@@ -25,7 +25,7 @@ A great model to start is **Claude Sonnet 4.5**, which offers a lot of power at 
 
 - **Anthropic:** Direct access to the Claude family of models. Requires API access approval and may have [rate limits depending on your tier](https://docs.anthropic.com/en/api/rate-limits#requirements-to-advance-tier).  To get an API key, [follow these instructions <LucideIcon name="ArrowRight" />](/providers/anthropic#getting-an-api-key)
 
-Roo Code is compatible with [other providers](/providers/index) which offer Claude, and with a wide range of different models you can try.
+Roo Code is compatible with [other providers](/providers) which offer Claude, and with a wide range of different models you can try.
 
 :::info Model Selection Advice
 We recommend **Claude Sonnet 4.5** because it "just works" out of the box for most tasks. We use it internally a lot.
