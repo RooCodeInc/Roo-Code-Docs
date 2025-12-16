@@ -15,7 +15,8 @@
     "typecheck": "tsc",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
-    "lint:unused": "eslint src --ext .js,.jsx,.ts,.tsx --rule 'unused-imports/no-unused-imports: error'"
+    "lint:unused": "eslint src --ext .js,.jsx,.ts,.tsx --rule 'unused-imports/no-unused-imports: error'",
+    "prepare": "husky"
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.2",
@@ -47,6 +48,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "husky": "^9.1.7",
     "typescript": "~5.6.2"
   },
   "browserslist": {
