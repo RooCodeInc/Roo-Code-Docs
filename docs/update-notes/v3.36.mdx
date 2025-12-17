@@ -116,6 +116,10 @@ The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved 
 * **Avoid deleting the wrong API messages**: Fixes a race condition where deleting a user message could remove earlier assistant API messages, especially during streaming/tool use ([#10113](https://github.com/RooCodeInc/Roo-Code/pull/10113))
 * **Deduplicate MCP tools across configs**: Fixes a “tool is already defined” error when the same MCP server exists in both global and project configs ([#10096](https://github.com/RooCodeInc/Roo-Code/pull/10096))
 * **Fix provider pricing page link**: Fixes a broken route so the provider pricing link takes you to the correct destination ([#10107](https://github.com/RooCodeInc/Roo-Code/pull/10107))
+* **MCP Tool Schema Normalization**: Fixes an issue where MCP tool schemas could fail validation when used with Amazon Bedrock or OpenAI in strict mode by normalizing JSON Schema formats ([#10148](https://github.com/RooCodeInc/Roo-Code/pull/10148))
+* **MCP Tool Names with Bedrock**: Fixes validation errors when using MCP servers with dots or colons in their names (like `awslabs.aws-documentation-mcp-server`) with Amazon Bedrock ([#10152](https://github.com/RooCodeInc/Roo-Code/pull/10152))
+* **Bedrock Task Resumption**: Fixes an error when resuming tasks with Amazon Bedrock when native tools are disabled, where users would encounter `The toolConfig field must be defined` errors ([#10155](https://github.com/RooCodeInc/Roo-Code/pull/10155))
+* **Roo Code Cloud Model Refresh**: Fixes an issue where authentication-required models (like `google/gemini-3-flash`) wouldn't appear immediately after logging into Roo Code Cloud ([#10156](https://github.com/RooCodeInc/Roo-Code/pull/10156))
 
 ## Misc Improvements
 
@@ -162,3 +166,7 @@ The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved 
 * **Native tools by default (more providers)**: Defaults more providers to the native tool protocol for more consistent tool calling across providers ([#10059](https://github.com/RooCodeInc/Roo-Code/pull/10059), [#10021](https://github.com/RooCodeInc/Roo-Code/pull/10021))
 * **Bedrock custom ARNs are less restrictive**: Removes overly strict ARN validation that could block valid AWS Bedrock custom ARNs, while keeping a non-blocking region mismatch warning ([#10110](https://github.com/RooCodeInc/Roo-Code/pull/10110))
 * **Cleaner Bedrock service tier UI**: Removes extra description text under the Bedrock service tier selector to make the UI easier to scan ([#10118](https://github.com/RooCodeInc/Roo-Code/pull/10118))
+* **Claude Code Provider Native Tool Calling**: The Claude Code provider now supports native tool calling for more direct and efficient communication with Claude ([#10077](https://github.com/RooCodeInc/Roo-Code/pull/10077))
+* **Z.ai Native Tool Calling**: Z.ai models (GLM-4.5 series, GLM-4.6, etc.) now use native tool calling by default ([#10158](https://github.com/RooCodeInc/Roo-Code/pull/10158))
+* **OpenAI Compatible Native Tools**: OpenAI Compatible providers now use native tool calling by default ([#10159](https://github.com/RooCodeInc/Roo-Code/pull/10159))
+* **AWS GovCloud and China Region Support**: Users in AWS GovCloud and China regions can now use custom ARNs with the Bedrock provider (thanks wisestmumbler!) ([#10157](https://github.com/RooCodeInc/Roo-Code/pull/10157))
