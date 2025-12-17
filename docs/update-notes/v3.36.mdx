@@ -47,6 +47,14 @@ GPT-5.2 is available in the OpenAI provider and set as the default model ([#1002
 
 You can now configure how Enter behaves in the chat input so it better fits multiline prompts and different input methods ([#10002](https://github.com/RooCodeInc/Roo-Code/pull/10002)).
 
+## Gemini 3 Flash preview model
+
+The `gemini-3-flash-preview` model is now available in the Roo Code Cloud provider, Google Gemini, GCP Vertex AI, Requesty, and OpenRouter providers. It’s the latest model from Google, released this morning (thanks contributors!) ([#10151](https://github.com/RooCodeInc/Roo-Code/pull/10151)).
+
+## DeepSeek reasoner: interleaved thinking during tool use
+
+The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved thinking” and native tool calling. In our internal evals, tool calling succeeded 100% of the time, and the extended-run score improved to 93.4% (thanks zbww_!) ([#9969](https://github.com/RooCodeInc/Roo-Code/pull/9969), [#10141](https://github.com/RooCodeInc/Roo-Code/pull/10141)).
+
 ## QOL Improvements
 
 * **Symlink support for slash commands**: Share and organize commands across projects using symlinks for individual files or directories, with command names derived from symlink names ([#9838](https://github.com/RooCodeInc/Roo-Code/pull/9838))
@@ -65,6 +73,7 @@ You can now configure how Enter behaves in the chat input so it better fits mult
 ## Bug Fixes
 
 * **Write tool validation**: Avoids false positives where `write_to_file` rejected complete markdown files containing inline code comments like `# NEW:` or `// Step 1:` ([#9787](https://github.com/RooCodeInc/Roo-Code/pull/9787))
+* **Context truncation token display**: Fixes an issue where the context truncation UI could show incorrect before/after token totals, especially in tool-heavy conversations ([#9961](https://github.com/RooCodeInc/Roo-Code/pull/9961))
 * **Download count display**: Fixes homepage download count precision for million-scale numbers ([#9807](https://github.com/RooCodeInc/Roo-Code/pull/9807))
 * **Extension freeze prevention**: Avoids freezes when a model attempts to call a non-existent tool ([#9834](https://github.com/RooCodeInc/Roo-Code/pull/9834))
 * **Checkpoint restore reliability**: Message history handling is consistent across rewind operations ([#9842](https://github.com/RooCodeInc/Roo-Code/pull/9842))
@@ -111,6 +120,7 @@ You can now configure how Enter behaves in the chat input so it better fits mult
 ## Misc Improvements
 
 * **Evals UI enhancements**: Adds better filtering, bulk delete actions, tool column consolidation, and run notes ([#9837](https://github.com/RooCodeInc/Roo-Code/pull/9837))
+* **Framework updates**: Updates Next.js to `~15.2.8` for improved compatibility with upstream fixes ([#10140](https://github.com/RooCodeInc/Roo-Code/pull/10140))
 * **Multi-model evals launch**: Launches identical test runs across multiple models with automatic staggering ([#9845](https://github.com/RooCodeInc/Roo-Code/pull/9845))
 * **New pricing page**: Updates the website pricing page with clearer feature explanations ([#9821](https://github.com/RooCodeInc/Roo-Code/pull/9821))
 * **Announcement UI updates**: Improves announcement visuals with updated social icons and GitHub stars CTA ([#9945](https://github.com/RooCodeInc/Roo-Code/pull/9945))
