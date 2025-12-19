@@ -91,6 +91,12 @@
       "cloud": false
     },
     {
+      "id": "providers/ibm-watsonx",
+      "title": "IBM watsonx",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/io-intelligence",
       "title": "IO Intelligence",
       "extension": true,
