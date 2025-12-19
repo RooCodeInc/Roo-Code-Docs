@@ -76,6 +76,7 @@ Models that support native tool calling now default to using native protocol ins
 * **Improved File Editing with Gemini Models**: New edit_file tool makes Gemini models more effective at editing files ([#9983](https://github.com/RooCodeInc/Roo-Code/pull/9983))
 * **VS Code LM Native Tools**: Native tool calling now works with VS Code's built-in Copilot models ([#10191](https://github.com/RooCodeInc/Roo-Code/pull/10191))
 * **Smarter Tool Defaults for Gemini and OpenAI**: Gemini and OpenAI models now use better default tools for file editing, improving reliability out of the box. ([#10170](https://github.com/RooCodeInc/Roo-Code/pull/10170))
+* **Grace Retry for Tool Errors**: When models fail to use tools, Roo Code now silently retries before showing errors. Clearer "Model Response Incomplete" messages appear only after consecutive failures ([#10196](https://github.com/RooCodeInc/Roo-Code/pull/10196))
 
 ## Bug Fixes
 
@@ -130,6 +131,7 @@ Models that support native tool calling now default to using native protocol ins
 * **LiteLLM Tool Protocol Dropdown**: The Native/XML protocol selector now appears correctly for LiteLLM models ([#10187](https://github.com/RooCodeInc/Roo-Code/pull/10187))
 * **Task Resumption**: Tasks no longer break when resuming after changing the Native Tool Calling setting ([#10192](https://github.com/RooCodeInc/Roo-Code/pull/10192))
 * **Bedrock Embedder CloudTrail Fix**: AWS Bedrock users now see Roo Code identified in CloudTrail logs when using Codebase Indexing. (thanks jackrein!) ([#10166](https://github.com/RooCodeInc/Roo-Code/pull/10166))
+* **MCP Compatibility with OpenAI Providers**: Fixes an issue where MCP servers using `format: "uri"` in their tool schemas would fail with OpenAI providers ([#10198](https://github.com/RooCodeInc/Roo-Code/pull/10198))
 
 ## Misc Improvements
 
@@ -182,3 +184,4 @@ Models that support native tool calling now default to using native protocol ins
 * **Z.ai Native Tool Calling**: Z.ai models (GLM-4.5 series, GLM-4.6, etc.) now use native tool calling by default ([#10158](https://github.com/RooCodeInc/Roo-Code/pull/10158))
 * **OpenAI Compatible Native Tools**: OpenAI Compatible providers now use native tool calling by default ([#10159](https://github.com/RooCodeInc/Roo-Code/pull/10159))
 * **AWS GovCloud and China Region Support**: Users in AWS GovCloud and China regions can now use custom ARNs with the Bedrock provider (thanks wisestmumbler!) ([#10157](https://github.com/RooCodeInc/Roo-Code/pull/10157))
+* **Native Tool Calling for Claude on Vertex AI**: All Claude models on Vertex AI now use native tool calling by default, matching the behavior of direct Anthropic API access ([#10197](https://github.com/RooCodeInc/Roo-Code/pull/10197))
