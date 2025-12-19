@@ -53,7 +53,11 @@ The `gemini-3-flash-preview` model is now available in the Roo Code Cloud provid
 
 ## DeepSeek reasoner: interleaved thinking during tool use
 
-The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved thinking” and native tool calling. In our internal evals, tool calling succeeded 100% of the time, and the extended-run score improved to 93.4% (thanks zbww_!) ([#9969](https://github.com/RooCodeInc/Roo-Code/pull/9969), [#10141](https://github.com/RooCodeInc/Roo-Code/pull/10141)).
+The DeepSeek provider's `deepseek-reasoner` model now supports "interleaved thinking" and native tool calling. In our internal evals, tool calling succeeded 100% of the time, and the extended-run score improved to 93.4% (thanks zbww_!) ([#9969](https://github.com/RooCodeInc/Roo-Code/pull/9969), [#10141](https://github.com/RooCodeInc/Roo-Code/pull/10141)).
+
+## Native Tool Protocol Default
+
+Models that support native tool calling now default to using native protocol instead of XML. The XML protocol is still available in provider settings ([#10186](https://github.com/RooCodeInc/Roo-Code/pull/10186)).
 
 ## QOL Improvements
 
@@ -69,6 +73,9 @@ The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved 
 * **Simplified Auto-Approve settings**: Removes separate toggles for retry and todo updates, reducing configuration overhead ([#10062](https://github.com/RooCodeInc/Roo-Code/pull/10062))
 * **Richer error details dialog**: Adds extra context (extension version, provider/model, timestamp, etc.) to the error details dialog to make debugging and reporting issues faster ([#10050](https://github.com/RooCodeInc/Roo-Code/pull/10050))
 * **Fewer read_file failures on large files**: Improves large-file reading by incrementally reading up to a token budget and returning cleaner truncation when needed ([#10052](https://github.com/RooCodeInc/Roo-Code/pull/10052))
+* **Improved File Editing with Gemini Models**: New edit_file tool makes Gemini models more effective at editing files ([#9983](https://github.com/RooCodeInc/Roo-Code/pull/9983))
+* **VS Code LM Native Tools**: Native tool calling now works with VS Code's built-in Copilot models ([#10191](https://github.com/RooCodeInc/Roo-Code/pull/10191))
+* **Smarter Tool Defaults for Gemini and OpenAI**: Gemini and OpenAI models now use better default tools for file editing, improving reliability out of the box. ([#10170](https://github.com/RooCodeInc/Roo-Code/pull/10170))
 
 ## Bug Fixes
 
@@ -120,6 +127,9 @@ The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved 
 * **MCP Tool Names with Bedrock**: Fixes validation errors when using MCP servers with dots or colons in their names (like `awslabs.aws-documentation-mcp-server`) with Amazon Bedrock ([#10152](https://github.com/RooCodeInc/Roo-Code/pull/10152))
 * **Bedrock Task Resumption**: Fixes an error when resuming tasks with Amazon Bedrock when native tools are disabled, where users would encounter `The toolConfig field must be defined` errors ([#10155](https://github.com/RooCodeInc/Roo-Code/pull/10155))
 * **Roo Code Cloud Model Refresh**: Fixes an issue where authentication-required models (like `google/gemini-3-flash`) wouldn't appear immediately after logging into Roo Code Cloud ([#10156](https://github.com/RooCodeInc/Roo-Code/pull/10156))
+* **LiteLLM Tool Protocol Dropdown**: The Native/XML protocol selector now appears correctly for LiteLLM models ([#10187](https://github.com/RooCodeInc/Roo-Code/pull/10187))
+* **Task Resumption**: Tasks no longer break when resuming after changing the Native Tool Calling setting ([#10192](https://github.com/RooCodeInc/Roo-Code/pull/10192))
+* **Bedrock Embedder CloudTrail Fix**: AWS Bedrock users now see Roo Code identified in CloudTrail logs when using Codebase Indexing. (thanks jackrein!) ([#10166](https://github.com/RooCodeInc/Roo-Code/pull/10166))
 
 ## Misc Improvements
 
@@ -142,6 +152,8 @@ The DeepSeek provider’s `deepseek-reasoner` model now supports “interleaved 
 * **Improved web-evals run logs**: Makes evaluation runs easier to inspect by improving run logs and formatting ([#10081](https://github.com/RooCodeInc/Roo-Code/pull/10081))
 * **Control public task sharing**: Adds an organization-level setting to disable public task sharing links ([#10105](https://github.com/RooCodeInc/Roo-Code/pull/10105))
 * **Evals UI: clearer tool grouping + duration fixes**: Improves the evals UI by grouping related tools and fixing cases where run duration could be missing or incorrect ([#10133](https://github.com/RooCodeInc/Roo-Code/pull/10133))
+* **Error Monitoring**: Improved tracking of consecutive mistake errors ([#10193](https://github.com/RooCodeInc/Roo-Code/pull/10193))
+* **Better Error Grouping**: Improved error tracking for faster issue resolution. ([#10163](https://github.com/RooCodeInc/Roo-Code/pull/10163))
 
 ## Provider Updates
 
