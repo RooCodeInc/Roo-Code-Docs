@@ -18,7 +18,7 @@ When Roo Code encounters an error, you can export detailed diagnostic informatio
 
 ## Why It Matters
 
-Error reports with full diagnostic data cut resolution time dramatically. Instead of back-and-forth questions about your setup, extension version, or what you were doing, the support team gets everything they need in one go. The detailed export includes your full task history, configuration, and environment—critical for reproducing and fixing issues.
+Error reports with full diagnostic data cut resolution time dramatically. Instead of back-and-forth questions about your setup, extension version, or what you were doing, the support team gets everything they need in one go. The detailed export includes your full task history, configuration, and environment, which are critical for reproducing and fixing issues.
 
 ---
 
