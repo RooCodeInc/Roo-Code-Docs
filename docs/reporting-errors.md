@@ -58,23 +58,3 @@ After copying error information:
 - **GitHub Issues**: File at [github.com/RooCodeInc/Roo-Code/issues](https://github.com/RooCodeInc/Roo-Code/issues)
 
 Include a brief description of what you were trying to do when the error occurred. The exported diagnostics handle the technical details.
-
----
-
-## What You Can't Do
-
-Error exports don't include your actual code or file contents—only metadata about the task. If the support team needs to see specific code that triggered the error, you'll need to share that separately.
-
----
-
-## When to Use Each Option
-
-| Scenario | Use This |
-|----------|----------|
-| Quick question in Discord | **Copy basic error info** |
-| Filing a GitHub issue | **Get detailed error info** |
-| Support email for recurring error | **Get detailed error info** |
-| Asking about a specific error message | **Copy basic error info** |
-| Error that only happens in certain conditions | **Get detailed error info** |
-
-The detailed report's task history helps the team understand the sequence of events leading to the error—invaluable for intermittent or complex issues.
