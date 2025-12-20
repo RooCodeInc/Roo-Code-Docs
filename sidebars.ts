@@ -17,6 +17,7 @@ const sidebars: SidebarsConfig = {
         'basic-usage/context-mentions',
         'basic-usage/using-modes',
         'tips-and-tricks',
+        'reporting-errors',
         {
          label: 'Features',
          type: 'category',
