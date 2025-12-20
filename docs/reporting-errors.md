@@ -16,12 +16,6 @@ When Roo Code encounters an error, you can export detailed diagnostic informatio
 
 ---
 
-## Why It Matters
-
-Error reports with full diagnostic data cut resolution time dramatically. Instead of back-and-forth questions about your setup, extension version, or what you were doing, the support team gets everything they need in one go. The detailed export includes your full task history, configuration, and environment, which are critical for reproducing and fixing issues.
-
----
-
 ## Accessing Error Details
 
 When an error appears, click the "Details" link next to the error message. This opens a modal with diagnostic information and export options.
@@ -52,8 +46,6 @@ The Error Details modal offers two buttons, each serving different needs:
    **Use when:** The support team needs to reproduce the issue or you're filing a GitHub issue.
 
 <img src="/img/reporting-errors/reporting-errors-2.png" alt="Error Details modal with Copy basic error info and Get detailed error info buttons" width="600" />
-
-*Choose basic for quick reports or detailed for thorough diagnostics.*
 
 ---
 
