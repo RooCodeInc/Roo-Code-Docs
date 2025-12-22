@@ -22,7 +22,7 @@ It also augments the Roo Code VS Code extension capabilities by adding:
 - [Token usage analytics](./analytics) to understand where your tokens and dollars are going
 
 And, in the [Team plan](./team-plan), adds team-oriented features:
-- Centralized billing
+- Centralized billing (for inference via the Roo Code Cloud provider and for Cloud Agents)
 - Team-wide task history and token usage analytics
 - Shared Cloud Agent team
 - Centralized integration with Github and Slack (not one per user)
