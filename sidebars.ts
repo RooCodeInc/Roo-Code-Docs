@@ -165,16 +165,23 @@ const sidebars: SidebarsConfig = {
         }))
       ]
     },
-    {
-      type: 'category',
-      label: 'Extension Release Notes',
-      items: [
-        'update-notes/index',
         {
           type: 'category',
-          label: '3.36',
+          label: 'Extension Release Notes',
           items: [
-            { type: 'doc', id: 'update-notes/v3.36', label: '3.36 Combined' },
+            'update-notes/index',
+            {
+              type: 'category',
+              label: '3.37',
+              items: [
+                { type: 'doc', id: 'update-notes/v3.37', label: '3.37 Combined' },
+              ],
+            },
+            {
+              type: 'category',
+              label: '3.36',
+              items: [
+                { type: 'doc', id: 'update-notes/v3.36', label: '3.36 Combined' },
             { type: 'doc', id: 'update-notes/v3.36.16', label: '3.36.16' },
             { type: 'doc', id: 'update-notes/v3.36.15', label: '3.36.15' },
             { type: 'doc', id: 'update-notes/v3.36.14', label: '3.36.14' },
