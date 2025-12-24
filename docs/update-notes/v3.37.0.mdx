@@ -1,13 +1,13 @@
 ---
 description: Roo Code 3.37 introduces custom tool calling, expands provider support, and improves tool-call reliability.
 keywords:
-  - roo code 3.37
+  - roo code 3.37.0
   - new features
   - bug fixes
 image: /img/v3.37.0/v3.37.0.png
 ---
 
-# Roo Code 3.37 Release Notes (2025-12-22)
+# Roo Code 3.37.0 Release Notes (2025-12-22)
 
 Roo Code 3.37 introduces experimental custom tools, adds new provider capabilities, and improves tool-call reliability.
 
@@ -42,23 +42,17 @@ You can now define and use **custom tools** so Roo can call your project- or tea
 * Fixes an issue where Chutes model loading could fail if the provider returned malformed model entries ([#10279](https://github.com/RooCodeInc/Roo-Code/pull/10279))
 * Fixes an issue where `reasoning_details` could be merged/ordered incorrectly during streaming, improving reliability for providers that depend on strict reasoning serialization ([#10285](https://github.com/RooCodeInc/Roo-Code/pull/10285))
 * Fixes an issue where DeepSeek-reasoner could error after condensation if the condensed summary lacked required reasoning fields ([#10292](https://github.com/RooCodeInc/Roo-Code/pull/10292))
-* Fixes an issue where Roo could show errors when a provider returned an empty assistant message by retrying once and only showing an error if the problem repeats ([#10297](https://github.com/RooCodeInc/Roo-Code/pull/10297))
-* Fixes an issue where OpenAI/OpenAI-compatible chats could fail to use native tools when custom model info didn’t explicitly set tool support, by sending native tool definitions by default ([#10314](https://github.com/RooCodeInc/Roo-Code/pull/10314))
-* Fixes an issue where Roo could send malformed `reasoning_details` data after transforming conversation history, preventing provider-side errors and improving compatibility with OpenAI Responses-style reasoning blocks ([#10313](https://github.com/RooCodeInc/Roo-Code/pull/10313))
-* Fixes an issue where “ask” flows could hang if your reply was queued instead of being delivered as an ask response, so conversations continue reliably ([#10315](https://github.com/RooCodeInc/Roo-Code/pull/10315))
 
 ## Misc Improvements
 
 * **Cleaner eval logs**: Deduplicates repetitive message log entries so eval traces are easier to read ([#10286](https://github.com/RooCodeInc/Roo-Code/pull/10286))
-* **Provider-centric signup**: Makes Roo easier to get started with by defaulting the welcome/sign-up flow to the Roo provider (while keeping other providers available), so you can reach a working setup faster with fewer choices up front ([#10306](https://github.com/RooCodeInc/Roo-Code/pull/10306))
 
 ## QOL Improvements
 
 * New tasks now default to native tool calling on models that support it, reducing the need for manual tool protocol selection ([#10281](https://github.com/RooCodeInc/Roo-Code/pull/10281))
-* Improves tool-calling reliability for Roo Code Cloud by preventing tool-result metadata (like `environment_details`) from interrupting tool call sequences ([#10301](https://github.com/RooCodeInc/Roo-Code/pull/10301))
-* Improves tool-calling reliability across OpenAI-compatible providers by merging trailing tool-result text into the last tool message, reducing cases where tool call sequences get interrupted ([#10299](https://github.com/RooCodeInc/Roo-Code/pull/10299))
 
 ## Provider Updates
 
 * Improves Z.ai thinking model message formatting by attaching `environment_details` to tool results instead of emitting separate system messages ([#10289](https://github.com/RooCodeInc/Roo-Code/pull/10289))
 * LiteLLM no longer sends `parallel_tool_calls`, improving tool-call compatibility (thanks farazoman!) ([#10274](https://github.com/RooCodeInc/Roo-Code/pull/10274))
+
