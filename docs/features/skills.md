@@ -274,7 +274,7 @@ The skill name comes from the symlink name (or directory name if not symlinked).
 | **When loaded** | On-demand (when request matches) | Always (part of base prompt) | On-demand (when invoked) |
 | **Best for** | Task-specific workflows | General coding standards | Retrieving pre-written content |
 | **Can bundle files** | Yes | No | No |
-| **Mode targeting** | Yes (skills-{mode} directories) | Yes (rules-{mode} directories) | No |
+| **Mode targeting** | Yes (`skills-{mode}` directories) | Yes (`rules-{mode}` directories) | No |
 | **Override priority** | Project > Global, Mode > Generic | Project > Global | Project > Global |
 | **Format** | SKILL.md with frontmatter | Any text file | JSON metadata + content |
 | **Discovery** | Automatic (directory scan) | Automatic (directory scan) | Automatic (directory scan) |
