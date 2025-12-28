@@ -42,6 +42,7 @@ const sidebars: SidebarsConfig = {
            'features/model-temperature',
            'features/concurrent-file-reads',
            'features/rooignore',
+           'features/skills',
            'features/slash-commands',
            'features/suggested-responses',
            'features/task-todo-list',

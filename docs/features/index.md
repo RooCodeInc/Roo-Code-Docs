@@ -40,6 +40,7 @@ Discover the powerful features that make Roo Code your ultimate AI-powered codin
 ### Configuration & Customization
 - [**API Configuration Profiles**](/features/api-configuration-profiles) - Manage multiple API configurations
 - [**Custom Instructions**](/features/custom-instructions) - Personalize AI behavior
+- [**Skills**](/features/skills) - Create reusable task-specific instruction packages
 - [**Settings Management**](/features/settings-management) - Fine-tune Roo Code to your preferences
 - [**.rooignore**](/features/rooignore) - Control file access and visibility
 
