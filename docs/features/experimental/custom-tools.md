@@ -164,7 +164,7 @@ Tools automatically load a `.env` file from the same folder. This lets you store
    })
    ```
 
-**Security:** Add `.roo/tools/.env` to `.gitignore` to keep secrets out of version control.
+**Security:** Ensure your `.env` file is ignored by version control to keep secrets safe.
 
 ---
 
