@@ -1,5 +1,5 @@
 ---
-description: Define TypeScript/JavaScript tools that extend Roo's capabilities beyond built-in tools, enabling project-specific workflows and team standardization.
+description: Define TypeScript/JavaScript tools that extend Roo's capabilities beyond built-in tools, with npm dependency support and per-tool environment variables.
 keywords:
   - experimental features
   - custom tools
@@ -8,6 +8,8 @@ keywords:
   - tool extension
   - defineCustomTool
   - workflow automation
+  - npm dependencies
+  - environment variables
 image: /img/social-share.jpg
 ---
 # Custom Tools
@@ -82,12 +84,95 @@ Tools from both directories are loaded. Tools with the same name in `.roo/tools/
 
 ---
 
+## Using npm Dependencies
+
+Custom tools can use npm packages. Install dependencies in the same folder as your tool, and imports will resolve normally.
+
+```bash
+# From your tool directory
+cd .roo/tools/
+npm init -y
+npm install axios lodash
+```
+
+Then import in your tool:
+
+```typescript
+import { parametersSchema as z, defineCustomTool } from "@roo-code/types"
+import axios from "axios"
+
+export default defineCustomTool({
+  name: "fetch_api",
+  description: "Fetch data from an API endpoint",
+  parameters: z.object({
+    url: z.string().describe("API endpoint URL"),
+  }),
+  async execute({ url }) {
+    const response = await axios.get(url)
+    return JSON.stringify(response.data, null, 2)
+  }
+})
+```
+
+---
+
+## Per-Tool Environment Variables
+
+Tools automatically load a `.env` file from the same folder. This lets you store API keys and secrets without hardcoding them.
+
+**Setup:**
+
+1. Create a `.env` file next to your tool:
+   ```
+   .roo/tools/
+   ├── my-tool.ts
+   ├── .env          # Loaded automatically
+   └── package.json
+   ```
+
+2. Add your secrets:
+   ```bash
+   # .roo/tools/.env
+   SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXX
+   API_SECRET=your-secret-key
+   ```
+
+3. Access them via `process.env`:
+   ```typescript
+   import { parametersSchema as z, defineCustomTool } from "@roo-code/types"
+
+   export default defineCustomTool({
+     name: "notify_slack",
+     description: "Send a notification to Slack",
+     parameters: z.object({
+       message: z.string().describe("Message to send"),
+     }),
+     async execute({ message }) {
+       const webhookUrl = process.env.SLACK_WEBHOOK_URL
+       if (!webhookUrl) {
+         return "Error: SLACK_WEBHOOK_URL not set in .env"
+       }
+       
+       const response = await fetch(webhookUrl, {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({ text: message }),
+       })
+       
+       return response.ok ? "Message sent" : `Failed: ${response.status}`
+     }
+   })
+   ```
+
+**Security:** Add `.roo/tools/.env` to `.gitignore` to keep secrets out of version control.
+
+---
+
 ## Limits
 
 - **No approval prompts**: Tools are auto-approved when the feature is enabled—security trade-off for convenience
 - **String-only results**: Tools must return strings (Roo's protocol constraint)
 - **No interactive input**: Tools can't prompt the user mid-execution
-- **No npm packages**: Tools are transpiled in isolation; use Node.js built-ins only
 - **Cache invalidation**: Tool updates may require reloading the window
 
 **vs. MCP:** [MCP](/features/mcp/overview) is for external services (search, APIs). Custom tools are for in-repo logic you control directly. MCP is more extensible; custom tools are lighter weight for project-specific actions.

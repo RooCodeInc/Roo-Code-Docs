@@ -47,12 +47,6 @@ For the complete, up-to-date model list with pricing and capabilities, see [Open
 
 ---
 
-## Supported Transforms
-
-OpenRouter provides an [optional "middle-out" message transform](https://openrouter.ai/docs/features/message-transforms) to help with prompts that exceed the maximum context size of a model. You can enable it by checking the "Compress prompts and message chains to the context size" box.
-
----
-
 ## Tips and Notes
 
 * **Model Selection:** OpenRouter offers a wide range of models. Experiment to find the best one for your needs.

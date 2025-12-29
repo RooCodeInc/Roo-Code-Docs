@@ -123,6 +123,7 @@ Please perform a thorough security review of the selected code:
 **Frontmatter Fields:**
 - **`description`**: Appears in the command menu to help users understand the command's purpose
 - **`argument-hint`**: (Optional) Provides a hint about expected arguments when using the command. See [Argument Hints](#argument-hints) for detailed information
+- **`mode`**: (Optional) Mode slug to switch to before running the command (e.g., `code`, `architect`). Roo switches to this mode first, then executes the command content in that mode's context
 
 ---
 
@@ -191,6 +192,25 @@ This will display as `/api-endpoint <endpoint-name> <http-method>` in the comman
 ---
 
 ## Examples and Use Cases
+
+**Mode-Targeting Commands**
+
+Use the `mode` field to ensure a command runs in a specific mode context:
+
+```yaml
+---
+description: Analyze architecture and propose improvements
+mode: architect
+---
+
+Review the current system architecture and suggest improvements for:
+- Scalability bottlenecks
+- Component coupling
+- Security boundaries
+- Data flow optimization
+```
+
+When you run this command, Roo switches to Architect mode first, then processes the command content with Architect's role definition and tool restrictions.
 
 **Development Workflows**
 
