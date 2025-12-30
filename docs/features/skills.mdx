@@ -56,11 +56,11 @@ You can't package bundled assets (scripts, templates, references) with custom in
 
 Skills use **progressive disclosure** to efficiently load content only when needed:
 
-**Level 1: Discovery** - Roo always knows which skills are available by reading their `name` and `description` from frontmatter. This lightweight metadata helps Roo decide which skills match your request.
+**Level 1: Discovery** - Roo reads each `SKILL.md` file and parses its frontmatter to extract `name` and `description`. Only this metadata is stored for matching—the full content isn't held in memory until needed.
 
 **Level 2: Instructions** - When your request matches a skill's description, Roo uses [`read_file`](/advanced-usage/available-tools/read-file) to load the full SKILL.md instructions into context.
 
-**Level 3: Resources** - Roo accesses additional skill files (scripts, templates, references) only as needed during execution.
+**Level 3: Resources** - The prompt tells Roo it may access bundled files (scripts, templates, references) alongside the skill. There's no separate resource manifest—Roo discovers these files on-demand when the instructions reference them.
 
 This architecture means skills remain dormant until activated—they don't bloat your base prompt. You can install many skills, and Roo loads only what's relevant for each task.
 
@@ -183,28 +183,34 @@ Create skills that only activate in specific modes:
 
 ## Override Priority
 
-When skills with the same name exist in multiple locations, this priority applies:
+When skills with the same name exist in multiple locations, this priority applies (project vs global is evaluated first, then mode-specific vs generic within each source):
 
 1. **Project mode-specific** (`.roo/skills-code/my-skill/`)
-2. **Global mode-specific** (`~/.roo/skills-code/my-skill/`)
-3. **Project generic** (`.roo/skills/my-skill/`)
+2. **Project generic** (`.roo/skills/my-skill/`)
+3. **Global mode-specific** (`~/.roo/skills-code/my-skill/`)
 4. **Global generic** (`~/.roo/skills/my-skill/`)
+
+This means a **project generic** skill overrides a **global mode-specific** skill—project location takes precedence over mode specificity.
 
 This lets you:
 - Set global standards that work everywhere
-- Override them per-project when needed
-- Specialize skills for specific modes
+- Override them per-project when needed (even with generic skills)
+- Specialize skills for specific modes within each location
 
 ---
 
 ## Skill Discovery
 
 Roo automatically discovers skills:
-- **At startup**: All skills are indexed
+- **At startup**: All skills are indexed by reading and parsing each SKILL.md
 - **During development**: File watchers detect changes to SKILL.md files
 - **Mode filtering**: Only skills relevant to the current mode are available
 
 You don't need to register or configure skills—just create the directory structure.
+
+:::warning Custom System Prompts Override Skills
+If you have a file-based custom system prompt (`.roo/system-prompt-{mode}` or similar), it replaces the standard system prompt entirely—including the skills section. Skills won't be available when a custom system prompt is active.
+:::
 
 #### Symlink support
 
@@ -307,24 +313,18 @@ The skill name comes from the symlink name (or directory name if not symlinked).
 
 ## Skill Specification
 
-Roo Code skills follow the [Agent Skills](https://agentskills.io/) open standard for skill packaging and metadata. This means skills you create are **portable across Agent Skills-compatible tools**, including:
+Roo Code skills follow the [Agent Skills](https://agentskills.io/) format for skill packaging and metadata.
 
-- **Roo Code** - Available in all modes with automatic discovery
-- **GitHub Copilot** (VS Code) - Works in chat and coding agent
-- **OpenAI Codex** - Accessible in CLI and IDE extensions
-- **Other compatible agents** - Any tool implementing the Agent Skills standard
+**Required conventions:**
+- The frontmatter `name` must exactly match the directory (or symlink) name
+- Both `name` and `description` fields are required in frontmatter
 
 #### Roo-specific enhancements
 
-While maintaining compatibility with the core standard, Roo Code adds mode-specific targeting:
+Roo Code adds mode-specific targeting beyond the base format:
 
-- **Standard locations**: `.roo/skills/` and `~/.roo/skills/` work with any Agent Skills-compatible tool
-- **Mode-specific directories**: `skills-{mode}/` (e.g., `skills-code/`, `skills-architect/`) are Roo enhancements that enable mode targeting without affecting portability—other tools will simply ignore these directories
-
-This means you can:
-- Share generic skills across different AI tools
-- Use mode-specific optimizations when working in Roo Code
-- Maintain a single skill library that works everywhere
+- **Standard locations**: `.roo/skills/` and `~/.roo/skills/`
+- **Mode-specific directories**: `skills-{mode}/` (e.g., `skills-code/`, `skills-architect/`) enable mode targeting
 
 ---
 

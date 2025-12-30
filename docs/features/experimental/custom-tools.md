@@ -59,7 +59,7 @@ export default defineCustomTool({
 - **`parameters`**: Zod schema converted to JSON Schema for validation
 - **`execute`**: Async function returning a string result to Roo
 
-Tools are dynamically loaded and transpiled with esbuild. Changes to tool files trigger automatic reload.
+Tools are dynamically loaded and transpiled with esbuild. Automatic reload on file changes isn't reliable—use the **Refresh Custom Tools** command (`refreshCustomTools`) to pick up changes immediately.
 
 ---
 
@@ -118,7 +118,7 @@ export default defineCustomTool({
 
 ## Per-Tool Environment Variables
 
-Tools automatically load a `.env` file from the same folder. This lets you store API keys and secrets without hardcoding them.
+Roo copies `.env` and `.env.*` files from your tool directory into the tool's cache folder so your tool can load them at runtime. **Roo does not automatically inject these variables into `process.env`**—your tool must load them itself.
 
 **Setup:**
 
@@ -126,7 +126,7 @@ Tools automatically load a `.env` file from the same folder. This lets you store
    ```
    .roo/tools/
    ├── my-tool.ts
-   ├── .env          # Loaded automatically
+   ├── .env          # Copied to cache dir at load time
    └── package.json
    ```
 
@@ -137,9 +137,14 @@ Tools automatically load a `.env` file from the same folder. This lets you store
    API_SECRET=your-secret-key
    ```
 
-3. Access them via `process.env`:
+3. Load the `.env` in your tool using `dotenv` and `__dirname`:
    ```typescript
    import { parametersSchema as z, defineCustomTool } from "@roo-code/types"
+   import dotenv from "dotenv"
+   import path from "path"
+
+   // Load .env from the tool's cache directory
+   dotenv.config({ path: path.join(__dirname, ".env") })
 
    export default defineCustomTool({
      name: "notify_slack",
@@ -163,6 +168,8 @@ Tools automatically load a `.env` file from the same folder. This lets you store
      }
    })
    ```
+
+**Why `__dirname`?** Roo copies your `.env` files into a cache directory alongside the transpiled tool. Using `__dirname` ensures your tool finds the `.env` in the correct location regardless of where the tool was originally defined.
 
 **Security:** Ensure your `.env` file is ignored by version control to keep secrets safe.
 
