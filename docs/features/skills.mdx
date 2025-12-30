@@ -123,9 +123,12 @@ When the user requests PDF processing:
 - Large files: Suggest page-by-page processing
 ```
 
-**Critical rules:**
-- The `name` field must exactly match the directory name
+**Naming rules:**
+- The `name` field must exactly match the directory name (or symlink name)
+- Names must be 1–64 characters, lowercase letters/numbers/hyphens only
+- No leading/trailing hyphens, no consecutive hyphens (e.g., `my--skill` is invalid)
 - Both `name` and `description` are required
+- Descriptions must be 1–1024 characters (trimmed)
 - The description tells Roo when to use this skill—be specific
 
 #### 4. Test the skill
@@ -209,22 +212,19 @@ Roo automatically discovers skills:
 You don't need to register or configure skills—just create the directory structure.
 
 :::warning Custom System Prompts Override Skills
-If you have a file-based custom system prompt (`.roo/system-prompt-{mode}` or similar), it replaces the standard system prompt entirely—including the skills section. Skills won't be available when a custom system prompt is active.
+If you have a file-based custom system prompt (`.roo/system-prompt-{modeSlug}`), it replaces the standard system prompt entirely—including the skills section. Skills won't be available when a custom system prompt is active.
 :::
 
 #### Symlink support
 
-Skills support symbolic links for sharing:
+Skills support symbolic links for sharing skill libraries across projects:
 
 ```bash
 # Share a skill library across projects
 ln -s /shared/company-skills ~/.roo/skills/company-standards
-
-# Use different names for the same skill
-ln -s ~/.roo/skills/pdf-processing ~/.roo/skills/pdf-handler
 ```
 
-The skill name comes from the symlink name (or directory name if not symlinked). The frontmatter `name` field must still match this name.
+The skill name comes from the symlink name (or directory name if not symlinked). The frontmatter `name` field must match this name exactly—you can't create aliases with different names pointing to the same skill.
 
 ---
 
@@ -313,11 +313,13 @@ The skill name comes from the symlink name (or directory name if not symlinked).
 
 ## Skill Specification
 
-Roo Code skills follow the [Agent Skills](https://agentskills.io/) format for skill packaging and metadata.
+Roo Code skills follow the [Agent Skills](https://agentskills.io/) format for skill packaging and metadata. Skills are **instruction packages with optional bundled files**—they don't register new executable tools.
 
 **Required conventions:**
 - The frontmatter `name` must exactly match the directory (or symlink) name
 - Both `name` and `description` fields are required in frontmatter
+- Names: 1–64 chars, lowercase alphanumeric + hyphens, no leading/trailing/consecutive hyphens
+- Descriptions: 1–1024 chars (trimmed)
 
 #### Roo-specific enhancements
 
