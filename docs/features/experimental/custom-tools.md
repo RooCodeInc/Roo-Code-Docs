@@ -59,7 +59,7 @@ export default defineCustomTool({
 - **`parameters`**: Zod schema converted to JSON Schema for validation
 - **`execute`**: Async function returning a string result to Roo
 
-Tools are dynamically loaded and transpiled with esbuild. Automatic reload on file changes isn't reliable—use the **Refresh Custom Tools** command (`refreshCustomTools`) to pick up changes immediately.
+Tools are dynamically loaded and transpiled with esbuild. Automatic reload on file changes isn't reliable—use the **Refresh Custom Tools** command to pick up changes immediately.
 
 ---
 
