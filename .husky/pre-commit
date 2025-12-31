@@ -14,7 +14,7 @@ fi
 
 # Fail if warnings were produced
 if echo "$output" \
-  | grep -vi "Cannot infer the update date for some files, as they are not tracked by git\." \
+  | grep -Fvi "Cannot infer the update date for some files, as they are not tracked by git." \
   | grep -qi "warning"; then
   echo ""
   echo "❌ Build produced warnings - commit blocked"
