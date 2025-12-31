@@ -13,7 +13,9 @@ if [ $exit_code -ne 0 ]; then
 fi
 
 # Fail if warnings were produced
-if echo "$output" | grep -qi "warning"; then
+if echo "$output" \
+  | grep -vi "Cannot infer the update date for some files, as they are not tracked by git\." \
+  | grep -qi "warning"; then
   echo ""
   echo "❌ Build produced warnings - commit blocked"
   echo "Please fix the warnings above before committing."
