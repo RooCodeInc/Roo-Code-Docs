@@ -44,7 +44,7 @@ If you chose the Roo Code Cloud Provider when signing up, you already have an ac
 You can manage all of your account settings (including cancellation) from the [web UI](https://app.roocode.com) and clicking on the user avatar menu, in the top right:
 
 <figure>
-  <img src="/img/roo-code-cloud/user-menu.png" alt="The user menu for individual accounts." width="500" />
+  <img src="/img/roo-code-cloud/user-menu.png" alt="The user menu for Personal and Team accounts." width="500" />
   <figcaption>The user menu for Personal and Team accounts, respectively.</figcaption>
 </figure>
 
