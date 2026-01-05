@@ -7,7 +7,6 @@ keywords:
   - Roo Code tools
   - codebase overview
   - Tree-sitter
-image: /img/social-share.jpg
 ---
 
 # list_code_definition_names

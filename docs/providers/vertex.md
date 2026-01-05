@@ -10,7 +10,6 @@ keywords:
   - AI models
   - machine learning
   - cloud AI
-image: /img/social-share.jpg
 sidebar_label: GCP Vertex AI
 ---
 

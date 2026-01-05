@@ -8,7 +8,6 @@ keywords:
   - local LLM
   - self-hosted AI
   - privacy-focused AI
-image: /img/social-share.jpg
 ---
 
 # Using Local Models

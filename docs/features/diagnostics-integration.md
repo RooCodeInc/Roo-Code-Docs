@@ -8,7 +8,6 @@ keywords:
   - linting
   - language server
   - automatic error fixing
-image: /img/social-share.jpg
 ---
 
 # Diagnostics Integration

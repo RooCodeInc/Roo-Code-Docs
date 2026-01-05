@@ -10,7 +10,6 @@ keywords:
   - oauth
   - alibaba
   - dashscope
-image: /img/social-share.jpg
 ---
 
 # Qwen Code CLI Provider

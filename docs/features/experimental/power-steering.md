@@ -9,7 +9,6 @@ keywords:
   - experimental feature
   - token optimization
   - role definition
-image: /img/social-share.jpg
 ---
 import Codicon from '@site/src/components/Codicon';
 

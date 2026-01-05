@@ -10,7 +10,6 @@ keywords:
   - prompt caching
   - byok
 sidebar_label: OpenRouter
-image: /img/social-share.jpg
 ---
 
 # Using OpenRouter With Roo Code

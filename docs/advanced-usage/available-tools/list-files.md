@@ -9,7 +9,6 @@ keywords:
   - recursive listing
   - codebase navigation
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # list_files

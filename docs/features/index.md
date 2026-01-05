@@ -9,7 +9,6 @@ keywords:
   - MCP integration
   - custom modes
   - experimental features
-image: /img/social-share.jpg
 sidebar_label: 'Features Overview'
 ---
 

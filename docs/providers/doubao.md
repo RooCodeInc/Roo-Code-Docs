@@ -10,7 +10,6 @@ keywords:
   - doubao models
   - chinese ai
   - language models
-image: /img/social-share.jpg
 ---
 
 # Using Doubao With Roo Code

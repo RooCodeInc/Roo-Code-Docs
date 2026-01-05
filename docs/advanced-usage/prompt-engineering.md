@@ -6,7 +6,6 @@ keywords:
   - effective communication
   - Roo Code tips
   - custom instructions
-image: /img/social-share.jpg
 ---
 
 # Prompt Engineering Tips

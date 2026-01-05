@@ -11,7 +11,6 @@ keywords:
   - aws ai
   - foundation models
   - vpc endpoint
-image: /img/social-share.jpg
 ---
 
 # Using AWS Bedrock With Roo Code

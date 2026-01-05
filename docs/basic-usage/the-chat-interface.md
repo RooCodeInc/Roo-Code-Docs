@@ -6,7 +6,6 @@ keywords:
   - chat features
   - user interface
   - VS Code extension
-image: /img/social-share.jpg
 ---
 
 import KangarooIcon from '@site/src/components/KangarooIcon';

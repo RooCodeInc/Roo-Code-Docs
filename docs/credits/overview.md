@@ -5,7 +5,6 @@ keywords:
   - Tokens
   - Dollars
   - Prepaid
-image: /img/social-share.jpg
 ---
 
 # Roo Code Credits Overview

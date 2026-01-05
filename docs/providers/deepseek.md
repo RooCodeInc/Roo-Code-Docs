@@ -10,7 +10,6 @@ keywords:
   - reasoning ai
   - coding ai
   - deepseek r1
-image: /img/social-share.jpg
 ---
 
 # Using DeepSeek With Roo Code

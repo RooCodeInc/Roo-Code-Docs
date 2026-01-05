@@ -7,7 +7,6 @@ keywords:
   - openai compatible
   - china region
   - api provider
-image: /img/social-share.jpg
 ---
 
 # Using MiniMax With Roo Code

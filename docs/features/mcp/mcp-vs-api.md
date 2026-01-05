@@ -7,7 +7,6 @@ keywords:
   - AI protocols
   - stateful connections
   - tool discovery
-image: /img/social-share.jpg
 sidebar_label: MCP vs API
 ---
 

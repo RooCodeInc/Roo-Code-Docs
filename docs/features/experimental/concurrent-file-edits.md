@@ -9,7 +9,6 @@ keywords:
   - "Roo Code experimental features"
   - apply_diff
   - "batch approval"
-image: /img/social-share.jpg
 ---
 
 # Concurrent File Edits (AKA Multi-File Edits)

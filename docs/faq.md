@@ -8,7 +8,6 @@ keywords:
   - custom modes
   - MCP
   - local models
-image: /img/social-share.jpg
 ---
 
 import KangarooIcon from '@site/src/components/KangarooIcon';

@@ -6,7 +6,6 @@ keywords:
   - quick answers
   - workflow optimization
   - ask_followup_question tool
-image: /img/social-share.jpg
 sidebar_label: Suggested Responses
 ---
 

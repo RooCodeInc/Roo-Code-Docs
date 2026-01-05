@@ -7,7 +7,6 @@ keywords:
   - Roo Code tools
   - user feedback
   - task summary
-image: /img/social-share.jpg
 ---
 
 # attempt_completion

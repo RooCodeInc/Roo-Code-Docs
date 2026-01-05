@@ -11,7 +11,6 @@ keywords:
   - usage tracking
   - byok
 sidebar_label: Vercel AI Gateway
-image: /img/social-share.jpg
 ---
 
 # Using Vercel AI Gateway With Roo Code

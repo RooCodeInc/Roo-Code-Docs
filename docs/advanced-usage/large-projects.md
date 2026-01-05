@@ -6,7 +6,6 @@ keywords:
   - token optimization
   - codebase refactoring
   - Roo Code scalability
-image: /img/social-share.jpg
 ---
 
 # Working with Large Projects

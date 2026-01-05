@@ -7,7 +7,6 @@ keywords:
   - gitignore syntax
   - file permissions
   - security
-image: /img/social-share.jpg
 sidebar_label: .rooignore
 ---
 

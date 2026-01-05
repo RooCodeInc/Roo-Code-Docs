@@ -11,7 +11,6 @@ keywords:
   - openai models
   - prompt caching
   - cost tracking
-image: /img/social-share.jpg
 ---
 
 # Using Glama With Roo Code

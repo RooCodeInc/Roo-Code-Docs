@@ -8,7 +8,6 @@ keywords:
   - match precision
   - editing efficiency
   - truncation prevention
-image: /img/social-share.jpg
 ---
 
 # Diff/Fast Edits

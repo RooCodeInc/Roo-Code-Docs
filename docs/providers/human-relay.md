@@ -10,7 +10,6 @@ keywords:
   - manual relay
   - web ai models
   - free ai access
-image: /img/social-share.jpg
 ---
 
 # Human Relay Provider

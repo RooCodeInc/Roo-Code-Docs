@@ -8,7 +8,6 @@ keywords:
   - VS Code extensions
   - AI models
   - experimental features
-image: /img/social-share.jpg
 sidebar_label: VS Code Language Model API
 ---
 

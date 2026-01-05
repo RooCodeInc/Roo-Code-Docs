@@ -11,7 +11,6 @@ keywords:
   - offline AI
   - privacy
   - context window configuration
-image: /img/social-share.jpg
 ---
 import KangarooIcon from '@site/src/components/KangarooIcon';
 

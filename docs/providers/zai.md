@@ -11,7 +11,6 @@ keywords:
   - china ai
   - international ai
   - openai compatible
-image: /img/social-share.jpg
 ---
 
 # Using Z AI With Roo Code

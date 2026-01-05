@@ -8,7 +8,6 @@ keywords:
   - Roo Code tools
   - command execution
   - shell integration
-image: /img/social-share.jpg
 ---
 
 # execute_command

@@ -11,7 +11,6 @@ keywords:
   - llama models
   - mixtral
   - high speed ai
-image: /img/social-share.jpg
 ---
 
 # Using Groq With Roo Code

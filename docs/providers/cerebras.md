@@ -11,7 +11,6 @@ keywords:
   - llama models
   - free tier
   - high speed ai
-image: /img/social-share.jpg
 ---
 
 # Using Cerebras With Roo Code

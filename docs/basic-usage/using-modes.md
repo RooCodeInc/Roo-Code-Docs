@@ -9,7 +9,6 @@ keywords:
   - Orchestrator mode
   - AI assistant modes
   - mode switching
-image: /img/social-share.jpg
 ---
 
 # Using Modes

@@ -12,7 +12,6 @@ keywords:
   - claude haiku
   - prompt caching
   - ai models
-image: /img/social-share.jpg
 ---
 
 # Using Anthropic With Roo Code

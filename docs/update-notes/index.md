@@ -9,7 +9,6 @@ keywords:
   - bug fixes
   - improvements
   - roo code versions
-image: /img/social-share.jpg
 ---
 
 # Extension Release Notes

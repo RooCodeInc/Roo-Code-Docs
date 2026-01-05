@@ -7,7 +7,6 @@ keywords:
   - MCP installation
   - MCP configuration
   - recommended servers
-image: /img/social-share.jpg
 sidebar_label: Recommended MCP Servers
 ---
 

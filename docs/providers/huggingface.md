@@ -12,7 +12,6 @@ keywords:
   - inference router
   - ai models
   - inference providers
-image: /img/social-share.jpg
 ---
 
 # Using Hugging Face With Roo Code

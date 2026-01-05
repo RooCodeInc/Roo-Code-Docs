@@ -6,7 +6,6 @@ keywords:
   - best practices
   - AI coding tips
   - advanced techniques
-image: /img/social-share.jpg
 ---
 
 # Tips & Tricks

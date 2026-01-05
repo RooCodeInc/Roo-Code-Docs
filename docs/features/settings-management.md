@@ -8,7 +8,6 @@ keywords:
   - reset settings
   - configuration backup
   - auto import
-image: /img/social-share.jpg
 ---
 
 # Import, Export, and Reset Settings

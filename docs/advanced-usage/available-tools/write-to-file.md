@@ -10,7 +10,6 @@ keywords:
   - file operations
   - interactive editing
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # write_to_file

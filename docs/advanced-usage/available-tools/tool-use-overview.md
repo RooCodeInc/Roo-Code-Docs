@@ -10,7 +10,6 @@ keywords:
   - tool security
   - workflow tools
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # Tool Use Overview

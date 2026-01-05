@@ -10,7 +10,6 @@ keywords:
   - usage tracking
   - prompt caching
 sidebar_label: Requesty
-image: /img/social-share.jpg
 ---
 
 # Using Requesty With Roo Code

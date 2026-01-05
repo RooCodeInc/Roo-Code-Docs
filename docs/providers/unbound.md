@@ -10,7 +10,6 @@ keywords:
   - Anthropic
   - OpenAI
   - compliance
-image: /img/social-share.jpg
 sidebar_label: Unbound
 ---
 

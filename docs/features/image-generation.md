@@ -13,7 +13,6 @@ keywords:
   - watercolor
   - upscaling
   - style transfer
-image: /img/social-share.jpg
 ---
 
 # Image Generation

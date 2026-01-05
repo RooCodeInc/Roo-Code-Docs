@@ -10,7 +10,6 @@ keywords:
   - task status
   - interactive UI
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # update_todo_list

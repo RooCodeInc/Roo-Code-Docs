@@ -7,7 +7,6 @@ keywords:
   - support
   - bug report
   - diagnostics
-image: /img/social-share.jpg
 ---
 
 # Reporting Errors

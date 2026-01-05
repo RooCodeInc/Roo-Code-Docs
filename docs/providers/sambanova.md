@@ -10,7 +10,6 @@ keywords:
   - enterprise ai
   - llm provider
   - fast inference
-image: /img/social-share.jpg
 ---
 
 # Using SambaNova With Roo Code

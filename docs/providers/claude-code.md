@@ -10,7 +10,6 @@ keywords:
   - no api key
   - claude reasoning
   - claude thinking mode
-image: /img/social-share.jpg
 ---
 
 # Claude Code Provider

@@ -8,7 +8,6 @@ keywords:
   - language support
   - multilingual
   - accessibility
-image: /img/social-share.jpg
 sidebar_label: Additional Features
 ---
 

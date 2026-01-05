@@ -6,7 +6,6 @@ keywords:
   - message flow
   - technical documentation
   - LLM communication
-image: /img/social-share.jpg
 ---
 
 # Prompt Structure

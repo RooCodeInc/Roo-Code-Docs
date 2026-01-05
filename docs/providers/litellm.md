@@ -11,7 +11,6 @@ keywords:
   - llm proxy
   - local deployment
   - cost management
-image: /img/social-share.jpg
 ---
 
 # Using LiteLLM With Roo Code

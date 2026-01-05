@@ -8,7 +8,6 @@ keywords:
   - VSCode integration
   - code improvements
   - error fixes
-image: /img/social-share.jpg
 ---
 
 # Code Actions

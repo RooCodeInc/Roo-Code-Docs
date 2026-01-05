@@ -8,7 +8,6 @@ keywords:
   - GitHub integration
   - Slack integration
   - Free AI models
-image: /img/social-share.jpg
 ---
 
 # Roo Code Cloud Overview

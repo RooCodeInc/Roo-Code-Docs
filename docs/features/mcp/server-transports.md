@@ -7,7 +7,6 @@ keywords:
   - SSE transport
   - MCP deployment
   - local vs remote MCP
-image: /img/social-share.jpg
 sidebar_label: STDIO, Streamable HTTP & SSE Transports
 ---
 

@@ -18,7 +18,6 @@ keywords:
   - open source models
   - serverless models
   - openai compatible
-image: /img/social-share.jpg
 ---
 
 # Using Fireworks AI With Roo Code

@@ -8,7 +8,6 @@ keywords:
   - Roo Code tools
   - vector search
   - Qdrant
-image: /img/social-share.jpg
 ---
 
 # codebase_search

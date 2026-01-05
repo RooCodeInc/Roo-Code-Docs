@@ -7,7 +7,6 @@ keywords:
   - Roo Code tools
   - clarification
   - user feedback
-image: /img/social-share.jpg
 ---
 
 # ask_followup_question

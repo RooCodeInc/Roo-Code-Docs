@@ -7,7 +7,6 @@ keywords:
   - code generation
   - temperature control
   - API configuration
-image: /img/social-share.jpg
 ---
 
 import KangarooIcon from '@site/src/components/KangarooIcon';

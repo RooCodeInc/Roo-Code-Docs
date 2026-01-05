@@ -10,7 +10,6 @@ keywords:
   - workflow automation
   - npm dependencies
   - environment variables
-image: /img/social-share.jpg
 ---
 # Custom Tools
 

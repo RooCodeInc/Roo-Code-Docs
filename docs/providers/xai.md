@@ -13,7 +13,6 @@ keywords:
   - Grok-3
   - Grok-2
   - prompt caching
-image: /img/social-share.jpg
 sidebar_label: xAI (Grok)
 ---
 

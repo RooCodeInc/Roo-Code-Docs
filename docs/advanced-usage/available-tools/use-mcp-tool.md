@@ -10,7 +10,6 @@ keywords:
   - domain tools
   - tool extension
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # use_mcp_tool

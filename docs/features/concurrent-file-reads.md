@@ -7,7 +7,6 @@ keywords:
   - context loading
   - workspace efficiency
   - file operations
-image: /img/social-share.jpg
 sidebar_label: 'Multi-File Reads'
 ---
 

@@ -9,7 +9,6 @@ keywords:
   - instruction templates
   - custom commands
   - experimental feature
-image: /img/social-share.jpg
 ---
 
 # run_slash_command

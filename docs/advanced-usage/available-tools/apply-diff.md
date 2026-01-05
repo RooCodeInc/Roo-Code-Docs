@@ -8,7 +8,6 @@ keywords:
   - diff tool
   - Roo Code tools
   - multi-file edits
-image: /img/social-share.jpg
 ---
 
 # apply_diff

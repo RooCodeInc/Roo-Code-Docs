@@ -7,7 +7,6 @@ keywords:
   - command execution
   - browser automation
   - tool approval
-image: /img/social-share.jpg
 ---
 
 # How Tools Work

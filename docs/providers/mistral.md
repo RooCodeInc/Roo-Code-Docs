@@ -11,7 +11,6 @@ keywords:
   - Ministral
   - function calling
   - La Plateforme
-image: /img/social-share.jpg
 ---
 
 # Using Mistral AI With Roo Code

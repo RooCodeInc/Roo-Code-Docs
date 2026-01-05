@@ -10,7 +10,6 @@ keywords:
   - task history
   - usage analytics
   - BYO keys
-image: /img/social-share.jpg
 ---
 
 # What is Roo Code Cloud?

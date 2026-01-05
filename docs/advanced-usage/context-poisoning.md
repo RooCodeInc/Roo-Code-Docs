@@ -6,7 +6,6 @@ keywords:
   - Roo Code troubleshooting
   - LLM context management
   - session recovery
-image: /img/social-share.jpg
 ---
 
 # Context Poisoning

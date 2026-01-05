@@ -10,7 +10,6 @@ keywords:
   - complex projects
   - task organization
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # new_task

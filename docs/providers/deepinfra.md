@@ -11,7 +11,6 @@ keywords:
   - prompt caching
   - vision models
   - open source ai
-image: /img/social-share.jpg
 ---
 
 # Using DeepInfra With Roo Code

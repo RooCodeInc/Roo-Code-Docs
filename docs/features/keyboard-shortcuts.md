@@ -7,7 +7,6 @@ keywords:
   - prompt history
   - accessibility
   - vim compatibility
-image: /img/social-share.jpg
 sidebar_label: Keyboard Navigation
 ---
 

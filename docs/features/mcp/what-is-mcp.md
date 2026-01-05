@@ -7,7 +7,6 @@ keywords:
   - AI tools integration
   - MCP client-server
   - JSON-RPC protocol
-image: /img/social-share.jpg
 sidebar_label: What is MCP?
 ---
 

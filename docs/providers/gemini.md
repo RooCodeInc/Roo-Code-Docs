@@ -11,7 +11,6 @@ keywords:
   - google ai
   - gemini models
   - ai studio
-image: /img/social-share.jpg
 ---
 
 # Using Google Gemini With Roo Code

@@ -10,7 +10,6 @@ keywords:
   - language models
   - llm api
   - open source models
-image: /img/social-share.jpg
 ---
 
 # Using Chutes AI With Roo Code

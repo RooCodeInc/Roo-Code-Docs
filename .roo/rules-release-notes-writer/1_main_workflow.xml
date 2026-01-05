@@ -295,13 +295,6 @@ VERSION="X.Y.Z"
 CANDIDATES_FILE=".roo/tmp/release-notes/image_candidates_v$VERSION.txt"
 FRONTMATTER_FILE=".roo/tmp/release-notes/frontmatter_image_v$VERSION.txt"
 
-# If no candidates were discovered, skip download entirely and use social-share
-if [ ! -s "$CANDIDATES_FILE" ]; then
-  mkdir -p "$(dirname "$FRONTMATTER_FILE")"
-  echo "/img/social-share.jpg" > "$FRONTMATTER_FILE"
-  exit 0
-fi
-
 # Try the first candidate URL/path as the hero image source
 mkdir -p "static/img/v$VERSION"
 OUT="static/img/v$VERSION/v$VERSION.png"
@@ -318,8 +311,6 @@ fi
 curl -L "$URL" -o "$OUT" || true
 if [ -s "$OUT" ]; then
   echo "/img/v$VERSION/v$VERSION.png" > "$FRONTMATTER_FILE"
-else
-  echo "/img/social-share.jpg" > "$FRONTMATTER_FILE"
 fi
         ]]></command>
         <notes>

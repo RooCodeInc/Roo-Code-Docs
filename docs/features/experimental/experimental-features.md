@@ -7,7 +7,6 @@ keywords:
   - "concurrent file edits"
   - "power steering"
   - "feature flags"
-image: /img/social-share.jpg
 ---
 
 # Experimental Features

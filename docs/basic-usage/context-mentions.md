@@ -8,7 +8,6 @@ keywords:
   - "problems panel"
   - "terminal mentions"
   - "Git integration"
-image: /img/social-share.jpg
 ---
 
 # Context Mentions

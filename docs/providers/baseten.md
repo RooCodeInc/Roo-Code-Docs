@@ -13,7 +13,6 @@ keywords:
   - AI integration
   - API key
   - enterprise inference
-image: /img/social-share.jpg
 ---
 
 # Using Baseten With Roo Code

@@ -6,7 +6,6 @@ keywords:
   - AI customization
   - coding preferences
   - project rules
-image: /img/social-share.jpg
 ---
 
 # Custom Instructions

@@ -8,7 +8,6 @@ keywords:
   - Roo Code tools
   - web testing
   - screenshots
-image: /img/social-share.jpg
 ---
 
 # browser_action

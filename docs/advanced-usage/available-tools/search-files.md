@@ -10,7 +10,6 @@ keywords:
   - codebase search
   - pattern matching
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # search_files

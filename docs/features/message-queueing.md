@@ -7,7 +7,6 @@ keywords:
   - workflow efficiency
   - chat interface
   - Roo Code features
-image: /img/social-share.jpg
 ---
 
 

@@ -7,7 +7,6 @@ keywords:
   - AI communication
   - request examples
   - best practices
-image: /img/social-share.jpg
 ---
 
 # Typing Your Requests

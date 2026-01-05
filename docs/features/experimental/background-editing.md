@@ -7,7 +7,6 @@ keywords:
   - background editing
   - workflow optimization
   - uninterrupted coding
-image: /img/social-share.jpg
 ---
 # Background Editing
 

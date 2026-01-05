@@ -11,7 +11,6 @@ keywords:
   - official OpenAI API
   - verbosity
   - reasoning effort
-image: /img/social-share.jpg
 ---
 
 # Using OpenAI With Roo Code

@@ -12,7 +12,6 @@ keywords:
   - OCR workflows
   - code analysis
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # read_file

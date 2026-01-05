@@ -10,7 +10,6 @@ keywords:
   - Perplexity
   - Anyscale
   - model configuration
-image: /img/social-share.jpg
 ---
 
 # Using OpenAI Compatible Providers With Roo Code

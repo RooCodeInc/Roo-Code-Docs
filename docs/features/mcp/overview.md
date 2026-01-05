@@ -8,7 +8,6 @@ keywords:
   - custom tools
   - MCP servers
   - AI integrations
-image: /img/social-share.jpg
 ---
 
 # Model Context Protocol (MCP)

@@ -308,7 +308,7 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
-    image: 'img/social-share.jpg', // Default Open Graph image
+    image: '/img/social-share.png', // Default Open Graph image
     navbar: {
       logo: {
         alt: 'Roo Code Logo',

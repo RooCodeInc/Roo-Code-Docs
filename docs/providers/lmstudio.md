@@ -11,7 +11,6 @@ keywords:
   - Mistral
   - DeepSeek
   - local inference
-image: /img/social-share.jpg
 ---
 
 # Using LM Studio With Roo Code

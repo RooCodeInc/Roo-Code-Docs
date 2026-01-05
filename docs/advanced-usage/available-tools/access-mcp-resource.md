@@ -8,7 +8,6 @@ keywords:
   - Roo Code tools
   - context retrieval
   - API integration
-image: /img/social-share.jpg
 ---
 
 # access_mcp_resource

@@ -7,7 +7,6 @@ keywords:
   - advanced customization
   - Roo Code configuration
   - custom prompts
-image: /img/social-share.jpg
 ---
 
 # Footgun Prompting: Override System Prompts

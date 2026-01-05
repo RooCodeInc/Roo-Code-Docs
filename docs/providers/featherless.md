@@ -12,7 +12,6 @@ keywords:
   - open source ai
   - reasoning models
   - kimi k2
-image: /img/social-share.jpg
 ---
 
 # Using Featherless AI With Roo Code

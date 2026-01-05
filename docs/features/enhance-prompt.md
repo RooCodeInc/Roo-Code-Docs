@@ -8,7 +8,6 @@ keywords:
   - chat enhancement
   - prompt refinement
   - wand icon
-image: /img/social-share.jpg
 ---
 
 # Enhance Prompt

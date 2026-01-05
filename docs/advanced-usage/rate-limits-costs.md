@@ -7,7 +7,6 @@ keywords:
   - cost optimization
   - auto-approval limits
   - API management
-image: /img/social-share.jpg
 ---
 
 # Rate Limits and Costs

@@ -7,7 +7,6 @@ keywords:
   - getting started
   - AI coding assistant tutorial
   - approval workflow
-image: /img/social-share.jpg
 ---
 import KangarooIcon from '@site/src/components/KangarooIcon';
 

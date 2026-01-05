@@ -11,7 +11,6 @@ keywords:
   - Ask mode
   - task transitions
   - VS Code AI
-image: /img/social-share.jpg
 ---
 
 # switch_mode

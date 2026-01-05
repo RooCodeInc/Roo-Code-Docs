@@ -5,7 +5,6 @@ keywords:
   - Roo Code Cloud Provider
   - LLM
   - Models
-image: /img/social-share.jpg
 ---
 
 # Roo Code Cloud Provider Overview
