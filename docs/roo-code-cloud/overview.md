@@ -51,6 +51,6 @@ You can manage all of your account settings (including cancellation) from the [w
 - **Account switcher:** to switch between multiple accounts associated to the same email address (if you have them).
 - **Billing and credits:** to add [credits](/credits/overview), configure auto top-up, change payment method, upgrade plans.
 - **My Settings:** to change settings specific to you or to cancel/delete your personal Roo Code cloud account (under "Open Profile").
-- **Organization Settings:** to change [global settings](/roo-code-cloud/team-plan#capabilities) for your Team, or cancel/delete your personal Roo Code cloud account (under "Open Profile").
+- **Organization Settings:** to change [global settings](/roo-code-cloud/team-plan#capabilities) for your Team.
 - **Docs:** to come here, so meta :)
 - **Help:** to start an in-app chat with our team
