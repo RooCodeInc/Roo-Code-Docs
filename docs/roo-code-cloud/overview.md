@@ -38,3 +38,19 @@ To use it, you'll need an account. You can:
 - Or  **[sign up for a Roo Code account from the VS Code extension](/roo-code-cloud/login)** to your account
 
 If you chose the Roo Code Cloud Provider when signing up, you already have an account and only need to sign in.
+
+## Managing your account
+
+You can manage all of your account settings (including cancellation) from the [web UI](https://app.roocode.com) and clicking on the user avatar menu, in the top right:
+
+<figure>
+  <img src="/img/roo-code-cloud/user-menu.png" alt="The user menu for individual accounts." width="500" />
+  <figcaption>The user menu for Personal and Team accounts, respectively.</figcaption>
+</figure>
+
+- **Account switcher:** to switch between multiple accounts associated to the same email address (if you have them).
+- **Billing and credits:** to add [credits](/credits/overview), configure auto top-up, change payment method, upgrade plans.
+- **My Settings:** to change settings specific to you or to cancel/delete your personal Roo Code cloud account (under "Open Profile").
+- **Organization Settings:** to change [global settings](/roo-code-cloud/team-plan#capabilities) for your Team, or cancel/delete your personal Roo Code cloud account (under "Open Profile").
+- **Docs:** to come here, so meta :)
+- **Help:** to start an in-app chat with our team
