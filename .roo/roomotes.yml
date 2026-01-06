@@ -1,0 +1,9 @@
+version: "1.0"
+
+commands:
+  - name: Install dependencies
+    run: npm install
+    timeout: 60
+  - name: Run dev
+    run: npm start
+    timeout: 10
