@@ -5,5 +5,5 @@ commands:
     run: npm install
     timeout: 60
   - name: Run dev
-    run: npm start
-    timeout: 120
+    run: nohup npm start > /tmp/docusaurus.log 2>&1 &
+    timeout: 60
