@@ -16,4 +16,4 @@ Non-obvious, project-specific rules:
 - Navigation/footer links are centralized in [src/constants.ts](src/constants.ts) and consumed by [docusaurus.config.ts](docusaurus.config.ts). Update constants rather than hardcoding URLs.
 - Legacy [Rakefile](Rakefile) is unrelated (Jekyll). Do not use it; all builds run through Docusaurus scripts.
 - For structural/formatting research, use Context7 MCP (ID "/facebook/docusaurus") via [.roo/mcp.json](.roo/mcp.json); see [.roorules](.roorules).
-- CI only builds (no lint/check-types). Run lint and check-types locally to catch issues CI won't.
+- CI runs build and check-types (no lint). Run lint locally to catch issues CI won't.
