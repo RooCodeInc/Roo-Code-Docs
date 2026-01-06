@@ -11,6 +11,7 @@ export default function NavbarNavLink({
   href,
   label,
   html,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isDropdownLink: _isDropdownLink,
   prependBaseUrlToHref,
   ...props

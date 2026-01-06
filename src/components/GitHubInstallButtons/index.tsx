@@ -64,7 +64,7 @@ async function getVSCodeDownloads() {
       return null;
     }
     
-    const installStat = statistics.find((stat: any) => stat.statisticName === "install");
+    const installStat = statistics.find((stat: { statisticName: string; value: number }) => stat.statisticName === "install");
     if (!installStat) {
       console.error("VSCode API: Install count not found");
       return null;
@@ -77,7 +77,7 @@ async function getVSCodeDownloads() {
   }
 }
 
-export default function GitHubInstallButtons(): JSX.Element {
+export default function GitHubInstallButtons(): React.JSX.Element {
   const [stars, setStars] = useState<string | null>("15.4k");
   const [downloads, setDownloads] = useState<string | null>("574.1k");
 

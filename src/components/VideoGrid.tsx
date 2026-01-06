@@ -6,7 +6,7 @@ interface Video {
   title: string;
 }
 
-export default function VideoGrid(): JSX.Element {
+export default function VideoGrid(): React.JSX.Element {
   const videoRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const scrollToVideo = (videoId: string) => {

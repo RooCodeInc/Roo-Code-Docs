@@ -6,8 +6,8 @@ const GTM_ID = 'GTM-M2JZHV8N';
 
 declare global {
   interface Window {
-    dataLayer?: any[];
-    google_tag_manager?: any;
+    dataLayer?: Record<string, unknown>[];
+    google_tag_manager?: Record<string, unknown>;
   }
 }
 
@@ -34,6 +34,7 @@ export function GTMProvider({ children }: { children: React.ReactNode }) {
       // Clean up GTM scripts on unmount
       removeGTMScripts();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const enableGTM = () => {

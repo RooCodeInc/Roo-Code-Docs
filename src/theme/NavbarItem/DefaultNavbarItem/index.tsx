@@ -5,6 +5,7 @@ import type {Props} from '@theme/NavbarItem/DefaultNavbarItem';
 
 export default function DefaultNavbarItem({
   mobile = false,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   position: _position, // Need to destructure position from props so that it doesn't get passed on.
   ...props
 }: Props): ReactNode {

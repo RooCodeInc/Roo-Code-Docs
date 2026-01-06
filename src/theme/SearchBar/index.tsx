@@ -1,5 +1,4 @@
-/* eslint-env browser */
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* Custom SearchBar override that always pushes Release Notes suggestions to the bottom */
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import clsx from 'clsx';
@@ -66,7 +65,7 @@ function deprioritizeReleaseNotes(results: any[]) {
   return [...nonRN, ...rn];
 }
 
-export default function SearchBar(): JSX.Element {
+export default function SearchBar(): React.JSX.Element {
   const isBrowser = useIsBrowser();
   const {
     siteConfig: {baseUrl},
@@ -276,7 +275,6 @@ export default function SearchBar(): JSX.Element {
     setTimeout(() => {
       const root = document.querySelector('article');
       if (!root) return;
-      // @ts-ignore
       const mark = new Mark(root);
       mark.unmark();
       if (keywords.length !== 0) {

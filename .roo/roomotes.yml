@@ -1,0 +1,13 @@
+version: '1.0'
+
+port: 3000
+
+commands:
+  - name: Install prerequisites
+    run: mise install
+
+  - name: Install dependencies
+    run: pnpm install
+
+  - name: Start web server
+    run: nohup pnpm start > /tmp/web-dev.log 2>&1 &

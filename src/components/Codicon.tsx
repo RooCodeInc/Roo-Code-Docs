@@ -5,7 +5,7 @@ interface CodiconProps {
   name: string;
 }
 
-export default function Codicon({ name }: CodiconProps): JSX.Element {
+export default function Codicon({ name }: CodiconProps): React.JSX.Element {
   return (
     <i 
       className={`codicon codicon-${name}`}

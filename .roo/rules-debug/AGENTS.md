@@ -2,7 +2,7 @@
 
 This file provides guidance to agents when working with code in this repository.
 
-- CI only builds, doesn't lint/typecheck ([.github/workflows/docusaurus-build.yml](.github/workflows/docusaurus-build.yml:29)). Run "npm run lint" and "npm run typecheck" locally before pushing.
+- CI only builds, doesn't lint/check-types ([.github/workflows/docusaurus-build.yml](.github/workflows/docusaurus-build.yml:29)). Run "pnpm run lint" and "pnpm run check-types" locally before pushing.
 - PostHog analytics silently skips if POSTHOG_API_KEY missing. Check [.env](.env) exists with key from [.env.example](.env.example).
 - No test framework configured. Scripts exist in package.json but no test files or jest/vitest config present.
 - Docusaurus dev server at localhost:3000. Hot reload may fail for theme swizzled components; restart if changes don't appear.

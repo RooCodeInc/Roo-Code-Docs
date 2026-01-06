@@ -3,7 +3,7 @@ import { FaCopy, FaCheck } from 'react-icons/fa6';
 import { useDoc } from '@docusaurus/plugin-content-docs/client';
 import styles from './styles.module.css';
 
-export default function CopyPageContent(): JSX.Element {
+export default function CopyPageContent(): React.JSX.Element {
   const [copied, setCopied] = useState(false);
   const { metadata, frontMatter } = useDoc();
   

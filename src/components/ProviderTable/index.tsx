@@ -10,7 +10,7 @@ interface ProviderMetadata {
   permalink: string;
 }
 
-export default function ProviderTable(): JSX.Element {
+export default function ProviderTable(): React.JSX.Element {
   // Get all docs data to extract permalinks
   const allDocsData = useAllDocsData();
   const docsData = allDocsData['default'];
@@ -19,14 +19,14 @@ export default function ProviderTable(): JSX.Element {
     return <div>Loading providers...</div>;
   }
 
-  // Get all docs from all versions
-  const allDocs = Object.values(docsData.versions).flatMap((version: any) => 
-    Object.values(version.docs)
+  // Get all docs from all versions (Docusaurus internal types don't expose permalink)
+  const allDocs = Object.values(docsData.versions).flatMap((version) =>
+    version.docs as unknown as Array<{ id: string; permalink: string }>
   );
   
   // Create a map of doc IDs to permalinks
   const docPermalinks = new Map<string, string>();
-  allDocs.forEach((doc: any) => {
+  allDocs.forEach((doc) => {
     if (doc.id && doc.permalink) {
       docPermalinks.set(doc.id, doc.permalink);
     }

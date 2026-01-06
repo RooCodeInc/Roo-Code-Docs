@@ -4,7 +4,6 @@ import { CookieConsent } from '../../components/CookieConsent';
 import { PostHogProvider } from '../../components/PostHogProvider';
 import { GTMProvider } from '../../components/GTMProvider';
 import { IntercomProvider } from '../../components/IntercomProvider';
-import { AnnouncementBanner } from '../../components/AnnouncementBanner';
 
 export default function Layout(props) {
   return (

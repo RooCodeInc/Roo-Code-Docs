@@ -3,7 +3,7 @@ import { FaReddit, FaDiscord } from 'react-icons/fa6';
 import { REDDIT_URL, DISCORD_URL } from '@site/src/constants';
 import styles from './styles.module.css';
 
-export default function NavbarSocialIcons(): JSX.Element {
+export default function NavbarSocialIcons(): React.JSX.Element {
   const socialLinks = [
     {
       href: REDDIT_URL,

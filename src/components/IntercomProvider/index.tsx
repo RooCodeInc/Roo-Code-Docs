@@ -53,6 +53,7 @@ export function IntercomProvider({ children }: { children: React.ReactNode }) {
       cleanup();
       shutdownIntercom();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadIntercom = (appId: string) => {

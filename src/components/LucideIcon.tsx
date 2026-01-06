@@ -1,5 +1,6 @@
 import React from 'react';
 import * as LucideIcons from 'lucide-react';
+import type { LucideProps } from 'lucide-react';
 
 interface LucideIconProps {
   name: keyof typeof LucideIcons;
@@ -17,8 +18,8 @@ export default function LucideIcon({
   strokeWidth,
   className,
   style
-}: LucideIconProps): JSX.Element | null {
-  const Icon = LucideIcons[name] as React.ComponentType<any>;
+}: LucideIconProps): React.JSX.Element | null {
+  const Icon = LucideIcons[name] as React.ComponentType<LucideProps>;
   
   if (!Icon) {
     console.warn(`Icon "${name}" not found in lucide-react`);

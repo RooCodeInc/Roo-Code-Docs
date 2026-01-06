@@ -1,4 +1,4 @@
-/* eslint-env browser */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* Custom SearchPage override that always pushes Release Notes results to the bottom */
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -85,7 +85,7 @@ function SearchPageContent() {
     } else {
       setSearchResults(undefined);
     }
-    // `updateSearchPath` intentionally omitted from deps (matches plugin behavior)
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- updateSearchPath intentionally omitted (matches plugin behavior)
   }, [searchQuery, versionUrl, searchContext]);
 
   const handleSearchInputChange = useCallback((e: React.ChangeEvent<any>) => {
@@ -96,6 +96,7 @@ function SearchPageContent() {
     if (searchValue && searchValue !== searchQuery) {
       setSearchQuery(searchValue);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- searchQuery intentionally omitted to prevent loops
   }, [searchValue]);
 
   const [searchWorkerReady, setSearchWorkerReady] = useState(false);
