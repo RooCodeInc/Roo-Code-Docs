@@ -120,6 +120,18 @@ In the <Codicon name="notebook" /> Prompts tab, you can explicitly associate a s
 
 ---
 
+## Per-Task Profile Persistence
+
+Each task remembers which profile it started with. This "sticky" behavior means:
+
+- **Reopening from history**: When you resume a task from history, it uses the same profile it had originally—even if you've since changed the global selection.
+- **Multi-workspace consistency**: If you switch profiles in another workspace window, existing tasks in the first window keep their original profile.
+- **Orchestrator subtasks**: Child tasks created by the orchestrator inherit the parent's profile and retain it for their lifetime.
+
+This prevents unexpected model switches mid-task and keeps your conversation context consistent with the model that generated it.
+
+---
+
 ## Security Note
 
 API keys are stored securely in VSCode's Secret Storage and are never exposed in plain text.

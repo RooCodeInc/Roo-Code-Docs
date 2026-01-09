@@ -30,6 +30,7 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | Mention Type | Format | Description | Example Usage |
 |--------------|--------|-------------|--------------|
 | **File** | `@/path/to/file.ts` | Includes file contents in request context | "Explain the function in @/src/utils.ts" |
+| **Image** | `@/path/to/image.png` | Includes image as inline visual content | "What's wrong with this UI? @/screenshots/bug.png" |
 | **Folder** | `@/path/to/folder` | Includes contents of all files directly in the folder (non-recursive) | "Analyze the code in @/src/components" |
 | **Problems** | `@problems` | Includes VS Code Problems panel diagnostics | "@problems Fix all errors in my code" |
 | **Terminal** | `@terminal` | Includes recent terminal command and output | "Fix the errors shown in @terminal" |
@@ -49,6 +50,18 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | **Supports** | Text files, PDFs, and DOCX files (with text extraction) |
 | **Works in** | Initial requests, feedback responses, and follow-up messages |
 | **Limitations** | Very large files may be truncated; binary files not supported |
+
+### Image Mentions
+
+Image mentions let you include visual content directly in your conversation. When the model supports vision, the image is sent as inline visual content rather than text.
+
+| Capability | Details |
+|------------|---------|
+| **Format** | `@/path/to/image.png` (same path format as file mentions) |
+| **Provides** | Image sent as inline visual content to the model |
+| **Supports** | PNG, JPG, JPEG, GIF, BMP, SVG, WEBP, ICO, AVIF |
+| **Best for** | UI reviews, screenshot debugging, diagram analysis |
+| **Requires** | A model with vision support (non-vision models can't interpret images) |
 
 ### Folder Mentions
 
@@ -130,7 +143,7 @@ The dropdown automatically suggests:
 - Special keywords (`problems`, `terminal`, `git-changes`)
 - **All currently open files** (regardless of ignore settings or directory filters)
 
-The dropdown automatically filters out common directories like `node_modules`, `.git`, `dist`, and `out` to reduce noise, even though their content could be included if manually typed.
+The dropdown respects `.rooignore` by default, hiding ignored files from suggestions. Enable the `showRooIgnoredFiles` setting to include ignored files in the dropdown (they'll appear with a 🔒 indicator). Common directories like `node_modules`, `.git`, `dist`, and `out` are also filtered to reduce noise.
 
 ---
 
@@ -140,6 +153,7 @@ The dropdown automatically filters out common directories like `node_modules`, `
 
 | Behavior | Description |
 |----------|-------------|
+| **Dropdown filtering** | The `@` dropdown hides `.rooignore`-matched files by default. Enable `showRooIgnoredFiles` to see them (marked with 🔒). |
 | **`.rooignore` bypass** | File and folder `@mentions` bypass `.rooignore` checks when fetching content for context. Content from ignored files will be included if directly mentioned. |
 | **`.gitignore` bypass** | Similarly, file and folder `@mentions` do not respect `.gitignore` rules when fetching content. |
 | **Git command respect** | Git-related mentions (`@git-changes`, `@commit-hash`) do respect `.gitignore` since they rely on Git commands. |
