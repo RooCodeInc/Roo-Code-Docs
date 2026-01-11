@@ -4,7 +4,6 @@ keywords:
   - roo code 3.39
   - new features
   - bug fixes
-image: /img/social-share.jpg
 ---
 
 # Roo Code 3.39 Release Notes (Combined)
@@ -40,9 +39,32 @@ Roo Code 3.39 includes task-level provider profile persistence, improved multimo
 
 ## Patch Releases
 
+### 3.39.3 (2026-01-10)
+
+* Renames Roo Code Cloud Provider to **Roo Code Router** for clearer branding.
+* Updates Roo Code Router service name and related wording so the UI uses consistent naming.
+* Improves ExtensionHost internal organization around mode changes.
+* Adds options to build and install the CLI release locally for testing.
+* Reorganizes the CLI file structure for better maintainability.
+* Adds an interactive TUI mode to the Roo CLI.
+
+### 3.39.2 (2026-01-09)
+
+* Adds an **Enable debug mode** toggle in Roo Code settings (About Roo Code) so you can turn debug logging on/off from the extension UI.
+* Improves the error message shown when a provider terminates a streaming response early, making it clearer the interruption came from the provider.
+* Fixes an issue where Cerebras could fail tool calling when a chat included both built-in tools and MCP tools.
+* Fixes tool calling for OpenAI-compatible providers.
+* Fixes cases where file edits could fail to apply due to overly strict `edit_file` matching.
+* Fixes an issue where the VS Code Language Model (vscode-lm) integration could error due to message part ordering.
+* Fixes an issue where Gemini requests via OpenRouter could fail when an assistant message contained only tool calls.
+* Fixes an issue where approving a tool run while adding feedback could produce duplicate tool results.
+* Improves Gemini tool calling reliability by preserving thought signatures correctly.
+* Improves file-edit reliability for Gemini and Vertex models.
+* Updates Roo Code CLI defaults by switching the default model to `anthropic/claude-opus-4.5`.
+* Updates Roo Code Cloud’s Terms of Service (effective 2026-01-09).
+
 ### 3.39.1 (2026-01-08)
 
 * Fixes an issue where file paths shown during native tool-call streaming could appear incorrect or truncated.
 * Fixes an issue where resuming a task with Gemini extended thinking could fail with a “Corrupted thought signature” / INVALID_ARGUMENT error.
 * Fixes an Anthropic tool schema compatibility issue affecting `ask_followup_question`.
-

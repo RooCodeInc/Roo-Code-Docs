@@ -2,15 +2,15 @@
 description: The Roo Code Cloud is the easiest way to use Roo Code without additional accounts and dealing with API keys
 keywords:
   - Roo Code Cloud
-  - Roo Code Cloud Provider
+  - Roo Code Router
   - LLM
   - Models
 ---
 
-# Roo Code Cloud Provider Overview
+# Roo Code Router Overview
 
 
-To make it as smooth as possible to use Roo Code, which depends on a provider service for LLM inference, we've built the Roo Code Cloud Provider.
+To make it as smooth as possible to use Roo Code, which depends on a provider service for LLM inference, we've built the Roo Code Router.
 
 You don't have to use our provider to use Roo Code (you can choose from dozens), but it's the easiest way to do it, since it only needs your Roo Code Cloud account and offers a selection of models we tested and approved to work with Roo Code:
 - State of the art models from the top frontier labs (including Anthropic, OpenAI, Google, xAi, etc)
@@ -43,7 +43,7 @@ best to check the privacy policy of the vendors themselves.
 You can always find the current pricing [on our website](https://roocode.com/provider) or the Roo Code Cloud app, under ["Models"](https://app.roocode.com/models).
 
 :::info Looking for free inference?
-When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute gift box icon). Those free minutes cover both the [Cloud Agent](/roo-code-cloud/cloud-agents) run time _and_ inference via the Roo Code Cloud provider (which, as we established, cost credits). Those can't be used in the extension.
+When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute gift box icon). Those free minutes cover both the [Cloud Agent](/roo-code-cloud/cloud-agents) run time _and_ inference via Roo Code Router (which, as we established, cost credits). Those can't be used in the extension.
 
 If you want free inference in the extension, choose a free model (or another provider which may offer it to you for free).
 :::
@@ -53,7 +53,7 @@ If you want free inference in the extension, choose a free model (or another pro
 
 ### Roo Code Cloud Agents
 
-When choosing a model to power your agent, just pick the Roo Code Cloud provider.
+When choosing a model to power your agent, just pick the Roo Code Router.
 There aren't really any more instructions needed :)
 
 ### Roo Code VS Code Extension

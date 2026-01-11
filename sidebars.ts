@@ -138,8 +138,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'doc',
-      label: 'Roo Code Cloud Provider',
-      id: 'roo-code-provider/overview'
+      label: 'Roo Code Router',
+      id: 'roo-code-router/overview'
     },
     {
       type: 'doc',
@@ -177,6 +177,8 @@ const sidebars: SidebarsConfig = {
               label: '3.39',
               items: [
                 { type: 'doc', id: 'update-notes/v3.39', label: '3.39 Combined' },
+                { type: 'doc', id: 'update-notes/v3.39.3', label: '3.39.3' },
+                { type: 'doc', id: 'update-notes/v3.39.2', label: '3.39.2' },
                 { type: 'doc', id: 'update-notes/v3.39.1', label: '3.39.1' },
                 { type: 'doc', id: 'update-notes/v3.39.0', label: '3.39.0' },
               ],

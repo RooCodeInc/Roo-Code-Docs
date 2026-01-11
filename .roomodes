@@ -70,7 +70,7 @@ customModes:
       - read
       - command
       - - edit
-        - fileRegex: (\.(md|mdx)$|sidebars\.ts$)
+        - fileRegex: (\.(md|mdx)$|sidebars\.ts$|docusaurus\.config\.ts$)
           description: Documentation files and sidebar configuration
       - mcp
     source: project

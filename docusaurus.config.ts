@@ -280,8 +280,17 @@ const config: Config = {
           },
           // Redirect /roo to Roo Code Cloud documentation
           {
-            to: '/providers/roo-code-cloud',
+            to: '/providers/roo-code-router',
             from: ['/providers/roo'],
+          },
+          // Roo Code Router rename redirects
+          {
+            to: '/providers/roo-code-router',
+            from: ['/providers/roo-code-cloud'],
+          },
+          {
+            to: '/roo-code-router/overview',
+            from: ['/roo-code-provider', '/roo-code-provider/overview'],
           },
           // Redirect deleted billing-subscriptions page
           {

@@ -39,9 +39,6 @@ Roo Code supports all Grok models available through xAI's API.
 
 For the complete, up-to-date model list and capabilities, see [xAI's documentation](https://docs.x.ai/docs).
 
-:::info Grok Code Fast - Free Access in Roo Code
-`grok-code-fast-1` is available for **free** through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. When using the xAI provider directly in Roo Code, standard pricing will apply once established. This model was previously known as "roo/sonic" and has been renamed. For free access within Roo Code, use the Roo Code Cloud provider instead of the xAI provider.
-:::
 
 ---
 
@@ -94,4 +91,4 @@ Prompt caching is available for select Grok models including `grok-code-fast-1`,
 
 Pricing varies by model. Refer to the [xAI documentation](https://console.x.ai/) for current pricing information.
 
-**Note:** `grok-code-fast-1` is available for free through the [Roo Code Cloud provider](/providers/roo-code-cloud) during the promotional period. Standard pricing will apply when using the xAI provider directly in Roo Code.
+**Note:** `grok-code-fast-1` is available for free through [Roo Code Router](/providers/roo-code-router) during the promotional period. Standard pricing will apply when using the xAI provider directly in Roo Code.
