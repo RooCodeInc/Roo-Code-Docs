@@ -11,7 +11,7 @@ keywords:
 
 Roo Code is composed of a few products:
 - **Roo Code VS Code** (the extension) is 100% free
-- **Roo Code Cloud Provider** (the model provider) offers both free and paid models
+- **Roo Code Router** (the model provider) offers both free and paid models
 - **Roo Code Cloud Agents** (the automous agents) are a paid feature as they incur infrastructure costs
 
 In order to use paid models via our provider and to run Cloud agents, you need credits.
