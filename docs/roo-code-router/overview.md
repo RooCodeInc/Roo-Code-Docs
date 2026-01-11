@@ -1,5 +1,5 @@
 ---
-description: The Roo Code Cloud is the easiest way to use Roo Code without additional accounts and dealing with API keys
+description: Roo Code Router is the easiest way to use Roo Code without additional accounts or managing API keys
 keywords:
   - Roo Code Cloud
   - Roo Code Router
