@@ -289,7 +289,7 @@ fi
       </step>
 
       <step number="1b">
-        <action>Resolve hero image from discovered candidates, falling back to social-share when none exist</action>
+        <action>Resolve hero image from discovered candidates (no placeholder if none exist)</action>
         <command><![CDATA[
 VERSION="X.Y.Z"
 CANDIDATES_FILE=".roo/tmp/release-notes/image_candidates_v$VERSION.txt"
@@ -314,9 +314,9 @@ if [ -s "$OUT" ]; then
 fi
         ]]></command>
         <notes>
-          - Skip hero image download entirely when no candidates were discovered; default to /img/social-share.jpg
+          - Skip hero image download entirely when no candidates were discovered
           - When candidates exist, attempt to download the first one and persist it as /img/v$VERSION/v$VERSION.png
-          - If download fails or the file is empty, fall back to /img/social-share.jpg
+          - If download fails or the file is empty, do not set a frontmatter image
           - Prefer PNG when multiple candidates are present (candidates list should already be filtered/ordered)
         </notes>
       </step>
@@ -521,17 +521,17 @@ Which features should I highlight with expanded sections in the release notes?
           <source>.roo/tmp/release-notes/frontmatter_image_v[version].txt</source>
           <behavior>
             - If the source file exists and starts with "/img/", set frontmatter "image" to that value
-            - Otherwise set "image" to /img/social-share.jpg
+            - Otherwise, OMIT the frontmatter "image" field entirely (no placeholder)
           </behavior>
         </frontmatter_image>
         <inline_hero_image>
           <source>.roo/tmp/release-notes/frontmatter_image_v[version].txt</source>
           <insertion_point>Immediately after the intro summary sentence below the H1 title</insertion_point>
           <behavior>
-            - If the persisted path starts with "/img/" and is not "/img/social-share.jpg", insert an HTML image tag under the intro paragraph
+            - If the persisted path starts with "/img/", insert an HTML image tag under the intro paragraph
             - Use the exact path value from the source file for src
             - Follow .roorules Image Tag Format and use width="600"
-            - If the persisted path is "/img/social-share.jpg", skip inline insertion
+            - If there is no persisted path file OR it does not start with "/img/", skip inline insertion
           </behavior>
           <html_snippet><![CDATA[
 <img src="[FRONTMATTER_IMAGE_PATH]" alt="Roo Code v[VERSION] Release" width="600" />
@@ -713,7 +713,8 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
       Use the simplified PR extraction command for consistent results
     </rule>
     <rule priority="HIGH">
-      Always acknowledge PR author AND issue reporter
+      Acknowledge PR author AND issue reporter, unless the username is on the release-notes “thank you” exclusion list.
+      If all candidate acknowledgements are excluded, omit the thanks parenthetical entirely.
     </rule>
     <rule priority="HIGH">
       Focus on user benefits, not technical implementation

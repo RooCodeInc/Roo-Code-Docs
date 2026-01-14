@@ -70,16 +70,11 @@ keywords:
         <criteria>New functionality changing user experience</criteria>
         <format>Own ## heading with expanded description</format>
         <template>
-## [Feature Name]
-
-We've [improvement description] (thanks [contributors]!) ([#PR](link)):
-
-- **[Benefit 1]**: [How this helps users]
-- **[Benefit 2]**: [Another benefit]
-
-[Concluding sentence about impact]
-
-> **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage instructions.
+ ## [Feature Name]
+ 
+ We've [improvement description]. [One cohesive paragraph: what changed, where users see it, and why it matters.] (thanks [contributors]!) ([#PR](link))
+ 
+ > **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage instructions.
         </template>
       </category>
       
@@ -113,16 +108,11 @@ We've [improvement description] (thanks [contributors]!) ([#PR](link)):
     <expanded_sections>
       <description>Major features with details</description>
       <format>
-## Feature Name
-
-Description of what the feature does (thanks contributor!) ([#PR](link)):
-
-- **Key Point 1**: Explanation of this aspect.
-- **Key Point 2**: Another explanation.
-
-Concluding sentence about the benefit.
-
-> **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage.
+ ## Feature Name
+ 
+ Description of what the feature does as a single cohesive paragraph (what changed, where users see it, and why it matters). (thanks contributor!) ([#PR](link))
+ 
+ > **📚 Documentation**: See [Feature Guide](/path/to/feature) for detailed usage.
       </format>
     </expanded_sections>
 
@@ -141,8 +131,8 @@ Concluding sentence about the benefit.
       <multiple>(thanks author, reporter!)</multiple>
       <rules>
         - Omit @ from GitHub usernames
-        - Place inside parentheses before PR link
-        - Include both PR author and issue reporter
+        - Place inside parentheses, and place PR link(s) at the end of the sentence/paragraph
+        - Include both PR author and issue reporter unless excluded by the release-notes “thank you” exclusion list
         - List PR author first
         - If PR author equals issue reporter, use a single username once
         - Do not thank these names: outlined in the special instructions section `Release Notes "thank you" exclusions`
@@ -152,7 +142,7 @@ Concluding sentence about the benefit.
     <pr_links>
       <format>([#PR_NUMBER](https://github.com/RooCodeInc/Roo-Code/pull/PR_NUMBER))</format>
       <placement>
-        <expanded>In intro paragraph or bullet points</expanded>
+        <expanded>At the end of the expanded-section paragraph (after any thanks parenthetical)</expanded>
         <grouped>At end of each bullet point</grouped>
       </placement>
     </pr_links>
