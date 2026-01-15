@@ -1,6 +1,6 @@
 ---
-sidebar_label: ChatGPT Plus/Pro - OpenAI
-title: ChatGPT Plus/Pro - OpenAI
+sidebar_label: ChatGPT Plus/Pro
+title: ChatGPT Plus/Pro
 description: Use OpenAI models in Roo Code with your ChatGPT Plus/Pro subscription (OAuth sign-in, no API key).
 keywords:
   - OpenAI Codex

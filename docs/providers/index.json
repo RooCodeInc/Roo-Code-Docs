@@ -1,22 +1,16 @@
 {
   "providers": [
     {
-      "id": "providers/roo-code-router",
-      "title": "Roo Code Router",
+      "id": "providers/anthropic",
+      "title": "Anthropic",
       "extension": true,
       "cloud": true
     },
     {
       "id": "providers/openai-chatgpt-plus-pro",
-      "title": "ChatGPT Plus/Pro - OpenAI",
+      "title": "ChatGPT Plus/Pro",
       "extension": true,
       "cloud": false
-    },
-    {
-      "id": "providers/anthropic",
-      "title": "Anthropic",
-      "extension": true,
-      "cloud": true
     },
     {
       "id": "providers/claude-code",
@@ -161,6 +155,12 @@
       "title": "Requesty",
       "extension": true,
       "cloud": false
+    },
+    {
+      "id": "providers/roo-code-router",
+      "title": "Roo Code Router",
+      "extension": true,
+      "cloud": true
     },
     {
       "id": "providers/sambanova",
