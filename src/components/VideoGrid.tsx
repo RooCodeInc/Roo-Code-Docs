@@ -76,7 +76,7 @@ export default function VideoGrid(): React.JSX.Element {
             className="video-container"
             onClick={(e) => {
               const target = e.currentTarget;
-              target.innerHTML = `<iframe src='https://www.youtube.com/embed/${video.id}?autoplay=1' title='${video.title}' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>`;
+              target.innerHTML = `<iframe src='https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1' title='${video.title}' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>`;
             }}
           >
             <img

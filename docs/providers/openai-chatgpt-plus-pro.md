@@ -14,7 +14,7 @@ keywords:
 
 <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
   <iframe
-    src="https://www.youtube.com/embed/c1IXRMl5i0g"
+    src="https://www.youtube.com/embed/c1IXRMl5i0g?rel=0&modestbranding=1"
     title="OpenAI – ChatGPT Plus/Pro provider setup"
     style={{
       position: 'absolute',
