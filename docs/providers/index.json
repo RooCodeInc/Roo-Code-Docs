@@ -1,6 +1,18 @@
 {
   "providers": [
     {
+      "id": "providers/roo-code-router",
+      "title": "Roo Code Router",
+      "extension": true,
+      "cloud": true
+    },
+    {
+      "id": "providers/openai-chatgpt-plus-pro",
+      "title": "ChatGPT Plus/Pro - OpenAI",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/anthropic",
       "title": "Anthropic",
       "extension": true,
@@ -127,12 +139,6 @@
       "cloud": true
     },
     {
-      "id": "providers/openai-chatgpt-plus-pro",
-      "title": "OpenAI – ChatGPT Plus/Pro",
-      "extension": true,
-      "cloud": false
-    },
-    {
       "id": "providers/openai-compatible",
       "title": "OpenAI Compatible",
       "extension": true,
@@ -155,12 +161,6 @@
       "title": "Requesty",
       "extension": true,
       "cloud": false
-    },
-    {
-      "id": "providers/roo-code-router",
-      "title": "Roo Code Router",
-      "extension": true,
-      "cloud": true
     },
     {
       "id": "providers/sambanova",
