@@ -127,6 +127,12 @@
       "cloud": true
     },
     {
+      "id": "providers/openai-chatgpt-plus-pro",
+      "title": "OpenAI – ChatGPT Plus/Pro",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/openai-compatible",
       "title": "OpenAI Compatible",
       "extension": true,
