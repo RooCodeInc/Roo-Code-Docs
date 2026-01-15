@@ -22,8 +22,6 @@ keywords:
   allowfullscreen
 ></iframe>
 
-Why this video matters: it shows the exact sign-in flow and where to click in the Roo Code settings panel.
-
 Use Codex models in Roo Code **without an OpenAI API key**. Just sign in with the ChatGPT account you already pay for.
 
 ---
