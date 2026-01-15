@@ -12,15 +12,22 @@ keywords:
   - subscription
 ---
 
-<iframe
-  width="600"
-  height="338"
-  src="https://www.youtube.com/embed/t0sIT8nGvrk"
-  title="OpenAI – ChatGPT Plus/Pro provider setup"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
+  <iframe
+    src="https://www.youtube.com/embed/t0sIT8nGvrk"
+    title="OpenAI – ChatGPT Plus/Pro provider setup"
+    style={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+    }}
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowFullScreen
+  ></iframe>
+</div>
 
 Use Codex models in Roo Code **without an OpenAI API key**. Just sign in with the ChatGPT account you already pay for.
 
