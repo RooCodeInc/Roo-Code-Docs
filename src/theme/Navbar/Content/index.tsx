@@ -19,6 +19,7 @@ import GitHubInstallButtons from '@site/src/components/GitHubInstallButtons';
 import NavbarSocialIcons from '@site/src/components/NavbarSocialIcons';
 
 import styles from './styles.module.css';
+import { SIGN_IN_URL, SIGN_UP_URL } from '@site/src/constants';
 
 function useNavbarItems() {
   // TODO temporary casting until ThemeConfig type is improved

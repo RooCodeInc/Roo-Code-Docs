@@ -25,6 +25,21 @@
   text-decoration: none;
 }
 
+.secondaryButton {
+  color: var(--primary);
+  border-radius: 0.375rem;
+  border: 1px solid hsl(var(--border) / 0.75);
+  padding: 0.37rem 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.secondaryButton:hover {
+  background: hsl(var(--primary) / 0.05);
+  color: hsl(var(--primary));
+  text-decoration: none;
+  scale: 1.05;
+}
+
 .installButton {
   background: hsl(var(--primary, 0 0% 9%));
   color: hsl(var(--primary-foreground, 0 0% 98%));

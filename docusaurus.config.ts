@@ -331,17 +331,6 @@ const config: Config = {
           type: 'search',
           position: 'left',
         },
-        {
-          label: 'Login',
-          href: SIGN_IN_URL,
-          position: 'right',
-        },
-        {
-          label: 'Sign Up',
-          href: SIGN_UP_URL,
-          position: 'right',
-          className: 'button button--primary',
-        },
       ],
     },
     footer: {

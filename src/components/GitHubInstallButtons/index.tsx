@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RxGithubLogo } from "react-icons/rx";
 import { VscVscode } from "react-icons/vsc";
-import { GITHUB_MAIN_REPO_URL, VSCODE_MARKETPLACE_URL } from '@site/src/constants';
+import { GITHUB_MAIN_REPO_URL, SIGN_IN_URL, SIGN_UP_URL, VSCODE_MARKETPLACE_URL } from '@site/src/constants';
 import styles from './styles.module.css';
 
 // Number formatting function
@@ -104,6 +104,30 @@ export default function GitHubInstallButtons(): React.JSX.Element {
       >
         <RxGithubLogo className={styles.icon} />
         {stars && <span>{stars}</span>}
+      </a>
+
+      <a
+        href={SIGN_IN_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.secondaryButton}
+        title="Log into Roo Code CLoud"
+      >
+        <span>
+          Log in
+        </span>
+      </a>
+
+      <a
+        href={SIGN_UP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.installButton}
+        title="Sign up"
+      >
+        <span>
+          Sign up
+        </span>
       </a>
 
       {/* Install Button */}
