@@ -29,3 +29,8 @@ export const CONTACT_EMAIL = 'mailto:support@roocode.com';
 export const CAREERS_URL = 'https://careers.roocode.com';
 export const WEBSITE_PRIVACY_URL = 'https://roocode.com/privacy';
 export const EXTENSION_PRIVACY_URL = `${GITHUB_MAIN_REPO_URL}/blob/main/PRIVACY.md`;
+
+// Authentication links
+export const APP_URL = 'https://app.roocode.com';
+export const SIGN_IN_URL = `${APP_URL}/sign-in`;
+export const SIGN_UP_URL = `${APP_URL}/sign-up`;

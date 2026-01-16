@@ -17,7 +17,9 @@ import {
   CAREERS_URL,
   WEBSITE_PRIVACY_URL,
   EXTENSION_PRIVACY_URL,
-  GITHUB_REPO_URL
+  GITHUB_REPO_URL,
+  SIGN_IN_URL,
+  SIGN_UP_URL
 } from './src/constants';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -328,6 +330,17 @@ const config: Config = {
         {
           type: 'search',
           position: 'left',
+        },
+        {
+          label: 'Login',
+          href: SIGN_IN_URL,
+          position: 'right',
+        },
+        {
+          label: 'Sign Up',
+          href: SIGN_UP_URL,
+          position: 'right',
+          className: 'button button--primary',
         },
       ],
     },
