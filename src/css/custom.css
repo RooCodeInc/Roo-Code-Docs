@@ -2073,7 +2073,6 @@ html {
 .button--secondary,
 .button--outline {
   background-color: transparent !important;
-  font-size: 400px;
   border: 1px solid hsl(var(--border) / 0.5) !important;
   color: hsl(var(--foreground)) !important;
 }
