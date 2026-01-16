@@ -111,7 +111,7 @@ export default function GitHubInstallButtons(): React.JSX.Element {
         target="_blank"
         rel="noopener noreferrer"
         className={styles.secondaryButton}
-        title="Log into Roo Code CLoud"
+        title="Log into Roo Code Cloud"
       >
         <span>
           Log in
