@@ -135,20 +135,20 @@ If no model instance is running, Ollama spins one up on demand. During that cold
 **Fixes**
 1. **Preload the model**
    ```bash
-   ollama run &lt;model-name&gt;
+   ollama run <model-name>
    ```
    Keep it running, then issue the request from Roo.
 
 2. **Pin the context window (`num_ctx`)**
    - Option A — interactive session, then save:
      ```bash
-     # inside `ollama run &lt;base-model&gt;`
+     # inside `ollama run <base-model>`
      /set parameter num_ctx 32768
-     /save &lt;your_model_name&gt;
+     /save <your_model_name>
      ```
    - Option B — Modelfile (recommended for reproducibility):
      ```dockerfile
-     FROM &lt;base-model&gt;
+     FROM <base-model>
      PARAMETER num_ctx 32768
      # Adjust based on your available memory:
      # 16384 for ~8GB VRAM
@@ -157,7 +157,7 @@ If no model instance is running, Ollama spins one up on demand. During that cold
      ```
      Then create the model:
      ```bash
-     ollama create &lt;your_model_name&gt; -f Modelfile
+     ollama create <your_model_name> -f Modelfile
      ```
 
 3. **Ensure the model's context window is pinned**
@@ -169,7 +169,7 @@ If no model instance is running, Ollama spins one up on demand. During that cold
 5. **Restart after an OOM**
    ```bash
    ollama ps
-   ollama stop &lt;model-name&gt;
+   ollama stop <model-name>
    ```
 
 **Quick checklist**
