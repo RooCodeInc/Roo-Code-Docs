@@ -44,6 +44,8 @@ For reasoning-capable models (for example, Gemini 3 Pro Preview and other models
 
 To further help manage API costs and prevent unexpected expenses, Roo Code includes a "Max Requests" setting for auto-approved actions. This allows you to define a specific limit on how many consecutive API calls Roo Code can make without requiring your explicit re-approval during a task.
 
+**Unlimited behavior:** In Settings, leaving this field blank means **Unlimited** (no request-count limit). In the underlying settings JSON this is stored as `null`.
+
 *   **How it works:** If you set a limit (e.g., 5 requests), Roo Code will perform up to 5 auto-approved API calls. Before making the 6th call, it will pause and prompt you to "Reset and Continue," as shown below.
     <img src="/img/v3.18.0/v3.18.0-1.png" alt="Warning message indicating the auto-approved request limit has been reached." width="600" />
     *Notification when the auto-approved request limit is met.*
