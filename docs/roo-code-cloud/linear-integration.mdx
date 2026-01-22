@@ -1,0 +1,164 @@
+---
+description: Use Roo Code Cloud agents directly from Linear to implement features, fix bugs, and collaborate on development tasks.
+keywords:
+  - Linear Integration
+  - Issue Tracking
+  - "@Roo Code"
+  - Linear bot
+  - AI coding
+  - collaborative development
+  - issue automation
+  - agent delegation
+---
+
+# Linear Integration
+
+The Roo Code Linear integration brings your Cloud Agent team directly into your issue tracking workflow. You can delegate issues to agents, get implementation plans, or execute coding tasks without leaving Linear, streamlining your development process.
+
+Using agents from Linear is an effective way to automate routine development tasks and maintain context between planning and implementation.
+
+---
+
+## Prerequisites
+
+- **Roo Code Cloud Team plan** — Linear integration is only available on the Team plan
+- **GitHub repository** — The repository must be connected to your Roo Code Cloud workspace
+- **Organization Settings access** — You'll need admin access to configure integrations
+
+---
+
+## Setting Up
+
+1. Navigate to **Organization Settings** in Roo Code Cloud (top right user menu)
+2. Go to **Integrations** → **Linear**
+3. Click **Connect** and authorize the OAuth connection (no API keys required)
+4. The Roo Code agent will be added to your Linear workspace
+
+**Note:** The integration uses OAuth authentication and requires no manual API key configuration.
+
+---
+
+## Linking Your Account
+
+The first time you interact with the Roo Code agent in Linear, you'll need to link your Linear account to your Roo Code account:
+
+1. When you first assign an issue or mention the agent, you'll receive an authentication prompt
+2. Click the authentication link to connect your accounts
+3. Once linked, your requests will be processed automatically
+
+This one-time linking ensures that agent work is properly attributed and tracked within your Roo Code organization.
+
+---
+
+## How to Use
+
+### Assigning Work to Roo Code
+
+Delegate issues to the agent just like assigning to a team member:
+
+1. Create a Linear issue with a clear description and acceptance criteria
+2. Assign the issue to **Roo Code** (the agent appears as a user in your workspace)
+3. The agent will acknowledge the assignment and begin working
+
+**Example:**
+> **Issue:** Add dark mode toggle to settings page
+>
+> **Description:** Implement a dark mode toggle in the user settings. The toggle should persist the user's preference and apply the theme across the entire application.
+
+### Mentioning the Agent
+
+You can also interact with the agent by mentioning it in issue comments:
+
+```
+@Roo Code Please implement this feature with support for system theme detection
+```
+
+```
+@Roo Code What's the best approach to implement this? Consider our existing auth middleware.
+```
+
+**Note:** The exact mention format is `@Roo Code` or `@roocode` depending on how the agent user was created in your workspace.
+
+### Monitor Progress
+
+The agent provides real-time updates as comments on the Linear issue:
+
+- "Getting started..."
+- "Analyzing codebase..."
+- "Creating implementation plan..."
+- "Opening PR..."
+
+All progress is visible directly in Linear, maintaining full context with your issue tracking.
+
+### Provide Feedback
+
+Continue the conversation by commenting on the issue:
+
+```
+@Roo Code Please also add a "system" option that follows OS preference
+```
+
+The agent will acknowledge your feedback and adapt its approach accordingly.
+
+### Review the PR
+
+When work is complete:
+- A GitHub pull request link appears in the Linear issue
+- The PR is automatically linked to the Linear issue (using issue identifier in branch name)
+- Review and merge through your normal GitHub workflow
+- Linear automatically updates when the PR is merged
+
+---
+
+## What Roo Code Can Do from Linear
+
+- **Implement features** — Turn requirements into working code with pull requests
+- **Fix bugs** — Analyze and resolve issues with automated fixes
+- **Provide consultation** — Analyze codebase and provide recommendations without making changes
+- **Review code** — If a PR already exists, the agent can review and suggest improvements
+- **Update documentation** — Keep docs in sync with code changes
+
+---
+
+## Stopping Work
+
+If you need to halt agent work on an issue:
+
+1. Send a stop signal from Linear (available in the agent session UI)
+2. The agent will immediately cancel any active work
+3. A confirmation message will be posted to the issue
+
+---
+
+## Key Benefits
+
+- **Work where you plan** — No context switching between Linear and your IDE
+- **Assign to agents like team members** — Familiar workflow for delegation
+- **Full visibility** — Progress updates appear directly in Linear issues
+- **Automatic PR linking** — PRs are automatically linked to Linear issues
+- **Team collaboration** — Everyone on the team can see agent work and provide feedback
+
+---
+
+## Limitations
+
+- **Organization Settings only** — Integration is configured at the organization level (not per-project)
+- **Team plan required** — Available only on Roo Code Cloud Team plan
+- **Active subscription** — Requires funded Cloud credits
+- **Account linking required** — Each Linear user must link their Roo Code account once
+
+---
+
+## Troubleshooting
+
+### "Please link your Roo Code account"
+
+This message appears if you haven't linked your Linear account to Roo Code yet. Click the authentication link in the prompt to complete the one-time linking process.
+
+### "No Coder agent is configured"
+
+This means your Roo Code organization doesn't have a Cloud Agent configured. Set up a Coder agent in your Roo Code Cloud settings before using the Linear integration.
+
+### "Linear authentication has expired"
+
+The OAuth connection needs to be refreshed. An organization admin should disconnect and reconnect the Linear integration in Organization Settings.

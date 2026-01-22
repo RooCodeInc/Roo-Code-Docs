@@ -133,6 +133,7 @@ const sidebars: SidebarsConfig = {
         'roo-code-cloud/analytics',
         'roo-code-cloud/github-integration',
         'roo-code-cloud/slack-integration',
+        'roo-code-cloud/linear-integration',
         'roo-code-cloud/team-plan',
       ],
     },
