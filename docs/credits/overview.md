@@ -23,7 +23,7 @@ You can see the plans we offer and the most up-to-date pricing on our [pricing p
 
 ## What are credits?
 
-Credits are just pre-paid dollar amounts you can optionally buy to use the paid parts of the Roo Code suite. If you stick to free features and sometimes available free models, you don't have to buy any credits.
+Credits are just pre-paid dollar amounts you can optionally buy to use the paid parts of the Roo Code suite. If you stick to free features and use free models, you don't have to buy any credits.
 
 Credits are shown in dollars, there's no shenanigans in converting it to obscure currencies you can't calculate.
 
