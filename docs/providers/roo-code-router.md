@@ -1,6 +1,6 @@
 ---
 sidebar_label: Roo Code Router
-description: The easiest way to get started with AI coding. Access premium models with zero configuration.
+description: The easiest way to get started with AI coding. Access vetted coding models with zero configuration.
 keywords:
   - roo code router
   - roo code cloud
