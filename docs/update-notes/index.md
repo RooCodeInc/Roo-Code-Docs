@@ -21,6 +21,12 @@ If you want to live on the edge and try things out before it's released, we have
 
 ---
 
+### Version 3.42
+
+*   [3.42.0](/update-notes/v3.42.0) (2026-01-22)
+
+---
+
 ### Version 3.41
 
 *   [3.41.2](/update-notes/v3.41.2) (2026-01-16)

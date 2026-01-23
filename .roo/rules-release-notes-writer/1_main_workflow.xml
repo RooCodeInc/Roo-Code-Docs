@@ -107,58 +107,60 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
     </phase>
 
     <phase name="pr_processing">
-      <initialization priority="CRITICAL">
-        <action>Create .roo/tmp/release-notes/temp_pr_analysis_v[version].md</action>
+      <overview>
+        Process each PR inline to gather details, categorize changes, and identify documentation needs.
+        All analysis happens within this task without spawning subtasks.
+      </overview>
+      
+      <initialization>
+        <action>Create tracking file for PR analysis</action>
+        <file>.roo/tmp/release-notes/temp_pr_analysis_v[version].md</file>
         <details>
-      Parent task MUST create this file (and .roo/tmp/release-notes/temp_pr_inclusion_v[version].json, .roo/tmp/release-notes/temp_pr_list_v[VERSION].md if needed) before ANY subtasks.
-      Subtasks will ONLY add entries to these temp files using the available safe file-editing capability (preserve existing content; no overwrites).
-      Parent task MUST NOT add entries to temp_pr_analysis_v[version].md; this file is reserved exclusively for subtask outputs. The parent may only create/initialize the empty file(s).
-      Temp files live under .roo/tmp/release-notes/
+          Create the temp directory and file to track PR analysis results.
+          Each PR analysis will be appended to this file as it completes.
         </details>
       </initialization>
       
-      <subtask_pattern priority="CRITICAL">
+      <inline_analysis_workflow>
         <for_each>PR in list</for_each>
-        <action>Create investigation subtask using new_task tool</action>
-        <implementation>
-          <tool>new_task</tool>
-          <mode>release-notes-writer</mode>
-          <description>
-            For each PR in the fetched or provided list, create a separate subtask
-            using the new_task tool. Each subtask investigates one PR independently.
-          </description>
-          <iteration_approach>
-            Process PRs sequentially or in batches, creating a new_task for each PR number.
-            Wait for all subtasks to complete before proceeding to compilation phase.
-          </iteration_approach>
-        </implementation>
-        <message_template>
-  Investigate PR #[number] for release notes v[version].
-  1. Get PR details: gh pr view [number] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url
-  2. Extract linked issues from PR body
-  3. Get issue details if linked
-  4. Categorize change (Feature/QOL/Bug Fix/Provider Update)
-  5. Identify documentation needs (new features, behavior changes, deprecations)
-      6. Add to .roo/tmp/release-notes/temp_pr_analysis_v[version].md at the start, preserving existing content (use the available safe file-editing capability)
-  
-  Include documentation flags:
-  - docs-new: Completely new feature
-  - docs-update: Existing docs need updating
-  - docs-example: New examples needed
-  - docs-migration: Breaking changes
-  
-  CRITICAL: Never overwrite existing content; only add entries while preserving prior content.
-  MANDATORY: Insert the marker line '&lt;!-- generated-by-subtask: true --&gt;' immediately before the '---' separator in each PR entry.
-  </message_template>
-        <todos_template>
-[ ] Fetch PR #[number] details using gh pr view --repo RooCodeInc/Roo-Code
-[ ] Extract linked issues from PR body
-[ ] Get issue details for each linked issue
-[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
-[ ] Identify documentation needs
-[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-        </todos_template>
-      </subtask_pattern>
+        <action>Analyze PR inline using gh CLI</action>
+        <steps>
+          <step number="1">
+            <action>Fetch PR details</action>
+            <command>gh pr view [NUMBER] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url</command>
+          </step>
+          <step number="2">
+            <action>Extract linked issues from PR body</action>
+            <details>Parse the PR body for issue references (Fixes #123, Closes #456, etc.)</details>
+          </step>
+          <step number="3">
+            <action>Fetch linked issue details if present</action>
+            <command>gh issue view [ISSUE_NUMBER] --repo RooCodeInc/Roo-Code --json number,title,author,body</command>
+          </step>
+          <step number="4">
+            <action>Categorize the change</action>
+            <categories>
+              <category>Feature - New functionality</category>
+              <category>QOL Improvement - UI/UX enhancement</category>
+              <category>Bug Fix - Resolves an issue</category>
+              <category>Provider Update - API provider changes</category>
+            </categories>
+          </step>
+          <step number="5">
+            <action>Identify documentation needs</action>
+            <flags>
+              <flag name="docs-new">Completely new feature requiring new documentation page</flag>
+              <flag name="docs-update">Existing documentation needs updating</flag>
+              <flag name="docs-example">New examples or use cases to add</flag>
+              <flag name="docs-migration">Migration guide needed for breaking changes</flag>
+            </flags>
+          </step>
+          <step number="6">
+            <action>Append analysis to tracking file</action>
+            <file>.roo/tmp/release-notes/temp_pr_analysis_v[version].md</file>
+          </step>
+        </steps>
+      </inline_analysis_workflow>
       
       <output_format>
 ## PR #[number]: [Title]
@@ -170,38 +172,15 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
 **Contributors**: [list]
 **Documentation Needs**: [none|docs-new|docs-update|docs-example|docs-migration]
 **Documentation Notes**: [If applicable, what needs documenting]
-&lt;!-- generated-by-subtask: true --&gt;
 
 ---
       </output_format>
       
-      <subtask_creation_example>
-        <description>Example of creating subtasks for a PR list</description>
-        <scenario>Given PRs: #1234, #1235, #1236 for version 3.20.1</scenario>
-        <implementation><![CDATA[
-<!-- For each PR, create a subtask like this: -->
-<new_task>
-<mode>release-notes-writer</mode>
-<message>Investigate PR #1234 for release notes v3.20.1.
-
-Get PR details: gh pr view 1234 --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url
-Extract linked issues and get details
-Categorize the change and identify documentation needs
-Add analysis to .roo/tmp/release-notes/temp_pr_analysis_v3.20.1.md at the start, preserving existing content</message>
-<todos>
-[ ] Fetch PR #1234 details
-[ ] Extract linked issues and get details
-[ ] Categorize and analyze
-[ ] Write to temp_pr_analysis_v3.20.1.md
-</todos>
-</new_task>
-        ]]></implementation>
-        <critical_notes>
-          - Parent creates temp files first
-          - Each PR gets its own subtask
-          - Subtasks only add entries; never overwrite existing content
-        </critical_notes>
-      </subtask_creation_example>
+      <processing_guidance>
+        <note>Process PRs sequentially, appending each analysis to the tracking file</note>
+        <note>For large PR lists (10+), provide progress updates every 5 PRs</note>
+        <note>If a PR fetch fails, note the error and continue with remaining PRs</note>
+      </processing_guidance>
     </phase>
     
     <phase name="changelog_alignment">
@@ -341,11 +320,11 @@ fi
   - Author signal: if bullet contains "thanks @user", "by @user", or "PR by @user" and that user equals the PR author or credited issue reporter, add +0.20 to score
   - Keyword boost: +0.05 when provider/model/domain keywords (e.g., OpenAI, Claude, Grok, Chutes, Qwen, LongCat, etc.) appear in both
   Confidence thresholds:
-  - score &gt;= 0.65 (after boosts) -&gt; linked (confident). Treat as changelog-referenced.
-  - 0.45 &lt;= score &lt; 0.65 OR multiple candidates within 0.05 -&gt; ambiguous (needs review)
-  - score &lt; 0.45 -&gt; unlinked
+  - score >= 0.65 (after boosts) -> linked (confident). Treat as changelog-referenced.
+  - 0.45 <= score < 0.65 OR multiple candidates within 0.05 -> ambiguous (needs review)
+  - score < 0.45 -> unlinked
   Tie-breakers: higher score; if within 0.02 then same author; then closer merge date to release date; then lowest PR number
-  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score &gt;= 0.50 (confidence="author-boost")
+  Edge case: If bullet credits exactly one username and exactly one PR in the window has that author, accept with score >= 0.50 (confidence="author-boost")
   Implementation notes:
   - Match only against PRs fetched for the version's date window
   - Persist mapping bullet_text -> { prNumber, confidenceScore, rationaleSignals[] } and use it to compute linked/ambiguous/unlinked counts
@@ -354,33 +333,24 @@ fi
       </step>
       
       <step number="2a">
-        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list and spawn analysis subtasks</action>
+        <action>Supplement candidate PR set with changelog-referenced PRs not in fetched list</action>
         <details>
           - Identify referenced PR numbers from step 2 that are missing from .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-          - For each missing PR, fetch details and create a new investigation subtask (same pattern as pr_processing) to add analysis to temp_pr_analysis_v[version].md without overwriting existing content
+          - For each missing PR, fetch details and analyze inline (same process as pr_processing phase)
           - Mark these as out_of_range if their mergedAt is outside the computed date window
-          - Wait for all spawned subtasks to complete before proceeding
+          - Append analysis to the tracking file
         </details>
-        <commands>
-          <fetch><![CDATA[
-# For each referenced PR number N not present in .roo/tmp/release-notes/temp_pr_analysis_v[version].md:
-gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,files
-          ]]></fetch>
-          <spawn_subtask><![CDATA[
-<new_task>
-<mode>release-notes-writer</mode>
-<message>Investigate PR #[NUMBER] (changelog-referenced, possibly out of original range) for release notes v[version]. Follow standard analysis and add to .roo/tmp/release-notes/temp_pr_analysis_v[version].md without overwriting existing content.</message>
-<todos>
-[ ] Fetch PR #[NUMBER] details using gh pr view --repo RooCodeInc/Roo-Code
-[ ] Extract linked issues from PR body
-[ ] Get issue details for each linked issue
-[ ] Categorize the change (Feature/QOL/Bug Fix/Provider Update)
-[ ] Identify documentation needs
-[ ] Write analysis to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
-</todos>
-</new_task>
-          ]]></spawn_subtask>
-        </commands>
+        <inline_analysis>
+          <for_each>Missing PR number referenced in changelog</for_each>
+          <command>gh pr view [NUMBER] --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labels,body,url</command>
+          <process>
+            - Fetch PR details
+            - Extract linked issues
+            - Categorize change
+            - Identify documentation needs
+            - Append to .roo/tmp/release-notes/temp_pr_analysis_v[version].md
+          </process>
+        </inline_analysis>
       </step>
       
       <step number="2b">
@@ -459,7 +429,6 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
         </inputs>
         <precondition>
           - Inclusion policy required: If .roo/tmp/release-notes/temp_pr_inclusion_v[version].json does not exist, you MUST execute the changelog_alignment phase now to obtain an inclusion decision, then retry this step.
-          - Subtask provenance required: All PR analysis entries MUST contain the marker '&lt;!-- generated-by-subtask: true --&gt;'. If any entries are missing this marker, HALT and re-run PR analysis via per-PR subtasks before proceeding.
         </precondition>
         <filtering>
           Include only PRs listed in "included" from .roo/tmp/release-notes/temp_pr_inclusion_v[version].json. Do not fall back to using all analyzed PRs without an explicit inclusion policy.
@@ -484,7 +453,7 @@ gh pr view N --repo RooCodeInc/Roo-Code --json number,title,author,mergedAt,labe
           <checks>
             <check>Each bullet must answer: what changed, where the user sees it, why it matters.</check>
             <check>Replace internal terms (e.g., "protocol selector") with the on-screen wording users see.</check>
-            <check>For fixes, start with “Fixes an issue where …” or “Resolves a problem where …” instead of echoing PR titles.</check>
+            <check>For fixes, start with "Fixes an issue where …" or "Resolves a problem where …" instead of echoing PR titles.</check>
           </checks>
         </user_facing_rewrite>
       </step>
@@ -556,10 +525,38 @@ Which features should I highlight with expanded sections in the release notes?
       </step>
       
       <step number="6">
-        <action>Create documentation update task</action>
-        <when>If any documentation flags were identified</when>
-        <tool>new_task with mode="documentation-writer"</tool>
+        <action>Summarize documentation update needs</action>
+        <when>If any documentation flags were identified during PR analysis</when>
+        <output>
+          Present a summary of documentation needs to the user:
+          - List items flagged as docs-new (new features needing new pages)
+          - List items flagged as docs-update (existing pages needing updates)
+          - List items flagged as docs-example (new examples needed)
+          - List items flagged as docs-migration (migration guides needed)
+          
+          The user can then follow up with documentation-writer mode separately if desired.
+        </output>
+        <template><![CDATA[
+**Documentation Update Summary:**
+
+The following items may need documentation updates:
+
+**New Documentation Needed:**
+- [Feature name]: [Brief description of what needs documenting]
+
+**Existing Docs Updates:**
+- [Page/feature]: [What needs updating]
+
+**Examples Needed:**
+- [Feature]: [Example scenarios to add]
+
+**Migration Guides:**
+- [Breaking change]: [Migration path to document]
+
+To create these documentation updates, you can start a new task with documentation-writer mode.
+        ]]></template>
       </step>
+      
       <step number="7">
         <action>Cleanup temporary files</action>
         <details>Delete .roo/tmp/release-notes/* (temp_pr_analysis_v[version].md, temp_pr_list_v[version].md, temp_pr_inclusion_v[version].json) after notes are finalized.</details>
@@ -700,20 +697,13 @@ gh pr list --repo RooCodeInc/Roo-Code --state merged --base main --limit 1000 \
       Date format is YYYY-MM-DD (ISO 8601) where MM is month (01-12)
     </rule>
     <rule priority="CRITICAL">
-      Parent task creates temp files, subtasks only add entries (never overwrite)
-    </rule>
-    <rule priority="CRITICAL">
-      For each PR, the parent MUST create a subtask via new_task. The parent MUST NOT write PR analysis entries; only subtasks may add entries to .roo/tmp/release-notes/temp_pr_analysis_v[version].md without overwriting existing content. Do not proceed to changelog_alignment or compilation until all PR subtasks complete.
-      Even when the parent already has the PR number, title, description, or a user‑provided
-      summary list, it MUST still create and wait on the per‑PR subtask. These summaries are
-      insufficient for functional understanding of the change, discovery of linked issues, and
-      correct contributor attribution (PR authors and issue reporters).
+      All PR analysis happens inline within this task - do not spawn subtasks
     </rule>
     <rule priority="CRITICAL">
       Use the simplified PR extraction command for consistent results
     </rule>
     <rule priority="HIGH">
-      Acknowledge PR author AND issue reporter, unless the username is on the release-notes “thank you” exclusion list.
+      Acknowledge PR author AND issue reporter, unless the username is on the release-notes "thank you" exclusion list.
       If all candidate acknowledgements are excluded, omit the thanks parenthetical entirely.
     </rule>
     <rule priority="HIGH">
