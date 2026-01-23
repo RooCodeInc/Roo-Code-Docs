@@ -8,7 +8,6 @@ keywords:
   - reasoning AI
   - vision models
   - large context
-  - Grok Code Fast
   - Grok-4
   - Grok-3
   - Grok-2
@@ -62,7 +61,7 @@ Several Grok models have reasoning capabilities. However, only the Grok 3 Mini m
 * `grok-3-mini` - Supports reasoning effort control
 * `grok-3-mini-fast` - Supports reasoning effort control
 
-Other models (`grok-code-fast-1`, `grok-4.1-fast`, `grok-4`, `grok-3`, `grok-3-fast`) are reasoning-capable but don't expose the `reasoning_effort` parameter.
+Other models (`grok-4.1-fast`, `grok-4`, `grok-3`, `grok-3-fast`) are reasoning-capable but don't expose the `reasoning_effort` parameter.
 
 ### Controlling Reasoning Effort
 
@@ -83,12 +82,10 @@ Choose `low` for simple queries that should complete quickly, and `high` for har
 
 ## Prompt Caching
 
-Prompt caching is available for select Grok models including `grok-code-fast-1`, `grok-4`, `grok-3`, `grok-3-fast`, `grok-3-mini`, and `grok-3-mini-fast`. This feature can reduce costs and improve response times.
+Prompt caching is available for select Grok models including `grok-4`, `grok-3`, `grok-3-fast`, `grok-3-mini`, and `grok-3-mini-fast`. This feature can reduce costs and improve response times.
 
 ---
 
 ## Pricing
 
 Pricing varies by model. Refer to the [xAI documentation](https://console.x.ai/) for current pricing information.
-
-**Note:** `grok-code-fast-1` is available for free through [Roo Code Router](/providers/roo-code-router) during the promotional period. Standard pricing will apply when using the xAI provider directly in Roo Code.

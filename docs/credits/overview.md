@@ -23,7 +23,7 @@ You can see the plans we offer and the most up-to-date pricing on our [pricing p
 
 ## What are credits?
 
-Credits are just pre-paid dollar amounts you can optionally buy to use the paid parts of the Roo Code suite. If you stick to free features and free models, you don't have to buy any credits.
+Credits are just pre-paid dollar amounts you can optionally buy to use the paid parts of the Roo Code suite. If you stick to free features and sometimes available free models, you don't have to buy any credits.
 
 Credits are shown in dollars, there's no shenanigans in converting it to obscure currencies you can't calculate.
 
@@ -44,7 +44,7 @@ The monthly subscription to the Team plan simply unlocks advanced functionality.
 
 When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute <LucideIcon name="Gift" style={{ width: 14, position: "relative", top: 4}} /> icon). Those free minutes cover both the [Cloud Agent](/roo-code-cloud/cloud-agents) run time _and_ inference via the Roo Code Cloud provider (both of which normally cost credits). Those can't be used in the extension – they're there for you to try the magic of Cloud Agents.
 
-If you want free inference in the extension, choose a free model (or another provider which may offer it to you for free).
+If you want free inference in the extension, look for a free model when available (or use another provider which may offer it to you for free).
 
 ## How can I buy credits?
 
