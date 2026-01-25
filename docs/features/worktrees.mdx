@@ -39,22 +39,24 @@ You can access the worktrees feature in two ways:
    - Click the selector to see all your worktrees
    - Click on any worktree to switch to it
    - Click the `+` button to create a new worktree
+   - Click the ⚙️ to manage worktrees
 
-2. **Settings Panel**: Navigate to Settings <Codicon name="gear" /> → Worktrees
+2. **Settings Panel**: from the last point above or via Settings (⚙️) → Worktrees
    - View and manage all your worktrees
    - Create new worktrees
    - Delete existing worktrees
    - Configure `.worktreeinclude` settings
+   - Choose wheter to show the selector in the home screen
 
 ### Creating Your First Worktree
 
-1. Open the Roo Code settings by clicking the gear icon <Codicon name="gear" />
+1. Open the Roo Code settings by clicking the gear icon
 2. Navigate to the "Worktrees" section
 3. Click the "Create worktree" button
 4. Fill in the required fields:
    - **Base Branch**: The branch to create your new branch from (typically `main` or `develop`)
    - **Branch Name**: Name for the new branch (e.g., `worktree/feature-name`)
-   - **Worktree Path**: Location where the worktree will be created (suggested path is `~/.roo/worktrees/`)
+   - **Worktree Path**: Location where the worktree will be created
 5. Click "Create"
 6. Choose whether to open the new worktree in a new window or stay in your current window
 
@@ -76,7 +78,7 @@ Once you have multiple worktrees, switching between them is seamless:
 **From Settings**:
 - Navigate to Settings → Worktrees
 - Click on any worktree to switch to it in the current window
-- Click the <Codicon name="arrow-up-right" /> icon to open in a new window
+- Click the icon to open in a new window
 
 :::tip Multiple Windows
 Opening worktrees in new windows allows you to have multiple tasks running in parallel, each in its own workspace. This is ideal for comparing different approaches or working on multiple features simultaneously.
@@ -94,14 +96,7 @@ The worktrees list shows:
 **Deleting Worktrees**:
 1. Navigate to Settings → Worktrees
 2. Click the trash icon <Codicon name="trash" /> next to the worktree you want to delete
-3. Review the warning - deletion will remove:
-   - The branch and any uncommitted changes
-   - All files in the worktree directory
-4. Confirm deletion
 
-:::warning Deletion is Permanent
-Deleting a worktree removes the branch and all files in that directory. Make sure to commit and push any important changes before deleting.
-:::
 
 ### Copying Files with .worktreeinclude
 
@@ -132,12 +127,6 @@ dist
 Only files that match BOTH `.worktreeinclude` AND `.gitignore` patterns are copied. This ensures you're only copying untracked files that you intentionally want to duplicate across worktrees.
 :::
 
-**Copy Progress**:
-When creating a worktree with a `.worktreeinclude` file:
-- A progress indicator shows which files are being copied
-- Large directories like `node_modules` are copied with real-time progress updates
-- The operation continues in the background if you close the modal
-
 ### Home Screen Integration
 
 The worktree selector can be shown or hidden from the home screen:
@@ -149,59 +138,10 @@ The worktree selector can be shown or hidden from the home screen:
 
 ---
 
-## Use Cases
-
-### Parallel Feature Development
-
-Create separate worktrees for different features:
-- Base worktree on `main` for production hotfixes
-- Feature worktree for new development
-- Experimental worktree for trying new approaches
-
-Switch between them instantly without stashing or committing incomplete work.
-
-### Code Review Workflow
-
-Review pull requests without disrupting your current work:
-1. Create a worktree from the PR branch
-2. Open it in a new window
-3. Test and review the changes
-4. Delete the worktree when done
-
-### Testing Different Implementations
-
-Try multiple solutions to the same problem:
-1. Create worktrees for different approaches
-2. Run tasks in parallel with Roo Code
-3. Compare results
-4. Keep the best implementation and delete the others
-
-### Environment Isolation
-
-Maintain separate environments with different dependencies:
-- Development worktree with latest dependencies
-- Stable worktree with pinned versions
-- Testing worktree with experimental packages
-
-Each worktree can have its own `node_modules` copied via `.worktreeinclude`.
-
----
-
-## Limitations
-
-- **Single-root workspaces only**: Multi-root workspaces are not supported
-- **Repository root required**: Workspace must be at the Git repository root, not a subfolder
-- **Git required**: Git must be installed on your system
-- **Task isolation**: Only one task can run per worktree at a time
-- **Branches in use**: Branches already checked out in other worktrees cannot be used for new worktrees
-- **Primary worktree**: The original repository worktree (marked as "Primary") cannot be deleted
-
----
-
-## Tips and Best Practices
+## Tips
 
 - **Organized locations**: Use a consistent location like `~/.roo/worktrees/` for all your worktrees
-- **Descriptive branch names**: Use clear naming like `worktree/feature-name` to identify worktree branches
+- **Descriptive branch names**: Use clear naming like `worktree/feature-name` to identify worktree branches later on
 - **Regular cleanup**: Delete worktrees you're no longer using to save disk space
 - **Commit before deleting**: Always commit and push important changes before deleting a worktree
 - **Use .worktreeinclude**: Set up a `.worktreeinclude` file once and benefit from it for all future worktrees
