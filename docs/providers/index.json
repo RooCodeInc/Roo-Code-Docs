@@ -13,12 +13,6 @@
       "cloud": false
     },
     {
-      "id": "providers/claude-code",
-      "title": "Claude Code",
-      "extension": true,
-      "cloud": false
-    },
-    {
       "id": "providers/bedrock",
       "title": "AWS Bedrock",
       "extension": true,

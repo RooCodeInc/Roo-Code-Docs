@@ -304,6 +304,11 @@ const config: Config = {
             to: '/',
             from: ['/providers/human-relay'],
           },
+          // Redirect removed Claude Code provider page
+          {
+            to: '/',
+            from: ['/providers/claude-code'],
+          },
         ],
       },
     ],
