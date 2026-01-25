@@ -46,6 +46,7 @@ const sidebars: SidebarsConfig = {
            'features/slash-commands',
            'features/suggested-responses',
            'features/task-todo-list',
+           'features/worktrees',
            'features/shell-integration',
            'features/more-features',
          ],
