@@ -91,12 +91,6 @@
       "cloud": false
     },
     {
-      "id": "providers/human-relay",
-      "title": "Human Relay",
-      "extension": true,
-      "cloud": false
-    },
-    {
       "id": "providers/io-intelligence",
       "title": "IO Intelligence",
       "extension": true,
