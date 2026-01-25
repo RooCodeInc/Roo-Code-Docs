@@ -301,7 +301,7 @@ const config: Config = {
           },
           // Redirect removed Human Relay provider page
           {
-            to: '/providers/anthropic',
+            to: '/',
             from: ['/providers/human-relay'],
           },
         ],
