@@ -45,7 +45,10 @@ Clicking the **Import** button allows you to load settings from a previously exp
     2.  A file open dialog appears. Select the `roo-code-settings.json` file (or similarly named file) you want to import.
     3.  Roo Code reads the file, validates its contents against the expected schema, and applies the settings.
 *   **Merging:** Importing settings **merges** the configurations. It adds new API profiles and updates existing ones and global settings based on the file content. It does **not** delete configurations present in your current setup but missing from the imported file.
-*   **Validation:** Only valid settings matching the internal schema can be imported, preventing configuration errors. A success notification appears upon completion.
+*   **Validation:** Import validates the file, but it can still succeed with warnings.
+
+    - If **some** API profiles reference a provider that no longer exists (or is otherwise invalid), Roo imports the rest and reports warnings.
+    - Import fails only if **all** profiles are invalid.
 
 ---
 

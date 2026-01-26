@@ -19,7 +19,6 @@ Discover the powerful features that make Roo Code your ultimate AI-powered codin
 ## Core Features
 
 ### Code Editing & Navigation
-- [**Fast Edits**](/features/fast-edits) - Lightning-fast code modifications with intelligent diff application
 - [**Concurrent File Reads**](/features/concurrent-file-reads) - Read multiple files simultaneously for better context
 - [**Code Actions**](/features/code-actions) - Quick fixes and refactoring suggestions
 - [**Diagnostics Integration**](/features/diagnostics-integration) - Real-time error detection and resolution
@@ -60,7 +59,6 @@ Push the boundaries with cutting-edge capabilities:
 
 - [**Custom Tools**](/features/experimental/custom-tools) - Define TypeScript/JavaScript tools that Roo can call
 - [**Concurrent File Edits**](/features/experimental/concurrent-file-edits) - Edit multiple files in a single operation
-- [**Power Steering**](/features/experimental/power-steering) - Enhanced consistency in AI responses
 - [**More Experimental Features**](/features/experimental/experimental-features) - Explore features under development
 
 ## Additional Resources

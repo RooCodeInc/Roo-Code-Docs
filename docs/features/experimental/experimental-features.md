@@ -1,11 +1,10 @@
 ---
-description: 'Explore Roo Code''s experimental features including concurrent file edits and power steering. Enable advanced capabilities that are still under development.'
+description: 'Explore Roo Code''s experimental features. Enable advanced capabilities that are still under development.'
 keywords:
   - experimental features
   - "Roo Code beta"
   - "advanced features"
   - "concurrent file edits"
-  - "power steering"
   - "feature flags"
 ---
 
@@ -33,7 +32,6 @@ The following experimental features are currently available:
 
 - [Custom Tools](/features/experimental/custom-tools) - Define TypeScript/JavaScript tools that Roo can call like built-in tools
 - [Concurrent File Edits](/features/experimental/concurrent-file-edits) - Edit multiple files in a single operation
-- [Power Steering](/features/experimental/power-steering) - Enhanced consistency in AI responses
 - [Background Editing](/features/experimental/background-editing) - Work uninterrupted while Roo edits files in the background
 - [Image Generation](/features/image-generation) - Generate images from text prompts and save them to your workspace
 - [Run Slash Command](/advanced-usage/available-tools/run-slash-command) - Execute predefined slash commands for templated instructions and workflow automation
