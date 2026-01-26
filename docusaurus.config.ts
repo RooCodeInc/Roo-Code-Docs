@@ -313,6 +313,12 @@ const config: Config = {
             to: '/',
             from: ['/providers/claude-code'],
           },
+
+          // Redirect removed Fast Edits feature page
+          {
+            to: '/',
+            from: ['/features/fast-edits'],
+          },
         ],
       },
     ],
