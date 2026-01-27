@@ -121,6 +121,20 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Roo Code CLI (Beta)',
+      items: [
+        'cli/overview',
+        'cli/installation',
+        'cli/authentication',
+        'cli/getting-started',
+        'cli/configuration',
+        'cli/usage',
+        'cli/reference',
+        'cli/advanced',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Roo Code Cloud',
       items: [
         'roo-code-cloud/overview',
