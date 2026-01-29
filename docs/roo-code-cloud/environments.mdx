@@ -362,7 +362,7 @@ Dev servers like Vite and Next.js reject requests from unrecognized hosts by def
 // Vite — vite.config.ts
 export default defineConfig({
   server: {
-    allowedHosts: true, // allow all hosts (simplest for preview environments)
+    allowedHosts: ['.vercel.run'],
   }
 })
 
