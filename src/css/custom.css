@@ -2424,3 +2424,207 @@ a.breadcrumbs__link:hover {
 .navbar__search-input:not(:focus) {
   min-width: 80px !important;
 }
+
+/* ============================================
+   VALENTINE'S DAY THEME
+   ============================================ */
+
+/* Valentine's Day color palette */
+:root {
+  --valentine-pink: #ff69b4;
+  --valentine-light-pink: #ffb6c1;
+  --valentine-rose: #ff1493;
+  --valentine-red: #dc143c;
+  --valentine-dark-pink: #c71585;
+}
+
+/* Valentine's Day gradient for headings */
+.roo-gradient-text,
+.roo-text-gradient-blue {
+  background: linear-gradient(to right, var(--valentine-pink), var(--valentine-rose), var(--valentine-red)) !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Valentine's Day primary colors */
+:root {
+  --ifm-color-primary: var(--valentine-pink);
+  --ifm-color-primary-dark: var(--valentine-rose);
+  --ifm-color-primary-darker: var(--valentine-dark-pink);
+  --ifm-color-primary-darkest: var(--valentine-red);
+  --ifm-color-primary-light: var(--valentine-light-pink);
+  --ifm-color-primary-lighter: #ffc0cb;
+  --ifm-color-primary-lightest: #ffe4e9;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: var(--valentine-pink);
+  --ifm-color-primary-dark: var(--valentine-rose);
+  --ifm-color-primary-darker: var(--valentine-dark-pink);
+  --ifm-color-primary-darkest: var(--valentine-red);
+  --ifm-color-primary-light: var(--valentine-light-pink);
+  --ifm-color-primary-lighter: #ffc0cb;
+  --ifm-color-primary-lightest: #ffe4e9;
+}
+
+/* Valentine's Day accent color for links */
+:root {
+  --accent: 330, 100%, 71%;
+}
+
+[data-theme='dark'] {
+  --accent: 330, 100%, 71%;
+}
+
+/* Valentine's Day link styling */
+.theme-doc-markdown a:not(.hash-link) {
+  color: var(--valentine-pink) !important;
+}
+
+.theme-doc-markdown a:not(.hash-link):hover {
+  color: var(--valentine-rose) !important;
+}
+
+/* Valentine's Day floating hearts background animation */
+@keyframes float-heart {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Create floating hearts container */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff69b4' opacity='0.15'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff1493' opacity='0.1'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dc143c' opacity='0.08'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+  background-size: 30px 30px, 20px 20px, 25px 25px;
+  background-position: 10% 20%, 80% 60%, 50% 80%;
+  background-repeat: no-repeat;
+  animation: subtle-float 20s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+  0%, 100% {
+    background-position: 10% 20%, 80% 60%, 50% 80%;
+  }
+  25% {
+    background-position: 15% 15%, 75% 65%, 55% 75%;
+  }
+  50% {
+    background-position: 10% 25%, 85% 55%, 45% 85%;
+  }
+  75% {
+    background-position: 5% 20%, 80% 60%, 50% 80%;
+  }
+}
+
+/* Valentine's Day glow effect on feature cards */
+.roo-feature-card::before {
+  background: linear-gradient(to right, rgba(255, 105, 180, 0.3), rgba(255, 20, 147, 0.3), rgba(220, 20, 60, 0.3)) !important;
+}
+
+/* Valentine's Day section background glow */
+.roo-section-background::before {
+  background: radial-gradient(circle, rgba(255, 105, 180, 0.15) 0%, transparent 70%) !important;
+}
+
+/* Valentine's Day button styling */
+[data-theme='dark'] .button--primary,
+.button--primary {
+  background: linear-gradient(135deg, var(--valentine-pink), var(--valentine-rose)) !important;
+  border: none !important;
+}
+
+[data-theme='dark'] .button--primary:hover,
+.button--primary:hover {
+  background: linear-gradient(135deg, var(--valentine-rose), var(--valentine-red)) !important;
+}
+
+/* Valentine's Day navbar accent */
+.navbar {
+  border-bottom: 1px solid rgba(255, 105, 180, 0.2) !important;
+}
+
+/* Valentine's Day footer accent */
+.footer {
+  border-top: 1px solid rgba(255, 105, 180, 0.2) !important;
+}
+
+/* Valentine's Day code block accents */
+[data-theme='dark'] .token.property,
+[data-theme='dark'] .token.tag,
+[data-theme='dark'] .token.boolean,
+[data-theme='dark'] .token.number,
+[data-theme='dark'] .token.constant,
+[data-theme='dark'] .token.symbol,
+[data-theme='dark'] .token.deleted {
+  color: var(--valentine-pink) !important;
+}
+
+[data-theme='dark'] .token.selector,
+[data-theme='dark'] .token.attr-name,
+[data-theme='dark'] .token.string,
+[data-theme='dark'] .token.char,
+[data-theme='dark'] .token.builtin,
+[data-theme='dark'] .token.inserted {
+  color: var(--valentine-light-pink) !important;
+}
+
+/* Valentine's Day admonition styling */
+.theme-admonition-info > div,
+.theme-admonition-info > div svg {
+  color: var(--valentine-pink) !important;
+  fill: var(--valentine-pink) !important;
+}
+
+/* Valentine's Day sidebar active link */
+.menu__link--active {
+  color: var(--valentine-pink) !important;
+}
+
+/* Valentine's Day table of contents active link */
+.table-of-contents__link--active {
+  color: var(--valentine-pink) !important;
+}
+
+/* Valentine's Day scrollbar styling for dark mode */
+[data-theme='dark'] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--valentine-pink), var(--valentine-rose));
+  border-radius: 10px;
+}
+
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(var(--valentine-rose), var(--valentine-red));
+}
+
+/* Valentine's Day selection highlight */
+::selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(255, 105, 180, 0.3);
+  color: inherit;
+}
