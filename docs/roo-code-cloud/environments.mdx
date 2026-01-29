@@ -323,39 +323,9 @@ After the environment starts, you'll get unique URLs for each port. Visit the WE
 
 ### CORS Errors
 
-In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.vercel.run` and `https://def456.vercel.run`). Browsers block cross-origin requests by default, so your backend needs to explicitly allow the frontend's domain.
+In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.vercel.run` and `https://def456.vercel.run`). Browsers block cross-origin requests by default, so you need to configure both sides: the backend must allow the frontend's origin, and the frontend dev server must accept the preview domain.
 
-Use the `ROO_WEB_HOST` variable to configure your backend's CORS policy:
-
-**Express:**
-
-```typescript
-import cors from 'cors';
-
-app.use(cors({
-  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
-}));
-```
-
-**Hono:**
-
-```typescript
-import { cors } from 'hono/cors';
-
-app.use(cors({
-  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
-}));
-```
-
-**Fastify:**
-
-```typescript
-app.register(import('@fastify/cors'), {
-  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
-});
-```
-
-Then in your environment config, make sure both ports are defined so the variables get injected:
+Make sure both ports are defined so the `ROO_*_HOST` variables get injected:
 
 ```yaml
 ports:
@@ -363,6 +333,43 @@ ports:
     port: 3000
   - name: API
     port: 3001
+```
+
+#### Backend: Allow the frontend origin
+
+Use `ROO_WEB_HOST` to configure your backend's CORS policy:
+
+```typescript
+// Express
+import cors from 'cors';
+app.use(cors({ origin: process.env.ROO_WEB_HOST || 'http://localhost:3000' }));
+
+// Hono
+import { cors } from 'hono/cors';
+app.use(cors({ origin: process.env.ROO_WEB_HOST || 'http://localhost:3000' }));
+
+// Fastify
+app.register(import('@fastify/cors'), {
+  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
+});
+```
+
+#### Frontend: Allow the preview domain
+
+Dev servers like Vite and Next.js reject requests from unrecognized hosts by default. You need to allow the preview domain so the dev server responds to requests on `https://<id>.vercel.run`:
+
+```typescript
+// Vite — vite.config.ts
+export default defineConfig({
+  server: {
+    allowedHosts: true, // allow all hosts (simplest for preview environments)
+  }
+})
+
+// Next.js — next.config.ts
+export default {
+  allowedDevOrigins: ['*.vercel.run'],
+}
 ```
 
 ### Managing Frontend API URLs with `.env` Files
