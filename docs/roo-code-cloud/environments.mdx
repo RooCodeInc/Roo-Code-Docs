@@ -9,6 +9,9 @@ keywords:
   - Services
   - Postgres
   - Redis
+  - Detached Commands
+  - Tool Versions
+  - mise
 ---
 
 # Preview Environments
@@ -40,14 +43,16 @@ repositories:
       - name: Install
         run: npm install
       - name: Start
-        run: npm run dev &
+        run: npm run dev
+        detached: true
 
   - repository: myorg/backend
     commands:
       - name: Install
         run: npm install
       - name: Start
-        run: npm run dev &
+        run: npm run dev
+        detached: true
 
 ports:
   - name: WEB
@@ -100,61 +105,31 @@ You can configure up to **4 named ports** per environment.
 
 ## Using Environment Variables in Your Code
 
-The injected environment variables let your applications find each other without hardcoded URLs.
-
-### React/Vite Frontend
+Use the `ROO_<NAME>_HOST` variables instead of hardcoded URLs so your services can find each other in both preview and local environments:
 
 ```typescript
+// Backend: configure CORS with the injected frontend URL
+app.use(cors({
+  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
+}));
+
+// Frontend (Vite): pass the API URL at build time
 // vite.config.ts
 export default defineConfig({
   define: {
     'import.meta.env.API_URL': JSON.stringify(process.env.ROO_API_HOST || 'http://localhost:3001')
   }
 })
-
-// In your React code
-const response = await fetch(`${import.meta.env.API_URL}/api/users`);
 ```
 
-### Next.js Frontend
+For static site frameworks (Vite, Next.js, CRA), the API URL needs to be set at build time via command-level `env`:
 
-```typescript
-// next.config.js
-module.exports = {
-  env: {
-    NEXT_PUBLIC_API_URL: process.env.ROO_API_HOST || 'http://localhost:3001'
-  }
-}
-
-// In your code
-const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`);
-```
-
-### Node.js/Express/Hono Backend
-
-```typescript
-// Configure CORS to allow requests from the frontend domain
-app.use(cors({
-  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
-}));
-
-// Or allow multiple frontends
-app.use(cors({
-  origin: [
-    process.env.ROO_WEB_HOST,
-    process.env.ROO_ADMIN_HOST
-  ].filter(Boolean)
-}));
-```
-
-### Inter-Service Communication
-
-If you have multiple backend services:
-
-```typescript
-// In your API service, call a worker service
-const workerUrl = process.env.ROO_WORKER_HOST || 'http://localhost:3002';
-await fetch(`${workerUrl}/jobs`, { method: 'POST', body: jobData });
+```yaml
+commands:
+  - name: Build
+    run: npm run build
+    env:
+      VITE_API_URL: ${ROO_API_HOST}
 ```
 
 ## Repositories
@@ -170,7 +145,9 @@ repositories:
       - name: Build
         run: npm run build
       - name: Start dev server
-        run: npm run dev &
+        run: npm run dev
+        detached: true
+        logfile: /tmp/frontend.log
 
   - repository: myorg/backend
     commands:
@@ -179,7 +156,9 @@ repositories:
       - name: Run migrations
         run: npm run db:migrate
       - name: Start server
-        run: npm run start &
+        run: npm run start
+        detached: true
+        logfile: /tmp/backend.log
 ```
 
 ### Repository Format
@@ -194,19 +173,38 @@ Each repository can have its own commands that run in order. Commands support:
 |-------|-------------|---------|
 | `name` | Display name for the command | Required |
 | `run` | The shell command to execute | Required |
-| `working_dir` | Directory to run the command in | Repository root |
+| `working_dir` | Relative directory to run the command in | Repository root |
+| `cwd` | Absolute path to run the command in | Repository root |
 | `env` | Command-specific environment variables | None |
 | `timeout` | Maximum seconds to wait | 60 |
 | `continue_on_error` | Keep going if command fails | false |
+| `detached` | Run in the background (see below) | false |
+| `logfile` | File path to write stdout/stderr when `detached` is true | None |
 
 ### Background Processes
 
-To start a server that keeps running, end the command with `&`:
+To start a long-running process like a dev server, use `detached: true`. This runs the command in the background so subsequent commands can execute immediately:
 
 ```yaml
 commands:
-  - name: Start server
-    run: npm run dev &
+  - name: Install
+    run: npm install
+  - name: Start dev server
+    run: npm run dev
+    detached: true
+    logfile: /tmp/dev-server.log
+```
+
+When `detached` is true, the command runs via `nohup` and the worker moves on after confirming the process started. If `logfile` is set, stdout and stderr are written to that path — useful for debugging startup issues.
+
+### Automatic Tool Installation
+
+If a repository contains a `.tool-versions` file (used by [mise](https://mise.jdx.dev/) / asdf), Roo Code Cloud automatically runs `mise install` after cloning. This installs the correct versions of tools like Node.js, Python, Ruby, Go, or any other runtime your project requires — before any of your setup commands execute.
+
+```
+# .tool-versions
+nodejs 20.11.0
+python 3.12.1
 ```
 
 ## Services
@@ -276,7 +274,9 @@ repositories:
         env:
           VITE_API_URL: ${ROO_API_HOST}
       - name: Serve
-        run: npx serve -s dist -l 3000 &
+        run: npx serve -s dist -l 3000
+        detached: true
+        logfile: /tmp/storefront.log
 
   - repository: acme/api
     commands:
@@ -285,7 +285,9 @@ repositories:
       - name: Migrate
         run: npm run db:push
       - name: Start
-        run: npm run start &
+        run: npm run start
+        detached: true
+        logfile: /tmp/api.log
         env:
           ALLOWED_ORIGINS: ${ROO_WEB_HOST}
 
@@ -294,7 +296,9 @@ repositories:
       - name: Install
         run: npm install
       - name: Start
-        run: npm run start &
+        run: npm run start
+        detached: true
+        logfile: /tmp/worker.log
 
 ports:
   - name: WEB
@@ -315,75 +319,80 @@ env:
 
 After the environment starts, you'll get unique URLs for each port. Visit the WEB URL to access your running application.
 
-## Tips
+## Common Issues
 
-### 1. Always Use Environment Variables for URLs
+### CORS Errors
 
-Don't hardcode URLs between services:
+In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.vercel.run` and `https://def456.vercel.run`). Browsers block cross-origin requests by default, so your backend needs to explicitly allow the frontend's domain.
 
-```typescript
-// Bad - breaks in preview environments
-const apiUrl = 'http://localhost:3001';
+Use the `ROO_WEB_HOST` variable to configure your backend's CORS policy:
 
-// Good - works everywhere
-const apiUrl = process.env.ROO_API_HOST || 'http://localhost:3001';
-```
-
-### 2. Configure CORS Dynamically
+**Express:**
 
 ```typescript
-// Bad - only works locally
-app.use(cors({ origin: 'http://localhost:3000' }));
+import cors from 'cors';
 
-// Good - works in preview and locally
 app.use(cors({
   origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
 }));
 ```
 
-### 3. Use Build-Time Variables for Static Sites
-
-For frameworks like Vite, CRA, or Next.js, the API URL often needs to be known at build time:
-
-```yaml
-commands:
-  - name: Build
-    run: npm run build
-    env:
-      VITE_API_URL: ${ROO_API_HOST}
-```
-
-### 4. Handle Missing Variables Gracefully
-
-In development, you might not have all variables set:
+**Hono:**
 
 ```typescript
-const apiUrl = process.env.ROO_API_HOST;
-if (!apiUrl) {
-  console.warn('ROO_API_HOST not set, using localhost');
-}
+import { cors } from 'hono/cors';
+
+app.use(cors({
+  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
+}));
 ```
 
-### 5. Use Consistent Naming
+**Fastify:**
 
-Pick a naming convention and stick with it:
+```typescript
+app.register(import('@fastify/cors'), {
+  origin: process.env.ROO_WEB_HOST || 'http://localhost:3000'
+});
+```
+
+Then in your environment config, make sure both ports are defined so the variables get injected:
 
 ```yaml
-# Good - clear and consistent
 ports:
   - name: WEB
     port: 3000
   - name: API
     port: 3001
-  - name: ADMIN
-    port: 3002
-
-# Avoid - inconsistent naming
-ports:
-  - name: frontend
-    port: 3000
-  - name: BACKEND_API
-    port: 3001
-  - name: Admin_Panel
-    port: 3002
 ```
+
+### Managing Frontend API URLs with `.env` Files
+
+Frontends typically need the API URL at build time. If your project already uses `.env` files (via dotenv, dotenvx, or framework built-ins like Vite's `.env.local`), you can write the injected `ROO_API_HOST` into a `.env` file as a setup command — no code changes needed:
+
+```yaml
+repositories:
+  - repository: myorg/frontend
+    commands:
+      - name: Configure API URL
+        run: echo "VITE_API_URL=${ROO_API_HOST}" >> .env.local
+      - name: Install
+        run: npm install
+      - name: Start
+        run: npm run dev
+        detached: true
+```
+
+This works with any framework that reads `.env` files:
+
+| Framework | File | Variable prefix |
+|-----------|------|-----------------|
+| Vite | `.env.local` | `VITE_` |
+| Next.js | `.env.local` | `NEXT_PUBLIC_` |
+| Create React App | `.env.local` | `REACT_APP_` |
+
+This approach keeps your environment config simple and avoids modifying application code.
+
+## Tips
+
+- **Use `ROO_*_HOST` variables, not hardcoded URLs.** Always fall back to localhost for local dev: `process.env.ROO_API_HOST || 'http://localhost:3001'`.
+- **Use consistent uppercase port names.** `WEB`, `API`, `ADMIN` — not `frontend`, `BACKEND_API`, `Admin_Panel`.
