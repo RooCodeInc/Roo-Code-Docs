@@ -12,6 +12,7 @@ keywords:
   - Detached Commands
   - Tool Versions
   - mise
+  - Initial Path
 ---
 
 # Preview Environments
@@ -80,7 +81,16 @@ ports:
     port: 3001
   - name: ADMIN
     port: 3002
+    initial_path: /dashboard
 ```
+
+### Port Configuration Fields
+
+| Field | Description | Required |
+|-------|-------------|----------|
+| `name` | Identifier for the port (used to generate environment variables) | Yes |
+| `port` | The port number to expose | Yes |
+| `initial_path` | Default path to append to the preview URL | No |
 
 For each named port, an environment variable is injected into your container:
 
@@ -88,7 +98,7 @@ For each named port, an environment variable is injected into your container:
 |-------------|---------------------|---------------|
 | `name: WEB, port: 3000` | `ROO_WEB_HOST` | `https://abc123.vercel.run` |
 | `name: API, port: 3001` | `ROO_API_HOST` | `https://def456.vercel.run` |
-| `name: ADMIN, port: 3002` | `ROO_ADMIN_HOST` | `https://ghi789.vercel.run` |
+| `name: ADMIN, port: 3002, initial_path: /dashboard` | `ROO_ADMIN_HOST` | `https://ghi789.vercel.run/dashboard` |
 
 ### Naming Rules
 
@@ -102,6 +112,39 @@ The name is converted to uppercase for the environment variable (e.g., `web` bec
 ### Limits
 
 You can configure up to **4 named ports** per environment.
+
+### Initial Path
+
+Use `initial_path` to specify the default URL path for a port's preview link. This is useful when your application's entry point isn't at the root path.
+
+For example, if your app requires authentication and the login page is at `/login`:
+
+```yaml
+ports:
+  - name: WEB
+    port: 3000
+    initial_path: /login
+```
+
+When the environment starts, the preview URL provided in the UI and task will be `https://abc123.vercel.run/login` instead of the root URL.
+
+#### Validation Rules
+
+The `initial_path` must:
+- Start with a forward slash (`/`)
+- Be a valid URI path (no query strings or fragments)
+- Contain only valid URI characters
+
+Valid examples:
+- `/login`
+- `/dashboard`
+- `/api/v1/health`
+- `/app/projects/123`
+
+Invalid examples:
+- `login` (missing leading slash)
+- `/path?query=1` (contains query string)
+- `/path#section` (contains fragment)
 
 ## Using Environment Variables in Your Code
 
