@@ -167,16 +167,21 @@ const sidebars: SidebarsConfig = {
         })),
       ],
     },
-    {
-      type: "category",
-      label: "Extension Release Notes",
-      items: [
-        "update-notes/index",
         {
           type: "category",
-          label: "3.45",
-          items: [{ type: "doc", id: "update-notes/v3.45.0", label: "3.45.0" }],
-        },
+          label: "Extension Release Notes",
+          items: [
+            "update-notes/index",
+            {
+              type: "category",
+              label: "3.46",
+              items: [{ type: "doc", id: "update-notes/v3.46.0", label: "3.46.0" }],
+            },
+            {
+              type: "category",
+              label: "3.45",
+              items: [{ type: "doc", id: "update-notes/v3.45.0", label: "3.45.0" }],
+            },
         {
           type: "category",
           label: "3.44",

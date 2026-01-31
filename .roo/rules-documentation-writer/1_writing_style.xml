@@ -1,116 +1,69 @@
 <writing_style_guide>
   <overview>
-    This guide defines the writing style for Roo Code documentation. The style is direct, concise, and technical. It avoids marketing language and prioritizes clarity for a developer audience. All output must be in markdown.
+    Writing style for Roo Code documentation. The goal is clarity and trust, not personality.
+    Optimize for reader momentum and capability discovery, not author completeness.
+    All output must be markdown.
   </overview>
 
-  <discovery_principle>
-    <rule>Before writing or editing documentation, always explore existing documentation to understand established patterns, style, and structure.</rule>
-    <steps>
-      <step>Use list_files to explore the documentation structure</step>
-      <step>Read similar existing documents to understand the style</step>
-      <step>Follow established patterns rather than imposing new ones</step>
-    </steps>
-  </discovery_principle>
+  <persona>
+    <identity>
+      Documentation sounds like a careful engineering teammate sitting next to you.
+      Calm, precise, focused on what will happen next.
+      It explains actions and consequences clearly and does not try to motivate, entertain, or reassure beyond what is factual.
+    </identity>
 
-  <content_validation_principle>
-    <rule>MANDATORY: Before making ANY changes to existing documentation files, you MUST complete the redundancy validation workflow. This is NOT optional.</rule>
-    <enforcement>
-      <requirement>You CANNOT proceed with edits until validation is complete</requirement>
-      <requirement>You MUST document validation results before making changes</requirement>
-      <requirement>Skipping validation steps will result in task rejection</requirement>
-    </enforcement>
-    <redundancy_check priority="CRITICAL">
-      <mandatory_step order="1">Use codebase_search to find ALL mentions of the topic across documentation</mandatory_step>
-      <mandatory_step order="2">Search for multiple variations of key terms (e.g., if editing "authentication", also search "auth", "login", "security", "credentials")</mandatory_step>
-      <mandatory_step order="3">Read and analyze EVERY discovered location thoroughly</mandatory_step>
-      <mandatory_step order="4">Create a validation report listing:
-        - All locations where similar content exists
-        - The current state of each location
-        - Potential conflicts or duplications
-        - Recommendation for how to proceed
-      </mandatory_step>
-      <mandatory_step order="5">If similar content exists, you MUST determine:
-        - Is this an update to existing content? (proceed to that location)
-        - Is this a consolidation opportunity? (merge content)
-        - Is this truly new, non-redundant content? (proceed with caution)
-      </mandatory_step>
-    </redundancy_check>
-    <cohesion_validation priority="CRITICAL">
-      <mandatory_step>Check for contradictions with existing documentation</mandatory_step>
-      <mandatory_step>Verify that new content aligns with established terminology and concepts</mandatory_step>
-      <mandatory_step>Ensure cross-references are accurate and bidirectional where appropriate</mandatory_step>
-      <mandatory_step>Validate that the change enhances rather than fragments the documentation flow</mandatory_step>
-      <mandatory_step>Document how the change improves overall documentation cohesion</mandatory_step>
-    </cohesion_validation>
-    <validation_gate>
-      <rule>You MUST use ask_followup_question to confirm validation results with the user BEFORE proceeding with any edits</rule>
-      <template>
-        "I've completed the mandatory redundancy validation. Here's what I found: [validation results]. Based on this analysis, I recommend: [recommendation]. Should I proceed with this approach?"
-      </template>
-    </validation_gate>
-  </content_validation_principle>
+    <primary_goal>
+      Help the user make a correct decision in the moment.
+      Every line should answer at least one of:
+      <question>What is happening</question>
+      <question>Why it matters</question>
+      <question>What will happen if you proceed</question>
+      <question>What to do next if something fails</question>
+    </primary_goal>
 
-  <core_principles>
-    <principle name="directness">
-      <rule>Start with the most important information. No filler introductions.</rule>
-      <bad>In this guide, we will explore how to configure the tool.</bad>
-      <good>To configure the tool, open...</good>
-    </principle>
-    <principle name="brevity">
-      <rule>Use short sentences. Cut unnecessary words. If it doesn't add value, remove it.</rule>
-    </principle>
-    <principle name="utility">
-      <rule>Focus on what the user can do and why it matters. Provide actionable steps.</rule>
-    </principle>
-    <principle name="truthfulness">
-      <rule>Only document what actually exists. When it doubt, ask questions.</rule>
-      <bad>Invent inexistent features.</bad>
-    </principle>
+    <summary>Documentation should read like a careful engineer describing system behavior, not like a product explaining itself.</summary>
+  </persona>
 
-    <principle name="value_filter">
-      <rule>Keep only what changes decisions, prevents mistakes, or unlocks outcomes. Cut narration of obvious UI.</rule>
-      <keep>
-        <item>Why it matters (value/outcome; 1–3 sentences at the top)</item>
-        <item>Decision points and trade-offs (e.g., Pro vs free, security implications)</item>
-        <item>Non-obvious behavior, caveats, limits, prerequisites</item>
-        <item>Short, actionable steps; error handling and recovery</item>
-      </keep>
-      <cut>
-        <item>Listing every visible control or tab on a page</item>
-        <item>Describing screenshots (“This page shows…”, “It includes…”) without decisions or implications</item>
-        <item>Explaining basic concepts common to developers</item>
-        <item>Redundant restatement of labels already visible in screenshots</item>
-      </cut>
-    </principle>
+  <tone>
+    <qualities>
+      <quality>Neutral</quality>
+      <quality>Direct</quality>
+      <quality>Predictable</quality>
+      <quality>Low emotion</quality>
+    </qualities>
+    <constraints>
+      <constraint>No hype</constraint>
+      <constraint>No jokes</constraint>
+      <constraint>No clever phrasing</constraint>
+      <constraint>The UI is not a stage</constraint>
+    </constraints>
+  </tone>
 
-    <principle name="consistency">
-      <rule>When editing a document, use its existing style, structure, and format as a guideline for any updates. Do not make major changes unless explicitly asked.</rule>
-      <discovery_approach>
-        <step>Read the entire document first to understand its current style</step>
-        <step>Identify patterns in headings, formatting, and tone</step>
-        <step>Match the existing style in your edits</step>
-      </discovery_approach>
-    </principle>
+  <sentence_style>
+    <rules>
+      <rule>Short sentences</rule>
+      <rule>One idea per sentence</rule>
+      <rule>Active voice</rule>
+      <rule>Concrete verbs</rule>
+    </rules>
+    <note>Fragments are acceptable if clearer than full sentences.</note>
+  </sentence_style>
 
-    <principle name="voice_style">
-      <rule>Bold, honest, human. No fluff, no fake hype.</rule>
-      <do>
-        <item>Short, punchy sentences. Speak like a helpful colleague.</item>
-        <item>Expose real value. If it matters, state it clearly; if not, leave it out.</item>
-        <item>Be excited when the feature earns it. Be candid about limits.</item>
-      </do>
-      <dont>
-        <item>Don’t use buzzwords, clickbait, or corporate tone.</item>
-        <item>Don’t exaggerate beyond the truth—real impact sells itself.</item>
-        <item>Don’t narrate the screen. Focus on decisions and outcomes.</item>
-        <item>Don’t sell the product, describe its aparent value and mechanics.</item>
-      </dont>
-    </principle>
-  </core_principles>
+  <language_rules>
+    <use>
+      <category name="specific_actions">run, write, open, delete, stop, approve</category>
+      <category name="specific_artifacts">file, branch, PR, task, command, log</category>
+      <category name="explicit_outcomes">will modify, will create, will stop</category>
+    </use>
+    <avoid>
+      <category name="vague_verbs">handle, manage, process</category>
+      <category name="abstract_nouns">solution, intelligence, capability</category>
+      <category name="softening_language">might try to, could potentially</category>
+    </avoid>
+  </language_rules>
 
-  <banned_language>
-    <description>Avoid marketing jargon, buzzwords, and clichés. These words are ambiguous and reduce signal.</description>
-    <discovery_note>When editing existing documentation, check if any of these words are already used and maintain consistency with the existing approach.</discovery_note>
+  <banned_words>
+    <description>Avoid marketing jargon, buzzwords, and vague reassurance.</description>
     <words>
       <word>seamlessly</word>
       <word>comprehensive</word>
@@ -125,137 +78,120 @@
       <word>easily</word>
       <word>simply</word>
     </words>
-  </banned_language>
+  </banned_words>
 
-  <formatting>
-    <guideline>Use structured headings, lists, and short paragraphs for scannability.</guideline>
-    <guideline>In step-by-step guides, use simple numbered lists. Don't use headings for numbered steps.</guideline>
-    <guideline>Provide clear, copy-pasteable code snippets.</guideline>
-    <guideline>Assume user familiarity with basic concepts. Do not over-explain.</guideline>
-    <guideline>In each page, after the initial introduction, add an HR with `---` before continuing. Use HRs sparingly outside of that.</guideline>
+  <tradeoffs_and_risk>
+    <rule>Be explicit when something is risky, slow, expensive, or irreversible.</rule>
+    <rule>Do not apologize for tradeoffs. State them.</rule>
+    <examples>
+      <example>This will modify files in your workspace.</example>
+      <example>Stopping this task may leave partial changes.</example>
+      <example>Cloud execution costs more than local execution.</example>
+    </examples>
+  </tradeoffs_and_risk>
 
-    <page_skeleton>
-      <section order="1" name="why_it_matters">Explain the outcome and value in 1–3 sentences.</section>
-      <section order="2" name="what_you_can_do">Concrete capabilities and decision points; link to authoritative references instead of duplication.</section>
-      <section order="3" name="quickstart">Minimal steps to success (include only non-obvious choices).</section>
-      <section order="4" name="troubleshooting">Common failure modes and fixes.</section>
-    </page_skeleton>
+  <errors_and_warnings>
+    <errors>
+      <rule>State what failed</rule>
+      <rule>State why if known</rule>
+      <rule>Give one concrete next step</rule>
+    </errors>
+    <warnings>
+      <rule>State the risk</rule>
+      <rule>State the scope</rule>
+      <rule>Ask for explicit confirmation</rule>
+    </warnings>
+    <constraint>No emotional language. No reassurance beyond facts.</constraint>
+  </errors_and_warnings>
 
-    <screenshot_policy>
-      <rule>Only include screenshots when they clarify a decision, show non-obvious state, or demonstrate outcome.</rule>
-      <limits>
-        <maxPerSection>3</maxPerSection>
-        <maxPerPage>6</maxPerPage>
-      </limits>
-      <prohibitions>
-        <item>No narration of on-screen labels or obvious layout.</item>
-        <item>No screenshot that repeats text already stated without adding decision context.</item>
-      </prohibitions>
-      <requirements>
-        <item>Alt text describes action/outcome, not the UI chrome.</item>
-        <item>Prefer width="600" unless smaller improves readability.</item>
-        <item>Use captions or surrounding text to explain the decision/implication.</item>
-        <item>Follow Docusaurus image rules; see rules in 2_docusaurus_conventions.xml.</item>
-      </requirements>
-    </screenshot_policy>
+  <guidance_and_help>
+    <rule>Guidance should explain what the system expects, not what the user should feel.</rule>
+    <good_guidance_answers>
+      <item>What input is required</item>
+      <item>What constraints apply</item>
+      <item>What success looks like</item>
+    </good_guidance_answers>
+    <constraint>Avoid instructional fluff or encouragement.</constraint>
+  </guidance_and_help>
 
-    <discovery_approach>
-      <step>Before formatting new content, examine existing documentation for:
-        - Heading hierarchy patterns (H1, H2, H3 usage)
-        - List formatting preferences (bullets vs numbers)
-        - Code block styling and language tags
-        - Paragraph length and structure
-      </step>
-      <step>Match the discovered patterns to maintain consistency</step>
-    </discovery_approach>
-  </formatting>
+  <never_do>
+    <item>Use humor</item>
+    <item>Use marketing language</item>
+    <item>Use vague reassurance</item>
+    <item>Hide side effects</item>
+    <item>Speak about future plans or unshipped features</item>
+  </never_do>
 
-  <before_writing_checklist>
-    <item>Have I explored the existing documentation structure?</item>
-    <item>Have I read similar documents to understand the established style?</item>
-    <item>Have I identified the patterns for paths, links, and references?</item>
-    <item>Am I following discovered patterns rather than making assumptions?</item>
-    <item>Have I searched for existing content that might overlap with my changes?</item>
-    <item>Have I verified that my changes don't contradict existing documentation?</item>
-    <item>Have I checked that cross-references will remain valid?</item>
-  </before_writing_checklist>
+  <decision_driven_outline>
+    <overview>
+      No fixed skeleton. Answer these questions in order, only if applicable.
+      Omit aggressively. If the page reads like a form, it failed.
+    </overview>
+    <questions>
+      <question order="1">What is the primary capability?</question>
+      <question order="2">How do I use it in practice?</question>
+      <question order="3">What choices or modes exist?</question>
+      <question order="4">What can go wrong and how do I fix it?</question>
+      <question order="5">Where do I go deeper?</question>
+    </questions>
+    <agent_instructions>
+      <instruction>Remove all mandatory section scaffolding.</instruction>
+      <instruction>Generate an outline based on feature complexity.</instruction>
+      <instruction>Prefer fewer sections with stronger titles.</instruction>
+      <instruction>Delete empty or obvious sections.</instruction>
+      <instruction>Optimize for a reader skimming at 10 seconds.</instruction>
+    </agent_instructions>
+  </decision_driven_outline>
 
-  <content_change_workflow>
-    <mandatory_notice>
-      <warning>This workflow is MANDATORY for ALL documentation changes. Each phase MUST be completed in order.</warning>
-      <enforcement>Skipping any phase or step will invalidate the entire change request.</enforcement>
-    </mandatory_notice>
-    
-    <phase name="analysis" status="MANDATORY">
-      <description>Analyze the requested change and its impact</description>
-      <blocking_requirement>You CANNOT proceed to the next phase until ALL steps are complete</blocking_requirement>
-      <steps>
-        <step validation="required">Identify the scope and purpose of the requested change</step>
-        <step validation="required">List ALL key concepts, terms, and their variations (e.g., "config" → "configuration", "setup", "settings")</step>
-        <step validation="required">Determine which documents might be affected (use list_files to verify)</step>
-        <step validation="required">Document your analysis results before proceeding</step>
-      </steps>
-    </phase>
-    
-    <phase name="discovery" status="MANDATORY">
-      <description>Search for ALL existing related content - this phase is NOT optional</description>
-      <blocking_requirement>You MUST find and analyze ALL related content before proceeding</blocking_requirement>
-      <steps>
-        <step validation="required">Use codebase_search with the primary term from the request</step>
-        <step validation="required">Use codebase_search with EACH variation of key terms identified in analysis</step>
-        <step validation="required">Read ALL potentially related documentation sections in full</step>
-        <step validation="required">Create a comprehensive map documenting:
-          - Every location where related information exists
-          - The specific content at each location
-          - How each location relates to the requested change
-        </step>
-        <step validation="required">Identify any gaps, overlaps, or contradictions</step>
-        <step validation="required">If you find existing content, you MUST read it completely before proceeding</step>
-      </steps>
-    </phase>
-    
-    <phase name="validation" status="MANDATORY">
-      <description>Validate the change against existing content - MUST be completed before ANY edits</description>
-      <blocking_requirement>You MUST answer ALL questions and get user confirmation before implementation</blocking_requirement>
-      <validation_checklist>
-        <check mandatory="true">Does this exact information already exist elsewhere? (If yes, STOP and redirect to existing location)</check>
-        <check mandatory="true">Does similar but incomplete information exist? (If yes, enhance existing rather than duplicate)</check>
-        <check mandatory="true">Will this change create any contradictions with existing docs?</check>
-        <check mandatory="true">Have you verified ALL cross-references will remain valid?</check>
-        <check mandatory="true">Does this enhance the documentation flow or fragment it?</check>
-        <check mandatory="true">Have you identified ALL files that need updates to maintain consistency?</check>
-      </validation_checklist>
-      <user_confirmation_required>
-        <rule>You MUST use ask_followup_question to present validation findings and get approval</rule>
-        <rule>Include specific file paths and line numbers in your validation report</rule>
-        <rule>Provide clear recommendations based on your findings</rule>
-      </user_confirmation_required>
-    </phase>
-    
-    <phase name="implementation" status="CONDITIONAL">
-      <description>Apply changes ONLY after validation is approved by user</description>
-      <blocking_requirement>You can ONLY enter this phase after user approves validation results</blocking_requirement>
-      <steps>
-        <step validation="required">If updating existing content, preserve ALL valuable context</step>
-        <step validation="required">If adding new content, ensure it links appropriately to ALL related topics discovered in phase 2</step>
-        <step validation="required">Update ALL affected cross-references in other documents</step>
-        <step validation="required">Maintain consistent terminology throughout ALL affected files</step>
-        <step validation="required">Verify no information is lost or contradicted by your changes</step>
-      </steps>
-    </phase>
-    
-    <phase name="post_implementation_verification" status="MANDATORY">
-      <description>Verify the changes maintain documentation integrity</description>
-      <steps>
-        <step validation="required">Re-run codebase_search to ensure no duplicates were created</step>
-        <step validation="required">Verify all cross-references still work</step>
-        <step validation="required">Confirm terminology remains consistent</step>
-        <step validation="required">Document what was changed and why for future reference</step>
-      </steps>
-    </phase>
-  </content_change_workflow>
+  <front_load_behavior>
+    <rule>The first section must show what the feature does now.</rule>
+    <rule>Use examples, tables, or UI references.</rule>
+    <rule>Avoid conceptual framing unless needed.</rule>
+    <principle>Context follows behavior, not the reverse.</principle>
+  </front_load_behavior>
+
+  <progressive_disclosure>
+    <rule>Start with the default path.</rule>
+    <rule>Expand into modes, levels, or configuration only after baseline usage.</rule>
+    <rule>Troubleshooting is optional and last.</rule>
+  </progressive_disclosure>
+
+  <content_lint_checks>
+    <description>
+      Convert the old skeleton into validation checks, not templates.
+      Fail only when a required answer is missing, not when a section is missing.
+    </description>
+    <checks>
+      <check>Does the page explain why this exists? (if non-obvious)</check>
+      <check>Does it show how to use it?</check>
+      <check>Does it document decisions the user must make?</check>
+      <check>Does it cover known failure modes? (if any exist)</check>
+    </checks>
+  </content_lint_checks>
+
+  <heading_rules>
+    <overview>Headings must name capabilities, not explanations. Be scannable in isolation.</overview>
+    <requirements>
+      <requirement>Name capabilities, not intent.</requirement>
+      <requirement>Match UI labels, commands, or mental models.</requirement>
+      <requirement>Be scannable in isolation.</requirement>
+    </requirements>
+    <examples>
+      <bad>
+        <heading>why_it_matters</heading>
+        <heading>what_you_can_do</heading>
+        <heading>Understanding the feature</heading>
+      </bad>
+      <good>
+        <heading>Auto-executed Cascade commands</heading>
+        <heading>Allow and deny lists</heading>
+        <heading>Dedicated terminal</heading>
+      </good>
+    </examples>
+  </heading_rules>
+
   <heading_and_toc_policy>
-    <overview>Minimize right-sidebar ToC noise. Reserve H3 for jump-worthy anchors and prefer H4 for in-body sub-chunking.</overview>
+    <overview>Minimize right-sidebar ToC noise. Reserve H3 for jump-worthy anchors; prefer H4 for in-body sub-chunking.</overview>
     <rules>
       <rule>H1 is implicit (page title). Do not write H1 in the body.</rule>
       <rule>H2 = primary sections; aim for 3–6 per page.</rule>
@@ -263,9 +199,9 @@
       <rule>H4 = break up long H2 sections without adding ToC items. Prefer H4 over H3 for minor subtopics.</rule>
       <rule>Disallow H5/H6 entirely.</rule>
       <rule>No orphan headings: any H2/H3/H4 must be followed by ≥2 sentences or a list.</rule>
-      <rule>Any H3 under ~75 words or a single short paragraph must be demoted to H4 .</rule>
+      <rule>Any H3 under ~75 words or a single short paragraph must be demoted to H4.</rule>
       <rule>Convert chains of small H3s into a single H2 with a numbered list; use H4 callouts if needed.</rule>
-      <rule>If an H4 exceeds ~200–250 words or needs substructure, split it into its own page (new H2 there) rather than promoting inside the same page.</rule>
+      <rule>If an H4 exceeds ~200–250 words or needs substructure, split it into its own page rather than promoting inside the same page.</rule>
     </rules>
     <budgets>
       <page_h2>3–6</page_h2>
@@ -277,41 +213,40 @@
       <step>Everything else becomes H4 under the H2.</step>
       <step>Preview ToC; demote noisy H3s to H4s before publishing.</step>
     </author_workflow>
-    <example name="checkpoints_restructure">
-      <description>Demote unnecessary H3s under “Working with Checkpoints”.</description>
-      <before>
-## Working with Checkpoints
-### Viewing Differences
-### Restoring Checkpoints
-### Limitations and Considerations
-      </before>
-      <after>
-## Working with Checkpoints
-#### Viewing differences: when it helps
-#### Restore a checkpoint: trade-off
-#### Limits and gotchas
-      </after>
-    </example>
   </heading_and_toc_policy>
 
-  <explanatory_baseline>
-    <requirement when="applicable">Include sections: “Why it matters”, “What you can’t do (and why)”, and “Troubleshooting”.</requirement>
-    <troubleshooting_pattern>
-      <item>symptom</item>
-      <item>cause</item>
-      <item>fix</item>
-      <item>prevention</item>
-    </troubleshooting_pattern>
-  </explanatory_baseline>
+  <troubleshooting_pattern>
+    <description>When troubleshooting is needed (optional, placed last):</description>
+    <item>symptom</item>
+    <item>cause</item>
+    <item>fix</item>
+    <item>prevention</item>
+  </troubleshooting_pattern>
 
-  <tone_guidelines>
-    <rules>
-      <rule>Colloquial, informal, light. Use contractions and “you” voice.</rule>
-      <rule>Bold, honest, human—avoid mechanical or professoral tone.</rule>
-    </rules>
-  </tone_guidelines>
+  <formatting>
+    <guideline>Use structured headings, lists, and short paragraphs for scannability.</guideline>
+    <guideline>In step-by-step guides, use simple numbered lists. Do not use headings for numbered steps.</guideline>
+    <guideline>Provide clear, copy-pasteable code snippets.</guideline>
+    <guideline>Assume user familiarity with basic concepts. Do not over-explain.</guideline>
+    <guideline>After the initial introduction, add an HR with `---` before continuing. Use HRs sparingly outside of that.</guideline>
+  </formatting>
 
-  <screenshot_caption_policy>
-    <requirement>Every screenshot must include a one-line “why this view matters” caption in addition to outcome-focused alt text.</requirement>
-  </screenshot_caption_policy>
+  <discovery_principle>
+    <rule>Before writing or editing, explore existing documentation to understand established patterns.</rule>
+    <steps>
+      <step>Use list_files to explore the documentation structure</step>
+      <step>Read similar existing documents to understand the style</step>
+      <step>Follow established patterns rather than imposing new ones</step>
+    </steps>
+  </discovery_principle>
+
+  <before_writing_checklist>
+    <item>Have I explored the existing documentation structure?</item>
+    <item>Have I read similar documents to understand the established style?</item>
+    <item>Am I following discovered patterns rather than making assumptions?</item>
+    <item>Have I searched for existing content that might overlap with my changes?</item>
+    <item>Does the first section show what the feature does, not explain why it exists?</item>
+    <item>Are headings capability names, not abstract labels?</item>
+    <item>Can a reader scanning for 10 seconds find what they need?</item>
+  </before_writing_checklist>
 </writing_style_guide>

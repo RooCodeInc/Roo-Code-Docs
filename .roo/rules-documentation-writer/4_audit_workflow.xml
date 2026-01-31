@@ -1,0 +1,134 @@
+<audit_workflow>
+  <overview>
+    Workflow for auditing existing documentation against defined rules.
+    Triggered by: "cleanup", "review", "audit", "rewrite", or "improve" requests.
+  </overview>
+
+  <trigger_phrases>
+    <phrase>cleanup this section</phrase>
+    <phrase>review this page</phrase>
+    <phrase>audit this doc</phrase>
+    <phrase>rewrite this</phrase>
+    <phrase>improve this section</phrase>
+    <phrase>what's wrong with this</phrase>
+  </trigger_phrases>
+
+  <audit_process>
+    <step number="1">
+      <title>Read the target content</title>
+      <action>Read the entire section, page, or content specified by the user.</action>
+    </step>
+
+    <step number="2">
+      <title>Run checklist against rules</title>
+      <action>Evaluate the content against each category in the audit_checklist below.</action>
+      <action>Mark each item as PASS, FAIL, or N/A.</action>
+    </step>
+
+    <step number="3">
+      <title>Generate findings report</title>
+      <action>Output a structured report with specific issues and suggestions.</action>
+      <action>Include line references or quotes where possible.</action>
+    </step>
+
+    <step number="4">
+      <title>Propose changes</title>
+      <action>Ask user if they want to proceed with suggested improvements.</action>
+      <action>If yes, apply changes following the validation workflow in 3_validation_enforcement.xml.</action>
+    </step>
+  </audit_process>
+
+  <audit_checklist>
+    <category name="decision_driven_structure">
+      <check id="DD1">Does the first section show what the feature does (not explain why it exists)?</check>
+      <check id="DD2">Does the page answer: capability, usage, choices, failures, deeper links (only if applicable)?</check>
+      <check id="DD3">Are empty or obvious sections deleted?</check>
+      <check id="DD4">Can a reader scanning for 10 seconds find what they need?</check>
+      <check id="DD5">Does it avoid feeling like a form with mandatory boxes?</check>
+    </category>
+
+    <category name="headings">
+      <check id="H1">Do headings name capabilities (not explanations like "why_it_matters")?</check>
+      <check id="H2">Do headings match UI labels, commands, or mental models?</check>
+      <check id="H3">Are headings scannable in isolation?</check>
+      <check id="H4">Is H3 count ≤ 4 (typical ≤ 2)?</check>
+      <check id="H5">Are minor subtopics H4 instead of H3?</check>
+      <check id="H6">No H5/H6 used?</check>
+      <check id="H7">No orphan headings (each followed by ≥2 sentences or a list)?</check>
+    </category>
+
+    <category name="progressive_disclosure">
+      <check id="PD1">Does it start with the default path?</check>
+      <check id="PD2">Are modes/levels/configuration after baseline usage?</check>
+      <check id="PD3">Is troubleshooting optional and last (if present)?</check>
+    </category>
+
+    <category name="tone_and_language">
+      <check id="TL1">Neutral, direct, predictable tone?</check>
+      <check id="TL2">No hype, jokes, or clever phrasing?</check>
+      <check id="TL3">Short sentences, one idea each?</check>
+      <check id="TL4">Active voice, concrete verbs?</check>
+      <check id="TL5">No banned words (seamlessly, comprehensive, powerful, etc.)?</check>
+      <check id="TL6">No vague verbs (handle, manage, process)?</check>
+      <check id="TL7">No softening language (might try to, could potentially)?</check>
+    </category>
+
+    <category name="tradeoffs_and_errors">
+      <check id="TE1">Are risks, costs, and irreversible actions explicit?</check>
+      <check id="TE2">No apologizing for tradeoffs?</check>
+      <check id="TE3">Errors state: what failed, why, one next step?</check>
+    </category>
+
+    <category name="screenshots">
+      <check id="SC1">Screenshots only for complex states or decision points?</check>
+      <check id="SC2">Screenshot count ≤1 per section, ≤3 per page?</check>
+      <check id="SC3">Alt text describes action/outcome (not UI chrome)?</check>
+      <check id="SC4">Each screenshot has a "why this matters" caption?</check>
+      <check id="SC5">Width is 600 (unless smaller improves readability)?</check>
+    </category>
+
+    <category name="content_value">
+      <check id="CV1">Does the page explain why this exists (if non-obvious)?</check>
+      <check id="CV2">Does it show how to use it?</check>
+      <check id="CV3">Does it document decisions the user must make?</check>
+      <check id="CV4">Does it cover known failure modes (if any exist)?</check>
+      <check id="CV5">No UI narration that lacks decisions/implications?</check>
+    </category>
+  </audit_checklist>
+
+  <findings_report_format>
+    <template>
+## Audit Findings: [Page/Section Name]
+
+### Summary
+- **Checks passed:** X/Y
+- **Issues found:** Z
+- **Priority:** High/Medium/Low
+
+### Issues
+
+#### [Category Name]
+| ID | Check | Status | Issue | Suggestion |
+|----|-------|--------|-------|------------|
+| H1 | Headings name capabilities | FAIL | "Understanding the feature" is abstract | Rename to specific capability, e.g., "Auto-save behavior" |
+
+### Recommended Changes
+1. [Specific change with before/after]
+2. [Specific change with before/after]
+
+### Questions for User
+- [Any clarifications needed before proceeding]
+    </template>
+  </findings_report_format>
+
+  <quick_audit>
+    <description>For fast "cleanup this" requests, run abbreviated checks:</description>
+    <checks>
+      <check>First section shows behavior (not concept)?</check>
+      <check>Headings name capabilities?</check>
+      <check>10-second scan test passes?</check>
+      <check>No banned words or UI narration?</check>
+      <check>ToC noise under control (H3 ≤ 4)?</check>
+    </checks>
+  </quick_audit>
+</audit_workflow>
