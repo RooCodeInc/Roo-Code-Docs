@@ -86,9 +86,9 @@ For each named port, an environment variable is injected into your container:
 
 | Port Config | Environment Variable | Example Value |
 |-------------|---------------------|---------------|
-| `name: WEB, port: 3000` | `ROO_WEB_HOST` | `https://abc123.vercel.run` |
-| `name: API, port: 3001` | `ROO_API_HOST` | `https://def456.vercel.run` |
-| `name: ADMIN, port: 3002` | `ROO_ADMIN_HOST` | `https://ghi789.vercel.run` |
+| `name: WEB, port: 3000` | `ROO_WEB_HOST` | `https://abc123.preview.roocode.cloud` |
+| `name: API, port: 3001` | `ROO_API_HOST` | `https://def456.preview.roocode.cloud` |
+| `name: ADMIN, port: 3002` | `ROO_ADMIN_HOST` | `https://ghi789.preview.roocode.cloud` |
 
 ### Naming Rules
 
@@ -323,7 +323,7 @@ After the environment starts, you'll get unique URLs for each port. Visit the WE
 
 ### CORS Errors
 
-In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.vercel.run` and `https://def456.vercel.run`). Browsers block cross-origin requests by default, so you need to configure both sides: the backend must allow the frontend's origin, and the frontend dev server must accept the preview domain.
+In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.preview.roocode.cloud` and `https://def456.preview.roocode.cloud`). Browsers block cross-origin requests by default, so you need to configure both sides: the backend must allow the frontend's origin, and the frontend dev server must accept the preview domain.
 
 Make sure both ports are defined so the `ROO_*_HOST` variables get injected:
 
@@ -356,7 +356,7 @@ app.register(import('@fastify/cors'), {
 
 #### Frontend: Allow the preview domain
 
-Dev servers like Vite and Next.js reject requests from unrecognized hosts by default. You need to allow the preview domain so the dev server responds to requests on `https://<id>.vercel.run`:
+Dev servers like Vite and Next.js reject requests from unrecognized hosts by default. You need to allow the preview domain so the dev server responds to requests on `https://<id>.preview.roocode.cloud`:
 
 ```typescript
 // Vite — vite.config.ts
