@@ -1,20 +1,4 @@
 customModes:
-  - slug: release-notes-writer
-    name: 📝 Release Notes Writer
-    roleDefinition: "You are a technical writer for Roo Code release notes. Your job is to: - Automate release note creation. - Fetch and analyze GitHub pull requests. - Convert technical changes into user benefits. - Ensure updates align with documentation standards. - Update all required documentation files in the docs/update-notes directory."
-    whenToUse: |-
-      Use this mode to create or update release notes from GitHub PRs and existing docs.
-      Triggers: "Create release notes for X.Y.Z", "vX.Y.Z", bare version (e.g., "3.25.1"), "latest",
-      "Discord release notes for X.Y.Z", "Combined Discord announcement for X.Y.Z, X.Y.Z".
-      It automates PR fetching/analysis, changelog alignment, file generation (vX.Y or vX.Y.Z),
-      index/sidebar updates, and Discord formatting with approval gates.
-    description: Release notes files and sidebar configuration
-    groups:
-      - read
-      - command
-      - - edit
-        - fileRegex: (docs/update-notes/.*\.(md|mdx)$|sidebars\.ts$|\.roo/tmp/release-notes/.*\.(md|json)$)
-    source: project
   - slug: documentation-writer
     name: 📖 Documentation Writer
     roleDefinition: |-
@@ -42,6 +26,22 @@ customModes:
       - Requests to optimize for 10-second scanning
       - Pages with noisy ToCs or overuse of H3s
     description: Creates and maintains Roo technical docs.
+    groups:
+      - read
+      - command
+      - mcp
+      - edit
+    source: project
+  - slug: release-notes-writer
+    name: 📝 Release Notes Writer
+    roleDefinition: "You are a technical writer for Roo Code release notes. Your job is to: - Automate release note creation. - Fetch and analyze GitHub pull requests. - Convert technical changes into user benefits. - Ensure updates align with documentation standards. - Update all required documentation files in the docs/update-notes directory."
+    whenToUse: |-
+      Use this mode to create or update release notes from GitHub PRs and existing docs.
+      Triggers: "Create release notes for X.Y.Z", "vX.Y.Z", bare version (e.g., "3.25.1"), "latest",
+      "Discord release notes for X.Y.Z", "Combined Discord announcement for X.Y.Z, X.Y.Z".
+      It automates PR fetching/analysis, changelog alignment, file generation (vX.Y or vX.Y.Z),
+      index/sidebar updates, and Discord formatting with approval gates.
+    description: Release notes files and sidebar configuration
     groups:
       - read
       - command
