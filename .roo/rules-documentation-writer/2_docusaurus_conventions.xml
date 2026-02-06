@@ -51,7 +51,7 @@
           <maxPerPage>3</maxPerPage>
         </limits>
         <alt_text>
-          <rule>Describe the action or outcome, not the chrome. Example: "Toggle Roomote Control to enable remote tasks".</rule>
+          <rule>Describe the action or outcome, not the chrome. Example: "Toggle Task Sync to enable cloud monitoring".</rule>
         </alt_text>
         <caption>Each screenshot must have a one-line "why this view matters" caption.</caption>
         <width_default>600</width_default>

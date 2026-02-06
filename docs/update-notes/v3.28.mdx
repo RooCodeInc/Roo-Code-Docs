@@ -1,9 +1,8 @@
 ---
-description: Combined release notes for Roo Code v3.28, featuring the Supernova model, Task Sync & Roomote Control for mobile task management, Roo Code Cloud integration, improved chat editing, and various bug fixes.
+description: Combined release notes for Roo Code v3.28, featuring the Supernova model, Task Sync for mobile task management, Roo Code Cloud integration, improved chat editing, and various bug fixes.
 keywords:
   - roo code 3.28
   - supernova model
-  - roomote control
   - task sync
   - cloud integration
   - chat editing
@@ -12,7 +11,7 @@ image: /img/v3.28.0/v3.28.0.png
 
 # Roo Code 3.28 Combined Release Notes
 
-This version introduces the Supernova model to Roo Code Cloud, Task Sync & Roomote Control for monitoring and controlling tasks from your phone, plus Roo Code Cloud integration features, enhanced chat editing, conversation preservation improvements, and multiple bug fixes.
+This version introduces the Supernova model to Roo Code Cloud, Task Sync for monitoring tasks from your phone, plus Roo Code Cloud integration features, enhanced chat editing, conversation preservation improvements, and multiple bug fixes.
 
 ## Supernova Model - FREE Access
 
@@ -28,13 +27,13 @@ Select the **FREE** code-supernova model from the Roo provider to start using th
 
 > **Documentation**: See the [Roo Code Router guide](/providers/roo-code-router) for model selection details.
 
-## Task Sync & Roomote Control
+## Task Sync
 
-Introducing our new cloud connectivity features that let you **monitor and control long-running tasks from your phone** - no more waiting at your desk! ([#7799](https://github.com/RooCodeInc/Roo-Code/pull/7799), [#7805](https://github.com/RooCodeInc/Roo-Code/pull/7805), [#7850](https://github.com/RooCodeInc/Roo-Code/pull/7850)):
+Introducing our new cloud connectivity feature that lets you **monitor long-running tasks from your phone** - no more waiting at your desk! ([#7799](https://github.com/RooCodeInc/Roo-Code/pull/7799), [#7805](https://github.com/RooCodeInc/Roo-Code/pull/7805), [#7850](https://github.com/RooCodeInc/Roo-Code/pull/7850)):
 
-> **Important**: Roo Code remains **completely free and open source**. Task Sync and Roomote Control are optional supplementary services that connect your local VS Code to the cloud - all processing still happens in your VS Code instance.
+> **Important**: Roo Code remains **completely free and open source**. Task Sync is an optional supplementary service that connects your local VS Code to the cloud - all processing still happens in your VS Code instance.
 
-<img src="/img/v3.28.0/v3.28.0.png" alt="Roomote Control interface showing real-time task monitoring and control from browser" width="300" />
+<img src="/img/v3.28.0/v3.28.0.png" alt="Task Sync interface showing real-time task monitoring from browser" width="300" />
 
 **[Task Sync](/roo-code-cloud/task-sync) (FREE for All Users)**:
 - **Monitor from Anywhere**: Check on long-running tasks from your phone while away from your desk
@@ -42,15 +41,7 @@ Introducing our new cloud connectivity features that let you **monitor and contr
 - **Task History**: Your tasks are saved to the cloud for later reference
 - **Cloud Visibility**: View your VS Code tasks from any browser
 
-**[Roomote Control](/roo-code-cloud/roomote-control)**:
-- **Continue Tasks Remotely**: Keep tasks going from your phone - respond to prompts, fix errors, approve actions
-- **Full Chat Control**: Interact with the chatbox as though you were in your IDE
-- **Start/Stop Tasks**: Launch new tasks or terminate running ones from anywhere
-- **Complete Control**: Full bidirectional control of your local VS Code from anywhere
-
-Task Sync enables monitoring your local development environment from any device. Add Roomote Control for full remote control capabilities - whether you're on another computer, tablet, or smartphone.
-
-> **Documentation**: See [Task Sync](/roo-code-cloud/task-sync) and [Roomote Control Guide](/roo-code-cloud/roomote-control).
+> **Documentation**: See [Task Sync](/roo-code-cloud/task-sync).
 
 ## GPT-5-Codex lands in OpenAI Native
 
@@ -78,7 +69,6 @@ This gives teams a higher-capacity OpenAI option without extra configuration.[#8
 * **Translation coverage auditing**: The translation checker now validates package.nls locales by default to catch missing strings before release (via [#8255](https://github.com/RooCodeInc/Roo-Code/pull/8255))
 
 * Smaller and more subtle auto-approve UI (thanks brunobergher!) ([#7894](https://github.com/RooCodeInc/Roo-Code/pull/7894))
-* Disable Roomote Control on logout for better security ([#7976](https://github.com/RooCodeInc/Roo-Code/pull/7976))
 * Add padding to the cloudview for better visual spacing ([#7954](https://github.com/RooCodeInc/Roo-Code/pull/7954))
 
 * Temporarily pause auto-approve with a global “Enabled” switch so you can pause without losing your per-toggle selections; the UI clearly distinguishes global vs. per-toggle states ([#8024](https://github.com/RooCodeInc/Roo-Code/pull/8024))

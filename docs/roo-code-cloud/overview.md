@@ -18,7 +18,6 @@ It also augments the Roo Code VS Code extension capabilities by adding:
 - Access to the [Roo Code Router](/roo-code-router/overview)
 - [Task Sync](./task-sync) to access your entire task history in one place
 - [Task sharing](./task-sharing) to access specific tasks with friends or co-workers
-- [Roomote Control](./roomote-control) to start/stop and control tasks in the Extension while away from your computer
 - [Token usage analytics](./analytics) to understand where your tokens and dollars are going
 
 And, in the [Team plan](./team-plan), adds team-oriented features:

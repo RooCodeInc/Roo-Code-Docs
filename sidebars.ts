@@ -128,7 +128,6 @@ const sidebars: SidebarsConfig = {
         "roo-code-cloud/cloud-agents",
         "roo-code-cloud/environments",
         "roo-code-cloud/task-sync",
-        "roo-code-cloud/roomote-control",
         "roo-code-cloud/task-sharing",
         "roo-code-cloud/analytics",
         "roo-code-cloud/github-integration",

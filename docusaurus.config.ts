@@ -319,6 +319,11 @@ const config: Config = {
             to: '/',
             from: ['/features/fast-edits'],
           },
+          // Redirect removed Roomote Control page
+          {
+            to: '/roo-code-cloud/overview',
+            from: ['/roo-code-cloud/roomote-control'],
+          },
         ],
       },
     ],
