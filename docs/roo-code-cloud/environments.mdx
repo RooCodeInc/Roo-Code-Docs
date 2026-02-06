@@ -96,9 +96,9 @@ For each named port, an environment variable is injected into your container:
 
 | Port Config | Environment Variable | Example Value |
 |-------------|---------------------|---------------|
-| `name: WEB, port: 3000` | `ROO_WEB_HOST` | `https://abc123.vercel.run` |
-| `name: API, port: 3001` | `ROO_API_HOST` | `https://def456.vercel.run` |
-| `name: ADMIN, port: 3002, initial_path: /dashboard` | `ROO_ADMIN_HOST` | `https://ghi789.vercel.run/dashboard` |
+| `name: WEB, port: 3000` | `ROO_WEB_HOST` | `https://abc123.preview.roocode.cloud` |
+| `name: API, port: 3001` | `ROO_API_HOST` | `https://def456.preview.roocode.cloud` |
+| `name: ADMIN, port: 3002` | `ROO_ADMIN_HOST` | `https://ghi789.preview.roocode.cloud` |
 
 ### Naming Rules
 
@@ -126,25 +126,28 @@ ports:
     initial_path: /login
 ```
 
-When the environment starts, the preview URL provided in the UI and task will be `https://abc123.vercel.run/login` instead of the root URL.
+When the environment starts, the preview URL provided in the UI and task will be `https://abc123.preview.roocode.cloud/login` instead of the root URL.
+
+:::note
+The `ROO_<NAME>_HOST` environment variable always contains the base URL without the initial path (e.g., `https://abc123.preview.roocode.cloud`). The `initial_path` only affects the preview link shown in the UI.
+:::
 
 #### Validation Rules
 
 The `initial_path` must:
 - Start with a forward slash (`/`)
-- Be a valid URI path (no query strings or fragments)
 - Contain only valid URI characters
 
-Valid examples:
+Query parameters and hash fragments are allowed. Valid examples:
 - `/login`
 - `/dashboard`
 - `/api/v1/health`
 - `/app/projects/123`
+- `/login?redirect=home`
+- `/docs#getting-started`
 
 Invalid examples:
 - `login` (missing leading slash)
-- `/path?query=1` (contains query string)
-- `/path#section` (contains fragment)
 
 ## Using Environment Variables in Your Code
 
@@ -366,7 +369,7 @@ After the environment starts, you'll get unique URLs for each port. Visit the WE
 
 ### CORS Errors
 
-In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.vercel.run` and `https://def456.vercel.run`). Browsers block cross-origin requests by default, so you need to configure both sides: the backend must allow the frontend's origin, and the frontend dev server must accept the preview domain.
+In a preview environment, your frontend and backend run on different domains (e.g., `https://abc123.preview.roocode.cloud` and `https://def456.preview.roocode.cloud`). Browsers block cross-origin requests by default, so you need to configure both sides: the backend must allow the frontend's origin, and the frontend dev server must accept the preview domain.
 
 Make sure both ports are defined so the `ROO_*_HOST` variables get injected:
 
@@ -399,7 +402,7 @@ app.register(import('@fastify/cors'), {
 
 #### Frontend: Allow the preview domain
 
-Dev servers like Vite and Next.js reject requests from unrecognized hosts by default. You need to allow the preview domain so the dev server responds to requests on `https://<id>.vercel.run`:
+Dev servers like Vite and Next.js reject requests from unrecognized hosts by default. You need to allow the preview domain so the dev server responds to requests on `https://<id>.preview.roocode.cloud`:
 
 ```typescript
 // Vite — vite.config.ts
