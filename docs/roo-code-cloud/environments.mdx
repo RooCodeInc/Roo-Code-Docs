@@ -13,6 +13,7 @@ keywords:
   - Tool Versions
   - mise
   - Initial Path
+  - Subdomain Routing
 ---
 
 # Preview Environments
@@ -91,6 +92,7 @@ ports:
 | `name` | Identifier for the port (used to generate environment variables) | Yes |
 | `port` | The port number to expose | Yes |
 | `initial_path` | Default path to append to the preview URL | No |
+| `subdomain` | Subdomain to set on the `Host` header when forwarding requests to the app | No |
 
 For each named port, an environment variable is injected into your container:
 
@@ -148,6 +150,44 @@ Query parameters and hash fragments are allowed. Valid examples:
 
 Invalid examples:
 - `login` (missing leading slash)
+
+### Subdomain Routing
+
+Use the `subdomain` field to enable subdomain-based routing for frameworks that rely on the `Host` header to distinguish tenants or admin panels (e.g., Rails, Django, Phoenix).
+
+When a port has a `subdomain` configured, the proxy rewrites the `Host` and `X-Forwarded-Host` headers to `{subdomain}.localhost:{port}` before forwarding the request to your application. The browser URL stays unchanged -- the rewriting happens internally inside the sandbox.
+
+```yaml
+ports:
+  - name: WEB
+    port: 3000
+    subdomain: admin
+```
+
+With this configuration, your application receives requests with `Host: admin.localhost:3000`, allowing it to route based on the subdomain without any DNS or infrastructure changes. WebSocket connections also receive the rewritten `Host` header.
+
+#### Validation Rules
+
+The `subdomain` value must be a valid DNS label:
+- Lowercase alphanumeric characters, hyphens, and dots only
+- Must start and end with an alphanumeric character
+- 1-253 characters long
+
+Valid examples:
+- `admin`
+- `tenant1`
+- `us-west.api`
+
+Invalid examples:
+- `Admin` (uppercase not allowed)
+- `-admin` (cannot start with a hyphen)
+- `admin-` (cannot end with a hyphen)
+
+#### Use Cases
+
+- **Multi-tenant apps**: Route `tenant1.localhost:3000` and `tenant2.localhost:3000` to different tenants in a single application
+- **Admin panels**: Serve an admin interface on `admin.localhost:3000` while the main app runs on the root domain
+- **Subdomain APIs**: Frameworks like Rails can use `api.localhost:3000` to route API requests to a separate controller namespace
 
 ## Using Environment Variables in Your Code
 
