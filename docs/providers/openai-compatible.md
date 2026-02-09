@@ -48,9 +48,9 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
 
 ---
 
-## Native Tool Calling (OpenAI-Native Endpoint)
+## Native Tool Calling
 
-When you connect this provider directly to the official OpenAI API (or an endpoint that mirrors it exactly), Roo Code can use OpenAI's **native tool-calling** protocol instead of the XML-based tool format.
+Roo Code uses **native tool calling** exclusively. This is the only supported tool protocol -- there is no XML-based fallback.
 
 At a high level:
 
@@ -58,15 +58,9 @@ At a high level:
 - **Tool calls** stream back as dedicated tool events, including the tool name, arguments, and metadata.
 - **Tool arguments** are streamed incrementally, which reduces latency between the model deciding to use a tool and Roo Code executing it.
 
-### When native tools are used
+### Requirements
 
-Roo Code uses native tool calling when **all** of the following are true:
-
-1. The selected provider is configured for the OpenAI-native protocol (OpenAI or an OpenAI-compatible endpoint that fully supports native tools).
-2. The active profile's tool protocol is set to allow native tools (or left at its default, which prefers native tools when supported).
-3. The selected model supports native tool calling.
-
-If any of these conditions aren't met, Roo Code falls back to its XML-based tool protocol instead.
+For native tool calling to work, the model you select **must** support OpenAI-compatible tool calling. If a model does not support native tool calling, it cannot be used with Roo Code.
 
 ### Example: simple native tool flow
 
@@ -102,11 +96,10 @@ When the model decides to use `read_file`, Roo Code surfaces **streamed tool eve
 
 This gives you lower-latency feedback on which tools are being used and with what arguments.
 
-### Settings and limitations
+### Limitations
 
-- **Tool protocol selector:** In advanced settings, you can choose which tool protocol Roo Code should prefer (XML vs native). If you disable native tools here, Roo Code will always use XML even if the provider supports native tools.
-- **Model support:** Not all OpenAI-native or compatible models support tools. If a model doesn't support tools, Roo Code will not attempt to send tool definitions for it.
-- **Provider quirks:** Some OpenAI-compatible providers only partially implement the native tools API. If Roo Code detects protocol errors, it may fall back to XML tools automatically.
+- **Model support:** Not all models support native tool calling. If a model does not support tools, it cannot be used with Roo Code. Check your provider's documentation to confirm tool-calling support for the model you want to use.
+- **Provider quirks:** Some OpenAI-compatible providers only partially implement the native tools API. If you encounter tool-calling errors, verify that your provider fully supports OpenAI-compatible function calling.
 
 For a deeper overview of how tools work in Roo Code in general, see the [Tool Use Overview](/advanced-usage/available-tools/tool-use-overview).
 
@@ -117,6 +110,7 @@ For a deeper overview of how tools work in Roo Code in general, see the [Tool Us
 *   **"Invalid API Key":** Double-check that you've entered the API key correctly.
 *   **"Model Not Found":** Make sure you're using a valid model ID for your chosen provider.
 *   **Connection Errors:** Verify the Base URL is correct and that your provider's API is accessible.
+*   **Tool-calling errors:** Roo Code requires native tool calling. If your model does not support it, you need to switch to a model that does. Check your provider's documentation for tool-calling compatibility.
 *   **Unexpected Results:** If you're getting unexpected results, try a different model.
 
 By using an OpenAI-compatible provider, you can leverage the flexibility of Roo Code with a wider range of AI models. Remember to always consult your provider's documentation for the most accurate and up-to-date information.
