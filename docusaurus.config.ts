@@ -59,6 +59,10 @@ const config: Config = {
     locales: ['en'],
   },
 
+  clientModules: [
+    require.resolve('./src/clientModules/scrollToAnchor.ts'),
+  ],
+
   presets: [
     [
       'classic',
