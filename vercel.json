@@ -1,0 +1,17 @@
+{
+  "redirects": [
+    { "source": "/roo-code-cloud/overview", "destination": "https://help.roocode.com", "permanent": true },
+    { "source": "/roo-code-cloud/login", "destination": "https://help.roocode.com/sign-in-from-extension/", "permanent": true },
+    { "source": "/roo-code-cloud/connect", "destination": "https://help.roocode.com/connect/", "permanent": true },
+    { "source": "/roo-code-cloud/cloud-agents", "destination": "https://help.roocode.com/cloud-agents/", "permanent": true },
+    { "source": "/roo-code-cloud/environments", "destination": "https://help.roocode.com/environments/", "permanent": true },
+    { "source": "/roo-code-cloud/task-sync", "destination": "https://help.roocode.com/task-sync/", "permanent": true },
+    { "source": "/roo-code-cloud/task-sharing", "destination": "https://help.roocode.com/task-sharing/", "permanent": true },
+    { "source": "/roo-code-cloud/analytics", "destination": "https://help.roocode.com/analytics/", "permanent": true },
+    { "source": "/roo-code-cloud/github-integration", "destination": "https://help.roocode.com/github-integration/", "permanent": true },
+    { "source": "/roo-code-cloud/slack-integration", "destination": "https://help.roocode.com/slack-integration/", "permanent": true },
+    { "source": "/roo-code-cloud/team-plan", "destination": "https://help.roocode.com/team-plan/", "permanent": true },
+    { "source": "/roo-code-cloud/:path*", "destination": "https://help.roocode.com/:path*", "permanent": true },
+    { "source": "/roo-code-cloud", "destination": "https://help.roocode.com", "permanent": true }
+  ]
+}

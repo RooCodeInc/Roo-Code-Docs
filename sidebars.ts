@@ -120,20 +120,9 @@ const sidebars: SidebarsConfig = {
       ],
     },
     {
-      type: "category",
-      label: "Roo Code Cloud",
-      items: [
-        "roo-code-cloud/overview",
-        "roo-code-cloud/login",
-        "roo-code-cloud/cloud-agents",
-        "roo-code-cloud/environments",
-        "roo-code-cloud/task-sync",
-        "roo-code-cloud/task-sharing",
-        "roo-code-cloud/analytics",
-        "roo-code-cloud/github-integration",
-        "roo-code-cloud/slack-integration",
-        "roo-code-cloud/team-plan",
-      ],
+      type: "link",
+      label: "Roo Code Cloud Help",
+      href: "https://help.roocode.com",
     },
     {
       type: "doc",

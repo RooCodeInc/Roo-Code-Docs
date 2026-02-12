@@ -42,7 +42,7 @@ The monthly subscription to the Team plan simply unlocks advanced functionality.
 
 ## How do I get free credits or free minutes or free tokens?
 
-When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute <LucideIcon name="Gift" style={{ width: 14, position: "relative", top: 4}} /> icon). Those free minutes cover both the [Cloud Agent](/roo-code-cloud/cloud-agents) run time _and_ inference via the Roo Code Cloud provider (both of which normally cost credits). Those can't be used in the extension – they're there for you to try the magic of Cloud Agents.
+When you sign up for a Roo Code Cloud account, you'll be given a number of "Free Minutes" to try the product out (you'll see a cute <LucideIcon name="Gift" style={{ width: 14, position: "relative", top: 4}} /> icon). Those free minutes cover both the [Cloud Agent](https://help.roocode.com/cloud-agents/) run time _and_ inference via the Roo Code Cloud provider (both of which normally cost credits). Those can't be used in the extension – they're there for you to try the magic of Cloud Agents.
 
 If you want free inference in the extension, look for a free model when available (or use another provider which may offer it to you for free).
 
