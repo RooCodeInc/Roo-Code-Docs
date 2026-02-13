@@ -247,9 +247,14 @@ repositories:
         logfile: /tmp/backend.log
 ```
 
-### Repository Format
+### Repository Configuration Fields
 
-Use the `owner/repo` format (e.g., `myorg/my-app`).
+| Field | Description | Required |
+|-------|-------------|----------|
+| `repository` | Repository in `owner/repo` format (e.g., `myorg/my-app`) | Yes |
+| `branch` | Branch to checkout (defaults to the repository's default branch) | No |
+| `tool_versions` | Tool versions to install via [mise](https://mise.jdx.dev/) (see [Tool Installation](#automatic-tool-installation)) | No |
+| `commands` | Ordered list of commands to run after cloning | No |
 
 ### Commands
 
@@ -285,13 +290,38 @@ When `detached` is true, the command runs via `nohup` and the worker moves on af
 
 ### Automatic Tool Installation
 
-If a repository contains a `.tool-versions` file (used by [mise](https://mise.jdx.dev/) / asdf), Roo Code Cloud automatically runs `mise install` after cloning. This installs the correct versions of tools like Node.js, Python, Ruby, Go, or any other runtime your project requires — before any of your setup commands execute.
+Roo Code Cloud uses [mise](https://mise.jdx.dev/) to manage tool versions. There are two ways to specify which versions of Node.js, Python, Ruby, Go, or other runtimes your project needs.
+
+#### Option 1: `tool_versions` in the environment config
+
+Set `tool_versions` directly on a repository entry to declare tool versions without modifying the repo itself. Roo Code Cloud generates a `.tool-versions` file from this config and adds it to `.git/info/exclude` so it stays out of version control.
+
+```yaml
+repositories:
+  - repository: myorg/backend
+    tool_versions:
+      node: "20.11.0"
+      python: "3.12.1"
+    commands:
+      - name: Install
+        run: npm install
+```
+
+This takes priority over any existing `.tool-versions` file in the repository.
+
+#### Option 2: `.tool-versions` file in the repository
+
+If a repository already contains a `.tool-versions` file (used by mise / asdf), Roo Code Cloud automatically picks it up and runs `mise install` after cloning — no extra configuration needed.
 
 ```
 # .tool-versions
 nodejs 20.11.0
 python 3.12.1
 ```
+
+:::tip
+Use `tool_versions` in the environment config when you want to pin versions per-environment without committing changes to the repository. Use a `.tool-versions` file in the repo when all environments should share the same versions.
+:::
 
 ## Services
 
@@ -365,6 +395,8 @@ repositories:
         logfile: /tmp/storefront.log
 
   - repository: acme/api
+    tool_versions:
+      node: "20.11.0"
     commands:
       - name: Install
         run: npm install
@@ -378,6 +410,7 @@ repositories:
           ALLOWED_ORIGINS: ${ROO_WEB_HOST}
 
   - repository: acme/worker
+    branch: main
     commands:
       - name: Install
         run: npm install
