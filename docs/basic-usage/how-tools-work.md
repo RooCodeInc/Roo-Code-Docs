@@ -1,11 +1,10 @@
 ---
-description: Learn how Roo Code uses tools to interact with your system. Understand file operations, command execution, browser control, and the approval workflow.
+description: Learn how Roo Code uses tools to interact with your system. Understand file operations, command execution, and the approval workflow.
 keywords:
   - Roo Code tools
   - AI tools
   - file operations
   - command execution
-  - browser automation
   - tool approval
 ---
 
@@ -30,11 +29,11 @@ Describe what you want to accomplish in natural language, and Roo Code will:
 
 | Category | Purpose | Tool Names |
 | :------- | :------ | :--------- |
-| Read | Access file content and code structure | `read_file`, `search_files`, `list_files`, `list_code_definition_names` |
-| Edit | Create or modify files and code | `write_to_file`, `apply_diff` |
+| Read | Access file content and code structure | `read_file`, `search_files`, `list_files`, `codebase_search`, `read_command_output` |
+| Edit | Create or modify files and code | `write_to_file`, `apply_diff`, `apply_patch`, `edit`, `edit_file`, `search_replace` |
 | Execute | Run commands and perform system operations | `execute_command` |
-| Browser | Interact with web content | `browser_action` |
-| Workflow | Manage task flow and context | `ask_followup_question`, `attempt_completion`, `switch_mode`, `new_task` |
+| Image | Generate AI-powered images | `generate_image` |
+| Workflow | Manage task flow and context | `ask_followup_question`, `attempt_completion`, `switch_mode`, `new_task`, `skill` |
 
 ---
 
@@ -89,15 +88,21 @@ This safety mechanism ensures you maintain control over which files are modified
 | `read_file` | Reads the content of a file with line numbers | Read |
 | `search_files` | Searches for text or regex patterns across files | Read |
 | `list_files` | Lists files and directories in a specified location | Read |
-| `list_code_definition_names` | Lists code definitions like classes and functions | Read |
+| `codebase_search` | Performs semantic search across your indexed codebase | Read |
+| `read_command_output` | Retrieves truncated output from previous commands | Read |
 | `write_to_file` | Creates new files or overwrites existing ones | Edit |
 | `apply_diff` | Makes precise changes to specific parts of a file | Edit |
+| `apply_patch` | Applies multi-file unified diff patches | Edit |
+| `edit` | Search-and-replace (first occurrence by default) | Edit |
+| `edit_file` | Search-and-replace (all occurrences with count validation) | Edit |
+| `search_replace` | Search-and-replace (all occurrences, simple) | Edit |
 | `execute_command` | Runs commands in the VS Code terminal | Execute |
-| `browser_action` | Performs actions in a headless browser | Browser |
+| `generate_image` | Generates AI-powered images from text prompts | Image |
 | `ask_followup_question` | Asks you a clarifying question | Workflow |
 | `attempt_completion` | Indicates the task is complete | Workflow |
 | `switch_mode` | Changes to a different operational mode | Workflow |
 | `new_task` | Creates a new subtask with a specific starting mode | Workflow |
+| `skill` | Loads and executes predefined skill instructions | Workflow |
 
 ---
 

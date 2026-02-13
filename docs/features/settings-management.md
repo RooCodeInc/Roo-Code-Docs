@@ -148,6 +148,48 @@ Use this option only if you are certain you want to remove all Roo Code data or 
 
 ---
 
+## Command Palette Commands
+
+Roo Code provides several useful commands accessible via the VS Code Command Palette (`Ctrl/Cmd + Shift + P`). These commands offer alternative ways to manage your settings and storage.
+
+### Set Custom Storage Path
+
+**Command:** `roo-cline.setCustomStoragePath`
+
+Opens a dialog to set a custom storage directory for Roo Code data. By default, Roo Code stores task history, settings, and other data in the standard VS Code extension storage location. This command allows you to choose an alternative location.
+
+**Use cases:**
+- **Team Collaboration**: Store Roo Code data in a shared network folder so team members can access the same task history and settings
+- **Drive Management**: Keep data on a specific drive (e.g., a larger secondary drive instead of your primary SSD)
+- **Cloud Sync**: Store data in a cloud-synced folder (Dropbox, OneDrive, etc.) to sync across multiple machines
+- **Backup Strategy**: Place data in a location that's included in your regular backup routine
+
+**To use:**
+1. Open the Command Palette (`Ctrl/Cmd + Shift + P`)
+2. Type "Set Custom Storage Path" or search for `roo-cline.setCustomStoragePath`
+3. Select the command
+4. Choose a directory in the file picker dialog
+5. Restart VS Code for the change to take effect
+
+**Note:** This setting can also be configured in VS Code settings as `roo-cline.customStoragePath`. See the [VS Code Settings Reference](#vs-code-settings-reference) section below for details.
+
+### Import Settings from File
+
+**Command:** `roo-cline.importSettings`
+
+Imports Roo Code settings from a JSON file via the Command Palette. This is an alternative to using the Import button in the settings UI.
+
+**To use:**
+1. Open the Command Palette (`Ctrl/Cmd + Shift + P`)
+2. Type "Import Settings" or search for `roo-cline.importSettings`
+3. Select the command
+4. Choose your settings JSON file in the file picker dialog
+5. Settings will be imported and merged with your current configuration
+
+This command provides the same functionality as the Import button described in the [Import Settings](#import-settings) section above.
+
+---
+
 ## UI Setting
 
 #### System Prompt Context Toggles
@@ -188,3 +230,121 @@ With both disabled, these sections are omitted, reducing token usage when you do
 - Notes:
   - Applies across conversations globally.
   - Text is localized; labels may differ by language.
+
+---
+
+## VS Code Settings Reference
+
+Roo Code provides VS Code settings that can be configured through your VS Code `settings.json` file. These settings offer fine-grained control over command execution, task management, API behavior, storage, indexing, and debugging.
+
+To configure these settings, open your VS Code settings (`Ctrl/Cmd + ,`) and search for "roo-cline", or edit your `settings.json` file directly (`Ctrl/Cmd + Shift + P` → "Preferences: Open User Settings (JSON)").
+
+### Command & Execution
+
+#### `roo-cline.allowedCommands`
+- **Type**: Array of strings
+- **Default**: `["git log", "git diff", "git show"]`
+- **Description**: Commands that can be auto-executed without approval. When Roo Code requests to execute a command that matches an entry in this list, it will execute automatically without prompting for approval. This is useful for safe, read-only commands.
+
+#### `roo-cline.deniedCommands`
+- **Type**: Array of strings
+- **Default**: `[]`
+- **Description**: Commands that are always blocked from execution. Roo Code will refuse to execute any command that matches an entry in this list, providing a safety mechanism to prevent potentially dangerous operations.
+
+#### `roo-cline.commandExecutionTimeout`
+- **Type**: Number (seconds)
+- **Default**: `0`
+- **Range**: 0-600
+- **Description**: Timeout in seconds for command execution. When set to a value greater than 0, commands running longer than this duration will be terminated. A value of 0 means no timeout (commands can run indefinitely). See also `commandTimeoutAllowlist` for exempting specific commands.
+
+#### `roo-cline.commandTimeoutAllowlist`
+- **Type**: Array of strings
+- **Default**: `[]`
+- **Description**: Commands exempt from execution timeout. Commands matching entries in this list will not be subject to the `commandExecutionTimeout` limit, allowing them to run without time restrictions. Useful for known long-running operations like build processes or deployment scripts.
+
+### Task Management
+
+#### `roo-cline.newTaskRequireTodos`
+- **Type**: Boolean
+- **Default**: `false`
+- **Description**: When enabled, requires a todo list when creating new tasks via boomerang/subtasks. This ensures structured planning for complex work by mandating that new tasks include a checklist of steps to complete.
+
+#### `roo-cline.preventCompletionWithOpenTodos`
+- **Type**: Boolean
+- **Default**: `false`
+- **Description**: Prevents task completion when there are uncompleted todo items. When enabled, Roo Code will not allow you to mark a task as complete if the todo list still has pending items, ensuring all planned work is finished.
+
+### API & Network
+
+#### `roo-cline.apiRequestTimeout`
+- **Type**: Number (seconds)
+- **Default**: `600`
+- **Range**: 0-3600
+- **Description**: Timeout in seconds for API requests. Determines how long Roo Code will wait for a response from AI provider APIs before timing out. A value of 0 means no timeout.
+
+### Storage & Import
+
+#### `roo-cline.customStoragePath`
+- **Type**: String
+- **Default**: `""` (empty)
+- **Description**: Custom file path for Roo Code's storage directory. By default, Roo Code stores its data in the standard extension storage location. Use this setting to specify an alternative directory for storing task history, settings, and other data.
+
+#### `roo-cline.autoImportSettingsPath`
+- **Type**: String
+- **Default**: `""` (empty)
+- **Description**: File path for automatic settings import on startup. When configured, Roo Code will automatically import settings from the specified JSON file every time VS Code starts. See the [Automatic Configuration Import](#automatic-configuration-import) section above for detailed usage instructions.
+
+### Code Index
+
+#### `roo-cline.maximumIndexedFilesForFileSearch`
+- **Type**: Number
+- **Default**: `10000`
+- **Range**: 5000-500000
+- **Description**: Maximum number of files indexed for file search. Controls the upper limit of files that Roo Code will index for semantic search functionality. Higher values increase search coverage but may impact performance.
+
+#### `roo-cline.codeIndex.embeddingBatchSize`
+- **Type**: Number
+- **Default**: `60`
+- **Range**: 1-200
+- **Description**: Batch size for embedding operations during code indexing. Determines how many code chunks are processed together when generating embeddings for semantic search. Lower values reduce memory usage but increase processing time; higher values are faster but use more memory.
+
+### Editor Integration
+
+#### `roo-cline.enableCodeActions`
+- **Type**: Boolean
+- **Default**: `true`
+- **Description**: Controls whether Roo Code actions appear in the editor context menu and lightbulb. When enabled, you can right-click in the editor or use the lightbulb menu to quickly send code selections to Roo Code with contextual prompts.
+
+#### `roo-cline.vsCodeLmModelSelector`
+- **Type**: Object
+- **Default**: `{}`
+- **Description**: Configuration for VS Code Language Model API provider selection. Allows you to specify vendor and family properties to control which language model is used when the VS Code LM API provider is selected. See [VS Code LM API documentation](/providers/vscode-lm) for details.
+
+### Rules & Instructions
+
+#### `roo-cline.useAgentRules`
+- **Type**: Boolean
+- **Default**: `true`
+- **Description**: Enable loading of AGENTS.md files for agent-specific instructions. When enabled, Roo Code will look for and load `AGENTS.md` files in your project directories to provide context-specific guidance to the AI. Disable this if you want to prevent automatic loading of these instruction files.
+
+### Debug
+
+#### `roo-cline.debug`
+- **Type**: Boolean
+- **Default**: `false`
+- **Description**: Enable debug mode for additional logging. When enabled, Roo Code will output detailed debug information to the console, useful for troubleshooting issues or understanding internal behavior.
+
+#### `roo-cline.debugProxy.enabled`
+- **Type**: Boolean
+- **Default**: `false`
+- **Description**: Enable debug proxy for intercepting API requests. When enabled, all API requests will be routed through a debug proxy server, allowing you to inspect and debug API communications.
+
+#### `roo-cline.debugProxy.serverUrl`
+- **Type**: String
+- **Default**: `"http://127.0.0.1:8888"`
+- **Description**: URL of the debug proxy server. Specifies the proxy server address used when `debugProxy.enabled` is true. Common debug proxy tools like mitmproxy or Charles Proxy typically run on this default address.
+
+#### `roo-cline.debugProxy.tlsInsecure`
+- **Type**: Boolean
+- **Default**: `false`
+- **Description**: Allow insecure TLS connections through the debug proxy. When enabled, certificate validation errors will be ignored, which is necessary when using self-signed certificates with debug proxies. Only enable this in development environments.

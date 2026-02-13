@@ -111,7 +111,7 @@ volumes:
    - API Key: Your Google AI Studio key
 
 :::info Other Providers Available
-While this guide focuses on Google Gemini since it's currently free, Roo Code also supports OpenAI, Ollama, and OpenAI-compatible providers. You can explore these options in the configuration dropdown.
+While this guide focuses on Google Gemini since it's currently free, Roo Code also supports OpenAI, Ollama, OpenAI-compatible, Mistral, Vercel AI Gateway, Bedrock, and OpenRouter providers. You can explore these options in the configuration dropdown.
 :::
 
 ### Step 4: Save
@@ -166,7 +166,7 @@ This guide explains each setting available in the configuration popover.
 
 - **Embedder Provider**
   - **Purpose**: To select your source for generating AI embeddings.
-  - **Behavior**: This dropdown menu determines which configuration fields are shown. Your options are **OpenAI**, **Google Gemini**, **Ollama**, and **OpenAI Compatible**.
+  - **Behavior**: This dropdown menu determines which configuration fields are shown. Your options are **OpenAI**, **Google Gemini**, **Ollama**, **OpenAI Compatible**, **Mistral**, **Vercel AI Gateway**, **Bedrock**, and **OpenRouter**.
 
 - **API Key** (for OpenAI, Gemini, OpenAI Compatible)
   - **Purpose**: The secret key to authenticate with your chosen provider.
@@ -297,7 +297,7 @@ Use natural language descriptions:
 ### Model Issues
 
 **"Model Not Found"**
-- For Google Gemini: Ensure the model name is correct (e.g., `text-embedding-004`)
+- For Google Gemini: Ensure the model name is correct (e.g., `gemini-embedding-001`)
 - For other providers: Consult their documentation for available models and proper naming
 
 ### Indexing Issues

@@ -44,7 +44,6 @@ Discover the powerful features that make Roo Code your ultimate AI-powered codin
 
 ### Integration Features
 - [**MCP (Model Context Protocol)**](/features/mcp/overview) - Connect to external tools and services
-- [**Browser Use**](/features/browser-use) - Web automation and interaction capabilities
 - [**Shell Integration**](/features/shell-integration) - Seamless terminal command execution
 - [**Marketplace**](/features/marketplace) - Discover and share custom modes
 

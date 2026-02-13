@@ -107,6 +107,9 @@ Both files use a JSON format with a `mcpServers` object containing named server 
   *   `env` (optional): An object containing environment variables to set for the server process.
   *   `alwaysAllow` (optional): An array of tool names from this server to automatically approve.
   *   `disabled` (optional): Set to `true` to disable this server configuration.
+  *   `timeout` (optional): Per-server timeout override in seconds (1-3600). If not specified, uses the default of 60 seconds.
+  *   `watchPaths` (optional): An array of file paths to watch. When any of these files change, the server will automatically restart.
+  *   `disabledTools` (optional): An array of tool names to disable from this server. These tools will not be available for use even if the server provides them.
 
   STDIO configuration example:
   ```json
@@ -177,6 +180,8 @@ Streamable HTTP configuration parameters:
 *   `headers` (optional): An object containing custom HTTP headers to send with requests (e.g., for authentication tokens).
 *   `alwaysAllow` (optional): An array of tool names from this server to automatically approve.
 *   `disabled` (optional): Set to `true` to disable this server configuration.
+*   `timeout` (optional): Per-server timeout override in seconds (1-3600). If not specified, uses the default of 60 seconds.
+*   `disabledTools` (optional): An array of tool names to disable from this server. These tools will not be available for use even if the server provides them.
 
 Streamable HTTP configuration example:
 ```json
@@ -214,6 +219,8 @@ Streamable HTTP configuration example:
   *   `headers` (optional): An object containing custom HTTP headers to send with requests (e.g., for authentication tokens).
   *   `alwaysAllow` (optional): An array of tool names from this server to automatically approve.
   *   `disabled` (optional): Set to `true` to disable this server configuration.
+  *   `timeout` (optional): Per-server timeout override in seconds (1-3600). If not specified, uses the default of 60 seconds.
+  *   `disabledTools` (optional): An array of tool names to disable from this server. These tools will not be available for use even if the server provides them.
 
   SSE (Legacy) configuration example:
   ```json
@@ -310,7 +317,7 @@ Each MCP server has its own configuration panel where you can modify settings, m
 
 To set the maximum time to wait for a response after a tool call to the MCP server:
 
-1. Click the `Network Timeout` pulldown at the bottom of the individual MCP server's config box and change the time. Default is 1 minute but it can be set between 30 seconds and 5 minutes.
+1. Click the `Network Timeout` pulldown at the bottom of the individual MCP server's config box and change the time. Default is 60 seconds (1 minute) but it can be set between 1 second and 3600 seconds (1 hour).
 
 <img src="/img/using-mcp-in-roo/using-mcp-in-roo-6.png" alt="Network Timeout pulldown" width="400" />
 

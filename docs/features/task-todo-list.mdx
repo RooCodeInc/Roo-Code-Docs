@@ -138,6 +138,40 @@ This is an architectural design decision where Roo Code maintains authority over
 
 ## Configuration
 
+### Todo List Settings
+
+Roo Code provides VS Code settings to control todo list behavior. These settings can be configured in your VS Code `settings.json` file (`Ctrl/Cmd + Shift + P` → "Preferences: Open User Settings (JSON)").
+
+#### Require Todo Lists for New Tasks
+
+**Setting**: `roo-cline.newTaskRequireTodos`
+- **Type**: Boolean
+- **Default**: `false`
+
+When enabled, this setting requires a todo list when creating new tasks via [boomerang](/features/boomerang-tasks) or subtask delegation. This ensures structured planning for complex work by mandating that new tasks include a checklist of steps to complete.
+
+**Example configuration**:
+```json
+{
+  "roo-cline.newTaskRequireTodos": true
+}
+```
+
+#### Prevent Completion with Open Todos
+
+**Setting**: `roo-cline.preventCompletionWithOpenTodos`
+- **Type**: Boolean
+- **Default**: `false`
+
+When enabled, this setting prevents task completion when there are uncompleted todo items. Roo Code will not allow you to mark a task as complete if the todo list still has pending items, ensuring all planned work is finished before closing the task.
+
+**Example configuration**:
+```json
+{
+  "roo-cline.preventCompletionWithOpenTodos": true
+}
+```
+
 ### Disabling Todo Lists
 
 You can disable todo lists entirely through the `todoListEnabled` setting. When disabled:

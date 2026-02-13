@@ -19,32 +19,8 @@
       "cloud": false
     },
     {
-      "id": "providers/cerebras",
-      "title": "Cerebras",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/deepinfra",
-      "title": "DeepInfra",
-      "extension": true,
-      "cloud": false
-    },
-    {
       "id": "providers/deepseek",
       "title": "DeepSeek",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/doubao",
-      "title": "Doubao",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/featherless",
-      "title": "Featherless AI",
       "extension": true,
       "cloud": false
     },
@@ -55,38 +31,8 @@
       "cloud": false
     },
     {
-      "id": "providers/chutes",
-      "title": "Chutes AI",
-      "extension": true,
-      "cloud": false
-    },
-    {
       "id": "providers/gemini",
       "title": "Google Gemini",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/glama",
-      "title": "Glama",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/groq",
-      "title": "Groq",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/huggingface",
-      "title": "Hugging Face",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/io-intelligence",
-      "title": "IO Intelligence",
       "extension": true,
       "cloud": false
     },
@@ -105,6 +51,12 @@
     {
       "id": "providers/mistral",
       "title": "Mistral AI",
+      "extension": true,
+      "cloud": false
+    },
+    {
+      "id": "providers/moonshot",
+      "title": "Moonshot",
       "extension": true,
       "cloud": false
     },
@@ -153,12 +105,6 @@
     {
       "id": "providers/sambanova",
       "title": "SambaNova",
-      "extension": true,
-      "cloud": false
-    },
-    {
-      "id": "providers/unbound",
-      "title": "Unbound",
       "extension": true,
       "cloud": false
     },

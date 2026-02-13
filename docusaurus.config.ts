@@ -237,8 +237,8 @@ const config: Config = {
             from: ['/features/tools/attempt-completion'],
           },
           {
-            to: '/advanced-usage/available-tools/browser-action',
-            from: ['/features/tools/browser-action'],
+            to: '/advanced-usage/available-tools/tool-use-overview',
+            from: ['/features/tools/browser-action', '/advanced-usage/available-tools/browser-action'],
           },
           {
             to: '/advanced-usage/available-tools/execute-command',
@@ -249,8 +249,8 @@ const config: Config = {
             from: ['/features/tools/insert-content', '/advanced-usage/available-tools/insert-content'],
           },
           {
-            to: '/advanced-usage/available-tools/list-code-definition-names',
-            from: ['/features/tools/list-code-definition-names'],
+            to: '/advanced-usage/available-tools/tool-use-overview',
+            from: ['/features/tools/list-code-definition-names', '/advanced-usage/available-tools/list-code-definition-names'],
           },
           {
             to: '/advanced-usage/available-tools/list-files',
@@ -327,6 +327,29 @@ const config: Config = {
           {
             to: '/roo-code-cloud/overview',
             from: ['/roo-code-cloud/roomote-control'],
+          },
+
+          // Redirect retired provider pages
+          {
+            to: '/providers',
+            from: [
+              '/providers/cerebras',
+              '/providers/chutes',
+              '/providers/deepinfra',
+              '/providers/doubao',
+              '/providers/featherless',
+              '/providers/glama',
+              '/providers/groq',
+              '/providers/huggingface',
+              '/providers/io-intelligence',
+              '/providers/unbound',
+            ],
+          },
+
+          // Redirect removed browser-use feature page
+          {
+            to: '/features',
+            from: ['/features/browser-use'],
           },
         ],
       },

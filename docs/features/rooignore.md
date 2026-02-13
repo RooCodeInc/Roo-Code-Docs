@@ -52,7 +52,6 @@ These tools directly check `.rooignore` before any file operation. If a file is 
 *   [`read_file`](/advanced-usage/available-tools/read-file): Will not read ignored files.
 *   [`write_to_file`](/advanced-usage/available-tools/write-to-file): Will not write to or create new ignored files.
 *   [`apply_diff`](/advanced-usage/available-tools/apply-diff): Will not apply diffs to ignored files.
-*   [`list_code_definition_names`](/advanced-usage/available-tools/list-code-definition-names): Will not parse ignored files for code symbols.
 
 ### File Discovery and Listing
 

@@ -13,6 +13,10 @@ keywords:
 
 # Concurrent File Edits (AKA Multi-File Edits)
 
+:::note
+Multi-file edits have graduated from experimental status and are now enabled by default. You no longer need to enable this feature in settings.
+:::
+
 Edit multiple files in a single operation, dramatically speeding up refactoring and multi-file changes.
 
 ---
@@ -44,17 +48,9 @@ This reduces interruptions and speeds up complex tasks like:
 
 ---
 
-## How to Enable
+## Availability
 
-:::info Experimental Feature
-Multi-File Edits is an experimental feature and must be enabled in settings.
-
-1. Open Roo Code settings (click the gear icon in Roo Code)
-2. Navigate to **Roo Code > Experimental Settings**
-3. Enable the **Enable multi-file edits** option
-
-<img src="/img/concurrent-file-edits/concurrent-file-edits.png" alt="Enable multi-file edits toggle in experimental settings" width="400" />
-:::
+Multi-file edits are now available by default in Roo Code. The feature has graduated from experimental status and no longer requires manual activation in settings.
 
 ---
 

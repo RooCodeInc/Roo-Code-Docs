@@ -77,7 +77,6 @@ This tool reads the content of a specified file and returns it with line numbers
 - **Large file preview**: Returns a 100KB preview for very large files to enable quick inspection
 - **Graceful error recovery**: Recovers from stream errors and guides you to use line_range for targeted reads
 - Automatically truncates large text files when no line range is specified, showing the beginning of the file
-- Appends `list_code_definition_names` for a code structure overview when content is truncated by line limits
 - Efficiently streams only requested line ranges for better performance
 - Makes it easy to discuss specific parts of code with line numbering
 - **Multi-file support**: Read multiple files simultaneously with batch approval
@@ -163,11 +162,10 @@ The tool uses a clear decision hierarchy to determine how to read a file:
    - Applies only when all of the following are true:
      - Neither `start_line` nor `end_line` is specified.
      - The file is identified as a text‑based file (not binary like PDF/DOCX/XLSX/IPYNB).
-     - The file’s total line count exceeds the `maxReadFileLine` setting (configurable; UI default may be 500; backend uses `-1`—no line limit—when unset).
+     - The file's total line count exceeds the `maxReadFileLine` setting (configurable; UI default may be 500; backend uses `-1`—no line limit—when unset).
    - When automatic truncation occurs:
      - The tool reads only the first `maxReadFileLine` lines.
      - It appends a notice like: `Showing only X of Y total lines. Use line_range if you need to read more lines.`
-     - For code files, it appends `list_code_definition_names` for a structure overview.
    - **Special Case – Definitions‑Only Mode**: When `maxReadFileLine` is `0`, the tool returns only code definitions without file content (plus a notice).
 
 4. **Default Behavior: Read Entire File**
@@ -267,11 +265,6 @@ When `maxReadFileLine` is set to `0` in user settings, the tool returns only sou
 ```xml
 <file>
   <path>src/services/auth.service.ts</path>
-  <list_code_definition_names>
-    class AuthService
-      method validateUser
-      method generateToken
-  </list_code_definition_names>
   <notice>Showing only 0 of 150 total lines. Use line_range if you need to read more lines</notice>
 </file>
 ```

@@ -26,13 +26,13 @@ Tools are organized into logical groups based on their functionality:
 
 | Category | Purpose | Tools | Common Use |
 |----------|---------|-------|------------|
-| **Read Group** | File system reading and exploration | [read_file](/advanced-usage/available-tools/read-file), [list_files](/advanced-usage/available-tools/list-files), [list_code_definition_names](/advanced-usage/available-tools/list-code-definition-names) | Code exploration and analysis |
+| **Read Group** | File system reading and exploration | [read_file](/advanced-usage/available-tools/read-file), [list_files](/advanced-usage/available-tools/list-files), [read_command_output](/advanced-usage/available-tools/read-command-output) | Code exploration and analysis |
 | **Search Group** | Pattern and semantic searching | [search_files](/advanced-usage/available-tools/search-files), [codebase_search](/advanced-usage/available-tools/codebase-search) | Finding code patterns and functionality |
-| **Edit Group** | File system modifications | [apply_diff](/advanced-usage/available-tools/apply-diff), [write_to_file](/advanced-usage/available-tools/write-to-file) | Code changes and file manipulation |
-| **Browser Group** | Web automation | [browser_action](/advanced-usage/available-tools/browser-action) | Web testing and interaction |
+| **Edit Group** | File system modifications | [apply_diff](/advanced-usage/available-tools/apply-diff), [apply_patch](/advanced-usage/available-tools/apply-patch), [edit](/advanced-usage/available-tools/edit), [edit_file](/advanced-usage/available-tools/edit-file), [search_replace](/advanced-usage/available-tools/search-replace), [write_to_file](/advanced-usage/available-tools/write-to-file) | Code changes and file manipulation |
+| **Image Group** | AI image generation | [generate_image](/advanced-usage/available-tools/generate-image) | Creating and editing images |
 | **Command Group** | System command execution | [execute_command](/advanced-usage/available-tools/execute-command), [run_slash_command](/advanced-usage/available-tools/run-slash-command)* | Running scripts, building projects, executing command templates |
 | **MCP Group** | External tool integration | [use_mcp_tool](/advanced-usage/available-tools/use-mcp-tool), [access_mcp_resource](/advanced-usage/available-tools/access-mcp-resource) | Specialized functionality through external servers |
-| **Workflow Group** | Mode and task management | [switch_mode](/advanced-usage/available-tools/switch-mode), [new_task](/advanced-usage/available-tools/new-task), [ask_followup_question](/advanced-usage/available-tools/ask-followup-question), [attempt_completion](/advanced-usage/available-tools/attempt-completion) | Context switching and task organization |
+| **Workflow Group** | Mode and task management | [switch_mode](/advanced-usage/available-tools/switch-mode), [new_task](/advanced-usage/available-tools/new-task), [ask_followup_question](/advanced-usage/available-tools/ask-followup-question), [attempt_completion](/advanced-usage/available-tools/attempt-completion), [update_todo_list](/advanced-usage/available-tools/update-todo-list), [skill](/advanced-usage/available-tools/skill) | Context switching and task organization |
 
 *_Experimental feature - requires explicit enablement in settings_
 
@@ -54,7 +54,7 @@ These tools help Roo understand your code and project:
 
 - [read_file](/advanced-usage/available-tools/read-file) - Examines the contents of files
 - [list_files](/advanced-usage/available-tools/list-files) - Maps your project's file structure
-- [list_code_definition_names](/advanced-usage/available-tools/list-code-definition-names) - Creates a structural map of your code
+- [read_command_output](/advanced-usage/available-tools/read-command-output) - Retrieves full output from truncated commands
 
 ### Search Tools
 These tools help Roo find patterns and functionality across your codebase:
@@ -66,12 +66,16 @@ These tools help Roo find patterns and functionality across your codebase:
 These tools help Roo make changes to your code:
 
 - [apply_diff](/advanced-usage/available-tools/apply-diff) - Makes precise, surgical changes to your code
+- [apply_patch](/advanced-usage/available-tools/apply-patch) - Applies multi-file unified diff patches
+- [edit](/advanced-usage/available-tools/edit) - Search-and-replace editing (first occurrence by default)
+- [edit_file](/advanced-usage/available-tools/edit-file) - Search-and-replace editing (all occurrences with count validation)
+- [search_replace](/advanced-usage/available-tools/search-replace) - Simple search-and-replace (all occurrences)
 - [write_to_file](/advanced-usage/available-tools/write-to-file) - Creates new files or completely rewrites existing ones
 
-### Browser Tools
-These tools help Roo interact with web applications:
+### Image Tools
+These tools help Roo generate and edit images:
 
-- [browser_action](/advanced-usage/available-tools/browser-action) - Automates browser interactions
+- [generate_image](/advanced-usage/available-tools/generate-image) - Generates AI-powered images from text prompts
 
 ### Command Tools
 These tools help Roo execute commands:
@@ -92,6 +96,8 @@ These tools help manage the conversation and task flow:
 - [attempt_completion](/advanced-usage/available-tools/attempt-completion) - Presents final results
 - [switch_mode](/advanced-usage/available-tools/switch-mode) - Changes to a different mode for specialized tasks
 - [new_task](/advanced-usage/available-tools/new-task) - Creates a new subtask
+- [update_todo_list](/advanced-usage/available-tools/update-todo-list) - Updates task checklist progress
+- [skill](/advanced-usage/available-tools/skill) - Loads and executes predefined skill instructions
 
 ---
 

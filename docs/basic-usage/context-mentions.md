@@ -29,13 +29,14 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 | Mention Type | Format | Description | Example Usage |
 |--------------|--------|-------------|--------------|
 | **File** | `@/path/to/file.ts` | Includes file contents in request context | "Explain the function in @/src/utils.ts" |
-| **Image** | `@/path/to/image.png` | Includes image as inline visual content | "What's wrong with this UI? @/screenshots/bug.png" |
-| **Folder** | `@/path/to/folder` | Includes contents of all files directly in the folder (non-recursive) | "Analyze the code in @/src/components" |
+| **Image** | `@/path/to/image.png` | Includes image as inline visual content (file mention with vision support) | "What's wrong with this UI? @/screenshots/bug.png" |
+| **Folder** | `@/path/to/folder/` | Includes contents of all files directly in the folder (non-recursive) | "Analyze the code in @/src/components/" |
 | **Problems** | `@problems` | Includes VS Code Problems panel diagnostics | "@problems Fix all errors in my code" |
 | **Terminal** | `@terminal` | Includes recent terminal command and output | "Fix the errors shown in @terminal" |
 | **Git Commit** | `@a1b2c3d` | References specific commit by hash | "What changed in commit @a1b2c3d?" |
 | **Git Changes** | `@git-changes` | Shows uncommitted changes | "Suggest a message for @git-changes" |
 | **URL** | `@https://example.com` | Imports website content | "Summarize @https://docusaurus.io/" |
+| **Slash Command** | `/<command-name>` | Executes a slash command (uses `/` not `@`) | "/test Run all tests" |
 
 ### File Mentions
 
@@ -52,10 +53,11 @@ Context mentions are a powerful way to provide Roo Code with specific informatio
 
 ### Image Mentions
 
-Image mentions let you include visual content directly in your conversation. When the model supports vision, the image is sent as inline visual content rather than text.
+Image mentions are file mentions with special visual processing. When you mention an image file, and the model supports vision, the image is sent as inline visual content rather than text.
 
 | Capability | Details |
 |------------|---------|
+| **Type** | Sub-type of file mentions (not a separate mention type) |
 | **Format** | `@/path/to/image.png` (same path format as file mentions) |
 | **Provides** | Image sent as inline visual content to the model |
 | **Supports** | PNG, JPG, JPEG, GIF, BMP, SVG, WEBP, ICO, AVIF |
@@ -69,7 +71,7 @@ Image mentions let you include visual content directly in your conversation. Whe
 *Folder mentions include the content of all files within the specified directory.*
 | Capability | Details |
 |------------|---------|
-| **Format** | `@/path/to/folder` (no trailing slash) |
+| **Format** | `@/path/to/folder/` (trailing slash required to distinguish from file mentions) |
 | **Provides** | Complete contents of all files within the directory |
 | **Includes** | Contents of non-binary text files directly within the folder (not recursive) |
 | **Best for** | Providing context from multiple files in a directory |
@@ -125,6 +127,20 @@ For comprehensive details on how Roo Code integrates with VSCode's diagnostics s
 | **Cleaning** | Removes scripts, styles, and navigation elements |
 | **Output** | Converts content to Markdown for readability |
 | **Limitation** | Complex pages may not convert perfectly |
+
+### Slash Command Mentions
+
+Slash commands are processed by the mentions system but use a `/` prefix instead of `@`. They execute predefined commands to perform specific actions.
+
+| Capability | Details |
+|------------|---------|
+| **Format** | `/<command-name>` (uses `/` not `@`) |
+| **Provides** | Executes the specified command and includes relevant context |
+| **Content Type** | Processed as content block type "command" |
+| **Examples** | `/test`, `/init`, `/deploy`, and other custom commands |
+| **Best for** | Quick access to predefined workflows and actions |
+
+For comprehensive details on available slash commands and how to create custom ones, see [Slash Commands](/features/slash-commands).
 
 ---
 

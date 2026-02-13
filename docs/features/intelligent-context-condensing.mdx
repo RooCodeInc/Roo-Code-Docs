@@ -120,7 +120,7 @@ When Roo Code encounters context window limit errors, it now automatically recov
 
 #### How error recovery works
 
-1. **Error Detection**: Roo Code detects context window errors from multiple providers (OpenAI, Anthropic, Cerebras, and others)
+1. **Error Detection**: Roo Code detects context window errors from multiple providers (OpenAI, Anthropic, and others)
 2. **Automatic Truncation**: The system automatically reduces the context by 25%
 3. **Retry Mechanism**: After truncation, Roo Code retries your request (up to the built-in retry limit)
 4. **Continuation**: Roo retries without manual intervention

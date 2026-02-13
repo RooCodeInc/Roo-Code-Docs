@@ -40,11 +40,18 @@ Auto-approve settings speed up your workflow by eliminating repetitive confirmat
 3. Use the All/None chips to bulk-select or clear permissions, or select individual tiles; you can keep Enabled On with "None" selected
 4. (Optional) Click the gear icon to open Settings for deeper per-permission controls
 
-### Keyboard Shortcut
+### Keyboard Shortcut and Command Palette
 
 **Default shortcut:** `Cmd+Alt+A` (macOS) / `Ctrl+Alt+A` (Windows/Linux)
 
-Quickly toggle auto-approve on/off without using the mouse. This shortcut toggles the global "Enabled" state while preserving your permission selections.
+**Command Palette:** `roo-cline.toggleAutoApprove`
+
+Quickly toggle auto-approve on/off without using the mouse. Both the keyboard shortcut and the Command Palette command toggle the global "Enabled" state while preserving your permission selections.
+
+**Via Command Palette:**
+1. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
+2. Type "Toggle Auto-Approve" or search for `roo-cline.toggleAutoApprove`
+3. Press Enter to toggle the auto-approve state
 
 **To customize the shortcut:**
 1. Open VS Code Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
@@ -200,26 +207,6 @@ This works like a human developer pausing to check for errors after changing cod
 - Project complexity
 - Language server speed
 - How important error detection is for your workflow
-:::
-
-### Browser Actions
-
-:::info Browser Actions (Risk: Medium)
-
-**Setting:** "Always approve browser actions"
-
-**Description:** "Automatically perform browser actions without requiring approval"
-
-**Note:** "Only applies when the model supports computer use"
-
-**Risk level:** Medium
-
-Allows Roo to control a headless browser without confirmation. This can include:
-- Opening websites
-- Navigating pages
-- Interacting with web elements
-
-Consider the security implications of allowing automated browser access.
 :::
 
 ### MCP Tools

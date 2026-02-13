@@ -24,6 +24,7 @@ Roo Code offers keyboard commands to enhance your workflow. This page focuses on
 |---------|-------------|-----------------|
 | `roo-cline.acceptInput` | Submit text or accept the primary suggestion | None (configurable) |
 | `roo-cline.focusInput` | Focus the Roo input box | None (configurable) |
+| `roo-cline.openInNewTab` | Open Roo Code in a new editor tab | None (via Command Palette) |
 | Add to Context | Add selected code to Roo's context | macOS: Cmd+K Cmd+A; Windows/Linux: Ctrl+K Ctrl+A |
 | Arrow Up/Down | Navigate through prompt history | Built-in |
 
