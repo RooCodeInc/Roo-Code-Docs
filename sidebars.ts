@@ -177,6 +177,11 @@ const sidebars: SidebarsConfig = {
             "update-notes/index",
             {
               type: "category",
+              label: "3.48",
+              items: [{ type: "doc", id: "update-notes/v3.48.0", label: "3.48.0" }],
+            },
+            {
+              type: "category",
               label: "3.47",
               items: [{ type: "doc", id: "update-notes/v3.47.0", label: "3.47.0" }],
             },
