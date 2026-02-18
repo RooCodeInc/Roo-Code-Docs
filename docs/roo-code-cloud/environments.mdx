@@ -197,7 +197,11 @@ Invalid examples:
 
 ### Direct Port Access (Non-Proxied)
 
-By default, all ports are proxied through an authentication layer that validates requests before forwarding them to your application. Setting `proxied: false` bypasses this proxy and exposes the port directly on the sandbox domain.
+By default, all ports are proxied through an authentication layer that validates requests before forwarding them to your application. Setting `proxied: false` bypasses this proxy entirely and exposes the port directly on the sandbox domain.
+
+:::tip[Try `unauthenticated: true` first]
+If you just need to skip authentication (e.g., for a public-facing endpoint or webhook), use `unauthenticated: true` instead. It keeps the proxy in place while disabling the auth check, and doesn't count against the stricter non-proxied port limit. Only reach for `proxied: false` when the proxy itself is the problem.
+:::
 
 ```yaml
 ports:
@@ -208,13 +212,13 @@ ports:
     proxied: false
 ```
 
-Use `proxied: false` when you need:
+Use `proxied: false` only when the proxy layer itself is incompatible with your use case:
 
-- **Direct socket access** for protocols that don't work well through the HTTP proxy
-- **Internal services** that handle their own authentication or don't need external access control
+- **Direct socket access** for protocols that don't work through the HTTP proxy
+- **Non-HTTP services** that need the raw port exposed without any intermediary
 
 :::warning[Warning]
-When `proxied` is `false`, the port is **completely exposed without authentication**, regardless of the `unauthenticated` setting. Only use this for ports that either handle their own security or don't serve sensitive content.
+When `proxied` is `false`, the port is **completely exposed without authentication**, regardless of the `unauthenticated` setting. Non-proxied ports also count against a stricter limit (1 per environment vs. 10 for proxied ports). Only use this as a last resort when other options don't work.
 :::
 
 The `ROO_<NAME>_HOST` environment variable for a non-proxied port points to the direct sandbox domain instead of the preview proxy URL. Your application code doesn't need to change -- just use the injected variable as usual:
