@@ -93,6 +93,7 @@ ports:
 |-------|-------------|----------|
 | `name` | Identifier for the port (used to generate environment variables) | Yes |
 | `port` | The port number to expose | Yes |
+| `unauthenticated` | Skip authentication for this port's preview URL (`false` by default). See [Public Ports](#public-ports-unauthenticated) | No |
 | `proxied` | Whether traffic goes through the auth proxy (`true` by default). Set to `false` for direct port access (see [Direct Port Access](#direct-port-access-non-proxied)) | No |
 | `initial_path` | Default path to append to the preview URL | No |
 | `subdomain` | Subdomain to set on the `Host` header when forwarding requests to the app | No |
@@ -194,6 +195,28 @@ Invalid examples:
 - **Multi-tenant apps**: Route `tenant1.localhost:3000` and `tenant2.localhost:3000` to different tenants in a single application
 - **Admin panels**: Serve an admin interface on `admin.localhost:3000` while the main app runs on the root domain
 - **Subdomain APIs**: Frameworks like Rails can use `api.localhost:3000` to route API requests to a separate controller namespace
+
+### Public Ports (Unauthenticated)
+
+By default, all preview URLs require authentication -- visitors must be signed in to your Roo Code Cloud organization to access them. Setting `unauthenticated: true` on a port disables this auth check while keeping the proxy layer intact.
+
+```yaml
+ports:
+  - name: DOCS
+    port: 4000
+    unauthenticated: true
+  - name: WEBHOOK
+    port: 3002
+    unauthenticated: true
+```
+
+Use `unauthenticated: true` when you need:
+
+- **Public-facing endpoints** like documentation sites or landing pages
+- **Webhook receivers** that need to accept requests from external services (e.g., Stripe, GitHub)
+- **Health checks** or status pages accessed by monitoring tools
+
+The port still goes through the proxy, so it benefits from HTTPS termination and domain routing. Only the authentication requirement is removed.
 
 ### Direct Port Access (Non-Proxied)
 
