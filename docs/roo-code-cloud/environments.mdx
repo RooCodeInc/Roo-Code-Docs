@@ -237,8 +237,8 @@ ports:
 
 Use `proxied: false` only when the proxy layer itself is incompatible with your use case:
 
-- **Direct socket access** for protocols that don't work through the HTTP proxy
-- **Non-HTTP services** that need the raw port exposed without any intermediary
+- **WebSocket or streaming connections** that are disrupted by the proxy intermediary
+- **Services with custom connection handling** that conflict with the proxy's request processing
 
 :::warning[Warning]
 When `proxied` is `false`, the port is **completely exposed without authentication**, regardless of the `unauthenticated` setting. Non-proxied ports also count against a stricter limit (1 per environment vs. 10 for proxied ports). Only use this as a last resort when other options don't work.
