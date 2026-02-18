@@ -212,8 +212,9 @@ ports:
 
 Use `unauthenticated: true` when you need:
 
-- **Public-facing endpoints** like documentation sites or landing pages
+- **API endpoints** that your frontend or external clients call directly (the auth proxy would otherwise block non-browser requests)
 - **Webhook receivers** that need to accept requests from external services (e.g., Stripe, GitHub)
+- **Public-facing endpoints** like documentation sites or landing pages
 - **Health checks** or status pages accessed by monitoring tools
 
 The port still goes through the proxy, so it benefits from HTTPS termination and domain routing. Only the authentication requirement is removed.
