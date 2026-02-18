@@ -202,8 +202,10 @@ By default, all preview URLs require authentication -- visitors must be signed i
 
 ```yaml
 ports:
-  - name: DOCS
-    port: 4000
+  - name: WEB
+    port: 3000
+  - name: API
+    port: 3001
     unauthenticated: true
   - name: WEBHOOK
     port: 3002
