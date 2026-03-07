@@ -285,6 +285,12 @@ Use natural language descriptions:
 - Ensure the key has necessary permissions
 - For Ollama, verify the service is running
 
+**"Internal Server Error" when connecting to Qdrant**
+- Potential causes include Roo Code's Qdrant client being incompatible with newer Qdrant server versions
+- Check the [Roo Code releases](https://github.com/RooCodeInc/Roo-Code/releases) 
+  for the supported Qdrant version, or pin your Docker image to a specific version 
+  (e.g., `qdrant/qdrant:v1.13.6`) rather than using `latest` to fix this version of the issue
+
 ### API Key Format Errors (“ByteString conversion”)
 
 - Symptom: Error mentions "ByteString conversion" during indexing or when saving settings
