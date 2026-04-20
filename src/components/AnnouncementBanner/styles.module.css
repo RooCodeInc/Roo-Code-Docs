@@ -1,9 +1,9 @@
 .announcementBanner {
   position: relative;
   width: 100%;
-  background: linear-gradient(90deg, #4f46e5, #2563eb);
-  border-bottom: 1px solid rgba(147, 197, 253, 0.5);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  background: linear-gradient(90deg, #dc2626, #b91c1c);
+  border-bottom: 1px solid rgba(252, 165, 165, 0.5);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
 }
 
 .bannerContent {
@@ -36,37 +36,11 @@
   text-decoration-color: rgba(255, 255, 255, 0.95);
 }
 
-.dismissButton {
-  position: absolute;
-  right: 1rem;
-  top: 1.5rem;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  color: #ffffff;
-  cursor: pointer;
-  padding: 0.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.dismissButton:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.dismissButton:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.5);
-  outline-offset: 2px;
-}
-
 @media (max-width: 768px) {
   .bannerContent {
     flex-direction: column;
     gap: 0.5rem;
-    padding: 1rem 3rem 1rem 1rem;
+    padding: 1rem;
     align-items: flex-start;
   }
 
@@ -76,9 +50,5 @@
 
   .bannerLink {
     font-size: 0.875rem;
-  }
-
-  .dismissButton {
-    right: 0.5rem;
   }
 }
