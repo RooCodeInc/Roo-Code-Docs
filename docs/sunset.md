@@ -2,7 +2,7 @@
 sidebar_label: Sunsetting Roo Code
 sidebar_position: 0
 title: Sunsetting Roo Code (Extension, Cloud, and Router)
-description: Roo Code is sunsetting on May 15, 2025. Learn what this means for you, how to migrate, and where to find alternatives.
+description: Roo Code is sunsetting on May 15, 2026. Learn what this means for you, how to migrate, and where to find alternatives.
 keywords:
   - Roo Code sunset
   - Roo Code shutdown
@@ -14,7 +14,7 @@ keywords:
 # Sunsetting Roo Code (Extension, Cloud, and Router)
 
 :::danger Important Notice
-**All Roo Code products will be shut down on May 15, 2025.** This includes the Roo Code VS Code Extension, Roo Code Cloud, and Roo Code Router.
+**All Roo Code products will be shut down on May 15, 2026.** This includes the Roo Code VS Code Extension, Roo Code Cloud, and Roo Code Router.
 :::
 
 To our community: thank you. Your trust, contributions, and feedback helped us drive innovation in this space and pushed us past 3 million extension downloads. We don't take that lightly.
@@ -23,8 +23,8 @@ That said, we don't believe IDEs are the future of coding. To keep pushing the f
 
 ## What this means for you
 
-- We will continue to support all existing Roo Code products through **May 15, 2025**.
-- On **May 15, 2025**, we will:
+- We will continue to support all existing Roo Code products through **May 15, 2026**.
+- On **May 15, 2026**, we will:
   - Shut down **Roo Code Cloud**
   - Shut down **Roo Code Router**
   - **Refund any unused balances**

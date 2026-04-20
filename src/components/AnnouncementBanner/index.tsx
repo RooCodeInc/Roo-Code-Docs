@@ -8,7 +8,7 @@ export function AnnouncementBanner() {
       <div className={styles.bannerContent}>
         <VscWarning size={20} color="#ffffff" />
         <span className={styles.bannerHeadline}>
-          Roo Code (Extension, Cloud, and Router) is sunsetting on May 15, 2025.
+          Roo Code (Extension, Cloud, and Router) is sunsetting on May 15, 2026.
         </span>
         <a
           className={styles.bannerLink}
