@@ -4,6 +4,7 @@ import modelProviders from "./docs/providers/index.json";
 const sidebars: SidebarsConfig = {
   tutorialSidebar: [
     "index",
+    "sunset",
     {
       type: "category",
       label: "Roo Code VSCode Extension",
