@@ -1,0 +1,17 @@
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logoLink:hover {
+  transform: scale(1.05);
+}
+
+.logoImage {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.logoLink:hover .logoImage {
+  opacity: 0.9;
+}
