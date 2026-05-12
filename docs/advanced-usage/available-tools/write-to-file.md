@@ -137,13 +137,12 @@ Creating a new JSON configuration file:
   },
   "features": {
     "darkMode": true,
-    "notifications": true,
-    "analytics": false
+    "notifications": true
   },
   "version": "1.0.0"
 }
 </content>
-<line_count>14</line_count>
+<line_count>13</line_count>
 </write_to_file>
 ```
 

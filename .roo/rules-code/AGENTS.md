@@ -9,6 +9,6 @@ This file provides guidance to agents when working with code in this repository.
 - When moving docs, add redirects in [docusaurus.config.ts](docusaurus.config.ts:109); onBrokenLinks is warn ([docusaurus.config.ts](docusaurus.config.ts:40)) so missing redirects won’t fail CI.
 - Internal doc links must be absolute and extensionless per [.roorules](.roorules) (e.g., /basic-usage/how-tools-work).
 - Images in docs must use HTML tags: <img src="/img/...png" alt="..." width="600" /> (Markdown image syntax is disallowed).
-- Builds preload dotenv; PostHog plugin loads only when POSTHOG_API_KEY is set. Use [.env.example](.env.example). See [docusaurus.config.ts](docusaurus.config.ts:83) and [package.json](package.json:7).
+- Builds preload dotenv. No environment variables are required by default; use [.env.example](.env.example) only when adding local-only settings. See [docusaurus.config.ts](docusaurus.config.ts) and [package.json](package.json).
 - Use Node 20 locally to match CI ([.github/workflows/docusaurus-build.yml](.github/workflows/docusaurus-build.yml:23)); package engines allow >=18.
 - “Tutorial Videos” sidebar is driven by [docs/tutorial-videos.json](docs/tutorial-videos.json); titles truncated to 40 chars in [sidebars.ts](sidebars.ts:5).
