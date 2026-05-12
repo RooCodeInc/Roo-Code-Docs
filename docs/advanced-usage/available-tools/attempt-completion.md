@@ -47,7 +47,6 @@ This tool marks the end of a task by presenting a final summary of what was acco
 - Optionally demonstrates results through command execution
 - Enables user feedback for further refinements
 - Displays results in a special UI format distinct from regular messages
-- Captures task completion telemetry for system analytics
 - Maintains a structured conversation flow by providing checkpoints
 - Supports subtask completion within larger workflows
 - Ensures users receive a clear summary of what was done

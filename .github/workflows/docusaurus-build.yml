@@ -36,5 +36,3 @@ jobs:
       
     - name: Build site
       run: pnpm run build
-      env:
-        POSTHOG_API_KEY: ${{ secrets.POSTHOG_API_KEY }}

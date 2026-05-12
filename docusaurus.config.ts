@@ -6,20 +6,13 @@ import {
   REDDIT_URL,
   TWITTER_URL,
   BLUESKY_URL,
-  LINKEDIN_URL,
-  TIKTOK_URL,
   GITHUB_MAIN_REPO_URL,
   GITHUB_ISSUES_MAIN_URL,
   GITHUB_FEATURES_URL,
   VSCODE_MARKETPLACE_URL,
   OPEN_VSX_URL,
-  CONTACT_EMAIL,
-  CAREERS_URL,
-  WEBSITE_PRIVACY_URL,
   EXTENSION_PRIVACY_URL,
-  GITHUB_REPO_URL,
-  SIGN_IN_URL,
-  SIGN_UP_URL
+  GITHUB_REPO_URL
 } from './src/constants';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -44,11 +37,6 @@ const config: Config = {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
-  },
-
-  // Custom fields for client-side access
-  customFields: {
-    intercomAppId: process.env.INTERCOM_APP_ID,
   },
 
   // Even if you don't use internationalization, you can use this field to set
@@ -98,7 +86,6 @@ const config: Config = {
           { label: "Features", path: "features" },
           { label: "Advanced Usage", path: "advanced-usage" },
           { label: "Providers", path: "providers" },
-          { label: "Roo Code Cloud", path: "roo-code-cloud" },
           { label: "Release Notes", path: "update-notes" }
         ],
         useAllContextsWithNoSearchContext: true,
@@ -107,16 +94,6 @@ const config: Config = {
   ],
 
   plugins: [
-    ...(process.env.POSTHOG_API_KEY ? [
-      [
-        "posthog-docusaurus",
-        {
-          apiKey: process.env.POSTHOG_API_KEY,
-          appUrl: "https://ph.roocode.com",
-          enableInDevelopment: true,
-        },
-      ],
-    ] : []),
     [
       '@docusaurus/plugin-sitemap',
       {
@@ -284,24 +261,56 @@ const config: Config = {
             to: '/advanced-usage/roo-code-nightly',
             from: ['/advanced-usage/prerelease-build'],
           },
-          // Redirect /roo to Roo Code Cloud documentation
+          // Redirect removed Roo Code Router provider aliases
           {
-            to: '/providers/roo-code-router',
+            to: '/providers',
             from: ['/providers/roo'],
           },
-          // Roo Code Router rename redirects
           {
-            to: '/providers/roo-code-router',
+            to: '/providers',
             from: ['/providers/roo-code-cloud'],
           },
           {
-            to: '/roo-code-router/overview',
+            to: '/providers',
             from: ['/roo-code-provider', '/roo-code-provider/overview'],
           },
-          // Redirect deleted billing-subscriptions page
+          // Redirect removed Cloud, Router, Credits, and billing pages
           {
-            to: '/credits/overview',
-            from: ['/roo-code-cloud/billing-subscriptions'],
+            to: '/',
+            from: [
+              '/sunset',
+              '/roo-code-cloud',
+              '/roo-code-cloud/overview',
+              '/roo-code-cloud/login',
+              '/roo-code-cloud/connect',
+              '/roo-code-cloud/cloud-agents',
+              '/roo-code-cloud/environments',
+              '/roo-code-cloud/task-sync',
+              '/roo-code-cloud/task-sharing',
+              '/roo-code-cloud/analytics',
+              '/roo-code-cloud/github-integration',
+              '/roo-code-cloud/slack-integration',
+              '/roo-code-cloud/team-plan',
+              '/roo-code-cloud/what-is-roo-code-cloud',
+              '/roo-code-cloud/dashboard',
+              '/roo-code-cloud/roomote-control',
+            ],
+          },
+          {
+            to: '/providers',
+            from: [
+              '/roo-code-router',
+              '/roo-code-router/overview',
+              '/providers/roo-code-router',
+            ],
+          },
+          {
+            to: '/advanced-usage/rate-limits-costs',
+            from: [
+              '/credits',
+              '/credits/overview',
+              '/roo-code-cloud/billing-subscriptions',
+            ],
           },
           // Redirect removed Human Relay provider page
           {
@@ -319,12 +328,6 @@ const config: Config = {
             to: '/',
             from: ['/features/fast-edits'],
           },
-          // Redirect removed Roomote Control page
-          {
-            to: '/roo-code-cloud/overview',
-            from: ['/roo-code-cloud/roomote-control'],
-          },
-
           // Redirect retired provider pages
           {
             to: '/providers',
@@ -414,14 +417,6 @@ const config: Config = {
               label: 'GitHub',
               href: GITHUB_MAIN_REPO_URL,
             },
-            {
-              label: 'LinkedIn',
-              href: LINKEDIN_URL,
-            },
-            {
-              label: 'TikTok',
-              href: TIKTOK_URL,
-            },
           ],
         },
         {
@@ -451,21 +446,8 @@ const config: Config = {
           ],
         },
         {
-          title: 'Company',
+          title: 'Privacy',
           items: [
-            {
-              label: 'Contact',
-              href: CONTACT_EMAIL,
-              target: '_self',
-            },
-            {
-              label: 'Careers',
-              href: CAREERS_URL,
-            },
-            {
-              label: 'Website Privacy Policy',
-              href: WEBSITE_PRIVACY_URL,
-            },
             {
               label: 'Extension Privacy Policy',
               href: EXTENSION_PRIVACY_URL,

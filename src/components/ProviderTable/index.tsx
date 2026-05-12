@@ -6,7 +6,6 @@ interface ProviderMetadata {
   id: string;
   title: string;
   extension: boolean;
-  cloud: boolean;
   permalink: string;
 }
 
@@ -37,7 +36,6 @@ export default function ProviderTable(): React.JSX.Element {
     id: provider.id,
     title: provider.title,
     extension: provider.extension,
-    cloud: provider.cloud,
     permalink: docPermalinks.get(provider.id) || `/${provider.id}`,
   }));
 
@@ -47,7 +45,6 @@ export default function ProviderTable(): React.JSX.Element {
         <tr>
           <th align="left" style={{ "minWidth": "100%" }}>Provider</th>
           <th align="center" style={{ "minWidth": "14rem", "textAlign": "center" }}>VS Code Extension</th>
-          <th align="center" style={{ "minWidth": "14rem", "textAlign": "center" }}>Cloud Agents</th>
         </tr>
       </thead>
       <tbody>
@@ -57,7 +54,6 @@ export default function ProviderTable(): React.JSX.Element {
               <a href={provider.permalink}>{provider.title}</a>
             </td>
             <td align="center">{provider.extension ? <><img src="/ui/check.svg" className="icon" /></> : ''}</td>
-            <td align="center">{provider.cloud ? <><img src="/ui/check.svg" className="icon" /></> : ''}</td>
           </tr>
         ))}
       </tbody>
