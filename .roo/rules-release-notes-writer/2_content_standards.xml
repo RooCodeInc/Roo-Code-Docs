@@ -214,7 +214,7 @@ keywords:
     </patterns>
     <auto_linking>
       - Modes: /features/modes/[mode-slug]
-      - Tools: /advanced-usage/available-tools#[tool-name]
+      - Tools: /basic-usage/how-tools-work
       - MCP: /features/mcp/
       - Providers: /providers/
     </auto_linking>

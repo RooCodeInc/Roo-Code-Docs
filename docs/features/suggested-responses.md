@@ -13,7 +13,7 @@ import Codicon from '@site/src/components/Codicon';
 
 # Suggested Responses
 
-When Roo needs more information to complete a task, it uses the [`ask_followup_question` tool](/advanced-usage/available-tools/ask-followup-question). To make responding easier and faster, Roo often provides suggested answers alongside the question.
+When Roo needs more information to complete a task, it uses the [`ask_followup_question` tool](/basic-usage/how-tools-work). To make responding easier and faster, Roo often provides suggested answers alongside the question.
 
 ---
 

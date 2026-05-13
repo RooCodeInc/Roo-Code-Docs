@@ -108,7 +108,7 @@ Four ways to switch modes:
 | **Description** | A strategic workflow orchestrator (aka Boomerang Mode) that breaks down complex tasks and delegates them to specialized modes. Learn more about [Boomerang Tasks](/features/boomerang-tasks). |
 | **Tool Access** | No direct tool access (uses `new_task` tool to delegate work to other modes) |
 | **Ideal For** | Managing multi-step projects, coordinating work across different modes, and automating complex workflows |
-| **Special Features** | Uses the [`new_task`](/advanced-usage/available-tools/new-task) tool to delegate subtasks to other modes. |
+| **Special Features** | Uses the [`new_task`](/basic-usage/how-tools-work) tool to delegate subtasks to other modes. |
 
 ---
 
@@ -124,4 +124,4 @@ Each tool group provides specific capabilities:
 - **`command`**: Terminal command execution
 - **`mcp`**: Model Context Protocol server interactions
 
-For detailed information about available tools, see the [Available Tools documentation](/advanced-usage/available-tools/tool-use-overview).
+For detailed information about available tools, see the [Available Tools documentation](/basic-usage/how-tools-work).

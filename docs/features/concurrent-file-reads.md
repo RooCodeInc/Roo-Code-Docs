@@ -49,7 +49,7 @@ When you ask Roo to perform a task that involves multiple files, it will automat
 -   Refactoring code that has dependencies in other parts of the codebase.
 -   Answering questions that require a broad understanding of your project.
 
-Roo is instructed to use this feature efficiently by prioritizing the most critical files and reading them in a single batch. The [`read_file`](/advanced-usage/available-tools/read-file) tool automatically accepts multiple files in a single request.
+Roo is instructed to use this feature efficiently by prioritizing the most critical files and reading them in a single batch. The [`read_file`](/basic-usage/how-tools-work) tool automatically accepts multiple files in a single request.
 
 When Roo requests to read multiple files, you'll see a batch approval interface that displays:
 
@@ -73,5 +73,5 @@ You can configure the Multi-File Read feature by clicking the <Codicon name="gea
     *   **Description**: This setting determines the maximum number of files that Roo can read in a single request. The default is 5, with a range of 1-100 files. Higher values can speed up tasks involving many small files but may use more memory. Setting the value to 1 effectively disables concurrent reads, reverting to single-file reads.
 
 :::note
-The per‑request file limit is configured in the UI (default 5, up to 100). The backend [`read_file`](/advanced-usage/available-tools/read-file) tool doesn’t hard‑enforce a cap; actual behavior may also depend on the selected model/tool.
+The per‑request file limit is configured in the UI (default 5, up to 100). The backend [`read_file`](/basic-usage/how-tools-work) tool doesn’t hard‑enforce a cap; actual behavior may also depend on the selected model/tool.
 :::

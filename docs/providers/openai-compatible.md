@@ -101,7 +101,7 @@ This gives you lower-latency feedback on which tools are being used and with wha
 - **Model support:** Not all models support native tool calling. If a model does not support tools, it cannot be used with Roo Code. Check your provider's documentation to confirm tool-calling support for the model you want to use.
 - **Provider quirks:** Some OpenAI-compatible providers only partially implement the native tools API. If you encounter tool-calling errors, verify that your provider fully supports OpenAI-compatible function calling.
 
-For a deeper overview of how tools work in Roo Code in general, see the [Tool Use Overview](/advanced-usage/available-tools/tool-use-overview).
+For a deeper overview of how tools work in Roo Code in general, see the [Tool Use Overview](/basic-usage/how-tools-work).
 
 ---
 

@@ -77,7 +77,7 @@ When enabled, Roo automatically uses concurrent edits when appropriate. You'll s
 
 ## Technical Details
 
-This feature leverages the [`apply_diff`](/advanced-usage/available-tools/apply-diff) tool's multi-file capabilities. For detailed information about the implementation and diff format, see the [apply_diff documentation](/advanced-usage/available-tools/apply-diff).
+This feature leverages the [`apply_diff`](/basic-usage/how-tools-work) tool's multi-file capabilities. For detailed information about the implementation and diff format, see the [apply_diff documentation](/basic-usage/how-tools-work).
 
 
 ---
@@ -117,6 +117,6 @@ This feature leverages the [`apply_diff`](/advanced-usage/available-tools/apply-
 
 ## See Also
 
-- [`apply_diff` Tool Documentation](/advanced-usage/available-tools/apply-diff) - Detailed technical information
+- [`apply_diff` Tool Documentation](/basic-usage/how-tools-work) - Detailed technical information
 - [Experimental Features](/features/experimental/experimental-features) - Other experimental capabilities
 - [`.rooignore` Configuration](/features/rooignore) - File access restrictions

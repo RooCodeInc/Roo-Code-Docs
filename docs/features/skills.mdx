@@ -57,7 +57,7 @@ Skills use **progressive disclosure** to efficiently load content only when need
 
 **Level 1: Discovery** - Roo reads each `SKILL.md` file and parses its frontmatter to extract `name` and `description`. Only this metadata is stored for matching—the full content isn't held in memory until needed.
 
-**Level 2: Instructions** - When your request matches a skill's description, Roo uses [`read_file`](/advanced-usage/available-tools/read-file) to load the full SKILL.md instructions into context.
+**Level 2: Instructions** - When your request matches a skill's description, Roo uses [`read_file`](/basic-usage/how-tools-work) to load the full SKILL.md instructions into context.
 
 **Level 3: Resources** - The prompt tells Roo it may access bundled files (scripts, templates, references) alongside the skill. There's no separate resource manifest—Roo discovers these files on-demand when the instructions reference them.
 

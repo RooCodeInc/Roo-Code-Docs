@@ -33,7 +33,7 @@ The following experimental features are currently available:
 - [Custom Tools](/features/experimental/custom-tools) - Define TypeScript/JavaScript tools that Roo can call like built-in tools
 - [Background Editing](/features/experimental/background-editing) - Work uninterrupted while Roo edits files in the background
 - [Image Generation](/features/image-generation) - Generate images from text prompts and save them to your workspace
-- [Run Slash Command](/advanced-usage/available-tools/run-slash-command) - Execute predefined slash commands for templated instructions and workflow automation
+- [Run Slash Command](/basic-usage/how-tools-work) - Execute predefined slash commands for templated instructions and workflow automation
 
 ---
 

@@ -49,13 +49,13 @@ For a comprehensive guide on syntax, refer to the [official Git documentation on
 
 These tools directly check `.rooignore` before any file operation. If a file is ignored, the operation is blocked:
 
-*   [`read_file`](/advanced-usage/available-tools/read-file): Will not read ignored files.
-*   [`write_to_file`](/advanced-usage/available-tools/write-to-file): Will not write to or create new ignored files.
-*   [`apply_diff`](/advanced-usage/available-tools/apply-diff): Will not apply diffs to ignored files.
+*   [`read_file`](/basic-usage/how-tools-work): Will not read ignored files.
+*   [`write_to_file`](/basic-usage/how-tools-work): Will not write to or create new ignored files.
+*   [`apply_diff`](/basic-usage/how-tools-work): Will not apply diffs to ignored files.
 
 ### File Discovery and Listing
 
-*   **[`list_files`](/advanced-usage/available-tools/list-files) Tool & `@directory` Attachments**: When Roo lists files or when you use `@directory` attachments, ignored files are omitted or marked with a 🔒 symbol (see "User Experience" below). Both use identical filtering logic.
+*   **[`list_files`](/basic-usage/how-tools-work) Tool & `@directory` Attachments**: When Roo lists files or when you use `@directory` attachments, ignored files are omitted or marked with a 🔒 symbol (see "User Experience" below). Both use identical filtering logic.
 *   **Environment Details**: Information about your workspace (like open tabs and project structure) provided to Roo is filtered to exclude or mark ignored items.
 
 ### Context Mentions
@@ -65,14 +65,14 @@ These tools directly check `.rooignore` before any file operation. If a file is 
 
 ### Command Execution
 
-*   **[`execute_command`](/advanced-usage/available-tools/execute-command) Tool**: This tool checks if a command (from a predefined list like `cat` or `grep`) targets an ignored file. If so, execution is blocked.
+*   **[`execute_command`](/basic-usage/how-tools-work) Tool**: This tool checks if a command (from a predefined list like `cat` or `grep`) targets an ignored file. If so, execution is blocked.
 
 ---
 
 ## Key Limitations and Scope
 
 *   **Workspace-Centric**: `.rooignore` rules apply **only to files and directories within the current VS Code workspace root**. Files outside this scope are not affected.
-*   **[`execute_command`](/advanced-usage/available-tools/execute-command) Specificity**: Protection for `execute_command` is limited to a predefined list of file-reading commands. Custom scripts or uncommon utilities might not be caught.
+*   **[`execute_command`](/basic-usage/how-tools-work) Specificity**: Protection for `execute_command` is limited to a predefined list of file-reading commands. Custom scripts or uncommon utilities might not be caught.
 *   **Not a Full Sandbox**: `.rooignore` is a powerful tool for controlling Roo's file access via its tools, but it does not create a system-level sandbox.
 
 ---
