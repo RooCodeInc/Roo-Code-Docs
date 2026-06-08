@@ -51,7 +51,7 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
 RunAPI exposes an OpenAI-compatible endpoint for model API requests:
 
 *   **API Provider:** OpenAI Compatible
-*   **Base URL:** `https://api.runapi.ai/v1`
+*   **Base URL:** `https://runapi.ai/v1`
 *   **API Key:** Your RunAPI API key
 *   **Model:** A model ID from [RunAPI models](https://runapi.ai/models.md)
 
