@@ -46,6 +46,15 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
     - Input Price
     - Output Price
 
+### Example: RunAPI
+
+RunAPI exposes an OpenAI-compatible endpoint for model API requests:
+
+*   **API Provider:** OpenAI Compatible
+*   **Base URL:** `https://runapi.ai/v1`
+*   **API Key:** Your RunAPI API key
+*   **Model:** A model ID from [RunAPI models](https://runapi.ai/models.md)
+
 ---
 
 ## Native Tool Calling
