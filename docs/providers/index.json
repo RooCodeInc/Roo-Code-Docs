@@ -85,6 +85,12 @@
       "cloud": true
     },
     {
+      "id": "providers/qvac",
+      "title": "QVAC",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/qwen-code",
       "title": "Qwen Code CLI",
       "extension": true,
