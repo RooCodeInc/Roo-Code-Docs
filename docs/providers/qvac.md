@@ -15,9 +15,9 @@ keywords:
 
 # Using QVAC With Roo Code
 
-[QVAC](https://qvac.com) is an open-source runtime for local-first, peer-to-peer AI. It can expose your local models through an OpenAI-compatible HTTP server, letting you connect them to Roo Code using the **OpenAI Compatible** provider.
+[QVAC](https://qvac.tether.io) is an open-source runtime for local-first, peer-to-peer AI. It can expose your local models through an OpenAI-compatible HTTP server, letting you connect them to Roo Code using the **OpenAI Compatible** provider.
 
-**Website:** [https://qvac.com](https://qvac.com)
+**Website:** [https://qvac.tether.io](https://qvac.tether.io)
 
 ---
 
