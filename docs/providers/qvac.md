@@ -77,7 +77,7 @@ keywords:
 *   **Use a capable, agent-tuned model.** Tool-calling quality is bounded by the model you run. Small models often fail to invoke tools reliably; a larger agent-tuned model such as `gpt-oss-20b` is a good local default.
 *   **Set the context window explicitly.** The QVAC LLM `ctx_size` default of `1024` is too small for Roo Code's prompts. Set it to something like `32768` in `qvac.config.json`.
 *   **Enable tools.** Roo Code uses native tool calling exclusively. Set `"tools": true` in the model config or the model will respond with text instead of tool calls.
-*   **Reasoning models.** For reasoning-tuned models such as Qwen3, set `"reasoning_budget": 0` in the model config unless you specifically want extended reasoning.
+*   **Reasoning models.** For reasoning-tuned models such as Qwen3.5, set `"reasoning_budget": 0` in the model config unless you specifically want extended reasoning.
 *   **Preload for a faster first response.** Setting `"preload": true` loads the model when the server starts, avoiding a cold start on your first request.
 *   **Resource requirements.** Running large language models locally is resource-intensive. Make sure your machine can handle the model and context size you choose.
 
