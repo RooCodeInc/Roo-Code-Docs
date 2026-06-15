@@ -109,6 +109,12 @@
       "cloud": false
     },
     {
+      "id": "providers/tokenmix",
+      "title": "TokenMix",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/vercel-ai-gateway",
       "title": "Vercel AI Gateway",
       "extension": true,
