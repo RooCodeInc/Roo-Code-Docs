@@ -43,6 +43,12 @@
       "cloud": false
     },
     {
+      "id": "providers/lynkr",
+      "title": "Lynkr",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/litellm",
       "title": "LiteLLM",
       "extension": true,
