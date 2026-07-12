@@ -18,6 +18,7 @@ Roo Code supports a wide range of AI model providers that offer APIs compatible 
 
 *   **Local models** running through tools like Ollama and LM Studio (covered in separate sections).
 *   **Cloud providers** like Perplexity, Together AI, Anyscale, and others.
+*   **Multi-model gateways** such as [DaoXE](/providers/daoxe) (`https://daoxe.com/v1`).
 *   **Any other provider** offering an OpenAI-compatible API endpoint.
 
 This document focuses on setting up providers *other than* the official OpenAI API (which has its own [dedicated configuration page](/providers/openai)).
@@ -45,6 +46,18 @@ You'll find these settings in the Roo Code settings panel (click the <Codicon na
     - Computer Use
     - Input Price
     - Output Price
+
+
+## Example: DaoXE
+
+[DaoXE](https://daoxe.com) is a multi-model multi-protocol AI API gateway.
+
+1. Select **OpenAI Compatible** as the API Provider.
+2. Set **Base URL** to `https://daoxe.com/v1`.
+3. Paste your DaoXE API key.
+4. Enter an exact model ID currently available to your account.
+
+DaoXE is not available in mainland China. See the dedicated [DaoXE guide](/providers/daoxe) for more detail.
 
 ---
 

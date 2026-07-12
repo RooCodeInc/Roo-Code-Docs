@@ -25,6 +25,12 @@
       "cloud": false
     },
     {
+      "id": "providers/daoxe",
+      "title": "DaoXE",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/fireworks",
       "title": "Fireworks AI",
       "extension": true,
