@@ -28,7 +28,8 @@ proxy's wallet.
 ## Available Models
 
 Fetch the live list (free) from `http://localhost:8402/v1/models` once the
-proxy is running. Model ids are namespaced, e.g. `z-ai/glm-5.3-flash`.
+proxy is running. Model ids are bare model names, e.g. `claude-sonnet-5` or
+`gpt-4o-mini`; `auto` lets the proxy pick a model per request.
 
 ## Configuration in Roo Code
 
