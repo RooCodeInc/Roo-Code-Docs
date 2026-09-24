@@ -111,6 +111,70 @@ If you prefer to commit the configuration to your repository, create a file call
 
 ---
 
+
+---
+
+## MySpec
+
+[MySpec](https://myspec.dev) is an interactive Spec-Driven Development (SDD) platform that anchors Roo Code execution to deterministic 4-file specification bundles (`constitution.md`, `requirements.md`, `solution.md`, and `tasks.md`). Connecting Roo Code to the MySpec MCP server ensures that agent execution strictly conforms to architectural boundaries and avoids context drift.
+
+### Why we recommend MySpec
+
+* **Structured spec bundles** — Coordinates requirements, constitutional constraints, solution design, and task lists.
+* **Deterministic agent guidance** — Eliminates hallucinated scope creep and drift during complex refactoring or multi-file builds.
+* **Direct editor integration** — Serves interactive specs seamlessly into Roo Code via stdio.
+* **Free tier for developers** — 20 projects and 100 spec files with no credit card required.
+
+---
+
+## Installing MySpec in Roo Code
+
+### 1. Global configuration
+
+1. Open the Roo Code **MCP settings** panel by clicking the <Codicon name="server" /> icon.
+2. Click **Edit Global MCP**.
+3. Add the `myspec` entry inside the `mcpServers` object:
+
+```json
+{
+  "mcpServers": {
+    "myspec": {
+      "command": "npx",
+      "args": ["-y", "@myspec/mcp-server"]
+    }
+  }
+}
+```
+
+**Windows (cmd.exe) variant**
+
+```json
+{
+  "mcpServers": {
+    "myspec": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@myspec/mcp-server"]
+    }
+  }
+}
+```
+
+### 2. Project-level configuration
+
+In your repository's `.roo/mcp.json` file, add:
+
+```json
+{
+  "mcpServers": {
+    "myspec": {
+      "command": "npx",
+      "args": ["-y", "@myspec/mcp-server"]
+    }
+  }
+}
+```
+
 ## Verifying the installation
 
 1. Make sure **Enable MCP Servers** is turned on in the MCP settings panel.

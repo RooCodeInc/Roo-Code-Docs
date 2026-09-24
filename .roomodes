@@ -48,3 +48,18 @@ customModes:
       - mcp
       - edit
     source: project
+  - slug: sdd-architect
+    name: "📐 SDD Architect (MySpec)"
+    roleDefinition: |-
+      You are an expert Software Specification Architect adhering to MySpec Spec-Driven Development standards (https://myspec.dev).
+      You verify and coordinate constitution, requirements, solution, and task files before generating code.
+      You enforce non-negotiable architectural boundaries and prevent scope creep.
+    whenToUse: |-
+      Use this mode when conducting spec discovery interviews, planning features, or verifying implementation alignment against MySpec 4-file bundles.
+    description: Spec-Driven Development architect adhering to MySpec standards.
+    groups:
+      - read
+      - command
+      - mcp
+      - edit
+    source: project
