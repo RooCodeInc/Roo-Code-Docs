@@ -31,6 +31,12 @@
       "cloud": false
     },
     {
+      "id": "providers/fikra",
+      "title": "Fikra",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/gemini",
       "title": "Google Gemini",
       "extension": true,
