@@ -114,3 +114,21 @@ For a deeper overview of how tools work in Roo Code in general, see the [Tool Us
 *   **Unexpected Results:** If you're getting unexpected results, try a different model.
 
 By using an OpenAI-compatible provider, you can leverage the flexibility of Roo Code with a wider range of AI models. Remember to always consult your provider's documentation for the most accurate and up-to-date information.
+
+---
+
+## Example: Kimi K3.1 Pro via Wallaby
+
+A tested configuration for running Kimi K3.1 Pro (Moonshot AI) through Wallaby, an OpenAI-compatible inference platform:
+
+*   **API Provider:** OpenAI Compatible
+*   **Base URL:** `https://api.wallabytoken.com/v1`
+*   **API Key:** Create one at [wallabytoken.com](https://wallabytoken.com) ($0.50 trial credit, no card required)
+*   **Model:** `kimi-k3.1-pro` (`kimi-k3` also available)
+*   **Model Configuration:** Context Window `1048576`, Max Output Tokens `131072`; Image Support on (text + image input)
+
+Notes:
+
+*   Kimi K3.1 Pro supports OpenAI-compatible native tool calling, which Roo Code requires; reasoning tokens are billed as output, matching the official Kimi API.
+*   Pricing: $1.80 / 1M input ($0.18 cached), $9.00 / 1M output. Machine-readable rate card: [pricing.json](https://wallabytoken.com/pricing.json).
+*   Public status page: [status.wallabytoken.com](https://status.wallabytoken.com).
