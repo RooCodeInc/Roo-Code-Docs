@@ -19,6 +19,12 @@
       "cloud": false
     },
     {
+      "id": "providers/crowllm",
+      "title": "CrowLLM",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/deepseek",
       "title": "DeepSeek",
       "extension": true,
