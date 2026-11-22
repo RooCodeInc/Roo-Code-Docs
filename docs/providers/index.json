@@ -13,6 +13,12 @@
       "cloud": false
     },
     {
+      "id": "providers/crowllm",
+      "title": "CrowLLM",
+      "extension": true,
+      "cloud": false
+    },
+    {
       "id": "providers/bedrock",
       "title": "AWS Bedrock",
       "extension": true,
