@@ -1,8 +1,9 @@
 ---
-description: Discover recommended MCP servers for Roo Code, including Context7. Learn how to install and configure MCP servers with step-by-step instructions.
+description: Discover recommended MCP servers for Roo Code, including Context7 and Dealport. Learn how to install and configure MCP servers with step-by-step instructions.
 keywords:
   - MCP servers
   - Context7
+  - Dealport
   - Roo Code MCP
   - MCP installation
   - MCP configuration
@@ -121,9 +122,77 @@ If you prefer to commit the configuration to your repository, create a file call
 
 ---
 
+## Dealport
+
+[Dealport](https://github.com/Dealport-HQ/dealport) (`com.dealport/dealport` on the Official MCP Registry) is the SMB knowledge layer for AI agents and humans, covering 28M+ US private companies, the commercial buildings and 50-state US property parcels they own, and the human principals behind them, backed by primary public-filing citations.
+
+### Why we recommend Dealport
+
+* **Zero-install Streamable HTTP or `npx` bridge** - connect directly to `https://app.dealport.com/api/mcp` or run `npx -y dealport mcp serve` locally.
+* **47 structured MCP tools** - size US company markets for `$0.00` without an API key (`preview_companies`), search company and NYC building `Record`s (`search_companies`, `search_buildings`, `get_record` at `$0.01`), unmask LLC corporate officers (`resolve_llc_owner`), query 50-state US parcels (`lookup_property`), search public filings, import manifests, federal contracts, tax exemptions, and permits (`preview_market_records`, `search_market_records`), map warm relationship paths (`find_connection`), look up verified human owner contacts (`find_owner`, `$0.09` on hit, `$0.00` on miss), run deep company research (`research_company`, `$0.50`), score `Project`s and `Playbook`s, and request double-opt-in owner introductions through **Avery** (Dealport's AI outreach specialist, who always discloses she is an AI; `$0.02` per email, `$25.00` per accepted Warm Yes introduction).
+* **Transparent pay-as-you-go balance** - API (Pro) accounts start with a `$5.00` free balance with no subscription (`https://app.dealport.com/llms.txt`).
+* **Open source client & CLI** - MIT-licensed on GitHub (`https://github.com/Dealport-HQ/dealport`) and npm (`dealport`).
+
+### Installing Dealport in Roo Code
+
+Add Dealport either globally (`Edit Global MCP`) or per workspace (`.roo/mcp.json`).
+
+#### Option A: Hosted Streamable HTTP (recommended)
+
+You can omit `headers` initially to test keyless `$0.00` market sizing (`preview_companies`), or pass a workspace API key (`dp_live_...` from `https://app.dealport.com/connect?tab=keys`):
+
+```json
+{
+  "mcpServers": {
+    "dealport": {
+      "type": "streamable-http",
+      "url": "https://app.dealport.com/api/mcp",
+      "headers": {
+        "Authorization": "Bearer dp_live_your_api_key"
+      }
+    }
+  }
+}
+```
+
+#### Option B: Local STDIO (`npx`)
+
+```json
+{
+  "mcpServers": {
+    "dealport": {
+      "command": "npx",
+      "args": ["-y", "dealport", "mcp", "serve"],
+      "env": {
+        "DP_API_KEY": "dp_live_your_api_key"
+      }
+    }
+  }
+}
+```
+
+**Windows (cmd.exe) variant**
+
+```json
+{
+  "mcpServers": {
+    "dealport": {
+      "type": "stdio",
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "dealport", "mcp", "serve"],
+      "env": {
+        "DP_API_KEY": "dp_live_your_api_key"
+      }
+    }
+  }
+}
+```
+
+---
+
 ## Next steps
 
-* Browse the list of tools shipped with Context7 in the server pane.
+* Browse the list of tools shipped with Context7 or Dealport in the server pane.
 * Configure **Always allow** for the tools you use most to streamline your workflow.
 * Want to expose your own APIs? Check out the [MCP server creation guide](/features/mcp/using-mcp-in-roo#enabling-or-disabling-mcp-server-creation).
 
